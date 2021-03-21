@@ -1,0 +1,21 @@
+{
+	//// Default Spudgun ////
+	"SpudgunBasic - BasicMuzzel":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "PotatoRifle - Shoot",
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_spudgun_wystrzal",
+				"attached": false,
+				"delay": 0.05
+			}
+		]
+	}
+}
+	

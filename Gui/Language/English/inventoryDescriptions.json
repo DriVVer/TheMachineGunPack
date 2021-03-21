@@ -1,0 +1,132 @@
+{
+    "bdd9e357-35f7-4140-8b19-477abef20e0f":{
+        "title":"Browning .50 HMG"
+    },
+    "04075bce-2b41-47a2-8753-343b1e0b20f7":{
+        "title":"Mounting panel"
+    },
+    "32e96b7d-a08a-483c-88c6-8a1616ea3123":{
+        "title":"Browning .30 LMG"
+    },
+    "1e731dbe-d89e-4722-b955-d347f92eec62":{
+        "title":"Maschinegewher Mg-34 LMG"
+    },
+    "28cc8c06-44e3-48e9-a76e-d0fa178997f0":{
+        "title":"Mg armored protection"
+    },
+    "6d98a168-f0c5-4774-a6ac-e0972fd9f1a4":{
+        "title":"Mosin-Nagant 1891 Rifle"
+    },
+    "ad260178-696b-4f96-b4ac-1f915afb1ce4":{
+        "title":"Rifle Bipod"
+    },
+    "5099511b-554b-4cba-a425-e07527b9a8f0":{
+        "title":"Mosin-Nagant Sight"
+    },
+    "073d0f36-9bee-47e4-b4b6-c42568648e3b":{
+        "title":"Mg 151/20"
+    },
+    "dee496d2-a9a9-4708-9a2f-50910f59f8fa":{
+        "title":"AK-47 Kalashnikov"
+    },
+    "7f25238c-0e9a-4910-b3ff-f63016fc9052":{
+        "title":"Degytariev Dp-29"
+    },
+    "77a65230-9c33-490f-b24d-e80cd63f6802":{
+        "title":"S-Mine p1 exp."
+    },
+    "1a74c9b1-dea5-42ab-86ad-08f1d24507d3":{
+        "title":"S-Mine p2 sens."
+    },
+    "0352de84-5cc7-487a-ae15-f3d9d6a84f37":{
+        "title":"M1 Mine p1 exp."
+    },
+    "46584f5b-b846-43c3-9f17-3fd494c5b8f0":{
+        "title":"M1 Mine p2 sens."
+    },
+    "820f8c24-37a5-42c4-9443-f60f0724c6b1":{
+        "title":"Mine Hider"
+    },
+    "db03da50-e7d6-4a42-8f07-4a296c64f2cd":{
+        "title":"Bomb 50kg"
+    },
+    "2433e932-88bb-4c14-b9bb-76502e03a9c9":{
+        "title":"Bomb 100kg"
+    },
+    "fe2d4f4e-a2ba-42ba-a7a5-6b97b2c0fa48":{
+        "title":"Bomb 250kg"
+    },
+    "68337ca8-e957-4b3f-a6dd-c11ac61da064":{
+        "title":"DGv03"
+    },
+    "b23027d0-0a69-4e82-a917-d43acce49057":{
+        "title":"1x8 7.7mm Gun Polygon"
+    },
+    "9664ed91-6917-43ce-8051-6dea8ac28e18":{
+        "title":"Bazooka M1A1"
+    },
+    "45c849b8-9417-446d-b703-75c582bd9b60":{
+        "title":"Browning .30 1x1"
+    },
+    "f6a9f44d-4544-4d4f-b623-559f3e0a0b31":{
+        "title":"Browning Armor"
+    },
+    "cb8d96c9-2b7b-4bfc-ae07-e308455dee6b":{
+        "title":"TKS cannon Dome"
+    },
+    "f0f14c15-4d9c-4dc3-8518-4ae65af491da":{
+        "title":"Hispano 20mm Gun"
+    },
+    "9fec1f9f-9f39-4d95-95d3-c15c4389e095":{
+        "title":"WZ.38 20mm Gun"
+    },
+    "b0384020-b6ac-45ae-9df3-045e51cc7e8a":{
+        "title":"Maschinegewehr MG-42 LMG"
+    },
+    "2779083c-1ee2-4b52-9eb3-586a383c5d4e":{
+        "title":"Maschinegewehr MG-42 1x1"
+    },
+    "0ccd6479-f1d8-46e6-acb1-02f9dc20f577":{
+        "title":"Degytariev Dp-29 1x1"
+    },
+    "05f70a50-3bb4-4a00-b7fb-f1c931d585ca":{
+        "title":"12mm DSzK Machine Gun"
+    },
+    "4b62da08-1214-4827-8bc0-b4dface80e0d":{
+        "title":"DSzK Sight"
+    },
+    "b40dbc55-65f3-40ae-be5e-4d8976c7d970":{
+        "title":"(Lost control, Press E to parachute) Alarm"
+    },
+    "561b2e83-4e9b-462f-ae97-645dc596b2c4":{
+        "title":"(Component destroyed) Alarm"
+    },
+    "27839ef0-bc1e-4fed-a715-7adb9c9701b1":{
+        "title":"(Target destroyed) Alarm"
+    },
+    "c4b65002-2928-4829-8661-84a08a31a253":{
+        "title":"Lewis M1914 Machine Gun"
+    },
+    "f9213740-d7ca-41ed-b1c8-23dd704c9063":{
+        "title":"Browning .50 Aircraft version"
+    },
+    "e33ed886-b55b-489a-b11d-7f590cea0be7":{
+        "title":"Maxim M1905"
+    },
+    "8edb6045-f410-441c-b9a9-a55ab15a90c7":{
+        "title":"Maxim M1905 1x1"
+    },
+    "28fbfaf6-3b42-4d72-94b1-5bf7b113b5dd":{
+        "title":"PTRD-41 AT rifle (bipod)"
+    },
+    "36d496d5-0718-4c53-81cf-eda4836847b1":{
+        "title":"Maxim Shield"
+    },
+    "b6d96e7c-80ad-4838-b9fb-364c8205c23a":{
+        "title":"PTRD-41 AT rifle"
+    },
+    "ba6c5d49-3792-4a2c-b3a4-acef3ab8a787":{
+        "title":"Cannon"
+    }
+}
+

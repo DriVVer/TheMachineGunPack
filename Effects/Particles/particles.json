@@ -1,0 +1,9 @@
+{
+	"particleSystemList":
+	[
+		"effect_fire.json",
+		"p_spudgun_wystrzal.json",
+		"potato.json",
+		"sublsm.json"
+	]
+}

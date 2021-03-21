@@ -1,0 +1,342 @@
+{
+    "partList": [
+        {
+            "uuid": "05f70a50-3bb4-4a00-b7fb-f1c931d585ca",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/DSzK.obj"
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 4, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 2},
+                    {"x": 0, "y": 0, "z": -2}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "ba6c5d49-3792-4a2c-b3a4-acef3ab8a787",
+            "renderable": {
+                "lodList": [
+                    {
+                        "mesh": "$MOD_DATA/Objects/Mesh/Cannon2.fbx",
+                        "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_half.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
+                            }
+                        ],
+                        "animationList": [
+                            {"name": "reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Cannon2.fbx"}
+                        ]
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "hull": {
+                "x": 1, "y": 1, "z": 10, "margin": 0.40,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 10},
+                    {"x": 0, "y": 0, "z": -10}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "28fbfaf6-3b42-4d72-94b1-5bf7b113b5dd",
+            "renderable": {
+                "lodList": [
+                    {
+                        "mesh": "$MOD_DATA/Objects/Mesh/PTRD_Anim_B.fbx",
+                        "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
+                            }
+                        ],
+                        "animationList": [
+                            {"name": "PTRD", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/PTRD_Anim_B.fbx"}
+                        ]
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 5, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 5},
+                    {"x": 0, "y": 0, "z": -5}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "b6d96e7c-80ad-4838-b9fb-364c8205c23a",
+            "renderable": {
+                "lodList": [
+                    {
+                        "mesh": "$MOD_DATA/Objects/Mesh/PTRD_Anim.fbx",
+                        "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
+                            }
+                        ],
+                        "animationList": [
+                            {"name": "PTRD", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/PTRD_Anim.fbx"}
+                        ]
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 3, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 3},
+                    {"x": 0, "y": 0, "z": -3}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "bdd9e357-35f7-4140-8b19-477abef20e0f",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "PoseAnimDifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/Browning .50 v.obj",
+                        "pose0": "$MOD_DATA/Objects/Mesh/Browning .50 pose2.obj"
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 3, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 3},
+                    {"x": 0, "y": 0, "z": -3}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "f9213740-d7ca-41ed-b1c8-23dd704c9063",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "PoseAnimDifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/Browning .50 Aircraft_v.obj",
+                        "pose0": "$MOD_DATA/Objects/Mesh/Browning .50 Aircraft pose2.obj"
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 3, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 3},
+                    {"x": 0, "y": 0, "z": -3}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "f0f14c15-4d9c-4dc3-8518-4ae65af491da",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/hispano.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/Hispano.obj"
+                    }
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "rotationSet": "PropYZ",
+            "color": "bc231e",
+            "hull": {
+                "x": 1, "y": 1, "z": 2, "margin": 0.10,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 2},
+                    {"x": 0, "y": 0, "z": -2}
+                ]
+            },
+            "density": 500,
+            "physicsMaterial": "Metal",
+            "sticky": "-Z-Y+Y-X+X"
+        },
+        {
+            "uuid": "9fec1f9f-9f39-4d95-95d3-c15c4389e095",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/nkm.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/wz38.obj"
+                    }
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "rotationSet": "PropYZ",
+            "color": "bc231e",
+            "hull": {
+                "x": 1, "y": 1, "z": 6, "margin": 0.25,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 6},
+                    {"x": 0, "y": 0, "z": -6}
+                ]
+            },
+            "density": 500,
+            "physicsMaterial": "Metal",
+            "sticky": "-Z-Y+Y-X+X"
+        },
+        {
+            "uuid": "9664ed91-6917-43ce-8051-6dea8ac28e18",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/Bazooka_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/Bazooka M1A1.obj"
+                    }
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "rotationSet": "PropYZ",
+            "color": "bc231e",
+            "box": {"x": 1, "y": 1, "z": 4},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "-Z-Y+Y-X+X"
+        },
+        {
+            "uuid": "073d0f36-9bee-47e4-b4b6-c42568648e3b",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/mg 151 20.obj"
+                    }
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "rotationSet": "PropYZ",
+            "color": "bc231e",
+            "hull": {
+                "x": 1, "y": 1, "z": 1, "margin": 0.25,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 1},
+                    {"x": 0, "y": 0, "z": -1}
+                ]
+            },
+            "density": 1250,
+            "physicsMaterial": "Metal",
+            "sticky": "-Z-Y+Y-X+X"
+        }
+    ]
+}

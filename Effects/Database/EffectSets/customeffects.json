@@ -1,0 +1,305 @@
+{
+	"boom":
+	{
+		"parameterList":
+		{
+			"Size": 0.0, 
+			"velocity": 0.0,
+			"power": 0.0,
+			"color": "007fff",
+			"radius": 1.5,
+			"intensity": 0.01
+		},
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"Size"
+				],
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "potato",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0.0
+			}
+		]
+	},
+	"BoomRusznica":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_enviroment_fire_putout_01",
+				"attached": true,
+				"delay": 0.05
+			}
+		]
+	},
+	
+
+	"BoomMuzlle20":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_spudgun_muzzel_spinner",
+				"attached": true,
+				"delay": 0.05
+			}
+		]
+	},
+	"Boom20":
+	{
+		"parameterList":
+		{
+			"color": "ff7b33ff",
+			"radius": 7.0,
+			"intensity": 3.0
+		},
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"delay": 0.075
+			},
+			{
+				"type": "particle",
+				"name": "p_enviroment_fire_putout_01",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.625 },
+				"attached": true,
+				"delay": 0.0
+			}
+		]
+	},
+	"Boom12":
+	{
+		"parameterList":
+		{
+			"Size": 0.3,
+			"Material": 20.0,
+			"Color": [1,0.6,0,1]
+		},
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/weapons/spudgun/frier_fire",
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_glowgorp_destruct",
+				"direction": { "x": 0.0, "y": 1.0, "z": 0.0 },
+				"parameters":
+				[
+					"Color"
+				],
+				"delay": 0.0
+			}
+
+		]
+	},
+	"BoomMuzzle12":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "PotatoRifle - Shoot",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_spudgun_muzzel_spinner",
+				"attached": true,
+				"delay": 0.05
+			}
+		]
+	},
+	"Explosion12":
+	{
+		"maxInstances": 8,
+		"parameterList":
+		{
+			"size": 0.0,
+			"color": "ffcc34",
+			"radius": 2.0,
+			"intensity": 1.0,
+			"shakeStrength": 0.5,
+			"shakeRadius": 10.0
+		},
+		"parameterCurves":
+		{
+			"radius":
+			{
+				"timeline":
+				[
+					{ "time":0.0, "value":0.0 },
+					{ "time":0.1, "value":5.0 },
+					{ "time":0.6, "value":0.0 }
+				]
+			}
+		},
+		"effectList":
+		[
+			{
+				"type": "particle",
+				"name": "Explosion_small_01",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"attached": true,
+				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"size"
+				],
+				"delay": 0.0
+			},
+			{
+				"type": "pointLight",
+				"name": "",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"color",
+					"radius",
+					"intensity"
+				],
+				"duration": 1.0,
+				"delay": 0.0
+			},
+			{
+				"type": "cameraShake",
+				"name": "",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"shakeStrength",
+					"shakeRadius"
+				],
+				"duration": 0.4,
+				"delay": 0.0
+			}
+		]
+	},
+	"BombSmall":
+	{
+		"parameterList":
+		{
+			"color": "ff7b33ff",
+			"radius": 10.0,
+			"intensity": 3.0
+		},
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"delay": 0.075
+			},
+			{
+				"type": "particle",
+				"name": "p_enviroment_fire_massive_putout_01",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.625 },
+				"attached": true,
+				"delay": 0.0
+			}
+		]
+	},
+	"GunSpudgun":
+	{
+		"parameterList":
+		{
+			"size": 6.5,
+			"color": "ffcc34",
+			"radius": 30.0,
+			"intensity": 12.0,
+			"shakeStrength": 0.5,
+			"shakeRadius": 30.2
+		},
+		"parameterCurves":
+		{
+			"radius":
+			{
+				"timeline":
+				[
+					{ "time":0.0, "value":0.0 },
+					{ "time":8, "value":60.0 },
+					{ "time":0.90, "value":2.0 }
+				]
+			}
+		},
+		"effectList":
+		[
+			{
+				"type": "particle",
+				"name": "Explosion_small_01",
+				"offset": { "x": 0.0, "y": -0.825, "z": 1 },
+				"attached": true,
+				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "Gas Explosion",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0
+			},
+			{
+				"type": "audio",
+				"name": "PotatoRifle - Shoot",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.625 },
+				"delay": 0.0
+			},
+			{
+				"type": "pointLight",
+				"name": "",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"color",
+					"radius",
+					"intensity"
+				],
+				"duration": 0.8,
+				"delay": 0.1
+			},
+			{
+				"type": "cameraShake",
+				"name": "",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"parameters":
+				[
+					"shakeStrength",
+					"shakeRadius"
+				],
+				"duration": 0.1
+			}
+		]
+	}
+}

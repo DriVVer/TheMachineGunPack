@@ -1,0 +1,6 @@
+{11c9e5d5-032e-4455-be93-2b07053ac0d3} event:/explnew
+{31a7b7da-521b-44fa-81ea-39ca7d8384c5} event:/laser
+{6e0cfe8d-f730-4721-8d4d-0b3349ae657a} event:/explnewm
+{e75d58bd-76c9-496b-a708-8e4aeeed32a0} bus:/
+{fc1332f6-3558-46c5-ab3e-009bcdcd76e2} bus:/Reverb
+{8cd62f6e-80a3-4a3a-a797-0cc9fd140f1b} bank:/MasterBank
