@@ -708,10 +708,11 @@ local _Database = {
             }
         },
         client = {
-            --heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
-            --cooling_speed = 0.12, --cooling per second
-
-           -- uv_overheat_anim_max = 110.0,
+            overheat_effect = {
+                heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
+                cooling_speed = 0.12, --cooling per second
+                uv_overheat_anim_max = 100.0
+            },
 
             effects = {
                 shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
@@ -719,7 +720,6 @@ local _Database = {
 
             bone_animation = {
                 required_animations = {"Shooting", "Overheat", "Reload"},
-
                 animation_states = {
                     shoot = {
                         {particles = {"shoot"}}, --time can be removed if you need no delay

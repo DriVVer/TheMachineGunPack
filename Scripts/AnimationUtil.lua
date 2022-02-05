@@ -72,40 +72,27 @@ end
 function AnimUtil.PushAnimationState(self, state)
     local is_shoot_state = self.anim.cur_state == "shoot"
 
-    local state_type = type(state)
-    if self.anim.cur_state == nil or is_shoot_state then
-        local cur_state = nil
-        if state_type == "string" then
-            cur_state = state
-        elseif state_type == "table" then
-            cur_state = state[1]
-            table.remove(state, 1)
+    if state == "shoot" then
+        if is_shoot_state or self.anim.cur_state == nil then
+            self.anim.cur_data = self.anim.data[state]
+            self.anim.cur_state = state
 
-            for k, v in pairs(state) do
-                table.insert(self.anim.state_queue, v)
+            AnimUtil.ResetAnimations(self)
+
+            self.anim.active = true
+            self.anim.step = 0
+            self.anim.timer = nil
+
+            if self.cl_heat_per_shot then
+                self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
             end
         end
-
-        self.anim.cur_data = self.anim.data[cur_state]
-        self.anim.cur_state = cur_state
-
-        if cur_state == "overheat" then
-            self.cl_cannon_heat = 0
-        end
-
-        AnimUtil.ResetAnimations(self)
-
-        self.anim.active = true
-        self.anim.step = 0
-        self.anim.timer = nil
-
-        if cur_state == "shoot" then
-            self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
-        end
     else
+        local state_type = type(state)
+
         if state_type == "string" then
             table.insert(self.anim.state_queue, state)
-        elseif state_type == "table" then
+        else --is table
             for k, v in pairs(state) do
                 table.insert(self.anim.state_queue, v)
             end
@@ -116,10 +103,13 @@ end
 function AnimUtil.InitializeAnimationUtil(self)
     local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
 
-    self.cl_cooling_speed = _data.cooling_speed
-    self.cl_heat_per_shot = _data.heat_per_shot
+    local overheat_eff = _data.overheat_effect
+    if overheat_eff then
+        self.cl_heat_per_shot = overheat_eff.heat_per_shot
+        self.cl_cooling_speed = overheat_eff.cooling_speed
 
-    self.cl_overheat_anim_max = _data.uv_overheat_anim_max
+        self.cl_overheat_anim_max = overheat_eff.uv_overheat_anim_max
+    end
 
     AnimUtil.InitializeEffects(self, _data.effects)
     AnimUtil.GetAnimVariables(self)
