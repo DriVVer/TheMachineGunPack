@@ -31,6 +31,36 @@ local _Database = {
             effect_offset = sm.vec3.new(0, 0, 0.5)
         }
     },
+    ["4825e551-b9c4-484e-8216-efec182957f5"] = { --Old Cannon
+        server = {
+            cannon = {
+               spread = 2,
+                fire_force = {
+                    min = 120.0,
+                    max = 120.0
+                },
+                recoil = sm.vec3.new(0, 0, -100),
+                reload_time = 280,
+                auto_reload = true
+            },
+            projectile = {
+                effect = "boom",
+                explosionEffect = "PropaneTank - ExplosionBig",
+                effectOffset = sm.vec3.new(0, 0, 0.5),
+                lifetime = 20.0,
+                gravity = 10.0,
+                friction = 0.01,
+                explosionLevel = 4,
+                explosionRadius = 1,
+                explosionImpulseStrength = 2,
+                explosionImpulseRadius = 2
+            }
+        },
+        client = {
+            effect = "BombSmall",
+            effect_offset = sm.vec3.new(0, 0, 0.5)
+        }
+    },
     ["28fbfaf6-3b42-4d72-94b1-5bf7b113b5dd"] = { --PTRD bipod
         server = {
             cannon = {
@@ -189,7 +219,7 @@ local _Database = {
                 gravity = 4.0,
                 friction = 0.003,
                 explosionLevel = 7,
-                explosionRadius = 0.3,
+                explosionRadius = 0.5,
                 explosionImpulseStrength = 3,
                 explosionImpulseRadius = 4
             }
@@ -229,6 +259,41 @@ local _Database = {
             effect_offset = sm.vec3.new(0, 0, 0.62)
         }
     },
+    ["cd1b3309-7046-4b81-ac01-f7ba8f7a00d7"] = { --M61 Vulcan 20mm
+        server = {
+            cannon = {
+                spread = 4,
+                fire_force = {
+                    min = 1000.0,
+                    max = 1000.0
+                },
+                recoil = sm.vec3.new(0, 0, -1000),
+                reload_time = 4,
+                auto_reload = true
+            },
+            projectile = {
+                effect = "boom",
+                explosionEffect = "Boom20",
+                effectOffset = sm.vec3.new(0, 0, 1.0),
+                lifetime = 20.0,
+                gravity = 10.0,
+                friction = 0.003,
+                explosionLevel = 5,
+                explosionRadius = 0.5,
+                explosionImpulseStrength = 4,
+                explosionImpulseRadius = 2
+            }
+        },
+        client = {
+            effect = "BoomMuzzle12",
+            effect_offset = sm.vec3.new(0, 0.08, 1.0),
+            pose_animation = {
+                {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
+                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.04}
+
+            }
+        }
+    },
     ["bdd9e357-35f7-4140-8b19-477abef20e0f"] = { --Browning .50 HMG
         server = {
             cannon = {
@@ -261,6 +326,36 @@ local _Database = {
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
             }
+        }
+    },
+    ["de609e41-58d1-409a-b981-447be0257609"] = { --Browning .50 1x1 HMG
+        server = {
+            cannon = {
+                spread = 0.5,
+                fire_force = {
+                    min = 600.0,
+                    max = 600.0
+                },
+                recoil = sm.vec3.new(0, 0, -100),
+                reload_time = 7,
+                auto_reload = true,
+            },
+            projectile = {
+                effect = "boom",
+                explosionEffect = "Boom12",
+                effectOffset = sm.vec3.new(0, 0, 1.9),
+                lifetime = 20.0,
+                gravity = 10.0,
+                friction = 0.001,
+                explosionLevel = 1,
+                explosionRadius = 0.3,
+                explosionImpulseStrength = 4,
+                explosionImpulseRadius = 2
+            }
+        },
+        client = {
+            effect = "BoomMuzzle12",
+            effect_offset = sm.vec3.new(0, 0, 0.4)
         }
     },
     ["f9213740-d7ca-41ed-b1c8-23dd704c9063"] = { --Browning .50 HMG Aircraft
@@ -410,7 +505,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 1),
                 projectile = "potato"
@@ -419,6 +514,30 @@ local _Database = {
         client = {
             effect = "SpudgunSpinner - SpinnerMuzzel",
             effect_offset = sm.vec3.new(0, 0, 0.7)
+        }
+    },
+    ["7ee6c514-3362-4fd1-b581-d8047b18801f"] = { --Maschinegewher Mg-15 LMG
+        server = {
+            cannon = {
+                spread = 0.5,
+                fire_force = {
+                    min = 800.0,
+                    max = 800.0
+                },
+                recoil = sm.vec3.new(0, 0, -100),
+                reload_time = 4,
+                auto_reload = true,
+                projectile_offset = sm.vec3.new(0, 0, 1),
+                projectile = "potato"
+            }
+        },
+        client = {
+            effect = "SpudgunSpinner - SpinnerMuzzel",
+            effect_offset = sm.vec3.new(0, 0, 0.5),
+            pose_animation = {
+                {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
+            }
         }
     },
     ["6d98a168-f0c5-4774-a6ac-e0972fd9f1a4"] = { --Mosin-Nagant 1891 Rifle
@@ -560,7 +679,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -583,12 +702,37 @@ local _Database = {
                 reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.2),
-                projectile = "potato"
+                projectile = "potato",
+
+                magazine_capacity = 30
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.25)
+            --heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
+            --cooling_speed = 0.12, --cooling per second
+
+           -- uv_overheat_anim_max = 110.0,
+
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
+            },
+
+            bone_animation = {
+                required_animations = {"Shooting", "Overheat", "Reload"},
+
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}}, --time can be removed if you need no delay
+                        {anims = {"Shooting"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                    },
+                    overheat = { --will never get executed if heat_per_shot variable is 0 or not present
+                        {anims = {"Overheat"}, start_value = 0.0, end_value = 1.0, time = 2.0}
+                    },
+                    reload = { --will never get executed if magazine_capacity variable is 0 or missing
+                        {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 1.0}
+                    }
+                }
+            }
         }
     },
     ["0ccd6479-f1d8-46e6-acb1-02f9dc20f577"] = { --Degytariev Dp-29 1x1

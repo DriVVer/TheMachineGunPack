@@ -35,6 +35,40 @@
             "rotationSet": "PropFull"
         },
         {
+            "uuid": "7ee6c514-3362-4fd1-b581-d8047b18801f",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "PoseAnimDifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/mg 15_1.obj",
+                        "pose0": "$MOD_DATA/Objects/Mesh/mg 15_2.obj"
+                    }
+                ]
+            },
+            "color": "375219",
+            "hull": {
+                "x": 1, "y": 1, "z": 3, "margin": 0.15,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 3},
+                    {"x": 0, "y": 0, "z": -3}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
+            "density": 500,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
             "uuid": "8edb6045-f410-441c-b9a9-a55ab15a90c7",
             "renderable": {
                 "lodList": [
@@ -422,17 +456,33 @@
             "renderable": {
                 "lodList": [
                     {
+                        "mesh": "$MOD_DATA/Objects/Mesh/AnimTest.fbx",
                         "subMeshList": [
                             {
                                 "textureList": [
-                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/tex_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tex_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
-                                "material": "DifAsgNor"
+                                "material": "SkelAnimDifAsgNor"
+                            },
+                            {
+                                "material": "SkelUVAnimDifAsgNor",
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tex_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tex_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "custom": {
+                                    "uv0": { "u": 0.01, "v": 0.01 }
+                                }
                             }
                         ],
-                        "mesh": "$MOD_DATA/Objects/Mesh/MG-42.obj"
+                        "animationList": [
+                            {"name": "Shooting", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/AnimTest.fbx"},
+                            {"name": "Overheat", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/AnimTest.fbx"},
+                            {"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/AnimTest.fbx"}
+                        ]
                     }
                 ]
             },
@@ -647,6 +697,41 @@
             "rotationSet": "PropFull"
         },
         {
+            "uuid": "b660f72a-7640-4446-b8bb-2df3cad61bbb",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                                    "$MOD_DATA/Objects/Textures/ASG.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/Bomb_Sensor_1.obj"
+                    }
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBombSensor.lua", "classname": "Explosive"},
+            "qualityLevel": 20,
+            "color": "3c5200",
+            "hull": {
+                "x": 1, "y": 1, "z": 4, "margin": 0.35
+                ,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 4},
+                    {"x": 0, "y": 0, "z": -4}
+                ]
+            },
+            "density": 120,
+            "physicsMaterial": "Metal",
+            "rotationSet": "PropYZ",
+            "sticky": "+Y-Y+Z-Z+X-X"
+        },
+        {
             "uuid": "db03da50-e7d6-4a42-8f07-4a296c64f2cd",
             "renderable": {
                 "lodList": [
@@ -655,7 +740,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/ASG.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -689,7 +774,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/ASG.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -723,7 +808,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/ASG.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
