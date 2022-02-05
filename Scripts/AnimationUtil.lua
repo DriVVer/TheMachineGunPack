@@ -39,6 +39,8 @@ function AnimUtil.GetAnimVariables(self)
 
     self.anim.required_animations = {}
     self.anim.state_queue = {}
+
+    self.anim.type = AnimUtil.animation_types.anim_selector
 end
 
 function AnimUtil.DestroyEffects(self)
@@ -138,6 +140,46 @@ AnimUtil.anim_method_t = {
     [2] = "bone_animation"
 }
 
+AnimUtil.animation_types = {
+    anim_selector = function(self, dt)
+        local cur_anim_data = self.anim.cur_data
+        local mCurAnim = cur_anim_data[self.anim.step]
+
+        if mCurAnim.particles then
+            self.anim.type = AnimUtil.animation_types.particle
+        else
+            self.anim.type = AnimUtil.animation_types.bone_anim
+        end
+
+        self.anim.type(self, dt)
+    end;
+    bone_anim = function(self, dt)
+        local mCurAnim = self.anim.cur_data[self.anim.step]
+
+        local _PredictTime = (self.anim.timer - dt)
+
+        local _AnimProg = (mCurAnim.time - math.max(_PredictTime, 0)) / mCurAnim.time
+        local _NormalizedValue = math.min(math.max(_AnimProg, 0), 1)
+        local _FinalValue = sm.util.lerp(mCurAnim.start_value, mCurAnim.end_value, _NormalizedValue)
+
+        local sInteractable = self.interactable
+        for i, anim in pairs(mCurAnim.anims) do
+            sInteractable:setAnimProgress(anim, _FinalValue)
+        end
+
+        self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil
+    end;
+    particle = function(self, dt)
+        local mCurAnim = self.anim.cur_data[self.anim.step]
+
+        for k, mParticle in pairs(mCurAnim.particles) do
+            self.effects[mParticle]:start()
+        end
+
+        self.anim.timer = nil
+    end
+}
+
 AnimUtil.anim_method = {
     [1] = function(self, dt)
         if not self.anim.active then return end
@@ -165,13 +207,14 @@ AnimUtil.anim_method = {
     [2] = function(self, dt)
         if not self.anim.active then return end
 
-        local cur_anim_data = self.anim.cur_data
-        if not cur_anim_data then return end
-
         if not self.anim.timer then
+            local cur_anim_data = self.anim.cur_data
+
             if self.anim.step < #cur_anim_data then
                 self.anim.step = self.anim.step + 1
                 self.anim.timer = cur_anim_data[self.anim.step].time or 0
+
+                self.anim.type = AnimUtil.animation_types.anim_selector
             else
                 self.anim.step = 0
 
@@ -189,29 +232,11 @@ AnimUtil.anim_method = {
                     self.anim.cur_state = nil
                     self.sv_anim_wait = false
                 end
-            end
-        else
-            local mCurAnim = cur_anim_data[self.anim.step]
-            if mCurAnim.particles then
-                for k, mParticle in pairs(mCurAnim.particles) do
-                    self.effects[mParticle]:start()
-                end
 
-                self.anim.timer = nil
-            else
-                local _PredictTime = (self.anim.timer - dt)
-
-                local _AnimProg = (mCurAnim.time - math.max(_PredictTime, 0)) / mCurAnim.time
-                local _NormalizedValue = math.min(math.max(_AnimProg, 0), 1)
-                local _FinalValue = sm.util.lerp(mCurAnim.start_value, mCurAnim.end_value, _NormalizedValue)
-
-                local sInteractable = self.interactable
-                for i, anim in pairs(mCurAnim.anims) do
-                    sInteractable:setAnimProgress(anim, _FinalValue)
-                end
-
-                self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil
+                return
             end
         end
+
+        self.anim.type(self, dt)
     end;
 }
