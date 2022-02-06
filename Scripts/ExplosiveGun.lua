@@ -2,7 +2,7 @@
     Copyright (c) 2022 Questionable Mark
 ]]
 
---if ExplGun then return end
+if ExplGun then return end
 dofile("./AnimationUtil.lua")
 dofile("./GunDatabase.lua")
 ExplGun = class()
@@ -39,33 +39,10 @@ function ExplGun:server_onCreate()
     self.cannon_ammo = self.cannon_settings.magazine_capacity
 end
 
-function ExplGun:server_performDataCheck()
-    if self.sv_anim_wait then return end
-
-    local is_overheating = (self.cl_cannon_heat and self.cl_cannon_heat >= 1.0)
-    local is_reloading   = (self.cannon_ammo and self.cannon_ammo == 0)
-
-    if is_overheating or is_reloading then
-        local data_table = {}
-
-        if is_overheating then
-            table.insert(data_table, "overheat")
-        end
-
-        if is_reloading then
-            self.cannon_ammo = self.cannon_settings.magazine_capacity
-            table.insert(data_table, "reload")
-        end
-
-        self.network:sendToClients("client_onOtherAnim", data_table)
-        self.sv_anim_wait = true
-    end
-end
-
 function ExplGun:server_onFixedUpdate(dt)
     if not sm.exists(self.interactable) then return end
 
-    self:server_performDataCheck()
+    AnimUtil.server_performDataCheck(self, "client_onOtherAnim")
 
     local sCannonSet = self.cannon_settings
     if not self.reload then
@@ -197,7 +174,7 @@ function ExplGun:client_onDestroy()
             bullet.effect:stop()
             bullet.effect:destroy()
         end
-        
+
         self.projectiles[k] = nil
     end
 end
