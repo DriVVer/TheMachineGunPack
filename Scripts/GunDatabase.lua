@@ -447,8 +447,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.7)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["e33ed886-b55b-489a-b11d-7f590cea0be7"] = { --Maxim M1905
@@ -467,9 +471,11 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, -0.04, 0.57),
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, -0.04, 0.57), bone_name = nil} 
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
             }
@@ -491,9 +497,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, -0.04, 0.37)
-            
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, -0.04, 0.37), bone_name = nil}                
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["1e731dbe-d89e-4722-b955-d347f92eec62"] = { --Maschinegewher Mg-34 LMG
@@ -512,8 +521,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.7)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["7ee6c514-3362-4fd1-b581-d8047b18801f"] = { --Maschinegewher Mg-15 LMG
@@ -532,9 +545,11 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.5),
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
             }
@@ -556,12 +571,16 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0, 0.75),
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
+            },
             bone_animation = {
                 required_animations = {"Action"},
-                animation = {
-                    {anims = {"Action"}, start_value = 0.0, end_value = 1.0, time = 1.0}
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}},
+                        {anims = {"Action"}, start_value = 0.0, end_value = 1.0, time = 1.0}
+                    }
                 }
             }
         }
@@ -582,9 +601,11 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.7),
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
             }
@@ -606,8 +627,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.8)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["68337ca8-e957-4b3f-a6dd-c11ac61da064"] = { -- DGv03
@@ -626,8 +651,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.95)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.95), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["b23027d0-0a69-4e82-a917-d43acce49057"] = { -- 1x8 7.7mm Gun Polygon
@@ -646,8 +675,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.55)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["45c849b8-9417-446d-b703-75c582bd9b60"] = { --Browning .30 1x1
@@ -666,8 +699,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.4)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.4), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["b0384020-b6ac-45ae-9df3-045e51cc7e8a"] = { --Maschinegewehr MG-42 LMG
@@ -686,8 +723,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.65)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.68), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["2779083c-1ee2-4b52-9eb3-586a383c5d4e"] = { --Maschinegewehr MG-42 1x1
@@ -751,8 +792,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.65)
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.45), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["c4b65002-2928-4829-8661-84a08a31a253"] = { --Lewis M1914 Machine Gun
