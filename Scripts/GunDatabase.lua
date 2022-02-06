@@ -27,8 +27,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzlle20",
-            effect_offset = sm.vec3.new(0, 0, 0.5)
+            effects = {
+                shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["4825e551-b9c4-484e-8216-efec182957f5"] = { --Old Cannon
@@ -57,8 +61,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BombSmall",
-            effect_offset = sm.vec3.new(0, 0, 0.5)
+            effects = {
+                shoot = {name = "BombSmall", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["28fbfaf6-3b42-4d72-94b1-5bf7b113b5dd"] = { --PTRD bipod
@@ -87,12 +95,16 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomRusznica",
-            effect_offset = sm.vec3.new(0, 0, 1.5),
+            effects = {
+                shoot = {name = "BoomRusznica", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
+            },
             bone_animation = {
                 required_animations = {"PTRD"},
-                animation = {
-                    {anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}},
+                        {anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+                    }
                 }
             }
         }
@@ -123,12 +135,16 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomRusznica",
-            effect_offset = sm.vec3.new(0, 0, 1.5),
+            effects = {
+                shoot = {name = "BoomRusznica", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
+            },
             bone_animation = {
                 required_animations = {"PTRD"},
-                animation = {
-                    {anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}},
+                        {anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+                    }
                 }
             }
         },
@@ -159,12 +175,16 @@ local _Database = {
             }
         },
         client = {
-            effect = "BombSmall",
-            effect_offset = sm.vec3.new(0, 0, 1.5),
+            effects = {
+                shoot = {name = "BombSmall", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
+            },
             bone_animation = {
                 required_animations = {"reload"},
-                animation = {
-                    {anims = {"reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}},
+                        {anims = {"reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+                    }
                 }
             }
         }
@@ -195,8 +215,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzlle20",
-            effect_offset = sm.vec3.new(0, 0, 1.0)
+            effects = {
+                shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 1.0), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["9664ed91-6917-43ce-8051-6dea8ac28e18"] = { --Bazooka M1A1
@@ -225,8 +249,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "PropaneTank - ExplosionSmall",
-            effect_offset = sm.vec3.new(0, 0, 1.4)
+            effects = {
+                shoot = {name = "PropaneTank - ExplosionSmall", offset = sm.vec3.new(0, 0, 1.4), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["073d0f36-9bee-47e4-b4b6-c42568648e3b"] = { --Mg 151/20
@@ -255,8 +283,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzlle20",
-            effect_offset = sm.vec3.new(0, 0, 0.62)
+            effects = {
+                shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 0.62), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["cd1b3309-7046-4b81-ac01-f7ba8f7a00d7"] = { --M61 Vulcan 20mm
@@ -285,12 +317,13 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0.08, 1.0),
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0.08, 1.0), bone_name = nil}
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.04}
-
             }
         }
     },
@@ -320,9 +353,11 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0, 0.9),
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.9), bone_name = nil}
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
             }
@@ -354,8 +389,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0, 0.4)
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.35), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
     ["f9213740-d7ca-41ed-b1c8-23dd704c9063"] = { --Browning .50 HMG Aircraft
@@ -385,9 +424,11 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0, 0.7),
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+            },
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
             }
@@ -420,8 +461,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "BoomMuzzle12",
-            effect_offset = sm.vec3.new(0, 0, 0.8)
+            effects = {
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
+            },
+            pose_animation = {
+                {particles = {"shoot"}}
+            }
         }
     },
 

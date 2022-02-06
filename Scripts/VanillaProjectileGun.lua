@@ -1,8 +1,8 @@
 --[[
-    Copyright (c) 2021 Questionable Mark
+    Copyright (c) 2022 Questionable Mark
 ]]
 
---if VGun then return end
+if VGun then return end
 dofile("./AnimationUtil.lua")
 dofile("./GunDatabase.lua")
 VGun = class()

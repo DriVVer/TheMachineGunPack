@@ -1,8 +1,8 @@
 --[[
-    Copyright (c) 2021 Questionable Mark
+    Copyright (c) 2022 Questionable Mark
 ]]
 
-if ExplGun then return end
+--if ExplGun then return end
 dofile("./AnimationUtil.lua")
 dofile("./GunDatabase.lua")
 ExplGun = class()
@@ -15,20 +15,7 @@ ExplGun.colorHighlight = sm.color.new(0xee0a00ff)
 ExplGun.poseWeightCount = 3
 
 function ExplGun:client_onCreate()
-    local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
-    self.shoot = sm.effect.createEffect(_data.effect, self.interactable)
-    self.shoot:setOffsetPosition(_data.effect_offset)
-
-    self.anim_method = AnimUtil.getAnimMethod(_data)
-    if self.anim_method then
-        local _AnimData = _data[AnimUtil.anim_method_t[self.anim_method]]
-
-        AnimUtil.PrepareAnimation(self, _AnimData, self.anim_method)
-
-        self.anim_data = AnimUtil.UnpackAnimation(_AnimData, self.anim_method)
-    end
-
-    AnimUtil.GetAnimVariables(self)
+    AnimUtil.InitializeAnimationUtil(self)
 
     self.projectiles = {}
 end
@@ -49,26 +36,58 @@ function ExplGun:server_onCreate()
         dir = sm.vec3.zero()
     }
     self.cannon_settings = _data.cannon
+    self.cannon_ammo = self.cannon_settings.magazine_capacity
+end
+
+function ExplGun:server_performDataCheck()
+    if self.sv_anim_wait then return end
+
+    local is_overheating = (self.cl_cannon_heat and self.cl_cannon_heat >= 1.0)
+    local is_reloading   = (self.cannon_ammo and self.cannon_ammo == 0)
+
+    if is_overheating or is_reloading then
+        local data_table = {}
+
+        if is_overheating then
+            table.insert(data_table, "overheat")
+        end
+
+        if is_reloading then
+            self.cannon_ammo = self.cannon_settings.magazine_capacity
+            table.insert(data_table, "reload")
+        end
+
+        self.network:sendToClients("client_onOtherAnim", data_table)
+        self.sv_anim_wait = true
+    end
 end
 
 function ExplGun:server_onFixedUpdate(dt)
     if not sm.exists(self.interactable) then return end
-    local parent = self.interactable:getSingleParent()
-    local active = parent and parent.active
 
-    if active and not self.reload then
-        self.reload = self.cannon_settings.reload_time
+    self:server_performDataCheck()
 
-        local _RandomForce = math.random(self.cannon_settings.fire_force.min, self.cannon_settings.fire_force.max)
-        local _Direction = sm.noise.gunSpread(self.shape.up, self.cannon_settings.spread) * _RandomForce
-        self.projectileConfig.dir = _Direction
-        self.network:sendToClients("client_onShoot", self.projectileConfig)
+    local sCannonSet = self.cannon_settings
+    if not self.reload then
+        local parent = self.interactable:getSingleParent()
+        local active = parent and parent.active
 
-        sm.physics.applyImpulse(self.shape, self.cannon_settings.recoil)
-    end
+        if active and not self.sv_anim_wait then
+            self.reload = sCannonSet.reload_time
 
-    if self.reload then
-        local _AutoReload = (not self.cannon_settings.auto_reload and active)
+            if self.cannon_ammo ~= nil then
+                self.cannon_ammo = self.cannon_ammo - 1
+            end
+
+            local _RandomForce = math.random(sCannonSet.fire_force.min, sCannonSet.fire_force.max)
+            local _Direction = sm.noise.gunSpread(self.shape.up, sCannonSet.spread) * _RandomForce
+            self.projectileConfig.dir = _Direction
+            self.network:sendToClients("client_onShoot", self.projectileConfig)
+
+            sm.physics.applyImpulse(self.shape, sCannonSet.recoil)
+        end
+    else
+        local _AutoReload = (not sCannonSet.auto_reload and active)
         self.reload = (self.reload > 1 and self.reload - 1) or (_AutoReload and 1) or nil
     end
 
@@ -125,18 +144,26 @@ function ExplGun:client_onFixedUpdate(dt)
 end
 
 local function BetterExists(object)
+    if object == nil then return false end
+
     local success, error = pcall(sm.exists, object)
-    if success and type(error) == "boolean" then return error end
-    return false
+    return (success and error == true)
 end
 
 function ExplGun:client_onUpdate(dt)
-    if not self.anim_method then return end
-    AnimUtil.anim_method[self.anim_method](self, dt)
+    AnimUtil.UpdateAnimations(self, dt)
+end
+
+function ExplGun:client_onOtherAnim(data)
+    AnimUtil.PushAnimationState(self, data)
 end
 
 function ExplGun:client_onShoot(data)
-    if not BetterExists(self.shape) then print("Couldn't spawn explosive projectile") return end
+    if not BetterExists(self.shape) then
+        print("Couldn't spawn explosive projectile")
+        return
+    end
+
     local _ShellEffect = sm.effect.createEffect(data.effect)
     local _OffsetPosition = self.shape.worldPosition + self.shape.worldRotation * data.effectOffset
     _ShellEffect:setPosition(_OffsetPosition)
@@ -158,24 +185,19 @@ function ExplGun:client_onShoot(data)
 
     self.projectiles[#self.projectiles + 1] = _Bullet
 
-    self.shoot:start()
-
-    if self.anim_data and #self.anim_data > 0 then
-        self.anim.active = true
-        self.anim.step = 0
-        self.anim.timer = nil
-    end
+    AnimUtil.PushAnimationState(self, "shoot")
 end
 
 function ExplGun:client_onDestroy()
+    AnimUtil.DestroyEffects(self)
+
     for k, bullet in pairs(self.projectiles) do
         if bullet and BetterExists(bullet.effect) then
             bullet.effect:setPosition(sm.vec3.new(0, 0, 10000))
             bullet.effect:stop()
             bullet.effect:destroy()
         end
+        
         self.projectiles[k] = nil
     end
-    self.shoot:stop()
-    self.shoot:destroy()
 end

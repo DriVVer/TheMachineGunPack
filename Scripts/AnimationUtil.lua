@@ -1,5 +1,5 @@
 --[[
-    Copyright (c) 2021 Questionable Mark
+    Copyright (c) 2022 Questionable Mark
 ]]
 
 if AnimUtil then return end
