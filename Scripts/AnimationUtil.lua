@@ -71,28 +71,64 @@ function AnimUtil.ResetAnimations(self)
     end
 end
 
+local function AnimUtil_PushAnimationStateInternal(self, state)
+    self.anim.cur_data = self.anim.data[state]
+    self.anim.cur_state = state
+
+    AnimUtil.ResetAnimations(self)
+
+    self.anim.active = true
+    self.anim.step = 0
+    self.anim.timer = nil
+
+    if state == "shoot" and self.cl_heat_per_shot then
+        self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
+    end
+end
+
+function AnimUtil.UpdateAnimations(self, dt)
+    if self.anim then
+        local anim_method = self.anim.method
+
+        if anim_method then
+            AnimUtil.anim_method[anim_method](self, dt)
+        end
+    end
+
+    if self.cl_cannon_heat then
+        if self.cl_cannon_heat > 0 then
+            self.cl_cannon_heat = self.cl_cannon_heat - (self.cl_cooling_speed * dt)
+        else
+            self.cl_cannon_heat = nil
+        end
+    end
+
+    if self.cl_overheat_anim_max then
+        local clamped_heat = math.min(math.max(self.cl_cannon_heat or 0, 0), 1)
+        self.cl_uv_heat_value = sm.util.lerp(self.cl_uv_heat_value or 0, clamped_heat, dt)
+
+        self.interactable:setUvFrameIndex(self.cl_uv_heat_value * self.cl_overheat_anim_max)
+    end
+end
+
 function AnimUtil.PushAnimationState(self, state)
-    local is_shoot_state = self.anim.cur_state == "shoot"
+    local is_state_string = (type(state) == "string")
+    
+    local can_skip_anim = not self.anim.cur_state or (self.anim.cur_state == "shoot" and state == "shoot")
+    if can_skip_anim then
+        local cur_state = state
+        if not is_state_string then
+            cur_state = state[1]
+            table.remove(state, 1)
 
-    if state == "shoot" then
-        if is_shoot_state or self.anim.cur_state == nil then
-            self.anim.cur_data = self.anim.data[state]
-            self.anim.cur_state = state
-
-            AnimUtil.ResetAnimations(self)
-
-            self.anim.active = true
-            self.anim.step = 0
-            self.anim.timer = nil
-
-            if self.cl_heat_per_shot then
-                self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
+            for k, v in pairs(state) do
+                table.insert(self.anim.state_queue, v)
             end
         end
-    else
-        local state_type = type(state)
 
-        if state_type == "string" then
+        AnimUtil_PushAnimationStateInternal(self, cur_state)
+    else
+        if is_state_string then
             table.insert(self.anim.state_queue, state)
         else --is table
             for k, v in pairs(state) do

@@ -79,24 +79,7 @@ function VGun:server_onFixedUpdate(dt)
 end
 
 function VGun:client_onUpdate(dt)
-    if self.anim.method then
-        AnimUtil.anim_method[self.anim.method](self, dt)
-    end
-
-    if self.cl_cannon_heat then
-        if self.cl_cannon_heat > 0 then
-            self.cl_cannon_heat = self.cl_cannon_heat - (self.cl_cooling_speed * dt)
-        else
-            self.cl_cannon_heat = nil
-        end
-    end
-
-    if self.cl_overheat_anim_max ~= nil then
-        local clamped_heat = math.min(math.max(self.cl_cannon_heat or 0, 0), 1)
-        self.cl_uv_heat_value = sm.util.lerp(self.cl_uv_heat_value or 0, clamped_heat, dt)
-
-        self.interactable:setUvFrameIndex(self.cl_uv_heat_value * self.cl_overheat_anim_max)
-    end
+    AnimUtil.UpdateAnimations(self, dt)
 end
 
 function VGun:client_onShoot(anim_state)
