@@ -2,7 +2,7 @@
     Copyright (c) 2021 Questionable Mark
 ]]
 
---if AnimUtil then return end
+if AnimUtil then return end
 AnimUtil = class()
 
 function AnimUtil.getAnimMethod(info_table)
@@ -66,8 +66,15 @@ end
 function AnimUtil.ResetAnimations(self)
     local sInteractable = self.interactable
 
-    for k, v in pairs(self.anim.required_animations) do
-        sInteractable:setAnimProgress(v, 0)
+    local sAnim = self.anim
+    if sAnim.method == 2 then
+        for k, v in pairs(sAnim.required_animations) do
+            sInteractable:setAnimProgress(v, 0)
+        end
+    else
+        sInteractable:setPoseWeight(0, 0)
+        sInteractable:setPoseWeight(1, 0)
+        sInteractable:setPoseWeight(2, 0)
     end
 end
 
@@ -112,31 +119,44 @@ function AnimUtil.UpdateAnimations(self, dt)
 end
 
 function AnimUtil.PushAnimationState(self, state)
-    local is_state_string = (type(state) == "string")
+    self.anim.push_method(self, state)
+end
+
+local AnimUtil_AnimPushFunctions = {
+    [1] = function(self, state)
+        AnimUtil.ResetAnimations(self)
+
+        self.anim.active = true
+        self.anim.step = 0
+        self.anim.timer = nil
+    end;
+    [2] = function(self, state)
+        local is_state_string = (type(state) == "string")
     
-    local can_skip_anim = not self.anim.cur_state or (self.anim.cur_state == "shoot" and state == "shoot")
-    if can_skip_anim then
-        local cur_state = state
-        if not is_state_string then
-            cur_state = state[1]
-            table.remove(state, 1)
+        local can_skip_anim = not self.anim.cur_state or (self.anim.cur_state == "shoot" and state == "shoot")
+        if can_skip_anim then
+            local cur_state = state
+            if not is_state_string then
+                cur_state = state[1]
+                table.remove(state, 1)
 
-            for k, v in pairs(state) do
-                table.insert(self.anim.state_queue, v)
+                for k, v in pairs(state) do
+                    table.insert(self.anim.state_queue, v)
+                end
             end
-        end
 
-        AnimUtil_PushAnimationStateInternal(self, cur_state)
-    else
-        if is_state_string then
-            table.insert(self.anim.state_queue, state)
-        else --is table
-            for k, v in pairs(state) do
-                table.insert(self.anim.state_queue, v)
+            AnimUtil_PushAnimationStateInternal(self, cur_state)
+        else
+            if is_state_string then
+                table.insert(self.anim.state_queue, state)
+            else --is table
+                for k, v in pairs(state) do
+                    table.insert(self.anim.state_queue, v)
+                end
             end
         end
     end
-end
+}
 
 function AnimUtil.InitializeAnimationUtil(self)
     local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
@@ -158,8 +178,12 @@ function AnimUtil.InitializeAnimationUtil(self)
         self.anim.required_animations = mAnimData.required_animations
 
         AnimUtil.PrepareAnimation(self)
+        self.anim.push_method = AnimUtil_AnimPushFunctions[self.anim.method]
 
         self.anim.data = AnimUtil.UnpackAnimation(mAnimData, self.anim.method)
+        if self.anim.method == 1 then
+            self.anim.cur_data = self.anim.data
+        end
     end
 end
 
@@ -176,22 +200,20 @@ AnimUtil.anim_method_t = {
     [2] = "bone_animation"
 }
 
-AnimUtil.animation_types = {
-    anim_selector = function(self, dt)
-        local cur_anim_data = self.anim.cur_data
-        local mCurAnim = cur_anim_data[self.anim.step]
+local AnimUtil_AnimationFunctions = {
+    [1] = function(self, dt) --pose animation
+        local _CurAnim = self.anim.data[self.anim.step]
+        local _PredictTime = (self.anim.timer - dt)
 
-        if mCurAnim.particles then
-            self.anim.type = AnimUtil.animation_types.particle
-        else
-            self.anim.type = AnimUtil.animation_types.bone_anim
-        end
+        local _AnimProg = (_CurAnim.time - math.max(_PredictTime, 0)) / _CurAnim.time
+        local _NormalizedValue = math.min(math.max(_AnimProg, 0), 1)
+        local _FinalValue = sm.util.lerp(_CurAnim.start_value, _CurAnim.end_value, _NormalizedValue)
 
-        self.anim.type(self, dt)
+        self.interactable:setPoseWeight(_CurAnim.pose, _FinalValue)
+        self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil
     end;
-    bone_anim = function(self, dt)
+    [2] = function(self, dt) --bone animation
         local mCurAnim = self.anim.cur_data[self.anim.step]
-
         local _PredictTime = (self.anim.timer - dt)
 
         local _AnimProg = (mCurAnim.time - math.max(_PredictTime, 0)) / mCurAnim.time
@@ -204,6 +226,21 @@ AnimUtil.animation_types = {
         end
 
         self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil
+    end
+}
+
+AnimUtil.animation_types = {
+    anim_selector = function(self, dt)
+        local cur_anim_data = self.anim.cur_data
+        local mCurAnim = cur_anim_data[self.anim.step]
+
+        if mCurAnim.particles then
+            self.anim.type = AnimUtil.animation_types.particle
+        else
+            self.anim.type = AnimUtil_AnimationFunctions[self.anim.method]
+        end
+
+        self.anim.type(self, dt)
     end;
     particle = function(self, dt)
         local mCurAnim = self.anim.cur_data[self.anim.step]
@@ -221,24 +258,22 @@ AnimUtil.anim_method = {
         if not self.anim.active then return end
 
         if not self.anim.timer then
-            if self.anim.step < #self.anim_data then
+            local cur_anim_data = self.anim.data
+
+            if self.anim.step < #cur_anim_data then
                 self.anim.step = self.anim.step + 1
-                self.anim.timer = self.anim_data[self.anim.step].time
+                self.anim.timer = cur_anim_data[self.anim.step].time
+
+                self.anim.type = AnimUtil.animation_types.anim_selector
             else
                 self.anim.active = false
                 self.anim.step = 0
+
+                return
             end
-        else
-            local _PredictTime = (self.anim.timer - dt)
-            local _CurAnim = self.anim_data[self.anim.step]
-
-            local _AnimProg = (_CurAnim.time - math.max(_PredictTime, 0)) / _CurAnim.time
-            local _NormalizedValue = math.min(math.max(_AnimProg, 0), 1)
-            local _FinalValue = sm.util.lerp(_CurAnim.start_value, _CurAnim.end_value, _NormalizedValue)
-
-            self.interactable:setPoseWeight(_CurAnim.pose, _FinalValue)
-            self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil
         end
+
+        self.anim.type(self, dt)
     end;
     [2] = function(self, dt)
         if not self.anim.active then return end

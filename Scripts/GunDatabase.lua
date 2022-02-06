@@ -771,9 +771,12 @@ local _Database = {
             }
         },
         client = {
-            effect = "SpudgunSpinner - SpinnerMuzzel",
-            effect_offset = sm.vec3.new(0, 0, 0.5),
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+            },
+
             pose_animation = {
+                {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
                 {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
             }
