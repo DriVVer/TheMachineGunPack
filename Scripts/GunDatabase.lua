@@ -785,19 +785,19 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.2),
                 projectile = "potato",
 
-                magazine_capacity = 30
+                magazine_capacity = 50
             }
         },
         client = {
             overheat_effect = {
                 heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
                 cooling_speed = 0.12, --cooling per second
-                uv_overheat_anim_max = 100.0
+                uv_overheat_anim_max = 70.0
             },
 
             effects = {
@@ -805,17 +805,17 @@ local _Database = {
             },
 
             bone_animation = {
-                required_animations = {"Shooting", "Overheat", "Reload"},
+                required_animations = {"Shots", "BarrelExchange", "Reload"},
                 animation_states = {
                     shoot = {
                         {particles = {"shoot"}}, --time can be removed if you need no delay
-                        {anims = {"Shooting"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                        {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
                     },
                     overheat = { --will never get executed if heat_per_shot variable is 0 or not present
-                        {anims = {"Overheat"}, start_value = 0.0, end_value = 1.0, time = 2.0}
+                        {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 2.0}
                     },
                     reload = { --will never get executed if magazine_capacity variable is 0 or missing
-                        {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 1.0}
+                        {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
                     }
                 }
             }
