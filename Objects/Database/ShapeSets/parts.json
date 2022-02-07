@@ -461,7 +461,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tex_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "SkelAnimDifAsgNor"
@@ -480,7 +480,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tex_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "SkelAnimDifAsgNor"

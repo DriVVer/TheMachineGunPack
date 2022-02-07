@@ -797,11 +797,11 @@ local _Database = {
             overheat_effect = {
                 heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
                 cooling_speed = 0.12, --cooling per second
-                uv_overheat_anim_max = 70.0
+                uv_overheat_anim_max = 73.0
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
             },
 
             bone_animation = {
