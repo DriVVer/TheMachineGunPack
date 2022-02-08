@@ -816,7 +816,7 @@ local _Database = {
                         {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
                     },
                     reload = { --will never get executed if magazine_capacity variable is 0 or missing
-                        {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+                        {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 6.0}
                     }
                 }
             }
