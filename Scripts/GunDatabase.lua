@@ -752,7 +752,7 @@ local _Database = {
             }
         }
     },
-    ["b0384020-b6ac-45ae-9df3-045e51cc7e8a"] = { --Maschinegewehr MG-42 LMG
+    ["2779083c-1ee2-4b52-9eb3-586a383c5d4e"] = { --Maschinegewehr MG-42 1x1 
         server = {
             cannon = {
                 spread = 0.5,
@@ -763,20 +763,36 @@ local _Database = {
                 recoil = sm.vec3.new(0, 0, -100),
                 reload_time = 4,
                 auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
+                projectile_offset = sm.vec3.new(0, 0, 0.7),
+                projectile = "potato",
+
+                magazine_capacity = 0
             }
         },
         client = {
-            effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.68), bone_name = nil}
+            overheat_effect = {
+                heat_per_shot = 0.0, --heating per shot (starts overheating animation at 1.0)
+                cooling_speed = 0.05, --cooling per second
+                uv_overheat_anim_max = 64.0
             },
-            pose_animation = {
-                {particles = {"shoot"}}
+
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}         
+            },
+
+
+            bone_animation = {
+                required_animations = {"Shots"},
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}}, --time can be removed if you need no delay
+                        {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                    }
+                }
             }
         }
     },
-    ["2779083c-1ee2-4b52-9eb3-586a383c5d4e"] = { --Maschinegewehr MG-42 1x1
+    ["b0384020-b6ac-45ae-9df3-045e51cc7e8a"] = { --Maschinegewehr MG-42 LMG
         server = {
             cannon = {
                 spread = 0.5,

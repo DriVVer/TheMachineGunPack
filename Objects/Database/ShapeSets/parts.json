@@ -452,7 +452,7 @@
             "rotationSet": "PropFull"
         },
         {
-            "uuid": "2779083c-1ee2-4b52-9eb3-586a383c5d4e",
+            "uuid": "b0384020-b6ac-45ae-9df3-045e51cc7e8a",
             "renderable": {
                 "lodList": [
                     {
@@ -509,34 +509,57 @@
             "rotationSet": "PropFull"
         },
         {
-            "uuid": "b0384020-b6ac-45ae-9df3-045e51cc7e8a",
+            "uuid": "2779083c-1ee2-4b52-9eb3-586a383c5d4e",
             "renderable": {
                 "lodList": [
                     {
+                        "mesh": "$MOD_DATA/Objects/Mesh/mg42_1x1.fbx",
                         "subMeshList": [
                             {
                                 "textureList": [
-                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
-                                "material": "DifAsgNor"
+                                "material": "SkelAnimDifAsgNor"
+                            },
+                            {
+                                "material": "SkelUVAnimDifAsgNor",
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "custom": {
+                                    "uv0": { "u": 0.01, "v": 0.01 }
+                                }
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
                             }
                         ],
-                        "mesh": "$MOD_DATA/Objects/Mesh/MG-42M.obj"
+                        "animationList": [
+                            {"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"}
+                            
+                        ]
                     }
                 ]
             },
             "color": "002E1A",
             "hull": {
-                "x": 1, "y": 1, "z": 4, "margin": 0.25,
+                "x": 1, "y": 1, "z": 1, "margin": 0.25,
                 "pointList": [
-                    {"x": 0, "y": 0, "z": 4},
-                    {"x": 0, "y": 0, "z": -4}
+                    {"x": 0, "y": 0, "z": 1},
+                    {"x": 0, "y": 0, "z": -1}
                 ]
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-            "density": 300,
+            "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
