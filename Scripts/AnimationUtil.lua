@@ -147,7 +147,7 @@ function AnimUtil.ReceiveAnimationData(self, cannon_heat)
 
     if self.anim.method == 2 then --has bone animation
         self.anim.state_queue = {}
-        self.ani.cur_state = nil
+        self.anim.cur_state = nil
     end
 end
 
