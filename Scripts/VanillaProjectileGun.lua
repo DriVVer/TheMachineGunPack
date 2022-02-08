@@ -16,6 +16,10 @@ VGun.poseWeightCount = 3
 
 function VGun:client_onCreate()
     AnimUtil.InitializeAnimationUtil(self)
+
+    if not self.sv_server_host then
+        self.network:sendToServer("server_requestAnimData")
+    end
 end
 
 function VGun:server_onCreate()
@@ -23,6 +27,16 @@ function VGun:server_onCreate()
     self.cannon_settings = _data.cannon
 
     self.cannon_ammo = self.cannon_settings.magazine_capacity
+
+    self.sv_server_host = true
+end
+
+function VGun:server_requestAnimData(data, player)
+    AnimUtil.SendAnimationData(self, player)
+end
+
+function VGun:client_receiveAnimData(data)
+    AnimUtil.ReceiveAnimationData(self, data)
 end
 
 function VGun:server_onFixedUpdate(dt)
