@@ -787,7 +787,7 @@ local _Database = {
                 recoil = sm.vec3.new(0, 0, -100),
                 reload_time = 4,
                 auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 0.2),
+                projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato",
 
                 magazine_capacity = 50

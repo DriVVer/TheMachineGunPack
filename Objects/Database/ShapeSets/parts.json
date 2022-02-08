@@ -496,10 +496,10 @@
             },
             "color": "002E1A",
             "hull": {
-                "x": 1, "y": 1, "z": 1, "margin": 0.25,
+                "x": 1, "y": 1, "z": 4, "margin": 0.25,
                 "pointList": [
-                    {"x": 0, "y": 0, "z": 1},
-                    {"x": 0, "y": 0, "z": -1}
+                    {"x": 0, "y": 0, "z": 4},
+                    {"x": 0, "y": 0, "z": -4}
                 ]
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
