@@ -132,6 +132,25 @@ function AnimUtil.ResetAnimations(self)
     end
 end
 
+function AnimUtil.SendAnimationData(self, player)
+    self.network:sendToClient(player, "client_receiveAnimData", self.cl_cannon_heat)
+end
+
+function AnimUtil.ReceiveAnimationData(self, cannon_heat)
+    self.cl_cannon_heat = cannon_heat
+
+    self.anim.active = false
+    self.anim.step = 0
+    self.anim.timer = nil
+    
+    AnimUtil.ResetAnimations(self)
+
+    if self.anim.method == 2 then --has bone animation
+        self.anim.state_queue = {}
+        self.ani.cur_state = nil
+    end
+end
+
 local function AnimUtil_PushAnimationStateInternal(self, state)
     self.anim.cur_data = self.anim.data[state]
     self.anim.cur_state = state

@@ -18,6 +18,10 @@ function ExplGun:client_onCreate()
     AnimUtil.InitializeAnimationUtil(self)
 
     self.projectiles = {}
+
+    if not self.sv_server_host then
+        self.network:sendToServer("server_requestAnimData")
+    end
 end
 
 function ExplGun:server_onCreate()
@@ -37,6 +41,16 @@ function ExplGun:server_onCreate()
     }
     self.cannon_settings = _data.cannon
     self.cannon_ammo = self.cannon_settings.magazine_capacity
+
+    self.sv_server_host = true
+end
+
+function ExplGun:server_requestAnimData(data, player)
+    AnimUtil.SendAnimationData(self, player)
+end
+
+function ExplGun:client_receiveAnimData(data)
+    AnimUtil.ReceiveAnimationData(self, data)
 end
 
 function ExplGun:server_onFixedUpdate(dt)
