@@ -763,21 +763,16 @@ local _Database = {
                 recoil = sm.vec3.new(0, 0, -100),
                 reload_time = 4,
                 auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 0.7),
+                projectile_offset = sm.vec3.new(0, 0, 0.5),
                 projectile = "potato",
 
-                magazine_capacity = 0
+               
             }
         },
         client = {
-            overheat_effect = {
-                heat_per_shot = 0.0, --heating per shot (starts overheating animation at 1.0)
-                cooling_speed = 0.05, --cooling per second
-                uv_overheat_anim_max = 64.0
-            },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}         
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.4), bone_name = nil}         
             },
 
 
@@ -787,6 +782,9 @@ local _Database = {
                     shoot = {
                         {particles = {"shoot"}}, --time can be removed if you need no delay
                         {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                    },
+                    overheat = { --will never get executed if heat_per_shot variable is 0 or not present
+                        {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
                     }
                 }
             }
@@ -817,7 +815,7 @@ local _Database = {
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}         
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.77), bone_name = nil}         
             },
 
 
