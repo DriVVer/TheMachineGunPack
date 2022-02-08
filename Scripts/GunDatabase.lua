@@ -804,7 +804,7 @@ local _Database = {
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato",
 
-                magazine_capacity = 50
+                magazine_capacity = 70
             }
         },
         client = {
@@ -815,7 +815,10 @@ local _Database = {
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.77), bone_name = nil}         
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.77), bone_name = nil},
+                overheat = {name = "overheat", offset = sm.vec3.new(0, 0, 0.77)},
+                reload = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
+
             },
 
 
@@ -827,9 +830,11 @@ local _Database = {
                         {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
                     },
                     overheat = { --will never get executed if heat_per_shot variable is 0 or not present
+                        {particles = {"overheat"}},
                         {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
                     },
                     reload = { --will never get executed if magazine_capacity variable is 0 or missing
+                        {particles = {"reload"}},
                         {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 6.0}
                     }
                 }

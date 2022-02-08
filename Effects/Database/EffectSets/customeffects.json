@@ -30,6 +30,105 @@
 			}
 		]
 	},
+	"overheat":
+	{
+		"parameterList":
+		{
+			"Size":1.0,
+			"Velocity_max_50":3.5,
+			"Material":9,
+			"Phys_energy":6.0
+
+	
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/amb/3D/fire_extinguish",
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "construct_Piston_exhaust_01",
+				"offset": { "x": 0.0, "y": 0.0, "z": -0.2 },
+				"attached": true,
+				"delay": 0.01
+			},
+			{
+				"type": "audio",
+				"name": "event:/coll/impact_single",
+				"parameters":
+				[
+					"Size",
+					"Velocity_max_50",
+					"Material",
+					"Phys_energy"
+				],
+				"delay": 2.5
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/handbook/handbook_putdown",
+				"delay": 3.6
+			}
+			
+		]
+	},
+	"MG42reload":
+	{
+		"parameterList":
+		{
+			"Size":1.0,
+			"Velocity_max_50":4.0,
+			"Material":9,
+			"Phys_energy":5.0
+	
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
+				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_colourmenu",
+				"delay": 1.2
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_toggle_off",
+				"delay": 2.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_toggle_on",
+				"delay": 4.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
+				"delay": 5.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/coll/impact_single",
+				"parameters":
+				[
+					"Size",
+					"Velocity_max_50",
+					"Material",
+					"Phys_energy"
+				],
+				"delay": 5.9
+			}
+			
+		]
+	},
 	"BoomRusznica":
 	{
 		"effectList":
