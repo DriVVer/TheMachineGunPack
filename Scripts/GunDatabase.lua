@@ -795,14 +795,15 @@ local _Database = {
         },
         client = {
             overheat_effect = {
-                heat_per_shot = 0.05, --heating per shot (starts overheating animation at 1.0)
-                cooling_speed = 0.12, --cooling per second
-                uv_overheat_anim_max = 73.0
+                heat_per_shot = 0.02, --heating per shot (starts overheating animation at 1.0)
+                cooling_speed = 0.05, --cooling per second
+                uv_overheat_anim_max = 64.0
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}         
             },
+
 
             bone_animation = {
                 required_animations = {"Shots", "BarrelExchange", "Reload"},
@@ -812,7 +813,7 @@ local _Database = {
                         {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
                     },
                     overheat = { --will never get executed if heat_per_shot variable is 0 or not present
-                        {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 2.0}
+                        {anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
                     },
                     reload = { --will never get executed if magazine_capacity variable is 0 or missing
                         {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
