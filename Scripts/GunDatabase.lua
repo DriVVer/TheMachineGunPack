@@ -601,35 +601,45 @@ local _Database = {
         }
     },
     ["6d98a168-f0c5-4774-a6ac-e0972fd9f1a4"] = { --Mosin-Nagant 1891 Rifle
-        server = {
-            cannon = {
-                spread = 0.01,
-                fire_force = {
-                    min = 1000.0,
-                    max = 1000.0
-                },
-                recoil = sm.vec3.new(0, 0, -1500),
-                reload_time = 50,
-                auto_reload = false,
-                projectile_offset = sm.vec3.new(0, 0, 0.75),
-                projectile = "potato"
-            }
-        },
-        client = {
-            effects = {
-                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
+    server = {
+        cannon = {
+            spread = 0.01,
+            fire_force = {
+                min = 1200.0,
+                max = 1200.0
             },
-            bone_animation = {
-                required_animations = {"Action"},
-                animation_states = {
-                    shoot = {
-                        {particles = {"shoot"}},
-                        {anims = {"Action"}, start_value = 0.0, end_value = 1.0, time = 1.0}
-                    }
+            recoil = sm.vec3.new(0, 0, -100),
+            reload_time = 100,
+            auto_reload = true,
+            projectile_offset = sm.vec3.new(0, 0, 0.7),
+            projectile = "potato",
+
+            magazine_capacity = 5
+        }
+    },
+    client = {
+        effects = {
+            shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
+            reload = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
+
+        },
+
+
+        bone_animation = {
+            required_animations = {"Shots", "Reload"},
+            animation_states = {
+                shoot = {
+                    {particles = {"shoot"}}, --time can be removed if you need no delay
+                    {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 2.2}
+                },
+                reload = { --will never get executed if magazine_capacity variable is 0 or missing
+                    {particles = {"reload"}},
+                    {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 2.6}
                 }
             }
         }
-    },
+    }
+},
     ["dee496d2-a9a9-4708-9a2f-50910f59f8fa"] = { -- AK-47 Kalashnikov
         server = {
             cannon = {
@@ -804,7 +814,7 @@ local _Database = {
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato",
 
-                magazine_capacity = 70
+                magazine_capacity = 50
             }
         },
         client = {
@@ -815,7 +825,7 @@ local _Database = {
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.77), bone_name = nil},
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
                 overheat = {name = "overheat", offset = sm.vec3.new(0, 0, 0.77)},
                 reload = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
 

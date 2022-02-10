@@ -260,33 +260,41 @@
                 "lodList": [
                     {
                         "mesh": "$MOD_DATA/Objects/Mesh/MosinAnim.fbx",
-                        "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
                         "subMeshList": [
                             {
-                                "material": "SkelAnimDifAsgNor",
                                 "textureList": [
-                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
-                                ]
+                                ],
+                                "material": "SkelAnimDifAsgNor"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
                             }
                         ],
                         "animationList": [
-                            {"name": "Action", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx"}
+                            {"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx"},
+                            {"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx"}
                         ]
                     }
                 ]
             },
-            "color": "375219",
+            "color": "002E1A",
             "hull": {
-                "x": 1, "y": 1, "z": 5, "margin": 0.25,
+                "x": 1, "y": 1, "z": 4, "margin": 0.15,
                 "pointList": [
-                    {"x": 0, "y": 0, "z": 5},
-                    {"x": 0, "y": 0, "z": -5}
+                    {"x": 0, "y": 0, "z": 4},
+                    {"x": 0, "y": 0, "z": -4}
                 ]
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-            "density": 1000,
+            "density": 300,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -518,7 +526,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "SkelAnimDifAsgNor"
@@ -527,7 +535,7 @@
                                 "material": "SkelUVAnimDifAsgNor",
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "custom": {
@@ -537,7 +545,7 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "SkelAnimDifAsgNor"
