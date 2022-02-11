@@ -129,6 +129,95 @@
 			
 		]
 	},
+	"MosinReload":
+	{
+		"parameterList":
+		{
+			"Size":1.0,
+			"Velocity_max_50":4.0,
+			"Material":9,
+			"Phys_energy":5.0
+	
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_putdown",
+				"delay": 0.3
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 2.8
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 3.0
+			}
+			
+		]
+	},
+	"MosinShot":
+	{
+		"parameterList":
+		{
+			"Size":1.0,
+			"Velocity_max_50":4.0,
+			"Material":9,
+			"Phys_energy":5.0
+	
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "PotatoRifle - Shoot",
+				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_spudgun_muzzel_spinner",
+				"attached": true,
+				"delay": 0.05
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 0.55
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_putdown",
+				"delay": 0.88
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 1.7
+			}
+			
+		]
+	},
 	"BoomRusznica":
 	{
 		"effectList":

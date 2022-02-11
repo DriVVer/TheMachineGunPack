@@ -619,8 +619,8 @@ local _Database = {
     },
     client = {
         effects = {
-            shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
-            reload = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
+            shoot = {name = "MosinShot", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
+            reload = {name = "MosinReload", offset = sm.vec3.new(0, 0, 0.77)}
 
         },
 
@@ -634,7 +634,7 @@ local _Database = {
                 },
                 reload = { --will never get executed if magazine_capacity variable is 0 or missing
                     {particles = {"reload"}},
-                    {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 2.6}
+                    {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 3.3}
                 }
             }
         }
