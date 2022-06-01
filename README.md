@@ -65,7 +65,7 @@ Some of them are animated so check them out if you like that kind of details!
 
 
 ## --------------------------Credit & Copyright:----------------------------
-Brent Batch / DO NOT COPY without permission from Brent Batch</br>
-Question Mark - scripts explosive and non-explosive guns</br>
-"Alarmblock" script is made by wingcomstriker405</br>
+[Brent Batch](https://steamcommunity.com/profiles/76561198296305997) / DO NOT COPY without permission from Brent Batch</br>
+[Questionable Mark](https://steamcommunity.com/profiles/76561198361178618) - scripts explosive and non-explosive guns</br>
+"Alarmblock" script is made by [wingcomstriker405](https://steamcommunity.com/profiles/76561198238909378)</br>
 ## --------------------------------------------------------------------------
