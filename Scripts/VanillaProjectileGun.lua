@@ -3,8 +3,10 @@
 ]]
 
 if VGun then return end
-dofile("./AnimationUtil.lua")
-dofile("./GunDatabase.lua")
+
+dofile("Databases/GunDatabase.lua")
+dofile("Utils/AnimationUtil.lua")
+
 VGun = class()
 VGun.maxParentCount = 1
 VGun.maxChildCount = 0

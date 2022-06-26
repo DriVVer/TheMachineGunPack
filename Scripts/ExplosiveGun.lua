@@ -3,14 +3,16 @@
 ]]
 
 if ExplGun then return end
-dofile("./AnimationUtil.lua")
-dofile("./GunDatabase.lua")
+
+dofile("Utils/AnimationUtil.lua")
+dofile("Databases/GunDatabase.lua")
+
 ExplGun = class()
 ExplGun.maxParentCount = 1
-ExplGun.maxChildCount = 0
-ExplGun.connectionInput = sm.interactable.connectionType.logic
+ExplGun.maxChildCount  = 0
+ExplGun.connectionInput  = sm.interactable.connectionType.logic
 ExplGun.connectionOutput = sm.interactable.connectionType.none
-ExplGun.colorNormal = sm.color.new(0xcb0a00ff)
+ExplGun.colorNormal    = sm.color.new(0xcb0a00ff)
 ExplGun.colorHighlight = sm.color.new(0xee0a00ff)
 ExplGun.poseWeightCount = 3
 

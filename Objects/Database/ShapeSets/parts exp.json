@@ -135,7 +135,7 @@
                     {"x": 0, "y": 0, "z": -6}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
