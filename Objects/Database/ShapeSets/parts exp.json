@@ -71,30 +71,30 @@
             "renderable": {
                 "lodList": [
                     {
-                        "mesh": "$MOD_DATA/Objects/Mesh/Cannon2.fbx",
+                        "mesh": "$MOD_DATA/Objects/Mesh/Pak40BreachSkelAnim-E.fbx",
                         "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
                         "subMeshList": [
                             {
                                 "textureList": [
-                                    "$MOD_DATA/Objects/Textures/texture_dif.tga",
-                                    "$MOD_DATA/Objects/Textures/reflections_half.tga",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "SkelAnimDifAsgNor"
                             }
                         ],
                         "animationList": [
-                            {"name": "reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Cannon2.fbx"}
+                            {"name": "reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40BreachSkelAnim-E.fbx"}
                         ]
                     }
                 ]
             },
             "color": "df7f00",
             "hull": {
-                "x": 1, "y": 1, "z": 10, "margin": 0.40,
+                "x": 1, "y": 1, "z": 6, "mar*gin": 0.40,
                 "pointList": [
-                    {"x": 0, "y": 0, "z": 10},
-                    {"x": 0, "y": 0, "z": -10}
+                    {"x": 0, "y": 0, "z": 6},
+                    {"x": 0, "y": 0, "z": -6}
                 ]
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},

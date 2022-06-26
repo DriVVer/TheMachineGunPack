@@ -476,30 +476,7 @@ local _Database = {
 
     ]]
     
-    ["32e96b7d-a08a-483c-88c6-8a1616ea3123"] = { --Browning .30 LMG
-        server = {
-            cannon = {
-                spread = 0.5,
-                fire_force = {
-                    min = 800.0,
-                    max = 800.0
-                },
-                recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
-                auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
-            }
-        },
-        client = {
-            effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
-            },
-            pose_animation = {
-                {particles = {"shoot"}}
-            }
-        }
-    },
+    
     ["e33ed886-b55b-489a-b11d-7f590cea0be7"] = { --Maxim M1905
         server = {
             cannon = {
@@ -738,6 +715,41 @@ local _Database = {
             }
         }
     },
+    ["32e96b7d-a08a-483c-88c6-8a1616ea3123"] = { --Browning .30 LMG
+        server = {
+            cannon = {
+                spread = 0.5,
+                fire_force = {
+                    min = 800.0,
+                    max = 800.0
+                },
+                recoil = sm.vec3.new(0, 0, -100),
+                reload_time = 5,
+                auto_reload = true,
+                projectile_offset = sm.vec3.new(0, 0, 0.4),
+                projectile = "potato",
+
+               
+            }
+        },
+        client = {
+
+            effects = {
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.44), bone_name = nil}         
+            },
+
+
+            bone_animation = {
+                required_animations = {"Shots"},
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}}, --time can be removed if you need no delay
+                        {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                    }
+                }
+            }
+        }
+    },
     ["45c849b8-9417-446d-b703-75c582bd9b60"] = { --Browning .30 1x1
         server = {
             cannon = {
@@ -749,16 +761,27 @@ local _Database = {
                 recoil = sm.vec3.new(0, 0, -100),
                 reload_time = 5,
                 auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
+                projectile_offset = sm.vec3.new(0, 0, 0.4),
+                projectile = "potato",
+
+               
             }
         },
         client = {
+
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.4), bone_name = nil}
+                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.44), bone_name = nil}         
             },
-            pose_animation = {
-                {particles = {"shoot"}}
+
+
+            bone_animation = {
+                required_animations = {"Shots"},
+                animation_states = {
+                    shoot = {
+                        {particles = {"shoot"}}, --time can be removed if you need no delay
+                        {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+                    }
+                }
             }
         }
     },
