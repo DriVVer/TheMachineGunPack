@@ -191,7 +191,6 @@ function Breech:server_onFixedUpdate()
 		local rld_time = s_pub_data.reloadTime or 40
 		local final_duration = (rld_time / 40) - self.anim_duration
 		if final_duration >= 0 then
-			print(final_duration)
 			self.network:sendToClients("client_startAnimation", final_duration)
 		else
 			print("Reload time should be at least", self.anim_duration, "seconds long!")
