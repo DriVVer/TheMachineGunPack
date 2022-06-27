@@ -31,7 +31,7 @@ local breech_database =
 		required_effects = {
 			--test = { name = "BombSmall", offset = sm.vec3.new(0, 0, 0), bone = nil } --that's how you define an effect that can be referenced by the animation
 		},
-		required_animations = { "Shot", "Reload1, Reload2" },
+		required_animations = { "Shot", "Reload1", "Reload2" },
 		animation = {
 			--{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }, start_val = 0.0, end_val = 1.0, time = 1.0 } --that's how you define your animation
 			--{ type = mgp_anim_enum.wait_timer } --that's how you define a custom wait timer that allows any cannon to specify its reload time
