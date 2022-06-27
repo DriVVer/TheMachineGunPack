@@ -179,6 +179,10 @@ function Breech:server_checkParent(s_interactable)
 	end	
 end
 
+function Breech:client_onReloadError(min_reload_time)
+	sm.gui.displayAlertText(("Breech: Reload time should be at least %.2f seconds (%i ticks)"):format(min_reload_time, min_reload_time * 40))
+end
+
 function Breech:server_onFixedUpdate()
 	local s_interactable = self.interactable
 	local s_pub_data = s_interactable.publicData
@@ -193,7 +197,7 @@ function Breech:server_onFixedUpdate()
 		if final_duration >= 0 then
 			self.network:sendToClients("client_startAnimation", final_duration)
 		else
-			print("Reload time should be at least", self.anim_duration, "seconds long!")
+			self.network:sendToClients("client_onReloadError", self.anim_duration)
 		end
 	end
 end
