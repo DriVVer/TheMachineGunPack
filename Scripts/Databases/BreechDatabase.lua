@@ -22,9 +22,6 @@ local breech_database =
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
 			{ type = mgp_anim_enum.wait_timer },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 1.0, time = 5.0 }
-		},
-		whitelist = {
-			["03e1ecbd-17ee-4045-a5d8-366f6e656555"] = true --M1 Abrams Cannon (Cannons Pack)
 		}
 	}
 }

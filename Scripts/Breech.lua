@@ -146,10 +146,6 @@ function Breech:client_onCreate()
 	self.anim_data = anim_data.animation
 	self.anim_step_count = #anim_data.animation + 1
 	self.anim_func = AnimationUpdateFunctions.no_animation
-
-	if sm.isHost then
-		self.sv_cannon_whitelist = anim_data.whitelist
-	end
 end
 
 function Breech:client_startAnimation(reloadTime)
@@ -172,7 +168,15 @@ function Breech:server_checkParent(s_interactable)
 	if cur_parent ~= self.sv_saved_parent then
 		self.sv_saved_parent = cur_parent
 
-		if self.sv_saved_parent and self.sv_cannon_whitelist[tostring(cur_parent.shape.uuid)] ~= true then
+		if cur_parent then
+			local p_pub_data = cur_parent.publicData
+			if p_pub_data then
+				local allowed_ports = p_pub_data.allowedPorts
+				if allowed_ports and allowed_ports[tostring(self.shape.uuid)] == true then
+					return
+				end 
+			end
+
 			cur_parent:disconnect(s_interactable)
 			self.sv_saved_parent = nil
 		end
