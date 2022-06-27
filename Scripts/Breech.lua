@@ -169,12 +169,14 @@ function Breech:server_checkParent(s_interactable)
 		self.sv_saved_parent = cur_parent
 
 		if cur_parent then
-			local p_pub_data = cur_parent.publicData
-			if p_pub_data then
-				local allowed_ports = p_pub_data.allowedPorts
-				if allowed_ports and allowed_ports[tostring(self.shape.uuid)] == true then
-					return
-				end 
+			if cur_parent.type == "scripted" then
+				local p_pub_data = cur_parent.publicData
+				if p_pub_data then
+					local allowed_ports = p_pub_data.allowedPorts
+					if allowed_ports and allowed_ports[tostring(self.shape.uuid)] == true then
+						return
+					end 
+				end
 			end
 
 			cur_parent:disconnect(s_interactable)
