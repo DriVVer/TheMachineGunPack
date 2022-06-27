@@ -160,7 +160,8 @@
                             }
                         ],
                         "animationList": [
-                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M6_37E.fbx"},
+                            {"name": "Reload1", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M6_37E.fbx"},
+                            {"name": "Reload2", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M6_37E.fbx"},
                             {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M6_37E.fbx"}
                         ]
                     }
