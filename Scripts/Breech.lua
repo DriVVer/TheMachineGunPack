@@ -51,7 +51,12 @@ AnimationUpdateFunctions.anim_handler = function(self, dt)
 	local c_anim_time = cur_data.time
 
 	local predict_time = (self.anim_time - dt)
-	local anim_prog = (c_anim_time - math.max(predict_time, 0)) / c_anim_time
+	
+	local anim_prog = 0.0
+	if c_anim_time > 0 then
+		anim_prog = (c_anim_time - math.max(predict_time, 0)) / c_anim_time
+	end
+
 	local normalized_val = sm.util.clamp(anim_prog, 0.0, 1.0)
 	local final_value = sm.util.lerp(cur_data.start_val, cur_data.end_val, normalized_val)
 
