@@ -166,9 +166,13 @@
         "title": "Pak40 Cannon Breech (r=1)",
         "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
     },
+    "54b7c549-4b12-4be1-b73d-4d62db371394": {
+        "title": "Pak40 Cannon Breech - Small (r=1)",
+        "description": "Tank breech for decoration. Smaller version of ''Pak40 Cannon Breech''\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+    },
     "379449f7-27ca-4aea-b723-f841406bbacc": {
         "title": "M6 37mm Cannon Breech (r=0.5)",
-        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 4.5 sec (180 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple."
+        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple."
     },
     "cd1b3309-7046-4b81-ac01-f7ba8f7a00d7": {
         "title": "M61 Vulcan 20mm",
