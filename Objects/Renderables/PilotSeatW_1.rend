@@ -1,0 +1,37 @@
+	{
+	"lodList": [
+		{
+		"minViewSize": 45,
+			"subMeshMap": {
+				"submesh0": {
+					"material": "SkelAnimDifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				}
+			},
+			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae",
+			"animationList": [
+				{
+					"name": "steering",
+					"file": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae"
+				}
+			]
+		},
+		{
+			"subMeshMap": {
+				"submesh0": {
+					"material": "DifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				}
+			},
+			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.fbx"
+		}
+	]
+}
