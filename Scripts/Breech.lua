@@ -36,6 +36,17 @@ AnimationUpdateFunctions.anim_selector = function(self, dt)
 		self.anim_func = AnimationUpdateFunctions.no_animation
 		self.anim_step_data = nil
 		self.anim_step = 0
+
+		for k, v in pairs(self.bone_tracker) do
+			self.bone_tracker[k] =
+			{
+				pos = self.interactable:getWorldBonePosition(k),
+				vel = sm.vec3.zero(),
+				angular_vel = sm.vec3.zero(),
+				angles = { 0, 0 },
+				b_end = v.b_end
+			}
+		end
 	end
 end
 
@@ -65,6 +76,8 @@ AnimationUpdateFunctions.anim_handler = function(self, dt)
 	for i, anim_name in pairs(cur_data.anim) do
 		s_interactable:setAnimProgress(anim_name, final_value)
 	end
+
+	self:client_trackBones(dt)
 
 	if self.anim_time then
 		self.anim_time = predict_time
@@ -204,8 +217,8 @@ function Breech:client_startAnimation(reloadTime)
 	end
 end
 
-function Breech:client_onUpdate(dt)
-	--Trach bone velocity and angular velocity
+function Breech:client_trackBones(dt)
+	print("Tracking bones")
 	local s_interactable = self.interactable
 	for k, b_data in pairs(self.bone_tracker) do
 		local prev_pos = b_data.pos
@@ -232,7 +245,9 @@ function Breech:client_onUpdate(dt)
 			b_end = b_data.b_end
 		}
 	end
+end
 
+function Breech:client_onUpdate(dt)
 	self.anim_func(self, dt)
 end
 
