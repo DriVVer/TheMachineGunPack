@@ -710,7 +710,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -744,7 +744,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -778,7 +778,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -812,7 +812,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -848,7 +848,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -882,7 +882,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -916,7 +916,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -950,7 +950,7 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 1, "y": 1, "z": 1},
+            "sphere": { "diameter": 1 },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -984,7 +984,13 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 2, "y": 1, "z": 1},
+            "hull": {
+                "x": 2, "y": 1, "z": 1, "margin": 0.45,
+                "pointList": [
+                    {"x": 2, "y": 0, "z": 0},
+                    {"x": -2, "y": 0, "z": 0}
+                ]
+            },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -1018,7 +1024,13 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 2, "y": 1, "z": 1},
+            "hull": {
+                "x": 2, "y": 1, "z": 1, "margin": 0.45,
+                "pointList": [
+                    {"x": 2, "y": 0, "z": 0},
+                    {"x": -2, "y": 0, "z": 0}
+                ]
+            },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -1052,7 +1064,13 @@
                 ]
             },
             "color": "df7f00",
-            "box": {"x": 3, "y": 1, "z": 1},
+            "hull": {
+                "x": 3, "y": 1, "z": 1, "margin": 0.45,
+                "pointList": [
+                    {"x": 3, "y": 0, "z": 0},
+                    {"x": -3, "y": 0, "z": 0}
+                ]
+            },
             "density": 100,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
