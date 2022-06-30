@@ -127,9 +127,10 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 	local cur_data = self.anim_step_data
 
 	--Calculate direction
-	local tracked_bone = self.bone_tracker[cur_data.bone]
-	local debri_pos = self.interactable:getWorldBonePosition(cur_data.bone)
-	local dir_calc  = self.interactable:getWorldBonePosition(cur_data.bone_end)
+	local bone_name = cur_data.bone
+	local tracked_bone = self.bone_tracker[bone_name]
+	local debri_pos = self.interactable:getWorldBonePosition(bone_name)
+	local dir_calc  = self.interactable:getWorldBonePosition(bone_name.."_end")
 	local direction = (debri_pos - dir_calc):normalize()
 
 	--Calculate rotation
@@ -139,7 +140,7 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 	--Calculate other things
 	local debri_time = math.random(2, 15)
 	local debri_offset = debri_rot * cur_data.offset
-	local world_vel = debri_rot * tracked_bone.vel
+	local world_vel = (debri_rot * tracked_bone.vel) + self.shape.velocity
 	local world_ang_vel = debri_rot * tracked_bone.angular_vel
 
 	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, world_vel, world_ang_vel, sm.color.new(0x000000ff), debri_time)
