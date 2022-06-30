@@ -35,13 +35,9 @@ local breech_database =
 	},
 	["54b7c549-4b12-4be1-b73d-4d62db371394"] =
 	{
-		required_effects = {
-				--test = { name = "BombSmall", offset = sm.vec3.new(0, 0, 0), bone = nil } --that's how you define an effect that can be referenced by the animation
-		},
+		required_effects = {},
 		required_animations = { "Shot", "Reload" },
-		bone_tracker = { "Case" },
 		animation = {
-			
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.385, time = 2.0 },
 			{ type = mgp_anim_enum.debris, uuid = mgp_shell_02, bone = "Case", offset = sm.vec3.new(0, 0.33, 0) },
