@@ -218,7 +218,6 @@ function Breech:client_startAnimation(reloadTime)
 end
 
 function Breech:client_trackBones(dt)
-	print("Tracking bones")
 	local s_interactable = self.interactable
 	for k, b_data in pairs(self.bone_tracker) do
 		local prev_pos = b_data.pos
