@@ -123,6 +123,7 @@ AnimationUpdateFunctions.delay_handler = function(self, dt)
 	end
 end
 
+local debri_color = sm.color.new(0x000000ff)
 AnimationUpdateFunctions.debris_handler = function(self, dt)
 	local cur_data = self.anim_step_data
 
@@ -140,10 +141,11 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 	--Calculate other things
 	local debri_time = math.random(2, 15)
 	local debri_offset = debri_rot * cur_data.offset
+	local debri_pos_final = debri_pos + debri_offset
 	local world_vel = (debri_rot * tracked_bone.vel) + self.shape.velocity
 	local world_ang_vel = debri_rot * tracked_bone.angular_vel
 
-	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, world_vel, world_ang_vel, sm.color.new(0x000000ff), debri_time)
+	sm.debris.createDebris(cur_data.uuid, debri_pos_final, debri_rot, world_vel, world_ang_vel, debri_color, debri_time)
 
 	self.anim_func = AnimationUpdateFunctions.anim_selector
 	self.anim_func(self, dt)
