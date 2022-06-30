@@ -126,19 +126,23 @@ end
 AnimationUpdateFunctions.debris_handler = function(self, dt)
 	local cur_data = self.anim_step_data
 
-	--self.bone_tracker
+	--Calculate direction
 	local tracked_bone = self.bone_tracker[cur_data.bone]
 	local debri_pos = self.interactable:getWorldBonePosition(cur_data.bone)
 	local dir_calc  = self.interactable:getWorldBonePosition(cur_data.bone_end)
-
 	local direction = (debri_pos - dir_calc):normalize()
 
+	--Calculate rotation
 	local debri_rot_local = sm.vec3.getRotation(-self.shape.at, direction)
 	local debri_rot = debri_rot_local * self.shape.worldRotation
-	local debri_offset = debri_rot * cur_data.offset
 
+	--Calculate other things
 	local debri_time = math.random(2, 15)
-	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, tracked_bone.vel, sm.vec3.zero(), sm.color.new(0x000000ff), debri_time)
+	local debri_offset = debri_rot * cur_data.offset
+	local world_vel = debri_rot * tracked_bone.vel
+	local world_ang_vel = debri_rot * tracked_bone.angular_vel
+
+	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, world_vel, world_ang_vel, sm.color.new(0x000000ff), debri_time)
 
 	self.anim_func = AnimationUpdateFunctions.anim_selector
 	self.anim_func(self, dt)
@@ -202,8 +206,8 @@ function Breech:client_onUpdate(dt)
 	local s_interactable = self.interactable
 	for k, b_data in pairs(self.bone_tracker) do
 		local prev_pos = b_data.pos
-		local new_pos = s_interactable:getWorldBonePosition(k)
-		local b_end_pos = s_interactable:getWorldBonePosition(b_data.b_end)
+		local new_pos = s_interactable:getLocalBonePosition(k)
+		local b_end_pos = s_interactable:getLocalBonePosition(b_data.b_end)
 		local b_dir = (new_pos - b_end_pos):normalize()
 
 		local prev_angles = b_data.angles
@@ -211,9 +215,9 @@ function Breech:client_onUpdate(dt)
 		local new_yaw = math.atan2(b_dir.y, b_dir.x) - math.pi / 2
 
 		local new_ang_vel = sm.vec3.new(
-			(new_pitch - prev_angles[1]) / dt,
+			(prev_angles[1] - new_pitch) / dt,
 			0,
-			(new_yaw - prev_angles[2]) / dt
+			(prev_angles[2] - new_yaw) / dt
 		)
 
 		self.bone_tracker[k] =
