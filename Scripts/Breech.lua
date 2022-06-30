@@ -133,15 +133,12 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 
 	local direction = (debri_pos - dir_calc):normalize()
 
-	local debri_rot_local = sm.vec3.getRotation(sm.vec3.new(0, 0, -1), direction)
+	local debri_rot_local = sm.vec3.getRotation(-self.shape.at, direction)
 	local debri_rot = debri_rot_local * self.shape.worldRotation
 	local debri_offset = debri_rot * cur_data.offset
 
-	--local debri_vel = debri_rot * cur_data.velocity
 	local debri_time = math.random(2, 15)
-
-	local ang_vel_rad = tracked_bone.angular_vel
-	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, tracked_bone.vel, tracked_bone.angular_vel, sm.color.new(0x000000ff), debri_time)
+	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, tracked_bone.vel, sm.vec3.zero(), sm.color.new(0x000000ff), debri_time)
 
 	self.anim_func = AnimationUpdateFunctions.anim_selector
 	self.anim_func(self, dt)
