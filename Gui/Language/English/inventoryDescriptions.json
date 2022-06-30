@@ -29,7 +29,10 @@
         "title": "Rounded Tank visor (Shape 2)"
     },
     "1260c944-c2d6-41be-b6a1-e9d1dfb020c5": {
-        "title": "Rounded Tank visor (Shape 3)"
+        "title": "Rounded Tank visor (Shape 3)"  
+    },
+    "e9cd2aab-9f63-49c5-8b65-96e8471bfb7f": {
+        "title": "Rounded Tank visor (Shape 4)"
     },
     "930e02b4-0c2b-49d6-a34a-8045b81b41d9": {
         "title": "Square Tank visor (Shape 1)"
@@ -39,6 +42,9 @@
     },
     "83d839c5-ff98-44b2-bcaf-629439b85d9b": {
         "title": "Square Tank visor (Shape 3)"
+    },
+    "f0bd91ea-5fcd-4679-9cd8-0208473fba96": {
+        "title": "Square Tank visor (Shape 4)"
     },
     "9d06161a-da39-451f-9ca3-08e1e7a20d4a": {
         "title": "Plane sight"

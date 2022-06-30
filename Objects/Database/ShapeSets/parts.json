@@ -691,13 +691,55 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
                             }
                         ],
                         "mesh": "$MOD_DATA/Objects/Mesh/TankSight.fbx"
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 1, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "e9cd2aab-9f63-49c5-8b65-96e8471bfb7f",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankSight_OneAndHalf.fbx"
                     }
                 ]
             },
@@ -717,7 +759,15 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -743,7 +793,15 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -771,13 +829,55 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
                             }
                         ],
                         "mesh": "$MOD_DATA/Objects/Mesh/TankSight_SQ.fbx"
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 1, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "f0bd91ea-5fcd-4679-9cd8-0208473fba96",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankSight_SQ_OneAndHalf.fbx"
                     }
                 ]
             },
@@ -797,7 +897,15 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -823,7 +931,15 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
@@ -841,6 +957,143 @@
             "rotationSet": "PropFull"
         },
         {
+            "uuid": "2fe5a537-657f-43f3-bced-aa1785ba74d9",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor2x1.fbx"
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 2, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "1fad8451-7485-42f0-a607-26728b389858",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor45d2x1.fbx"
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 2, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "e7b4c12b-f074-4ca5-98f5-15a98c4615ef",
+            "renderable": {
+                "lodList": [
+                    {
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            }
+                        ],
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor3x1.fbx"
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 3, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
+            "uuid": "67c2f314-5b3a-442e-ab08-6e6c24699d97",
+            "renderable": {
+                "lodList": [
+                    {
+                        "mesh": "$MOD_DATA/Objects/Mesh/TankCommanderVisor3x0.5.fbx",
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "DifAsgNor"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
+                            }
+                        ]
+                    
+                    }
+                ]
+            },
+            "color": "df7f00",
+            "box": {"x": 3, "y": 1, "z": 1},
+            "density": 100,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+        {
             "uuid": "9d06161a-da39-451f-9ca3-08e1e7a20d4a",
             "renderable": {
                 "lodList": [
@@ -849,10 +1102,18 @@
                             {
                                 "textureList": [
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
                                 "material": "DifAsgNor"
+                            },
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "Glass"
                             }
                         ],
                         "mesh": "$MOD_DATA/Objects/Mesh/PlaneSight.fbx"

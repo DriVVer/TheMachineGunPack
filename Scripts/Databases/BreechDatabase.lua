@@ -39,9 +39,9 @@ local breech_database =
 			--{ type = mgp_anim_enum.delay, time = 2.0 } --a simple delay in which you can specify any time you want
 
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
-			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.572, time = 2.0 },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.57, time = 3.5 },
 			{ type = mgp_anim_enum.wait_timer },
-			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.572, end_val = 1.0, time = 2.0 }
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.57, end_val = 1.0, time = 2.5 }
 		}
 	},
 	["379449f7-27ca-4aea-b723-f841406bbacc"] =
