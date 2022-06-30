@@ -17,7 +17,8 @@ local type_to_func_name =
 	[1] = "anim_setup",
 	[2] = "wait_handler",
 	[3] = "effect_handler",
-	[4] = "delay_setup"
+	[4] = "delay_setup",
+	[5] = "debris_handler"
 }
 
 local AnimationUpdateFunctions = {}
@@ -122,6 +123,30 @@ AnimationUpdateFunctions.delay_handler = function(self, dt)
 	end
 end
 
+AnimationUpdateFunctions.debris_handler = function(self, dt)
+	local cur_data = self.anim_step_data
+
+	--self.bone_tracker
+	local tracked_bone = self.bone_tracker[cur_data.bone]
+	local debri_pos = self.interactable:getWorldBonePosition(cur_data.bone)
+	local dir_calc  = self.interactable:getWorldBonePosition(cur_data.bone_end)
+
+	local direction = (debri_pos - dir_calc):normalize()
+
+	local debri_rot_local = sm.vec3.getRotation(sm.vec3.new(0, 0, -1), direction)
+	local debri_rot = debri_rot_local * self.shape.worldRotation
+	local debri_offset = debri_rot * cur_data.offset
+
+	--local debri_vel = debri_rot * cur_data.velocity
+	local debri_time = math.random(2, 15)
+
+	local ang_vel_rad = tracked_bone.angular_vel
+	sm.debris.createDebris(cur_data.uuid, debri_pos + debri_offset, debri_rot, tracked_bone.vel, tracked_bone.angular_vel, sm.color.new(0x000000ff), debri_time)
+
+	self.anim_func = AnimationUpdateFunctions.anim_selector
+	self.anim_func(self, dt)
+end
+
 
 
 function Breech:client_onCreate()
@@ -151,6 +176,21 @@ function Breech:client_onCreate()
 	self.anim_data = anim_data.animation
 	self.anim_step_count = #anim_data.animation + 1
 	self.anim_func = AnimationUpdateFunctions.no_animation
+
+	--Create bone tracker
+	local bone_tracker_tmp = {}
+	for k, v in ipairs(anim_data.bone_tracker or {}) do
+		bone_tracker_tmp[v] =
+		{
+			pos = self.interactable:getWorldBonePosition(v),
+			vel = sm.vec3.zero(),
+			angular_vel = sm.vec3.zero(),
+			angles = {0, 0},
+			b_end = v.."_end"
+		}
+	end
+
+	self.bone_tracker = bone_tracker_tmp
 end
 
 function Breech:client_startAnimation(reloadTime)
@@ -161,6 +201,34 @@ function Breech:client_startAnimation(reloadTime)
 end
 
 function Breech:client_onUpdate(dt)
+	--Trach bone velocity and angular velocity
+	local s_interactable = self.interactable
+	for k, b_data in pairs(self.bone_tracker) do
+		local prev_pos = b_data.pos
+		local new_pos = s_interactable:getWorldBonePosition(k)
+		local b_end_pos = s_interactable:getWorldBonePosition(b_data.b_end)
+		local b_dir = (new_pos - b_end_pos):normalize()
+
+		local prev_angles = b_data.angles
+		local new_pitch = math.asin(b_dir.z)
+		local new_yaw = math.atan2(b_dir.y, b_dir.x) - math.pi / 2
+
+		local new_ang_vel = sm.vec3.new(
+			(new_pitch - prev_angles[1]) / dt,
+			0,
+			(new_yaw - prev_angles[2]) / dt
+		)
+
+		self.bone_tracker[k] =
+		{
+			pos = new_pos,
+			vel = (new_pos - prev_pos) / dt,
+			angular_vel = new_ang_vel,
+			angles = { new_pitch, new_yaw },
+			b_end = b_data.b_end
+		}
+	end
+
 	self.anim_func(self, dt)
 end
 

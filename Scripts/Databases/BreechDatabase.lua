@@ -3,8 +3,11 @@ mgp_anim_enum =
 	bone_animation = 1,
 	wait_timer     = 2,
 	effect         = 3,
-	delay          = 4
+	delay          = 4,
+	debris         = 5
 }
+
+local mgp_shell_01 = sm.uuid.new("0d4d66a0-532a-49e4-83c5-8ec8bb95ea8e")
 
 local breech_database =
 {
@@ -50,16 +53,17 @@ local breech_database =
 			--test = { name = "BombSmall", offset = sm.vec3.new(0, 0, 0), bone = nil } --that's how you define an effect that can be referenced by the animation
 		},
 		required_animations = { "Shot", "Reload" },
+		bone_tracker = { "Shell" },
 		animation = {
 			--{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }, start_val = 0.0, end_val = 1.0, time = 1.0 } --that's how you define your animation
 			--{ type = mgp_anim_enum.wait_timer } --that's how you define a custom wait timer that allows any cannon to specify its reload time
 			--{ type = mgp_anim_enum.effect, effects = { "test" } } --that's how you define effects
 			--{ type = mgp_anim_enum.delay, time = 2.0 } --a simple delay in which you can specify any time you want
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
-			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.50, time = 1.3 },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.35, time = 1.3 },
+			{ type = mgp_anim_enum.debris, uuid = mgp_shell_01, bone = "Shell", bone_end = "Shell_end", offset = sm.vec3.new(0, 0.07, 0), velocity = sm.vec3.new(0, -0.6, 0) },
 			{ type = mgp_anim_enum.wait_timer },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.50, end_val = 1.0, time = 1.2 }
-		
 		}
 	}
 }

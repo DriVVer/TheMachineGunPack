@@ -1,0 +1,35 @@
+{
+	"partList": [
+		{
+			"uuid": "0d4d66a0-532a-49e4-83c5-8ec8bb95ea8e",
+			"renderable": {
+				"lodList": [
+					{
+						"mesh": "$MOD_DATA/Objects/Mesh/37mm_shell.obj",
+						"subMeshList": [
+							{
+								"textureList": [
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+								],
+								"material": "DifAsgNor"
+							}
+						]
+					}
+				]
+			},
+			"color": "939291",
+			"hull": {
+				"x": 1,
+				"y": 2,
+				"z": 1,
+				"col": "$MOD_DATA/Objects/Collisions/32mm_shell_col.obj"
+			},
+			"density": 1000,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull"
+		}
+	]
+}
