@@ -108,7 +108,7 @@
             "renderable": {
                 "lodList": [
                     {
-                        "mesh": "$MOD_DATA/Objects/Mesh/Pak40BreachSkelAnim-E.fbx",
+                        "mesh": "$MOD_DATA/Objects/Mesh/Pak40BreachSkelAnim-E2.fbx",
                         "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
                         "subMeshList": [
                             {
@@ -121,8 +121,8 @@
                             }
                         ],
                         "animationList": [
-                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40BreachSkelAnim-E.fbx"},
-                            {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40BreachSkelAnim-E.fbx"}
+                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40BreachSkelAnim-E2.fbx"},
+                            {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40BreachSkelAnim-E2.fbx"}
                         ]
                     }
                 ]
@@ -147,7 +147,7 @@
             "renderable": {
                 "lodList": [
                     {
-                        "mesh": "$MOD_DATA/Objects/Mesh/Pak40MiniBreachSkelAnim-E.fbx",
+                        "mesh": "$MOD_DATA/Objects/Mesh/Pak40MiniBreachSkelAnim-E3.fbx",
                         "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
                         "subMeshList": [
                             {
@@ -160,8 +160,8 @@
                             }
                         ],
                         "animationList": [
-                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40MiniBreachSkelAnim-E.fbx"},
-                            {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40MiniBreachSkelAnim-E.fbx"}
+                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40MiniBreachSkelAnim-E3.fbx"},
+                            {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Pak40MiniBreachSkelAnim-E3.fbx"}
                         ]
                     }
                 ]

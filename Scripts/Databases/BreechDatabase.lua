@@ -37,6 +37,7 @@ local breech_database =
 	{
 		required_effects = {},
 		required_animations = { "Shot", "Reload" },
+		bone_tracker = { "Case" },
 		animation = {
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.385, time = 2.0 },
