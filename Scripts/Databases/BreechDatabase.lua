@@ -62,8 +62,9 @@ local breech_database =
 			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.35, time = 1.3 },
 			{ type = mgp_anim_enum.debris, uuid = mgp_shell_01, bone = "Shell", bone_end = "Shell_end", offset = sm.vec3.new(0, 0.07, 0), velocity = sm.vec3.new(0, -0.6, 0) },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.5, end_val = 0.5, time = 0 },
 			{ type = mgp_anim_enum.wait_timer },
-			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.50, end_val = 1.0, time = 1.2 }
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.5, end_val = 1.0, time = 1.2 }
 		}
 	}
 }
