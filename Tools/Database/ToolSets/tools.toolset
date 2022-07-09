@@ -1,0 +1,14 @@
+{
+	"toolList":
+	[
+		{
+			"uuid": "336a7328-4d50-432c-8698-2ed511187cc7",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/TommyGun_InventoryPreview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/TommyGun.lua",
+				"class": "TommyGun"
+			}
+		}
+	]
+}
