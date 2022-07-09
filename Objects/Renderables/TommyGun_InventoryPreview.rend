@@ -1,0 +1,17 @@
+{
+   "lodList" : [
+      {
+         "mesh" : "$CONTENT_DATA/Tools/Mesh/TommyGun1.0.fbx",
+         "subMeshList" : [
+            {
+               "material" : "DifAsg",
+               "textureList" : [ "$CONTENT_DATA/Tools/Textures/Tool_gun.png", "" ]
+            },
+            {
+               "material" : "DifAsg",
+               "textureList" : [ "$CONTENT_DATA/Tools/Textures/Tool_gun.png", "" ]
+            }
+         ]
+      }
+   ]
+}
