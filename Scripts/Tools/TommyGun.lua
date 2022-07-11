@@ -13,11 +13,11 @@ local renderables = {
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Sight/Sight_basic/char_spudgun_sight_basic.rend",
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Stock/Stock_broom/char_spudgun_stock_broom.rend",
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Tank/Tank_basic/char_spudgun_tank_basic.rend"
-	"$CONTENT_DATA/Tools/Renderables/TommyGun_InventoryPreview.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model.rend"
 }
 
-local renderablesTp = {"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend", "$GAME_DATA/Character/Char_Tools/Char_spudgun/char_spudgun_tp_animlist.rend"}
-local renderablesFp = {"$GAME_DATA/Character/Char_Tools/Char_spudgun/char_spudgun_fp_animlist.rend"}
+local renderablesTp = {"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"}
+local renderablesFp = {"$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"}
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
