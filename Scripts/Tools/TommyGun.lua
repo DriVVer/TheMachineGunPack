@@ -17,7 +17,7 @@ local renderables = {
 }
 
 local renderablesTp = {"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"}
-local renderablesFp = {"$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"}
+local renderablesFp = {"$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"}
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
