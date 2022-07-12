@@ -6,11 +6,11 @@
 
 			
 
-			{ "name" : "spudgun_idle", 					"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_idle.dae" },
-			{ "name" : "spudgun_shoot", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_normal_shoot.dae" },
+			{ "name" : "TommyGun_idle", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_idle.dae" },
+			{ "name" : "TommyGun_shoot", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_shoot.dae" },
 
-			{ "name" : "spudgun_pickup", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_normal_pickup.dae" },
-			{ "name" : "spudgun_putdown", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_normal_putdown.dae" },
+			{ "name" : "TommyGun_pickup", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_pickup.dae" },
+			{ "name" : "TommyGun_putdown", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_putdown.dae" },
 
 			{ "name" : "spudgun_sprint_into", 			"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_sprint_into.dae" },
 			{ "name" : "spudgun_sprint_exit", 			"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_sprint_exit.dae" },

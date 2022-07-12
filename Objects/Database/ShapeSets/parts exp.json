@@ -143,6 +143,45 @@
         },
 
         {
+            "uuid": "85de2428-d5ff-4a20-b2a0-408070b01b05",
+            "renderable": {
+                "lodList": [
+                    {
+                        "mesh": "$MOD_DATA/Objects/Mesh/AbramsCannon.fbx",
+                        "includes": ["POSITION", "UV0", "NORMAL", "TANGENT", "BLEND_INDICES", "BLEND_WEIGHTS"],
+                        "subMeshList": [
+                            {
+                                "textureList": [
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                                    "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                                    "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                                ],
+                                "material": "SkelAnimDifAsgNor"
+                            }
+                        ],
+                        "animationList": [
+                            {"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/AbramsCannon.fbx"},
+                            {"name": "Shot"  , "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/AbramsCannon.fbx"}
+                        ]
+                    }
+                ]
+            },
+            "color": "939291",
+            "hull": {
+                "x": 1, "y": 1, "z": 5, "margin": 0.49,
+                "pointList": [
+                    {"x": 0, "y": 0, "z": 5},
+                    {"x": 0, "y": 0, "z": -5}
+                ]
+            },
+            "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
+            "density": 1000,
+            "physicsMaterial": "Metal",
+            "sticky": "+X-X+Z-Z+Y-Y",
+            "rotationSet": "PropFull"
+        },
+
+        {
             "uuid": "54b7c549-4b12-4be1-b73d-4d62db371394",
             "renderable": {
                 "lodList": [

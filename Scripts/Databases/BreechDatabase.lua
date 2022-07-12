@@ -9,6 +9,7 @@ mgp_anim_enum =
 
 local mgp_shell_01 = sm.uuid.new("0d4d66a0-532a-49e4-83c5-8ec8bb95ea8e")
 local mgp_shell_02 = sm.uuid.new("8f7a8365-d6b4-4f22-88c9-6951ac8ff8d5")
+local mgp_shell_03 = sm.uuid.new("f656fa19-4b04-4bb0-8724-0e9baf07245d")
 
 local breech_database =
 {
@@ -53,12 +54,27 @@ local breech_database =
 		required_animations = { "Shot", "Reload" },
 		bone_tracker = { "Shell" },
 		animation = {
-			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 1.0 },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 0.5 },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.35, time = 1.3 },
 			{ type = mgp_anim_enum.debris, uuid = mgp_shell_01, bone = "Shell", offset = sm.vec3.new(0, 0.068, 0) },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.5, end_val = 0.5, time = 0 },
 			{ type = mgp_anim_enum.wait_timer },
 			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.5, end_val = 1.0, time = 1.2 }
+		}
+	},
+	["85de2428-d5ff-4a20-b2a0-408070b01b05"] =
+	{
+		required_effects = {},
+		required_animations = { "Shot", "Reload" },
+		bone_tracker = { "Shell" },
+		animation = {
+			{ type = mgp_anim_enum.bone_animation, anim = { "Shot" }  , start_val = 0.0, end_val = 1.0, time = 0.5 },
+
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.0, end_val = 0.30, time = 1.0 },
+			{ type = mgp_anim_enum.debris, uuid = mgp_shell_03, bone = "Shell", offset = sm.vec3.new(0, 0.0, 0) },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.32, end_val = 0.32, time = 0 },
+			{ type = mgp_anim_enum.wait_timer },
+			{ type = mgp_anim_enum.bone_animation, anim = { "Reload" }, start_val = 0.32, end_val = 1.0, time = 1.8 }
 		}
 	}
 }

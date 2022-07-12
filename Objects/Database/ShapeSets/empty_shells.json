@@ -63,6 +63,38 @@
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
 			"showInInventory": false
+		},
+		{
+			"uuid": "f656fa19-4b04-4bb0-8724-0e9baf07245d",
+			"renderable": {
+				"lodList": [
+					{
+						"mesh": "$MOD_DATA/Objects/Mesh/Abrams_shell.obj",
+						"subMeshList": [
+							{
+								"textureList": [
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+								],
+								"material": "DifAsgNor"
+							}
+						]
+					}
+				]
+			},
+			"color": "939291",
+			"hull": {
+				"x": 1,
+				"y": 3,
+				"z": 1,
+				"col": "$MOD_DATA/Objects/Collisions/Abrams_shell_col.obj"
+			},
+			"density": 1000,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		}
 	]
 }

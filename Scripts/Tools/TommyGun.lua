@@ -78,11 +78,11 @@ function TommyGun.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "spudgun_pickup", { nextAnimation = "idle" } },
-				unequip = { "spudgun_putdown" },
+				equip = { "TommyGun_pickup", { nextAnimation = "idle" } },
+				unequip = { "TommyGun_putdown" },
 
-				idle = { "spudgun_idle", { looping = true } },
-				shoot = { "spudgun_shoot", { nextAnimation = "idle" } },
+				idle = { "TommyGun_idle", { looping = true } },
+				shoot = { "TommyGun_shoot", { nextAnimation = "idle" } },
 
 				aimInto = { "spudgun_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "spudgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
