@@ -19,7 +19,10 @@
 			{ "name" : "spudgun_aim_into", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_aim_into.dae" },
 			{ "name" : "spudgun_aim_exit", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_aim_exit.dae" },
 			{ "name" : "spudgun_aim_shoot", 			"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_aim_shoot.dae" },
-			{ "name" : "spudgun_aim_idle", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_aim_idle.dae" }
+			{ "name" : "spudgun_aim_idle", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_spudgun_aim_idle.dae" },
+
+			{ "name" : "TommyGun_reload",               "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_reload.dae" },
+			{ "name" : "TommyGun_reload_empty",         "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_empty_reload.dae"}
 
 
 

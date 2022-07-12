@@ -84,6 +84,9 @@ function TommyGun.loadAnimations( self )
 				idle = { "TommyGun_idle", { looping = true } },
 				shoot = { "TommyGun_shoot", { nextAnimation = "idle" } },
 
+				reload = { "TommyGun_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+
 				aimInto = { "spudgun_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "spudgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "spudgun_aim_idle", { looping = true} },
@@ -142,6 +145,8 @@ function TommyGun.loadAnimations( self )
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 
+	self.mag_capacity = 30
+	self.ammo_in_mag = self.mag_capacity
 end
 
 function TommyGun.client_onUpdate( self, dt )
@@ -154,7 +159,7 @@ function TommyGun.client_onUpdate( self, dt )
 		if self.equipped then
 			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not self.tool:isSprinting() and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
@@ -259,7 +264,7 @@ function TommyGun.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0
+	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -453,9 +458,9 @@ function TommyGun.onShoot( self, dir )
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
 
 	if self.tool:isInFirstPersonView() then
-			self.shootEffectFP:start()
-		else
-			self.shootEffect:start()
+		self.shootEffectFP:start()
+	else
+		self.shootEffect:start()
 	end
 
 end
@@ -553,13 +558,16 @@ end
 function TommyGun.cl_onPrimaryUse( self, is_shooting )
 	if not is_shooting then return end
 
+	if self:client_isGunReloading() then return end
+
 	if self.tool:getOwner().character == nil then
 		return
 	end
 
 	if self.fireCooldownTimer <= 0.0 then
-
-		if not sm.game.getEnableAmmoConsumption() or sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) then
+		if self.ammo_in_mag > 0 then
+		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+			self.ammo_in_mag = self.ammo_in_mag - 1
 			local firstPerson = self.tool:isInFirstPersonView()
 
 			local dir = sm.localPlayer.getDirection()
@@ -624,15 +632,43 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 	end
 end
 
+local reload_anims =
+{
+	["reload"] = true,
+	["reload_empty"] = true
+}
+
+function TommyGun:client_isGunReloading()
+	return (reload_anims[self.fpAnimations.currentAnimation] == true)
+end
+
+function TommyGun:client_onReload()
+	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+	if not is_mag_full then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
+			local cur_anim_name = "reload"
+			if self.ammo_in_mag == 0 then
+				cur_anim_name = "reload_empty"
+			end
+
+			self.ammo_in_mag = self.mag_capacity
+			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
+		end
+	end
+
+	return true
+end
+
 local _intstate = sm.tool.interactState
 function TommyGun.cl_onSecondaryUse( self, state )
-	local new_state = (state == _intstate.start or state == _intstate.hold)
+	local is_reloading = self:client_isGunReloading()
+	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
 
-		self:onAim(self.aiming)
 		self.tool:setMovementSlowDown(self.aiming)
+		self:onAim(self.aiming)
 		self.network:sendToServer("sv_n_onAim", self.aiming)
 	end
 end
