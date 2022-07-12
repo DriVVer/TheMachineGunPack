@@ -97,7 +97,7 @@ function TommyGun.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.20,
+		fireCooldown = 0.125,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = .25,
@@ -112,7 +112,7 @@ function TommyGun.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.20,
+		fireCooldown = 0.125,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
@@ -550,12 +550,14 @@ function TommyGun.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-function TommyGun.cl_onPrimaryUse( self, state )
+function TommyGun.cl_onPrimaryUse( self, is_shooting )
+	if not is_shooting then return end
+
 	if self.tool:getOwner().character == nil then
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
+	if self.fireCooldownTimer <= 0.0 then
 
 		if not sm.game.getEnableAmmoConsumption() or sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) then
 			local firstPerson = self.tool:isInFirstPersonView()
@@ -622,31 +624,21 @@ function TommyGun.cl_onPrimaryUse( self, state )
 	end
 end
 
+local _intstate = sm.tool.interactState
 function TommyGun.cl_onSecondaryUse( self, state )
-	if state == sm.tool.interactState.start and not self.aiming then
-		self.aiming = true
+	local new_state = (state == _intstate.start or state == _intstate.hold)
+	if self.aiming ~= new_state then
+		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
 
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
-	end
-
-	if self.aiming and (state == sm.tool.interactState.stop or state == sm.tool.interactState.null) then
-		self.aiming = false
-		self.tpAnimations.animations.idle.time = 0
-
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
+		self:onAim(self.aiming)
+		self.tool:setMovementSlowDown(self.aiming)
+		self.network:sendToServer("sv_n_onAim", self.aiming)
 	end
 end
 
 function TommyGun.client_onEquippedUpdate( self, primaryState, secondaryState )
-	if primaryState ~= self.prevPrimaryState then
-		self:cl_onPrimaryUse( primaryState )
-		self.prevPrimaryState = primaryState
-	end
+	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )
