@@ -654,9 +654,6 @@ function TommyGun:client_onReload()
 			self.ammo_in_mag = self.mag_capacity
 			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
 		end
-		if self.ammo_in_mag == 0 then
-			
-		end
 	end
 
 	return true
