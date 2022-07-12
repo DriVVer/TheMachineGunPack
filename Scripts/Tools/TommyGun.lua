@@ -632,8 +632,14 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 	end
 end
 
+local reload_anims =
+{
+	["reload"] = true,
+	["reload_empty"] = true
+}
+
 function TommyGun:client_isGunReloading()
-	return (self.fpAnimations.currentAnimation == "reload")
+	return (reload_anims[self.fpAnimations.currentAnimation] == true)
 end
 
 function TommyGun:client_onReload()
