@@ -26,6 +26,9 @@ sm.tool.preloadRenderables( renderablesFp )
 function TommyGun.client_onCreate( self )
 	self.shootEffect = sm.effect.createEffect( "SpudgunBasic - BasicMuzzel" )
 	self.shootEffectFP = sm.effect.createEffect( "SpudgunBasic - FPBasicMuzzel" )
+
+	self.mag_capacity = 30
+	self.ammo_in_mag = self.mag_capacity
 end
 
 
@@ -87,9 +90,11 @@ function TommyGun.loadAnimations( self )
 				reload = { "TommyGun_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
+				ammo_check = { "TommyGun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+
 				aimInto = { "TommyGun_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "TommyGun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "TommyGun_aim_idle", { looping = true} },
+				aimIdle = { "TommyGun_aim_idle", { looping = true } },
 				aimShoot = { "TommyGun_aim_shoot", { nextAnimation = "aimIdle"} },
 
 				sprintInto = { "TommyGun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
@@ -144,19 +149,35 @@ function TommyGun.loadAnimations( self )
 	self.spineWeight = 0.0
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
-
-	self.mag_capacity = 30
-	self.ammo_in_mag = self.mag_capacity
 end
+
+local actual_reload_anims =
+{
+	["reload"] = true,
+	["reload_empty"] = true
+}
 
 function TommyGun.client_onUpdate( self, dt )
 
 	-- First person animation
-	local isSprinting =  self.tool:isSprinting()
-	local isCrouching =  self.tool:isCrouching()
+	local isSprinting = self.tool:isSprinting()
+	local isCrouching = self.tool:isCrouching()
 
 	if self.tool:isLocal() then
 		if self.equipped then
+			local fp_anim = self.fpAnimations
+			local cur_anim_cache = fp_anim.currentAnimation
+			local anim_data = fp_anim.animations[cur_anim_cache]
+			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+			if anim_data and is_reload_anim then
+				local time_predict = anim_data.time + anim_data.playRate * dt
+				local info_duration = anim_data.info.duration
+
+				if time_predict >= info_duration then
+					self.ammo_in_mag = self.mag_capacity
+				end
+			end
+
 			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
@@ -635,7 +656,8 @@ end
 local reload_anims =
 {
 	["reload"] = true,
-	["reload_empty"] = true
+	["reload_empty"] = true,
+	["ammo_check"] = true
 }
 
 function TommyGun:client_isGunReloading()
@@ -651,8 +673,21 @@ function TommyGun:client_onReload()
 				cur_anim_name = "reload_empty"
 			end
 
-			self.ammo_in_mag = self.mag_capacity
 			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
+		end
+	end
+
+	return true
+end
+
+function TommyGun:client_onToggle()
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
+		if self.ammo_in_mag > 0 then
+			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
+		else
+			sm.gui.displayAlertText("TommyGun: No Ammo. Reloading...", 3)
+			setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
 		end
 	end
 

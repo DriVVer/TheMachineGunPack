@@ -22,7 +22,9 @@
 			{ "name" : "TommyGun_aim_idle", 			"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_idle.dae" },
 
 			{ "name" : "TommyGun_reload",               "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_reload.dae" },
-			{ "name" : "TommyGun_reload_empty",         "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_empty_reload.dae"}
+			{ "name" : "TommyGun_reload_empty",         "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_empty_reload.dae"},
+
+			{ "name" : "TommyGun_ammo_check",           "file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_ammo_check.dae" }
 
 
 
