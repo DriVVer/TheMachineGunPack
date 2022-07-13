@@ -646,7 +646,7 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 				end
 			end
 
-			dir = dir:rotate( math.rad( 0.955 ), sm.camera.getRight() ) -- 50 m sight calibration
+			dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 50 m sight calibration
 
 			-- Spread
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
