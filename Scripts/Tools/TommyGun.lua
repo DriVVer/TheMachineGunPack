@@ -13,7 +13,8 @@ local renderables = {
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Sight/Sight_basic/char_spudgun_sight_basic.rend",
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Stock/Stock_broom/char_spudgun_stock_broom.rend",
 	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Tank/Tank_basic/char_spudgun_tank_basic.rend"
-	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model.rend",
+	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Receiver.rend"
 }
 
 local renderablesTp = {"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"}
