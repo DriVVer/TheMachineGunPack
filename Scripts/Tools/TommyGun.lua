@@ -87,14 +87,14 @@ function TommyGun.loadAnimations( self )
 				reload = { "TommyGun_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "spudgun_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "spudgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "spudgun_aim_idle", { looping = true} },
-				aimShoot = { "spudgun_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "TommyGun_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "TommyGun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "TommyGun_aim_idle", { looping = true} },
+				aimShoot = { "TommyGun_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "spudgun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "spudgun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "spudgun_sprint_idle", { looping = true } },
+				sprintInto = { "TommyGun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "TommyGun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "TommyGun_sprint_idle", { looping = true } },
 			}
 		)
 	end
