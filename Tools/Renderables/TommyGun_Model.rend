@@ -1,19 +1,21 @@
 {
-   "lodList" : [
-      {
-         "mesh" : "$CONTENT_DATA/Tools/Mesh/TommyGun_Model.dae",
-         "includes" : ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
-         "subMeshList" : [
-            {
-               "material" : "DifAsgNor",
-               "textureList" : 
-               [ 
-                  "$CONTENT_DATA/Tools/Textures/Tool_gun.png",
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGun_Model.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "TommyGun_model_shoot",  "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_shoot.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Tools/Textures/Tool_gun.png",
 						"$CONTENT_DATA/Tools/Textures/Tool_gunASG.png",
 						"$CONTENT_DATA/Tools/Textures/nonor_nor.tga"
-               ]
-            }
-         ]
-      }
-   ]
+					]
+				}
+			]
+		}
+	]
 }

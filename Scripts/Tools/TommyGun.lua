@@ -37,7 +37,17 @@ function TommyGun.client_onRefresh( self )
 	self:loadAnimations()
 end
 
+function TommyGun:client_startModelAnimation(name)
+	local anim_data = self.gunAnimations[name]
+
+	anim_data.time = anim_data.duration
+end
+
 function TommyGun.loadAnimations( self )
+	self.gunAnimations =
+	{
+		shoot = { name = "TommyGun_model_shoot", duration = 1.0, max_value = 100.0 }
+	}
 
 	self.tpAnimations = createTpAnimations(
 		self.tool,
@@ -337,6 +347,22 @@ function TommyGun.client_onUpdate( self, dt )
 		end
 	end
 
+	for name, animation in pairs(self.gunAnimations) do
+		if animation.time then
+			animation.time = animation.time - dt
+			local anim_progress = 1.0 - (animation.time / animation.duration)
+			if animation.time <= 0 then
+				anim_progress = 1.0
+				animation.time = nil
+			end
+
+			print("Animation: ", name, anim_progress * animation.max_value)
+
+			self.tool:updateAnimation(animation.name, anim_progress * animation.max_value, 1.0)
+			self.tool:updateFpAnimation(animation.name, anim_progress * animation.max_value, 1.0)
+		end
+	end
+
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
 	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
@@ -477,6 +503,8 @@ function TommyGun.onShoot( self, dir )
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
+	self:client_startModelAnimation("shoot")
+	--client_startModelAnimation
 
 	if self.tool:isInFirstPersonView() then
 		self.shootEffectFP:start()
