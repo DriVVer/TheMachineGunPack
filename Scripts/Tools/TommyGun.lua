@@ -49,7 +49,7 @@ function TommyGun.loadAnimations( self )
 	self.gunAnimations =
 	{
 		shoot = { name = "TommyGun_model_shoot", duration = 2.0, max_value = 1.0 },
-		reload = { name = "TommyGun_model_reload", duration = 4.0, max_value = 1.0 }
+		reload = { name = "TommyGun_model_reload", duration = 4.0, max_value = 5.0 }
 	}
 
 	self.tpAnimations = createTpAnimations(
@@ -359,8 +359,6 @@ function TommyGun.client_onUpdate( self, dt )
 				animation.time = nil
 			end
 
-			print("Animation: ", name, anim_progress * animation.max_value)
-
 			self.tool:updateAnimation(animation.name, anim_progress * animation.max_value, 1.0)
 			self.tool:updateFpAnimation(animation.name, anim_progress * animation.max_value, 1.0)
 		end
@@ -507,7 +505,6 @@ function TommyGun.onShoot( self, dir )
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
 	self:client_startModelAnimation("shoot")
-	--client_startModelAnimation
 
 	if self.tool:isInFirstPersonView() then
 		self.shootEffectFP:start()
@@ -699,6 +696,8 @@ function TommyGun:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
+			self:client_startModelAnimation("reload")
+
 			local cur_anim_name = "reload"
 			if self.ammo_in_mag == 0 then
 				cur_anim_name = "reload_empty"
