@@ -3,84 +3,73 @@ dofile("$CONTENT_DATA/Scripts/Databases/ToolDatabase.lua")
 local type_to_func_name =
 {
 	[1] = "anim_setup",
-	[2] = "wait_handler",
-	[3] = "effect_handler",
-	[4] = "delay_setup",
-	[5] = "debris_handler"
+	[2] = "effect_handler",
+	[3] = "delay_setup",
+	[4] = "debris_handler"
 }
 
 local AnimationUpdateFunctions = {}
-AnimationUpdateFunctions.no_animation = function(self, dt) end
+AnimationUpdateFunctions.no_animation = function(self, track, dt) end
 
-AnimationUpdateFunctions.anim_selector = function(self, dt)
-	self.cl_animator_step = self.cl_animator_step + 1
-	if self.cl_animator_step < self.cl_animator_step_count then
-		self.cl_animator_step_data = self.cl_animator_data[self.cl_animator_step]
-		local func_name = type_to_func_name[self.cl_animator_step_data.type]
+AnimationUpdateFunctions.anim_selector = function(self, track, dt)
+	track.step = track.step + 1
+	if track.step < track.step_count then
+		track.step_data = track.data[track.step]
+		local func_name = type_to_func_name[track.step_data.type]
 
-		self.cl_animator_func = AnimationUpdateFunctions[func_name]
-		self.cl_animator_func(self, dt)
+		track.func = AnimationUpdateFunctions[func_name]
+		track.func(self, track, dt)
 	end
 end
 
-AnimationUpdateFunctions.anim_setup = function(self, dt)
-	self.cl_animator_time = self.cl_animator_step_data.time
+AnimationUpdateFunctions.anim_setup = function(self, track, dt)
+	track.time = track.step_data.time
 
-	self.cl_animator_func = AnimationUpdateFunctions.anim_handler
-	self.cl_animator_func(self, dt)
+	track.func = AnimationUpdateFunctions.anim_handler
+	track.func(self, track, dt)
 end
 
-AnimationUpdateFunctions.anim_handler = function(self, dt)
-	local cur_data = self.cl_animator_step_data
+local _sm_util_clamp = sm.util.clamp
+local _sm_util_lerp = sm.util.lerp
+AnimationUpdateFunctions.anim_handler = function(self, track, dt)
+	local cur_data = track.step_data
 	local c_anim_time = cur_data.time
 
-	local predict_time = (self.cl_animator_time - dt)
+	local predict_time = (track.time - dt)
 	
 	local anim_prog = 0.0
 	if c_anim_time > 0 then
 		anim_prog = (c_anim_time - math.max(predict_time, 0)) / c_anim_time
 	end
 
-	local normalized_val = sm.util.clamp(anim_prog, 0.0, 1.0)
-	local final_value = sm.util.lerp(cur_data.start_val, cur_data.end_val, normalized_val)
+	local normalized_val = _sm_util_clamp(anim_prog, 0.0, 1.0)
 
 	local s_tool = self.tool
 	if s_tool:isInFirstPersonView() then
-		for k, anim_name in ipairs(cur_data.fp_anim) do
-			s_tool:updateFpAnimation(anim_name, final_value, 1.0)
+		for k, anim_data in ipairs(cur_data.fp_anim) do
+			local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
+			s_tool:updateFpAnimation(anim_data.name, anim_val, 1.0)
 		end
 	else
-		for k, anim_name in pairs(cur_data.tp_anim) do
-			s_tool:updateAnimation(anim_name, final_value, 1.0)
+		for k, anim_data in pairs(cur_data.tp_anim) do
+			local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
+			s_tool:updateAnimation(anim_data.name, anim_val, 1.0)
 		end
 	end
 
-	if self.cl_animator_time then
-		self.cl_animator_time = predict_time
+	if track.time then
+		track.time = predict_time
 
-		if self.cl_animator_time <= 0 then
-			self.cl_animator_time = nil
+		if track.time <= 0 then
+			track.time = nil
 
-			self.cl_animator_func = AnimationUpdateFunctions.anim_selector
-			self.cl_animator_func(self, dt)
-		end
-	end
-end
-
-AnimationUpdateFunctions.wait_handler = function(self, dt)
-	if self.anim_wait_time then
-		self.anim_wait_time = self.anim_wait_time - dt
-
-		if self.anim_wait_time <= 0.0 then
-			self.anim_wait_time = nil
-
-			self.anim_func = AnimationUpdateFunctions.anim_selector
-			self.anim_func(self, dt)
+			track.func = AnimationUpdateFunctions.anim_selector
+			track.func(self, track, dt)
 		end
 	end
 end
 
-AnimationUpdateFunctions.effect_handler = function(self, dt)
+AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 	local cur_data = self.anim_step_data
 
 	local s_anim_eff = self.anim_effects
@@ -92,28 +81,28 @@ AnimationUpdateFunctions.effect_handler = function(self, dt)
 	self.anim_func(self, dt)
 end
 
-AnimationUpdateFunctions.delay_setup = function(self, dt)
-	self.anim_time = self.anim_step_data.time
+AnimationUpdateFunctions.delay_setup = function(self, track, dt)
+	track.time = track.step_data.time
 
-	self.anim_func = AnimationUpdateFunctions.delay_handler
-	self.anim_func(self, dt)
+	track.func = AnimationUpdateFunctions.delay_handler
+	track.func(self, track, dt)
 end
 
-AnimationUpdateFunctions.delay_handler = function(self, dt)
-	if self.anim_time then
-		self.anim_time = self.anim_time - dt
+AnimationUpdateFunctions.delay_handler = function(self, track, dt)
+	if track.time then
+		track.time = track.time - dt
 
-		if self.anim_time <= 0 then
-			self.anim_time = nil
+		if track.time <= 0 then
+			track.time = nil
 
-			self.anim_func = AnimationUpdateFunctions.anim_selector
-			self.anim_func(self, dt)
+			track.func = AnimationUpdateFunctions.anim_selector
+			track.func(self, track, dt)
 		end
 	end
 end
 
 local debri_color = sm.color.new(0x000000ff)
-AnimationUpdateFunctions.debris_handler = function(self, dt)
+AnimationUpdateFunctions.debris_handler = function(self, track, dt)
 	local cur_data = self.anim_step_data
 
 	--Calculate direction
@@ -141,24 +130,29 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 end
 
 function mgp_toolAnimator_update(self, dt)
-	self.cl_animator_func(self, dt)
+	for id, track in ipairs(self.cl_animator_tracks) do
+		track.func(self, track, dt)
+	end
 end
 
 function mgp_toolAnimator_setAnimation(self, anim_name)
 	local anim_data = self.cl_animator_animations[anim_name]
 
-	self.cl_animator_data = anim_data
-	self.cl_animator_step = 0
-	self.cl_animator_step_count = #anim_data + 1
-
-	self.cl_animator_func = AnimationUpdateFunctions.anim_selector
+	self.cl_animator_tracks = {}
+	for k, v in ipairs(anim_data) do
+		self.cl_animator_tracks[k] =
+		{
+			data = v,
+			step = 0,
+			step_count = #v + 1,
+			func = AnimationUpdateFunctions.anim_selector
+		}
+	end
 end
 
 function mgp_toolAnimator_initialize(self, tool_name)
 	local anim_data = mgp_getToolData(tool_name)
 
-	self.cl_animator_step = 0
 	self.cl_animator_animations = anim_data.animation
-
-	self.cl_animator_func = AnimationUpdateFunctions.no_animation
+	self.cl_animator_tracks = {}
 end

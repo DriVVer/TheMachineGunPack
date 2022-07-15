@@ -37,19 +37,7 @@ function TommyGun.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function TommyGun:client_startModelAnimation(name)
-	local anim_data = self.gunAnimations[name]
-
-	anim_data.time = anim_data.duration
-end
-
 function TommyGun.loadAnimations( self )
-	--[[self.gunAnimations =
-	{
-		shoot = { name = "TommyGun_model_shoot", duration = 1.0, max_value = 1.5 },
-		reload = { name = "TommyGun_model_reload", duration = 5.0, max_value = 5.0 }
-	}]]
-
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -348,20 +336,6 @@ function TommyGun.client_onUpdate( self, dt )
 			self.tool:updateAnimation( animation.info.name, animation.time, weight )
 		end
 	end
-
-	--[[for name, animation in pairs(self.gunAnimations) do
-		if animation.time then
-			animation.time = animation.time - dt
-			local anim_progress = 1.0 - (animation.time / animation.duration)
-			if animation.time <= 0 then
-				anim_progress = 1.0
-				animation.time = nil
-			end
-
-			self.tool:updateAnimation(animation.name, anim_progress * animation.max_value, 1.0)
-			self.tool:updateFpAnimation(animation.name, anim_progress * animation.max_value, 1.0)
-		end
-	end]]
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
