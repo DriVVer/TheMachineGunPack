@@ -46,7 +46,9 @@ function TommyGun.loadAnimations( self )
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
+			tp_e_reload = { "TommyGun_tp_empty_reload" },
 			putdown = { "spudgun_putdown" }
+			
 		}
 	)
 	local movementAnimations = {
