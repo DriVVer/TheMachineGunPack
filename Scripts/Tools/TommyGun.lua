@@ -435,24 +435,29 @@ function TommyGun.client_onEquip( self, animate )
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	
+	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
+	local is_tool_local = self.tool:isLocal()
+	if is_tool_local then
+		self.tool:setFpRenderables(currentRenderablesFp)
+	end
 
+	--Load animations before setting them
 	self:loadAnimations()
 
+	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-
-	if self.tool:isLocal() then
-		-- Sets PotatoRifle renderable, change this to change the mesh
-		self.tool:setFpRenderables( currentRenderablesFp )
-		swapFpAnimation( self.fpAnimations, "unequip", "equip", 0.2 )
+	if is_tool_local then
+		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 end
 
 function TommyGun.client_onUnequip( self, animate )
-
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+	
 	if sm.exists( self.tool ) then
 		if animate then
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
