@@ -48,7 +48,7 @@ end
 function TommyGun.loadAnimations( self )
 	self.gunAnimations =
 	{
-		shoot = { name = "TommyGun_model_shoot", duration = 2.0, max_value = 1.0 },
+		shoot = { name = "TommyGun_model_shoot", duration = 1.0, max_value = 1.0 },
 		reload = { name = "TommyGun_model_reload", duration = 5.0, max_value = 5.0 }
 	}
 
