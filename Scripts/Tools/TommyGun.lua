@@ -417,7 +417,6 @@ function TommyGun.client_onUpdate( self, dt )
 end
 
 function TommyGun.client_onEquip( self, animate )
-
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -503,7 +502,6 @@ function TommyGun.cl_n_onShoot( self, dir )
 end
 
 function TommyGun.onShoot( self, dir )
-
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -516,7 +514,6 @@ function TommyGun.onShoot( self, dir )
 	else
 		self.shootEffect:start()
 	end
-
 end
 
 function TommyGun.calculateFirePosition( self )
@@ -677,7 +674,7 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 			self.network:sendToServer( "sv_n_onShoot", dir )
 
 			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.05 )
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 		else
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 			self.fireCooldownTimer = fireMode.fireCooldown
