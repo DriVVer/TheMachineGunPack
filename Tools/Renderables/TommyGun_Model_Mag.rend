@@ -4,7 +4,8 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGunMag.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "TommyGun_model_reload", 	       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_Reload.dae" }
+				{ "name": "TommyGun_model_reload", 	       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_Reload.dae" },
+				{ "name": "TommyGun_model_empty_reload",   "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_Empty_Reload.dae" }
 			],
 			"subMeshList": [
 				{
