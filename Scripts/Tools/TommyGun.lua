@@ -691,7 +691,9 @@ function TommyGun:client_onToggle()
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 		else
 			sm.gui.displayAlertText("TommyGun: No Ammo. Reloading...", 3)
+			
 			setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
+			mgp_toolAnimator_setAnimation(self, "reload_empty")
 		end
 	end
 
