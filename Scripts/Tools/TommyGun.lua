@@ -3,23 +3,21 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
+dofile("ToolAnimator.lua")
+
 local Damage = 28
 
 TommyGun = class()
 
-local renderables = {
-	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Base/char_spudgun_base_basic.rend",
-	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Barrel/Barrel_basic/char_spudgun_barrel_basic.rend",
-	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Sight/Sight_basic/char_spudgun_sight_basic.rend",
-	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Stock/Stock_broom/char_spudgun_stock_broom.rend",
-	--"$GAME_DATA/Character/Char_Tools/Char_spudgun/Tank/Tank_basic/char_spudgun_tank_basic.rend"
+local renderables =
+{
 	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model.rend",
 	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Receiver.rend",
 	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Mag.rend"
 }
 
-local renderablesTp = {"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"}
-local renderablesFp = {"$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"}
+local renderablesTp = { "$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend" }
+local renderablesFp = { "$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend" }
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
@@ -31,9 +29,9 @@ function TommyGun.client_onCreate( self )
 
 	self.mag_capacity = 30
 	self.ammo_in_mag = self.mag_capacity
+
+	mgp_toolAnimator_initialize(self, "tommy_gun")
 end
-
-
 
 function TommyGun.client_onRefresh( self )
 	self:loadAnimations()
@@ -46,11 +44,11 @@ function TommyGun:client_startModelAnimation(name)
 end
 
 function TommyGun.loadAnimations( self )
-	self.gunAnimations =
+	--[[self.gunAnimations =
 	{
 		shoot = { name = "TommyGun_model_shoot", duration = 1.0, max_value = 1.5 },
 		reload = { name = "TommyGun_model_reload", duration = 5.0, max_value = 5.0 }
-	}
+	}]]
 
 	self.tpAnimations = createTpAnimations(
 		self.tool,
@@ -171,6 +169,7 @@ local actual_reload_anims =
 }
 
 function TommyGun.client_onUpdate( self, dt )
+	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
@@ -350,7 +349,7 @@ function TommyGun.client_onUpdate( self, dt )
 		end
 	end
 
-	for name, animation in pairs(self.gunAnimations) do
+	--[[for name, animation in pairs(self.gunAnimations) do
 		if animation.time then
 			animation.time = animation.time - dt
 			local anim_progress = 1.0 - (animation.time / animation.duration)
@@ -362,7 +361,7 @@ function TommyGun.client_onUpdate( self, dt )
 			self.tool:updateAnimation(animation.name, anim_progress * animation.max_value, 1.0)
 			self.tool:updateFpAnimation(animation.name, anim_progress * animation.max_value, 1.0)
 		end
-	end
+	end]]
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
@@ -507,7 +506,7 @@ function TommyGun.onShoot( self, dir )
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-	self:client_startModelAnimation("shoot")
+	mgp_toolAnimator_setAnimation(self, "shoot")
 
 	if self.tool:isInFirstPersonView() then
 		self.shootEffectFP:start()
@@ -698,14 +697,13 @@ function TommyGun:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
-			self:client_startModelAnimation("reload")
-
 			local cur_anim_name = "reload"
 			if self.ammo_in_mag == 0 then
 				cur_anim_name = "reload_empty"
 			end
 
 			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
+			mgp_toolAnimator_setAnimation(self, cur_anim_name)
 		end
 	end
 
