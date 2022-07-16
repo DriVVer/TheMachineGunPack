@@ -16,8 +16,17 @@ local renderables =
 	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Mag.rend"
 }
 
-local renderablesTp = { "$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend" }
-local renderablesFp = { "$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend", "$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend" }
+local renderablesTp =
+{
+	"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"
+}
+
+local renderablesFp =
+{
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"
+}
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
@@ -46,9 +55,10 @@ function TommyGun.loadAnimations( self )
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
-			tp_e_reload = { "TommyGun_tp_empty_reload" },
-			putdown = { "spudgun_putdown" }
+			putdown = { "spudgun_putdown" },
 			
+			reload_empty = { "TommyGun_tp_empty_reload" },
+			reload = { "TommyGun_tp_reload" }
 		}
 	)
 	local movementAnimations = {
@@ -665,6 +675,33 @@ local reload_anims =
 	["ammo_check"] = true
 }
 
+local anim_name_to_id =
+{
+	["reload"] = 1,
+	["reload_empty"] = 2
+}
+
+local id_to_anim_name =
+{
+	[1] = "reload",
+	[2] = "reload_empty"
+}
+
+function TommyGun:sv_n_onReload(anim_id)
+	self.network:sendToClients("cl_n_onReload", anim_id)
+end
+
+function TommyGun:cl_n_onReload(anim_id)
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:cl_startReloadAnim(id_to_anim_name[anim_id])
+	end
+end
+
+function TommyGun:cl_startReloadAnim(anim_name)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim_name)
+end
+
 function TommyGun:client_isGunReloading()
 	return (reload_anims[self.fpAnimations.currentAnimation] == true)
 end
@@ -678,8 +715,12 @@ function TommyGun:client_onReload()
 				cur_anim_name = "reload_empty"
 			end
 
+			--Start fp and tp animations
 			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
-			mgp_toolAnimator_setAnimation(self, cur_anim_name)
+			self:cl_startReloadAnim(cur_anim_name)
+
+			--Send animation data to other clients
+			self.network:sendToServer("sv_n_onReload", anim_name_to_id[cur_anim_name])
 		end
 	end
 
