@@ -703,7 +703,12 @@ function TommyGun:cl_startReloadAnim(anim_name)
 end
 
 function TommyGun:client_isGunReloading()
-	return (reload_anims[self.fpAnimations.currentAnimation] == true)
+	local fp_anims = self.fpAnimations
+	if fp_anims ~= nil then
+		return (reload_anims[fp_anims.currentAnimation] == true)
+	end
+
+	return false
 end
 
 function TommyGun:client_onReload()
