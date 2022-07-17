@@ -5,7 +5,8 @@ local type_to_func_name =
 	[1] = "anim_setup",
 	[2] = "effect_handler",
 	[3] = "delay_setup",
-	[4] = "debris_handler"
+	[4] = "debris_handler",
+	[5] = "particle_handler"
 }
 
 local AnimationUpdateFunctions = {}
@@ -103,30 +104,55 @@ end
 
 local debri_color = sm.color.new(0x000000ff)
 AnimationUpdateFunctions.debris_handler = function(self, track, dt)
-	local cur_data = self.anim_step_data
+	local cur_data = track.step_data
 
-	--Calculate direction
-	local bone_name = cur_data.bone
-	local tracked_bone = self.bone_tracker[bone_name]
-	local debri_pos = self.interactable:getWorldBonePosition(bone_name)
-	local dir_calc  = self.interactable:getWorldBonePosition(bone_name.."_end")
-	local direction = (debri_pos - dir_calc):normalize()
+	local debri_pos = nil
 
-	--Calculate rotation
-	local debri_rot_local = sm.vec3.getRotation(-self.shape.at, direction)
-	local debri_rot = debri_rot_local * self.shape.worldRotation
+	local s_tool = self.tool
+	if s_tool:isInFirstPersonView() then
+		debri_pos = s_tool:getFpBonePos(cur_data.bone_name)
+	else
+		debri_pos = s_tool:getTpBonePos(cur_data.bone_name)
+	end
 
-	--Calculate other things
-	local debri_time = math.random(2, 15)
-	local debri_offset = debri_rot * cur_data.offset
-	local debri_pos_final = debri_pos + debri_offset
-	local world_vel = (debri_rot * tracked_bone.vel) + self.shape.velocity
-	local world_ang_vel = debri_rot * tracked_bone.angular_vel
+	sm.debris.createDebris(cur_data.uuid, debri_pos, sm.quat.identity())
 
-	sm.debris.createDebris(cur_data.uuid, debri_pos_final, debri_rot, world_vel, world_ang_vel, debri_color, debri_time)
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
+end
 
-	self.anim_func = AnimationUpdateFunctions.anim_selector
-	self.anim_func(self, dt)
+AnimationUpdateFunctions.particle_handler = function(self, track, dt)
+	local cur_data = track.step_data
+
+	local bone_name = cur_data.bone_name
+	local s_tool = self.tool
+
+	local particle_pos = nil
+	local particle_offset = nil
+	local particle_name = nil
+
+	if sm.localPlayer.isInFirstPersonView() then
+		particle_pos = s_tool:getFpBonePos(bone_name)
+		particle_offset = cur_data.fp_offset
+		particle_name = cur_data.name_fp
+	else
+		particle_pos = s_tool:getTpBonePos(bone_name)
+		particle_offset = cur_data.tp_offset
+		particle_name = cur_data.name_tp
+	end
+
+	--Calculate rotation quaternion
+	local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
+	particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+
+	--Calculate final position
+	local offset_final = sm.camera.getRotation() * particle_offset
+	local particle_pos_final = particle_pos + offset_final
+
+	sm.particle.createParticle(particle_name, particle_pos_final, particle_rot, debri_color)
+
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
 end
 
 function mgp_toolAnimator_update(self, dt)
