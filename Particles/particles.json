@@ -1,0 +1,6 @@
+{
+	"particleSystemList": [
+		"ParticleEffects/TommyShell.json",
+		"ParticleEffects/TommyShellFP.json"
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"lodList": [
+		{
+			"mesh": "$MOD_DATA/Objects/Mesh/TommyShell.obj",
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}
