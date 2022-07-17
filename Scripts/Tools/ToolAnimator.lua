@@ -127,29 +127,31 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 	local bone_name = cur_data.bone_name
 	local s_tool = self.tool
 
-	local particle_pos = nil
-	local particle_offset = nil
-	local particle_name = nil
+	if s_tool:isLocal() and s_tool:isEquipped() then
+		local particle_pos = nil
+		local particle_offset = nil
+		local particle_name = nil
 
-	if sm.localPlayer.isInFirstPersonView() then
-		particle_pos = s_tool:getFpBonePos(bone_name)
-		particle_offset = cur_data.fp_offset
-		particle_name = cur_data.name_fp
-	else
-		particle_pos = s_tool:getTpBonePos(bone_name)
-		particle_offset = cur_data.tp_offset
-		particle_name = cur_data.name_tp
+		if sm.localPlayer.isInFirstPersonView() then
+			particle_pos = s_tool:getFpBonePos(bone_name)
+			particle_offset = cur_data.fp_offset
+			particle_name = cur_data.name_fp
+		else
+			particle_pos = s_tool:getTpBonePos(bone_name)
+			particle_offset = cur_data.tp_offset
+			particle_name = cur_data.name_tp
+		end
+
+		--Calculate rotation quaternion
+		local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
+		particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+
+		--Calculate final position
+		local offset_final = sm.camera.getRotation() * particle_offset
+		local particle_pos_final = particle_pos + offset_final
+
+		sm.particle.createParticle(particle_name, particle_pos_final, particle_rot, debri_color)
 	end
-
-	--Calculate rotation quaternion
-	local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
-	particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
-
-	--Calculate final position
-	local offset_final = sm.camera.getRotation() * particle_offset
-	local particle_pos_final = particle_pos + offset_final
-
-	sm.particle.createParticle(particle_name, particle_pos_final, particle_rot, debri_color)
 
 	track.func = AnimationUpdateFunctions.anim_selector
 	track.func(self, track, dt)
