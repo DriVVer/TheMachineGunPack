@@ -326,6 +326,86 @@
 			}
 		]
 	},
+
+	"TommyReload":
+	{
+		"parameterList":
+		{
+			"Size":1.0,
+			"Velocity_max_50":4.0,
+			"Material":9,
+			"Phys_energy":5.0
+	
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/ct_pickup",
+				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/weldtool/wt_pickup",
+				"delay": 0.0
+			},
+			
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"delay": 0.2
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"delay": 0.25
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/spudgun/pt_pickup",
+				"delay": 2.8
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 3.0
+			}
+			
+		]
+	},
+
+	"Muzzle_Flash_SmallCal":
+	{
+		"effectList":
+		[
+
+			{
+				"type": "particle",
+				"name": "Muzzle_flash_1",
+				"attached": true,
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "Muzzle_flash_2",
+				"attached": true,
+				"delay": 0.001
+			},
+			{
+				"type": "particle",
+				"name": "Smoke_1",
+				"attached": false,
+				"delay": 0.02
+			}
+		]
+	},
+
 	"Explosion12":
 	{
 		"maxInstances": 8,

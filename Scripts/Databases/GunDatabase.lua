@@ -198,7 +198,7 @@ local _Database = {
                     max = 400.0
                 },
                 recoil = sm.vec3.new(0, 0, -400),
-                reload_time = 10,
+                reload_time = 9,
                 auto_reload = true
             },
             projectile = {
@@ -266,7 +266,7 @@ local _Database = {
                     max = 450.0
                 },
                 recoil = sm.vec3.new(0, 0, -400),
-                reload_time = 8,
+                reload_time = 7,
                 auto_reload = true
             },
             projectile = {
@@ -300,7 +300,7 @@ local _Database = {
                     max = 1000.0
                 },
                 recoil = sm.vec3.new(0, 0, -1000),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true
             },
             projectile = {
@@ -323,7 +323,7 @@ local _Database = {
             pose_animation = {
                 {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
-                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.04}
+                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.03}
             }
         }
     },
@@ -336,7 +336,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 7,
+                reload_time = 6,
                 auto_reload = true,
             },
             projectile = {
@@ -372,7 +372,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 7,
+                reload_time = 6,
                 auto_reload = true,
             },
             projectile = {
@@ -406,7 +406,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 7,
+                reload_time = 6,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 1.9),
             },
@@ -486,7 +486,7 @@ local _Database = {
                     max = 500.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -512,7 +512,7 @@ local _Database = {
                     max = 500.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -626,7 +626,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -400),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.65),
                 projectile = "potato"
@@ -652,7 +652,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato"
@@ -676,7 +676,7 @@ local _Database = {
                     max = 700.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.9),
                 projectile = "potato"
@@ -700,7 +700,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
                 projectile = "potato"
@@ -724,7 +724,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
                 projectile = "potato",
@@ -759,7 +759,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
                 projectile = "potato",
@@ -794,7 +794,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
                 projectile = "potato",
@@ -832,7 +832,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato",
@@ -883,7 +883,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 5,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"

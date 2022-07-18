@@ -1,6 +1,9 @@
 {
 	"particleSystemList": [
 		"ParticleEffects/TommyShell.json",
-		"ParticleEffects/TommyShellFP.json"
+		"ParticleEffects/TommyShellFP.json",
+		"ParticleEffects/Smoke_1.json",
+		"ParticleEffects/Muzzle_flash_1.json",
+		"ParticleEffects/Muzzle_flash_2.json"
 	]
 }

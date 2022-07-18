@@ -31,7 +31,8 @@ local mgp_tool_database =
 						fp_anim = { { name = "TommyGun_model_shoot", start_val = 0.0, end_val = 1.0 } },
 						tp_anim = { { name = "TommyGun_model_shoot", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
-					}
+					},
+					
 				}
 			},
 			reload =
