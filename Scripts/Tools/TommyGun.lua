@@ -33,13 +33,14 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 function TommyGun.client_onCreate( self )
-	self.shootEffect = sm.effect.createEffect( "SpudgunBasic - BasicMuzzel" )
-	self.shootEffectFP = sm.effect.createEffect( "SpudgunBasic - FPBasicMuzzel" )
-
 	self.mag_capacity = 30
 	self.ammo_in_mag = self.mag_capacity
 
 	mgp_toolAnimator_initialize(self, "tommy_gun")
+end
+
+function TommyGun.client_onDestroy(self)
+	mgp_toolAnimator_destroy(self)
 end
 
 function TommyGun.client_onRefresh( self )
@@ -233,11 +234,6 @@ function TommyGun.client_onUpdate( self, dt )
 		end
 
 		rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-
-
-		self.shootEffectFP:setPosition( effectPos )
-		self.shootEffectFP:setVelocity( self.tool:getMovementVelocity() )
-		self.shootEffectFP:setRotation( rot )
 	end
 	local pos = self.tool:getTpBonePos( "pejnt_barrel" )
 	local dir = self.tool:getTpBoneDir( "pejnt_barrel" )
@@ -245,11 +241,6 @@ function TommyGun.client_onUpdate( self, dt )
 	effectPos = pos + dir * 0.2
 
 	rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-
-
-	self.shootEffect:setPosition( effectPos )
-	self.shootEffect:setVelocity( self.tool:getMovementVelocity() )
-	self.shootEffect:setRotation( rot )
 
 	-- Timers
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
@@ -493,12 +484,6 @@ function TommyGun.onShoot( self, dir )
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
 	mgp_toolAnimator_setAnimation(self, "shoot")
-
-	if self.tool:isInFirstPersonView() then
-		self.shootEffectFP:start()
-	else
-		self.shootEffect:start()
-	end
 end
 
 function TommyGun.calculateFirePosition( self )

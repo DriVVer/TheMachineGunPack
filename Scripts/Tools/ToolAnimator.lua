@@ -71,15 +71,40 @@ AnimationUpdateFunctions.anim_handler = function(self, track, dt)
 end
 
 AnimationUpdateFunctions.effect_handler = function(self, track, dt)
-	local cur_data = self.anim_step_data
+	local cur_data = track.step_data
 
-	local s_anim_eff = self.anim_effects
-	for k, eff_name in ipairs(cur_data.effects) do
-		s_anim_eff[eff_name]:start()
+	local s_tool = self.tool
+	if s_tool:isLocal() and s_tool:isEquipped() then
+		local cur_effect
+		local effect_pos
+		local effect_dir
+		local effect_offset
+
+		if sm.localPlayer.isInFirstPersonView() then
+			cur_effect = self.cl_animator_effects[cur_data.name_fp]
+			effect_pos = s_tool:getFpBonePos(cur_data.bone)
+			effect_dir = s_tool:getTpBoneDir(cur_data.bone)
+			effect_offset = cur_data.fp_offset
+		else
+			cur_effect = self.cl_animator_effects[cur_data.name_tp]
+			effect_pos = s_tool:getTpBonePos(cur_data.bone)
+			effect_dir = sm.localPlayer.getDirection()
+			effect_offset = cur_data.tp_offset
+		end
+
+		effect_offset = sm.camera.getRotation() * effect_offset
+
+		cur_effect:setPosition(effect_pos + effect_offset)
+		cur_effect:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), effect_dir))
+		if cur_data.apply_velocity then
+			cur_effect:setVelocity(s_tool:getMovementVelocity())
+		end
+
+		cur_effect:start()
 	end
 
-	self.anim_func = AnimationUpdateFunctions.anim_selector
-	self.anim_func(self, dt)
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
 end
 
 AnimationUpdateFunctions.delay_setup = function(self, track, dt)
@@ -181,6 +206,21 @@ end
 function mgp_toolAnimator_initialize(self, tool_name)
 	local anim_data = mgp_getToolData(tool_name)
 
+	self.cl_animator_effects = {}
+	for eff_id, eff_name in pairs(anim_data.required_effects) do
+		self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+	end
+
 	self.cl_animator_animations = anim_data.animation
 	self.cl_animator_tracks = {}
+end
+
+function mgp_toolAnimator_destroy(self)
+	for k, cur_effect in pairs(self.cl_animator_effects) do
+		if cur_effect:isPlaying() then
+			cur_effect:stopImmediate()
+		end
+
+		cur_effect:destroy()
+	end
 end

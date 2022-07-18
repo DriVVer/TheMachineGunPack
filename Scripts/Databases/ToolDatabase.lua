@@ -13,11 +13,23 @@ local mgp_tool_database =
 {
 	tommy_gun =
 	{
-		required_effects = {},
+		required_effects = {
+			shoot_tp = "SpudgunBasic - BasicMuzzel",
+			shoot_fp = "SpudgunBasic - FPBasicMuzzel"
+		},
 		animation = {
 			shoot =
 			{
 				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "Shell",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = true
+					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
