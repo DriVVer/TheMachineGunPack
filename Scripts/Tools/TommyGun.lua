@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 
-local Damage = 18
+local Damage = 24
 
 TommyGun = class()
 
