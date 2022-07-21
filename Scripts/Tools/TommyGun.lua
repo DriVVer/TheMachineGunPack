@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 
-local Damage = 28
+local Damage = 18
 
 TommyGun = class()
 
@@ -58,8 +58,8 @@ function TommyGun.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 			
-			reload_empty = { "TommyGun_tp_empty_reload" },
-			reload = { "TommyGun_tp_reload" }
+			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -120,9 +120,9 @@ function TommyGun.loadAnimations( self )
 		fireCooldown = 0.125,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = .25,
-		spreadMaxAngle = 8,
-		fireVelocity = 130.0,
+		spreadMinAngle = 1.25,
+		spreadMaxAngle = 12,
+		fireVelocity = 250.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -136,8 +136,8 @@ function TommyGun.loadAnimations( self )
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
-		spreadMaxAngle = 8,
-		fireVelocity =  130.0,
+		spreadMaxAngle = 5,
+		fireVelocity =  250.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -316,6 +316,8 @@ function TommyGun.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
+				elseif ( name == "reload" or name == "reload_empty" ) then
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -672,6 +674,8 @@ local id_to_anim_name =
 	[2] = "reload_empty"
 }
 
+ 
+
 function TommyGun:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
@@ -683,7 +687,7 @@ function TommyGun:cl_n_onReload(anim_id)
 end
 
 function TommyGun:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0) 
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
@@ -703,7 +707,7 @@ function TommyGun:client_onReload()
 			local cur_anim_name = "reload"
 			if self.ammo_in_mag == 0 then
 				cur_anim_name = "reload_empty"
-			end
+			end 
 
 			--Start fp and tp animations
 			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
@@ -711,7 +715,7 @@ function TommyGun:client_onReload()
 
 			--Send animation data to other clients
 			self.network:sendToServer("sv_n_onReload", anim_name_to_id[cur_anim_name])
-		end
+		end 
 	end
 
 	return true
@@ -728,7 +732,7 @@ function TommyGun:client_onToggle()
 			setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
 			mgp_toolAnimator_setAnimation(self, "reload_empty")
 		end
-	end
+	end   
 
 	return true
 end
