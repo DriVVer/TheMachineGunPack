@@ -674,8 +674,6 @@ local id_to_anim_name =
 	[2] = "reload_empty"
 }
 
- 
-
 function TommyGun:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
@@ -687,7 +685,7 @@ function TommyGun:cl_n_onReload(anim_id)
 end
 
 function TommyGun:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0) 
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
@@ -700,6 +698,15 @@ function TommyGun:client_isGunReloading()
 	return false
 end
 
+function TommyGun:cl_initReloadAnim(anim_name)
+	--Start fp and tp animations locally
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
+	self:cl_startReloadAnim(anim_name)
+
+	--Send the animation data to all the other clients
+	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
+end
+
 function TommyGun:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
@@ -709,16 +716,28 @@ function TommyGun:client_onReload()
 				cur_anim_name = "reload_empty"
 			end 
 
-			--Start fp and tp animations
-			setFpAnimation(self.fpAnimations, cur_anim_name, 0.0)
-			self:cl_startReloadAnim(cur_anim_name)
-
-			--Send animation data to other clients
-			self.network:sendToServer("sv_n_onReload", anim_name_to_id[cur_anim_name])
-		end 
+			self:cl_initReloadAnim(cur_anim_name)
+		end
 	end
 
 	return true
+end
+
+function TommyGun:sv_n_checkMag()
+	self.network:sendToClients("cl_n_checkMag")
+end
+
+function TommyGun:cl_n_checkMag()
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
+		self:cl_startCheckMagAnim()
+	end
+end
+
+function TommyGun:cl_startCheckMagAnim()
+	--TODO: Add a TP animation for checking mag
+	--[[setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim_name)]]
 end
 
 function TommyGun:client_onToggle()
@@ -726,13 +745,15 @@ function TommyGun:client_onToggle()
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
+
+			self:cl_startCheckMagAnim()
+			self.network:sendToServer("sv_n_checkMag")
 		else
 			sm.gui.displayAlertText("TommyGun: No Ammo. Reloading...", 3)
-			
-			setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
-			mgp_toolAnimator_setAnimation(self, "reload_empty")
+
+			self:cl_initReloadAnim("reload_empty")
 		end
-	end   
+	end
 
 	return true
 end

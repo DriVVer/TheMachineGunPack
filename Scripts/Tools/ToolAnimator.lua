@@ -80,14 +80,15 @@ AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 		local effect_dir
 		local effect_offset
 
+		local cur_bone = cur_data.bone
 		if sm.localPlayer.isInFirstPersonView() and s_tool:isLocal() then
 			cur_effect = self.cl_animator_effects[cur_data.name_fp]
-			effect_pos = s_tool:getFpBonePos(cur_data.bone)
-			effect_dir = s_tool:getTpBoneDir(cur_data.bone)
+			effect_pos = s_tool:getFpBonePos(cur_bone)
+			effect_dir = s_tool:getTpBoneDir(cur_bone)
 			effect_offset = cur_data.fp_offset
 		else
 			cur_effect = self.cl_animator_effects[cur_data.name_tp]
-			effect_pos = s_tool:getTpBonePos(cur_data.bone)
+			effect_pos = s_tool:getTpBonePos(cur_bone)
 			effect_dir = sm.localPlayer.getDirection()
 			effect_offset = cur_data.tp_offset
 		end
@@ -149,14 +150,13 @@ end
 AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 	local cur_data = track.step_data
 
-	local bone_name = cur_data.bone_name
 	local s_tool = self.tool
-
 	if s_tool:isEquipped() then
 		local particle_pos = nil
 		local particle_offset = nil
 		local particle_name = nil
 
+		local bone_name = cur_data.bone_name
 		if sm.localPlayer.isInFirstPersonView() and s_tool:isLocal() then
 			particle_pos = s_tool:getFpBonePos(bone_name)
 			particle_offset = cur_data.fp_offset
