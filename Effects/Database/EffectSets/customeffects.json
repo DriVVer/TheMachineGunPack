@@ -386,12 +386,6 @@
 		
 		"effectList":
 		[
-			{
-				"type": "audio",
-				"name": "event:/tools/connectiontool/ct_pickup",
-				"attached": true,
-				"delay": 0.0
-			},
 			
 			
 			{
@@ -419,12 +413,6 @@
 				"name": "event:/tools/connectiontool/connectiontool_equip",
 				"attached": true,
 				"delay": 1.2
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/spudgun/sg_pickup",
-				"attached": true,
-				"delay": 1.8
 			},
 			{
 				"type": "audio",

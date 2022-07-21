@@ -59,7 +59,8 @@ function TommyGun.loadAnimations( self )
 			putdown = { "spudgun_putdown" },
 			
 			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
+			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "TommyGun_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -318,6 +319,8 @@ function TommyGun.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+				elseif  name == "ammo_check" then
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -619,7 +622,7 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 				end
 			end
 
-			dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 50 m sight calibration
+			dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 			-- Spread
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
@@ -735,9 +738,7 @@ function TommyGun:cl_n_checkMag()
 end
 
 function TommyGun:cl_startCheckMagAnim()
-	--TODO: Add a TP animation for checking mag
-	--[[setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)]]
+	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 end
 
 function TommyGun:client_onToggle()
