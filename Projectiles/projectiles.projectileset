@@ -1,0 +1,27 @@
+{
+	"projectiles": [
+		{
+			"uuid": "6c87e1c0-79a6-40dc-a26a-ef28916aff69",
+			"name": "mgp_potato",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$GAME_DATA/Projectiles/Renderables/potato.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 1 },
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 0.9 },
+					{ "qualityLevel": 3, "chance": 0.8 },
+					{ "qualityLevel": 4, "chance": 0.5 },
+					{ "qualityLevel": 5, "chance": 0.3 }
+				]
+			},
+			"enableImpactEffect": true
+		}
+	]
+}

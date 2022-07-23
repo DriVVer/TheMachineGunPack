@@ -581,6 +581,7 @@ function TommyGun.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
+local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
 function TommyGun.cl_onPrimaryUse( self, is_shooting )
 	if not is_shooting then return end
 
@@ -636,7 +637,7 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 
 			local owner = self.tool:getOwner()
 			if owner then
-				sm.projectile.projectileAttack( projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
+				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
 			end
 
 			-- Timers
