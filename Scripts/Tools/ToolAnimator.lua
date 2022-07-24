@@ -212,7 +212,20 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	end
 
 	self.cl_animator_animations = anim_data.animation
+	self.cl_animator_on_unequip = anim_data.on_unequip_action
 	self.cl_animator_tracks = {}
+end
+
+function mgp_toolAnimator_reset(self)
+	self.cl_animator_tracks = {}
+
+	local effects_to_stop = self.cl_animator_on_unequip.stop_effects
+	for k, v in ipairs(effects_to_stop) do
+		local cur_effect = self.cl_animator_effects[v]
+		if cur_effect:isPlaying() then
+			cur_effect:stopImmediate()
+		end
+	end
 end
 
 function mgp_toolAnimator_destroy(self)

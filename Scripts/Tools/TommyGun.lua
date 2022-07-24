@@ -437,6 +437,7 @@ function TommyGun.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+	mgp_toolAnimator_reset(self)
 	
 	if sm.exists( self.tool ) then
 		if animate then

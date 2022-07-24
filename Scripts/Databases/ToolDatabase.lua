@@ -18,7 +18,9 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reloadTG = "TommyReload",
 			reloadETG = "TommyEReload"
-
+		},
+		on_unequip_action = {
+			stop_effects = { "reloadTG", "reloadETG" }
 		},
 		animation = {
 			shoot =
