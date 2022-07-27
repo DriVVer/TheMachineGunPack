@@ -15,10 +15,10 @@
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.9 },
-					{ "qualityLevel": 3, "chance": 0.8 },
-					{ "qualityLevel": 4, "chance": 0.5 },
-					{ "qualityLevel": 5, "chance": 0.1 }
+					{ "qualityLevel": 2, "chance": 0.8 },
+					{ "qualityLevel": 3, "chance": 0.0 },
+					{ "qualityLevel": 4, "chance": 0.0 },
+					{ "qualityLevel": 5, "chance": 0.0 }
 				]
 			},
 			"enableImpactEffect": true
