@@ -11,20 +11,20 @@ TommyGun = class()
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Magnum44_Model.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"
 	
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/char_male_tp_Magnum44.rend",
-	"$CONTENT_DATA/Tools/Renderables/char_Magnum44_tp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/char_male_tp_Magnum44.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_tp_animlist.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/char_male_fp_Magnum44.rend",
-	"$CONTENT_DATA/Tools/Renderables/char_Magnum44_fp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/char_male_fp_Magnum44.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_fp_animlist.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
