@@ -16,7 +16,7 @@
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/Magnum44.lua",
-				"class": "TommyGun"
+				"class": "Magnum44"
 			}
 		}
 	]

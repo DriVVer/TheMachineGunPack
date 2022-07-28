@@ -1,6 +1,6 @@
 {
 	"lodList": [{
-		"mesh": "$CONTENT_DATA/Tools/Animations/ani_char_Magnum44_fp_position.dae",
+		"mesh": "$CONTENT_DATA/Tools/Animations/ani_char_Magnum_fp_position.dae",
 		"includes" : ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
 
 		"maxViewDistance": 1000.0
