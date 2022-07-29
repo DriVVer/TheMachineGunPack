@@ -5,13 +5,14 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 
-local Damage = 24
+local Damage = 45
 
 Magnum44 = class()
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend"
 	
 }
 
@@ -31,22 +32,22 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function Magnum44.client_onCreate( self )
+function TommyGun.client_onCreate( self )
 	self.mag_capacity = 6
 	self.ammo_in_mag = self.mag_capacity
 
 	mgp_toolAnimator_initialize(self, "tommy_gun")
 end
 
-function Magnum44.client_onDestroy(self)
+function TommyGun.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function Magnum44.client_onRefresh( self )
+function TommyGun.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function Magnum44.loadAnimations( self )
+function TommyGun.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -169,7 +170,7 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
-function Magnum44.client_onUpdate( self, dt )
+function TommyGun.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -396,7 +397,7 @@ function Magnum44.client_onUpdate( self, dt )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function Magnum44.client_onEquip( self, animate )
+function TommyGun.client_onEquip( self, animate )
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -432,7 +433,7 @@ function Magnum44.client_onEquip( self, animate )
 	end
 end
 
-function Magnum44.client_onUnequip( self, animate )
+function TommyGun.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
@@ -455,34 +456,34 @@ function Magnum44.client_onUnequip( self, animate )
 	end
 end
 
-function Magnum44.sv_n_onAim( self, aiming )
+function TommyGun.sv_n_onAim( self, aiming )
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Magnum44.cl_n_onAim( self, aiming )
+function TommyGun.cl_n_onAim( self, aiming )
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function Magnum44.onAim( self, aiming )
+function TommyGun.onAim( self, aiming )
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Magnum44.sv_n_onShoot( self, dir )
+function TommyGun.sv_n_onShoot( self, dir )
 	self.network:sendToClients( "cl_n_onShoot", dir )
 end
 
-function Magnum44.cl_n_onShoot( self, dir )
+function TommyGun.cl_n_onShoot( self, dir )
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onShoot( dir )
 	end
 end
 
-function Magnum44.onShoot( self, dir )
+function TommyGun.onShoot( self, dir )
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -491,7 +492,7 @@ function Magnum44.onShoot( self, dir )
 	mgp_toolAnimator_setAnimation(self, "shoot")
 end
 
-function Magnum44.calculateFirePosition( self )
+function TommyGun.calculateFirePosition( self )
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -518,7 +519,7 @@ function Magnum44.calculateFirePosition( self )
 	return firePosition
 end
 
-function Magnum44.calculateTpMuzzlePos( self )
+function TommyGun.calculateTpMuzzlePos( self )
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -552,7 +553,7 @@ function Magnum44.calculateTpMuzzlePos( self )
 	return fakePosition
 end
 
-function Magnum44.calculateFpMuzzlePos( self )
+function TommyGun.calculateFpMuzzlePos( self )
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -582,7 +583,7 @@ function Magnum44.calculateFpMuzzlePos( self )
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function Magnum44.cl_onPrimaryUse( self, is_shooting )
+function TommyGun.cl_onPrimaryUse( self, is_shooting )
 	if not is_shooting then return end
 
 	if self:client_isGunReloading() then return end
@@ -678,22 +679,22 @@ local id_to_anim_name =
 	[2] = "reload_empty"
 }
 
-function Magnum44:sv_n_onReload(anim_id)
+function TommyGun:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function Magnum44:cl_n_onReload(anim_id)
+function TommyGun:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
 
-function Magnum44:cl_startReloadAnim(anim_name)
+function TommyGun:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function Magnum44:client_isGunReloading()
+function TommyGun:client_isGunReloading()
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
 		return (reload_anims[fp_anims.currentAnimation] == true)
@@ -702,7 +703,7 @@ function Magnum44:client_isGunReloading()
 	return false
 end
 
-function Magnum44:cl_initReloadAnim(anim_name)
+function TommyGun:cl_initReloadAnim(anim_name)
 	--Start fp and tp animations locally
 	setFpAnimation(self.fpAnimations, anim_name, 0.0)
 	self:cl_startReloadAnim(anim_name)
@@ -711,7 +712,7 @@ function Magnum44:cl_initReloadAnim(anim_name)
 	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
 end
 
-function Magnum44:client_onReload()
+function TommyGun:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
@@ -727,22 +728,22 @@ function Magnum44:client_onReload()
 	return true
 end
 
-function Magnum44:sv_n_checkMag()
+function TommyGun:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function Magnum44:cl_n_checkMag()
+function TommyGun:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function Magnum44:cl_startCheckMagAnim()
+function TommyGun:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 end
 
-function Magnum44:client_onToggle()
+function TommyGun:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
@@ -761,7 +762,7 @@ function Magnum44:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Magnum44.cl_onSecondaryUse( self, state )
+function TommyGun.cl_onSecondaryUse( self, state )
 	local is_reloading = self:client_isGunReloading()
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
@@ -774,7 +775,7 @@ function Magnum44.cl_onSecondaryUse( self, state )
 	end
 end
 
-function Magnum44.client_onEquippedUpdate( self, primaryState, secondaryState )
+function TommyGun.client_onEquippedUpdate( self, primaryState, secondaryState )
 	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then
