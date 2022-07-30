@@ -94,11 +94,11 @@ function Magnum44.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "TommyGun_pickup", { nextAnimation = "idle" } },
+				equip = { "Magnum_pickup", { nextAnimation = "idle" } },
 				unequip = { "TommyGun_putdown" },
 
-				idle = { "TommyGun_idle", { looping = true } },
-				shoot = { "TommyGun_shoot", { nextAnimation = "idle" } },
+				idle = { "Magnum_idle", { looping = true } },
+				shoot = { "Magnum_shoot", { nextAnimation = "idle" } },
 
 				reload = { "TommyGun_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
@@ -118,12 +118,12 @@ function Magnum44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.125,
-		spreadCooldown = 0.18,
+		fireCooldown = 0.8,
+		spreadCooldown = 1.0,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 1.25,
 		spreadMaxAngle = 12,
-		fireVelocity = 250.0,
+		fireVelocity = 300.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -133,8 +133,8 @@ function Magnum44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.125,
-		spreadCooldown = 0.18,
+		fireCooldown = 0.8,
+		spreadCooldown = 1.0,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
 		spreadMaxAngle = 5,
