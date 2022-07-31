@@ -138,17 +138,20 @@ local mgp_tool_database =
 						apply_velocity = false
 					},
 					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.07, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "pejnt_barrel"
-					},
-					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
 						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
+						time = 1.5
+					}
+				}
+			},
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_Pickup", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Magnum44_Pickup", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					}
 				}
