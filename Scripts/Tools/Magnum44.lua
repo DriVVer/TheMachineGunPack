@@ -36,7 +36,7 @@ function Magnum44.client_onCreate( self )
 	self.mag_capacity = 6
 	self.ammo_in_mag = self.mag_capacity
 
-	mgp_toolAnimator_initialize(self, "tommy_gun")
+	mgp_toolAnimator_initialize(self, "Magnum44")
 end
 
 function Magnum44.client_onDestroy(self)
