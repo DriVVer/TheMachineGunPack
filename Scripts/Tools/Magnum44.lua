@@ -105,9 +105,9 @@ function Magnum44.loadAnimations( self )
 
 				ammo_check = { "TommyGun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "TommyGun_aim_into", { nextAnimation = "aimIdle" } },
+				aimInto = { "Magnum_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "TommyGun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "TommyGun_aim_idle", { looping = true } },
+				aimIdle = { "Magnum_aim_idle", { looping = true } },
 				aimShoot = { "TommyGun_aim_shoot", { nextAnimation = "aimIdle"} },
 
 				sprintInto = { "TommyGun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
