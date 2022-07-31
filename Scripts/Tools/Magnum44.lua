@@ -746,13 +746,13 @@ end
 function Magnum44:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			sm.gui.displayAlertText(("Magnum44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
 		else
-			sm.gui.displayAlertText("TommyGun: No Ammo. Reloading...", 3)
+			sm.gui.displayAlertText("Magnum44: No Ammo. Reloading...", 3)
 
 			self:cl_initReloadAnim("reload_empty")
 		end
@@ -776,7 +776,7 @@ function Magnum44.cl_onSecondaryUse( self, state )
 end
 
 function Magnum44.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
+	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )
