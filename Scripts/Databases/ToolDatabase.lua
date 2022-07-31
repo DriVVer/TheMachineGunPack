@@ -143,15 +143,14 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "Shell"
+						bone_name = "pejnt_barrel"
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
 						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
-					},
-					
+					}
 				}
 			},
 			reload =
