@@ -112,9 +112,9 @@ function Magnum44.loadAnimations( self )
 				aimIdle = { "Magnum_aim_idle", { looping = true } },
 				aimShoot = { "TommyGun_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "TommyGun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "TommyGun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "TommyGun_sprint_idle", { looping = true } },
+				sprintInto = { "Magnum_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Magnum_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Magnum_sprint_idle", { looping = true } },
 			}
 		)
 	end
@@ -654,7 +654,7 @@ function Magnum44.cl_onPrimaryUse(self, state)
 						end
 					end
 			
-					dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
+					dir = dir:rotate( math.rad( 0.8 ), sm.camera.getRight() ) -- 25 m sight calibration
 			
 					-- Spread
 					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
