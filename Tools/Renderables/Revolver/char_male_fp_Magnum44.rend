@@ -16,7 +16,7 @@
 				{ "name": "TommyGun_sprint_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_idle.dae" },
 
 				{ "name": "Magnum_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_into.dae" },
-				{ "name": "TommyGun_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_exit.dae" },
+				{ "name": "Magnum_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_exit.dae" },
 				{ "name": "TommyGun_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_shoot.dae" },
 				{ "name": "Magnum_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_idle.dae" },
 
