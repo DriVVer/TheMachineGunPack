@@ -130,9 +130,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.4 } },
-						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.4 } },
-						time = 0.4
+						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.5 } },
+						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.5 } },
+						time = 0.5
 					}
 				}
 			},
@@ -141,9 +141,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
-						time = 0.5
+						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
 					}
 				}
 			},
