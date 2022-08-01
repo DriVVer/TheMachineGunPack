@@ -125,6 +125,28 @@ local mgp_tool_database =
 			stop_effects = { "reloadTG", "reloadETG" }
 		},
 		animation = {
+			cock_the_hammer =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.4 } },
+						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.4 } },
+						time = 0.4
+					}
+				}
+			},
+			no_ammo =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
+						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
+						time = 0.5
+					}
+				}
+			},
 			shoot =
 			{
 				[1] = {
@@ -134,14 +156,14 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 1.0 } },
-						time = 1.5
+						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
+						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.4, end_val = 1.0 } },
+						time = 0.5
 					}
 				}
 			},
