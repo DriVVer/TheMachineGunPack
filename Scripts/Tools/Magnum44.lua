@@ -120,7 +120,7 @@ function Magnum44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.3,
+		fireCooldown = 0.5,
 		spreadCooldown = 1.2,
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
@@ -135,7 +135,7 @@ function Magnum44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.3,
+		fireCooldown = 0.5,
 		spreadCooldown = 1.0,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
