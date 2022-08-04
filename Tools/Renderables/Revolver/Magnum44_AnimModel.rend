@@ -5,7 +5,7 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
 				{ "name": "Magnum44_Shoot", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_Shoot.dae" },
-				{ "name": "Magnum44_C_hammer", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_C_hammer.dae" },
+				{ "name": "Magnum44_Reload", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_normal_Reload.dae" },
 				{ "name": "Magnum44_Pickup", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_Pickup.dae" }
 			],
 			"subMeshList": [

@@ -1,0 +1,21 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Revolver/Magnum44_SLoader_AnimModel.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "Magnum44_SL_Reload", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_SL_fp_normal_Reload.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				}
+			]
+		}
+	]
+}

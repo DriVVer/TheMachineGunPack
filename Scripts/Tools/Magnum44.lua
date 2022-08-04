@@ -12,8 +12,8 @@ Magnum44 = class()
 local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend"
-	
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend"
 }
 
 local renderablesTp =
@@ -97,12 +97,12 @@ function Magnum44.loadAnimations( self )
 			self.tool,
 			{
 				equip = { "Magnum_pickup", { nextAnimation = "idle" } },
-				unequip = { "TommyGun_putdown" },
+				unequip = { "Magnum_putdown" },
 
 				idle = { "Magnum_idle", { looping = true } },
 				shoot = { "Magnum_shoot", { nextAnimation = "idle" } },
 
-				reload = { "TommyGun_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
 				ammo_check = { "TommyGun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
@@ -120,7 +120,7 @@ function Magnum44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.5,
+		fireCooldown = 0.8,
 		spreadCooldown = 1.2,
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
@@ -135,7 +135,7 @@ function Magnum44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.5,
+		fireCooldown = 0.8,
 		spreadCooldown = 1.0,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
