@@ -6,7 +6,7 @@
 			"maxViewDistance": 1000.0,
 			"animationList": [
 				{ "name": "Magnum_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_idle.dae" },
-				{ "name": "Magnum_c_hammer", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_idle.dae" },
+				{ "name": "Magnum_c_hammer", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_c_hammer.dae" },
 				{ "name": "Magnum_shoot", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_shoot.dae" },
 
 				{ "name": "Magnum_pickup", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_pickup.dae" },
