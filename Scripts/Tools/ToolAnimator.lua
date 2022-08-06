@@ -147,7 +147,16 @@ AnimationUpdateFunctions.debris_handler = function(self, track, dt)
 	track.func(self, track, dt)
 end
 
+---@class ParticleHandlerTrack
+---@field fp_offset Vec3
+---@field tp_offset Vec3
+---@field name_fp string
+---@field name_tp string
+---@field bone_name string
+
+---@param self ToolClass
 AnimationUpdateFunctions.particle_handler = function(self, track, dt)
+	---@type ParticleHandlerTrack
 	local cur_data = track.step_data
 
 	local s_tool = self.tool

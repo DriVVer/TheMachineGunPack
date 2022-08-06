@@ -7,6 +7,18 @@ dofile("ToolAnimator.lua")
 
 local Damage = 45
 
+---@class Magnum : ToolClass
+---@field fpAnimations table
+---@field tpAnimations table
+---@field aiming boolean
+---@field mag_capacity integer
+---@field aimFireMode table
+---@field normalFireMode table
+---@field movementDispersion integer
+---@field blendTime integer
+---@field aimBlendSpeed integer
+---@field sprintCooldown integer
+---@field ammo_in_mag integer
 Magnum44 = class()
 
 local renderables =
@@ -400,17 +412,6 @@ function Magnum44.client_onUpdate( self, dt )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function Magnum44:client_onFixedUpdate(dt)
-	if self.shoot_timer then
-		self.shoot_timer = self.shoot_timer - dt
-
-		if self.shoot_timer <= 0 then
-			self.shoot_timer = nil
-			self:ShootProjectile()
-		end
-	end
-end
-
 function Magnum44.client_onEquip( self, animate )
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
@@ -512,6 +513,7 @@ function Magnum44.onShoot( self, dir )
 	end
 end
 
+---@return Vec3
 function Magnum44.calculateFirePosition( self )
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
@@ -535,8 +537,8 @@ function Magnum44.calculateFirePosition( self )
 		fireOffset = fireOffset + right * 0.25
 		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
 	end
-	local firePosition = GetOwnerPosition( self.tool ) + fireOffset
-	return firePosition
+
+	return GetOwnerPosition(self.tool) + fireOffset
 end
 
 function Magnum44.calculateTpMuzzlePos( self )
