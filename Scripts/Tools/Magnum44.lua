@@ -162,7 +162,7 @@ function Magnum44.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 0.0
+	self.fireCooldownTimer = 1.2
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
@@ -416,6 +416,7 @@ function Magnum44.client_onEquip( self, animate )
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
 
+	self.cl_hammer_cocked = false
 	self.wantEquipped = true
 	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
@@ -427,9 +428,9 @@ function Magnum44.client_onEquip( self, animate )
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 	
+	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
+
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	local is_tool_local = self.tool:isLocal()

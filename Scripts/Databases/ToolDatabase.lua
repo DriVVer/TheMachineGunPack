@@ -1,10 +1,11 @@
 mgp_tool_anim_enum =
 {
-	bone_animation = 1,
-	effect         = 2,
-	delay          = 3,
-	debris         = 4,
-	particle       = 5
+	bone_animation    = 1,
+	effect            = 2,
+	delay             = 3,
+	debris            = 4,
+	particle          = 5,
+	toggle_renderable = 6
 }
 
 local mgp_tommy_shell = sm.uuid.new("553820fd-14a7-4276-a8eb-1f66d4caa775")
@@ -123,6 +124,10 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "reloadTG", "reloadETG" }
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"    , enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend", enabled_by_default = true }
 		},
 		animation = {
 			cock_the_hammer =
