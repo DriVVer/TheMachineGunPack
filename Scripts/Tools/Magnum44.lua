@@ -7,6 +7,18 @@ dofile("ToolAnimator.lua")
 
 local Damage = 45
 
+---@class Magnum : ToolClass
+---@field fpAnimations table
+---@field tpAnimations table
+---@field aiming boolean
+---@field mag_capacity integer
+---@field aimFireMode table
+---@field normalFireMode table
+---@field movementDispersion integer
+---@field blendTime integer
+---@field aimBlendSpeed integer
+---@field sprintCooldown integer
+---@field ammo_in_mag integer
 Magnum44 = class()
 
 local renderables =
@@ -103,6 +115,8 @@ function Magnum44.loadAnimations( self )
 
 				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				cock_hammer = { "Magnum_c_hammer", { nextAnimation = "idle" } },
+				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "idle" } },
 
 				ammo_check = { "TommyGun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -119,7 +133,7 @@ function Magnum44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.8,
+		fireCooldown = 0.6,
 		spreadCooldown = 1.2,
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
@@ -134,7 +148,7 @@ function Magnum44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.8,
+		fireCooldown = 0.6,
 		spreadCooldown = 1.0,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
@@ -290,8 +304,7 @@ function Magnum44.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
-	self.tool:setBlockSprint( blockSprint )
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -398,17 +411,6 @@ function Magnum44.client_onUpdate( self, dt )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function Magnum44:client_onFixedUpdate(dt)
-	if self.shoot_timer then
-		self.shoot_timer = self.shoot_timer - dt
-
-		if self.shoot_timer <= 0 then
-			self.shoot_timer = nil
-			self:ShootProjectile()
-		end
-	end
-end
-
 function Magnum44.client_onEquip( self, animate )
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
@@ -510,6 +512,7 @@ function Magnum44.onShoot( self, dir )
 	end
 end
 
+---@return Vec3
 function Magnum44.calculateFirePosition( self )
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
@@ -533,8 +536,8 @@ function Magnum44.calculateFirePosition( self )
 		fireOffset = fireOffset + right * 0.25
 		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
 	end
-	local firePosition = GetOwnerPosition( self.tool ) + fireOffset
-	return firePosition
+
+	return GetOwnerPosition(self.tool) + fireOffset
 end
 
 function Magnum44.calculateTpMuzzlePos( self )
@@ -690,10 +693,16 @@ function Magnum44.cl_onPrimaryUse(self, state)
 					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
 			else
-				self.fireCooldownTimer = 0.25
+				self.fireCooldownTimer = 0.4
 
 				self.network:sendToServer("sv_n_cockHammer")
 				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+
+				if self.aiming then
+					setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+				else
+					setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+				end
 			end
 
 			self.cl_hammer_cocked = not self.cl_hammer_cocked

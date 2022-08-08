@@ -7,6 +7,18 @@ dofile("ToolAnimator.lua")
 
 local Damage = 24
 
+---@class TommyGun : ToolClass
+---@field fpAnimations table
+---@field tpAnimations table
+---@field mag_capacity integer
+---@field aiming boolean
+---@field aimFireMode table
+---@field normalFireMode table
+---@field blendTime integer
+---@field aimBlendSpeed integer
+---@field movementDispersion integer
+---@field sprintCooldown integer
+---@field ammo_in_mag integer
 TommyGun = class()
 
 local renderables =
