@@ -12,8 +12,7 @@ Magnum44 = class()
 local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend"
 }
 
 local renderablesTp =
