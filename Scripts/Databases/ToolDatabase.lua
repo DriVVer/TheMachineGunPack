@@ -201,9 +201,9 @@ local mgp_tool_database =
 				[2] = { --second animation track
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 0.0, end_val = 6.0 } },
-						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 0.0, end_val = 6.0 } },
-						time = 6.0
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
 					}
 				}
 			},
@@ -222,26 +222,11 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_Reload", start_val = 0.0, end_val = 5.0 } },
+						fp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 5.0 } },
 						time = 5.0
 					}
 					
-				},
-				[2] = { --second animation track
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "TommyGun_model_shoot", start_val = 0.0, end_val = 0.04 } },
-						tp_anim = { { name = "TommyGun_model_shoot", start_val = 0.0, end_val = 0.04 } },
-						time = 0.05
-					},
-					{ type = mgp_tool_anim_enum.delay, time = 2.45 },
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "TommyGun_model_shoot", start_val = 0.04, end_val = 1.0 } },
-						tp_anim = { { name = "TommyGun_model_shoot", start_val = 0.04, end_val = 1.0 } },
-						time = 2.0
-					}
 				}
 			}
 		}

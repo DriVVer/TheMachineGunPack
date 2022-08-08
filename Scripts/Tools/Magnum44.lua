@@ -24,7 +24,8 @@ Magnum44 = class()
 local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend"
 }
 
 local renderablesTp =
@@ -114,7 +115,7 @@ function Magnum44.loadAnimations( self )
 				shoot = { "Magnum_shoot", { nextAnimation = "idle" } },
 
 				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "TommyGun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "Magnum_E_reload", { nextAnimation = "idle", duration = 1.0 } },
 				cock_hammer = { "Magnum_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "idle" } },
 
