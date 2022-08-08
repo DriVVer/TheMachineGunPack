@@ -6,7 +6,8 @@ local type_to_func_name =
 	[2] = "effect_handler",
 	[3] = "delay_setup",
 	[4] = "debris_handler",
-	[5] = "particle_handler"
+	[5] = "particle_handler",
+	[6] = "renderable_handler"
 }
 
 local AnimationUpdateFunctions = {}
@@ -191,9 +192,98 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 	track.func(self, track, dt)
 end
 
+local _table_remove = table.remove
+local _table_insert = table.insert
+
+---@class AnimatorClass : ToolClass
+---@field cl_animator_renderables table
+---@field cl_animator_tp_renderables table
+---@field cl_animator_fp_renderables table
+
+---@class RenderableHandlerData
+---@field path string
+---@field name string
+---@field enabled boolean
+---@field enabled_by_default boolean
+---@field tp_id integer
+---@field fp_id integer
+
+---@class RenderableHandlerTrack
+---@field step_data RenderableHandlerData
+---@field func function
+
+---@param self AnimatorClass
+---@param track RenderableHandlerTrack
+---@param dt integer
+AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
+	local t_data = track.step_data
+
+	local s_tool = self.tool
+	if s_tool:isEquipped() then
+		local rend_data = self.cl_animator_renderables[t_data.name]
+		if t_data.enabled then
+			if not rend_data.enabled then
+				rend_data.enabled = true
+
+				rend_data.fp_id = #self.cl_animator_fp_renderables + 1
+				rend_data.tp_id = #self.cl_animator_tp_renderables + 1
+
+				_table_insert(self.cl_animator_fp_renderables, rend_data.path)
+				_table_insert(self.cl_animator_tp_renderables, rend_data.path)
+
+				s_tool:setFpRenderables(self.cl_animator_fp_renderables)
+				s_tool:setTpRenderables(self.cl_animator_tp_renderables)
+			end
+		else
+			if rend_data.enabled then
+				rend_data.enabled = false
+
+				_table_remove(self.cl_animator_tp_renderables, rend_data.tp_id)
+				_table_remove(self.cl_animator_fp_renderables, rend_data.fp_id)
+
+				rend_data.tp_id = nil
+				rend_data.fp_id = nil
+
+				s_tool:setFpRenderables(self.cl_animator_fp_renderables)
+				s_tool:setTpRenderables(self.cl_animator_tp_renderables)
+			end
+		end
+	end
+
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
+end
+
 function mgp_toolAnimator_update(self, dt)
 	for id, track in ipairs(self.cl_animator_tracks) do
 		track.func(self, track, dt)
+	end
+end
+
+function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderables, fallback_renderables)
+	if self.cl_animator_renderables then
+		for k, v in pairs(self.cl_animator_renderables) do
+			v.enabled = v.enabled_by_default
+			if v.enabled then
+				local fp_id = #fp_renderables + 1
+				local tp_id = #tp_renderables + 1
+
+				local v_path = v.path
+				fp_renderables[fp_id] = v_path
+				tp_renderables[tp_id] = v_path
+
+				v.fp_id = fp_id
+				v.tp_id = tp_id
+			end
+		end
+
+		self.cl_animator_tp_renderables = tp_renderables
+		self.cl_animator_fp_renderables = fp_renderables
+	else
+		for k, v in ipairs(fallback_renderables) do
+			_table_insert(tp_renderables, v)
+			_table_insert(fp_renderables, v)
+		end
 	end
 end
 
@@ -218,6 +308,13 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	self.cl_animator_effects = {}
 	for eff_id, eff_name in pairs(anim_data.required_effects) do
 		self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+	end
+
+	if anim_data.renderables ~= nil then
+		self.cl_animator_renderables = {}
+		for rend_name, data in pairs(anim_data.renderables) do
+			self.cl_animator_renderables[rend_name] = data
+		end
 	end
 
 	self.cl_animator_animations = anim_data.animation

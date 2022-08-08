@@ -159,7 +159,7 @@ function TommyGun.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 0.0
+	self.fireCooldownTimer = 0.8
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
