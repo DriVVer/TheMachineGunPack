@@ -9581,7 +9581,13 @@
   </library_controllers>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-     
+      <node name="Armature.001" id="Armature.001" sid="Armature.001">
+        <matrix sid="matrix">1.003371 0.000000 0.000000 0.000000 0.000000 -0.000000 1.003371 0.000000 0.000000 -1.003370 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
         <node name="AnimSLoader" id="AnimSLoader" sid="AnimSLoader" type="JOINT">
           <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.018900 -0.000000 0.000000 1.000000 0.328862 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
@@ -9622,7 +9628,7 @@
             </node>
           </node>
         </node>
-     
+      </node>
       <node name="Cube.001" id="Cube.001" sid="Cube.001">
         <instance_controller url="#Cube.001Controller">
           <bind_material>

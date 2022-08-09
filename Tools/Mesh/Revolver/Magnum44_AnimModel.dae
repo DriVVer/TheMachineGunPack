@@ -31044,7 +31044,13 @@ Bullet_H_4 Shell_3 S_Bump_3 Bullet_H_3 Shell_2 S_Bump_2 Bullet_H_2</Name_array>
   </library_controllers>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-     
+      <node name="Armature.001" id="Armature.001" sid="Armature.001">
+        <matrix sid="matrix">1.003371 0.000000 0.000000 0.000000 0.000000 -0.000000 1.003371 0.000000 0.000000 -1.003370 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
         <node name="Anim" id="Anim" sid="Anim" type="JOINT">
           <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.018900 -0.000000 0.000000 1.000000 0.328862 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
@@ -31253,7 +31259,7 @@ Bullet_H_4 Shell_3 S_Bump_3 Bullet_H_3 Shell_2 S_Bump_2 Bullet_H_2</Name_array>
             </node>
           </node>
         </node>
-      
+      </node>
       <node name="Cube" id="Cube" sid="Cube">
         <instance_controller url="#CubeController">
           <bind_material>

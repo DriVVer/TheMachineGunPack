@@ -127,7 +127,9 @@ local mgp_tool_database =
 		},
 		renderables = {
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"    , enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend", enabled_by_default = true }
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend", enabled_by_default = true },
+			anim_SL_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend", enabled_by_default = true }
+
 		},
 		animation = {
 			cock_the_hammer =
