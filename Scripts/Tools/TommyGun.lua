@@ -727,7 +727,7 @@ end
 function TommyGun:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			local cur_anim_name = "reload"
 			if self.ammo_in_mag == 0 then
 				cur_anim_name = "reload_empty"
@@ -756,7 +756,7 @@ function TommyGun:cl_startCheckMagAnim()
 end
 
 function TommyGun:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() then
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
