@@ -199,6 +199,8 @@ local _table_insert = table.insert
 ---@field cl_animator_renderables table
 ---@field cl_animator_tp_renderables table
 ---@field cl_animator_fp_renderables table
+---@field cl_animator_reset_data table
+---@field cl_animator_animations table
 
 ---@class RenderableHandlerData
 ---@field path string
@@ -287,9 +289,21 @@ function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderabl
 	end
 end
 
+---@param self AnimatorClass
 function mgp_toolAnimator_setAnimation(self, anim_name)
-	local anim_data = self.cl_animator_animations[anim_name]
+	local reset_data = self.cl_animator_reset_data[anim_name]
+	if reset_data ~= nil then
+		local s_tool = self.tool
+		for k, v in ipairs(reset_data.tp) do
+			s_tool:updateAnimation(v[1], v[2], 1.0)
+		end
 
+		for k, v in ipairs(reset_data.fp) do
+			s_tool:updateFpAnimation(v[1], v[2], 1.0)
+		end
+	end
+
+	local anim_data = self.cl_animator_animations[anim_name]
 	self.cl_animator_tracks = {}
 	for k, v in ipairs(anim_data) do
 		self.cl_animator_tracks[k] =
@@ -310,11 +324,17 @@ function mgp_toolAnimator_initialize(self, tool_name)
 		self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
 	end
 
-	if anim_data.renderables ~= nil then
+	local anim_data_renderables = anim_data.renderables
+	if anim_data_renderables ~= nil then
 		self.cl_animator_renderables = {}
-		for rend_name, data in pairs(anim_data.renderables) do
+		for rend_name, data in pairs(anim_data_renderables) do
 			self.cl_animator_renderables[rend_name] = data
 		end
+	end
+
+	local anim_data_reset = anim_data.animation_reset
+	if anim_data_reset ~= nil then
+		self.cl_animator_reset_data = anim_data_reset
 	end
 
 	self.cl_animator_animations = anim_data.animation

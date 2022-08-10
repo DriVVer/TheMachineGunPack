@@ -19,6 +19,7 @@ local Damage = 45
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
+---@field fireCooldownTimer integer
 Magnum44 = class()
 
 local renderables =
@@ -117,7 +118,7 @@ function Magnum44.loadAnimations( self )
 				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "Magnum_E_reload", { nextAnimation = "idle", duration = 1.0 } },
 				cock_hammer = { "Magnum_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "idle" } },
+				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				ammo_check = { "Magnum_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -186,6 +187,21 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
+local aim_animation_list01 =
+{
+	["aimInto"]         = true,
+	["aimIdle"]         = true,
+	["aimShoot"]        = true,
+	["cock_hammer_aim"] = true
+}
+
+local aim_animation_list02 =
+{
+	["aimInto"]  = true,
+	["aimIdle"]  = true,
+	["aimShoot"] = true
+}
+
 function Magnum44.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
@@ -214,10 +230,10 @@ function Magnum44.client_onUpdate( self, dt )
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -507,10 +523,10 @@ function Magnum44.onShoot( self, dir )
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	if dir ~= nil then
-		setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-		mgp_toolAnimator_setAnimation(self, "shoot")
+		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
+		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
 	else
-		mgp_toolAnimator_setAnimation(self, "no_ammo")
+		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
 end
 
@@ -681,8 +697,8 @@ function Magnum44.cl_onPrimaryUse(self, state)
 					self.sprintCooldownTimer = self.sprintCooldown
 			
 					-- Send TP shoot over network and dircly to self
-					self:onShoot( dir )
-					self.network:sendToServer( "sv_n_onShoot", dir)
+					self:onShoot(1)
+					self.network:sendToServer("sv_n_onShoot", 1)
 			
 					-- Play FP shoot animation
 					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
@@ -698,12 +714,13 @@ function Magnum44.cl_onPrimaryUse(self, state)
 				self.fireCooldownTimer = 0.4
 
 				self.network:sendToServer("sv_n_cockHammer")
-				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-
+				
 				if self.aiming then
 					setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+					mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
 				else
 					setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+					mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
 				end
 			end
 
