@@ -300,6 +300,17 @@ local mgp_tool_database =
 					}
 					
 				}
+			},
+			ammo_check =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
+						tp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
+						time = 2.0
+					}
+				}
 			}
 		}
 	}

@@ -289,7 +289,6 @@ function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderabl
 	end
 end
 
----@param self AnimatorClass
 function mgp_toolAnimator_setAnimation(self, anim_name)
 	local reset_data = self.cl_animator_reset_data[anim_name]
 	if reset_data ~= nil then

@@ -518,8 +518,8 @@ function Magnum44.cl_n_onShoot( self, dir )
 end
 
 function Magnum44.onShoot( self, dir )
-	self.tpAnimations.animations.idle.time = 0
-	self.tpAnimations.animations.shoot.time = 0
+	self.tpAnimations.animations.idle.time     = 0
+	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	if dir ~= nil then
@@ -810,12 +810,15 @@ end
 
 function Magnum44:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
+	mgp_toolAnimator_setAnimation(self, "ammo_check")
+	
 end
 
 function Magnum44:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("Magnum44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
