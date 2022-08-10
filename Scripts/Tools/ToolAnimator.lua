@@ -290,15 +290,17 @@ function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderabl
 end
 
 function mgp_toolAnimator_setAnimation(self, anim_name)
-	local reset_data = self.cl_animator_reset_data[anim_name]
-	if reset_data ~= nil then
-		local s_tool = self.tool
-		for k, v in ipairs(reset_data.tp) do
-			s_tool:updateAnimation(v[1], v[2], 1.0)
-		end
+	if self.cl_animator_reset_data then
+		local reset_data = self.cl_animator_reset_data[anim_name]
+		if reset_data ~= nil then
+			local s_tool = self.tool
+			for k, v in ipairs(reset_data.tp) do
+				s_tool:updateAnimation(v[1], v[2], 1.0)
+			end
 
-		for k, v in ipairs(reset_data.fp) do
-			s_tool:updateFpAnimation(v[1], v[2], 1.0)
+			for k, v in ipairs(reset_data.fp) do
+				s_tool:updateFpAnimation(v[1], v[2], 1.0)
+			end
 		end
 	end
 
