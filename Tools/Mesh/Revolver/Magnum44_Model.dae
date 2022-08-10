@@ -6,9 +6,9 @@
       <authoring_tool>FBX COLLADA exporter</authoring_tool>
       <comments></comments>
     </contributor>
-    <created>2022-08-10T12:25:37Z</created>
+    <created>2022-08-10T14:34:39Z</created>
     <keywords></keywords>
-    <modified>2022-08-10T12:25:37Z</modified>
+    <modified>2022-08-10T14:34:39Z</modified>
     <revision></revision>
     <subject></subject>
     <title></title>
@@ -184,7 +184,7 @@
           </technique>
         </extra>
       </node>
-      
+     
         <node name="jnt_Magnum_base" id="jnt_Magnum_base" sid="jnt_Magnum_base" type="JOINT">
           <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
@@ -249,8 +249,8 @@
             </node>
           </node>
         </node>
-    
-      <extra>
+      
+      <extra>d
         <technique profile="MAX3D">
           <frame_rate>50.000000</frame_rate>
         </technique>

@@ -119,7 +119,7 @@ function Magnum44.loadAnimations( self )
 				cock_hammer = { "Magnum_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "idle" } },
 
-				ammo_check = { "TommyGun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "Magnum_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
 				aimInto = { "Magnum_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "Magnum_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
