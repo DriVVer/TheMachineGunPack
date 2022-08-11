@@ -23,7 +23,7 @@
 				{ "name": "Magnum_aim_c_hammer", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_c_hammer.dae" },
 
 				{ "name": "Magnum_reload",         	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_reload.dae" },
-				{ "name": "Magnum_E_reload",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_reload.dae" },
+				{ "name": "Magnum_E_reload",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_empty_reload.dae" },
 				{ "name": "Magnum_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_ammo_check.dae" }
 			]
 		}

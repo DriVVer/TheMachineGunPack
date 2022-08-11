@@ -46,7 +46,7 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 function Magnum44.client_onCreate( self )
-	self.mag_capacity = 6
+	self.mag_capacity = 2
 	self.ammo_in_mag = self.mag_capacity
 
 	self.cl_hammer_cocked = false
@@ -674,7 +674,7 @@ function Magnum44.cl_onPrimaryUse(self, state)
 						end
 					end
 			
-					dir = dir:rotate( math.rad( 0.9 ), sm.camera.getRight() ) -- 25 m sight calibration
+					dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
 			
 					-- Spread
 					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode

@@ -244,6 +244,38 @@ local mgp_tool_database =
 						tp_anim = { { name = "Magnum44_Pickup", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					}
+				},
+				[2] = {
+
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.97, end_val = 2.97 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.97, end_val = 2.97 } },
+						time = 0.1
+					},
+					{
+						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_SL_body",
+						enabled = false
+					},
+					{
+						
+						type = mgp_tool_anim_enum.delay,
+						time = 1.0
+					},
+					{
+						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_SL_body",
+						enabled = true
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
+						time = 0.1
+					},
 				}
 			},
 			reload =
@@ -261,44 +293,83 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_Reload", start_val = 0.0, end_val = 5.0 } },
+						fp_anim = { { name = "Magnum44_1-6_Reload", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Magnum44_1-6_Reload", start_val = 0.0, end_val = 5.0 } },
 						time = 5.0
 					}
 				},
 				[2] = { --second animation track
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 3.5
+						time = 2.85
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 3.5, end_val = 4.7 } },
-						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 3.5, end_val = 4.7 } },
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
 						time = 1.2
-					}
+					},
 				}
 			},
 			reload_empty =
 			{
-				[1] = { --first animation track
+				[1] = {
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadETG",
-						name_fp = "reloadETG",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-		
+
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 3.0 } },
+						tp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 3.0 } },
+						time = 3.0
 					}
-					
+				},
+				[2] = { --second animation track
+
+					{
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_SL_body",
+						enabled = true
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.30
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
+						time = 1.1
+					},
+					{
+						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_SL_body",
+						enabled = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.45
+					},
+					{
+						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_SL_body",
+						enabled = true
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
+						tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
+						time = 0.01
+					}
 				}
 			},
 			ammo_check =
