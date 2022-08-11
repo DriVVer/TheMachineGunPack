@@ -46,7 +46,7 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 function Magnum44.client_onCreate( self )
-	self.mag_capacity = 2
+	self.mag_capacity = 6
 	self.ammo_in_mag = self.mag_capacity
 
 	self.cl_hammer_cocked = false
