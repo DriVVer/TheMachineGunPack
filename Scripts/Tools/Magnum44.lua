@@ -20,6 +20,7 @@ local Damage = 45
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
+---@field aim_timer integer
 Magnum44 = class()
 
 local renderables =
@@ -204,6 +205,13 @@ local aim_animation_list02 =
 
 function Magnum44.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
+
+	if self.aim_timer then
+		self.aim_timer = self.aim_timer - dt
+		if self.aim_timer <= 0.0 then
+			self.aim_timer = nil
+		end
+	end
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
@@ -439,6 +447,7 @@ function Magnum44.client_onEquip( self, animate )
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
+	self.aim_timer = 1.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
@@ -827,7 +836,7 @@ end
 
 local _intstate = sm.tool.interactState
 function Magnum44.cl_onSecondaryUse( self, state )
-	local is_reloading = self:client_isGunReloading()
+	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
