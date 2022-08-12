@@ -731,21 +731,19 @@ end
 
 local reload_anims =
 {
-	["reload"] = true,
+	["reload"]       = true,
 	["reload_empty"] = true,
-	["ammo_check"] = true
+	["ammo_check"]   = true
 }
 
-local anim_name_to_id =
+local ammo_count_to_anim_name =
 {
-	["reload"] = 1,
-	["reload_empty"] = 2
-}
-
-local id_to_anim_name =
-{
-	[1] = "reload",
-	[2] = "reload_empty"
+	[0] = "reload0",
+	[1] = "reload1",
+	[2] = "reload2",
+	[3] = "reload3",
+	[4] = "reload4",
+	[5] = "reload5"
 }
 
 function Magnum44:sv_n_onReload(anim_id)
@@ -754,7 +752,7 @@ end
 
 function Magnum44:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(id_to_anim_name[anim_id])
+		self:cl_startReloadAnim(anim_id)
 	end
 end
 
@@ -772,25 +770,21 @@ function Magnum44:client_isGunReloading()
 	return false
 end
 
-function Magnum44:cl_initReloadAnim(anim_name)
-	--Start fp and tp animations locally
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
+function Magnum44:cl_initReloadAnim(anim_id)
+	local anim_name = ammo_count_to_anim_name[anim_id]
+
+	setFpAnimation(self.fpAnimations, (anim_id == 0) and "reload_empty" or "reload", 0.0)
 	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
+	self.network:sendToServer("sv_n_onReload", anim_id)
 end
 
 function Magnum44:client_onReload()
 	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 	if not is_mag_full then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			local cur_anim_name = "reload"
-			if self.ammo_in_mag == 0 then
-				cur_anim_name = "reload_empty"
-			end 
-
-			self:cl_initReloadAnim(cur_anim_name)
+			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
 
@@ -811,7 +805,6 @@ end
 function Magnum44:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 	mgp_toolAnimator_setAnimation(self, "ammo_check")
-	
 end
 
 function Magnum44:client_onToggle()
@@ -825,8 +818,7 @@ function Magnum44:client_onToggle()
 			self.network:sendToServer("sv_n_checkMag")
 		else
 			sm.gui.displayAlertText("Magnum44: No Ammo. Reloading...", 3)
-
-			self:cl_initReloadAnim("reload_empty")
+			self:cl_initReloadAnim(0)
 		end
 	end
 
