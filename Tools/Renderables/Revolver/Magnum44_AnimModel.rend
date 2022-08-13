@@ -6,8 +6,12 @@
 			"animationList": [
 				{ "name": "Magnum44_Shoot"            , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_Shoot.dae" },
 				{ "name": "Magnum44_aim_Shoot"        , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_aim_Shoot.dae" },
-				{ "name": "Magnum44_1-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_1-6_Reload.dae" },
 				{ "name": "Magnum44_E_Reload"         , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_0-6_Reload.dae" },
+				{ "name": "Magnum44_1-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_1-6_Reload.dae" },
+				{ "name": "Magnum44_2-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_2-6_Reload.dae" },
+				{ "name": "Magnum44_3-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_3-6_Reload.dae" },
+				{ "name": "Magnum44_4-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_4-6_Reload.dae" },
+				{ "name": "Magnum44_5-6_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_5-6_Reload.dae" },
 				{ "name": "Magnum44_Pickup"           , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_Pickup.dae" },
 				{ "name": "Magnum44_normal_ammo_check", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Revolver/ani_char_Magnum44_fp_normal_Ammo_Check.dae" }
 			],

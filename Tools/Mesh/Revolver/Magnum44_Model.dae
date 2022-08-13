@@ -6,9 +6,9 @@
       <authoring_tool>FBX COLLADA exporter</authoring_tool>
       <comments></comments>
     </contributor>
-    <created>2022-08-10T14:34:39Z</created>
+    <created>2022-08-13T21:13:22Z</created>
     <keywords></keywords>
-    <modified>2022-08-10T14:34:39Z</modified>
+    <modified>2022-08-13T21:13:22Z</modified>
     <revision></revision>
     <subject></subject>
     <title></title>
@@ -141,10 +141,10 @@
 1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 1.000000 -1.653064 -0.000000 -1.000000 -0.000000 0.392846 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 -0.000000 0.018719 -0.000000 0.000000 1.000000 -0.328676 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.018964 0.000000 0.000000 1.000000 -0.329970 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000000 -0.080811 -0.000000 1.000000 -0.000001 -0.117151 0.000000 0.000001 1.000000 -0.414917 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000001 0.000000 0.000000 -0.000000 0.000001 1.000000 0.756993 -0.000001 -1.000000 0.000001 0.312247 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000001 0.000000 0.000000 -0.000000 0.000001 1.000000 0.626993 -0.000001 -1.000000 0.000001 0.312247 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000001 0.000000 0.000000 -0.000000 0.000001 1.000000 0.926993 -0.000001 -1.000000 0.000001 0.312247 0.000000 0.000000 0.000000 1.000000</float_array>
+1.000000 0.000000 0.000000 -0.080811 -0.000000 1.000000 -0.000000 0.882849 -0.000000 0.000000 1.000000 -0.414917 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000001 0.000000 -0.000001 -0.000000 0.000001 1.000000 0.756994 -0.000001 -1.000000 0.000001 -0.687753 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000002 0.000000 -0.000001 -0.000000 0.000001 1.000000 0.626994 -0.000002 -1.000000 0.000001 -0.687753 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000002 0.000000 -0.000001 -0.000000 0.000001 1.000000 0.926994 -0.000002 -1.000000 0.000001 -0.687753 0.000000 0.000000 0.000000 1.000000</float_array>
           <technique_common>
             <accessor source="#Cube.001Controller-Matrices-array" count="8" stride="16">
               <param type="float4x4"/>
@@ -184,70 +184,72 @@
           </technique>
         </extra>
       </node>
-      <node name="jnt_Magnum_base" id="jnt_Magnum_base" sid="jnt_Magnum_base" type="JOINT">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-        <extra>
-          <technique profile="FCOLLADA">
-            <visibility>1.000000</visibility>
-          </technique>
-        </extra>
-        <node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT">
-          <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.392846 -0.000000 1.000000 -0.000000 1.653064 0.000000 0.000000 0.000000 1.000000</matrix>
+    
+        <node name="jnt_Magnum_base" id="jnt_Magnum_base" sid="jnt_Magnum_base" type="JOINT">
+          <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
             <technique profile="FCOLLADA">
               <visibility>1.000000</visibility>
             </technique>
           </extra>
-        </node>
-        <node name="Anim" id="Anim" sid="Anim" type="JOINT">
-          <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 -0.018719 0.000000 0.000000 1.000000 0.328676 0.000000 0.000000 0.000000 1.000000</matrix>
-          <extra>
-            <technique profile="FCOLLADA">
-              <visibility>1.000000</visibility>
-            </technique>
-          </extra>
-        </node>
-        <node name="AnimSLoader" id="AnimSLoader" sid="AnimSLoader" type="JOINT">
-          <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.018964 -0.000000 -0.000000 1.000000 0.329970 0.000000 0.000000 0.000000 1.000000</matrix>
-          <extra>
-            <technique profile="FCOLLADA">
-              <visibility>1.000000</visibility>
-            </technique>
-          </extra>
-          <node name="Bone_1" id="Bone_1" sid="Bone_1" type="JOINT">
-            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.080811 0.000000 1.000000 0.000000 0.136115 0.000000 -0.000000 1.000000 0.084947 0.000000 0.000000 0.000000 1.000000</matrix>
+          <node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.392846 -0.000000 1.000000 -0.000000 1.653064 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
                 <visibility>1.000000</visibility>
               </technique>
             </extra>
-            <node name="SLMain1" id="SLMain1" sid="SLMain1" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.080811 -0.000001 0.000000 -1.000000 0.195095 0.000000 1.000000 0.000000 -1.171910 0.000000 0.000000 0.000000 1.000000</matrix>
+          </node>
+          <node name="Anim" id="Anim" sid="Anim" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 -0.018719 0.000000 0.000000 1.000000 0.328676 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+          </node>
+          <node name="AnimSLoader" id="AnimSLoader" sid="AnimSLoader" type="JOINT">
+            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.018964 -0.000000 -0.000000 1.000000 0.329970 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+            <node name="Bone_1" id="Bone_1" sid="Bone_1" type="JOINT">
+              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.080811 0.000000 1.000000 0.000000 -0.863885 0.000000 -0.000000 1.000000 0.084947 0.000000 0.000000 0.000000 1.000000</matrix>
               <extra>
                 <technique profile="FCOLLADA">
                   <visibility>1.000000</visibility>
                 </technique>
               </extra>
-              <node name="SLA1" id="SLA1" sid="SLA1" type="JOINT">
-                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.130000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <node name="SLMain1" id="SLMain1" sid="SLMain1" type="JOINT">
+                <matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.080811 -0.000001 0.000000 -1.000000 0.195095 0.000000 1.000000 0.000000 -1.171910 0.000000 0.000000 0.000000 1.000000</matrix>
                 <extra>
                   <technique profile="FCOLLADA">
                     <visibility>1.000000</visibility>
                   </technique>
                 </extra>
-              </node>
-              <node name="SLB1" id="SLB1" sid="SLB1" type="JOINT">
-                <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000000 -0.170000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
+                <node name="SLA1" id="SLA1" sid="SLA1" type="JOINT">
+                  <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.130000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                  <extra>
+                    <technique profile="FCOLLADA">
+                      <visibility>1.000000</visibility>
+                    </technique>
+                  </extra>
+                </node>
+                <node name="SLB1" id="SLB1" sid="SLB1" type="JOINT">
+                  <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.170000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                  <extra>
+                    <technique profile="FCOLLADA">
+                      <visibility>1.000000</visibility>
+                    </technique>
+                  </extra>
+                </node>
               </node>
             </node>
           </node>
         </node>
-      </node>
+     
       <extra>
         <technique profile="MAX3D">
           <frame_rate>50.000000</frame_rate>

@@ -2,6 +2,7 @@
 	"particleSystemList": [
 		"ParticleEffects/TommyShell.json",
 		"ParticleEffects/TommyShellFP.json",
+		"ParticleEffects/Magnum_6_Shell_TP.json",
 		"ParticleEffects/Smoke_1.json",
 		"ParticleEffects/Smoke_chamber.json",
 		"ParticleEffects/Smoke_new_fp.json",
