@@ -31,9 +31,9 @@
 			"friction": 0.5,
 			"spin": 7.0,
 			"mesh": "$GAME_DATA/Projectiles/Renderables/potato.rend",
-			"effect": "PotatoProjectile - Hit",
+			"effect": "ShrapnelProjectile - Hit",
 			"audiomass": 250.0,
-			"effectmaterial": "Potato",
+			"effectmaterial": "",
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0 },

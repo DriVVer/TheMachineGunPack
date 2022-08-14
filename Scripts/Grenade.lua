@@ -2,29 +2,56 @@
 Grenade = class()
 
 function Grenade:server_onCreate()
+	local s_inter = self.interactable
+	if s_inter then
+		local inter_data = s_inter.publicData
+		if inter_data then
+			self.timer = inter_data.timer
+			self.expl_lvl = inter_data.expl_lvl
+			self.expl_rad = inter_data.expl_rad
+			self.expl_effect = inter_data.expl_effect
+			self.shrapnel_data = inter_data.shrapnel_data
+		end
+	end
 	if self.interactable and self.interactable.publicData then
 		self.timer = self.interactable.publicData.timer
+		self.explosion_level = self.interactable
 	end
 end
 
 local mgp_sharpnel_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 local _math_random = math.random
+local _vec3_new = sm.vec3.new
+local _sm_noise_gunSpread = sm.noise.gunSpread
+local _sm_projectile_shapeProjectileAttack = sm.projectile.shapeProjectileAttack
 function Grenade:server_onFixedUpdate(dt)
 	if self.timer then
 		self.timer = self.timer - dt
 
 		if self.timer <= 0.0 then
-			local sharpnel_pos = sm.vec3.zero()
-			local sharpnel_count = _math_random(150, 350)
-			for i = 1, sharpnel_count do
-				local s_speed = _math_random(100, 400)
-				local shoot_dir = sm.vec3.new(_math_random(0, 100) / 100, _math_random(0, 100) / 100, _math_random(0, 100) / 100):normalize()
-				local dir = sm.noise.gunSpread(shoot_dir, 360) * s_speed
-				local s_damage = _math_random(10, 30)
-				sm.projectile.shapeProjectileAttack(mgp_sharpnel_uuid, s_damage, sharpnel_pos, dir, self.shape)
+			local shr_data = self.shrapnel_data
+			if shr_data ~= nil then
+				local sharpnel_pos = sm.vec3.zero()
+				local sharpnel_count = _math_random(shr_data.min_count, shr_data.max_count)
+
+				local shrapnel_min_speed = shr_data.min_speed
+				local shrapnel_max_speed = shr_data.max_speed
+
+				local shrapnel_min_damage = shr_data.min_damage
+				local shrapnel_max_damage = shr_data.max_damage
+
+				for i = 1, sharpnel_count do
+					local s_speed = _math_random(shrapnel_min_speed, shrapnel_max_speed)
+					local s_damage = _math_random(shrapnel_min_damage, shrapnel_max_damage)
+
+					local shoot_dir = _vec3_new(_math_random(0, 100) / 100, _math_random(0, 100) / 100, _math_random(0, 100) / 100):normalize()
+					local dir = _sm_noise_gunSpread(shoot_dir, 360) * s_speed
+
+					_sm_projectile_shapeProjectileAttack(mgp_sharpnel_uuid, s_damage, sharpnel_pos, dir, self.shape)
+				end
 			end
 
-			sm.physics.explode(self.shape.worldPosition, 10, 1, 20, 50, "PropaneTank - ExplosionSmall", self.shape)
+			sm.physics.explode(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 20, 50, "PropaneTank - ExplosionSmall", self.shape)
 			self.shape:destroyShape(0)
 
 			self.timer = nil

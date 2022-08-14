@@ -664,5 +664,35 @@
 				"duration": 0.1
 			}
 		]
+	},
+	"ShrapnelProjectile - Hit":
+	{
+		"maxInstances": 16,
+		"parameterList":
+		{
+			"Material": 2,
+			"Velocity_max_50": 10.0,
+			"Size": 0.005
+		},
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Weapon - Hit",
+				"parameters":
+				[
+					"Material",
+					"Velocity_max_50",
+					"Size"
+				],
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "p_spudgun_basic_impact_potato",
+				"attached": false,
+				"delay": 0.0
+			}
+		]
 	}
 }

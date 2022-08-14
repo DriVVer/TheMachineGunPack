@@ -12,33 +12,43 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
 HandheldGrenade = class()
-
-local renderables =
+HandheldGrenade.mgp_renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"
 }
 
-local renderablesTp =
+HandheldGrenade.mgp_renderables_tp =
 {
 	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
 }
 
-local renderablesFp =
+HandheldGrenade.mgp_renderables_fp =
 {
+	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
 }
 
-sm.tool.preloadRenderables( renderables )
-sm.tool.preloadRenderables( renderablesTp )
-sm.tool.preloadRenderables( renderablesFp )
+HandheldGrenade.mgp_grenade_settings =
+{
+	timer = 4,
+	expl_lvl = 10,
+	expl_rad = 1,
+	expl_effect = "PropaneTank - ExplosionSmall",
+	shrapnel_data = {
+		min_count = 50, max_count = 150,
+		min_speed = 100, max_speed = 300,
+		min_damage = 10, max_damage = 30
+	}
+}
+
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables)
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_tp)
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_fp)
 
 function HandheldGrenade.client_onCreate( self )
-	self.shootEffect = sm.effect.createEffect( "SpudgunBasic - BasicMuzzel" )
-	self.shootEffectFP = sm.effect.createEffect( "SpudgunBasic - FPBasicMuzzel" )
+	
 end
-
-
 
 function HandheldGrenade.client_onRefresh( self )
 	self:loadAnimations()
@@ -351,10 +361,10 @@ function HandheldGrenade.client_onEquip( self, animate )
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
 
-	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
-	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	for k,v in pairs( self.mgp_renderables_tp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
+	for k,v in pairs( self.mgp_renderables_fp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	for k,v in pairs( self.mgp_renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
+	for k,v in pairs( self.mgp_renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 	self.tool:setTpRenderables( currentRenderablesTp )
 
 	self:loadAnimations()
@@ -523,11 +533,11 @@ function HandheldGrenade:sv_n_spawnGrenade()
 
 	if owner_char and sm.exists(owner_char) then
 		local s_grenade = sm.shape.createPart(grenade_shape_uuid, owner_char.worldPosition + owner_char.direction * 0.5, sm.quat.identity(), true, true)
-		sm.physics.applyImpulse(s_grenade, owner_char.direction * 20 * s_grenade:getMass())
+		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20)
 
 		local grenade_inter = s_grenade.interactable
 		if grenade_inter then
-			grenade_inter.publicData = { timer = 2 }
+			grenade_inter.publicData = self.mgp_grenade_settings
 		end
 	end
 end
