@@ -604,7 +604,8 @@ HandheldGrenade.mgp_tool_config =
 		shrapnel_data = {
 			min_count = 50, max_count = 150,
 			min_speed = 100, max_speed = 300,
-			min_damage = 10, max_damage = 30
+			min_damage = 10, max_damage = 30,
+			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 		}
 	}
 }

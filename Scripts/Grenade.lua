@@ -19,7 +19,6 @@ function Grenade:server_onCreate()
 	end
 end
 
-local mgp_sharpnel_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 local _math_random = math.random
 local _vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
@@ -40,6 +39,8 @@ function Grenade:server_onFixedUpdate(dt)
 				local shrapnel_min_damage = shr_data.min_damage
 				local shrapnel_max_damage = shr_data.max_damage
 
+				local shrapnel_projectile_uuid = shr_data.proj_uuid
+
 				for i = 1, sharpnel_count do
 					local s_speed = _math_random(shrapnel_min_speed, shrapnel_max_speed)
 					local s_damage = _math_random(shrapnel_min_damage, shrapnel_max_damage)
@@ -47,7 +48,7 @@ function Grenade:server_onFixedUpdate(dt)
 					local shoot_dir = _vec3_new(_math_random(0, 100) / 100, _math_random(0, 100) / 100, _math_random(0, 100) / 100):normalize()
 					local dir = _sm_noise_gunSpread(shoot_dir, 360) * s_speed
 
-					_sm_projectile_shapeProjectileAttack(mgp_sharpnel_uuid, s_damage, sharpnel_pos, dir, self.shape)
+					_sm_projectile_shapeProjectileAttack(shrapnel_projectile_uuid, s_damage, sharpnel_pos, dir, self.shape)
 				end
 			end
 
