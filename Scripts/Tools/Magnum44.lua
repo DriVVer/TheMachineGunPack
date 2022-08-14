@@ -436,7 +436,7 @@ function Magnum44.client_onUpdate( self, dt )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function Magnum44.client_onEquip( self, animate )
+function Magnum44:client_onEquip(animate)
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -467,7 +467,9 @@ function Magnum44.client_onEquip( self, animate )
 	--Load animations before setting them
 	self:loadAnimations()
 
-	mgp_toolAnimator_setAnimation(self, "equip")
+	if not self.tool:isSprinting() then
+		mgp_toolAnimator_setAnimation(self, "equip")
+	end
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
