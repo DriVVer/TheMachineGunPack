@@ -3,7 +3,7 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
----@class HandheldGrenade : ToolClass
+---@class HandheldGrenadeBase : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -11,50 +11,21 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field normalFireMode table
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
-HandheldGrenade = class()
-HandheldGrenade.mgp_renderables =
+HandheldGrenadeBase = class()
+HandheldGrenadeBase.mgp_renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"
 }
 
-HandheldGrenade.mgp_renderables_tp =
-{
-	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
-}
-
-HandheldGrenade.mgp_renderables_fp =
-{
-	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
-}
-
-HandheldGrenade.mgp_grenade_settings =
-{
-	timer = 4,
-	expl_lvl = 10,
-	expl_rad = 1,
-	expl_effect = "PropaneTank - ExplosionSmall",
-	shrapnel_data = {
-		min_count = 50, max_count = 150,
-		min_speed = 100, max_speed = 300,
-		min_damage = 10, max_damage = 30
-	}
-}
-
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_tp)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_fp)
-
-function HandheldGrenade.client_onCreate( self )
+function HandheldGrenadeBase.client_onCreate( self )
 	
 end
 
-function HandheldGrenade.client_onRefresh( self )
+function HandheldGrenadeBase.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function HandheldGrenade.loadAnimations( self )
+function HandheldGrenadeBase.loadAnimations( self )
 
 	self.tpAnimations = createTpAnimations(
 		self.tool,
@@ -164,7 +135,7 @@ function HandheldGrenade.loadAnimations( self )
 
 end
 
-function HandheldGrenade.client_onUpdate( self, dt )
+function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
@@ -346,7 +317,7 @@ function HandheldGrenade.client_onUpdate( self, dt )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function HandheldGrenade.client_onEquip( self, animate )
+function HandheldGrenadeBase.client_onEquip( self, animate )
 
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
@@ -378,7 +349,7 @@ function HandheldGrenade.client_onEquip( self, animate )
 	end
 end
 
-function HandheldGrenade.client_onUnequip( self, animate )
+function HandheldGrenadeBase.client_onUnequip( self, animate )
 
 	self.wantEquipped = false
 	self.equipped = false
@@ -400,34 +371,34 @@ function HandheldGrenade.client_onUnequip( self, animate )
 	end
 end
 
-function HandheldGrenade.sv_n_onAim( self, aiming )
+function HandheldGrenadeBase.sv_n_onAim( self, aiming )
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function HandheldGrenade.cl_n_onAim( self, aiming )
+function HandheldGrenadeBase.cl_n_onAim( self, aiming )
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function HandheldGrenade.onAim( self, aiming )
+function HandheldGrenadeBase.onAim( self, aiming )
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function HandheldGrenade.sv_n_onShoot( self, dir )
+function HandheldGrenadeBase.sv_n_onShoot( self, dir )
 	self.network:sendToClients( "cl_n_onShoot", dir )
 end
 
-function HandheldGrenade.cl_n_onShoot( self, dir )
+function HandheldGrenadeBase.cl_n_onShoot( self, dir )
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onShoot( dir )
 	end
 end
 
-function HandheldGrenade.onShoot( self, dir )
+function HandheldGrenadeBase.onShoot( self, dir )
 
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
@@ -436,7 +407,7 @@ function HandheldGrenade.onShoot( self, dir )
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
 end
 
-function HandheldGrenade.calculateFirePosition( self )
+function HandheldGrenadeBase.calculateFirePosition( self )
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -463,7 +434,7 @@ function HandheldGrenade.calculateFirePosition( self )
 	return firePosition
 end
 
-function HandheldGrenade.calculateTpMuzzlePos( self )
+function HandheldGrenadeBase.calculateTpMuzzlePos( self )
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -497,7 +468,7 @@ function HandheldGrenade.calculateTpMuzzlePos( self )
 	return fakePosition
 end
 
-function HandheldGrenade.calculateFpMuzzlePos( self )
+function HandheldGrenadeBase.calculateFpMuzzlePos( self )
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -527,7 +498,7 @@ function HandheldGrenade.calculateFpMuzzlePos( self )
 end
 
 local grenade_shape_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2")
-function HandheldGrenade:sv_n_spawnGrenade()
+function HandheldGrenadeBase:sv_n_spawnGrenade()
 	local owner_player = self.tool:getOwner()
 	local owner_char = owner_player.character
 
@@ -542,7 +513,7 @@ function HandheldGrenade:sv_n_spawnGrenade()
 	end
 end
 
-function HandheldGrenade.cl_onPrimaryUse( self, state )
+function HandheldGrenadeBase.cl_onPrimaryUse( self, state )
 	if self.tool:getOwner().character == nil then
 		return
 	end
@@ -566,7 +537,7 @@ function HandheldGrenade.cl_onPrimaryUse( self, state )
 	end
 end
 
-function HandheldGrenade.cl_onSecondaryUse( self, state )
+function HandheldGrenadeBase.cl_onSecondaryUse( self, state )
 	if state == sm.tool.interactState.start and not self.aiming then
 		self.aiming = true
 		self.tpAnimations.animations.idle.time = 0
@@ -586,7 +557,7 @@ function HandheldGrenade.cl_onSecondaryUse( self, state )
 	end
 end
 
-function HandheldGrenade.client_onEquippedUpdate( self, primaryState, secondaryState )
+function HandheldGrenadeBase.client_onEquippedUpdate( self, primaryState, secondaryState )
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse( primaryState )
 		self.prevPrimaryState = primaryState
@@ -599,3 +570,37 @@ function HandheldGrenade.client_onEquippedUpdate( self, primaryState, secondaryS
 
 	return true, true
 end
+
+--Custom class definitions
+
+---@type HandheldGrenadeBase
+HandheldGrenade = class(HandheldGrenadeBase)
+
+HandheldGrenade.mgp_renderables_tp =
+{
+	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
+}
+
+HandheldGrenade.mgp_renderables_fp =
+{
+	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
+}
+
+HandheldGrenade.mgp_grenade_settings =
+{
+	timer = 4,
+	expl_lvl = 10,
+	expl_rad = 1,
+	expl_effect = "PropaneTank - ExplosionSmall",
+	shrapnel_data = {
+		min_count = 50, max_count = 150,
+		min_speed = 100, max_speed = 300,
+		min_damage = 10, max_damage = 30
+	}
+}
+
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables)
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_tp)
+sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_fp)
