@@ -130,6 +130,7 @@ local mgp_tool_database =
 	{
 		required_effects = {
 			MG_shells_tp = "Magnum_6_Shell_TP",
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reloadTG = "TommyReload",
 			reloadETG = "TommyEReload"
