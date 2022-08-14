@@ -1,0 +1,17 @@
+{
+   "lodList" : [
+      {
+         "mesh" : "$CONTENT_DATA/Tools/Mesh/Grenade/s_grenade.dae",
+         "subMeshList" : [
+            {
+               "material" : "DifAsg",
+               "textureList" : []
+            },
+            {
+               "material" : "DifAsg",
+               "textureList" : [ "", "", "" ]
+            }
+         ]
+      }
+   ]
+}

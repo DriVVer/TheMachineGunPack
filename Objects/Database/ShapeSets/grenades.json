@@ -1,0 +1,16 @@
+{
+	"partList": [
+		{
+			"uuid": "b4a6a717-f54b-4df7-a44c-bb5308a494a2",
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
+			"color": "939291",
+			"box": { "x": 1, "y": 1, "z": 2 },
+			"scripted": { "filename": "$CONTENT_DATA/Scripts/Grenade.lua", "classname": "Grenade" },
+			"density": 1000,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull"//,
+			//"showInInventory": false
+		}
+	]
+}
