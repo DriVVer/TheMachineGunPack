@@ -507,8 +507,21 @@ function HandheldGrenadeBase:sv_n_spawnGrenade()
 
 	if owner_char and sm.exists(owner_char) then
 		local tool_config = self.mgp_tool_config
-		local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, owner_char.worldPosition + owner_char.direction * 0.5, sm.quat.identity(), true, true)
-		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20)
+
+		local char_dir = owner_char.direction
+		local grenade_pos = owner_char.worldPosition + char_dir * 0.5
+		local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
+
+		local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, grenade_pos, grenade_rotation, true, true)
+
+		--Apply forward impulse
+		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20, true)
+
+		--Apply rotation
+		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
+		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
+
+		--sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 100), false, sm.vec3.new(0.1, 0, 0))
 
 		local grenade_inter = s_grenade.interactable
 		if grenade_inter then
