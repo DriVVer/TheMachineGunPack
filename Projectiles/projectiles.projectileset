@@ -22,6 +22,29 @@
 				]
 			},
 			"enableImpactEffect": true
+		},
+		{
+			"uuid": "7a3887dd-0fd2-489c-ac04-7306a672ae35",
+			"name": "mgp_grenade_sharpnel",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.5,
+			"spin": 7.0,
+			"mesh": "$GAME_DATA/Projectiles/Renderables/potato.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 0.8 },
+					{ "qualityLevel": 3, "chance": 0.6 },
+					{ "qualityLevel": 4, "chance": 0.4 },
+					{ "qualityLevel": 5, "chance": 0.2 },
+					{ "qualityLevel": 6, "chance": 0.1 }
+				]
+			},
+			"enableImpactEffect": true
 		}
 	]
 }

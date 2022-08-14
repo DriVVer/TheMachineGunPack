@@ -7,10 +7,16 @@
 			"box": { "x": 1, "y": 1, "z": 2 },
 			"scripted": { "filename": "$CONTENT_DATA/Scripts/Grenade.lua", "classname": "Grenade" },
 			"density": 1000,
+			"ratings": {
+				"density": 4,
+				"durability": 20,
+				"friction": 5,
+				"buoyancy": 1
+			},
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"//,
-			//"showInInventory": false
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		}
 	]
 }

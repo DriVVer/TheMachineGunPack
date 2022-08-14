@@ -522,10 +522,13 @@ function HandheldGrenade:sv_n_spawnGrenade()
 	local owner_char = owner_player.character
 
 	if owner_char and sm.exists(owner_char) then
-		local s_grenade = sm.shape.createPart(grenade_shape_uuid, owner_char.worldPosition, sm.quat.identity(), true, true)
-		sm.physics.applyImpulse(s_grenade, owner_char.direction * 10 * s_grenade:getMass())
-		print(s_grenade, s_grenade.interactable)
-		--print(owner_char.direction, owner_char.worldPosition)
+		local s_grenade = sm.shape.createPart(grenade_shape_uuid, owner_char.worldPosition + owner_char.direction * 0.5, sm.quat.identity(), true, true)
+		sm.physics.applyImpulse(s_grenade, owner_char.direction * 20 * s_grenade:getMass())
+
+		local grenade_inter = s_grenade.interactable
+		if grenade_inter then
+			grenade_inter.publicData = { timer = 2 }
+		end
 	end
 end
 
