@@ -11,6 +11,10 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field normalFireMode table
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
+---@field mgp_tool_config table
+---@field mgp_renderables_tp table
+---@field mgp_renderables_fp table
+---@field mgp_renderables table
 HandheldGrenadeBase = class()
 HandheldGrenadeBase.mgp_renderables =
 {
@@ -497,18 +501,18 @@ function HandheldGrenadeBase.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-local grenade_shape_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2")
 function HandheldGrenadeBase:sv_n_spawnGrenade()
 	local owner_player = self.tool:getOwner()
 	local owner_char = owner_player.character
 
 	if owner_char and sm.exists(owner_char) then
-		local s_grenade = sm.shape.createPart(grenade_shape_uuid, owner_char.worldPosition + owner_char.direction * 0.5, sm.quat.identity(), true, true)
+		local tool_config = self.mgp_tool_config
+		local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, owner_char.worldPosition + owner_char.direction * 0.5, sm.quat.identity(), true, true)
 		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20)
 
 		local grenade_inter = s_grenade.interactable
 		if grenade_inter then
-			grenade_inter.publicData = self.mgp_grenade_settings
+			grenade_inter.publicData = tool_config.grenade_settings
 		end
 	end
 end
@@ -588,16 +592,20 @@ HandheldGrenade.mgp_renderables_fp =
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
 }
 
-HandheldGrenade.mgp_grenade_settings =
+HandheldGrenade.mgp_tool_config =
 {
-	timer = 4,
-	expl_lvl = 10,
-	expl_rad = 1,
-	expl_effect = "PropaneTank - ExplosionSmall",
-	shrapnel_data = {
-		min_count = 50, max_count = 150,
-		min_speed = 100, max_speed = 300,
-		min_damage = 10, max_damage = 30
+	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
+	grenade_settings =
+	{
+		timer = 4,
+		expl_lvl = 10,
+		expl_rad = 1,
+		expl_effect = "PropaneTank - ExplosionSmall",
+		shrapnel_data = {
+			min_count = 50, max_count = 150,
+			min_speed = 100, max_speed = 300,
+			min_damage = 10, max_damage = 30
+		}
 	}
 }
 
