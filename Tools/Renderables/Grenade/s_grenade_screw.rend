@@ -1,7 +1,7 @@
 {
    "lodList" : [
       {
-         "mesh" : "$CONTENT_DATA/Tools/Mesh/Grenade/s_grenade.dae",
+         "mesh" : "$CONTENT_DATA/Tools/Mesh/Grenade/s_grenade_screw.dae",
          "subMeshList" : [
             {
                "material" : "DifAsg",

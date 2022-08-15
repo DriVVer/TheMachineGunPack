@@ -16,9 +16,11 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field mgp_renderables_fp table
 ---@field mgp_renderables table
 HandheldGrenadeBase = class()
+
 HandheldGrenadeBase.mgp_renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
 }
 
 function HandheldGrenadeBase.client_onCreate( self )
@@ -34,33 +36,33 @@ function HandheldGrenadeBase.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
-			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
-			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
-			idle = { "spudgun_idle" },
-			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
-			putdown = { "spudgun_putdown" }
+			shoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
+			aim = { "glowstick_idle", { crouch = "glowstick_crouch_idle" } },
+			aimShoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
+			idle = { "glowstick_use" },
+			pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
+			putdown = { "glowstick_putdown" }
 		}
 	)
 	local movementAnimations = {
-		idle = "spudgun_idle",
-		idleRelaxed = "spudgun_relax",
+		idle = "glowstick_idle",
+		idleRelaxed = "glowstick_idle",
 
-		sprint = "spudgun_sprint",
-		runFwd = "spudgun_run_fwd",
-		runBwd = "spudgun_run_bwd",
+		sprint = "glowstick_sprint",
+		runFwd = "glowstick_run_fwd",
+		runBwd = "glowstick_run_bwd",
 
-		jump = "spudgun_jump",
-		jumpUp = "spudgun_jump_up",
-		jumpDown = "spudgun_jump_down",
+		jump = "glowstick_jump",
+		jumpUp = "glowstick_jump_up",
+		jumpDown = "glowstick_jump_down",
 
-		land = "spudgun_jump_land",
-		landFwd = "spudgun_jump_land_fwd",
-		landBwd = "spudgun_jump_land_bwd",
+		land = "glowstick_idle",
+		landFwd = "glowstick_idle",
+		landBwd = "glowstick_idle",
 
-		crouchIdle = "spudgun_crouch_idle",
-		crouchFwd = "spudgun_crouch_fwd",
-		crouchBwd = "spudgun_crouch_bwd"
+		crouchIdle = "glowstick_crouch_idle",
+		crouchFwd = "glowstick_crouch_fwd",
+		crouchBwd = "glowstick_crouch_bwd"
 	}
 
 	for name, animation in pairs( movementAnimations ) do
@@ -73,20 +75,23 @@ function HandheldGrenadeBase.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "spudgun_pickup", { nextAnimation = "idle" } },
-				unequip = { "spudgun_putdown" },
+				equip = { "glowstick_pickup", { nextAnimation = "idle" } },
+				unequip = { "glowstick_putdown" },
 
-				idle = { "spudgun_idle", { looping = true } },
-				shoot = { "spudgun_shoot", { nextAnimation = "idle" } },
+				idle = { "glowstick_idle", { looping = true } },
+				shoot = { "glowstick_throw", { nextAnimation = "idle" } },
 
-				aimInto = { "spudgun_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "spudgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "spudgun_aim_idle", { looping = true} },
-				aimShoot = { "spudgun_aim_shoot", { nextAnimation = "aimIdle"} },
+				activate = { "glowstick_activ", { nextAnimation = "idle" } },
 
-				sprintInto = { "spudgun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "spudgun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "spudgun_sprint_idle", { looping = true } },
+
+				aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "glowstick_aim_idle", { looping = true } },
+				aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
+
+				sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "glowstick_sprint_idle", { looping = true } }
 			}
 		)
 	end
@@ -97,7 +102,7 @@ function HandheldGrenadeBase.loadAnimations( self )
 		spreadIncrement = 2.6,
 		spreadMinAngle = .25,
 		spreadMaxAngle = 8,
-		fireVelocity = 130.0,
+		fireVelocity = 80.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -595,13 +600,13 @@ HandheldGrenade = class(HandheldGrenadeBase)
 
 HandheldGrenade.mgp_renderables_tp =
 {
-	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_tp_animlist.rend",
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
 }
 
 HandheldGrenade.mgp_renderables_fp =
 {
-	"$GAME_DATA/Character/Char_Male/Animations/char_male_tp_spudgun.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_fp_animlist.rend",
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
 }
 
@@ -611,13 +616,13 @@ HandheldGrenade.mgp_tool_config =
 	grenade_settings =
 	{
 		timer = 4,
-		expl_lvl = 10,
-		expl_rad = 1,
+		expl_lvl = 6,
+		expl_rad = 3,
 		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
-			min_count = 50, max_count = 150,
-			min_speed = 100, max_speed = 300,
-			min_damage = 10, max_damage = 30,
+			min_count = 10, max_count = 25,
+			min_speed = 60, max_speed = 200,
+			min_damage = 20, max_damage = 50,
 			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 		}
 	}

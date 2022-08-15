@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "glowstick_idle", 	     	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_activate", 	 	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_throw", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Granade/ani_char_male_fp_SGranade_throw.dae" },
+
+				{ "name": "glowstick_activ", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Granade/ani_char_male_fp_SGranade_activation.dae" },
+
+				{ "name": "glowstick_pickup", 	     	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_pickup.dae" },
+				{ "name": "glowstick_putdown", 	 	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_putdown.dae" },
+
+				{ "name": "glowstick_sprint_into",  	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_sprint_exit",  	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_sprint_idle",  	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+
+				{ "name": "glowstick_aim_into",     	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_aim_exit",     	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_aim_shoot",    	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_use.dae" },
+				{ "name": "glowstick_aim_idle",     	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" },
+				{ "name": "glowstick_activate", 	"file": "$SURVIVAL_DATA/Character/Char_Male/Animations/Firstperson/Glowstick/ani_char_male_fp_glowstick_idle.dae" }
+			]
+		}
+	]
+} 
