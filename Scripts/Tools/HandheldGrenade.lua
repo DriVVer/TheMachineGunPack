@@ -23,11 +23,11 @@ HandheldGrenadeBase.mgp_renderables =
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
 }
 
-function HandheldGrenadeBase.client_onCreate( self )
-	
+function HandheldGrenadeBase:client_onCreate()
+	self.grenade_active = true
 end
 
-function HandheldGrenadeBase.client_onRefresh( self )
+function HandheldGrenadeBase:client_onRefresh()
 	self:loadAnimations()
 end
 
@@ -82,7 +82,6 @@ function HandheldGrenadeBase.loadAnimations( self )
 				shoot = { "glowstick_throw", { nextAnimation = "idle" } },
 
 				activate = { "glowstick_activ", { nextAnimation = "idle" } },
-
 
 				aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
@@ -345,15 +344,18 @@ function HandheldGrenadeBase.client_onEquip( self, animate )
 	for k,v in pairs( self.mgp_renderables_fp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 	for k,v in pairs( self.mgp_renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( self.mgp_renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	self.tool:setTpRenderables( currentRenderablesTp )
+
+	local s_tool = self.tool
+	s_tool:setTpRenderables(currentRenderablesTp)
+	local is_tool_local = s_tool:isLocal()
+	if is_tool_local then
+		s_tool:setFpRenderables(currentRenderablesFp)
+	end
 
 	self:loadAnimations()
 
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-
-	if self.tool:isLocal() then
-		-- Sets PotatoRifle renderable, change this to change the mesh
-		self.tool:setFpRenderables( currentRenderablesFp )
+	if is_tool_local then
 		swapFpAnimation( self.fpAnimations, "unequip", "equip", 0.2 )
 	end
 end
@@ -397,113 +399,18 @@ function HandheldGrenadeBase.onAim( self, aiming )
 	end
 end
 
-function HandheldGrenadeBase.sv_n_onShoot( self, dir )
-	self.network:sendToClients( "cl_n_onShoot", dir )
-end
-
-function HandheldGrenadeBase.cl_n_onShoot( self, dir )
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot( dir )
-	end
-end
-
-function HandheldGrenadeBase.onShoot( self, dir )
-
+function HandheldGrenadeBase:onShoot()
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
+	setTpAnimation( self.tpAnimations, "shoot", 10.0 )
 end
 
-function HandheldGrenadeBase.calculateFirePosition( self )
-	local crouching = self.tool:isCrouching()
-	local firstPerson = self.tool:isInFirstPersonView()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-
-	local fireOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if crouching then
-		fireOffset.z = 0.15
-	else
-		fireOffset.z = 0.45
+function HandheldGrenadeBase:cl_n_throwGrenade()
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:onShoot()
 	end
-
-	if firstPerson then
-		if not self.aiming then
-			fireOffset = fireOffset + right * 0.05
-		end
-	else
-		fireOffset = fireOffset + right * 0.25
-		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
-	end
-	local firePosition = GetOwnerPosition( self.tool ) + fireOffset
-	return firePosition
-end
-
-function HandheldGrenadeBase.calculateTpMuzzlePos( self )
-	local crouching = self.tool:isCrouching()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-	local up = right:cross(dir)
-
-	local fakeOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	--General offset
-	fakeOffset = fakeOffset + right * 0.25
-	fakeOffset = fakeOffset + dir * 0.5
-	fakeOffset = fakeOffset + up * 0.25
-
-	--Action offset
-	local pitchFraction = pitch / ( math.pi * 0.5 )
-	if crouching then
-		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
-		fakeOffset = fakeOffset - right * 0.05
-
-		if pitchFraction > 0.0 then
-			fakeOffset = fakeOffset - up * 0.2 * pitchFraction
-		else
-			fakeOffset = fakeOffset + up * 0.1 * math.abs( pitchFraction )
-		end
-	else
-		fakeOffset = fakeOffset + up * 0.1 *  math.abs( pitchFraction )
-	end
-
-	local fakePosition = fakeOffset + GetOwnerPosition( self.tool )
-	return fakePosition
-end
-
-function HandheldGrenadeBase.calculateFpMuzzlePos( self )
-	local fovScale = ( sm.camera.getFov() - 45 ) / 45
-
-	local up = sm.localPlayer.getUp()
-	local dir = sm.localPlayer.getDirection()
-	local right = sm.localPlayer.getRight()
-
-	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
-	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if self.aiming then
-		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
-
-		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
-	else
-		muzzlePos45 = muzzlePos45 - up * 0.15
-		muzzlePos45 = muzzlePos45 + right * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 1.25
-
-		muzzlePos90 = muzzlePos90 - up * 0.15
-		muzzlePos90 = muzzlePos90 + right * 0.2
-		muzzlePos90 = muzzlePos90 + dir * 0.25
-	end
-
-	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
 function HandheldGrenadeBase:sv_n_spawnGrenade()
@@ -532,29 +439,30 @@ function HandheldGrenadeBase:sv_n_spawnGrenade()
 		if grenade_inter then
 			grenade_inter.publicData = tool_config.grenade_settings
 		end
+
+		self.network:sendToClients("cl_n_throwGrenade")
 	end
 end
 
-function HandheldGrenadeBase.cl_onPrimaryUse( self, state )
+function HandheldGrenadeBase:cl_onPrimaryUse(state)
 	if self.tool:getOwner().character == nil then
 		return
 	end
 
 	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
+		if self.grenade_active then
+			self.fireCooldownTimer = 2.0
+			self.grenade_active = false
 
-		if not sm.game.getEnableAmmoConsumption() or sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) then
+			self:onShoot()
 			self.network:sendToServer("sv_n_spawnGrenade")
 
-			-- Send TP shoot over network and dircly to self
-			self:onShoot( dir )
-			self.network:sendToServer( "sv_n_onShoot", dir )
-
-			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.05 )
+			setFpAnimation(self.fpAnimations, "shoot", 0.0)
 		else
-			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-			self.fireCooldownTimer = fireMode.fireCooldown
-			sm.audio.play( "PotatoRifle - NoAmmo" )
+			self.grenade_active = true
+			setFpAnimation(self.fpAnimations, "activate", 0.0)
+
+			self.fireCooldownTimer = 1.0
 		end
 	end
 end
