@@ -17,12 +17,6 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field mgp_renderables table
 HandheldGrenadeBase = class()
 
-HandheldGrenadeBase.mgp_renderables =
-{
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
-}
-
 function HandheldGrenadeBase:client_onCreate()
 	self.grenade_active = true
 end
@@ -517,6 +511,12 @@ end
 
 ---@type HandheldGrenadeBase
 HandheldGrenade = class(HandheldGrenadeBase)
+
+HandheldGrenade.mgp_renderables =
+{
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
+}
 
 HandheldGrenade.mgp_renderables_tp =
 {
