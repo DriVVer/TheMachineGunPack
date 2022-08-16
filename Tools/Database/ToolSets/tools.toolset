@@ -21,7 +21,7 @@
 		},
 		{
 			"uuid": "c3e4dc43-a841-4c0f-82a6-7225d1bf210e",
-			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/HandheldGrenade.lua",

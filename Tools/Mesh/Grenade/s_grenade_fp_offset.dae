@@ -6,9 +6,9 @@
       <authoring_tool>FBX COLLADA exporter</authoring_tool>
       <comments></comments>
     </contributor>
-    <created>2022-08-14T14:28:11Z</created>
+    <created>2022-08-16T13:54:54Z</created>
     <keywords></keywords>
-    <modified>2022-08-14T14:28:11Z</modified>
+    <modified>2022-08-16T13:54:54Z</modified>
     <revision></revision>
     <subject></subject>
     <title></title>
@@ -17,22 +17,16 @@
   </asset>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-        <extra>
-          <technique profile="FCOLLADA">
-            <visibility>1.000000</visibility>
-          </technique>
-        </extra>
-        <node name="jnt_grenade_base" id="jnt_grenade_base" sid="jnt_grenade_base" type="JOINT">
-          <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+      
+        <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
+          <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
             <technique profile="FCOLLADA">
               <visibility>1.000000</visibility>
             </technique>
           </extra>
-          <node name="jnt_grenade_base_end" id="jnt_grenade_base_end" sid="jnt_grenade_base_end" type="JOINT">
-            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 1.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+          <node name="jnt_grenade_base" id="jnt_grenade_base" sid="jnt_grenade_base" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 0.000000 -0.480938 0.000000 0.989930 -0.141559 0.121432 0.000000 0.141559 0.989930 -0.116585 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
                 <visibility>1.000000</visibility>
@@ -40,7 +34,7 @@
             </extra>
           </node>
         </node>
-      </node>
+     
       <extra>
         <technique profile="MAX3D">
           <frame_rate>30.000000</frame_rate>

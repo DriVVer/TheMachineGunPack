@@ -10,9 +10,9 @@
 				{ "name" : "glowstick_pickup", 		"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_pickup.dae" },
 				{ "name" : "glowstick_putdown", 	"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_putdown.dae" },
 
-				{ "name" : "glowstick_use", 		"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_idle.dae" },
+				{ "name" : "glowstick_use", 		"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/ani_char_male_tp_SGranade_throw.dae" },
 
-				{ "name" : "glowstick_activ", 		"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_use.dae" },
+				{ "name" : "glowstick_activ", 		"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/ani_char_male_tp_SGranade_activation.dae" },
 
 				{ "name" : "glowstick_jump_start", 	"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_jump_start.dae" },
 				{ "name" : "glowstick_jump_up", 	"file" : "$SURVIVAL_DATA/Character/Char_Male/Animations/Thirdperson/Glowstick/ani_char_male_glowstick_jump_up.dae", "looping" : true },
