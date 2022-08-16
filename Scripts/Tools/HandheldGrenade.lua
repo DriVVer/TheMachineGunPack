@@ -175,6 +175,16 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 		return
 	end
 
+	if self.grenade_spawn_timer then
+		self.grenade_spawn_timer = self.grenade_spawn_timer - dt
+
+		if self.grenade_spawn_timer <= 0.0 then
+			self.grenade_spawn_timer = nil
+
+			self.network:sendToServer("sv_n_spawnGrenade")
+		end
+	end
+
 	-- Timers
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
@@ -413,6 +423,10 @@ function HandheldGrenadeBase:cl_n_throwGrenade()
 	end
 end
 
+function HandheldGrenadeBase:sv_n_throwGrenade()
+	self.network:sendToClients("cl_n_throwGrenade")
+end
+
 function HandheldGrenadeBase:sv_n_spawnGrenade()
 	local owner_player = self.tool:getOwner()
 	local owner_char = owner_player.character
@@ -433,14 +447,10 @@ function HandheldGrenadeBase:sv_n_spawnGrenade()
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
 
-		--sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 100), false, sm.vec3.new(0.1, 0, 0))
-
 		local grenade_inter = s_grenade.interactable
 		if grenade_inter then
 			grenade_inter.publicData = tool_config.grenade_settings
 		end
-
-		self.network:sendToClients("cl_n_throwGrenade")
 	end
 end
 
@@ -454,8 +464,10 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 			self.fireCooldownTimer = 2.0
 			self.grenade_active = false
 
+			self.grenade_spawn_timer = 0.4
+
 			self:onShoot()
-			self.network:sendToServer("sv_n_spawnGrenade")
+			self.network:sendToServer("sv_n_throwGrenade")
 
 			setFpAnimation(self.fpAnimations, "shoot", 0.0)
 		else
