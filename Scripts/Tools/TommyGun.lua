@@ -19,6 +19,7 @@ local Damage = 24
 ---@field movementDispersion integer
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
+---@field fireCooldownTimer integer
 TommyGun = class()
 
 local renderables =
