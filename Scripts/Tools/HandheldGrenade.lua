@@ -93,8 +93,8 @@ function HandheldGrenadeBase.loadAnimations( self )
 		fireCooldown = 0.20,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = .25,
-		spreadMaxAngle = 8,
+		spreadMinAngle = 40.25,
+		spreadMaxAngle = 90,
 		fireVelocity = 80.0,
 
 		minDispersionStanding = 0.1,
@@ -458,7 +458,7 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 			self.fireCooldownTimer = 2.0
 			self.grenade_active = false
 
-			self.grenade_spawn_timer = 0.4
+			self.grenade_spawn_timer = 0.35
 
 			self:onShoot()
 			self.network:sendToServer("sv_n_throwGrenade")
@@ -468,7 +468,7 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 			self.grenade_active = true
 			setFpAnimation(self.fpAnimations, "activate", 0.0)
 
-			self.fireCooldownTimer = 1.0
+			self.fireCooldownTimer = 2.4
 		end
 	end
 end

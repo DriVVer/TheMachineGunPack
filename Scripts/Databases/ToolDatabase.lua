@@ -125,6 +125,86 @@ local mgp_tool_database =
 			}
 		}
 	},
+
+
+	HandheldGrenadeBase =
+	{
+		required_effects = {
+			MG_shells_tp = "Magnum_6_Shell_TP",
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reloadTG = "TommyReload",
+			reloadETG = "TommyEReload"
+		},
+		on_unequip_action = {
+			stop_effects = { "reloadTG", "reloadETG" }
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"    , enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", enabled_by_default = true },
+		},
+		animation_reset = {
+			cock_the_hammer = mgp_aim_shoot_reset_table,
+			cock_the_hammer_aim = mgp_shoot_reset_table,
+			no_ammo = mgp_aim_shoot_reset_table,
+			no_ammo_aim = mgp_shoot_reset_table,
+			shoot = mgp_aim_shoot_reset_table,
+			shoot_aim = mgp_shoot_reset_table
+		},
+		animation = {
+			Granade_activ =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Granade_unscrew", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Granade_unscrew", start_val = 0.0, end_val = 1.0 } },
+						time = 0.35
+					},
+					{						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "main_body",
+						enabled = false
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Granade_unscrew", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Granade_unscrew", start_val = 0.0, end_val = 1.0 } },
+						time = 0.45
+					},
+					{						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "main_body",
+						enabled = true
+					}
+				}
+			},
+			throw =
+			{
+				[1] = {
+					{						
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "main_body",
+						enabled = false
+					},
+					{						
+						type = mgp_tool_anim_enum.delay,
+						time = 0.4
+					},
+					{						
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "main_body",
+						enabled = true
+					}
+				}
+			},
+
+		}
+	},
 	
 	Magnum44 =
 	{

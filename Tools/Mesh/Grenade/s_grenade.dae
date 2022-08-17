@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-08-15T22:24:34Z</created><keywords></keywords><modified>2022-08-15T22:24:34Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-08-16T20:46:28Z</created><keywords></keywords><modified>2022-08-16T20:46:28Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_images>
     <image id="base_color_texture-image" name="base_color_texture"><init_from>file://D:\Steam\steamapps\common\Scrap Mechanic\Data\Objects\Textures\interactive\obj_interactive_propanetank_small_dif.tga</init_from></image>
     <image id="base_color_texture_ncl1_1-image" name="base_color_texture_ncl1_1"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\TommyGunDif.png</init_from></image>
@@ -43102,23 +43102,21 @@
         <bind_shape_matrix>1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 </bind_shape_matrix>
         <source id="GranadeController-Joints">
-          <Name_array id="GranadeController-Joints-array" count="4">
- jnt_grenade_base Activation AnimLocation AnimRotation</Name_array>
+          <Name_array id="GranadeController-Joints-array" count="2">
+ jnt_grenade_base Activation</Name_array>
           <technique_common>
-            <accessor source="#GranadeController-Joints-array" count="4">
+            <accessor source="#GranadeController-Joints-array" count="2">
               <param type="name"/>
             </accessor>
           </technique_common>
         </source>
         <source id="GranadeController-Matrices">
-          <float_array id="GranadeController-Matrices-array" count="64">
+          <float_array id="GranadeController-Matrices-array" count="32">
 
 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.700000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
-0.000000 0.000000 -1.000000 0.000000 0.000000 -1.000000 0.000000 -0.590000 -1.000000 -0.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
-0.000000 0.000000 -1.000000 0.000000 0.000000 -1.000000 0.000000 -0.790000 -1.000000 -0.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
+1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.700000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
           <technique_common>
-            <accessor source="#GranadeController-Matrices-array" count="4" stride="16">
+            <accessor source="#GranadeController-Matrices-array" count="2" stride="16">
               <param type="float4x4"/>
             </accessor>
           </technique_common>
@@ -43249,7 +43247,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node name="Granade" id="Granade" sid="Granade"><instance_controller url="#GranadeController"><bind_material><technique_common><instance_material symbol="propanetanksmall.001" target="#propanetanksmall.001"/><instance_material symbol="Material.001" target="#Material.001"/></technique_common></bind_material></instance_controller><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
-      <node name="jnt_grenade_base" id="jnt_grenade_base" sid="jnt_grenade_base" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Activation" id="Activation" sid="Activation" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.700000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node><node name="AnimLocation" id="AnimLocation" sid="AnimLocation" type="JOINT"><matrix sid="matrix">0.000000 0.000000 -1.000000 0.000000 1.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 -0.000000 -0.590000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="AnimRotation" id="AnimRotation" sid="AnimRotation" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.200000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node>
+      <node name="jnt_grenade_base" id="jnt_grenade_base" sid="jnt_grenade_base" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Activation" id="Activation" sid="Activation" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 -0.700000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node>
       <extra><technique profile="MAX3D"><frame_rate>30.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>1.000000</end_time></technique></extra>
     </visual_scene>
   </library_visual_scenes>
