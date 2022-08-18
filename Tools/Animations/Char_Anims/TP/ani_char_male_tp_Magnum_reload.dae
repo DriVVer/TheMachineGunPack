@@ -16370,664 +16370,662 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array>
     </library_animations>
     <library_visual_scenes>
         <visual_scene id="Scene" name="Scene">
-         
-                <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
-                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                    <technique profile="FCOLLADA">
+                        <visibility>1.000000</visibility>
+                    </technique>
+                </extra>
+            </node>
+            <node name="root_jnt" id="root_jnt" sid="root_jnt" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                    <technique profile="FCOLLADA">
+                        <visibility>1.000000</visibility>
+                    </technique>
+                </extra>
+                <node name="jnt_hips" id="jnt_hips" sid="jnt_hips" type="JOINT">
+                    <matrix sid="matrix">0.979381 0.028973 -0.199932 -0.000000 -0.033623 0.999236 -0.019902 1.941480 0.199203 0.026214 0.979608 -0.247371 0.000000 0.000000 0.000000 1.000000</matrix>
                     <extra>
                         <technique profile="FCOLLADA">
                             <visibility>1.000000</visibility>
                         </technique>
                     </extra>
-                </node>
-                <node name="root_jnt" id="root_jnt" sid="root_jnt" type="JOINT">
-                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                    <extra>
-                        <technique profile="FCOLLADA">
-                            <visibility>1.000000</visibility>
-                        </technique>
-                    </extra>
-                    <node name="jnt_hips" id="jnt_hips" sid="jnt_hips" type="JOINT">
-                        <matrix sid="matrix">0.979381 0.028973 -0.199932 -0.000000 -0.033623 0.999236 -0.019902 1.941480 0.199203 0.026214 0.979608 -0.247371 0.000000 0.000000 0.000000 1.000000</matrix>
+                    <node name="jnt_height" id="jnt_height" sid="jnt_height" type="JOINT">
+                        <matrix sid="matrix">0.999343 0.033759 0.013196 -0.000000 -0.033492 0.999241 -0.019891 -0.000000 -0.013858 0.019436 0.999715 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                         <extra>
                             <technique profile="FCOLLADA">
                                 <visibility>1.000000</visibility>
                             </technique>
                         </extra>
-                        <node name="jnt_height" id="jnt_height" sid="jnt_height" type="JOINT">
-                            <matrix sid="matrix">0.999343 0.033759 0.013196 -0.000000 -0.033492 0.999241 -0.019891 -0.000000 -0.013858 0.019436 0.999715 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <node name="jnt_spine1" id="jnt_spine1" sid="jnt_spine1" type="JOINT">
+                            <matrix sid="matrix">0.041228 0.014011 0.999052 -0.005844 0.999108 -0.009800 -0.041093 0.209026 0.009215 0.999854 -0.014402 0.038786 0.000000 0.000000 0.000000 1.000000</matrix>
                             <extra>
                                 <technique profile="FCOLLADA">
                                     <visibility>1.000000</visibility>
                                 </technique>
                             </extra>
-                            <node name="jnt_spine1" id="jnt_spine1" sid="jnt_spine1" type="JOINT">
-                                <matrix sid="matrix">0.041228 0.014011 0.999052 -0.005844 0.999108 -0.009800 -0.041093 0.209026 0.009215 0.999854 -0.014402 0.038786 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <node name="jnt_spine2" id="jnt_spine2" sid="jnt_spine2" type="JOINT">
+                                <matrix sid="matrix">0.994144 0.078188 -0.074585 0.354983 -0.079948 0.996579 -0.020913 0.078525 0.072695 0.026753 0.996995 0.012378 0.000000 0.000000 0.000000 1.000000</matrix>
                                 <extra>
                                     <technique profile="FCOLLADA">
                                         <visibility>1.000000</visibility>
                                     </technique>
                                 </extra>
-                                <node name="jnt_spine2" id="jnt_spine2" sid="jnt_spine2" type="JOINT">
-                                    <matrix sid="matrix">0.994144 0.078188 -0.074585 0.354983 -0.079948 0.996579 -0.020913 0.078525 0.072695 0.026753 0.996995 0.012378 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <node name="jnt_spine3" id="jnt_spine3" sid="jnt_spine3" type="JOINT">
+                                    <matrix sid="matrix">0.977323 0.178801 0.113447 0.727646 -0.209865 0.889270 0.406393 0.078480 -0.028222 -0.420986 0.906628 -0.093513 0.000000 0.000000 0.000000 1.000000</matrix>
                                     <extra>
                                         <technique profile="FCOLLADA">
                                             <visibility>1.000000</visibility>
                                         </technique>
                                     </extra>
-                                    <node name="jnt_spine3" id="jnt_spine3" sid="jnt_spine3" type="JOINT">
-                                        <matrix sid="matrix">0.977323 0.178801 0.113447 0.727646 -0.209865 0.889270 0.406393 0.078480 -0.028222 -0.420986 0.906628 -0.093513 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <node name="jnt_neck" id="jnt_neck" sid="jnt_neck" type="JOINT">
+                                        <matrix sid="matrix">0.975056 -0.218555 0.038727 0.680426 0.209929 0.851395 -0.480682 0.270155 0.072083 0.476822 0.876039 -0.297846 0.000000 0.000000 0.000000 1.000000</matrix>
                                         <extra>
                                             <technique profile="FCOLLADA">
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_neck" id="jnt_neck" sid="jnt_neck" type="JOINT">
-                                            <matrix sid="matrix">0.975056 -0.218555 0.038727 0.680426 0.209929 0.851395 -0.480682 0.270155 0.072083 0.476822 0.876039 -0.297846 0.000000 0.000000 0.000000 1.000000</matrix>
+                                        <node name="jnt_head" id="jnt_head" sid="jnt_head" type="JOINT">
+                                            <matrix sid="matrix">0.987004 -0.096887 0.128206 0.273591 0.105560 0.992437 -0.062658 0.000002 -0.121166 0.075377 0.989766 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                             <extra>
                                                 <technique profile="FCOLLADA">
                                                     <visibility>1.000000</visibility>
                                                 </technique>
                                             </extra>
-                                            <node name="jnt_head" id="jnt_head" sid="jnt_head" type="JOINT">
-                                                <matrix sid="matrix">0.987004 -0.096887 0.128206 0.273591 0.105560 0.992437 -0.062658 0.000002 -0.121166 0.075377 0.989766 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                            <node name="jnt_headappend" id="jnt_headappend" sid="jnt_headappend" type="JOINT">
+                                                <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                                 <extra>
                                                     <technique profile="FCOLLADA">
                                                         <visibility>1.000000</visibility>
                                                     </technique>
                                                 </extra>
-                                                <node name="jnt_headappend" id="jnt_headappend" sid="jnt_headappend" type="JOINT">
-                                                    <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                    <extra>
-                                                        <technique profile="FCOLLADA">
-                                                            <visibility>1.000000</visibility>
-                                                        </technique>
-                                                    </extra>
-                                                </node>
                                             </node>
-                                        </node>
-                                        <node name="jnt_left_armroot" id="jnt_left_armroot" sid="jnt_left_armroot" type="JOINT">
-                                            <matrix sid="matrix">1.000000 -0.000004 -0.000000 0.075080 0.000004 1.000000 -0.000000 -0.051343 0.000000 0.000000 1.000000 -0.327614 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                            <node name="jnt_left_shoulder" id="jnt_left_shoulder" sid="jnt_left_shoulder" type="JOINT">
-                                                <matrix sid="matrix">-0.021963 0.045191 -0.998737 0.433146 0.336997 -0.940180 -0.049953 0.291624 -0.941250 -0.337668 0.005420 0.391172 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                <extra>
-                                                    <technique profile="FCOLLADA">
-                                                        <visibility>1.000000</visibility>
-                                                    </technique>
-                                                </extra>
-                                                <node name="jnt_left_arm" id="jnt_left_arm" sid="jnt_left_arm" type="JOINT">
-                                                    <matrix sid="matrix">0.826672 0.044700 0.560906 -0.366435 -0.330697 0.845109 0.420036 -0.255407 -0.455251 -0.532722 0.713410 0.134598 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                    <extra>
-                                                        <technique profile="FCOLLADA">
-                                                            <visibility>1.000000</visibility>
-                                                        </technique>
-                                                    </extra>
-                                                    <node name="jnt_left_armroll" id="jnt_left_armroll" sid="jnt_left_armroll" type="JOINT">
-                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.421995 0.000000 1.000000 -0.000000 0.000002 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                    </node>
-                                                    <node name="jnt_left_forearm" id="jnt_left_forearm" sid="jnt_left_forearm" type="JOINT">
-                                                        <matrix sid="matrix">0.669541 -0.708729 0.222301 -0.843981 0.726395 0.687270 0.003323 0.000001 -0.155136 0.159253 0.974972 0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                        <node name="jnt_left_forearmroll" id="jnt_left_forearmroll" sid="jnt_left_forearmroll" type="JOINT">
-                                                            <matrix sid="matrix">1.000000 0.000001 -0.000000 -0.487001 -0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                        </node>
-                                                        <node name="jnt_left_hand" id="jnt_left_hand" sid="jnt_left_hand" type="JOINT">
-                                                            <matrix sid="matrix">0.983907 -0.113163 0.138284 -0.975262 0.131975 0.981956 -0.135443 -0.000001 -0.120461 0.151513 0.981088 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                            <node name="jnt_left_handthumb1" id="jnt_left_handthumb1" sid="jnt_left_handthumb1" type="JOINT">
-                                                                <matrix sid="matrix">0.632884 -0.699845 0.331171 -0.060229 0.547510 0.706972 0.447686 -0.203939 -0.547440 -0.102014 0.830604 0.155677 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_left_handthumb2" id="jnt_left_handthumb2" sid="jnt_left_handthumb2" type="JOINT">
-                                                                    <matrix sid="matrix">0.999697 0.024614 -0.000001 -0.213228 -0.024614 0.999697 -0.000003 -0.000002 0.000000 0.000003 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_left_handthumb3" id="jnt_left_handthumb3" sid="jnt_left_handthumb3" type="JOINT">
-                                                                        <matrix sid="matrix">0.999202 -0.039936 -0.000001 -0.141879 0.039936 0.999202 -0.000003 0.000003 0.000001 0.000003 1.000000 -0.000027 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_left_handthumb4" id="jnt_left_handthumb4" sid="jnt_left_handthumb4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.122601 0.000000 1.000000 0.000000 -0.000006 -0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_left_handindex1" id="jnt_left_handindex1" sid="jnt_left_handindex1" type="JOINT">
-                                                                <matrix sid="matrix">0.750819 0.659619 0.034271 -0.494375 0.007413 0.043467 -0.999027 -0.203977 -0.660467 0.750342 0.027746 -0.029847 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_left_handindex2" id="jnt_left_handindex2" sid="jnt_left_handindex2" type="JOINT">
-                                                                    <matrix sid="matrix">0.956197 0.292723 -0.000000 -0.145433 -0.292723 0.956197 -0.000000 0.001125 0.000000 0.000001 1.000000 0.000040 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_left_handindex3" id="jnt_left_handindex3" sid="jnt_left_handindex3" type="JOINT">
-                                                                        <matrix sid="matrix">0.992093 0.125506 -0.000000 -0.093752 -0.125506 0.992093 0.000001 0.000003 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_left_handindex4" id="jnt_left_handindex4" sid="jnt_left_handindex4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.107084 0.000000 1.000000 0.000000 0.000049 0.000000 -0.000000 1.000000 -0.001504 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_left_weapon" id="jnt_left_weapon" sid="jnt_left_weapon" type="JOINT">
-                                                                <matrix sid="matrix">-0.068652 -0.108939 -0.991680 -0.369354 0.108715 -0.988918 0.101111 -0.054074 -0.991705 -0.100868 0.079735 0.296616 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                            </node>
-                                                            <node name="jnt_left_handmiddle1" id="jnt_left_handmiddle1" sid="jnt_left_handmiddle1" type="JOINT">
-                                                                <matrix sid="matrix">0.696565 0.714247 -0.068176 -0.489248 -0.047814 -0.048599 -0.997673 -0.062066 -0.715899 0.698204 0.000299 -0.036308 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_left_handmiddle2" id="jnt_left_handmiddle2" sid="jnt_left_handmiddle2" type="JOINT">
-                                                                    <matrix sid="matrix">0.940501 0.339790 -0.000000 -0.176688 -0.339790 0.940501 0.000000 0.000004 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_left_handmiddle3" id="jnt_left_handmiddle3" sid="jnt_left_handmiddle3" type="JOINT">
-                                                                        <matrix sid="matrix">0.992141 0.125121 0.000000 -0.108368 -0.125121 0.992141 0.000000 0.000001 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_left_handmiddle4" id="jnt_left_handmiddle4" sid="jnt_left_handmiddle4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.119193 0.000000 1.000000 0.000000 -0.000107 0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_left_handring1" id="jnt_left_handring1" sid="jnt_left_handring1" type="JOINT">
-                                                                <matrix sid="matrix">0.682189 0.696210 -0.223406 -0.469963 -0.107120 -0.207082 -0.972441 0.076797 -0.723287 0.687320 -0.066691 -0.036647 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_left_handring2" id="jnt_left_handring2" sid="jnt_left_handring2" type="JOINT">
-                                                                    <matrix sid="matrix">0.935173 0.354193 0.000000 -0.184233 -0.354192 0.935173 -0.000001 -0.000001 -0.000001 0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_left_handring3" id="jnt_left_handring3" sid="jnt_left_handring3" type="JOINT">
-                                                                        <matrix sid="matrix">0.992310 0.123775 0.000000 -0.103958 -0.123775 0.992310 0.000001 0.000003 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_left_handring4" id="jnt_left_handring4" sid="jnt_left_handring4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.120246 -0.000000 1.000000 0.000000 -0.000105 0.000000 -0.000000 1.000000 0.000017 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_left_handpinky1" id="jnt_left_handpinky1" sid="jnt_left_handpinky1" type="JOINT">
-                                                                <matrix sid="matrix">0.707807 0.685954 -0.168751 -0.407612 -0.104937 -0.134135 -0.985391 0.208155 -0.698569 0.715175 -0.022959 0.012223 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_left_handpinky2" id="jnt_left_handpinky2" sid="jnt_left_handpinky2" type="JOINT">
-                                                                    <matrix sid="matrix">0.937776 0.347242 0.000001 -0.148503 -0.347242 0.937776 -0.000000 0.000001 -0.000001 0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_left_handpinky3" id="jnt_left_handpinky3" sid="jnt_left_handpinky3" type="JOINT">
-                                                                        <matrix sid="matrix">0.994342 0.106229 -0.000000 -0.075474 -0.106229 0.994342 -0.000001 0.000002 0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_left_handpinky4" id="jnt_left_handpinky4" sid="jnt_left_handpinky4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 0.000000 -0.101158 -0.000000 1.000000 -0.000000 -0.000003 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                        </node>
-                                        <node name="jnt_right_armroot" id="jnt_right_armroot" sid="jnt_right_armroot" type="JOINT">
-                                            <matrix sid="matrix">1.000000 -0.000004 -0.000000 0.083773 0.000004 1.000000 -0.000000 -0.052984 0.000000 0.000000 1.000000 0.074505 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                            <node name="jnt_right_shoulder" id="jnt_right_shoulder" sid="jnt_right_shoulder" type="JOINT">
-                                                <matrix sid="matrix">-0.145925 -0.475687 0.867426 0.339132 -0.588464 0.746562 0.310411 0.322253 -0.795246 -0.465152 -0.388867 -0.611631 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                <extra>
-                                                    <technique profile="FCOLLADA">
-                                                        <visibility>1.000000</visibility>
-                                                    </technique>
-                                                </extra>
-                                                <node name="jnt_right_arm" id="jnt_right_arm" sid="jnt_right_arm" type="JOINT">
-                                                    <matrix sid="matrix">-0.330184 -0.930151 -0.160618 0.458969 0.860240 -0.366569 0.354421 0.036427 -0.388542 -0.021146 0.921188 -0.096013 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                    <extra>
-                                                        <technique profile="FCOLLADA">
-                                                            <visibility>1.000000</visibility>
-                                                        </technique>
-                                                    </extra>
-                                                    <node name="jnt_right_armroll" id="jnt_right_armroll" sid="jnt_right_armroll" type="JOINT">
-                                                        <matrix sid="matrix">1.000000 0.000000 -0.000000 0.421995 -0.000000 1.000000 -0.000000 -0.000002 0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                    </node>
-                                                    <node name="jnt_right_forearm" id="jnt_right_forearm" sid="jnt_right_forearm" type="JOINT">
-                                                        <matrix sid="matrix">0.611216 -0.752164 0.246299 0.843981 0.786466 0.542283 -0.295637 -0.000002 0.088804 0.374404 0.923003 -0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                        <node name="jnt_right_forearmroll" id="jnt_right_forearmroll" sid="jnt_right_forearmroll" type="JOINT">
-                                                            <matrix sid="matrix">1.000000 0.000001 0.000000 0.487001 -0.000001 1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                        </node>
-                                                        <node name="jnt_right_hand" id="jnt_right_hand" sid="jnt_right_hand" type="JOINT">
-                                                            <matrix sid="matrix">0.976929 -0.028934 -0.211597 0.975261 -0.062925 0.907802 -0.414652 -0.000000 0.204086 0.418400 0.885037 0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                            <node name="jnt_right_handthumb1" id="jnt_right_handthumb1" sid="jnt_right_handthumb1" type="JOINT">
-                                                                <matrix sid="matrix">0.801418 -0.583364 0.131974 0.060227 0.332988 0.618476 0.711763 0.203939 -0.496839 -0.526474 0.689910 -0.155682 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_right_handthumb2" id="jnt_right_handthumb2" sid="jnt_right_handthumb2" type="JOINT">
-                                                                    <matrix sid="matrix">0.959263 0.282513 -0.000001 0.213224 -0.282513 0.959263 -0.000003 -0.000000 -0.000000 0.000004 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_right_handthumb3" id="jnt_right_handthumb3" sid="jnt_right_handthumb3" type="JOINT">
-                                                                        <matrix sid="matrix">0.975491 0.220039 0.000001 0.141882 -0.220039 0.975491 0.000006 -0.000001 0.000000 -0.000006 1.000000 0.000023 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_right_handthumb4" id="jnt_right_handthumb4" sid="jnt_right_handthumb4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000002 -0.000000 0.122606 0.000002 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_right_handindex1" id="jnt_right_handindex1" sid="jnt_right_handindex1" type="JOINT">
-                                                                <matrix sid="matrix">0.828630 0.556530 0.060388 0.494373 0.044440 0.042136 -0.998123 0.203977 -0.558029 0.829759 0.010183 0.029845 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_right_handindex2" id="jnt_right_handindex2" sid="jnt_right_handindex2" type="JOINT">
-                                                                    <matrix sid="matrix">0.986120 0.166034 -0.000000 0.145440 -0.166034 0.986120 -0.000000 -0.001121 0.000000 0.000000 1.000000 -0.000039 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_right_handindex3" id="jnt_right_handindex3" sid="jnt_right_handindex3" type="JOINT">
-                                                                        <matrix sid="matrix">0.999990 -0.004391 -0.000000 0.093746 0.004391 0.999990 0.000000 0.000001 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_right_handindex4" id="jnt_right_handindex4" sid="jnt_right_handindex4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.107088 0.000000 1.000000 -0.000000 -0.000052 -0.000000 0.000000 1.000000 0.001503 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
-                                                                <matrix sid="matrix">-0.068648 0.108939 0.991675 0.369356 0.108715 0.988918 -0.101110 0.054074 -0.991700 0.100869 -0.079731 -0.296619 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                            </node>
-                                                            <node name="jnt_right_handmiddle1" id="jnt_right_handmiddle1" sid="jnt_right_handmiddle1" type="JOINT">
-                                                                <matrix sid="matrix">0.632372 0.771234 -0.072822 0.489245 -0.050807 -0.052511 -0.997327 0.062066 -0.772997 0.634382 0.005978 0.036303 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_right_handmiddle2" id="jnt_right_handmiddle2" sid="jnt_right_handmiddle2" type="JOINT">
-                                                                    <matrix sid="matrix">0.907977 0.419021 -0.000000 0.176685 -0.419021 0.907977 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_right_handmiddle3" id="jnt_right_handmiddle3" sid="jnt_right_handmiddle3" type="JOINT">
-                                                                        <matrix sid="matrix">0.977794 0.209567 -0.000000 0.108374 -0.209567 0.977794 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_right_handmiddle4" id="jnt_right_handmiddle4" sid="jnt_right_handmiddle4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.119191 -0.000000 1.000000 0.000000 0.000105 0.000000 -0.000000 1.000000 -0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_right_handring1" id="jnt_right_handring1" sid="jnt_right_handring1" type="JOINT">
-                                                                <matrix sid="matrix">0.537456 0.810806 -0.231808 0.469963 -0.081936 -0.223375 -0.971283 -0.076798 -0.839302 0.541015 -0.053620 0.036646 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_right_handring2" id="jnt_right_handring2" sid="jnt_right_handring2" type="JOINT">
-                                                                    <matrix sid="matrix">0.853108 0.521735 -0.000001 0.184241 -0.521735 0.853108 -0.000001 0.000000 -0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_right_handring3" id="jnt_right_handring3" sid="jnt_right_handring3" type="JOINT">
-                                                                        <matrix sid="matrix">0.952054 0.305931 0.000000 0.103951 -0.305931 0.952054 0.000001 0.000001 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_right_handring4" id="jnt_right_handring4" sid="jnt_right_handring4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.120247 0.000000 1.000000 0.000000 0.000103 0.000000 -0.000000 1.000000 -0.000016 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                            <node name="jnt_right_handpinky1" id="jnt_right_handpinky1" sid="jnt_right_handpinky1" type="JOINT">
-                                                                <matrix sid="matrix">0.144978 0.976353 -0.160366 0.407608 0.058887 -0.170305 -0.983630 -0.208155 -0.987681 0.133161 -0.082185 -0.012229 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                                <node name="jnt_right_handpinky2" id="jnt_right_handpinky2" sid="jnt_right_handpinky2" type="JOINT">
-                                                                    <matrix sid="matrix">0.524946 0.851135 -0.000001 0.148507 -0.851135 0.524946 -0.000001 0.000001 -0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                    <extra>
-                                                                        <technique profile="FCOLLADA">
-                                                                            <visibility>1.000000</visibility>
-                                                                        </technique>
-                                                                    </extra>
-                                                                    <node name="jnt_right_handpinky3" id="jnt_right_handpinky3" sid="jnt_right_handpinky3" type="JOINT">
-                                                                        <matrix sid="matrix">0.717916 0.696129 -0.000000 0.075471 -0.696129 0.717916 0.000002 -0.000001 0.000001 -0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                        <extra>
-                                                                            <technique profile="FCOLLADA">
-                                                                                <visibility>1.000000</visibility>
-                                                                            </technique>
-                                                                        </extra>
-                                                                        <node name="jnt_right_handpinky4" id="jnt_right_handpinky4" sid="jnt_right_handpinky4" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.101152 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
-                                                                    </node>
-                                                                </node>
-                                                            </node>
-                                                        </node>
-                                                    </node>
-                                                </node>
-                                            </node>
-                                        </node>
-                                        <node name="jnt_backpack" id="jnt_backpack" sid="jnt_backpack" type="JOINT">
-                                            <matrix sid="matrix">0.029997 0.957514 -0.286820 0.772805 -0.105049 0.288380 0.951736 -0.532305 0.994014 0.001581 0.109236 -0.228287 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
                                         </node>
                                     </node>
-                                </node>
-                            </node>
-                            <node name="jnt_camera" id="jnt_camera" sid="jnt_camera" type="JOINT">
-                                <matrix sid="matrix">0.980538 -0.066792 0.184619 -0.000000 0.058128 0.996956 0.051959 1.193611 -0.187528 -0.040216 0.981436 0.007402 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                            </node>
-                        </node>
-                        <node name="jnt_right_upleg" id="jnt_right_upleg" sid="jnt_right_upleg" type="JOINT">
-                            <matrix sid="matrix">-0.157621 -0.253603 -0.954380 -0.433670 -0.986593 0.081844 0.141194 -0.114485 0.042303 0.963840 -0.263104 -0.087705 0.000000 0.000000 0.000000 1.000000</matrix>
-                            <extra>
-                                <technique profile="FCOLLADA">
-                                    <visibility>1.000000</visibility>
-                                </technique>
-                            </extra>
-                            <node name="jnt_right_uplegroll" id="jnt_right_uplegroll" sid="jnt_right_uplegroll" type="JOINT">
-                                <matrix sid="matrix">1.000000 -0.000000 0.000000 0.430000 0.000000 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                            </node>
-                            <node name="jnt_right_leg" id="jnt_right_leg" sid="jnt_right_leg" type="JOINT">
-                                <matrix sid="matrix">0.887088 0.461187 -0.019518 0.860324 -0.457760 0.873480 -0.165796 0.000000 -0.059415 0.156011 0.985967 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                                <node name="jnt_right_legroll" id="jnt_right_legroll" sid="jnt_right_legroll" type="JOINT">
-                                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.384000 -0.000000 1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                    <extra>
-                                        <technique profile="FCOLLADA">
-                                            <visibility>1.000000</visibility>
-                                        </technique>
-                                    </extra>
-                                </node>
-                                <node name="jnt_right_foot" id="jnt_right_foot" sid="jnt_right_foot" type="JOINT">
-                                    <matrix sid="matrix">0.199001 -0.944140 0.262677 0.768144 0.966244 0.144278 -0.213440 -0.000001 0.163619 0.296285 0.940980 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                    <extra>
-                                        <technique profile="FCOLLADA">
-                                            <visibility>1.000000</visibility>
-                                        </technique>
-                                    </extra>
-                                    <node name="jnt_right_toebase" id="jnt_right_toebase" sid="jnt_right_toebase" type="JOINT">
-                                        <matrix sid="matrix">0.918936 -0.394407 -0.000000 0.441847 0.394407 0.918936 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <node name="jnt_left_armroot" id="jnt_left_armroot" sid="jnt_left_armroot" type="JOINT">
+                                        <matrix sid="matrix">1.000000 -0.000004 -0.000000 0.075080 0.000004 1.000000 -0.000000 -0.051343 0.000000 0.000000 1.000000 -0.327614 0.000000 0.000000 0.000000 1.000000</matrix>
                                         <extra>
                                             <technique profile="FCOLLADA">
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_right_toeend" id="jnt_right_toeend" sid="jnt_right_toeend" type="JOINT">
-                                            <matrix sid="matrix">1.000000 -0.000001 0.000000 0.379397 0.000001 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                        <node name="jnt_left_shoulder" id="jnt_left_shoulder" sid="jnt_left_shoulder" type="JOINT">
+                                            <matrix sid="matrix">-0.021963 0.045191 -0.998737 0.433146 0.336997 -0.940180 -0.049953 0.291624 -0.941250 -0.337668 0.005420 0.391172 0.000000 0.000000 0.000000 1.000000</matrix>
                                             <extra>
                                                 <technique profile="FCOLLADA">
                                                     <visibility>1.000000</visibility>
                                                 </technique>
                                             </extra>
+                                            <node name="jnt_left_arm" id="jnt_left_arm" sid="jnt_left_arm" type="JOINT">
+                                                <matrix sid="matrix">0.826672 0.044700 0.560906 -0.366435 -0.330697 0.845109 0.420036 -0.255407 -0.455251 -0.532722 0.713410 0.134598 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                <extra>
+                                                    <technique profile="FCOLLADA">
+                                                        <visibility>1.000000</visibility>
+                                                    </technique>
+                                                </extra>
+                                                <node name="jnt_left_armroll" id="jnt_left_armroll" sid="jnt_left_armroll" type="JOINT">
+                                                    <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.421995 0.000000 1.000000 -0.000000 0.000002 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                    <extra>
+                                                        <technique profile="FCOLLADA">
+                                                            <visibility>1.000000</visibility>
+                                                        </technique>
+                                                    </extra>
+                                                </node>
+                                                <node name="jnt_left_forearm" id="jnt_left_forearm" sid="jnt_left_forearm" type="JOINT">
+                                                    <matrix sid="matrix">0.669541 -0.708729 0.222301 -0.843981 0.726395 0.687270 0.003323 0.000001 -0.155136 0.159253 0.974972 0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                    <extra>
+                                                        <technique profile="FCOLLADA">
+                                                            <visibility>1.000000</visibility>
+                                                        </technique>
+                                                    </extra>
+                                                    <node name="jnt_left_forearmroll" id="jnt_left_forearmroll" sid="jnt_left_forearmroll" type="JOINT">
+                                                        <matrix sid="matrix">1.000000 0.000001 -0.000000 -0.487001 -0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                        <extra>
+                                                            <technique profile="FCOLLADA">
+                                                                <visibility>1.000000</visibility>
+                                                            </technique>
+                                                        </extra>
+                                                    </node>
+                                                    <node name="jnt_left_hand" id="jnt_left_hand" sid="jnt_left_hand" type="JOINT">
+                                                        <matrix sid="matrix">0.983907 -0.113163 0.138284 -0.975262 0.131975 0.981956 -0.135443 -0.000001 -0.120461 0.151513 0.981088 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                        <extra>
+                                                            <technique profile="FCOLLADA">
+                                                                <visibility>1.000000</visibility>
+                                                            </technique>
+                                                        </extra>
+                                                        <node name="jnt_left_handthumb1" id="jnt_left_handthumb1" sid="jnt_left_handthumb1" type="JOINT">
+                                                            <matrix sid="matrix">0.632884 -0.699845 0.331171 -0.060229 0.547510 0.706972 0.447686 -0.203939 -0.547440 -0.102014 0.830604 0.155677 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_left_handthumb2" id="jnt_left_handthumb2" sid="jnt_left_handthumb2" type="JOINT">
+                                                                <matrix sid="matrix">0.999697 0.024614 -0.000001 -0.213228 -0.024614 0.999697 -0.000003 -0.000002 0.000000 0.000003 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_left_handthumb3" id="jnt_left_handthumb3" sid="jnt_left_handthumb3" type="JOINT">
+                                                                    <matrix sid="matrix">0.999202 -0.039936 -0.000001 -0.141879 0.039936 0.999202 -0.000003 0.000003 0.000001 0.000003 1.000000 -0.000027 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_left_handthumb4" id="jnt_left_handthumb4" sid="jnt_left_handthumb4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.122601 0.000000 1.000000 0.000000 -0.000006 -0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_left_handindex1" id="jnt_left_handindex1" sid="jnt_left_handindex1" type="JOINT">
+                                                            <matrix sid="matrix">0.750819 0.659619 0.034271 -0.494375 0.007413 0.043467 -0.999027 -0.203977 -0.660467 0.750342 0.027746 -0.029847 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_left_handindex2" id="jnt_left_handindex2" sid="jnt_left_handindex2" type="JOINT">
+                                                                <matrix sid="matrix">0.956197 0.292723 -0.000000 -0.145433 -0.292723 0.956197 -0.000000 0.001125 0.000000 0.000001 1.000000 0.000040 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_left_handindex3" id="jnt_left_handindex3" sid="jnt_left_handindex3" type="JOINT">
+                                                                    <matrix sid="matrix">0.992093 0.125506 -0.000000 -0.093752 -0.125506 0.992093 0.000001 0.000003 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_left_handindex4" id="jnt_left_handindex4" sid="jnt_left_handindex4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.107084 0.000000 1.000000 0.000000 0.000049 0.000000 -0.000000 1.000000 -0.001504 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_left_weapon" id="jnt_left_weapon" sid="jnt_left_weapon" type="JOINT">
+                                                            <matrix sid="matrix">-0.068652 -0.108939 -0.991680 -0.369354 0.108715 -0.988918 0.101111 -0.054074 -0.991705 -0.100868 0.079735 0.296616 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                        </node>
+                                                        <node name="jnt_left_handmiddle1" id="jnt_left_handmiddle1" sid="jnt_left_handmiddle1" type="JOINT">
+                                                            <matrix sid="matrix">0.696565 0.714247 -0.068176 -0.489248 -0.047814 -0.048599 -0.997673 -0.062066 -0.715899 0.698204 0.000299 -0.036308 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_left_handmiddle2" id="jnt_left_handmiddle2" sid="jnt_left_handmiddle2" type="JOINT">
+                                                                <matrix sid="matrix">0.940501 0.339790 -0.000000 -0.176688 -0.339790 0.940501 0.000000 0.000004 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_left_handmiddle3" id="jnt_left_handmiddle3" sid="jnt_left_handmiddle3" type="JOINT">
+                                                                    <matrix sid="matrix">0.992141 0.125121 0.000000 -0.108368 -0.125121 0.992141 0.000000 0.000001 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_left_handmiddle4" id="jnt_left_handmiddle4" sid="jnt_left_handmiddle4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.119193 0.000000 1.000000 0.000000 -0.000107 0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_left_handring1" id="jnt_left_handring1" sid="jnt_left_handring1" type="JOINT">
+                                                            <matrix sid="matrix">0.682189 0.696210 -0.223406 -0.469963 -0.107120 -0.207082 -0.972441 0.076797 -0.723287 0.687320 -0.066691 -0.036647 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_left_handring2" id="jnt_left_handring2" sid="jnt_left_handring2" type="JOINT">
+                                                                <matrix sid="matrix">0.935173 0.354193 0.000000 -0.184233 -0.354192 0.935173 -0.000001 -0.000001 -0.000001 0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_left_handring3" id="jnt_left_handring3" sid="jnt_left_handring3" type="JOINT">
+                                                                    <matrix sid="matrix">0.992310 0.123775 0.000000 -0.103958 -0.123775 0.992310 0.000001 0.000003 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_left_handring4" id="jnt_left_handring4" sid="jnt_left_handring4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.120246 -0.000000 1.000000 0.000000 -0.000105 0.000000 -0.000000 1.000000 0.000017 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_left_handpinky1" id="jnt_left_handpinky1" sid="jnt_left_handpinky1" type="JOINT">
+                                                            <matrix sid="matrix">0.707807 0.685954 -0.168751 -0.407612 -0.104937 -0.134135 -0.985391 0.208155 -0.698569 0.715175 -0.022959 0.012223 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_left_handpinky2" id="jnt_left_handpinky2" sid="jnt_left_handpinky2" type="JOINT">
+                                                                <matrix sid="matrix">0.937776 0.347242 0.000001 -0.148503 -0.347242 0.937776 -0.000000 0.000001 -0.000001 0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_left_handpinky3" id="jnt_left_handpinky3" sid="jnt_left_handpinky3" type="JOINT">
+                                                                    <matrix sid="matrix">0.994342 0.106229 -0.000000 -0.075474 -0.106229 0.994342 -0.000001 0.000002 0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_left_handpinky4" id="jnt_left_handpinky4" sid="jnt_left_handpinky4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 0.000000 0.000000 -0.101158 -0.000000 1.000000 -0.000000 -0.000003 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                    </node>
+                                                </node>
+                                            </node>
                                         </node>
+                                    </node>
+                                    <node name="jnt_right_armroot" id="jnt_right_armroot" sid="jnt_right_armroot" type="JOINT">
+                                        <matrix sid="matrix">1.000000 -0.000004 -0.000000 0.083773 0.000004 1.000000 -0.000000 -0.052984 0.000000 0.000000 1.000000 0.074505 0.000000 0.000000 0.000000 1.000000</matrix>
+                                        <extra>
+                                            <technique profile="FCOLLADA">
+                                                <visibility>1.000000</visibility>
+                                            </technique>
+                                        </extra>
+                                        <node name="jnt_right_shoulder" id="jnt_right_shoulder" sid="jnt_right_shoulder" type="JOINT">
+                                            <matrix sid="matrix">-0.145925 -0.475687 0.867426 0.339132 -0.588464 0.746562 0.310411 0.322253 -0.795246 -0.465152 -0.388867 -0.611631 0.000000 0.000000 0.000000 1.000000</matrix>
+                                            <extra>
+                                                <technique profile="FCOLLADA">
+                                                    <visibility>1.000000</visibility>
+                                                </technique>
+                                            </extra>
+                                            <node name="jnt_right_arm" id="jnt_right_arm" sid="jnt_right_arm" type="JOINT">
+                                                <matrix sid="matrix">-0.330184 -0.930151 -0.160618 0.458969 0.860240 -0.366569 0.354421 0.036427 -0.388542 -0.021146 0.921188 -0.096013 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                <extra>
+                                                    <technique profile="FCOLLADA">
+                                                        <visibility>1.000000</visibility>
+                                                    </technique>
+                                                </extra>
+                                                <node name="jnt_right_armroll" id="jnt_right_armroll" sid="jnt_right_armroll" type="JOINT">
+                                                    <matrix sid="matrix">1.000000 0.000000 -0.000000 0.421995 -0.000000 1.000000 -0.000000 -0.000002 0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                    <extra>
+                                                        <technique profile="FCOLLADA">
+                                                            <visibility>1.000000</visibility>
+                                                        </technique>
+                                                    </extra>
+                                                </node>
+                                                <node name="jnt_right_forearm" id="jnt_right_forearm" sid="jnt_right_forearm" type="JOINT">
+                                                    <matrix sid="matrix">0.611216 -0.752164 0.246299 0.843981 0.786466 0.542283 -0.295637 -0.000002 0.088804 0.374404 0.923003 -0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                    <extra>
+                                                        <technique profile="FCOLLADA">
+                                                            <visibility>1.000000</visibility>
+                                                        </technique>
+                                                    </extra>
+                                                    <node name="jnt_right_forearmroll" id="jnt_right_forearmroll" sid="jnt_right_forearmroll" type="JOINT">
+                                                        <matrix sid="matrix">1.000000 0.000001 0.000000 0.487001 -0.000001 1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                        <extra>
+                                                            <technique profile="FCOLLADA">
+                                                                <visibility>1.000000</visibility>
+                                                            </technique>
+                                                        </extra>
+                                                    </node>
+                                                    <node name="jnt_right_hand" id="jnt_right_hand" sid="jnt_right_hand" type="JOINT">
+                                                        <matrix sid="matrix">0.976929 -0.028934 -0.211597 0.975261 -0.062925 0.907802 -0.414652 -0.000000 0.204086 0.418400 0.885037 0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                        <extra>
+                                                            <technique profile="FCOLLADA">
+                                                                <visibility>1.000000</visibility>
+                                                            </technique>
+                                                        </extra>
+                                                        <node name="jnt_right_handthumb1" id="jnt_right_handthumb1" sid="jnt_right_handthumb1" type="JOINT">
+                                                            <matrix sid="matrix">0.801418 -0.583364 0.131974 0.060227 0.332988 0.618476 0.711763 0.203939 -0.496839 -0.526474 0.689910 -0.155682 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_right_handthumb2" id="jnt_right_handthumb2" sid="jnt_right_handthumb2" type="JOINT">
+                                                                <matrix sid="matrix">0.959263 0.282513 -0.000001 0.213224 -0.282513 0.959263 -0.000003 -0.000000 -0.000000 0.000004 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_right_handthumb3" id="jnt_right_handthumb3" sid="jnt_right_handthumb3" type="JOINT">
+                                                                    <matrix sid="matrix">0.975491 0.220039 0.000001 0.141882 -0.220039 0.975491 0.000006 -0.000001 0.000000 -0.000006 1.000000 0.000023 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_right_handthumb4" id="jnt_right_handthumb4" sid="jnt_right_handthumb4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000002 -0.000000 0.122606 0.000002 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_right_handindex1" id="jnt_right_handindex1" sid="jnt_right_handindex1" type="JOINT">
+                                                            <matrix sid="matrix">0.828630 0.556530 0.060388 0.494373 0.044440 0.042136 -0.998123 0.203977 -0.558029 0.829759 0.010183 0.029845 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_right_handindex2" id="jnt_right_handindex2" sid="jnt_right_handindex2" type="JOINT">
+                                                                <matrix sid="matrix">0.986120 0.166034 -0.000000 0.145440 -0.166034 0.986120 -0.000000 -0.001121 0.000000 0.000000 1.000000 -0.000039 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_right_handindex3" id="jnt_right_handindex3" sid="jnt_right_handindex3" type="JOINT">
+                                                                    <matrix sid="matrix">0.999990 -0.004391 -0.000000 0.093746 0.004391 0.999990 0.000000 0.000001 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_right_handindex4" id="jnt_right_handindex4" sid="jnt_right_handindex4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000000 0.000000 0.107088 0.000000 1.000000 -0.000000 -0.000052 -0.000000 0.000000 1.000000 0.001503 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
+                                                            <matrix sid="matrix">-0.068648 0.108939 0.991675 0.369356 0.108715 0.988918 -0.101110 0.054074 -0.991700 0.100869 -0.079731 -0.296619 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                        </node>
+                                                        <node name="jnt_right_handmiddle1" id="jnt_right_handmiddle1" sid="jnt_right_handmiddle1" type="JOINT">
+                                                            <matrix sid="matrix">0.632372 0.771234 -0.072822 0.489245 -0.050807 -0.052511 -0.997327 0.062066 -0.772997 0.634382 0.005978 0.036303 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_right_handmiddle2" id="jnt_right_handmiddle2" sid="jnt_right_handmiddle2" type="JOINT">
+                                                                <matrix sid="matrix">0.907977 0.419021 -0.000000 0.176685 -0.419021 0.907977 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_right_handmiddle3" id="jnt_right_handmiddle3" sid="jnt_right_handmiddle3" type="JOINT">
+                                                                    <matrix sid="matrix">0.977794 0.209567 -0.000000 0.108374 -0.209567 0.977794 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_right_handmiddle4" id="jnt_right_handmiddle4" sid="jnt_right_handmiddle4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 0.000000 -0.000000 0.119191 -0.000000 1.000000 0.000000 0.000105 0.000000 -0.000000 1.000000 -0.000005 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_right_handring1" id="jnt_right_handring1" sid="jnt_right_handring1" type="JOINT">
+                                                            <matrix sid="matrix">0.537456 0.810806 -0.231808 0.469963 -0.081936 -0.223375 -0.971283 -0.076798 -0.839302 0.541015 -0.053620 0.036646 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_right_handring2" id="jnt_right_handring2" sid="jnt_right_handring2" type="JOINT">
+                                                                <matrix sid="matrix">0.853108 0.521735 -0.000001 0.184241 -0.521735 0.853108 -0.000001 0.000000 -0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_right_handring3" id="jnt_right_handring3" sid="jnt_right_handring3" type="JOINT">
+                                                                    <matrix sid="matrix">0.952054 0.305931 0.000000 0.103951 -0.305931 0.952054 0.000001 0.000001 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_right_handring4" id="jnt_right_handring4" sid="jnt_right_handring4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.120247 0.000000 1.000000 0.000000 0.000103 0.000000 -0.000000 1.000000 -0.000016 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                        <node name="jnt_right_handpinky1" id="jnt_right_handpinky1" sid="jnt_right_handpinky1" type="JOINT">
+                                                            <matrix sid="matrix">0.144978 0.976353 -0.160366 0.407608 0.058887 -0.170305 -0.983630 -0.208155 -0.987681 0.133161 -0.082185 -0.012229 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                            <extra>
+                                                                <technique profile="FCOLLADA">
+                                                                    <visibility>1.000000</visibility>
+                                                                </technique>
+                                                            </extra>
+                                                            <node name="jnt_right_handpinky2" id="jnt_right_handpinky2" sid="jnt_right_handpinky2" type="JOINT">
+                                                                <matrix sid="matrix">0.524946 0.851135 -0.000001 0.148507 -0.851135 0.524946 -0.000001 0.000001 -0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                <extra>
+                                                                    <technique profile="FCOLLADA">
+                                                                        <visibility>1.000000</visibility>
+                                                                    </technique>
+                                                                </extra>
+                                                                <node name="jnt_right_handpinky3" id="jnt_right_handpinky3" sid="jnt_right_handpinky3" type="JOINT">
+                                                                    <matrix sid="matrix">0.717916 0.696129 -0.000000 0.075471 -0.696129 0.717916 0.000002 -0.000001 0.000001 -0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                    <extra>
+                                                                        <technique profile="FCOLLADA">
+                                                                            <visibility>1.000000</visibility>
+                                                                        </technique>
+                                                                    </extra>
+                                                                    <node name="jnt_right_handpinky4" id="jnt_right_handpinky4" sid="jnt_right_handpinky4" type="JOINT">
+                                                                        <matrix sid="matrix">1.000000 0.000000 -0.000000 0.101152 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                                                        <extra>
+                                                                            <technique profile="FCOLLADA">
+                                                                                <visibility>1.000000</visibility>
+                                                                            </technique>
+                                                                        </extra>
+                                                                    </node>
+                                                                </node>
+                                                            </node>
+                                                        </node>
+                                                    </node>
+                                                </node>
+                                            </node>
+                                        </node>
+                                    </node>
+                                    <node name="jnt_backpack" id="jnt_backpack" sid="jnt_backpack" type="JOINT">
+                                        <matrix sid="matrix">0.029997 0.957514 -0.286820 0.772805 -0.105049 0.288380 0.951736 -0.532305 0.994014 0.001581 0.109236 -0.228287 0.000000 0.000000 0.000000 1.000000</matrix>
+                                        <extra>
+                                            <technique profile="FCOLLADA">
+                                                <visibility>1.000000</visibility>
+                                            </technique>
+                                        </extra>
                                     </node>
                                 </node>
                             </node>
                         </node>
-                        <node name="jnt_left_upleg" id="jnt_left_upleg" sid="jnt_left_upleg" type="JOINT">
-                            <matrix sid="matrix">0.421972 0.518541 -0.743677 0.425095 -0.874960 0.447771 -0.184247 -0.114371 0.237457 0.728434 0.642649 0.159214 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <node name="jnt_camera" id="jnt_camera" sid="jnt_camera" type="JOINT">
+                            <matrix sid="matrix">0.980538 -0.066792 0.184619 -0.000000 0.058128 0.996956 0.051959 1.193611 -0.187528 -0.040216 0.981436 0.007402 0.000000 0.000000 0.000000 1.000000</matrix>
                             <extra>
                                 <technique profile="FCOLLADA">
                                     <visibility>1.000000</visibility>
                                 </technique>
                             </extra>
-                            <node name="jnt_left_uplegroll" id="jnt_left_uplegroll" sid="jnt_left_uplegroll" type="JOINT">
-                                <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.430000 0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                        </node>
+                    </node>
+                    <node name="jnt_right_upleg" id="jnt_right_upleg" sid="jnt_right_upleg" type="JOINT">
+                        <matrix sid="matrix">-0.157621 -0.253603 -0.954380 -0.433670 -0.986593 0.081844 0.141194 -0.114485 0.042303 0.963840 -0.263104 -0.087705 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_right_uplegroll" id="jnt_right_uplegroll" sid="jnt_right_uplegroll" type="JOINT">
+                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.430000 0.000000 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                        </node>
+                        <node name="jnt_right_leg" id="jnt_right_leg" sid="jnt_right_leg" type="JOINT">
+                            <matrix sid="matrix">0.887088 0.461187 -0.019518 0.860324 -0.457760 0.873480 -0.165796 0.000000 -0.059415 0.156011 0.985967 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                            <node name="jnt_right_legroll" id="jnt_right_legroll" sid="jnt_right_legroll" type="JOINT">
+                                <matrix sid="matrix">1.000000 0.000000 0.000000 0.384000 -0.000000 1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                 <extra>
                                     <technique profile="FCOLLADA">
                                         <visibility>1.000000</visibility>
                                     </technique>
                                 </extra>
                             </node>
-                            <node name="jnt_left_leg" id="jnt_left_leg" sid="jnt_left_leg" type="JOINT">
-                                <matrix sid="matrix">0.839963 0.535299 -0.088973 0.860328 -0.541336 0.815226 -0.205821 -0.000000 -0.037643 0.221046 0.974536 0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <node name="jnt_right_foot" id="jnt_right_foot" sid="jnt_right_foot" type="JOINT">
+                                <matrix sid="matrix">0.199001 -0.944140 0.262677 0.768144 0.966244 0.144278 -0.213440 -0.000001 0.163619 0.296285 0.940980 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                 <extra>
                                     <technique profile="FCOLLADA">
                                         <visibility>1.000000</visibility>
                                     </technique>
                                 </extra>
-                                <node name="jnt_left_legroll" id="jnt_left_legroll" sid="jnt_left_legroll" type="JOINT">
-                                    <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.384000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <node name="jnt_right_toebase" id="jnt_right_toebase" sid="jnt_right_toebase" type="JOINT">
+                                    <matrix sid="matrix">0.918936 -0.394407 -0.000000 0.441847 0.394407 0.918936 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                     <extra>
                                         <technique profile="FCOLLADA">
                                             <visibility>1.000000</visibility>
                                         </technique>
                                     </extra>
-                                </node>
-                                <node name="jnt_left_foot" id="jnt_left_foot" sid="jnt_left_foot" type="JOINT">
-                                    <matrix sid="matrix">0.312566 -0.936895 -0.156621 0.768142 0.930744 0.335015 -0.146564 0.000000 0.189785 -0.099963 0.976724 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
-                                    <extra>
-                                        <technique profile="FCOLLADA">
-                                            <visibility>1.000000</visibility>
-                                        </technique>
-                                    </extra>
-                                    <node name="jnt_left_toebase" id="jnt_left_toebase" sid="jnt_left_toebase" type="JOINT">
-                                        <matrix sid="matrix">0.918936 -0.394408 0.000000 0.441847 0.394407 0.918936 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <node name="jnt_right_toeend" id="jnt_right_toeend" sid="jnt_right_toeend" type="JOINT">
+                                        <matrix sid="matrix">1.000000 -0.000001 0.000000 0.379397 0.000001 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                                         <extra>
                                             <technique profile="FCOLLADA">
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_left_toeend" id="jnt_left_toeend" sid="jnt_left_toeend" type="JOINT">
-                                            <matrix sid="matrix">1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                        </node>
+                                    </node>
+                                </node>
+                            </node>
+                        </node>
+                    </node>
+                    <node name="jnt_left_upleg" id="jnt_left_upleg" sid="jnt_left_upleg" type="JOINT">
+                        <matrix sid="matrix">0.421972 0.518541 -0.743677 0.425095 -0.874960 0.447771 -0.184247 -0.114371 0.237457 0.728434 0.642649 0.159214 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_left_uplegroll" id="jnt_left_uplegroll" sid="jnt_left_uplegroll" type="JOINT">
+                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.430000 0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                        </node>
+                        <node name="jnt_left_leg" id="jnt_left_leg" sid="jnt_left_leg" type="JOINT">
+                            <matrix sid="matrix">0.839963 0.535299 -0.088973 0.860328 -0.541336 0.815226 -0.205821 -0.000000 -0.037643 0.221046 0.974536 0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                            <node name="jnt_left_legroll" id="jnt_left_legroll" sid="jnt_left_legroll" type="JOINT">
+                                <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.384000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <extra>
+                                    <technique profile="FCOLLADA">
+                                        <visibility>1.000000</visibility>
+                                    </technique>
+                                </extra>
+                            </node>
+                            <node name="jnt_left_foot" id="jnt_left_foot" sid="jnt_left_foot" type="JOINT">
+                                <matrix sid="matrix">0.312566 -0.936895 -0.156621 0.768142 0.930744 0.335015 -0.146564 0.000000 0.189785 -0.099963 0.976724 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <extra>
+                                    <technique profile="FCOLLADA">
+                                        <visibility>1.000000</visibility>
+                                    </technique>
+                                </extra>
+                                <node name="jnt_left_toebase" id="jnt_left_toebase" sid="jnt_left_toebase" type="JOINT">
+                                    <matrix sid="matrix">0.918936 -0.394408 0.000000 0.441847 0.394407 0.918936 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <extra>
+                                        <technique profile="FCOLLADA">
+                                            <visibility>1.000000</visibility>
+                                        </technique>
+                                    </extra>
+                                    <node name="jnt_left_toeend" id="jnt_left_toeend" sid="jnt_left_toeend" type="JOINT">
+                                        <matrix sid="matrix">1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                        <extra>
+                                            <technique profile="FCOLLADA">
+                                                <visibility>1.000000</visibility>
+                                            </technique>
+                                        </extra>
                                     </node>
                                 </node>
                             </node>
                         </node>
                     </node>
                 </node>
-           
+            </node>
             <extra>
                 <technique profile="MAX3D">
                     <frame_rate>60.000000</frame_rate>

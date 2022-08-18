@@ -25,9 +25,9 @@ Magnum44 = class()
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend",
 	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"
 }
 
 local renderablesTp =
@@ -76,7 +76,7 @@ function Magnum44.loadAnimations( self )
 			
 			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "TommyGun_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			ammo_check = { "TommyGun_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -768,7 +768,7 @@ function Magnum44:cl_n_onReload(anim_id)
 end
 
 function Magnum44:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	setTpAnimation(self.tpAnimations, "reload", 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
