@@ -19,6 +19,14 @@ function Grenade:server_onCreate()
 	end
 end
 
+function Grenade:server_onProjectile()
+	self.timer = 0
+end
+
+function Grenade:server_onMelee()
+	self.timer = 0
+end
+
 local _math_random = math.random
 local _vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
