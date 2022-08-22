@@ -27,6 +27,15 @@
 				"file": "$CONTENT_DATA/Scripts/Tools/HandheldGrenade.lua",
 				"class": "HandheldGrenade"
 			}
+		},
+		{
+			"uuid": "57626e0c-6b12-4a70-879b-91cc15788c50",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shrapnel_Grenade/Shrapnel_Grenade_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/ShrapnelGrenade.lua",
+				"class": "ShrapnelGrenade"
+			}
 		}
 	]
 }

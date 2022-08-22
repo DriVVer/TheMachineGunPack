@@ -1,0 +1,25 @@
+{
+   "lodList" : [
+      {
+         "mesh" : "$CONTENT_DATA/Tools/Mesh/Shrapnel_Grenade/Shrapnel_Grenade_Previev.fbx",
+         "subMeshList" : [
+            {
+               "material" : "DifAsg",
+               "textureList" : [
+                  "$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_dif.tga",
+						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_asg.tga",
+						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_nor.tga"
+               ]
+            },
+            {
+               "material" : "DifAsg",
+               "textureList" : [
+                  "$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+               ]
+            }
+         ]
+      }
+   ]
+}
