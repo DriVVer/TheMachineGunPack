@@ -514,8 +514,8 @@ HandheldGrenade = class(HandheldGrenadeBase)
 
 HandheldGrenade.mgp_renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
+	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"--,
+	--"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
 }
 
 HandheldGrenade.mgp_renderables_tp =

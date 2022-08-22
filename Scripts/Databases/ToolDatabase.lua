@@ -130,7 +130,6 @@ local mgp_tool_database =
 	HandheldGrenadeBase =
 	{
 		required_effects = {
-			MG_shells_tp = "Magnum_6_Shell_TP",
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reloadTG = "TommyReload",
@@ -155,9 +154,9 @@ local mgp_tool_database =
 			Granade_activ =
 			{
 				[1] = {
-					{						
+					{				
 						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "main_body",
+						name = "anim_body",
 						enabled = true
 					},
 					{
@@ -166,9 +165,9 @@ local mgp_tool_database =
 						tp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					},
-					{						
+					{					
 						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "main_body",
+						name = "anim_body",
 						enabled = false
 					}
 				}
@@ -182,7 +181,7 @@ local mgp_tool_database =
 					},
 					{						
 						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "main_body",
+						name = "anim_body",
 						enabled = false
 					},
 					{						
