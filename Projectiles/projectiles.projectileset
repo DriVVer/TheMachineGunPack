@@ -24,6 +24,29 @@
 			"enableImpactEffect": true
 		},
 		{
+			"uuid": "bef985da-1271-489f-9c5a-99c08642f982",
+			"name": "mgp_Magnum",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$GAME_DATA/Projectiles/Renderables/potato.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 1 },
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 1.0 },
+					{ "qualityLevel": 3, "chance": 0.8 },
+					{ "qualityLevel": 4, "chance": 0.6 },
+					{ "qualityLevel": 5, "chance": 0.2 }
+				]
+			},
+			"enableImpactEffect": true
+		},
+		{
 			"uuid": "7a3887dd-0fd2-489c-ac04-7306a672ae35",
 			"name": "mgp_grenade_sharpnel",
 			"mass": 100.0,

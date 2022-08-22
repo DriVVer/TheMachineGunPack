@@ -2,13 +2,18 @@
 	"lodList": [
 		{
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Grenade/s_grenade_screw.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "Activation_unscrew", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Grenade/Granade_Activation.dae" }
+			],
+	
 			"subMeshList": [
 				{
 					"material": "DifAsg",
 					"textureList": [
-						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_dif.tga",
-						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_asg.tga",
-						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_nor.tga"
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
 					]
 				}
 			]

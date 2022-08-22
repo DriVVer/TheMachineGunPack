@@ -25,9 +25,8 @@ Magnum44 = class()
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_SLoader_AnimModel.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend",
+	"$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend"
 }
 
 local renderablesTp =
@@ -642,7 +641,7 @@ function Magnum44:cl_n_cockHammer()
 	end
 end
 
-local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
+local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
 function Magnum44.cl_onPrimaryUse(self, state)
 	if state == sm.tool.interactState.start then
 		if self:client_isGunReloading() then return end
