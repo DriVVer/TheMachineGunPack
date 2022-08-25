@@ -60,7 +60,7 @@ function Grenade:server_onFixedUpdate(dt)
 				end
 			end
 
-			sm.physics.explode(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 20, 50, "PropaneTank - ExplosionSmall", self.shape)
+			sm.physics.explode(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", self.shape)
 			self.shape:destroyShape(0)
 
 			self.timer = nil

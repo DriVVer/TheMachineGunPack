@@ -18,7 +18,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
-	self.grenade_active = true
+	self.grenade_active = false
 end
 
 function HandheldGrenadeBase:client_onRefresh()
@@ -150,13 +150,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 			elseif not self.tool:isSprinting() and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
-
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
-			end
 		end
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
@@ -187,7 +180,7 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local fireMode = self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -211,28 +204,16 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
-		if self.aiming then
-			if self.tool:isInFirstPersonView() then
-				self.tool:setCrossHairAlpha( 0.0 )
-			else
-				self.tool:setCrossHairAlpha( 1.0 )
-			end
-			self.tool:setInteractionTextSuppressed( true )
-		else
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
-		end
+		self.tool:setCrossHairAlpha( 1.0 )
+		self.tool:setInteractionTextSuppressed( false )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0
-	self.tool:setBlockSprint( blockSprint )
+	self.tool:setBlockSprint( self.sprintCooldownTimer > 0.0 )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
 	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
 
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
@@ -311,22 +292,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
 function HandheldGrenadeBase.client_onEquip( self, animate )
@@ -417,6 +382,63 @@ function HandheldGrenadeBase:cl_n_throwGrenade()
 	end
 end
 
+local _math_random = math.random
+local _sm_vec3_new = sm.vec3.new
+local _sm_noise_gunSpread = sm.noise.gunSpread
+function HandheldGrenadeBase:server_onFixedUpdate(dt)
+	--self.sv_grenade_timer
+	if self.sv_grenade_timer then
+		self.sv_grenade_timer = self.sv_grenade_timer - dt
+		print(self.sv_grenade_timer)
+
+		if self.sv_grenade_timer <= 0.0 then
+			self.sv_grenade_timer = nil
+
+			local grenade_owner = self.tool:getOwner()
+			if not grenade_owner then
+				return
+			end
+
+			local owner_char = grenade_owner.character
+			if not (owner_char and sm.exists(owner_char)) then
+				return
+			end
+
+			local grenade_settings = self.mgp_tool_config.grenade_settings
+			local shr_data = grenade_settings.shrapnel_data
+			if shr_data ~= nil then
+				local sharpnel_pos = owner_char.worldPosition
+				local shrapenl_count = _math_random(shr_data.min_count, shr_data.max_count)
+
+				local shrapnel_min_speed = shr_data.min_speed
+				local shrapnel_max_speed = shr_data.max_speed
+
+				local shrapnel_min_damage = shr_data.min_damage
+				local shrapnel_max_damage = shr_data.max_damage
+
+				local shrapnel_projectile_uuid = shr_data.proj_uuid
+
+				for i = 1, shrapenl_count do
+					local s_speed = _math_random(shrapnel_min_speed, shrapnel_max_speed)
+					local s_damage = _math_random(shrapnel_min_damage, shrapnel_max_damage)
+
+					local shoot_dir = _sm_vec3_new(_math_random(0, 100) / 100, _math_random(0, 100) / 100, _math_random(0, 100) / 100):normalize()
+					local dir = _sm_noise_gunSpread(shoot_dir, 360) * s_speed
+
+					sm.projectile.projectileAttack(shrapnel_projectile_uuid, s_damage, sharpnel_pos, dir, grenade_owner)
+				end
+			end
+
+			sm.physics.explode(owner_char.worldPosition, grenade_settings.expl_lvl, grenade_settings.expl_rad, 5, 4, "PropaneTank - ExplosionSmall")
+			sm.event.sendToPlayer(grenade_owner, "sv_e_receiveDamage", { damage = 1000 })
+		end
+	end
+end
+
+function HandheldGrenadeBase:sv_n_startGrenadeTimer()
+	self.sv_grenade_timer = 10
+end
+
 function HandheldGrenadeBase:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
 end
@@ -467,41 +489,22 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		else
 			self.grenade_active = true
 			setFpAnimation(self.fpAnimations, "activate", 0.0)
+			
+			self.network:sendToServer("sv_n_startGrenadeTimer")
 
 			self.fireCooldownTimer = 2.4
 		end
 	end
 end
 
-function HandheldGrenadeBase.cl_onSecondaryUse( self, state )
-	if state == sm.tool.interactState.start and not self.aiming then
-		self.aiming = true
-		self.tpAnimations.animations.idle.time = 0
-
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
-	end
-
-	if self.aiming and (state == sm.tool.interactState.stop or state == sm.tool.interactState.null) then
-		self.aiming = false
-		self.tpAnimations.animations.idle.time = 0
-
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
-	end
+function HandheldGrenadeBase.client_onReload()
+	return true
 end
 
 function HandheldGrenadeBase.client_onEquippedUpdate( self, primaryState, secondaryState )
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse( primaryState )
 		self.prevPrimaryState = primaryState
-	end
-
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
 	end
 
 	return true, true
