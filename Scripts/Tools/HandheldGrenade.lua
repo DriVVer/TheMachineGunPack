@@ -137,6 +137,19 @@ function HandheldGrenadeBase.loadAnimations( self )
 
 end
 
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
+local function calculateUpVector(vector)
+	return calculateRightVector(vector):cross(vector)
+end
+
+local function calculateOffsetVector(direction, offset)
+
+end
+
 function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	-- First person animation
@@ -213,7 +226,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
 
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
@@ -330,11 +342,14 @@ function HandheldGrenadeBase.client_onEquip( self, animate )
 end
 
 function HandheldGrenadeBase.client_onUnequip( self, animate )
-
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+	self.grenade_active = false
+
 	if sm.exists( self.tool ) then
+		self.network:sendToServer("sv_n_unequipGrenade")
+
 		if animate then
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
 		end
@@ -443,30 +458,68 @@ function HandheldGrenadeBase:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
 end
 
+function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
+	if caller ~= nil or self.sv_grenade_timer == nil then
+		return nil
+	end
+
+	local grenade_timer_saved = self.sv_grenade_timer
+	self.sv_grenade_timer = nil
+
+	local tool_config = self.mgp_tool_config
+	local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, data.pos, data.rot, true, true)
+	
+	local g_inter = s_grenade.interactable
+	if g_inter then
+		local g_settings_copy = {}
+		for k, v in pairs(tool_config.grenade_settings) do
+			g_settings_copy[k] = v
+		end
+
+		g_settings_copy.timer = grenade_timer_saved
+		g_inter.publicData = g_settings_copy
+	end
+
+	return s_grenade
+end
+
+function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
+	local grenade_owner = self.tool:getOwner()
+	if not grenade_owner then
+		return
+	end
+
+	local owner_char = grenade_owner.character
+	if not (owner_char and sm.exists(owner_char)) then
+		return
+	end
+
+	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
+end
+
 function HandheldGrenadeBase:sv_n_spawnGrenade()
-	local owner_player = self.tool:getOwner()
-	local owner_char = owner_player.character
+	local grenade_owner = self.tool:getOwner()
+	if not grenade_owner then
+		return
+	end
 
-	if owner_char and sm.exists(owner_char) then
-		local tool_config = self.mgp_tool_config
+	local owner_char = grenade_owner.character
+	if not (owner_char and sm.exists(owner_char)) then
+		return
+	end
 
-		local char_dir = owner_char.direction
-		local grenade_pos = owner_char.worldPosition + char_dir * 0.5
-		local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
+	local char_dir = owner_char.direction
+	local grenade_pos = owner_char.worldPosition + char_dir * 0.5
+	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
 
-		local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, grenade_pos, grenade_rotation, true, true)
-
+	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
+	if s_grenade then
 		--Apply forward impulse
 		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20, true)
 
 		--Apply rotation
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
-
-		local grenade_inter = s_grenade.interactable
-		if grenade_inter then
-			grenade_inter.publicData = tool_config.grenade_settings
-		end
 	end
 end
 
