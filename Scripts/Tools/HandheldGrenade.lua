@@ -15,6 +15,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field mgp_renderables_tp table
 ---@field mgp_renderables_fp table
 ---@field mgp_renderables table
+---@field equipped boolean
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
@@ -155,14 +156,17 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 	if self.tool:isLocal() then
 		if self.equipped then
 			local fp_anims = self.fpAnimations
+			local cur_anim = fp_anims.currentAnimation
 
-			if isSprinting and fp_anims.currentAnimation ~= "sprintInto" and fp_anims.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( fp_anims, "sprintExit", "sprintInto", 0.0 )
-			elseif not self.tool:isSprinting() and ( fp_anims.currentAnimation == "sprintIdle" or fp_anims.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( fp_anims, "sprintInto", "sprintExit", 0.0 )
+			--shoot
+			if cur_anim ~= "shoot" then
+				if isSprinting and fp_anims.currentAnimation ~= "sprintInto" and fp_anims.currentAnimation ~= "sprintIdle" then
+					swapFpAnimation( fp_anims, "sprintExit", "sprintInto", 0.0 )
+				elseif not self.tool:isSprinting() and ( fp_anims.currentAnimation == "sprintIdle" or fp_anims.currentAnimation == "sprintInto" ) then
+					swapFpAnimation( fp_anims, "sprintInto", "sprintExit", 0.0 )
+				end
 			end
 
-			local cur_anim = fp_anims.currentAnimation
 			if cur_anim == "activate" then
 				local cur_anim_info = fp_anims.animations[cur_anim]
 				local anim_duration = cur_anim_info.info.duration
@@ -414,7 +418,6 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 	--self.sv_grenade_timer
 	if self.sv_grenade_timer then
 		self.sv_grenade_timer = self.sv_grenade_timer - dt
-		print(self.sv_grenade_timer)
 
 		if self.sv_grenade_timer <= 0.0 then
 			self.sv_grenade_timer = nil
@@ -461,7 +464,7 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 end
 
 function HandheldGrenadeBase:sv_n_startGrenadeTimer()
-	self.sv_grenade_timer = 10
+	self.sv_grenade_timer = self.mgp_tool_config.grenade_fuse_time
 end
 
 function HandheldGrenadeBase:sv_n_throwGrenade()
@@ -552,7 +555,6 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 	end
 
 	if self:cl_shouldBlockSprint() then
-		print("BLOCKING INPUT")
 		return
 	end
 
@@ -568,26 +570,10 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 
 			setFpAnimation(self.fpAnimations, "shoot", 0.0)
 		else
-			setFpAnimation(self.fpAnimations, "activate", 0.0)
+			if not self.tool:isSprinting() then
+				setFpAnimation(self.fpAnimations, "activate", 0.0)
+			end
 		end
-		--[[if self.grenade_active then
-			self.fireCooldownTimer = 2.0
-			self.grenade_active = false
-
-			self.grenade_spawn_timer = 0.35
-
-			self:onShoot()
-			self.network:sendToServer("sv_n_throwGrenade")
-
-			setFpAnimation(self.fpAnimations, "shoot", 0.0)
-		else
-			self.grenade_active = true
-			setFpAnimation(self.fpAnimations, "activate", 0.0)
-			
-			self.network:sendToServer("sv_n_startGrenadeTimer")
-
-			self.fireCooldownTimer = 2.4
-		end]]
 	end
 end
 
@@ -630,6 +616,7 @@ HandheldGrenade.mgp_renderables_fp =
 HandheldGrenade.mgp_tool_config =
 {
 	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
+	grenade_fuse_time = 7,
 	grenade_settings =
 	{
 		timer = 4,
