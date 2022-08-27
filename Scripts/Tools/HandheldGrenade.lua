@@ -146,10 +146,6 @@ local function calculateUpVector(vector)
 	return calculateRightVector(vector):cross(vector)
 end
 
-local function calculateOffsetVector(direction, offset)
-
-end
-
 function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	-- First person animation
@@ -158,10 +154,24 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	if self.tool:isLocal() then
 		if self.equipped then
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not self.tool:isSprinting() and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			local fp_anims = self.fpAnimations
+
+			if isSprinting and fp_anims.currentAnimation ~= "sprintInto" and fp_anims.currentAnimation ~= "sprintIdle" then
+				swapFpAnimation( fp_anims, "sprintExit", "sprintInto", 0.0 )
+			elseif not self.tool:isSprinting() and ( fp_anims.currentAnimation == "sprintIdle" or fp_anims.currentAnimation == "sprintInto" ) then
+				swapFpAnimation( fp_anims, "sprintInto", "sprintExit", 0.0 )
+			end
+
+			local cur_anim = fp_anims.currentAnimation
+			if cur_anim == "activate" then
+				local cur_anim_info = fp_anims.animations[cur_anim]
+				local anim_duration = cur_anim_info.info.duration
+				local anim_time = cur_anim_info.time + dt
+
+				if anim_time >= anim_duration then
+					self.grenade_active = true
+					self.network:sendToServer("sv_n_startGrenadeTimer")
+				end
 			end
 		end
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
@@ -222,7 +232,7 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint( self.sprintCooldownTimer > 0.0 )
+	self.tool:setBlockSprint( self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -523,13 +533,44 @@ function HandheldGrenadeBase:sv_n_spawnGrenade()
 	end
 end
 
+local blocking_animations =
+{
+	["activate"] = true
+}
+
+function HandheldGrenadeBase:cl_shouldBlockSprint()
+	if self.tool:isLocal() and self.equipped then
+		return (blocking_animations[self.fpAnimations.currentAnimation] == true)
+	end
+
+	return false
+end
+
 function HandheldGrenadeBase:cl_onPrimaryUse(state)
 	if self.tool:getOwner().character == nil then
 		return
 	end
 
+	if self:cl_shouldBlockSprint() then
+		print("BLOCKING INPUT")
+		return
+	end
+
 	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
 		if self.grenade_active then
+			self.fireCooldownTimer = 2.0
+			self.grenade_active = false
+
+			self.grenade_spawn_timer = 0.35
+
+			self:onShoot()
+			self.network:sendToServer("sv_n_throwGrenade")
+
+			setFpAnimation(self.fpAnimations, "shoot", 0.0)
+		else
+			setFpAnimation(self.fpAnimations, "activate", 0.0)
+		end
+		--[[if self.grenade_active then
 			self.fireCooldownTimer = 2.0
 			self.grenade_active = false
 
@@ -546,7 +587,7 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 			self.network:sendToServer("sv_n_startGrenadeTimer")
 
 			self.fireCooldownTimer = 2.4
-		end
+		end]]
 	end
 end
 
@@ -593,7 +634,7 @@ HandheldGrenade.mgp_tool_config =
 	{
 		timer = 4,
 		expl_lvl = 6,
-		expl_rad = 3,
+		expl_rad = 1,
 		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
 			min_count = 10, max_count = 25,
