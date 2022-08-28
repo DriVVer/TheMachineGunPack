@@ -16,6 +16,9 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field mgp_renderables_fp table
 ---@field mgp_renderables table
 ---@field equipped boolean
+---@field mgp_tp_animation_list table
+---@field mgp_movement_animations table
+---@field mgp_fp_animation_list table
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
@@ -28,66 +31,16 @@ end
 
 function HandheldGrenadeBase.loadAnimations( self )
 
-	self.tpAnimations = createTpAnimations(
-		self.tool,
-		{
-			shoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-			aim = { "glowstick_idle", { crouch = "glowstick_crouch_idle" } },
-			aimShoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-			idle = { "glowstick_use" },
-			pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
-			putdown = { "glowstick_putdown" }
-		}
-	)
-	local movementAnimations = {
-		idle = "glowstick_idle",
-		idleRelaxed = "glowstick_idle",
-
-		sprint = "glowstick_sprint",
-		runFwd = "glowstick_run_fwd",
-		runBwd = "glowstick_run_bwd",
-
-		jump = "glowstick_jump",
-		jumpUp = "glowstick_jump_up",
-		jumpDown = "glowstick_jump_down",
-
-		land = "glowstick_idle",
-		landFwd = "glowstick_idle",
-		landBwd = "glowstick_idle",
-
-		crouchIdle = "glowstick_crouch_idle",
-		crouchFwd = "glowstick_crouch_fwd",
-		crouchBwd = "glowstick_crouch_bwd"
-	}
-
-	for name, animation in pairs( movementAnimations ) do
+	self.tpAnimations = createTpAnimations(self.tool, self.mgp_tp_animation_list)
+	
+	for name, animation in pairs( self.mgp_movement_animations ) do
 		self.tool:setMovementAnimation( name, animation )
 	end
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
 	if self.tool:isLocal() then
-		self.fpAnimations = createFpAnimations(
-			self.tool,
-			{
-				equip = { "glowstick_pickup", { nextAnimation = "idle" } },
-				unequip = { "glowstick_putdown" },
-
-				idle = { "glowstick_idle", { looping = true } },
-				shoot = { "glowstick_throw", { nextAnimation = "idle" } },
-
-				activate = { "glowstick_activ", { nextAnimation = "idle" } },
-
-				aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "glowstick_aim_idle", { looping = true } },
-				aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
-
-				sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "glowstick_sprint_idle", { looping = true } }
-			}
-		)
+		self.fpAnimations = createFpAnimations(self.tool, self.mgp_fp_animation_list)
 	end
 
 	self.normalFireMode = {
@@ -153,6 +106,15 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 	local isSprinting =  self.tool:isSprinting()
 	local isCrouching =  self.tool:isCrouching()
 
+	if self.cl_grenade_timer then
+		self.cl_grenade_timer = self.cl_grenade_timer - dt
+
+		if self.cl_grenade_timer <= 0.0 then
+			self.cl_grenade_timer = nil
+			self.grenade_active = false
+		end
+	end
+
 	if self.tool:isLocal() then
 		if self.equipped then
 			local fp_anims = self.fpAnimations
@@ -174,6 +136,7 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 				if anim_time >= anim_duration then
 					self.grenade_active = true
+					self.cl_grenade_timer = self.mgp_tool_config.grenade_fuse_time
 					self.network:sendToServer("sv_n_startGrenadeTimer")
 				end
 			end
@@ -415,12 +378,26 @@ local _math_random = math.random
 local _sm_vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
 function HandheldGrenadeBase:server_onFixedUpdate(dt)
-	--self.sv_grenade_timer
+	if self.sv_grenade_activation_timer then
+		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - dt
+
+		if self.sv_grenade_activation_timer <= 0.0 then
+			self.sv_grenade_ready = true
+			self.sv_grenade_activation_timer = nil
+		end
+	end
+	
 	if self.sv_grenade_timer then
 		self.sv_grenade_timer = self.sv_grenade_timer - dt
 
 		if self.sv_grenade_timer <= 0.0 then
 			self.sv_grenade_timer = nil
+
+			if not self.sv_grenade_ready then
+				return
+			end
+
+			self.sv_grenade_ready = nil
 
 			local grenade_owner = self.tool:getOwner()
 			if not grenade_owner then
@@ -467,6 +444,10 @@ function HandheldGrenadeBase:sv_n_startGrenadeTimer()
 	self.sv_grenade_timer = self.mgp_tool_config.grenade_fuse_time
 end
 
+function HandheldGrenadeBase:sv_n_activateGrenade()
+	self.sv_grenade_activation_timer = 2.46667
+end
+
 function HandheldGrenadeBase:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
 end
@@ -511,6 +492,12 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 end
 
 function HandheldGrenadeBase:sv_n_spawnGrenade()
+	if not self.sv_grenade_ready then
+		return
+	end
+
+	self.sv_grenade_ready = nil
+
 	local grenade_owner = self.tool:getOwner()
 	if not grenade_owner then
 		return
@@ -561,7 +548,9 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
 		if self.grenade_active then
 			self.fireCooldownTimer = 2.0
+
 			self.grenade_active = false
+			self.cl_grenade_timer = nil
 
 			self.grenade_spawn_timer = 0.35
 
@@ -572,6 +561,7 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		else
 			if not self.tool:isSprinting() then
 				setFpAnimation(self.fpAnimations, "activate", 0.0)
+				self.network:sendToServer("sv_n_activateGrenade")
 			end
 		end
 	end
@@ -611,6 +601,58 @@ HandheldGrenade.mgp_renderables_fp =
 {
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_fp_animlist.rend",
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
+}
+
+HandheldGrenade.mgp_tp_animation_list =
+{
+	shoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
+	aim = { "glowstick_idle", { crouch = "glowstick_crouch_idle" } },
+	aimShoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
+	idle = { "glowstick_use" },
+	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
+	putdown = { "glowstick_putdown" }
+}
+
+HandheldGrenade.mgp_fp_animation_list =
+{
+	equip = { "glowstick_pickup", { nextAnimation = "idle" } },
+	unequip = { "glowstick_putdown" },
+
+	idle = { "glowstick_idle", { looping = true } },
+	shoot = { "glowstick_throw", { nextAnimation = "idle" } },
+
+	activate = { "glowstick_activ", { nextAnimation = "idle" } },
+
+	aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
+	aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+	aimIdle = { "glowstick_aim_idle", { looping = true } },
+	aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
+
+	sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+	sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+	sprintIdle = { "glowstick_sprint_idle", { looping = true } }
+}
+
+HandheldGrenade.mgp_movement_animations =
+{
+	idle = "glowstick_idle",
+	idleRelaxed = "glowstick_idle",
+
+	sprint = "glowstick_sprint",
+	runFwd = "glowstick_run_fwd",
+	runBwd = "glowstick_run_bwd",
+
+	jump = "glowstick_jump",
+	jumpUp = "glowstick_jump_up",
+	jumpDown = "glowstick_jump_down",
+
+	land = "glowstick_idle",
+	landFwd = "glowstick_idle",
+	landBwd = "glowstick_idle",
+
+	crouchIdle = "glowstick_crouch_idle",
+	crouchFwd = "glowstick_crouch_fwd",
+	crouchBwd = "glowstick_crouch_bwd"
 }
 
 HandheldGrenade.mgp_tool_config =
