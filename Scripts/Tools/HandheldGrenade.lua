@@ -219,12 +219,10 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
-				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif animation.nextAnimation ~= "" then
-					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
+				if name == "throw" or name == "activate" then
+					setTpAnimation(self.tpAnimations, animation.nextAnimation, 10.0)
+				else
+					setTpAnimation(self.tpAnimations, animation.nextAnimation, 0.001)
 				end
 			end
 		else
