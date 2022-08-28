@@ -121,7 +121,7 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 			local cur_anim = fp_anims.currentAnimation
 
 			--shoot
-			if cur_anim ~= "shoot" then
+			if cur_anim ~= "throw" then
 				if isSprinting and fp_anims.currentAnimation ~= "sprintInto" and fp_anims.currentAnimation ~= "sprintIdle" then
 					swapFpAnimation( fp_anims, "sprintExit", "sprintInto", 0.0 )
 				elseif not self.tool:isSprinting() and ( fp_anims.currentAnimation == "sprintIdle" or fp_anims.currentAnimation == "sprintInto" ) then
@@ -360,17 +360,27 @@ function HandheldGrenadeBase.onAim( self, aiming )
 	end
 end
 
-function HandheldGrenadeBase:onShoot()
-	self.tpAnimations.animations.idle.time = 0
-	self.tpAnimations.animations.shoot.time = 0
-	self.tpAnimations.animations.aimShoot.time = 0
+function HandheldGrenadeBase:onActivateGrenade()
+	setTpAnimation(self.tpAnimations, "activate", 1.0)
+end
 
-	setTpAnimation( self.tpAnimations, "shoot", 10.0 )
+function HandheldGrenadeBase:cl_n_activateGrenade()
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:onActivateGrenade()
+	end
+end
+
+function HandheldGrenadeBase:onThrowGrenade()
+	--self.tpAnimations.animations.idle.time = 0
+	--self.tpAnimations.animations.shoot.time = 0
+	--self.tpAnimations.animations.aimShoot.time = 0
+
+	setTpAnimation( self.tpAnimations, "throw", 10.0 )
 end
 
 function HandheldGrenadeBase:cl_n_throwGrenade()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot()
+		self:onThrowGrenade()
 	end
 end
 
@@ -446,6 +456,7 @@ end
 
 function HandheldGrenadeBase:sv_n_activateGrenade()
 	self.sv_grenade_activation_timer = 2.46667
+	self.network:sendToClients("cl_n_activateGrenade")
 end
 
 function HandheldGrenadeBase:sv_n_throwGrenade()
@@ -554,13 +565,15 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 
 			self.grenade_spawn_timer = 0.35
 
-			self:onShoot()
+			self:onThrowGrenade()
 			self.network:sendToServer("sv_n_throwGrenade")
 
-			setFpAnimation(self.fpAnimations, "shoot", 0.0)
+			setFpAnimation(self.fpAnimations, "throw", 0.0)
 		else
 			if not self.tool:isSprinting() then
 				setFpAnimation(self.fpAnimations, "activate", 0.0)
+
+				self:onActivateGrenade()
 				self.network:sendToServer("sv_n_activateGrenade")
 			end
 		end
@@ -605,12 +618,12 @@ HandheldGrenade.mgp_renderables_fp =
 
 HandheldGrenade.mgp_tp_animation_list =
 {
-	shoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-	aim = { "glowstick_idle", { crouch = "glowstick_crouch_idle" } },
-	aimShoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-	idle = { "glowstick_use" },
+	idle = { "glowstick_idle" },
 	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
-	putdown = { "glowstick_putdown" }
+	putdown = { "glowstick_putdown" },
+	
+	throw = { "glowstick_use", { nextAnimation = "idle", blendNext = 0 } },
+	activate = { "glowstick_activ", { nextAnimation = "idle" } }
 }
 
 HandheldGrenade.mgp_fp_animation_list =
@@ -619,9 +632,9 @@ HandheldGrenade.mgp_fp_animation_list =
 	unequip = { "glowstick_putdown" },
 
 	idle = { "glowstick_idle", { looping = true } },
-	shoot = { "glowstick_throw", { nextAnimation = "idle" } },
-
+	
 	activate = { "glowstick_activ", { nextAnimation = "idle" } },
+	throw = { "glowstick_throw", { nextAnimation = "idle" } },
 
 	aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
 	aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
