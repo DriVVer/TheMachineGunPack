@@ -15,10 +15,14 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 ---@field mgp_renderables_tp table
 ---@field mgp_renderables_fp table
 ---@field mgp_renderables table
+---@field equipped boolean
+---@field mgp_tp_animation_list table
+---@field mgp_movement_animations table
+---@field mgp_fp_animation_list table
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
-	self.grenade_active = true
+	self.grenade_active = false
 end
 
 function HandheldGrenadeBase:client_onRefresh()
@@ -27,66 +31,16 @@ end
 
 function HandheldGrenadeBase.loadAnimations( self )
 
-	self.tpAnimations = createTpAnimations(
-		self.tool,
-		{
-			shoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-			aim = { "glowstick_idle", { crouch = "glowstick_crouch_idle" } },
-			aimShoot = { "glowstick_use", { crouch = "glowstick_crouch_idle" } },
-			idle = { "glowstick_use" },
-			pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
-			putdown = { "glowstick_putdown" }
-		}
-	)
-	local movementAnimations = {
-		idle = "glowstick_idle",
-		idleRelaxed = "glowstick_idle",
-
-		sprint = "glowstick_sprint",
-		runFwd = "glowstick_run_fwd",
-		runBwd = "glowstick_run_bwd",
-
-		jump = "glowstick_jump",
-		jumpUp = "glowstick_jump_up",
-		jumpDown = "glowstick_jump_down",
-
-		land = "glowstick_idle",
-		landFwd = "glowstick_idle",
-		landBwd = "glowstick_idle",
-
-		crouchIdle = "glowstick_crouch_idle",
-		crouchFwd = "glowstick_crouch_fwd",
-		crouchBwd = "glowstick_crouch_bwd"
-	}
-
-	for name, animation in pairs( movementAnimations ) do
+	self.tpAnimations = createTpAnimations(self.tool, self.mgp_tp_animation_list)
+	
+	for name, animation in pairs( self.mgp_movement_animations ) do
 		self.tool:setMovementAnimation( name, animation )
 	end
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
 	if self.tool:isLocal() then
-		self.fpAnimations = createFpAnimations(
-			self.tool,
-			{
-				equip = { "glowstick_pickup", { nextAnimation = "idle" } },
-				unequip = { "glowstick_putdown" },
-
-				idle = { "glowstick_idle", { looping = true } },
-				shoot = { "glowstick_throw", { nextAnimation = "idle" } },
-
-				activate = { "glowstick_activ", { nextAnimation = "idle" } },
-
-				aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "glowstick_aim_idle", { looping = true } },
-				aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
-
-				sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "glowstick_sprint_idle", { looping = true } }
-			}
-		)
+		self.fpAnimations = createFpAnimations(self.tool, self.mgp_fp_animation_list)
 	end
 
 	self.normalFireMode = {
@@ -137,25 +91,54 @@ function HandheldGrenadeBase.loadAnimations( self )
 
 end
 
-function HandheldGrenadeBase.client_onUpdate( self, dt )
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
+local function calculateUpVector(vector)
+	return calculateRightVector(vector):cross(vector)
+end
+
+function HandheldGrenadeBase:client_onUpdate(dt)
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
 	local isCrouching =  self.tool:isCrouching()
 
+	if self.cl_grenade_timer then
+		self.cl_grenade_timer = self.cl_grenade_timer - dt
+
+		if self.cl_grenade_timer <= 0.0 then
+			self.cl_grenade_timer = nil
+			self.grenade_active = false
+		end
+	end
+
 	if self.tool:isLocal() then
 		if self.equipped then
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not self.tool:isSprinting() and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			local fp_anims = self.fpAnimations
+			local cur_anim = fp_anims.currentAnimation
+
+			--shoot
+			if cur_anim ~= "throw" then
+				if isSprinting and fp_anims.currentAnimation ~= "sprintInto" and fp_anims.currentAnimation ~= "sprintIdle" then
+					swapFpAnimation( fp_anims, "sprintExit", "sprintInto", 0.0 )
+				elseif not self.tool:isSprinting() and ( fp_anims.currentAnimation == "sprintIdle" or fp_anims.currentAnimation == "sprintInto" ) then
+					swapFpAnimation( fp_anims, "sprintInto", "sprintExit", 0.0 )
+				end
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+			if cur_anim == "activate" then
+				local cur_anim_info = fp_anims.animations[cur_anim]
+				local anim_duration = cur_anim_info.info.duration
+				local anim_time = cur_anim_info.time + dt
+
+				if anim_time >= anim_duration then
+					self.grenade_active = true
+					self.cl_grenade_timer = self.mgp_tool_config.grenade_fuse_time
+					self.network:sendToServer("sv_n_startGrenadeTimer")
+				end
 			end
 		end
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
@@ -174,7 +157,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 		if self.grenade_spawn_timer <= 0.0 then
 			self.grenade_spawn_timer = nil
-
 			self.network:sendToServer("sv_n_spawnGrenade")
 		end
 	end
@@ -187,7 +169,7 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local fireMode = self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -211,28 +193,15 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
-		if self.aiming then
-			if self.tool:isInFirstPersonView() then
-				self.tool:setCrossHairAlpha( 0.0 )
-			else
-				self.tool:setCrossHairAlpha( 1.0 )
-			end
-			self.tool:setInteractionTextSuppressed( true )
-		else
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
-		end
+		self.tool:setCrossHairAlpha( 1.0 )
+		self.tool:setInteractionTextSuppressed( false )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0
-	self.tool:setBlockSprint( blockSprint )
+	self.tool:setBlockSprint( self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
 
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
@@ -249,12 +218,10 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
-				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif animation.nextAnimation ~= "" then
-					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
+				if name == "throw" or name == "activate" then
+					setTpAnimation(self.tpAnimations, animation.nextAnimation, 10.0)
+				else
+					setTpAnimation(self.tpAnimations, animation.nextAnimation, 0.001)
 				end
 			end
 		else
@@ -311,22 +278,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
 function HandheldGrenadeBase.client_onEquip( self, animate )
@@ -365,11 +316,14 @@ function HandheldGrenadeBase.client_onEquip( self, animate )
 end
 
 function HandheldGrenadeBase.client_onUnequip( self, animate )
-
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+	self.grenade_active = false
+
 	if sm.exists( self.tool ) then
+		self.network:sendToServer("sv_n_unequipGrenade")
+
 		if animate then
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
 		end
@@ -403,49 +357,220 @@ function HandheldGrenadeBase.onAim( self, aiming )
 	end
 end
 
-function HandheldGrenadeBase:onShoot()
-	self.tpAnimations.animations.idle.time = 0
-	self.tpAnimations.animations.shoot.time = 0
-	self.tpAnimations.animations.aimShoot.time = 0
+function HandheldGrenadeBase:onActivateGrenade()
+	setTpAnimation(self.tpAnimations, "activate", 1.0)
+end
 
-	setTpAnimation( self.tpAnimations, "shoot", 10.0 )
+function HandheldGrenadeBase:cl_n_activateGrenade()
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:onActivateGrenade()
+	end
+end
+
+function HandheldGrenadeBase:onThrowGrenade()
+	--self.tpAnimations.animations.idle.time = 0
+	--self.tpAnimations.animations.shoot.time = 0
+	--self.tpAnimations.animations.aimShoot.time = 0
+
+	setTpAnimation( self.tpAnimations, "throw", 10.0 )
 end
 
 function HandheldGrenadeBase:cl_n_throwGrenade()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot()
+		self:onThrowGrenade()
 	end
+end
+
+local _math_random = math.random
+local _sm_vec3_new = sm.vec3.new
+local _sm_noise_gunSpread = sm.noise.gunSpread
+function HandheldGrenadeBase:server_onFixedUpdate(dt)
+	if self.sv_grenade_activation_timer then
+		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - dt
+
+		if self.sv_grenade_activation_timer <= 0.0 then
+			self.sv_grenade_ready = true
+			self.sv_grenade_activation_timer = nil
+		end
+	end
+	
+	if self.sv_grenade_timer then
+		self.sv_grenade_timer = self.sv_grenade_timer - dt
+
+		if self.sv_grenade_timer <= 0.0 then
+			self.sv_grenade_timer = nil
+
+			if not self.sv_grenade_ready then
+				return
+			end
+
+			self.sv_grenade_ready = nil
+
+			local grenade_owner = self.tool:getOwner()
+			if not grenade_owner then
+				return
+			end
+
+			local owner_char = grenade_owner.character
+			if not (owner_char and sm.exists(owner_char)) then
+				return
+			end
+
+			local grenade_settings = self.mgp_tool_config.grenade_settings
+			local shr_data = grenade_settings.shrapnel_data
+			if shr_data ~= nil then
+				local sharpnel_pos = owner_char.worldPosition
+				local shrapenl_count = _math_random(shr_data.min_count, shr_data.max_count)
+
+				local shrapnel_min_speed = shr_data.min_speed
+				local shrapnel_max_speed = shr_data.max_speed
+
+				local shrapnel_min_damage = shr_data.min_damage
+				local shrapnel_max_damage = shr_data.max_damage
+
+				local shrapnel_projectile_uuid = shr_data.proj_uuid
+
+				for i = 1, shrapenl_count do
+					local s_speed = _math_random(shrapnel_min_speed, shrapnel_max_speed)
+					local s_damage = _math_random(shrapnel_min_damage, shrapnel_max_damage)
+
+					local shoot_dir = _sm_vec3_new(_math_random(0, 100) / 100, _math_random(0, 100) / 100, _math_random(0, 100) / 100):normalize()
+					local dir = _sm_noise_gunSpread(shoot_dir, 360) * s_speed
+
+					sm.projectile.projectileAttack(shrapnel_projectile_uuid, s_damage, sharpnel_pos, dir, grenade_owner)
+				end
+			end
+
+			sm.physics.explode(owner_char.worldPosition, grenade_settings.expl_lvl, grenade_settings.expl_rad, 5, 4, "PropaneTank - ExplosionSmall")
+			sm.event.sendToPlayer(grenade_owner, "sv_e_receiveDamage", { damage = 1000 })
+		end
+	end
+end
+
+function HandheldGrenadeBase:sv_n_startGrenadeTimer()
+	self.sv_grenade_timer = self.mgp_tool_config.grenade_fuse_time
+end
+
+function HandheldGrenadeBase:sv_n_activateGrenade()
+	self.sv_grenade_activation_timer = 2.46667
+	self.network:sendToClients("cl_n_activateGrenade")
 end
 
 function HandheldGrenadeBase:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
 end
 
-function HandheldGrenadeBase:sv_n_spawnGrenade()
-	local owner_player = self.tool:getOwner()
-	local owner_char = owner_player.character
+function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
+	if caller ~= nil or self.sv_grenade_timer == nil then
+		return nil
+	end
 
-	if owner_char and sm.exists(owner_char) then
-		local tool_config = self.mgp_tool_config
+	local grenade_timer_saved = self.sv_grenade_timer
+	self.sv_grenade_timer = nil
 
-		local char_dir = owner_char.direction
-		local grenade_pos = owner_char.worldPosition + char_dir * 0.5
-		local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
+	local tool_config = self.mgp_tool_config
+	local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, data.pos, data.rot, true, true)
+	
+	local g_inter = s_grenade.interactable
+	if g_inter then
+		local g_settings_copy = {}
+		for k, v in pairs(tool_config.grenade_settings) do
+			g_settings_copy[k] = v
+		end
 
-		local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, grenade_pos, grenade_rotation, true, true)
+		g_settings_copy.timer = grenade_timer_saved
+		g_inter.publicData = g_settings_copy
+	end
 
+	return s_grenade
+end
+
+function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
+	local grenade_owner = self.tool:getOwner()
+	if not grenade_owner then
+		return
+	end
+
+	local owner_char = grenade_owner.character
+	if not (owner_char and sm.exists(owner_char)) then
+		return
+	end
+
+	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
+end
+
+local _math_sqrt = math.sqrt
+local _math_asin = math.asin
+local function SolveBalArcInternal(launchPos, hitPos, velocity)
+	local g = 10
+
+	local a = (launchPos.x - hitPos.x)^2
+	local b = (launchPos.y - hitPos.y)^2
+	local R = _math_sqrt(a + b)
+
+	return _math_asin(g * R / velocity^2) / 2
+end
+
+local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
+	local angle = SolveBalArcInternal(start_pos, end_pos, velocity)
+	if angle == angle then
+		return direction:rotate(angle, calculateRightVector(direction))
+	end
+
+	return direction
+end
+
+function HandheldGrenadeBase:sv_n_spawnGrenade(data)
+	if not self.sv_grenade_ready then
+		return
+	end
+
+	self.sv_grenade_ready = nil
+
+	local grenade_owner = self.tool:getOwner()
+	if not grenade_owner then
+		return
+	end
+
+	local owner_char = grenade_owner.character
+	if not (owner_char and sm.exists(owner_char)) then
+		return
+	end
+
+	local char_dir = owner_char.direction
+	local grenade_pos = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2 + char_dir * 0.7
+	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
+
+	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
+	local grd_mass = s_grenade:getMass()
+	local grd_vel = 20
+	local grenade_direction = owner_char.direction
+	local hit, result = sm.physics.raycast(grenade_pos, grenade_pos + char_dir * 300)
+	if hit then
+		local dir_calc = (result.pointWorld - result.originWorld):normalize()
+		grenade_direction = SolveBallisticArc(result.originWorld, result.pointWorld, grd_vel, dir_calc)
+	end
+	if s_grenade then
 		--Apply forward impulse
-		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20, true)
+		sm.physics.applyImpulse(s_grenade, grenade_direction * (grd_mass * grd_vel), true)
 
 		--Apply rotation
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
-
-		local grenade_inter = s_grenade.interactable
-		if grenade_inter then
-			grenade_inter.publicData = tool_config.grenade_settings
-		end
 	end
+end
+
+local blocking_animations =
+{
+	["activate"] = true
+}
+
+function HandheldGrenadeBase:cl_shouldBlockSprint()
+	if self.tool:isLocal() and self.equipped then
+		return (blocking_animations[self.fpAnimations.currentAnimation] == true)
+	end
+
+	return false
 end
 
 function HandheldGrenadeBase:cl_onPrimaryUse(state)
@@ -453,55 +578,42 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		return
 	end
 
+	if self:cl_shouldBlockSprint() then
+		return
+	end
+
 	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
 		if self.grenade_active then
 			self.fireCooldownTimer = 2.0
+
 			self.grenade_active = false
+			self.cl_grenade_timer = nil
 
 			self.grenade_spawn_timer = 0.35
 
-			self:onShoot()
+			self:onThrowGrenade()
 			self.network:sendToServer("sv_n_throwGrenade")
 
-			setFpAnimation(self.fpAnimations, "shoot", 0.0)
+			setFpAnimation(self.fpAnimations, "throw", 0.0)
 		else
-			self.grenade_active = true
-			setFpAnimation(self.fpAnimations, "activate", 0.0)
+			if not self.tool:isSprinting() then
+				setFpAnimation(self.fpAnimations, "activate", 0.0)
 
-			self.fireCooldownTimer = 2.4
+				self:onActivateGrenade()
+				self.network:sendToServer("sv_n_activateGrenade")
+			end
 		end
 	end
 end
 
-function HandheldGrenadeBase.cl_onSecondaryUse( self, state )
-	if state == sm.tool.interactState.start and not self.aiming then
-		self.aiming = true
-		self.tpAnimations.animations.idle.time = 0
-
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
-	end
-
-	if self.aiming and (state == sm.tool.interactState.stop or state == sm.tool.interactState.null) then
-		self.aiming = false
-		self.tpAnimations.animations.idle.time = 0
-
-		self:onAim( self.aiming )
-		self.tool:setMovementSlowDown( self.aiming )
-		self.network:sendToServer( "sv_n_onAim", self.aiming )
-	end
+function HandheldGrenadeBase.client_onReload()
+	return true
 end
 
 function HandheldGrenadeBase.client_onEquippedUpdate( self, primaryState, secondaryState )
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse( primaryState )
 		self.prevPrimaryState = primaryState
-	end
-
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
 	end
 
 	return true, true
@@ -530,14 +642,67 @@ HandheldGrenade.mgp_renderables_fp =
 	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
 }
 
+HandheldGrenade.mgp_tp_animation_list =
+{
+	idle = { "glowstick_idle" },
+	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
+	putdown = { "glowstick_putdown" },
+	
+	throw = { "glowstick_use", { nextAnimation = "idle", blendNext = 0 } },
+	activate = { "glowstick_activ", { nextAnimation = "idle" } }
+}
+
+HandheldGrenade.mgp_fp_animation_list =
+{
+	equip = { "glowstick_pickup", { nextAnimation = "idle" } },
+	unequip = { "glowstick_putdown" },
+
+	idle = { "glowstick_idle", { looping = true } },
+	
+	activate = { "glowstick_activ", { nextAnimation = "idle" } },
+	throw = { "glowstick_throw", { nextAnimation = "idle" } },
+
+	aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
+	aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+	aimIdle = { "glowstick_aim_idle", { looping = true } },
+	aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
+
+	sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+	sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+	sprintIdle = { "glowstick_sprint_idle", { looping = true } }
+}
+
+HandheldGrenade.mgp_movement_animations =
+{
+	idle = "glowstick_idle",
+	idleRelaxed = "glowstick_idle",
+
+	sprint = "glowstick_sprint",
+	runFwd = "glowstick_run_fwd",
+	runBwd = "glowstick_run_bwd",
+
+	jump = "glowstick_jump",
+	jumpUp = "glowstick_jump_up",
+	jumpDown = "glowstick_jump_down",
+
+	land = "glowstick_idle",
+	landFwd = "glowstick_idle",
+	landBwd = "glowstick_idle",
+
+	crouchIdle = "glowstick_crouch_idle",
+	crouchFwd = "glowstick_crouch_fwd",
+	crouchBwd = "glowstick_crouch_bwd"
+}
+
 HandheldGrenade.mgp_tool_config =
 {
 	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
+	grenade_fuse_time = 7,
 	grenade_settings =
 	{
 		timer = 4,
 		expl_lvl = 6,
-		expl_rad = 3,
+		expl_rad = 1,
 		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
 			min_count = 10, max_count = 25,

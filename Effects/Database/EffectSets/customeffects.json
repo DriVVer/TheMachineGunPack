@@ -335,7 +335,7 @@
 		[
 			{
 				"type": "audio",
-				"name": "event:/tools/connectiontool/ct_pickup",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
 				"attached": true,
 				"delay": 0.0
 			},
@@ -369,7 +369,7 @@
 			},
 			{
 				"type": "audio",
-				"name": "event:/tools/spudgun/sg_pickup",
+				"name": "event:/tools/sledgehammer_pickup",
 				"attached": true,
 				"delay": 1.5
 			}
