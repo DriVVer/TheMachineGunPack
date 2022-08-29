@@ -157,7 +157,6 @@ function HandheldGrenadeBase.client_onUpdate( self, dt )
 
 		if self.grenade_spawn_timer <= 0.0 then
 			self.grenade_spawn_timer = nil
-
 			self.network:sendToServer("sv_n_spawnGrenade")
 		end
 	end
@@ -500,7 +499,28 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
 end
 
-function HandheldGrenadeBase:sv_n_spawnGrenade()
+local _math_sqrt = math.sqrt
+local _math_asin = math.asin
+local function SolveBalArcInternal(launchPos, hitPos, velocity)
+	local g = 10
+
+	local a = (launchPos.x - hitPos.x)^2
+	local b = (launchPos.y - hitPos.y)^2
+	local R = _math_sqrt(a + b)
+
+	return _math_asin(g * R / velocity^2) / 2
+end
+
+local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
+	local angle = SolveBalArcInternal(start_pos, end_pos, velocity)
+	if angle == angle then
+		return direction:rotate(angle, calculateRightVector(direction))
+	end
+
+	return direction
+end
+
+function HandheldGrenadeBase:sv_n_spawnGrenade(data)
 	if not self.sv_grenade_ready then
 		return
 	end
@@ -518,13 +538,21 @@ function HandheldGrenadeBase:sv_n_spawnGrenade()
 	end
 
 	local char_dir = owner_char.direction
-	local grenade_pos = owner_char.worldPosition + char_dir * 0.5
+	local grenade_pos = owner_char.worldPosition + char_dir * 0.7
 	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
 
 	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
+	local grd_mass = s_grenade:getMass()
+	local grd_vel = 20
+	local grenade_direction = owner_char.direction
+	local hit, result = sm.physics.raycast(grenade_pos, grenade_pos + char_dir * 300)
+	if hit then
+		local dir_calc = (result.pointWorld - result.originWorld):normalize()
+		grenade_direction = SolveBallisticArc(result.originWorld, result.pointWorld, grd_vel, dir_calc)
+	end
 	if s_grenade then
 		--Apply forward impulse
-		sm.physics.applyImpulse(s_grenade, owner_char.direction * s_grenade:getMass() * 20, true)
+		sm.physics.applyImpulse(s_grenade, grenade_direction * (grd_mass * grd_vel), true)
 
 		--Apply rotation
 		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
