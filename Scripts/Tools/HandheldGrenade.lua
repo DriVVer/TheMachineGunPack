@@ -100,7 +100,7 @@ local function calculateUpVector(vector)
 	return calculateRightVector(vector):cross(vector)
 end
 
-function HandheldGrenadeBase.client_onUpdate( self, dt )
+function HandheldGrenadeBase:client_onUpdate(dt)
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
@@ -538,7 +538,7 @@ function HandheldGrenadeBase:sv_n_spawnGrenade(data)
 	end
 
 	local char_dir = owner_char.direction
-	local grenade_pos = owner_char.worldPosition + char_dir * 0.7
+	local grenade_pos = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2 + char_dir * 0.7
 	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
 
 	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
