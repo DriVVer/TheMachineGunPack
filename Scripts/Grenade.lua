@@ -23,6 +23,20 @@ function Grenade:server_onProjectile()
 	self.timer = 0
 end
 
+function Grenade:server_onCollision(object, position)
+	if type(object) ~= "Shape" or not sm.exists(object) then
+		return
+	end
+
+	local obj_uuid = object.uuid
+	if sm.item.isBlock(obj_uuid) and sm.item.getQualityLevel(obj_uuid) == 1 then
+		local loc_pos = object:getClosestBlockLocalPosition(position)
+		object:destroyBlock(loc_pos, sm.vec3.new(3, 3, 3), 1)
+
+		sm.effect.playEffect("Sledgehammer - Destroy", position, sm.vec3.zero(), sm.quat.identity(), sm.vec3.one(), { Material = object:getMaterialId() })
+	end
+end
+
 function Grenade:server_onMelee()
 	self.timer = 0
 end
