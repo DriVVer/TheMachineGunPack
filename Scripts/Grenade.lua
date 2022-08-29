@@ -23,8 +23,12 @@ function Grenade:server_onProjectile()
 	self.timer = 0
 end
 
-function Grenade:server_onCollision(object, position)
+function Grenade:server_onCollision(object, position, velocity)
 	if type(object) ~= "Shape" or not sm.exists(object) then
+		return
+	end
+
+	if velocity:length() < 8 then
 		return
 	end
 
