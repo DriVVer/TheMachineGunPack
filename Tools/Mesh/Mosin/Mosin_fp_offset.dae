@@ -17,7 +17,13 @@
   </asset>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      
+      <node name="Armature.002" id="Armature.002" sid="Armature.002">
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
         <node name="jnt_left_weapon" id="jnt_left_weapon" sid="jnt_left_weapon" type="JOINT">
           <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
@@ -34,7 +40,7 @@
             </extra>
           </node>
         </node>
-      
+      </node>
       <extra>
         <technique profile="MAX3D">
           <frame_rate>60.000000</frame_rate>
