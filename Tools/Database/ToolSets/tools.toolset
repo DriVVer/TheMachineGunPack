@@ -20,6 +20,15 @@
 			}
 		},
 		{
+			"uuid": "c0cb7836-075a-478a-af3d-0b7360721527",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Mosin.lua",
+				"class": "Mosin"
+			}
+		},
+		{
 			"uuid": "c3e4dc43-a841-4c0f-82a6-7225d1bf210e",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],

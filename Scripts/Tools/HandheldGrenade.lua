@@ -697,7 +697,7 @@ HandheldGrenade.mgp_movement_animations =
 HandheldGrenade.mgp_tool_config =
 {
 	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
-	grenade_fuse_time = 7,
+	grenade_fuse_time = 4,
 	grenade_settings =
 	{
 		timer = 4,

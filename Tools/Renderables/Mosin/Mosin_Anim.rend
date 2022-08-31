@@ -1,0 +1,31 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Mosin/Mosin_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			//"animationList": [
+				//{ "name": "Mosin_Shoot"            , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_Shoot.dae" },
+				//{ "name": "Mosin_aim_Shoot"        , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_aim_Shoot.dae" },
+				//{ "name": "Mosin_E_Reload"         , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_0-5_Reload.dae" },
+				//{ "name": "Mosin_1-5_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_1-5_Reload.dae" },
+				//{ "name": "Mosin_2-5_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_2-5_Reload.dae" },
+				//{ "name": "Mosin_3-5_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_3-5_Reload.dae" },
+				//{ "name": "Mosin_4-5_Reload"       , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_4-5_Reload.dae" },
+				
+				//{ "name": "Mosin_Pickup"           , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_Pickup.dae" },
+				//{ "name": "Mosin_1_ammo_check", 	"file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_normal_Ammo_Check.dae" },
+				//{ "name": "Mosin_2_ammo_check", 	"file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/ani_char_Mosin_fp_normal_Ammo_Check.dae" }
+			//],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				}
+			]
+		}
+	]
+}
