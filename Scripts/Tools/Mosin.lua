@@ -466,9 +466,9 @@ function Mosin:client_onEquip(animate)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	if not self.tool:isSprinting() then
-		mgp_toolAnimator_setAnimation(self, "equip")
-	end
+	--if not self.tool:isSprinting() then
+	--	mgp_toolAnimator_setAnimation(self, "equip")
+	--end
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
