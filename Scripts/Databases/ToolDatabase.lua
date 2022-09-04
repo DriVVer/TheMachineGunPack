@@ -202,7 +202,6 @@ local mgp_tool_database =
 	Magnum44 =
 	{
 		required_effects = {
-			MG_shells_tp = "Magnum_6_Shell_TP",
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reloadTG = "TommyReload",
@@ -479,6 +478,233 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
 						tp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
+						time = 2.0
+					}
+				}
+			}
+		}
+	},
+
+	Mosin =
+	{
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reloadTG = "TommyReload",
+			reloadETG = "TommyEReload"
+		},
+		on_unequip_action = {
+			stop_effects = { "reloadTG", "reloadETG" }
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Base.rend"    , enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Anim.rend"	, enabled_by_default = true }
+		},
+		animation_reset = {
+			cock_the_hammer = mgp_aim_shoot_reset_table,
+			cock_the_hammer_aim = mgp_shoot_reset_table,
+			no_ammo = mgp_aim_shoot_reset_table,
+			no_ammo_aim = mgp_shoot_reset_table,
+			shoot = mgp_aim_shoot_reset_table,
+			shoot_aim = mgp_shoot_reset_table
+		},
+		animation = {
+			cock_the_hammer =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 0.5 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 0.5 } },
+						time = 0.5
+					}
+				}
+			},
+			cock_the_hammer_aim =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 0.5 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 0.5 } },
+						time = 0.5
+					}
+				}
+			},
+			no_ammo =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				}
+			},
+			no_ammo_aim =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				}
+			},
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				}
+			},
+			shoot_aim =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				}
+			},
+			reload4 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
+					}
+				}
+			},
+			reload3 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
+					}
+				}
+			},
+			reload2 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
+					}
+				}
+			},
+			reload1 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
+					}
+				}
+			},
+			reload0 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reloadTG",
+						name_fp = "reloadTG",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 3.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 3.0 } },
+						time = 3.0
+					}
+				}
+			},
+			ammo_check =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 2.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 2.0 } },
 						time = 2.0
 					}
 				}
