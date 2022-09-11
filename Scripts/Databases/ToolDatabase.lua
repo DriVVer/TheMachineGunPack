@@ -567,9 +567,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Mosin_Shoot", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
+						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 1.0 } },
+						time = 0.2
 					}
 				}
 			},
@@ -608,9 +608,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						tp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						time = 4.75
 					}
 				}
 			},
@@ -629,9 +629,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						tp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						time = 4.75
 					}
 				}
 			},
@@ -650,9 +650,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Mosin_Shoot", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						tp_anim = { { name = "Mosin_Reload_5", start_val = 0.0, end_val = 4.75 } },
+						time = 4.75
 					}
 				}
 			},

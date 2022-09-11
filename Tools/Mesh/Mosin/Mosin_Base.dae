@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-09-02T23:20:08Z</created><keywords></keywords><modified>2022-09-02T23:20:08Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-09-11T21:58:46Z</created><keywords></keywords><modified>2022-09-11T21:58:46Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_images>
     <image id="base_color_texture-image" name="base_color_texture"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\rifle_wood_dif.png</init_from></image>
     <image id="base_color_texture_ncl1_1-image" name="base_color_texture_ncl1_1"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\TommyGunDif.png</init_from></image>
@@ -67918,22 +67918,30 @@
         <bind_shape_matrix>0.700000 0.000000 0.000000 0.000000 0.000000 -0.000000 0.700000 0.000000 0.000000 -0.700000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 </bind_shape_matrix>
         <source id="WoodController-Joints">
-          <Name_array id="WoodController-Joints-array" count="3">
- jnt_mosin pejnt_barrel jnt_bolt</Name_array>
+          <Name_array id="WoodController-Joints-array" count="10">
+ jnt_mosin jnt_bolt jnt_bolt_location jnt_bolt_rotation jnt_bolt_striker
+jnt_trigger jnt_empty jnt_ammo_1 jnt_ammo_2 pejnt_barrel</Name_array>
           <technique_common>
-            <accessor source="#WoodController-Joints-array" count="3">
+            <accessor source="#WoodController-Joints-array" count="10">
               <param type="name"/>
             </accessor>
           </technique_common>
         </source>
         <source id="WoodController-Matrices">
-          <float_array id="WoodController-Matrices-array" count="48">
+          <float_array id="WoodController-Matrices-array" count="160">
 
 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000001 -0.000000 0.000000 -0.000000 -0.000000 1.000000 -2.940000 -0.000001 -1.000000 -0.000000 0.210000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 1.000000 0.324043 -0.000000 -1.000000 -0.000000 0.210000 0.000000 0.000000 0.000000 1.000000</float_array>
+1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.324043 -0.000000 -1.000000 0.000000 0.210000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.814043 -0.000000 -1.000000 0.000000 0.210000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 0.000001 0.000000 0.000000 1.000000 0.000000 -0.210000 -0.000001 -0.000000 1.000000 0.604043 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 1.094043 -0.000000 -1.000000 0.000000 0.210000 0.000000 0.000000 0.000000 1.000000
+0.000000 -0.000000 -1.000000 -0.957117 -0.000000 -1.000000 -0.000000 -0.093053 -1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000001 0.000000 0.000000 0.000000 0.000000 1.000000 0.004750 -0.000001 -1.000000 0.000000 0.210000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000001 -0.000000 0.000000 0.000000 -0.000000 1.000000 0.591028 -0.000001 -1.000000 -0.000000 0.139798 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000001 -0.000000 0.000000 0.000000 0.000000 1.000000 0.591028 -0.000001 -1.000000 0.000000 0.072892 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000001 -0.000000 0.000000 -0.000000 -0.000000 1.000000 -2.940000 -0.000001 -1.000000 -0.000000 0.210000 0.000000 0.000000 0.000000 1.000000</float_array>
           <technique_common>
-            <accessor source="#WoodController-Matrices-array" count="3" stride="16">
+            <accessor source="#WoodController-Matrices-array" count="10" stride="16">
               <param type="float4x4"/>
             </accessor>
           </technique_common>
@@ -68126,7 +68134,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node name="Wood" id="Wood" sid="Wood"><instance_controller url="#WoodController"><bind_material><technique_common><instance_material symbol="Material" target="#Material"/><instance_material symbol="Material2" target="#Material2"/></technique_common></bind_material></instance_controller><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
-      <node name="jnt_mosin" id="jnt_mosin" sid="jnt_mosin" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 0.000000 0.000000 -1.000000 0.000000 -2.940000 -0.000001 -0.000000 -1.000000 0.210000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="jnt_bolt" id="jnt_bolt" sid="jnt_bolt" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 -1.000000 0.000000 0.324043 -0.000000 -0.000000 -1.000000 0.210000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <node name="jnt_mosin" id="jnt_mosin" sid="jnt_mosin" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_bolt" id="jnt_bolt" sid="jnt_bolt" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 -0.324043 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_bolt_location" id="jnt_bolt_location" sid="jnt_bolt_location" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 -0.490000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_bolt_rotation" id="jnt_bolt_rotation" sid="jnt_bolt_rotation" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.000000 0.000001 0.000000 1.000000 0.210000 -0.000000 -1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="jnt_bolt_striker" id="jnt_bolt_striker" sid="jnt_bolt_striker" type="JOINT"><matrix sid="matrix">1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 -0.000000 -0.280000 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node><node name="jnt_trigger" id="jnt_trigger" sid="jnt_trigger" type="JOINT"><matrix sid="matrix">-0.000001 0.000000 -1.000000 0.000000 -1.000000 -0.000000 0.000001 -0.633074 -0.000000 1.000000 0.000000 0.303053 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="jnt_empty" id="jnt_empty" sid="jnt_empty" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.000000 0.000000 1.000000 0.000000 0.319293 0.000001 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="jnt_ammo_1" id="jnt_ammo_1" sid="jnt_ammo_1" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 -0.266985 0.000000 0.000000 1.000000 0.070202 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="jnt_ammo_2" id="jnt_ammo_2" sid="jnt_ammo_2" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 -0.266985 0.000000 0.000000 1.000000 0.137108 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node><node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node>
       <extra><technique profile="MAX3D"><frame_rate>30.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>1.000000</end_time></technique></extra>
     </visual_scene>
   </library_visual_scenes>
