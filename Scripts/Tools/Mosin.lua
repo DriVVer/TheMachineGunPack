@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 
-local Damage = 45
+local Damage = 90
 
 ---@class Magnum : ToolClass
 ---@field fpAnimations table
@@ -46,7 +46,7 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 function Mosin.client_onCreate( self )
-	self.mag_capacity = 6
+	self.mag_capacity = 5
 	self.ammo_in_mag = self.mag_capacity
 
 	self.cl_hammer_cocked = false
@@ -136,11 +136,11 @@ function Mosin.loadAnimations( self )
 
 	self.normalFireMode = {
 		fireCooldown = 0.6,
-		spreadCooldown = 1.2,
-		spreadIncrement = 20,
-		spreadMinAngle = 5,
-		spreadMaxAngle = 15,
-		fireVelocity = 300.0,
+		spreadCooldown = 0.3,
+		spreadIncrement = 3,
+		spreadMinAngle = 1,
+		spreadMaxAngle = 3,
+		fireVelocity = 500.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -150,12 +150,12 @@ function Mosin.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.2,
-		spreadCooldown = 1.0,
-		spreadIncrement = 1.3,
-		spreadMinAngle = 0,
-		spreadMaxAngle = 5,
-		fireVelocity =  250.0,
+		fireCooldown = 0.6,
+		spreadCooldown = 0.3,
+		spreadIncrement = 3,
+		spreadMinAngle = 1,
+		spreadMaxAngle = 3,
+		fireVelocity = 500.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,

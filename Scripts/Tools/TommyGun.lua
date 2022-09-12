@@ -168,7 +168,7 @@ function TommyGun.loadAnimations( self )
 	self.sprintCooldownTimer = 0.0
 	self.sprintCooldown = 0.3
 
-	self.aimBlendSpeed = 3.0
+	self.aimBlendSpeed = 10.0
 	self.blendTime = 0.2
 
 	self.jointWeight = 0.0
