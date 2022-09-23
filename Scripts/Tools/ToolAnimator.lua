@@ -359,6 +359,7 @@ function mgp_toolAnimator_initialize(self, tool_name)
 
 	self.cl_animator_animations = anim_data.animation
 	self.cl_animator_on_unequip = anim_data.on_unequip_action
+	self.cl_animator_current_track_count = 0
 	self.cl_animator_tracks = {}
 end
 
