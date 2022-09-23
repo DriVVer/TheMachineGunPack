@@ -11,7 +11,6 @@ local type_to_func_name =
 }
 
 local AnimationUpdateFunctions = {}
-AnimationUpdateFunctions.no_animation = function(self, track, dt) end
 
 AnimationUpdateFunctions.anim_selector = function(self, track, dt)
 	track.step = track.step + 1
@@ -21,6 +20,8 @@ AnimationUpdateFunctions.anim_selector = function(self, track, dt)
 
 		track.func = AnimationUpdateFunctions[func_name]
 		track.func(self, track, dt)
+	else
+		track.func = nil
 	end
 end
 
@@ -257,8 +258,20 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 end
 
 function mgp_toolAnimator_update(self, dt)
-	for id, track in ipairs(self.cl_animator_tracks) do
-		track.func(self, track, dt)
+	if self.cl_animator_current_track_count > 0 then
+		for id, track in ipairs(self.cl_animator_tracks) do
+			local track_func = track.func
+			if track_func ~= nil then
+				track_func(self, track, dt)
+			else
+				self.cl_animator_current_track_count = self.cl_animator_current_track_count - 1
+				self.cl_animator_tracks[id] = nil
+			end
+		end
+
+		if self.cl_animator_current_track_count == 0 then
+			self.cl_animator_current_name = nil
+		end
 	end
 end
 
@@ -289,6 +302,10 @@ function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderabl
 	end
 end
 
+function mgp_toolAnimator_getAnimation(self)
+	return self.cl_animator_current_name
+end
+
 function mgp_toolAnimator_setAnimation(self, anim_name)
 	if self.cl_animator_reset_data then
 		local reset_data = self.cl_animator_reset_data[anim_name]
@@ -305,6 +322,8 @@ function mgp_toolAnimator_setAnimation(self, anim_name)
 	end
 
 	local anim_data = self.cl_animator_animations[anim_name]
+	self.cl_animator_current_name = anim_name
+	self.cl_animator_current_track_count = #anim_data
 	self.cl_animator_tracks = {}
 	for k, v in ipairs(anim_data) do
 		self.cl_animator_tracks[k] =

@@ -255,33 +255,6 @@ function Mosin.client_onUpdate( self, dt )
 		return
 	end
 
-	local effectPos, rot
-
-	if self.tool:isLocal() then
-
-		local zOffset = 0.6
-		if self.tool:isCrouching() then
-			zOffset = 0.29
-		end
-
-		local dir = sm.localPlayer.getDirection()
-		local firePos = self.tool:getFpBonePos( "pejnt_barrel" )
-
-		if not self.aiming then
-			effectPos = firePos + dir * 0.2
-		else
-			effectPos = firePos + dir * 0.45
-		end
-
-		rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-	end
-	local pos = self.tool:getTpBonePos( "pejnt_barrel" )
-	local dir = self.tool:getTpBoneDir( "pejnt_barrel" )
-
-	effectPos = pos + dir * 0.2
-
-	rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-
 	-- Timers
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
@@ -650,23 +623,27 @@ function Mosin.cl_onPrimaryUse(self, state)
 			return
 		end
 
-		
+
 		if self.fireCooldownTimer <= 0.0 then
+			if self.tool:isSprinting() then
+				return
+			end
+
 			if self.cl_hammer_cocked then
 				if self.ammo_in_mag > 0 then
 				--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 					self.ammo_in_mag = self.ammo_in_mag - 1
 					local firstPerson = self.tool:isInFirstPersonView()
-			
+
 					local dir = sm.localPlayer.getDirection()
-			
+
 					local firePos = self:calculateFirePosition()
 					local fakePosition = self:calculateTpMuzzlePos()
 					local fakePositionSelf = fakePosition
 					if firstPerson then
 						fakePositionSelf = self:calculateFpMuzzlePos()
 					end
-			
+
 					-- Aim assist
 					if not firstPerson then
 						local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
@@ -674,7 +651,7 @@ function Mosin.cl_onPrimaryUse(self, state)
 						if hit then
 							local norDir = sm.vec3.normalize( result.pointWorld - firePos )
 							local dirDot = norDir:dot( dir )
-			
+
 							if dirDot > 0.96592583 then -- max 15 degrees off
 								dir = norDir
 							else
@@ -683,45 +660,44 @@ function Mosin.cl_onPrimaryUse(self, state)
 							end
 						end
 					end
-			
+
 					dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
-			
+
 					-- Spread
 					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 					local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-			
+
 					local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
 					spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
 					local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-			
+
 					dir = sm.noise.gunSpread( dir, spreadDeg )
-			
+
 					local owner = self.tool:getOwner()
 					if owner then
 						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
 					end
-			
+
 					-- Timers
 					self.fireCooldownTimer = fireMode.fireCooldown
 					self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 					self.sprintCooldownTimer = self.sprintCooldown
-			
+
 					-- Send TP shoot over network and dircly to self
 					self:onShoot(1)
 					self.network:sendToServer("sv_n_onShoot", 1)
-			
+
 					-- Play FP shoot animation
 					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 				else
 					self:onShoot(nil)
 					self.network:sendToServer("sv_n_onShoot", nil)
 
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 					self.fireCooldownTimer = 0.3
 					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
 			else
-				self.fireCooldownTimer = 0.4
+				self.fireCooldownTimer = 1.0
 
 				self.network:sendToServer("sv_n_cockHammer")
 				
@@ -741,9 +717,11 @@ end
 
 local reload_anims =
 {
-	["reload"]       = true,
-	["reload_empty"] = true,
-	["ammo_check"]   = true
+	["cock_hammer_aim"] = true,
+	["reload_empty"   ] = true,
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
+	["reload"         ] = true
 }
 
 local ammo_count_to_anim_name =
