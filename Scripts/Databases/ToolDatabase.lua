@@ -509,6 +509,17 @@ local mgp_tool_database =
 			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
+			cock_the_hammer_on_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 4.75, end_val = 4.75 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 4.75, end_val = 4.75 } },
+						time = 0.0
+					}
+				}
+			},
 			cock_the_hammer =
 			{
 				[1] = {
@@ -539,7 +550,7 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 4.05, end_val = 4.75 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 4.05, end_val = 4.75  } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 4.05, end_val = 4.75 } },
 						time = 0.7
 					}
 				}

@@ -228,6 +228,7 @@ function Mosin.client_onUpdate( self, dt )
 
 				if time_predict >= info_duration then
 					self.ammo_in_mag = self.mag_capacity
+					self.cl_hammer_cocked = true
 				end
 			end
 
@@ -413,7 +414,6 @@ function Mosin:client_onEquip(animate)
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
 
-	self.cl_hammer_cocked = false
 	self.wantEquipped = true
 	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
@@ -439,14 +439,14 @@ function Mosin:client_onEquip(animate)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	--if not self.tool:isSprinting() then
-	--	mgp_toolAnimator_setAnimation(self, "equip")
-	--end
-
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+	end
+
+	if self.cl_hammer_cocked then
+		mgp_toolAnimator_setAnimation(self, "cock_the_hammer_on_equip")
 	end
 end
 
@@ -690,23 +690,28 @@ function Mosin.cl_onPrimaryUse(self, state)
 					-- Play FP shoot animation
 					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 				else
-					self:onShoot(nil)
-					self.network:sendToServer("sv_n_onShoot", nil)
+					self:onShoot()
+					self.network:sendToServer("sv_n_onShoot")
 
 					self.fireCooldownTimer = 0.3
 					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
 			else
-				self.fireCooldownTimer = 1.0
-
-				self.network:sendToServer("sv_n_cockHammer")
-				
-				if self.aiming then
-					setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-					mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+				if self.ammo_in_mag == 0 then
+					self:client_onReload()
+					return
 				else
-					setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-					mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+					self.fireCooldownTimer = 1.0
+
+					self.network:sendToServer("sv_n_cockHammer")
+					
+					if self.aiming then
+						setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+						mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+					else
+						setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+						mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+					end
 				end
 			end
 
@@ -769,8 +774,12 @@ function Mosin:cl_initReloadAnim(anim_id)
 end
 
 function Mosin:client_onReload()
-	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
-	if not is_mag_full then
+	if self.ammo_in_mag ~= self.mag_capacity then
+		if self.cl_hammer_cocked then
+			sm.gui.displayAlertText("You can't reload while the hammer is cocked!", 3)
+			return true
+		end
+
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
