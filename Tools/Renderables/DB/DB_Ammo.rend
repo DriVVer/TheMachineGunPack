@@ -1,0 +1,19 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/DB/DB_Ammo.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"subMeshList": [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				}
+			]
+		}
+	]
+}
