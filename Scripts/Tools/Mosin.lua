@@ -796,9 +796,6 @@ function Mosin:cl_initReloadAnim(anim_id)
 end
 
 function Mosin:client_onReload()
-	mgp_toolAnimator_setAnimation(self, "reload0")
-	setFpAnimation(self.fpAnimations, "reload0", 0.0)
-
 	if self.ammo_in_mag ~= self.mag_capacity then
 		if self.cl_hammer_cocked then
 			sm.gui.displayAlertText("You can't reload while the hammer is cocked!", 3)
