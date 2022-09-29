@@ -787,7 +787,6 @@ local mosin_fp_animation_names =
 function Mosin:cl_initReloadAnim(anim_id)
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
-	print(self.ammo_in_mag, mosin_fp_animation_names[self.ammo_in_mag])
 	setFpAnimation(self.fpAnimations, mosin_fp_animation_names[self.ammo_in_mag], 0.0)
 	self:cl_startReloadAnim(anim_name)
 
