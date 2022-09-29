@@ -120,6 +120,12 @@ function Mosin.loadAnimations( self )
 				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
+				reload0 = { "Reload0", { nextAnimation = "idle" } },
+				reload1 = { "Reload1", { nextAnimation = "idle" } },
+				reload2 = { "Reload2", { nextAnimation = "idle" } },
+				reload3 = { "Reload3", { nextAnimation = "idle" } },
+				reload4 = { "Reload4", { nextAnimation = "idle" } },
+
 				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
 				aimInto = { "Gun_aim_into", { nextAnimation = "aimIdle" } },
@@ -183,8 +189,11 @@ end
 
 local actual_reload_anims =
 {
-	["reload"] = true,
-	["reload_empty"] = true
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true
 }
 
 local aim_animation_list01 =
@@ -723,10 +732,13 @@ end
 local reload_anims =
 {
 	["cock_hammer_aim"] = true,
-	["reload_empty"   ] = true,
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
-	["reload"         ] = true
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true
 }
 
 local ammo_count_to_anim_name =
@@ -763,10 +775,20 @@ function Mosin:client_isGunReloading()
 	return false
 end
 
+local mosin_fp_animation_names =
+{
+	[0] = "reload0",
+	[1] = "reload1",
+	[2] = "reload2",
+	[3] = "reload3",
+	[4] = "reload4"
+}
+
 function Mosin:cl_initReloadAnim(anim_id)
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
-	setFpAnimation(self.fpAnimations, (anim_id == 0) and "reload_empty" or "reload", 0.0)
+	print(self.ammo_in_mag, mosin_fp_animation_names[self.ammo_in_mag])
+	setFpAnimation(self.fpAnimations, mosin_fp_animation_names[self.ammo_in_mag], 0.0)
 	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
