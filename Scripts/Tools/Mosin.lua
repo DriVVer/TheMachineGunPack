@@ -315,6 +315,7 @@ function Mosin.client_onUpdate( self, dt )
 				self.scope_hud:open()
 
 				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+				self.fpAnimations.animations.aim_anim.time = 0.5
 
 				sm.gui.startFadeToBlack(1.0, 0.5)
 				sm.gui.endFadeToBlack(0.8)
@@ -603,97 +604,6 @@ function Mosin.onShoot( self, dir )
 	end
 end
 
----@return Vec3
-function Mosin.calculateFirePosition( self )
-	local crouching = self.tool:isCrouching()
-	local firstPerson = self.tool:isInFirstPersonView()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-
-	local fireOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if crouching then
-		fireOffset.z = 0.15
-	else
-		fireOffset.z = 0.45
-	end
-
-	if firstPerson then
-		if not self.aiming then
-			fireOffset = fireOffset + right * 0.05
-		end
-	else
-		fireOffset = fireOffset + right * 0.25
-		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
-	end
-
-	return GetOwnerPosition(self.tool) + fireOffset
-end
-
-function Mosin.calculateTpMuzzlePos( self )
-	local crouching = self.tool:isCrouching()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-	local up = right:cross(dir)
-
-	local fakeOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	--General offset
-	fakeOffset = fakeOffset + right * 0.25
-	fakeOffset = fakeOffset + dir * 0.5
-	fakeOffset = fakeOffset + up * 0.25
-
-	--Action offset
-	local pitchFraction = pitch / ( math.pi * 0.5 )
-	if crouching then
-		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
-		fakeOffset = fakeOffset - right * 0.05
-
-		if pitchFraction > 0.0 then
-			fakeOffset = fakeOffset - up * 0.2 * pitchFraction
-		else
-			fakeOffset = fakeOffset + up * 0.1 * math.abs( pitchFraction )
-		end
-	else
-		fakeOffset = fakeOffset + up * 0.1 *  math.abs( pitchFraction )
-	end
-
-	local fakePosition = fakeOffset + GetOwnerPosition( self.tool )
-	return fakePosition
-end
-
-function Mosin.calculateFpMuzzlePos( self )
-	local fovScale = ( sm.camera.getFov() - 45 ) / 45
-
-	local up = sm.localPlayer.getUp()
-	local dir = sm.localPlayer.getDirection()
-	local right = sm.localPlayer.getRight()
-
-	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
-	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if self.aiming then
-		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
-
-		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
-	else
-		muzzlePos45 = muzzlePos45 - up * 0.15
-		muzzlePos45 = muzzlePos45 + right * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 1.25
-
-		muzzlePos90 = muzzlePos90 - up * 0.15
-		muzzlePos90 = muzzlePos90 + right * 0.2
-		muzzlePos90 = muzzlePos90 + dir * 0.25
-	end
-
-	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
-end
-
 function Mosin:sv_n_cockHammer(data)
 	self.network:sendToClients("cl_n_cockHammer", data)
 end
@@ -703,6 +613,32 @@ function Mosin:cl_n_cockHammer(aim_data)
 		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
 		setTpAnimation(self.tpAnimations, aim_data and "bolt_action_aim" or "bolt_action", 1.0)
 	end
+end
+
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
+local _math_sqrt = math.sqrt
+local _math_asin = math.asin
+local function SolveBalArcInternal(launchPos, hitPos, velocity)
+	local g = 10
+
+	local a = (launchPos.x - hitPos.x)^2
+	local b = (launchPos.y - hitPos.y)^2
+	local R = _math_sqrt(a + b)
+
+	return _math_asin(g * R / velocity^2) / 2
+end
+
+local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
+	local angle = SolveBalArcInternal(start_pos, end_pos, velocity)
+	if angle == angle then
+		return direction:rotate(angle, calculateRightVector(direction))
+	end
+
+	return direction
 end
 
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
@@ -724,38 +660,29 @@ function Mosin.cl_onPrimaryUse(self, state)
 				if self.ammo_in_mag > 0 then
 				--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 					self.ammo_in_mag = self.ammo_in_mag - 1
-					local firstPerson = self.tool:isInFirstPersonView()
 
-					local dir = sm.localPlayer.getDirection()
+					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
-					local firePos = self:calculateFirePosition()
-					local fakePosition = self:calculateTpMuzzlePos()
-					local fakePositionSelf = fakePosition
-					if firstPerson then
-						fakePositionSelf = self:calculateFpMuzzlePos()
-					end
+					local dir = nil
+					local firePos = nil
+					if self.tool:isInFirstPersonView() and self.aiming then
+						firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
 
-					-- Aim assist
-					if not firstPerson then
-						local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-						local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+						local hit, result = sm.localPlayer.getRaycast(300)
 						if hit then
-							local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-							local dirDot = norDir:dot( dir )
+							local v_resultPos = result.pointWorld
 
-							if dirDot > 0.96592583 then -- max 15 degrees off
-								dir = norDir
-							else
-								local radsOff = math.asin( dirDot )
-								dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-							end
+							local dir_calc = (v_resultPos - firePos):normalize()
+							dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
+						else
+							dir = sm.camera.getDirection()
 						end
+					else
+						dir = sm.camera.getDirection()
+						firePos = self.tool:getTpBonePos("pejnt_barrel")
 					end
-
-					dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 					-- Spread
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 					local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 					local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
@@ -766,7 +693,7 @@ function Mosin.cl_onPrimaryUse(self, state)
 
 					local owner = self.tool:getOwner()
 					if owner then
-						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
+						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner )
 					end
 
 					-- Timers
@@ -774,7 +701,7 @@ function Mosin.cl_onPrimaryUse(self, state)
 					self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 					self.sprintCooldownTimer = self.sprintCooldown
 
-					-- Send TP shoot over network and dircly to self
+					-- Send TP shoot over network and directly to self
 					self:onShoot(1)
 					self.network:sendToServer("sv_n_onShoot", 1)
 
@@ -936,6 +863,8 @@ end
 
 local _intstate = sm.tool.interactState
 function Mosin.cl_onSecondaryUse( self, state )
+	if self.scope_timer then return end
+
 	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
@@ -943,12 +872,10 @@ function Mosin.cl_onSecondaryUse( self, state )
 		self.tpAnimations.animations.idle.time = 0
 
 		if self.aiming then
-			local old_last_time = self.scope_last_time or 0
-			self.scope_last_time = sm.game.getCurrentTick()
-
-			self.scope_timer = sm.util.clamp((self.scope_last_time - old_last_time) / 40, 0, 1) * 0.3
+			self.scope_timer = 0.3
 		else
 			self.fireCooldownTimer = 0.4
+			self.scope_timer = 0.5
 		end
 
 		self.tool:setMovementSlowDown(self.aiming)
@@ -963,10 +890,7 @@ function Mosin.client_onEquippedUpdate(self, primaryState, secondaryState)
 		self.prevPrimaryState = primaryState
 	end
 
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
-	end
+	self:cl_onSecondaryUse( secondaryState )
 
 	return true, true
 end

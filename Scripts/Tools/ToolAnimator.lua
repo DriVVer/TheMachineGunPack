@@ -39,7 +39,7 @@ AnimationUpdateFunctions.anim_handler = function(self, track, dt)
 	local c_anim_time = cur_data.time
 
 	local predict_time = (track.time - dt)
-	
+
 	local anim_prog = 0.0
 	if c_anim_time > 0 then
 		anim_prog = (c_anim_time - math.max(predict_time, 0)) / c_anim_time
@@ -56,7 +56,7 @@ AnimationUpdateFunctions.anim_handler = function(self, track, dt)
 		local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
 		s_tool:updateAnimation(anim_data.name, anim_val, 1.0)
 	end
-	
+
 	if track.time then
 		track.time = predict_time
 
