@@ -476,7 +476,8 @@ function DB:cl_n_cockHammer()
 	end
 end
 
-local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
+local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
+local mgp_projectile_powerful = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
 function DB.cl_onPrimaryUse(self, is_double_shot)
 	if self:client_isGunReloading() then return end
 
@@ -512,54 +513,11 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 
 			local fireMode = self.normalFireMode
 
-			sm.projectile.projectileAttack(mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
-			--[[local firstPerson = self.tool:isInFirstPersonView()
-
-			local dir = sm.localPlayer.getDirection()
-
-			local firePos = self:calculateFirePosition()
-			local fakePosition = self:calculateTpMuzzlePos()
-			local fakePositionSelf = fakePosition
-			if firstPerson then
-				fakePositionSelf = self:calculateFpMuzzlePos()
-			end
-
-			-- Aim assist
-			if not firstPerson then
-				local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
-				if hit then
-					local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-					local dirDot = norDir:dot( dir )
-
-					if dirDot > 0.96592583 then -- max 15 degrees off
-						dir = norDir
-					else
-						local radsOff = math.asin( dirDot )
-						dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-					end
-				end
-			end
-
-			dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-			-- Spread
-			local fireMode = and self.aimFireMode or self.normalFireMode
-			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-			dir = sm.noise.gunSpread( dir, spreadDeg )
-
-			local owner = self.tool:getOwner()
-			if owner then
-				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
-			end]]
+			local proj_type = is_double_shot and mgp_projectile_powerful or mgp_projectile_potato
+			sm.projectile.projectileAttack(proj_type, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
-			self.fireCooldownTimer = fireMode.fireCooldown
+			self.fireCooldownTimer = is_double_shot and 2.0 or 0.5
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
