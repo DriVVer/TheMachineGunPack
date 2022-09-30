@@ -496,9 +496,9 @@ local mgp_tool_database =
 			stop_effects = { "reloadTG", "reloadETG" }
 		},
 		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend"		    , enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend"			, enabled_by_default = true },
-			ammo_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend"			, enabled_by_default = true }
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend", enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend" , enabled_by_default = true },
+			ammo_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend" , enabled_by_default = true }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_aim_shoot_reset_table,
@@ -523,10 +523,6 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "reloadTG", "reloadETG" }
-		},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Base.rend"    , enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Anim.rend"	, enabled_by_default = true }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_aim_shoot_reset_table,

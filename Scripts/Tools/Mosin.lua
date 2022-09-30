@@ -22,6 +22,7 @@ local Damage = 90
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
+---@field scope_hud GuiInterface
 Mosin = class()
 
 local renderables =
@@ -50,12 +51,28 @@ function Mosin.client_onCreate( self )
 	self.mag_capacity = 5
 	self.ammo_in_mag = self.mag_capacity
 
-	self.cl_hammer_cocked = false
+	self.cl_hammer_cocked = true
 
 	mgp_toolAnimator_initialize(self, "Mosin")
+
+	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
+		isHud = true,
+		isInteractive = false,
+		needsCursor = false,
+		hidesHotbar = true
+	})
 end
 
 function Mosin.client_onDestroy(self)
+	local v_scopeHud = self.scope_hud
+	if v_scopeHud and sm.exists(v_scopeHud) then
+		if v_scopeHud:isActive() then
+			v_scopeHud:close()
+		end
+
+		v_scopeHud:destroy()
+	end
+
 	mgp_toolAnimator_destroy(self)
 end
 
@@ -115,6 +132,7 @@ function Mosin.loadAnimations( self )
 			{
 				equip = { "Gun_pickup", { nextAnimation = "idle" } },
 				unequip = { "Gun_putdown" },
+				aim_anim = { "Gun_putdown" },
 
 				idle = { "Gun_idle", { looping = true } },
 				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
@@ -189,6 +207,7 @@ function Mosin.loadAnimations( self )
 	self.spineWeight = 0.0
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+	self.aimWeightFp = self.aimWeight
 end
 
 local actual_reload_anims =
@@ -251,11 +270,13 @@ function Mosin.client_onUpdate( self, dt )
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+			if self.fpAnimations.currentAnimation ~= "aim_anim" then
+				if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+				end
+				if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+				end
 			end
 		end
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
@@ -273,6 +294,46 @@ function Mosin.client_onUpdate( self, dt )
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
+
+	if self.scope_timer then
+		self.scope_timer = self.scope_timer - dt
+
+		if self.scope_timer <= 0.0 then
+			self.scope_timer = nil
+
+			if self.aiming then
+				self.scope_enabled = true
+			end
+		end
+	end
+
+	if self.scope_enabled then
+		local v_isInFirstPerson = self.tool:isInFirstPersonView()
+		local v_aimState = self.aiming
+		if v_isInFirstPerson and v_aimState then
+			if not self.scope_hud:isActive() then
+				self.scope_hud:open()
+
+				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+
+				sm.gui.startFadeToBlack(1.0, 0.5)
+				sm.gui.endFadeToBlack(0.8)
+			end
+		else
+			if not v_aimState then
+				self.scope_enabled = false
+			end
+
+			setFpAnimation(self.fpAnimations, "aimExit", 0.0)
+
+			if self.scope_hud:isActive() then
+				self.scope_hud:close()
+
+				sm.gui.startFadeToBlack(1.0, 0.5)
+				sm.gui.endFadeToBlack(0.8)
+			end
+		end
+	end
 
 
 	if self.tool:isLocal() then
@@ -406,20 +467,27 @@ function Mosin.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 
 
+	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+
 	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
+	local bobbingFp = 1
+	if self.aiming and self.scope_enabled then
+		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
+		bobbingFp = 0.12
 	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
+		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 0.0, weight_blend )
+		bobbingFp = 1
 	end
 
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+	if self.aiming then
+		self.aimWeight = sm.util.lerp(self.aimWeight, 1.0, weight_blend)
+	else
+		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
+	end
+
+
+	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
 function Mosin:client_onEquip(animate)
@@ -464,11 +532,20 @@ function Mosin:client_onEquip(animate)
 end
 
 function Mosin.client_onUnequip( self, animate )
+	self.scope_enabled = false
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+
 	mgp_toolAnimator_reset(self)
-	
+
+	if self.scope_hud:isActive() then
+		self.scope_hud:close()
+
+		sm.gui.startFadeToBlack(1.0, 0.5)
+		sm.gui.endFadeToBlack(0.8)
+	end
+
 	if sm.exists( self.tool ) then
 		if animate then
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
@@ -520,7 +597,7 @@ function Mosin.onShoot( self, dir )
 
 	if dir ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
+		mgp_toolAnimator_setAnimation(self, "shoot")
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
@@ -701,8 +778,10 @@ function Mosin.cl_onPrimaryUse(self, state)
 					self:onShoot(1)
 					self.network:sendToServer("sv_n_onShoot", 1)
 
-					-- Play FP shoot animation
-					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+					if not self.aiming then
+						-- Play FP shoot animation
+						setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+					end
 				else
 					self:onShoot()
 					self.network:sendToServer("sv_n_onShoot")
@@ -711,6 +790,11 @@ function Mosin.cl_onPrimaryUse(self, state)
 					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
 			else
+				if self.aiming then
+					sm.gui.displayAlertText("Can't reload while aiming")
+					return
+				end
+
 				if self.ammo_in_mag == 0 then
 					self:client_onReload()
 					return
@@ -857,6 +941,15 @@ function Mosin.cl_onSecondaryUse( self, state )
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
+
+		if self.aiming then
+			local old_last_time = self.scope_last_time or 0
+			self.scope_last_time = sm.game.getCurrentTick()
+
+			self.scope_timer = sm.util.clamp((self.scope_last_time - old_last_time) / 40, 0, 1) * 0.3
+		else
+			self.fireCooldownTimer = 0.4
+		end
 
 		self.tool:setMovementSlowDown(self.aiming)
 		self:onAim(self.aiming)
