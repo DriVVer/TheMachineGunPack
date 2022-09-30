@@ -508,7 +508,7 @@ function Mosin:client_onEquip(animate)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	
+
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
 
 	--Set the tp and fp renderables before actually loading animations
@@ -704,6 +704,8 @@ function Mosin.cl_onPrimaryUse(self, state)
 					-- Send TP shoot over network and directly to self
 					self:onShoot(1)
 					self.network:sendToServer("sv_n_onShoot", 1)
+
+					sm.camera.setShake(0.07)
 
 					if not self.aiming then
 						-- Play FP shoot animation
