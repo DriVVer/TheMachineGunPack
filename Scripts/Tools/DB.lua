@@ -50,8 +50,6 @@ function DB.client_onCreate( self )
 	self.mag_capacity = 2
 	self.ammo_in_mag = self.mag_capacity
 
-	self.cl_hammer_cocked = false
-
 	mgp_toolAnimator_initialize(self, "DB")
 end
 
@@ -238,7 +236,6 @@ function DB.client_onUpdate( self, dt )
 
 				if time_predict >= info_duration then
 					self.ammo_in_mag = self.mag_capacity
-					self.cl_hammer_cocked = true
 				end
 			end
 
@@ -247,14 +244,8 @@ function DB.client_onUpdate( self, dt )
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
-
-			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
-			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -274,7 +265,7 @@ function DB.client_onUpdate( self, dt )
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local fireMode = self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -298,21 +289,12 @@ function DB.client_onUpdate( self, dt )
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
-		if self.aiming then
-			if self.tool:isInFirstPersonView() then
-				self.tool:setCrossHairAlpha( 0.0 )
-			else
-				self.tool:setCrossHairAlpha( 1.0 )
-			end
-			self.tool:setInteractionTextSuppressed( true )
-		else
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
-		end
+		self.tool:setCrossHairAlpha( 1.0 )
+		self.tool:setInteractionTextSuppressed( false )
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -336,13 +318,13 @@ function DB.client_onUpdate( self, dt )
 
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
+					setTpAnimation( self.tpAnimations, "idle", 10.0 )
 				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
+					setTpAnimation( self.tpAnimations, "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
+					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -369,7 +351,7 @@ function DB.client_onUpdate( self, dt )
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -401,22 +383,6 @@ function DB.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
 function DB:client_onEquip(animate)
@@ -425,7 +391,6 @@ function DB:client_onEquip(animate)
 	end
 
 	self.wantEquipped = true
-	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
@@ -454,16 +419,11 @@ function DB:client_onEquip(animate)
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
-
-	if self.cl_hammer_cocked then
-		mgp_toolAnimator_setAnimation(self, "cock_the_hammer_on_equip")
-	end
 end
 
 function DB.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
-	self.aiming = false
 	mgp_toolAnimator_reset(self)
 	
 	if sm.exists( self.tool ) then
@@ -483,23 +443,6 @@ function DB.client_onUnequip( self, animate )
 	end
 end
 
-function DB.sv_n_onAim( self, aiming )
-	self.network:sendToClients( "cl_n_onAim", aiming )
-end
-
-function DB.cl_n_onAim( self, aiming )
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onAim( aiming )
-	end
-end
-
-function DB.onAim( self, aiming )
-	self.aiming = aiming
-	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
-		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
-	end
-end
-
 function DB.sv_n_onShoot( self, dir )
 	self.network:sendToClients( "cl_n_onShoot", dir )
 end
@@ -515,103 +458,12 @@ function DB.onShoot( self, dir )
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	if dir ~= nil then
+	--[[if dir ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
 		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
-	end
-end
-
----@return Vec3
-function DB.calculateFirePosition( self )
-	local crouching = self.tool:isCrouching()
-	local firstPerson = self.tool:isInFirstPersonView()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-
-	local fireOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if crouching then
-		fireOffset.z = 0.15
-	else
-		fireOffset.z = 0.45
-	end
-
-	if firstPerson then
-		if not self.aiming then
-			fireOffset = fireOffset + right * 0.05
-		end
-	else
-		fireOffset = fireOffset + right * 0.25
-		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
-	end
-
-	return GetOwnerPosition(self.tool) + fireOffset
-end
-
-function DB.calculateTpMuzzlePos( self )
-	local crouching = self.tool:isCrouching()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-	local up = right:cross(dir)
-
-	local fakeOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	--General offset
-	fakeOffset = fakeOffset + right * 0.25
-	fakeOffset = fakeOffset + dir * 0.5
-	fakeOffset = fakeOffset + up * 0.25
-
-	--Action offset
-	local pitchFraction = pitch / ( math.pi * 0.5 )
-	if crouching then
-		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
-		fakeOffset = fakeOffset - right * 0.05
-
-		if pitchFraction > 0.0 then
-			fakeOffset = fakeOffset - up * 0.2 * pitchFraction
-		else
-			fakeOffset = fakeOffset + up * 0.1 * math.abs( pitchFraction )
-		end
-	else
-		fakeOffset = fakeOffset + up * 0.1 *  math.abs( pitchFraction )
-	end
-
-	local fakePosition = fakeOffset + GetOwnerPosition( self.tool )
-	return fakePosition
-end
-
-function DB.calculateFpMuzzlePos( self )
-	local fovScale = ( sm.camera.getFov() - 45 ) / 45
-
-	local up = sm.localPlayer.getUp()
-	local dir = sm.localPlayer.getDirection()
-	local right = sm.localPlayer.getRight()
-
-	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
-	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if self.aiming then
-		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
-
-		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
-	else
-		muzzlePos45 = muzzlePos45 - up * 0.15
-		muzzlePos45 = muzzlePos45 + right * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 1.25
-
-		muzzlePos90 = muzzlePos90 - up * 0.15
-		muzzlePos90 = muzzlePos90 + right * 0.2
-		muzzlePos90 = muzzlePos90 + dir * 0.25
-	end
-
-	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
+	end]]
 end
 
 function DB:sv_n_cockHammer()
@@ -625,107 +477,86 @@ function DB:cl_n_cockHammer()
 end
 
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
-function DB.cl_onPrimaryUse(self, state)
-	if state == sm.tool.interactState.start then
-		if self:client_isGunReloading() then return end
+function DB.cl_onPrimaryUse(self, is_double_shot)
+	if self:client_isGunReloading() then return end
 
-		if self.tool:getOwner().character == nil then
+	if self.tool:getOwner().character == nil then
+		return
+	end
+
+
+	if self.fireCooldownTimer <= 0.0 then
+		if self.tool:isSprinting() then
 			return
 		end
 
+		if self.ammo_in_mag > 0 then
+		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+			self.ammo_in_mag = self.ammo_in_mag - 1
+			--[[local firstPerson = self.tool:isInFirstPersonView()
 
-		if self.fireCooldownTimer <= 0.0 then
-			if self.tool:isSprinting() then
-				return
+			local dir = sm.localPlayer.getDirection()
+
+			local firePos = self:calculateFirePosition()
+			local fakePosition = self:calculateTpMuzzlePos()
+			local fakePositionSelf = fakePosition
+			if firstPerson then
+				fakePositionSelf = self:calculateFpMuzzlePos()
 			end
 
-			if self.cl_hammer_cocked then
-				if self.ammo_in_mag > 0 then
-				--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-					self.ammo_in_mag = self.ammo_in_mag - 1
-					local firstPerson = self.tool:isInFirstPersonView()
+			-- Aim assist
+			if not firstPerson then
+				local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+				if hit then
+					local norDir = sm.vec3.normalize( result.pointWorld - firePos )
+					local dirDot = norDir:dot( dir )
 
-					local dir = sm.localPlayer.getDirection()
-
-					local firePos = self:calculateFirePosition()
-					local fakePosition = self:calculateTpMuzzlePos()
-					local fakePositionSelf = fakePosition
-					if firstPerson then
-						fakePositionSelf = self:calculateFpMuzzlePos()
-					end
-
-					-- Aim assist
-					if not firstPerson then
-						local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-						local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
-						if hit then
-							local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-							local dirDot = norDir:dot( dir )
-
-							if dirDot > 0.96592583 then -- max 15 degrees off
-								dir = norDir
-							else
-								local radsOff = math.asin( dirDot )
-								dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-							end
-						end
-					end
-
-					dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-					-- Spread
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-					local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-					local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-					spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-					local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-					dir = sm.noise.gunSpread( dir, spreadDeg )
-
-					local owner = self.tool:getOwner()
-					if owner then
-						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
-					end
-
-					-- Timers
-					self.fireCooldownTimer = fireMode.fireCooldown
-					self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-					self.sprintCooldownTimer = self.sprintCooldown
-
-					-- Send TP shoot over network and dircly to self
-					self:onShoot(1)
-					self.network:sendToServer("sv_n_onShoot", 1)
-
-					-- Play FP shoot animation
-					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-				else
-					self:onShoot()
-					self.network:sendToServer("sv_n_onShoot")
-
-					self.fireCooldownTimer = 0.3
-					sm.audio.play( "PotatoRifle - NoAmmo" )
-				end
-			else
-				if self.ammo_in_mag == 0 then
-					self:client_onReload()
-					return
-				else
-					self.fireCooldownTimer = 1.0
-
-					self.network:sendToServer("sv_n_cockHammer")
-					
-					if self.aiming then
-						setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-						mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+					if dirDot > 0.96592583 then -- max 15 degrees off
+						dir = norDir
 					else
-						setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-						mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+						local radsOff = math.asin( dirDot )
+						dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
 					end
 				end
 			end
 
-			self.cl_hammer_cocked = not self.cl_hammer_cocked
+			dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
+
+			-- Spread
+			local fireMode = and self.aimFireMode or self.normalFireMode
+			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+			dir = sm.noise.gunSpread( dir, spreadDeg )
+
+			local owner = self.tool:getOwner()
+			if owner then
+				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
+			end]]
+
+			local fireMode = self.normalFireMode
+
+			-- Timers
+			self.fireCooldownTimer = fireMode.fireCooldown
+			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+			self.sprintCooldownTimer = self.sprintCooldown
+
+			-- Send TP shoot over network and dircly to self
+			self:onShoot(1)
+			self.network:sendToServer("sv_n_onShoot", 1)
+
+			-- Play FP shoot animation
+			setFpAnimation( self.fpAnimations, "shoot", 0.0 )
+		else
+			self:onShoot()
+			self.network:sendToServer("sv_n_onShoot")
+
+			self.fireCooldownTimer = 0.3
+			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
 	end
 end
@@ -745,11 +576,7 @@ local reload_anims =
 local ammo_count_to_anim_name =
 {
 	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4",
-	[5] = "reload5"
+	[1] = "reload1"
 }
 
 function DB:sv_n_onReload(anim_id)
@@ -764,7 +591,7 @@ end
 
 function DB:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, "reload", 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+	--mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
 function DB:client_isGunReloading()
@@ -776,19 +603,10 @@ function DB:client_isGunReloading()
 	return false
 end
 
-local DB_fp_animation_names =
-{
-	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4"
-}
-
 function DB:cl_initReloadAnim(anim_id)
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
-	setFpAnimation(self.fpAnimations, DB_fp_animation_names[self.ammo_in_mag], 0.0)
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
 	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
@@ -797,12 +615,7 @@ end
 
 function DB:client_onReload()
 	if self.ammo_in_mag ~= self.mag_capacity then
-		if self.cl_hammer_cocked then
-			sm.gui.displayAlertText("You can't reload while the hammer is cocked!", 3)
-			return true
-		end
-
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
@@ -827,7 +640,7 @@ function DB:cl_startCheckMagAnim()
 end
 
 function DB:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+	if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("DB: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 
@@ -844,29 +657,13 @@ function DB:client_onToggle()
 	return true
 end
 
-local _intstate = sm.tool.interactState
-function DB.cl_onSecondaryUse( self, state )
-	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
-	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
-	if self.aiming ~= new_state then
-		self.aiming = new_state
-		self.tpAnimations.animations.idle.time = 0
-
-		self.tool:setMovementSlowDown(self.aiming)
-		self:onAim(self.aiming)
-		self.network:sendToServer("sv_n_onAim", self.aiming)
-	end
-end
-
-function DB.client_onEquippedUpdate(self, primaryState, secondaryState)
-	if primaryState ~= self.prevPrimaryState then
-		self:cl_onPrimaryUse(primaryState)
-		self.prevPrimaryState = primaryState
+function DB:client_onEquippedUpdate(primaryState, secondaryState)
+	if primaryState == sm.tool.interactState.start then
+		self:cl_onPrimaryUse()
 	end
 
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
+	if secondaryState == sm.tool.interactState.start then
+		self:cl_onPrimaryUse(true)
 	end
 
 	return true, true
