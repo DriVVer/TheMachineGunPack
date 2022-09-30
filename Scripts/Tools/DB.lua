@@ -7,7 +7,7 @@ dofile("ToolAnimator.lua")
 
 local Damage = 90
 
----@class Magnum : ToolClass
+---@class DoubleBarrel : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean

@@ -7,7 +7,7 @@ dofile("ToolAnimator.lua")
 
 local Damage = 90
 
----@class Magnum : ToolClass
+---@class Mosin : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -21,6 +21,7 @@ local Damage = 90
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
+---@field cl_hammer_cocked boolean
 Mosin = class()
 
 local renderables =
@@ -72,7 +73,10 @@ function Mosin.loadAnimations( self )
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
-			
+
+			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
+			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
+
 			reload_empty = { "Mosin_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "Mosin_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
@@ -613,13 +617,14 @@ function Mosin.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-function Mosin:sv_n_cockHammer()
-	self.network:sendToClients("cl_n_cockHammer")
+function Mosin:sv_n_cockHammer(data)
+	self.network:sendToClients("cl_n_cockHammer", data)
 end
 
-function Mosin:cl_n_cockHammer()
+function Mosin:cl_n_cockHammer(aim_data)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+		setTpAnimation(self.tpAnimations, aim_data and "bolt_action_aim" or "bolt_action", 1.0)
 	end
 end
 
@@ -712,13 +717,15 @@ function Mosin.cl_onPrimaryUse(self, state)
 				else
 					self.fireCooldownTimer = 1.0
 
-					self.network:sendToServer("sv_n_cockHammer")
-					
+					self.network:sendToServer("sv_n_cockHammer", self.aiming)
+
 					if self.aiming then
 						setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+						setTpAnimation(self.tpAnimations, "bolt_action_aim", 1.0)
 						mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
 					else
 						setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+						setTpAnimation(self.tpAnimations, "bolt_action", 1.0)
 						mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
 					end
 				end
