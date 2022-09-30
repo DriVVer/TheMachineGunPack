@@ -480,19 +480,39 @@ local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982"
 function DB.cl_onPrimaryUse(self, is_double_shot)
 	if self:client_isGunReloading() then return end
 
-	if self.tool:getOwner().character == nil then
+	local v_toolOwner = self.tool:getOwner()
+	if not v_toolOwner then
 		return
 	end
 
+	local v_ownerChar = v_toolOwner.character
+	if not (v_ownerChar and sm.exists(v_ownerChar)) then
+		return
+	end
 
 	if self.fireCooldownTimer <= 0.0 then
 		if self.tool:isSprinting() then
 			return
 		end
 
-		if self.ammo_in_mag > 0 then
+		local ammo_count = is_double_shot and 1 or 0
+		local ammo_to_consume = ammo_count + 1
+
+		if self.ammo_in_mag > ammo_count then
 		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-			self.ammo_in_mag = self.ammo_in_mag - 1
+			self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
+
+			local dir = sm.camera.getDirection()
+			local firePos = nil
+			if self.tool:isInFirstPersonView() then
+				firePos = self.tool:getFpBonePos("pejnt_barrel")
+			else
+				firePos = self.tool:getTpBonePos("pejnt_barrel")
+			end
+
+			local fireMode = self.normalFireMode
+
+			sm.projectile.projectileAttack(mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 			--[[local firstPerson = self.tool:isInFirstPersonView()
 
 			local dir = sm.localPlayer.getDirection()
@@ -537,8 +557,6 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 			if owner then
 				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
 			end]]
-
-			local fireMode = self.normalFireMode
 
 			-- Timers
 			self.fireCooldownTimer = fireMode.fireCooldown
