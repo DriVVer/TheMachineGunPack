@@ -48,18 +48,15 @@ AnimationUpdateFunctions.anim_handler = function(self, track, dt)
 	local normalized_val = _sm_util_clamp(anim_prog, 0.0, 1.0)
 
 	local s_tool = self.tool
-	if s_tool:isInFirstPersonView() then
-		for k, anim_data in ipairs(cur_data.fp_anim) do
-			local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
-			s_tool:updateFpAnimation(anim_data.name, anim_val, 1.0)
-		end
-	else
-		for k, anim_data in pairs(cur_data.tp_anim) do
-			local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
-			s_tool:updateAnimation(anim_data.name, anim_val, 1.0)
-		end
+	for k, anim_data in ipairs(cur_data.fp_anim) do
+		local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
+		s_tool:updateFpAnimation(anim_data.name, anim_val, 1.0)
 	end
-
+	for k, anim_data in pairs(cur_data.tp_anim) do
+		local anim_val = _sm_util_lerp(anim_data.start_val, anim_data.end_val, normalized_val)
+		s_tool:updateAnimation(anim_data.name, anim_val, 1.0)
+	end
+	
 	if track.time then
 		track.time = predict_time
 
