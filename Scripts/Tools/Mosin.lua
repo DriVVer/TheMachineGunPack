@@ -47,6 +47,33 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
+---Reload anim without the aim reload
+local reload_anims =
+{
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true
+}
+
+---Reload anims with all the other reload anims
+local reload_anims2 =
+{
+	["cock_hammer_aim"] = true,
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true
+}
+
 function Mosin.client_onCreate( self )
 	self.mag_capacity = 5
 	self.ammo_in_mag = self.mag_capacity
@@ -163,7 +190,7 @@ function Mosin.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.1,
+		fireCooldown = 0.3,
 		spreadCooldown = 0.3,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
@@ -178,7 +205,7 @@ function Mosin.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.1,
+		fireCooldown = 0.3,
 		spreadCooldown = 0.01,
 		spreadIncrement = 1,
 		spreadMinAngle = 0.05,
@@ -234,6 +261,12 @@ local aim_animation_list02 =
 	["aimShoot"] = true
 }
 
+local aim_animation_blacklist =
+{
+	["aim_anim"] = true,
+	["cock_hammer_aim"] = true
+}
+
 function Mosin.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
@@ -270,7 +303,19 @@ function Mosin.client_onUpdate( self, dt )
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.fpAnimations.currentAnimation ~= "aim_anim" then
+			if self.fpAnimations.currentAnimation == "cock_hammer_aim" then
+				local v_animData = self.fpAnimations.animations.cock_hammer_aim
+
+				local v_timePredict = v_animData.time + dt
+				if v_timePredict >= v_animData.info.duration then
+					if self.aiming then
+						setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+						self.fpAnimations.animations.aim_anim.time = 0.5
+					end
+				end
+			end
+
+			if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
 				if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
 					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 				end
@@ -310,7 +355,8 @@ function Mosin.client_onUpdate( self, dt )
 	if self.scope_enabled then
 		local v_isInFirstPerson = self.tool:isInFirstPersonView()
 		local v_aimState = self.aiming
-		if v_isInFirstPerson and v_aimState then
+		local v_isAimReload = self.fpAnimations.currentAnimation == "cock_hammer_aim"
+		if v_isInFirstPerson and v_aimState and not v_isAimReload then
 			if not self.scope_hud:isActive() then
 				self.scope_hud:open()
 
@@ -321,11 +367,13 @@ function Mosin.client_onUpdate( self, dt )
 				sm.gui.endFadeToBlack(0.8)
 			end
 		else
-			if not v_aimState then
-				self.scope_enabled = false
-			end
+			if not v_isAimReload then
+				if not v_aimState then
+					self.scope_enabled = false
+				end
 
-			setFpAnimation(self.fpAnimations, "aimExit", 0.0)
+				setFpAnimation(self.fpAnimations, "aimExit", 0.0)
+			end
 
 			if self.scope_hud:isActive() then
 				self.scope_hud:close()
@@ -377,7 +425,7 @@ function Mosin.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(reload_anims2))
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -472,7 +520,7 @@ function Mosin.client_onUpdate( self, dt )
 
 	-- Camera update
 	local bobbingFp = 1
-	if self.aiming and self.scope_enabled then
+	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -644,7 +692,7 @@ end
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
 function Mosin.cl_onPrimaryUse(self, state)
 	if state == sm.tool.interactState.start then
-		if self:client_isGunReloading() then return end
+		if self:client_isGunReloading(reload_anims2) then return end
 
 		if self.tool:getOwner().character == nil then
 			return
@@ -663,22 +711,23 @@ function Mosin.cl_onPrimaryUse(self, state)
 
 					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
-					local dir = nil
+					local dir = sm.camera.getDirection()
 					local firePos = nil
-					if self.tool:isInFirstPersonView() and self.aiming then
-						firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
+					if self.tool:isInFirstPersonView() then
+						if self.aiming then
+							firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
 
-						local hit, result = sm.localPlayer.getRaycast(300)
-						if hit then
-							local v_resultPos = result.pointWorld
+							local hit, result = sm.localPlayer.getRaycast(300)
+							if hit then
+								local v_resultPos = result.pointWorld
 
-							local dir_calc = (v_resultPos - firePos):normalize()
-							dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
+								local dir_calc = (v_resultPos - firePos):normalize()
+								dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
+							end
 						else
-							dir = sm.camera.getDirection()
+							firePos = self.tool:getFpBonePos("pejnt_barrel")
 						end
 					else
-						dir = sm.camera.getDirection()
 						firePos = self.tool:getTpBonePos("pejnt_barrel")
 					end
 
@@ -719,11 +768,6 @@ function Mosin.cl_onPrimaryUse(self, state)
 					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
 			else
-				if self.aiming then
-					sm.gui.displayAlertText("Can't reload while aiming")
-					return
-				end
-
 				if self.ammo_in_mag == 0 then
 					self:client_onReload()
 					return
@@ -748,18 +792,6 @@ function Mosin.cl_onPrimaryUse(self, state)
 		end
 	end
 end
-
-local reload_anims =
-{
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
-}
 
 local ammo_count_to_anim_name =
 {
@@ -786,10 +818,10 @@ function Mosin:cl_startReloadAnim(anim_name)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function Mosin:client_isGunReloading()
+function Mosin:client_isGunReloading(reload_table)
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
+		return (reload_table[fp_anims.currentAnimation] == true)
 	end
 
 	return false
@@ -821,7 +853,7 @@ function Mosin:client_onReload()
 			return true
 		end
 
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
@@ -867,7 +899,7 @@ local _intstate = sm.tool.interactState
 function Mosin.cl_onSecondaryUse( self, state )
 	if self.scope_timer then return end
 
-	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
+	local is_reloading = self:client_isGunReloading(reload_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
