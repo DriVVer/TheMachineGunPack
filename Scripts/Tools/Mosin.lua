@@ -163,12 +163,12 @@ function Mosin.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.6,
+		fireCooldown = 0.1,
 		spreadCooldown = 0.3,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 3,
-		fireVelocity = 500.0,
+		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -178,12 +178,12 @@ function Mosin.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.6,
-		spreadCooldown = 0.3,
-		spreadIncrement = 3,
-		spreadMinAngle = 1,
-		spreadMaxAngle = 3,
-		fireVelocity = 500.0,
+		fireCooldown = 0.1,
+		spreadCooldown = 0.01,
+		spreadIncrement = 1,
+		spreadMinAngle = 0.05,
+		spreadMaxAngle = 0.1,
+		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
