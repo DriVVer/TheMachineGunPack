@@ -32,13 +32,13 @@ local renderables =
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_tp_Mosin.rend",
+	"$CONTENT_DATA/Tools/Renderables/DB/char_male_tp_DB.rend",
 	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_fp_Mosin.rend",
+	"$CONTENT_DATA/Tools/Renderables/DB/char_male_fp_DB.rend",
 	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_fp_offset.rend"
 }
 
@@ -108,16 +108,16 @@ function DB.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "Gun_pickup", { nextAnimation = "idle" } },
-				unequip = { "Gun_putdown" },
+				equip = { "DB_pickup", { nextAnimation = "idle" } },
+				unequip = { "DB_putdown" },
 
-				idle = { "Gun_idle", { looping = true } },
-				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
+				idle = { "DB_idle", { looping = true } },
+				shoot = { "DB_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Gun_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Gun_E_reload", { nextAnimation = "idle", duration = 1.0 } },
-				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
+				reload = { "DB_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "DB_E_reload", { nextAnimation = "idle", duration = 1.0 } },
+				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
+				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				reload0 = { "Reload0", { nextAnimation = "idle" } },
 				reload1 = { "Reload1", { nextAnimation = "idle" } },
@@ -125,16 +125,16 @@ function DB.loadAnimations( self )
 				reload3 = { "Reload3", { nextAnimation = "idle" } },
 				reload4 = { "Reload4", { nextAnimation = "idle" } },
 
-				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "Gun_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "Gun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Gun_aim_idle", { looping = true } },
-				aimShoot = { "Gun_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "DB_aim_idle", { looping = true } },
+				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "Gun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "Gun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "Gun_sprint_idle", { looping = true } },
+				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "DB_sprint_idle", { looping = true } },
 			}
 		)
 	end
