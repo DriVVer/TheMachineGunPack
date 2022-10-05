@@ -841,7 +841,7 @@ local mosin_fp_animation_names =
 function Mosin:cl_initReloadAnim(anim_id)
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
-	setFpAnimation(self.fpAnimations, mosin_fp_animation_names[self.ammo_in_mag], 0.0)
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
 	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
