@@ -26,22 +26,23 @@
 			{ "name": "Mosin_Reload5", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_5.dae" },
 			
 			{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },
-			{ "name": "spudgun_crouch_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run_bwd.dae", "looping": true },
+			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+			{ "name": "spudgun_crouch_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_shoot", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_shoot.dae" },
 			{ "name": "spudgun_crouch_aim", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_crouch_aim_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_aim_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_crouch_aim_shoot.dae" },
+			{ "name": "spudgun_crouch_aim_bolt_action", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_crouch_aim_shoot.dae" },
 
 			{ "name": "spudgun_sprint", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_sprint.dae", "looping": true },
 			{ "name": "spudgun_run_fwd", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },
 			{ "name": "spudgun_run_bwd", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run_bwd.dae", "looping": true },
 
-			{ "name": "spudgun_jump", 					"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump.dae" },
-			{ "name": "spudgun_jump_up", 				"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump_up.dae", "looping" : true },
-			{ "name": "spudgun_jump_down", 				"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump_down.dae", "looping" : true },
-			{ "name": "spudgun_jump_land", 				"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump_land.dae" },
-			{ "name": "spudgun_jump_land_fwd", 			"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump_land.dae" },
-			{ "name": "spudgun_jump_land_bwd", 			"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_jump_land.dae" }
+			{ "name": "spudgun_jump", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae" },
+			{ "name": "spudgun_jump_up", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
+			{ "name": "spudgun_jump_down", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
+			{ "name": "spudgun_jump_land", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
+			{ "name": "spudgun_jump_land_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
+			{ "name": "spudgun_jump_land_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" }
 		],
 		"maxViewDistance": 1000.0
 	}]

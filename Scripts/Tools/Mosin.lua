@@ -460,8 +460,8 @@ function Mosin.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
-				elseif ( name == "cock_hammer" or name == "cock_hammer_aim" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 1 )
+				elseif ( name == "bolt_action" or name == "bolt_action_aim" ) then
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
