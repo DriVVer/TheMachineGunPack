@@ -18,6 +18,9 @@
 			{ "name": "Mosin_tp_ammo_check",        	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
 			{ "name": "Mosin_tp_bolt_action",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_bolt.dae" },
 			{ "name": "Mosin_tp_aim_bolt_action",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_bolt.dae" },
+
+			{ "name": "Mosin_Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_4.dae" },
+			{ "name": "Mosin_Reload5", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_5.dae" },
 			
 			{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },

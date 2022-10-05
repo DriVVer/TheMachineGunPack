@@ -811,7 +811,7 @@ end
 
 function Mosin:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(anim_id)
+		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
 	end
 end
 
@@ -828,15 +828,6 @@ function Mosin:client_isGunReloading(reload_table)
 
 	return false
 end
-
-local mosin_fp_animation_names =
-{
-	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4"
-}
 
 function Mosin:cl_initReloadAnim(anim_id)
 	local anim_name = ammo_count_to_anim_name[anim_id]
