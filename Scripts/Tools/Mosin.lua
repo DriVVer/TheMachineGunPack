@@ -120,6 +120,7 @@ function Mosin.loadAnimations( self )
 
 			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
 			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
+			bolt_action_crouch = { "spudgun_crouch_aim_bolt_action", { nextAnimation = "idle" } },
 
 			reload0 = { "Mosin_Reload5", { nextAnimation = "idle" } },
 			reload1 = { "Mosin_Reload4", { nextAnimation = "idle" } },
@@ -665,9 +666,18 @@ function Mosin:sv_n_cockHammer(data)
 end
 
 function Mosin:cl_n_cockHammer(aim_data)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
 		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-		setTpAnimation(self.tpAnimations, aim_data and "bolt_action_aim" or "bolt_action", 1.0)
+
+		local v_animName = nil
+		if aim_data then
+			v_animName = s_tool:isCrouching() and "bolt_action_crouch" or "bolt_action_aim"
+		else
+			v_animName = "bolt_action"
+		end
+
+		setTpAnimation(self.tpAnimations, v_animName, 1.0)
 	end
 end
 
@@ -702,10 +712,15 @@ function Mosin.cl_onPrimaryUse(self, state)
 	if state == sm.tool.interactState.start then
 		if self:client_isGunReloading(reload_anims2) then return end
 
-		if self.tool:getOwner().character == nil then
+		local v_toolOwner = self.tool:getOwner()
+		if not v_toolOwner then
 			return
 		end
 
+		local v_toolChar = v_toolOwner.character
+		if not (v_toolChar and sm.exists(v_toolChar)) then
+			return
+		end
 
 		if self.fireCooldownTimer <= 0.0 then
 			if self.tool:isSprinting() then
@@ -747,11 +762,7 @@ function Mosin.cl_onPrimaryUse(self, state)
 					local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 					dir = sm.noise.gunSpread( dir, spreadDeg )
-
-					local owner = self.tool:getOwner()
-					if owner then
-						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner )
-					end
+					sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
 
 					-- Timers
 					self.fireCooldownTimer = fireMode.fireCooldown
@@ -786,7 +797,7 @@ function Mosin.cl_onPrimaryUse(self, state)
 
 					if self.aiming then
 						setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-						setTpAnimation(self.tpAnimations, "bolt_action_aim", 1.0)
+						setTpAnimation(self.tpAnimations, v_toolChar:isCrouching() and "bolt_action_crouch" or "bolt_action_aim", 1.0)
 						mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
 					else
 						setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
