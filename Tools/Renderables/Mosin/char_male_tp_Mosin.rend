@@ -19,6 +19,9 @@
 			{ "name": "Mosin_tp_bolt_action",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_bolt.dae" },
 			{ "name": "Mosin_tp_aim_bolt_action",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_bolt.dae" },
 
+			{ "name": "Mosin_Reload1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_1.dae" },
+			{ "name": "Mosin_Reload2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_2.dae" },
+			{ "name": "Mosin_Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_3.dae" },
 			{ "name": "Mosin_Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_4.dae" },
 			{ "name": "Mosin_Reload5", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_5.dae" },
 			

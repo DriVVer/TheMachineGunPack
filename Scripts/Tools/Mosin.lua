@@ -121,6 +121,12 @@ function Mosin.loadAnimations( self )
 			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
 			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
 
+			reload0 = { "Mosin_Reload5", { nextAnimation = "idle" } },
+			reload1 = { "Mosin_Reload4", { nextAnimation = "idle" } },
+			reload2 = { "Mosin_Reload3", { nextAnimation = "idle" } },
+			reload3 = { "Mosin_Reload2", { nextAnimation = "idle" } },
+			reload4 = { "Mosin_Reload1", { nextAnimation = "idle" } },
+
 			reload_empty = { "Mosin_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "Mosin_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
@@ -816,7 +822,7 @@ function Mosin:cl_n_onReload(anim_id)
 end
 
 function Mosin:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, "reload", 1.0)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
