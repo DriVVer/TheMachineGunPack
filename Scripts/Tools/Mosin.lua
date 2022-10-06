@@ -459,10 +459,10 @@ function Mosin.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
+				elseif ( name == "reload0" or name == "reload1" or name == "reload2" or name == "reload3" or name == "reload4" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif ( name == "bolt_action" or name == "bolt_action_aim" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
@@ -859,7 +859,7 @@ end
 function Mosin:client_onReload()
 	if self.ammo_in_mag ~= self.mag_capacity then
 		if self.cl_hammer_cocked then
-			sm.gui.displayAlertText("You can't reload while the hammer is cocked!", 3)
+			sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
 			return true
 		end
 
