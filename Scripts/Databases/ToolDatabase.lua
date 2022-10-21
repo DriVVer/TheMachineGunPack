@@ -670,16 +670,7 @@ local mgp_tool_database =
 			reload4 =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
+					
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
@@ -722,16 +713,7 @@ local mgp_tool_database =
 			reload3 =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
+					
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
@@ -771,16 +753,7 @@ local mgp_tool_database =
 			reload2 =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
+					
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
@@ -820,16 +793,7 @@ local mgp_tool_database =
 			reload1 =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
+					
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
@@ -869,16 +833,6 @@ local mgp_tool_database =
 			reload0 =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },

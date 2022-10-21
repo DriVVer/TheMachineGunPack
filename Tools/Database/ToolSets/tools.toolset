@@ -29,21 +29,21 @@
 			}
 		},
 		{
-			"uuid": "b0c08b35-4b40-40fe-b933-ca123f99eef8",
-			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
-			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
-			"script": {
-				"file": "$CONTENT_DATA/Scripts/Tools/DB.lua",
-				"class": "DB"
-			}
-		},
-		{
 			"uuid": "c3e4dc43-a841-4c0f-82a6-7225d1bf210e",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/HandheldGrenade.lua",
 				"class": "HandheldGrenade"
+			}
+		},
+		{
+			"uuid": "b0c08b35-4b40-40fe-b933-ca123f99eef8",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/DB.lua",
+				"class": "DB"
 			}
 		},
 		{
