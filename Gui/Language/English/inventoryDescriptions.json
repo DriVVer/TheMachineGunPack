@@ -14,7 +14,7 @@
     },
     "c3e4dc43-a841-4c0f-82a6-7225d1bf210e": {
         "title": "Stielhandgranate 24",
-        "description": "Granade based on well known German 'Stick Granade' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
+        "description": "Grenade based on well known German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
     },
     "bdd9e357-35f7-4140-8b19-477abef20e0f": {
         "title": "Browning .50 HMG"
@@ -210,19 +210,19 @@
     },
     "3d410289-0079-4989-ba21-b211562147d5": {
         "title": "Pak40 Cannon Breech (r=1)",
-        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
     },
     "54b7c549-4b12-4be1-b73d-4d62db371394": {
         "title": "Pak40 Cannon Breech - Small (r=1)",
-        "description": "Tank breech for decoration. Smaller version of ''Pak40 Cannon Breech''\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
     },
     "379449f7-27ca-4aea-b723-f841406bbacc": {
         "title": "M6 37mm Cannon Breech (r=0.5)",
-        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple."
+        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple."
     },
     "85de2428-d5ff-4a20-b2a0-408070b01b05": {
         "title": "Abrams Cannon Breech (r=1)",
-        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. You need to place cannon\nfrom almost any mod (exemple: Cannons Pack by Question Mark)\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+        "description": "Tank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.3 sec (132 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Abrams Tank cannon\n - Pak40."
     
     },
     "cd1b3309-7046-4b81-ac01-f7ba8f7a00d7": {

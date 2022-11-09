@@ -6,33 +6,19 @@
 			"maxViewDistance": 1000.0,
 			"animationList": [
 				{ "name": "DB_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_idle.dae" },
-				{ "name": "DB_c_hammer", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_bolt.dae" },
-				{ "name": "DB_shoot", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_shoot.dae" },
+				{ "name": "DB_shoot_1", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_shoot_1.dae" },
+				{ "name": "DB_shoot_2", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_shoot_2.dae" },
 
-				{ "name": "Reload0", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
-				{ "name": "Reload1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
-				{ "name": "Reload2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_2_reload.dae" },
-				{ "name": "Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
-				{ "name": "Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
+				{ "name": "DB_reload_0", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_2.dae" },
+				{ "name": "DB_reload_1", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_1.dae" },
 
-				{ "name": "DB_pickup", 	     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
-				{ "name": "DB_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
+				{ "name": "DB_pickup", 	   		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_pickup.dae" },
+				{ "name": "DB_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_putdown.dae" },
 
 				{ "name": "DB_sprint_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_into.dae" },
 				{ "name": "DB_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
 				{ "name": "DB_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
 
-				{ "name": "DB_aim_into",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_into.dae" },
-				{ "name": "DB_aim_exit",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_exit.dae" },
-				{ "name": "DB_aim_shoot",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "DB_aim_idle",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "DB_aim_c_hammer", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_bolt.dae" },
-
-				{ "name": "DB_reload4",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
-				{ "name": "DB_reload3",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
-				{ "name": "DB_reload2",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_2_reload.dae" },
-				{ "name": "DB_reload1",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
-				{ "name": "DB_E_reload",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
 				{ "name": "DB_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
 			]
 		}

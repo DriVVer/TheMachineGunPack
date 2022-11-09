@@ -112,18 +112,13 @@ function DB.loadAnimations( self )
 				unequip = { "DB_putdown" },
 
 				idle = { "DB_idle", { looping = true } },
-				shoot = { "DB_shoot", { nextAnimation = "idle" } },
+				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
+				shoot_2 = { "DB_shoot_2", { nextAnimation = "idle" } },
 
-				reload = { "DB_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "DB_E_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
 				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
-
-				reload0 = { "Reload0", { nextAnimation = "idle" } },
-				reload1 = { "Reload1", { nextAnimation = "idle" } },
-				reload2 = { "Reload2", { nextAnimation = "idle" } },
-				reload3 = { "Reload3", { nextAnimation = "idle" } },
-				reload4 = { "Reload4", { nextAnimation = "idle" } },
 
 				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
