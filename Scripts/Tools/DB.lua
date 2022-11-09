@@ -183,11 +183,8 @@ end
 
 local actual_reload_anims =
 {
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
+	["reload"] = true,
+	["reload_empty"] = true
 }
 
 local aim_animation_list01 =
@@ -537,17 +534,14 @@ local reload_anims =
 	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
+	["reload"] = true,
+	["reload_empty"] = true
 }
 
 local ammo_count_to_anim_name =
 {
-	[0] = "reload0",
-	[1] = "reload1"
+	[0] = "reload_empty",
+	[1] = "reload"
 }
 
 function DB:sv_n_onReload(anim_id)
@@ -556,12 +550,12 @@ end
 
 function DB:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(anim_id)
+		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
 	end
 end
 
 function DB:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, "reload", 1.0)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	--mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
