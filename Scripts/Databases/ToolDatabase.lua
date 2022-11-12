@@ -524,6 +524,24 @@ local mgp_tool_database =
 					}
 				}
 			},
+			ammo_check =
+			{
+				[1] = {
+					
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.5 } },
+						tp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.5 } },
+						time = 2.5
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "DB_Reload1_Anim", start_val = 2.5, end_val = 5.5 } },
+						tp_anim = { { name = "DB_Reload1_Anim", start_val = 2.5, end_val = 5.5 } },
+						time = 3.0
+					}
+				}
+			},
 					
 			reload =
 			{
