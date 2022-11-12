@@ -6,9 +6,9 @@
             <authoring_tool>FBX COLLADA exporter</authoring_tool>
             <comments></comments>
         </contributor>
-        <created>2022-11-12T14:18:41Z</created>
+        <created>2022-11-12T14:37:13Z</created>
         <keywords></keywords>
-        <modified>2022-11-12T14:18:41Z</modified>
+        <modified>2022-11-12T14:37:13Z</modified>
         <revision></revision>
         <subject></subject>
         <title></title>
@@ -15457,7 +15457,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Na
     </library_animations>
     <library_visual_scenes>
         <visual_scene id="Scene" name="Scene">
-            
+          
                 <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
                     <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                     <extra>
@@ -16114,7 +16114,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Na
                         </node>
                     </node>
                 </node>
-          
+           
             <extra>
                 <technique profile="MAX3D">
                     <frame_rate>0.000000</frame_rate>
