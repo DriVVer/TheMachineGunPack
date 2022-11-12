@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset>
-    <contributor>
-      <author></author>
-      <authoring_tool>FBX COLLADA exporter</authoring_tool>
-      <comments></comments>
-    </contributor>
-    <created>2022-11-12T16:05:51Z</created>
-    <keywords></keywords>
-    <modified>2022-11-12T16:05:51Z</modified>
-    <revision></revision>
-    <subject></subject>
-    <title></title>
-    <unit meter="0.010000" name="centimeter"></unit>
-    <up_axis>Y_UP</up_axis>
-  </asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-11-12T16:19:41Z</created><keywords></keywords><modified>2022-11-12T16:19:41Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
-    <animation id="Armature-anim" name="Armature">
-      <animation>
-        <source id="Armature-Matrix-animation-input">
-          <float_array id="Armature-Matrix-animation-input-array" count="110">
+    <animation id="Armature-anim" name="Armature"><animation><source id="Armature-Matrix-animation-input"><float_array id="Armature-Matrix-animation-input-array" count="110">
 
 0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000 0.333333 0.366667 0.400000 0.433333 0.466667 0.500000
 0.533333 0.566667 0.600000 0.633333 0.666667 0.700000 0.733333 0.766667 0.800000 0.833333 0.866667 0.900000 0.933333 0.966667 1.000000 1.033333
@@ -27,15 +10,7 @@
 1.600000 1.633333 1.666667 1.700000 1.733333 1.766667 1.800000 1.833333 1.866667 1.900000 1.933333 1.966667 2.000000 2.033333 2.066667 2.100000
 2.133333 2.166667 2.200000 2.233333 2.266667 2.300000 2.333333 2.366667 2.400000 2.433333 2.466667 2.500000 2.533333 2.566667 2.600000 2.633333
 2.666667 2.700000 2.733333 2.766667 2.800000 2.833333 2.866667 2.900000 2.933333 2.966667 3.000000 3.033333 3.066667 3.100000 3.133333 3.166667
-3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array>
-          <technique_common>
-            <accessor source="#Armature-Matrix-animation-input-array" count="110">
-              <param name="TIME" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Armature-Matrix-animation-output-transform">
-          <float_array id="Armature-Matrix-animation-output-transform-array" count="1760">
+3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array><technique_common><accessor source="#Armature-Matrix-animation-input-array" count="110"><param name="TIME" type="float"/></accessor></technique_common></source><source id="Armature-Matrix-animation-output-transform"><float_array id="Armature-Matrix-animation-output-transform-array" count="1760">
 
 1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
@@ -146,15 +121,7 @@
 1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
-          <technique_common>
-            <accessor source="#Armature-Matrix-animation-output-transform-array" count="110" stride="16">
-              <param type="float4x4"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Armature-Interpolations">
-          <Name_array id="Armature-Interpolations-array" count="110">
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#Armature-Matrix-animation-output-transform-array" count="110" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="Armature-Interpolations"><Name_array id="Armature-Interpolations-array" count="110">
  LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
@@ -164,25 +131,8 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
-LINEAR LINEAR LINEAR</Name_array>
-          <technique_common>
-            <accessor source="#Armature-Interpolations-array" count="110">
-              <param type="name"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <sampler id="Armature-Matrix-animation-transform">
-          <input semantic="INPUT" source="#Armature-Matrix-animation-input"/>
-          <input semantic="OUTPUT" source="#Armature-Matrix-animation-output-transform"/>
-          <input semantic="INTERPOLATION" source="#Armature-Interpolations"/>
-        </sampler>
-        <channel source="#Armature-Matrix-animation-transform" target="Armature/matrix"/>
-      </animation>
-    </animation>
-    <animation id="jnt_eject-anim" name="jnt_eject">
-      <animation>
-        <source id="jnt_eject-Matrix-animation-input">
-          <float_array id="jnt_eject-Matrix-animation-input-array" count="110">
+LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#Armature-Interpolations-array" count="110"><param type="name"/></accessor></technique_common></source><sampler id="Armature-Matrix-animation-transform"><input semantic="INPUT" source="#Armature-Matrix-animation-input"/><input semantic="OUTPUT" source="#Armature-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#Armature-Interpolations"/></sampler><channel source="#Armature-Matrix-animation-transform" target="Armature/matrix"/></animation></animation>
+    <animation id="jnt_eject-anim" name="jnt_eject"><animation><source id="jnt_eject-Matrix-animation-input"><float_array id="jnt_eject-Matrix-animation-input-array" count="110">
 
 0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000 0.333333 0.366667 0.400000 0.433333 0.466667 0.500000
 0.533333 0.566667 0.600000 0.633333 0.666667 0.700000 0.733333 0.766667 0.800000 0.833333 0.866667 0.900000 0.933333 0.966667 1.000000 1.033333
@@ -190,15 +140,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.600000 1.633333 1.666667 1.700000 1.733333 1.766667 1.800000 1.833333 1.866667 1.900000 1.933333 1.966667 2.000000 2.033333 2.066667 2.100000
 2.133333 2.166667 2.200000 2.233333 2.266667 2.300000 2.333333 2.366667 2.400000 2.433333 2.466667 2.500000 2.533333 2.566667 2.600000 2.633333
 2.666667 2.700000 2.733333 2.766667 2.800000 2.833333 2.866667 2.900000 2.933333 2.966667 3.000000 3.033333 3.066667 3.100000 3.133333 3.166667
-3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array>
-          <technique_common>
-            <accessor source="#jnt_eject-Matrix-animation-input-array" count="110">
-              <param name="TIME" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="jnt_eject-Matrix-animation-output-transform">
-          <float_array id="jnt_eject-Matrix-animation-output-transform-array" count="1760">
+3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array><technique_common><accessor source="#jnt_eject-Matrix-animation-input-array" count="110"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_eject-Matrix-animation-output-transform"><float_array id="jnt_eject-Matrix-animation-output-transform-array" count="1760">
 
 1.000000 0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -0.928888 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -0.928888 0.000000 0.000000 0.000000 1.000000
@@ -309,15 +251,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.000000 0.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -1.014348 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -1.014348 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -1.014348 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -1.014348 0.000000 0.000000 0.000000 1.000000</float_array>
-          <technique_common>
-            <accessor source="#jnt_eject-Matrix-animation-output-transform-array" count="110" stride="16">
-              <param type="float4x4"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="jnt_eject-Interpolations">
-          <Name_array id="jnt_eject-Interpolations-array" count="110">
+1.000000 0.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -1.014348 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_eject-Matrix-animation-output-transform-array" count="110" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_eject-Interpolations"><Name_array id="jnt_eject-Interpolations-array" count="110">
  LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
@@ -327,25 +261,8 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
-LINEAR LINEAR LINEAR</Name_array>
-          <technique_common>
-            <accessor source="#jnt_eject-Interpolations-array" count="110">
-              <param type="name"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <sampler id="jnt_eject-Matrix-animation-transform">
-          <input semantic="INPUT" source="#jnt_eject-Matrix-animation-input"/>
-          <input semantic="OUTPUT" source="#jnt_eject-Matrix-animation-output-transform"/>
-          <input semantic="INTERPOLATION" source="#jnt_eject-Interpolations"/>
-        </sampler>
-        <channel source="#jnt_eject-Matrix-animation-transform" target="jnt_eject/matrix"/>
-      </animation>
-    </animation>
-    <animation id="Ammo_2-anim" name="Ammo_2">
-      <animation>
-        <source id="Ammo_2-Matrix-animation-input">
-          <float_array id="Ammo_2-Matrix-animation-input-array" count="110">
+LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_eject-Interpolations-array" count="110"><param type="name"/></accessor></technique_common></source><sampler id="jnt_eject-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_eject-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_eject-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_eject-Interpolations"/></sampler><channel source="#jnt_eject-Matrix-animation-transform" target="jnt_eject/matrix"/></animation></animation>
+    <animation id="Ammo_2-anim" name="Ammo_2"><animation><source id="Ammo_2-Matrix-animation-input"><float_array id="Ammo_2-Matrix-animation-input-array" count="110">
 
 0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000 0.333333 0.366667 0.400000 0.433333 0.466667 0.500000
 0.533333 0.566667 0.600000 0.633333 0.666667 0.700000 0.733333 0.766667 0.800000 0.833333 0.866667 0.900000 0.933333 0.966667 1.000000 1.033333
@@ -353,15 +270,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.600000 1.633333 1.666667 1.700000 1.733333 1.766667 1.800000 1.833333 1.866667 1.900000 1.933333 1.966667 2.000000 2.033333 2.066667 2.100000
 2.133333 2.166667 2.200000 2.233333 2.266667 2.300000 2.333333 2.366667 2.400000 2.433333 2.466667 2.500000 2.533333 2.566667 2.600000 2.633333
 2.666667 2.700000 2.733333 2.766667 2.800000 2.833333 2.866667 2.900000 2.933333 2.966667 3.000000 3.033333 3.066667 3.100000 3.133333 3.166667
-3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array>
-          <technique_common>
-            <accessor source="#Ammo_2-Matrix-animation-input-array" count="110">
-              <param name="TIME" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Ammo_2-Matrix-animation-output-transform">
-          <float_array id="Ammo_2-Matrix-animation-output-transform-array" count="1760">
+3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array><technique_common><accessor source="#Ammo_2-Matrix-animation-input-array" count="110"><param name="TIME" type="float"/></accessor></technique_common></source><source id="Ammo_2-Matrix-animation-output-transform"><float_array id="Ammo_2-Matrix-animation-output-transform-array" count="1760">
 
 1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
@@ -472,15 +381,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</float_array>
-          <technique_common>
-            <accessor source="#Ammo_2-Matrix-animation-output-transform-array" count="110" stride="16">
-              <param type="float4x4"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Ammo_2-Interpolations">
-          <Name_array id="Ammo_2-Interpolations-array" count="110">
+1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#Ammo_2-Matrix-animation-output-transform-array" count="110" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="Ammo_2-Interpolations"><Name_array id="Ammo_2-Interpolations-array" count="110">
  LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
@@ -490,25 +391,8 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
-LINEAR LINEAR LINEAR</Name_array>
-          <technique_common>
-            <accessor source="#Ammo_2-Interpolations-array" count="110">
-              <param type="name"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <sampler id="Ammo_2-Matrix-animation-transform">
-          <input semantic="INPUT" source="#Ammo_2-Matrix-animation-input"/>
-          <input semantic="OUTPUT" source="#Ammo_2-Matrix-animation-output-transform"/>
-          <input semantic="INTERPOLATION" source="#Ammo_2-Interpolations"/>
-        </sampler>
-        <channel source="#Ammo_2-Matrix-animation-transform" target="Ammo_2/matrix"/>
-      </animation>
-    </animation>
-    <animation id="Ammo_1-anim" name="Ammo_1">
-      <animation>
-        <source id="Ammo_1-Matrix-animation-input">
-          <float_array id="Ammo_1-Matrix-animation-input-array" count="110">
+LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#Ammo_2-Interpolations-array" count="110"><param type="name"/></accessor></technique_common></source><sampler id="Ammo_2-Matrix-animation-transform"><input semantic="INPUT" source="#Ammo_2-Matrix-animation-input"/><input semantic="OUTPUT" source="#Ammo_2-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#Ammo_2-Interpolations"/></sampler><channel source="#Ammo_2-Matrix-animation-transform" target="Ammo_2/matrix"/></animation></animation>
+    <animation id="Ammo_1-anim" name="Ammo_1"><animation><source id="Ammo_1-Matrix-animation-input"><float_array id="Ammo_1-Matrix-animation-input-array" count="110">
 
 0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000 0.333333 0.366667 0.400000 0.433333 0.466667 0.500000
 0.533333 0.566667 0.600000 0.633333 0.666667 0.700000 0.733333 0.766667 0.800000 0.833333 0.866667 0.900000 0.933333 0.966667 1.000000 1.033333
@@ -516,15 +400,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.600000 1.633333 1.666667 1.700000 1.733333 1.766667 1.800000 1.833333 1.866667 1.900000 1.933333 1.966667 2.000000 2.033333 2.066667 2.100000
 2.133333 2.166667 2.200000 2.233333 2.266667 2.300000 2.333333 2.366667 2.400000 2.433333 2.466667 2.500000 2.533333 2.566667 2.600000 2.633333
 2.666667 2.700000 2.733333 2.766667 2.800000 2.833333 2.866667 2.900000 2.933333 2.966667 3.000000 3.033333 3.066667 3.100000 3.133333 3.166667
-3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array>
-          <technique_common>
-            <accessor source="#Ammo_1-Matrix-animation-input-array" count="110">
-              <param name="TIME" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Ammo_1-Matrix-animation-output-transform">
-          <float_array id="Ammo_1-Matrix-animation-output-transform-array" count="1760">
+3.200000 3.233333 3.266667 3.300000 3.333333 3.366667 3.400000 3.433333 3.466667 3.500000 3.533333 3.566667 3.600000 3.633333</float_array><technique_common><accessor source="#Ammo_1-Matrix-animation-input-array" count="110"><param name="TIME" type="float"/></accessor></technique_common></source><source id="Ammo_1-Matrix-animation-output-transform"><float_array id="Ammo_1-Matrix-animation-output-transform-array" count="1760">
 
 1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
@@ -635,15 +511,7 @@ LINEAR LINEAR LINEAR</Name_array>
 1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</float_array>
-          <technique_common>
-            <accessor source="#Ammo_1-Matrix-animation-output-transform-array" count="110" stride="16">
-              <param type="float4x4"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Ammo_1-Interpolations">
-          <Name_array id="Ammo_1-Interpolations-array" count="110">
+1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#Ammo_1-Matrix-animation-output-transform-array" count="110" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="Ammo_1-Interpolations"><Name_array id="Ammo_1-Interpolations-array" count="110">
  LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
@@ -653,75 +521,12 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
-LINEAR LINEAR LINEAR</Name_array>
-          <technique_common>
-            <accessor source="#Ammo_1-Interpolations-array" count="110">
-              <param type="name"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <sampler id="Ammo_1-Matrix-animation-transform">
-          <input semantic="INPUT" source="#Ammo_1-Matrix-animation-input"/>
-          <input semantic="OUTPUT" source="#Ammo_1-Matrix-animation-output-transform"/>
-          <input semantic="INTERPOLATION" source="#Ammo_1-Interpolations"/>
-        </sampler>
-        <channel source="#Ammo_1-Matrix-animation-transform" target="Ammo_1/matrix"/>
-      </animation>
-    </animation>
+LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#Ammo_1-Interpolations-array" count="110"><param type="name"/></accessor></technique_common></source><sampler id="Ammo_1-Matrix-animation-transform"><input semantic="INPUT" source="#Ammo_1-Matrix-animation-input"/><input semantic="OUTPUT" source="#Ammo_1-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#Ammo_1-Interpolations"/></sampler><channel source="#Ammo_1-Matrix-animation-transform" target="Ammo_1/matrix"/></animation></animation>
   </library_animations>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-     
-        <node name="jnt_eject" id="jnt_eject" sid="jnt_eject" type="JOINT">
-          <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -0.928888 0.000000 0.000000 0.000000 1.000000</matrix>
-          <extra>
-            <technique profile="FCOLLADA">
-              <visibility>1.000000</visibility>
-            </technique>
-          </extra>
-          <node name="Ammo_2" id="Ammo_2" sid="Ammo_2" type="JOINT">
-            <matrix sid="matrix">1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="Ammo_2_end" id="Ammo_2_end" sid="Ammo_2_end" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-            </node>
-          </node>
-          <node name="Ammo_1" id="Ammo_1" sid="Ammo_1" type="JOINT">
-            <matrix sid="matrix">1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="Ammo_1_end" id="Ammo_1_end" sid="Ammo_1_end" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-            </node>
-          </node>
-        </node>
-      
-      <extra>
-        <technique profile="MAX3D">
-          <frame_rate>60.000000</frame_rate>
-        </technique>
-        <technique profile="FCOLLADA">
-          <start_time>0.000000</start_time>
-          <end_time>1.000000</end_time>
-        </technique>
-      </extra>
+      <node name="Armature" id="Armature" sid="Armature"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_eject" id="jnt_eject" sid="jnt_eject" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 0.180000 0.000000 -1.000000 -0.000000 -0.928888 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Ammo_2" id="Ammo_2" sid="Ammo_2" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Ammo_2_end" id="Ammo_2_end" sid="Ammo_2_end" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node><node name="Ammo_1" id="Ammo_1" sid="Ammo_1" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Ammo_1_end" id="Ammo_1_end" sid="Ammo_1_end" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node></node></node>
+      <extra><technique profile="MAX3D"><frame_rate>60.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>1.000000</end_time></technique></extra>
     </visual_scene>
   </library_visual_scenes>
   <scene>
