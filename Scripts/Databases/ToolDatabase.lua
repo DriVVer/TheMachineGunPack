@@ -525,7 +525,7 @@ local mgp_tool_database =
 				}
 			},
 					
-			reload1 =
+			reload =
 			{
 				[1] = {
 					
@@ -551,7 +551,7 @@ local mgp_tool_database =
 					}
 				}
 			},
-			reload0 =
+			reload_empty =
 			{
 				[1] = {
 					

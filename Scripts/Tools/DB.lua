@@ -135,12 +135,12 @@ function DB.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.6,
+		fireCooldown = 0.1,
 		spreadCooldown = 0.3,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 3,
-		fireVelocity = 500.0,
+		fireVelocity = 200.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -150,7 +150,7 @@ function DB.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.6,
+		fireCooldown = 0.2,
 		spreadCooldown = 0.3,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,

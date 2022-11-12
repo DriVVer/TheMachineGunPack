@@ -19,7 +19,7 @@
 				{ "name": "DB_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
 				{ "name": "DB_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
 
-				{ "name": "DB_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
+				{ "name": "DB_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_ammo_check.dae" }
 			]
 		}
 	]
