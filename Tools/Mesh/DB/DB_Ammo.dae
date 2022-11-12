@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-09-29T21:16:15Z</created><keywords></keywords><modified>2022-09-29T21:16:15Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2022-11-12T16:14:46Z</created><keywords></keywords><modified>2022-11-12T16:14:46Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_images>
     <image id="base_color_texture-image" name="base_color_texture"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\TommyGunDif.png</init_from></image>
   </library_images>
@@ -1731,7 +1731,7 @@
   <library_controllers>
     <controller id="char_spudgun_base.004Controller">
       <skin source="#char_spudgun_base.004-lib">
-        <bind_shape_matrix>1.000000 0.000000 -0.000000 -0.000000 0.000000 -1.000000 -0.000000 -0.000000 -0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
+        <bind_shape_matrix>1.000000 -0.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 -0.000000 -1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 </bind_shape_matrix>
         <source id="char_spudgun_base.004Controller-Joints">
           <Name_array id="char_spudgun_base.004Controller-Joints-array" count="3">
@@ -1745,9 +1745,9 @@
         <source id="char_spudgun_base.004Controller-Matrices">
           <float_array id="char_spudgun_base.004Controller-Matrices-array" count="48">
 
-1.000000 0.000000 -0.000000 -0.000000 0.000000 -1.000000 -0.000000 -0.928888 -0.000000 0.000000 -1.000000 -0.180000 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000001 0.076364 0.000000 -1.000000 -0.000000 -0.686686 -0.000001 0.000000 -1.000000 -0.179142 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000001 -0.076364 0.000000 -1.000000 -0.000000 -0.686686 -0.000001 0.000000 -1.000000 -0.179142 0.000000 0.000000 0.000000 1.000000</float_array>
+1.000000 0.000000 0.000000 -0.000000 0.000000 0.000000 -1.000000 -0.928888 -0.000000 1.000000 0.000000 -0.180000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000001 0.000000 0.076364 0.000000 0.000000 -1.000000 -0.686686 -0.000001 1.000000 0.000000 -0.179142 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000001 0.000000 -0.076364 0.000000 0.000000 -1.000000 -0.686686 -0.000001 1.000000 0.000000 -0.179142 0.000000 0.000000 0.000000 1.000000</float_array>
           <technique_common>
             <accessor source="#char_spudgun_base.004Controller-Matrices-array" count="3" stride="16">
               <param type="float4x4"/>
@@ -1789,10 +1789,70 @@
     </controller>
   </library_controllers>
   <library_visual_scenes>
-    <visual_scene id="Scene" name="Scene">
-      <node name="jnt_eject" id="jnt_eject" sid="jnt_eject" type="JOINT"><matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.180000 0.000000 -1.000000 0.000000 -0.928888 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="Ammo_2" id="Ammo_2" sid="Ammo_2" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node><node name="Ammo_1" id="Ammo_1" sid="Ammo_1" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node>
-      <node name="char_spudgun_base.004" id="char_spudgun_base.004" sid="char_spudgun_base.004"><instance_controller url="#char_spudgun_base.004Controller"><bind_material><technique_common><instance_material symbol="Parts" target="#Parts"/></technique_common></bind_material></instance_controller><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
-      <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>1.000000</end_time></technique></extra>
+   <visual_scene id="Scene" name="Scene">
+      <node name="jnt_eject" id="jnt_eject" sid="jnt_eject" type="JOINT">
+        <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.928888 0.000000 0.000000 1.000000 0.180000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+        <node name="Ammo_2" id="Ammo_2" sid="Ammo_2" type="JOINT">
+          <matrix sid="matrix">1.000000 0.000000 -0.000001 -0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix>
+          <extra>
+            <technique profile="FCOLLADA">
+              <visibility>1.000000</visibility>
+            </technique>
+          </extra>
+          <node name="Ammo_2_end" id="Ammo_2_end" sid="Ammo_2_end" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.402676 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+          </node>
+        </node>
+        <node name="Ammo_1" id="Ammo_1" sid="Ammo_1" type="JOINT">
+          <matrix sid="matrix">1.000000 0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix>
+          <extra>
+            <technique profile="FCOLLADA">
+              <visibility>1.000000</visibility>
+            </technique>
+          </extra>
+          <node name="Ammo_1_end" id="Ammo_1_end" sid="Ammo_1_end" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.402676 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+          </node>
+        </node>
+      </node>
+      <node name="char_spudgun_base.004" id="char_spudgun_base.004" sid="char_spudgun_base.004">
+        <instance_controller url="#char_spudgun_base.004Controller">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Parts" target="#Parts"/>
+            </technique_common>
+          </bind_material>
+        </instance_controller>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>24.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.000000</start_time>
+          <end_time>1.000000</end_time>
+        </technique>
+      </extra>
     </visual_scene>
   </library_visual_scenes>
   <scene>

@@ -111,7 +111,10 @@ function DB.loadAnimations( self )
 				equip = { "DB_pickup", { nextAnimation = "idle" } },
 				unequip = { "DB_putdown" },
 
-				idle = { "DB_idle", { looping = true } },
+				idle = { "DB_idle", { nextAnimation = "assign_new_anim" } },
+				assign_new_anim = { "DB_idle" },
+				idle2 = { "DB_idle2", { nextAnimation = "idle" } },
+
 				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
 				shoot_2 = { "DB_shoot_2", { nextAnimation = "idle" } },
 
@@ -239,6 +242,18 @@ function DB.client_onUpdate( self, dt )
 		end
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
+
+		if self.equipped then
+			if self.fpAnimations.currentAnimation == "assign_new_anim" then
+				if math.random(0, 100) > 2 then
+					print("playing rare idle animation")
+					setFpAnimation(self.fpAnimations, "idle2", 0.0)
+				else
+					print("playing normal idle animation")
+					setFpAnimation(self.fpAnimations, "idle", 0.0)
+				end
+			end
+		end
 	end
 
 	if not self.equipped then
@@ -556,7 +571,7 @@ end
 
 function DB:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	--mgp_toolAnimator_setAnimation(self, anim_name)
+	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
 function DB:client_isGunReloading()
