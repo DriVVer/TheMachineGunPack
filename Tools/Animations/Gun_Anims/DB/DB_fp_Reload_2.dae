@@ -6,9 +6,9 @@
       <authoring_tool>FBX COLLADA exporter</authoring_tool>
       <comments></comments>
     </contributor>
-    <created>2022-11-12T14:19:15Z</created>
+    <created>2022-11-12T15:15:50Z</created>
     <keywords></keywords>
-    <modified>2022-11-12T14:19:15Z</modified>
+    <modified>2022-11-12T15:15:50Z</modified>
     <revision></revision>
     <subject></subject>
     <title></title>
@@ -1345,6 +1345,14 @@ LINEAR LINEAR LINEAR</Name_array>
                   <visibility>1.000000</visibility>
                 </technique>
               </extra>
+              <node name="jnt_trigger_end" id="jnt_trigger_end" sid="jnt_trigger_end" type="JOINT">
+                <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.759998 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
             </node>
             <node name="Bone" id="Bone" sid="Bone" type="JOINT">
               <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000516 0.000000 -0.144540 0.989499 0.724043 -0.000000 -0.989499 -0.144540 0.312658 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -1353,6 +1361,14 @@ LINEAR LINEAR LINEAR</Name_array>
                   <visibility>1.000000</visibility>
                 </technique>
               </extra>
+              <node name="Bone_end" id="Bone_end" sid="Bone_end" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.759998 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
             </node>
           </node>
           <node name="jnt_eject" id="jnt_eject" sid="jnt_eject" type="JOINT">
@@ -1369,6 +1385,14 @@ LINEAR LINEAR LINEAR</Name_array>
                   <visibility>1.000000</visibility>
                 </technique>
               </extra>
+              <node name="Ammo_2_end" id="Ammo_2_end" sid="Ammo_2_end" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
             </node>
             <node name="Ammo_1" id="Ammo_1" sid="Ammo_1" type="JOINT">
               <matrix sid="matrix">1.000000 -0.000000 -0.000001 0.076364 -0.000000 1.000000 -0.000000 -0.242202 0.000001 0.000000 1.000000 -0.000858 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -1377,10 +1401,18 @@ LINEAR LINEAR LINEAR</Name_array>
                   <visibility>1.000000</visibility>
                 </technique>
               </extra>
+              <node name="Ammo_1_end" id="Ammo_1_end" sid="Ammo_1_end" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.253957 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
             </node>
           </node>
         </node>
-      
+     
       <extra>
         <technique profile="MAX3D">
           <frame_rate>60.000000</frame_rate>
