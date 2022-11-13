@@ -525,15 +525,15 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.5 } },
-						tp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.5 } },
-						time = 2.5
+						fp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.0 } },
+						tp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 2.0 } },
+						time = 2.0
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload1_Anim", start_val = 2.5, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Reload1_Anim", start_val = 2.5, end_val = 5.5 } },
-						time = 3.0
+						fp_anim = { { name = "DB_Reload1_Anim", start_val = 2.0, end_val = 3.66 } },
+						tp_anim = { { name = "DB_Reload1_Anim", start_val = 2.0, end_val = 3.66 } },
+						time = 1.66
 					}
 				}
 			},
@@ -542,17 +542,17 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
-						time = 5.5
+						fp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 3.66 } },
+						tp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 3.66 } },
+						time = 3.66
 					}
 				},
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload1", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Ammo_Reload1", start_val = 0.0, end_val = 5.5 } },
-						time = 5.5
+						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
+						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
+						time = 3.66
 					}
 				}
 			},
@@ -561,16 +561,16 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Reload1_Anim", start_val = 0.0, end_val = 5.5 } },
+						fp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 5.5 } },
+						tp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 5.5 } },
 						time = 5.5
 					}
 				},
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload1", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Ammo_Reload1", start_val = 0.0, end_val = 5.5 } },
+						fp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 5.5 } },
+						tp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 5.5 } },
 						time = 5.5
 					}
 				}

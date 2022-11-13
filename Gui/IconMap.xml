@@ -242,8 +242,11 @@
             <Index name="c0cb7836-075a-478a-af3d-0b7360721527">
                 <Frame point="768 672"/>
             </Index>
-            <Index name="57626e0c-6b12-4a70-879b-91cc15788c50">
+            <Index name="b0c08b35-4b40-40fe-b933-ca123f99eef8">
                 <Frame point="864 672"/>
+            </Index>
+            <Index name="57626e0c-6b12-4a70-879b-91cc15788c50">
+                <Frame point="0 768"/>
             </Index>
         </Group>
     </Resource>

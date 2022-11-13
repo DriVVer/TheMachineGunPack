@@ -111,7 +111,7 @@ function DB.loadAnimations( self )
 				equip = { "DB_pickup", { nextAnimation = "idle" } },
 				unequip = { "DB_putdown" },
 
-				idle = { "DB_idle", { nextAnimation = "assign_new_anim" } },
+				idle = { "DB_idle", { nextAnimation = "idle" } },
 				assign_new_anim = { "DB_idle" },
 				idle2 = { "DB_idle2", { nextAnimation = "idle" } },
 
