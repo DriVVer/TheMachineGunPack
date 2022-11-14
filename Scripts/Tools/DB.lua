@@ -112,7 +112,7 @@ function DB.loadAnimations( self )
 				unequip = { "DB_putdown" },
 
 				idle = { "DB_idle_1", { nextAnimation = "idle" } },
-				
+				inspect = { "DB_idle_2", { nextAnimation = "idle" } },
 
 				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
 				shoot_2 = { "DB_shoot_2", { nextAnimation = "idle" } },
@@ -241,18 +241,6 @@ function DB.client_onUpdate( self, dt )
 		end
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
-
-		if self.equipped then
-			if self.fpAnimations.currentAnimation == "assign_new_anim" then
-				if math.random(0, 100) < 10 then
-					print("playing rare idle animation")
-					setFpAnimation(self.fpAnimations, "idle2", 0.0)
-				else
-					print("playing normal idle animation")
-					setFpAnimation(self.fpAnimations, "idle", 0.0)
-				end
-			end
-		end
 	end
 
 	if not self.equipped then
@@ -611,7 +599,7 @@ function DB:client_onToggle()
 	return true
 end
 
-function DB:client_onEquippedUpdate(primaryState, secondaryState)
+function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if primaryState == sm.tool.interactState.start then
 		self:cl_onPrimaryUse()
 	end
@@ -620,5 +608,20 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState)
 		self:cl_onPrimaryUse(true)
 	end
 
+	if f and not self:client_isGunReloading() and not self.tool:isSprinting() and self.fpAnimations.currentAnimation ~= "inspect" then
+		self.network:sendToServer("sv_onInspect")
+	end
+
 	return true, true
+end
+
+function DB:sv_onInspect()
+	self.network:sendToClients("cl_onInspect")
+end
+
+function DB:cl_onInspect()
+	--setTpAnimation(self.tpAnimations, "inspect", 1)
+	if self.tool:isLocal() then
+		setFpAnimation(self.fpAnimations, "inspect", 1)
+	end
 end
