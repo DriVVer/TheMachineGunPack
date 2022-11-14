@@ -575,7 +575,7 @@ local mgp_tool_database =
 						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 3.66 } },
 						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 3.66 } },
 						time = 3.66
-					}
+					},
 				}
 			},
 			reload_empty =

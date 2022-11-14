@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 
-local Damage = 90
+local Damage = 25
 
 ---@class DoubleBarrel : ToolClass
 ---@field fpAnimations table
