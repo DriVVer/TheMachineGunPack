@@ -483,7 +483,7 @@ local mgp_tool_database =
 	DB =
 	{
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reloadTG = "TommyReload",
 			reloadETG = "TommyEReload"

@@ -71,7 +71,7 @@ function DB.loadAnimations( self )
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
-			
+
 			reload_empty = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "DB_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "DB_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
@@ -244,7 +244,7 @@ function DB.client_onUpdate( self, dt )
 
 		if self.equipped then
 			if self.fpAnimations.currentAnimation == "assign_new_anim" then
-				if math.random(0, 100) > 2 then
+				if math.random(0, 100) < 10 then
 					print("playing rare idle animation")
 					setFpAnimation(self.fpAnimations, "idle2", 0.0)
 				else
@@ -304,13 +304,6 @@ function DB.client_onUpdate( self, dt )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -407,7 +400,7 @@ function DB:client_onEquip(animate)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	
+
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
 
 	--Set the tp and fp renderables before actually loading animations
@@ -431,7 +424,7 @@ function DB.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
 	mgp_toolAnimator_reset(self)
-	
+
 	if sm.exists( self.tool ) then
 		if animate then
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
@@ -464,22 +457,7 @@ function DB.onShoot( self, dir )
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	--[[if dir ~= nil then
-		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
-	else
-		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
-	end]]
-end
-
-function DB:sv_n_cockHammer()
-	self.network:sendToClients("cl_n_cockHammer")
-end
-
-function DB:cl_n_cockHammer()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-	end
+	mgp_toolAnimator_setAnimation(self, "shoot")
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
@@ -534,9 +512,6 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 			-- Play FP shoot animation
 			setFpAnimation( self.fpAnimations, "shoot", 0.0 )
 		else
-			self:onShoot()
-			self.network:sendToServer("sv_n_onShoot")
-
 			self.fireCooldownTimer = 0.3
 			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
