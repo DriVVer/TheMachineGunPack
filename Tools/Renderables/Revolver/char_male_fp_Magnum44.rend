@@ -5,26 +5,26 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "Magnum_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_idle.dae" },
-				{ "name": "Magnum_c_hammer", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_c_hammer.dae" },
-				{ "name": "Magnum_shoot", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_shoot.dae" },
+				{ "name": "Magnum_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_idle.dae" },
+				{ "name": "Magnum_c_hammer", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_c_hammer.dae" },
+				{ "name": "Magnum_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_shoot.dae" },
 
-				{ "name": "Magnum_pickup", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_pickup.dae" },
-				{ "name": "Magnum_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_putdown.dae" },
+				{ "name": "Magnum_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_pickup.dae" },
+				{ "name": "Magnum_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_putdown.dae" },
 
-				{ "name": "Magnum_sprint_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_into.dae" },
-				{ "name": "Magnum_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_exit.dae" },
-				{ "name": "Magnum_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_idle.dae" },
+				{ "name": "Magnum_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_into.dae" },
+				{ "name": "Magnum_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_exit.dae" },
+				{ "name": "Magnum_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_sprint_idle.dae" },
 
-				{ "name": "Magnum_aim_into",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_into.dae" },
-				{ "name": "Magnum_aim_exit",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_exit.dae" },
-				{ "name": "Magnum_aim_shoot",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_shoot.dae" },
-				{ "name": "Magnum_aim_idle",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_idle.dae" },
-				{ "name": "Magnum_aim_c_hammer", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_c_hammer.dae" },
+				{ "name": "Magnum_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_into.dae" },
+				{ "name": "Magnum_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_exit.dae" },
+				{ "name": "Magnum_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_shoot.dae" },
+				{ "name": "Magnum_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_idle.dae" },
+				{ "name": "Magnum_aim_c_hammer", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_aim_c_hammer.dae" },
 
-				{ "name": "Magnum_reload",         	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_reload.dae" },
-				{ "name": "Magnum_E_reload",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_empty_reload.dae" },
-				{ "name": "Magnum_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_ammo_check.dae" }
+				{ "name": "Magnum_reload",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_reload.dae" },
+				{ "name": "Magnum_E_reload",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_empty_reload.dae" },
+				{ "name": "Magnum_ammo_check", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Revolver/ani_char_male_fp_Magnum_normal_ammo_check.dae" }
 			]
 		}
 	]

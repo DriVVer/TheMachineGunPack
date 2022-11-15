@@ -5,9 +5,9 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "Gun_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "Gun_c_hammer", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_bolt.dae" },
-				{ "name": "Gun_shoot", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_shoot.dae" },
+				{ "name": "Gun_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
+				{ "name": "Gun_c_hammer", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_bolt.dae" },
+				{ "name": "Gun_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_shoot.dae" },
 
 				{ "name": "Reload0", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
 				{ "name": "Reload1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
@@ -15,25 +15,25 @@
 				{ "name": "Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
 				{ "name": "Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
 
-				{ "name": "Gun_pickup", 	     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
-				{ "name": "Gun_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
+				{ "name": "Gun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
+				{ "name": "Gun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
 
-				{ "name": "Gun_sprint_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_into.dae" },
-				{ "name": "Gun_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
-				{ "name": "Gun_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
+				{ "name": "Gun_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_into.dae" },
+				{ "name": "Gun_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
+				{ "name": "Gun_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
 
-				{ "name": "Gun_aim_into",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_into.dae" },
-				{ "name": "Gun_aim_exit",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_exit.dae" },
-				{ "name": "Gun_aim_shoot",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "Gun_aim_idle",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "Gun_aim_c_hammer", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_bolt.dae" },
+				{ "name": "Gun_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_into.dae" },
+				{ "name": "Gun_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_exit.dae" },
+				{ "name": "Gun_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
+				{ "name": "Gun_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
+				{ "name": "Gun_aim_c_hammer", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_bolt.dae" },
 
-				{ "name": "Gun_reload4",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
-				{ "name": "Gun_reload3",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
-				{ "name": "Gun_reload2",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_2_reload.dae" },
-				{ "name": "Gun_reload1",         "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
-				{ "name": "Gun_E_reload",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
-				{ "name": "Gun_ammo_check",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
+				{ "name": "Gun_reload4",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
+				{ "name": "Gun_reload3",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
+				{ "name": "Gun_reload2",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_2_reload.dae" },
+				{ "name": "Gun_reload1",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
+				{ "name": "Gun_E_reload",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
+				{ "name": "Gun_ammo_check", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
 			]
 		}
 	]

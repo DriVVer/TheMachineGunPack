@@ -1,7 +1,9 @@
 {
-	"lodList": [{
-		"mesh": "$CONTENT_DATA/Tools/Mesh/Mosin/Mosin_tp_offset.dae",
-		"includes" : ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
-		"maxViewDistance": 1000.0
-	}]
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Mosin/Mosin_tp_offset.dae",
+			"includes" : ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
+			"maxViewDistance": 1000.0
+		}
+	]
 }

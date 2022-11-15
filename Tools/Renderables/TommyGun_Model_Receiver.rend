@@ -4,7 +4,7 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGunReciever.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "TommyGun_model_shoot", 	       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_shoot.dae" }
+				{ "name": "TommyGun_model_shoot", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/ani_char_TommyGun_fp_shoot.dae" }
 			],
 			"subMeshList": [
 				{

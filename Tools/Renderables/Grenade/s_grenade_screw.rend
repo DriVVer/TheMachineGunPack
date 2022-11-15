@@ -6,7 +6,6 @@
 			"animationList": [
 				{ "name": "Activation_unscrew", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Grenade/Granade_Activation.dae" }
 			],
-	
 			"subMeshList": [
 				{
 					"material": "DifAsg",

@@ -4,7 +4,7 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Mosin/Mosin_Anim.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "Mosin_Anim"            , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/Mosin_tp_shoot.dae" }
+				{ "name": "Mosin_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/Mosin_tp_shoot.dae" }
 			],
 			"subMeshList": [
 				{

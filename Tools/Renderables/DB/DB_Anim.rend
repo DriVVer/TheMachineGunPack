@@ -2,19 +2,9 @@
 	"lodList": [
 		{
 			"mesh": "$CONTENT_DATA/Tools/Mesh/DB/DB_Anim.dae",
-			"includes": [
-				"POSITION",
-				"UV0",
-				"NORMAL",
-				"TANGENTS",
-				"BLEND_INDICES",
-				"BLEND_WEIGHTS"
-			],
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{
-					"name": "DB_Reload_Anim",
-					"file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_fp_Reload_2.dae"
-				}
+				{ "name": "DB_Reload_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_fp_Reload_2.dae" }
 			],
 			"subMeshList": [
 				{
