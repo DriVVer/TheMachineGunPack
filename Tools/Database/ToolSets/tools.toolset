@@ -2,57 +2,69 @@
 	"toolList":
 	[
 		{
+			"name": "TommyGun",
 			"uuid": "336a7328-4d50-432c-8698-2ed511187cc7",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/TommyGun_InventoryPreview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/TommyGun.lua",
-				"class": "TommyGun"
+				"class": "TommyGun",
+				"data": {}
 			}
 		},
 		{
+			"name": "Magnum44",
 			"uuid": "96f3b45c-8729-4573-bc14-bbe1cc7fd2bb",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_InventoryPreview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/Magnum44.lua",
-				"class": "Magnum44"
+				"class": "Magnum44",
+				"data": {}
 			}
 		},
 		{
+			"name": "Mosin",
 			"uuid": "c0cb7836-075a-478a-af3d-0b7360721527",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/Mosin.lua",
-				"class": "Mosin"
+				"class": "Mosin",
+				"data": {}
 			}
 		},
 		{
+			"name": "HandheldGrenade",
 			"uuid": "c3e4dc43-a841-4c0f-82a6-7225d1bf210e",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/HandheldGrenade.lua",
-				"class": "HandheldGrenade"
+				"class": "HandheldGrenade",
+				"data": {}
 			}
 		},
 		{
+			"name": "DoubleBarrel",
 			"uuid": "b0c08b35-4b40-40fe-b933-ca123f99eef8",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/DB.lua",
-				"class": "DB"
+				"class": "DB",
+				"data": {}
 			}
 		},
 		{
+			"name": "ShrapnelGrenade",
 			"uuid": "57626e0c-6b12-4a70-879b-91cc15788c50",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shrapnel_Grenade/Shrapnel_Grenade_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/ShrapnelGrenade.lua",
-				"class": "ShrapnelGrenade"
+				"class": "ShrapnelGrenade",
+				"data": {}
 			}
 		}
 	]
