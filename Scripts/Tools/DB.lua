@@ -516,8 +516,8 @@ local reload_anims =
 	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
-	["reload"] = true,
-	["reload_empty"] = true
+	["reload"]          = true,
+	["reload_empty"]    = true
 }
 
 local ammo_count_to_anim_name =
@@ -627,6 +627,6 @@ end
 function DB:cl_onInspect()
 	--setTpAnimation(self.tpAnimations, "inspect", 1)
 	if self.tool:isLocal() then
-		setFpAnimation(self.fpAnimations, "inspect", 1)
+		setFpAnimation(self.fpAnimations, "inspect", 0.0)
 	end
 end
