@@ -438,19 +438,18 @@ function DB.client_onUnequip( self, animate )
 	end
 end
 
-function DB.sv_n_onShoot( self, doubleShot )
-	self.network:sendToClients( "cl_n_onShoot", doubleShot )
+function DB:sv_n_onShoot(doubleShot)
+	self.network:sendToClients("cl_n_onShoot", doubleShot)
 end
 
-function DB.cl_n_onShoot( self, doubleShot )
+function DB:cl_n_onShoot(doubleShot)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot( doubleShot )
+		self:onShoot(doubleShot)
 	end
 end
 
-function DB.onShoot( self, doubleShot )
+function DB:onShoot(doubleShot)
 	mgp_toolAnimator_setAnimation(self, doubleShot and "shoot_2" or "shoot")
-	print(doubleShot and "shoot_2" or "shoot")
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
@@ -494,7 +493,7 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 			sm.projectile.projectileAttack(proj_type, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
-			self.fireCooldownTimer = is_double_shot and 2.0 or 0.5
+			self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
@@ -503,7 +502,7 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 			self.network:sendToServer("sv_n_onShoot", is_double_shot)
 
 			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, "shoot", 0.0 )
+			setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
 		else
 			self.fireCooldownTimer = 0.3
 			sm.audio.play( "PotatoRifle - NoAmmo" )
