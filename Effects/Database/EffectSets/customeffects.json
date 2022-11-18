@@ -379,6 +379,63 @@
 		]
 	},
 
+	"MosinBoltOpen":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 0.55
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_putdown",
+				"delay": 0.88
+			}
+		]
+	},
+
+	"MosinBoltClose":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 1.7
+			}
+		]
+	},
+
+	"MosinBulletPut":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 1.7
+			}
+		]
+	},
+
 
 	"TommyEReload":
 	{
