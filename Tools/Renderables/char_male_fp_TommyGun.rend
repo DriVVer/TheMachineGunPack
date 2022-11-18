@@ -5,20 +5,20 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "TommyGun_idle", 	       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_idle.dae" },
-				{ "name": "TommyGun_shoot", 	   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_shoot.dae" },
+				{ "name": "TommyGun_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_idle.dae" },
+				{ "name": "TommyGun_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_shoot.dae" },
 
-				{ "name": "TommyGun_pickup", 	   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_pickup.dae" },
-				{ "name": "TommyGun_putdown", 	   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_putdown.dae" },
+				{ "name": "TommyGun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_pickup.dae" },
+				{ "name": "TommyGun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_putdown.dae" },
 
-				{ "name": "TommyGun_sprint_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_into.dae" },
-				{ "name": "TommyGun_sprint_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_exit.dae" },
-				{ "name": "TommyGun_sprint_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_idle.dae" },
+				{ "name": "TommyGun_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_into.dae" },
+				{ "name": "TommyGun_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_exit.dae" },
+				{ "name": "TommyGun_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_sprint_idle.dae" },
 
-				{ "name": "TommyGun_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_into.dae" },
-				{ "name": "TommyGun_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_exit.dae" },
-				{ "name": "TommyGun_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_shoot.dae" },
-				{ "name": "TommyGun_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_idle.dae" },
+				{ "name": "TommyGun_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_into.dae" },
+				{ "name": "TommyGun_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_exit.dae" },
+				{ "name": "TommyGun_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_shoot.dae" },
+				{ "name": "TommyGun_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_aim_idle.dae" },
 
 				{ "name": "TommyGun_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_normal_reload.dae" },
 				{ "name": "TommyGun_reload_empty", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/ani_char_male_fp_TommyGun_empty_reload.dae"},

@@ -4,9 +4,8 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Grenade/s_grenade_screw.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "Activation_unscrew", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Grenade/Granade_Activation.dae" }
+				{ "name": "Activation_unscrew", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Grenade/Grenade_Activation.dae" }
 			],
-	
 			"subMeshList": [
 				{
 					"material": "DifAsg",

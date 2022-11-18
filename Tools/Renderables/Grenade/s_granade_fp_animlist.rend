@@ -22,7 +22,6 @@
 				{ "name": "glowstick_aim_exit",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Granade/SGranade_fp_idle.dae" },
 				{ "name": "glowstick_aim_shoot",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Granade/SGranade_fp_throw.dae" },
 				{ "name": "glowstick_aim_idle",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Granade/SGranade_fp_idle.dae" }
-				
 			]
 		}
 	]

@@ -66,8 +66,13 @@ function DB.loadAnimations( self )
 		self.tool,
 		{
 			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
+			shoot_2 = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
+
+			--[[
 			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
+			]]
+
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
@@ -119,15 +124,18 @@ function DB.loadAnimations( self )
 
 				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
-				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+
+				--[[
+				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
+				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "DB_aim_idle", { looping = true } },
 				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
+				]]
 
 				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -430,22 +438,18 @@ function DB.client_onUnequip( self, animate )
 	end
 end
 
-function DB.sv_n_onShoot( self, dir )
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function DB:sv_n_onShoot(doubleShot)
+	self.network:sendToClients("cl_n_onShoot", doubleShot)
 end
 
-function DB.cl_n_onShoot( self, dir )
+function DB:cl_n_onShoot(doubleShot)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot( dir )
+		self:onShoot(doubleShot)
 	end
 end
 
-function DB.onShoot( self, dir )
-	self.tpAnimations.animations.idle.time     = 0
-	self.tpAnimations.animations.shoot.time    = 0
-	self.tpAnimations.animations.aimShoot.time = 0
-
-	mgp_toolAnimator_setAnimation(self, "shoot")
+function DB:onShoot(doubleShot)
+	mgp_toolAnimator_setAnimation(self, doubleShot and "shoot_2" or "shoot")
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
@@ -489,16 +493,16 @@ function DB.cl_onPrimaryUse(self, is_double_shot)
 			sm.projectile.projectileAttack(proj_type, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
-			self.fireCooldownTimer = is_double_shot and 2.0 or 0.5
+			self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
 			-- Send TP shoot over network and dircly to self
-			self:onShoot(1)
-			self.network:sendToServer("sv_n_onShoot", 1)
+			self:onShoot(is_double_shot)
+			self.network:sendToServer("sv_n_onShoot", is_double_shot)
 
 			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, "shoot", 0.0 )
+			setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
 		else
 			self.fireCooldownTimer = 0.3
 			sm.audio.play( "PotatoRifle - NoAmmo" )
@@ -511,8 +515,8 @@ local reload_anims =
 	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
-	["reload"] = true,
-	["reload_empty"] = true
+	["reload"]          = true,
+	["reload_empty"]    = true
 }
 
 local ammo_count_to_anim_name =
@@ -601,7 +605,7 @@ end
 
 function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if primaryState == sm.tool.interactState.start then
-		self:cl_onPrimaryUse()
+		self:cl_onPrimaryUse(false)
 	end
 
 	if secondaryState == sm.tool.interactState.start then
@@ -622,6 +626,6 @@ end
 function DB:cl_onInspect()
 	--setTpAnimation(self.tpAnimations, "inspect", 1)
 	if self.tool:isLocal() then
-		setFpAnimation(self.fpAnimations, "inspect", 1)
+		setFpAnimation(self.fpAnimations, "inspect", 0.0)
 	end
 end

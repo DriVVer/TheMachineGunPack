@@ -8,7 +8,6 @@
 				{ "name": "DB_Ammo_Reload2_Anim"            , "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_fp_Ammo_Reload_2.dae" }
 			],
 			"subMeshList": [
-				
 				{
 					"material": "DifAsgNor",
 					"textureList": [ 
