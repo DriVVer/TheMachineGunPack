@@ -618,11 +618,12 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			reloadTG = "TommyReload",
-			reloadETG = "TommyEReload"
+			BoltOpen = "MosinBoltOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = { "MosinBoltOpen", "MosinBoltClose", "MosinBulletPut" }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_aim_shoot_reset_table,
@@ -677,6 +678,34 @@ local mgp_tool_database =
 						tp_anim = { { name = "Mosin_Anim", start_val = 4.05, end_val = 4.75 } },
 						time = 0.7
 					}
+				},
+
+				[2] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "MosinBoltOpen",
+						name_fp = "MosinBoltOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "MosinBoltClose",
+						name_fp = "MosinBoltClose",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
+
+
 				}
 			},
 			cock_the_hammer_aim =

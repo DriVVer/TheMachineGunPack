@@ -379,64 +379,6 @@
 		]
 	},
 
-	"MosinBoltOpen":
-	{
-		
-		
-		"effectList":
-		[
-			{
-				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 0.55
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/painttool/pt_putdown",
-				"delay": 0.88
-			}
-		]
-	},
-
-	"MosinBoltClose":
-	{
-		
-		
-		"effectList":
-		[
-			{
-				"type": "audio",
-				"name": "event:/tools/painttool/pt_equip",
-				"delay": 1.4
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 1.7
-			}
-		]
-	},
-
-	"MosinBulletPut":
-	{
-		
-		
-		"effectList":
-		[
-			{
-				"type": "audio",
-				"name": "event:/tools/painttool/pt_equip",
-				"delay": 1.4
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 1.7
-			}
-		]
-	},
-
-
 	"TommyEReload":
 	{
 		
@@ -483,6 +425,65 @@
 			
 		]
 	},
+
+	"MosinBoltOpen":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 0.50
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_putdown",
+				"delay": 1.2
+			}
+		]
+	},
+
+	"MosinBoltClose":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 0.00
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 0.50
+			}
+		]
+	},
+
+	"MosinBulletPut":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 1.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_pickup",
+				"delay": 1.7
+			}
+		]
+	},
+
+
 
 	"Muzzle_Flash_SmallCal_tp":
 	{
