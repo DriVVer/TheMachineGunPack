@@ -205,6 +205,17 @@ local aim_animation_list02 =
 function Magnum44.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
+	if self.cl_show_ammo_timer then
+		self.cl_show_ammo_timer = self.cl_show_ammo_timer - dt
+
+		if self.cl_show_ammo_timer <= 0.0 then
+			self.cl_show_ammo_timer = nil
+			if self.tool:isEquipped() then
+				sm.gui.displayAlertText(("Magnum44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			end
+		end
+	end
+
 	if self.aim_timer then
 		self.aim_timer = self.aim_timer - dt
 		if self.aim_timer <= 0.0 then
@@ -820,7 +831,7 @@ end
 function Magnum44:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("Magnum44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			self.cl_show_ammo_timer = 0.5
 
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 

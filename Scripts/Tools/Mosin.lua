@@ -277,6 +277,17 @@ local aim_animation_blacklist =
 function Mosin.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
+	if self.cl_show_ammo_timer then
+		self.cl_show_ammo_timer = self.cl_show_ammo_timer - dt
+
+		if self.cl_show_ammo_timer <= 0.0 then
+			self.cl_show_ammo_timer = nil
+			if self.tool:isEquipped() then
+				sm.gui.displayAlertText(("Mosin: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			end
+		end
+	end
+
 	if self.aim_timer then
 		self.aim_timer = self.aim_timer - dt
 		if self.aim_timer <= 0.0 then
@@ -890,7 +901,7 @@ end
 function Mosin:client_onToggle()
 	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("Mosin: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			self.cl_show_ammo_timer = 0.7
 
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
