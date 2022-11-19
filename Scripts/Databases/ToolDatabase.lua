@@ -623,7 +623,7 @@ local mgp_tool_database =
 			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
-			stop_effects = { "MosinBoltOpen", "MosinBoltClose", "MosinBulletPut" }
+			stop_effects = { "BoltOpen", "BoltClose", "BulletPut" }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_aim_shoot_reset_table,
@@ -689,8 +689,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "MosinBoltOpen",
-						name_fp = "MosinBoltOpen",
+						name_tp = "BoltOpen",
+						name_fp = "BoltOpen",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
@@ -698,8 +698,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "MosinBoltClose",
-						name_fp = "MosinBoltClose",
+						name_tp = "BoltClose",
+						name_fp = "BoltClose",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
@@ -797,7 +797,7 @@ local mgp_tool_database =
 			},
 			reload4 =
 			{
-				[1] = {	
+				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
@@ -839,7 +839,7 @@ local mgp_tool_database =
 			},
 			reload3 =
 			{
-				[1] = {		
+				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
