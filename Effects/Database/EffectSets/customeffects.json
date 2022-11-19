@@ -434,13 +434,8 @@
 		[
 			{
 				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 0.50
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/painttool/pt_putdown",
-				"delay": 1.2
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 0.0
 			}
 		]
 	},
@@ -453,32 +448,26 @@
 		[
 			{
 				"type": "audio",
-				"name": "event:/tools/painttool/pt_equip",
-				"delay": 0.00
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 0.50
+				"name": "event:/tools/painttool/pt_putdown",
+				"delay": 0.0,
+				"duration" : 0.5
 			}
 		]
 	},
 
 	"MosinBulletPut":
 	{
-		
-		
+		"parameterList":
+		{
+			"size": 0.5
+		},
+				
 		"effectList":
 		[
 			{
 				"type": "audio",
-				"name": "event:/tools/painttool/pt_equip",
-				"delay": 1.4
-			},
-			{
-				"type": "audio",
-				"name": "event:/tools/sledgehammer_pickup",
-				"delay": 1.7
+				"name": "event:/tools/sledgehammer_putdown",
+				"delay": 0.0
 			}
 		]
 	},
