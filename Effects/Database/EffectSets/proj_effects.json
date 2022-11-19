@@ -1,0 +1,10 @@
+{
+	"Bazooka - Projectile": {
+		"effectList": [
+			{
+				"type": "renderable",
+				"name": "$CONTENT_DATA/Projectiles/Renderables/Rocket.rend"
+			}
+		]
+	}
+}

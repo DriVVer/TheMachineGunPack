@@ -151,7 +151,7 @@ local mgp_tool_database =
 			Granade_activ =
 			{
 				[1] = {
-					{				
+					{
 						type = mgp_tool_anim_enum.toggle_renderable,
 						name = "anim_body",
 						enabled = true
@@ -162,7 +162,7 @@ local mgp_tool_database =
 						tp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					},
-					{					
+					{
 						type = mgp_tool_anim_enum.toggle_renderable,
 						name = "anim_body",
 						enabled = false
@@ -172,20 +172,20 @@ local mgp_tool_database =
 			throw =
 			{
 				[1] = {
-					{						
+					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.2
 					},
-					{						
+					{
 						type = mgp_tool_anim_enum.toggle_renderable,
 						name = "anim_body",
 						enabled = false
 					},
-					{						
+					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.4
 					},
-					{						
+					{
 						type = mgp_tool_anim_enum.toggle_renderable,
 						name = "main_body",
 						enabled = true
