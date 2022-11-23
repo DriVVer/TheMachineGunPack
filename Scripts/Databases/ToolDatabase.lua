@@ -485,8 +485,9 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			reloadTG = "TommyReload",
-			reloadETG = "TommyEReload"
+			MagOpen = "DBOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
 			stop_effects = { "reloadTG", "reloadETG" }
@@ -554,6 +555,7 @@ local mgp_tool_database =
 						time = 1.0
 					}
 				},
+
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -570,6 +572,36 @@ local mgp_tool_database =
 						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 2.66, end_val = 3.66 } },
 						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 2.66, end_val = 3.66 } },
 						time = 1.0
+					}
+				},
+
+				[3] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.05
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "MagOpen",
+						name_fp = "MagOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.1
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltClose",
+						name_fp = "BoltClose",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
 					}
 				}
 			},
@@ -590,6 +622,62 @@ local mgp_tool_database =
 						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 3.66 } },
 						time = 3.66
 					},
+				},
+
+				[3] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.05
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "MagOpen",
+						name_fp = "MagOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.6
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.3
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.8
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltClose",
+						name_fp = "BoltClose",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
 				}
 			},
 			reload_empty =
@@ -608,6 +696,62 @@ local mgp_tool_database =
 						fp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 5.5 } },
 						tp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 5.5 } },
 						time = 5.5
+					}
+				},
+
+				[3] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.05
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "MagOpen",
+						name_fp = "MagOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.6
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.3
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.8
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltClose",
+						name_fp = "BoltClose",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
 					}
 				}
 			},
@@ -708,8 +852,6 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					}
-
-
 				}
 			},
 			cock_the_hammer_aim =
@@ -761,7 +903,7 @@ local mgp_tool_database =
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.15
+						time = 0.1
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -774,7 +916,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.4
+						time = 0.45
 					},
 					{
 						type = mgp_tool_anim_enum.effect,

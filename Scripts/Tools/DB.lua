@@ -65,8 +65,8 @@ function DB.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
-			shoot_2 = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
+			shoot = { "spudgun_shoot1", { crouch = "spudgun_crouch_shoot" } },
+			shoot_2 = { "spudgun_shoot2", { crouch = "spudgun_crouch_shoot" } },
 
 			--[[
 			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },

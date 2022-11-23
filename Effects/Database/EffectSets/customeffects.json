@@ -472,6 +472,19 @@
 		]
 	},
 
+	"DBOpen":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/sledgehammer_swing",
+				"delay": 0.0,
+				"duration" : 0.8
+			}
+		]
+	},
+
 
 
 	"Muzzle_Flash_SmallCal_tp":

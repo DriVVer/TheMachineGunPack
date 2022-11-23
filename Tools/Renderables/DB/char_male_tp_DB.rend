@@ -11,15 +11,16 @@
 
 			{ "name": "spudgun_relax", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_idle", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-			{ "name": "spudgun_shoot", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
+			{ "name": "spudgun_shoot1", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
+			{ "name": "spudgun_shoot2", 					"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
 
-			{ "name": "Mosin_tp_empty_reload",      	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_empty_reload.dae" },
-			{ "name": "Mosin_tp_reload",             	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload.dae" },
-			{ "name": "Mosin_tp_ammo_check",        	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
+			{ "name": "DB_tp_empty_reload",      	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
+			{ "name": "DB_tp_reload",             	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
+			{ "name": "DB_tp_ammo_check",        	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
 
 			{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-			{ "name": "spudgun_crouch_bwd*", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+			{ "name": "spudgun_crouch_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_shoot", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_shoot.dae" },
 
 				{ "name": "spudgun_sprint", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_sprint.dae", "looping": true },
