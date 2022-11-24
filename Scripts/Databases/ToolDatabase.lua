@@ -490,7 +490,7 @@ local mgp_tool_database =
 			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
 		},
 		renderables = {
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend", enabled_by_default = true },
@@ -754,7 +754,7 @@ local mgp_tool_database =
 						apply_velocity = false
 					}
 				}
-			},
+			}
 		}
 	},
 	Mosin =

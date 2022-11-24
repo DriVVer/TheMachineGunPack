@@ -68,11 +68,6 @@ function DB.loadAnimations( self )
 			shoot = { "spudgun_shoot1", { crouch = "spudgun_crouch_shoot" } },
 			shoot_2 = { "spudgun_shoot2", { crouch = "spudgun_crouch_shoot" } },
 
-			--[[
-			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
-			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
-			]]
-
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
@@ -460,7 +455,9 @@ function DB:cl_n_onShoot(doubleShot)
 end
 
 function DB:onShoot(doubleShot)
-	mgp_toolAnimator_setAnimation(self, doubleShot and "shoot_2" or "shoot")
+	local v_anim_name = doubleShot and "shoot_2" or "shoot"
+	mgp_toolAnimator_setAnimation(self, v_anim_name)
+	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
