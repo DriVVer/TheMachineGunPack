@@ -21,7 +21,7 @@
 			{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-			{ "name": "spudgun_crouch_shoot", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_shoot.dae" },
+			{ "name": "spudgun_crouch_shoot", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
 
 				{ "name": "spudgun_sprint", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_sprint.dae", "looping": true },
 				{ "name": "spudgun_run_fwd", 				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },
