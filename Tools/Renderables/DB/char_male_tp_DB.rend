@@ -16,7 +16,7 @@
 
 			{ "name": "DB_tp_empty_reload",      	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
 			{ "name": "DB_tp_reload",             	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
-			{ "name": "DB_tp_ammo_check",        	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
+			{ "name": "DB_tp_ammo_check",        	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_ammo_check.dae" },
 
 			{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 			{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
