@@ -65,8 +65,9 @@ function DB.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot1", { crouch = "spudgun_crouch_shoot" } },
-			shoot_2 = { "spudgun_shoot2", { crouch = "spudgun_crouch_shoot" } },
+			shoot = { "spudgun_shoot1" },
+			shoot_2 = { "spudgun_shoot2" },
+			crouch_shoot = { "spudgun_crouch_shoot", { nextAnimation = "idle" } },
 
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
@@ -121,16 +122,6 @@ function DB.loadAnimations( self )
 				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
 
 				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
-
-				--[[
-				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
-
-				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "DB_aim_idle", { looping = true } },
-				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
-				]]
 
 				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -316,9 +307,9 @@ function DB.client_onUpdate( self, dt )
 
 		if name == self.tpAnimations.currentAnimation then
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
-
+			
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot1" or name == "shoot2" or  name == "spudgun_crouch_shoot" ) then
+				if ( name == "shoot1" or name == "shoot2" ) then
 					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, "idle", 0.001 )
@@ -457,7 +448,13 @@ end
 function DB:onShoot(doubleShot)
 	local v_anim_name = doubleShot and "shoot_2" or "shoot"
 	mgp_toolAnimator_setAnimation(self, v_anim_name)
-	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
+
+	if self.tool:isCrouching() then
+		setTpAnimation(self.tpAnimations, "crouch_shoot", 1.0)
+		print("crouch shoot")
+	else
+		setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
+	end
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
