@@ -942,6 +942,14 @@ local _Database = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
             },
 
+            debris = {
+                position = sm.vec3.new(0.2, 0, -0.5),
+                direction = sm.vec3.new(1, 0, 0),
+                spread = 50,
+                velocity = 5,
+                uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+            },
+
             pose_animation = {
                 {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},

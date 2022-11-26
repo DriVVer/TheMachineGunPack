@@ -2,3 +2,4 @@
 *.blend1
 *.mtl
 /Tools/Animations/**/*.fbx
+/Blend Files/**/*.fbx
