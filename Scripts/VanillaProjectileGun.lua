@@ -7,6 +7,8 @@ if VGun then return end
 dofile("Databases/GunDatabase.lua")
 dofile("Utils/AnimationUtil.lua")
 
+---@class VGun : ShapeClass
+---@field sv_anim_wait boolean
 VGun = class()
 VGun.maxParentCount = 1
 VGun.maxChildCount = 0
@@ -18,6 +20,9 @@ VGun.poseWeightCount = 3
 
 function VGun:client_onCreate()
     AnimUtil.InitializeAnimationUtil(self)
+
+    local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
+    self.debris_settings = _data.debris
 
     if not self.sv_server_host then
         self.network:sendToServer("server_requestAnimData")
@@ -74,10 +79,30 @@ end
 
 function VGun:client_onUpdate(dt)
     AnimUtil.UpdateAnimations(self, dt)
+    self.cl_dt = dt
 end
 
+local v_deb_color = sm.color.new(0xffffffff)
+local v_deb_rotation = sm.quat.identity()
 function VGun:client_onShoot(anim_state)
     AnimUtil.PushAnimationState(self, anim_state)
+
+    local v_deb_set = self.debris_settings
+    if v_deb_set then
+        local s_shape = self.shape
+        local v_position = s_shape.worldPosition + s_shape.worldRotation * v_deb_set.position
+        local v_final_pos = v_position + (s_shape.velocity * self.cl_dt) * 1.9
+
+        local v_dir = sm.noise.gunSpread(s_shape.worldRotation * v_deb_set.direction, v_deb_set.spread) * v_deb_set.velocity
+        local v_deb_lifetime = math.random(2, 10)
+        local v_ang_velocity = sm.vec3.new(
+            math.random(1, 500) / 10,
+            math.random(1, 500) / 10,
+            math.random(1, 500) / 10
+        )
+
+        sm.debris.createDebris(v_deb_set.uuid, v_final_pos, v_deb_rotation, v_dir + s_shape.velocity, v_ang_velocity, v_deb_color, v_deb_lifetime)
+    end
 end
 
 function VGun:client_onDestroy()
