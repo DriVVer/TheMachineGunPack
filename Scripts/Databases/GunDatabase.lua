@@ -494,7 +494,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.57), bone_name = nil} 
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.48), bone_name = nil} 
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -520,7 +520,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.37), bone_name = nil}                
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.25), bone_name = nil}                
             },
             pose_animation = {
                 {particles = {"shoot"}}
