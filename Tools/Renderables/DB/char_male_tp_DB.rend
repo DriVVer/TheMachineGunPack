@@ -3,36 +3,36 @@
 		{
 			"maxViewDistance": 1000.0,
 			"animationList": [	
-				{ "name": "spudgun_spine_bend",     "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Posetarget/ani_posetarget_spudgun_spine_bend.dae" },
-				{ "name": "spudgun_aim_spine_bend", "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Posetarget/ani_posetarget_spudgun_aim_spine_bend.dae" },
+				{ "name": "spudgun_spine_bend",     	"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Posetarget/ani_posetarget_spudgun_spine_bend.dae" },
+				{ "name": "spudgun_aim_spine_bend", 	"file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Posetarget/ani_posetarget_spudgun_aim_spine_bend.dae" },
 				
-				{ "name": "spudgun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_pickup.dae" },
-				{ "name": "spudgun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_putdown.dae" },
+				{ "name": "spudgun_pickup", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_pickup.dae" },
+				{ "name": "spudgun_putdown", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_putdown.dae" },
 
-				{ "name": "spudgun_relax",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-				{ "name": "spudgun_idle",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-				{ "name": "spudgun_shoot1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
-				{ "name": "spudgun_shoot2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
+				{ "name": "spudgun_relax",  			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+				{ "name": "spudgun_idle",   			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+				{ "name": "spudgun_shoot1", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
+				{ "name": "spudgun_shoot2", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
 
-				{ "name": "DB_tp_empty_reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
-				{ "name": "DB_tp_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
-				{ "name": "DB_tp_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_ammo_check.dae" },
+				{ "name": "DB_tp_empty_reload", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
+				{ "name": "DB_tp_reload",      			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_reload.dae" },
+				{ "name": "DB_tp_ammo_check",  			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_ammo_check.dae" },
 
-				{ "name": "spudgun_crouch_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-				{ "name": "spudgun_crouch_fwd",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-				{ "name": "spudgun_crouch_bwd",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
-				{ "name": "spudgun_crouch_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/DB_tp_shoot.dae" },
+				{ "name": "spudgun_crouch_idle",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+				{ "name": "spudgun_crouch_fwd",   		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+				{ "name": "spudgun_crouch_bwd",   		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
+				{ "name": "spudgun_crouch_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_shoot.dae" },
 
-				{ "name": "spudgun_sprint",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_sprint.dae", "looping": true },
-				{ "name": "spudgun_run_fwd", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },
-				{ "name": "spudgun_run_bwd", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run_bwd.dae", "looping": true },
+				{ "name": "spudgun_sprint",  			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_sprint.dae", "looping": true },
+				{ "name": "spudgun_run_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run.dae", "looping": true },
+				{ "name": "spudgun_run_bwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_run_bwd.dae", "looping": true },
 
-				{ "name": "spudgun_jump",          "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae" },
-				{ "name": "spudgun_jump_up",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
-				{ "name": "spudgun_jump_down",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
-				{ "name": "spudgun_jump_land",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
-				{ "name": "spudgun_jump_land_fwd", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
-				{ "name": "spudgun_jump_land_bwd", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" }
+				{ "name": "spudgun_jump",          		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae" },
+				{ "name": "spudgun_jump_up",       		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
+				{ "name": "spudgun_jump_down",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump.dae", "looping" : true },
+				{ "name": "spudgun_jump_land",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
+				{ "name": "spudgun_jump_land_fwd", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" },
+				{ "name": "spudgun_jump_land_bwd", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_jump_down.dae" }
 			]
 		}
 	]

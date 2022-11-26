@@ -65,8 +65,8 @@ function DB.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot1" },
-			shoot_2 = { "spudgun_shoot2" },
+			shoot = { "spudgun_shoot1", { nextAnimation = "idle" } },
+			shoot_2 = { "spudgun_shoot2", { nextAnimation = "idle" } },
 			crouch_shoot = { "spudgun_crouch_shoot", { nextAnimation = "idle" } },
 
 			idle = { "spudgun_idle" },
@@ -309,8 +309,8 @@ function DB.client_onUpdate( self, dt )
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 			
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot1" or name == "shoot2" ) then
-					setTpAnimation( self.tpAnimations, "idle", 2 )
+				if ( name == "shoot1" or name == "crouch_shoot" ) then
+					setTpAnimation( self.tpAnimations, "idle", 0.1 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then

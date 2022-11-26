@@ -392,6 +392,7 @@ local _Database = {
             effects = {
                 shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
             },
+            
             pose_animation = {
                 {particles = {"shoot"}}
             }
@@ -464,6 +465,14 @@ local _Database = {
             effects = {
                 shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
             },
+            
+            debris = {
+                position = sm.vec3.new(0.0, -0.16, -0.4),
+                direction = sm.vec3.new(0, -1, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
             pose_animation = {
                 {particles = {"shoot"}}
             }
@@ -496,6 +505,13 @@ local _Database = {
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.48), bone_name = nil} 
             },
+            debris = {
+                position = sm.vec3.new(0.0, -0.08, -0.3),
+                direction = sm.vec3.new(0, 0, 1),
+                spread = 50,
+                velocity = 2,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
             pose_animation = {
                 {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
@@ -522,6 +538,13 @@ local _Database = {
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.27), bone_name = nil}                
             },
+            debris = {
+                position = sm.vec3.new(0.0, -0.08, -0.55),
+                direction = sm.vec3.new(0, 0, 1),
+                spread = 50,
+                velocity = 2,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
             pose_animation = {
                 {particles = {"shoot"}}
             }
@@ -546,6 +569,13 @@ local _Database = {
         effects = {
             shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
         },
+        debris = {
+            position = sm.vec3.new(0.0, -0.21, -0.59),
+            direction = sm.vec3.new(0, -1, 0),
+            spread = 50,
+            velocity = 2,
+            uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+        },
         pose_animation = {
             {particles = {"shoot"}}
         }
@@ -569,6 +599,13 @@ local _Database = {
         client = {
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.6), bone_name = nil}
+            },
+            debris = {
+                position = sm.vec3.new(-0.15, 0.03, -0.28),
+                direction = sm.vec3.new(-1, 0, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -660,6 +697,13 @@ local _Database = {
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
             },
+            debris = {
+                position = sm.vec3.new(-0.15, 0.02, -0.05),
+                direction = sm.vec3.new(-1, 0, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
             pose_animation = {
                 {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
@@ -685,6 +729,13 @@ local _Database = {
         client = {
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.63), bone_name = nil}
+            },
+            debris = {
+                position = sm.vec3.new(0.0, -0.16, -0.13),
+                direction = sm.vec3.new(0, -1, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -762,6 +813,14 @@ local _Database = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}         
             },
 
+            debris = {
+                position = sm.vec3.new(0.0, -0.16, -0.4),
+                direction = sm.vec3.new(0, -1, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
+
 
             bone_animation = {
                 required_animations = {"Shots"},
@@ -797,6 +856,14 @@ local _Database = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}         
             },
 
+            debris = {
+                position = sm.vec3.new(0.0, -0.16, -0.4),
+                direction = sm.vec3.new(0, -1, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
+
 
             bone_animation = {
                 required_animations = {"Shots"},
@@ -830,6 +897,14 @@ local _Database = {
 
             effects = {
                 shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.28), bone_name = nil}         
+            },
+
+            debris = {
+                position = sm.vec3.new(-0.15, 0.02, -0.4),
+                direction = sm.vec3.new(-1, 0, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
             },
 
 
@@ -869,6 +944,14 @@ local _Database = {
                 heat_per_shot = 0.02, --heating per shot (starts overheating animation at 1.0)
                 cooling_speed = 0.05, --cooling per second
                 uv_overheat_anim_max = 64.0
+            },
+
+            debris = {
+                position = sm.vec3.new(-0.15, 0.02, -0.1),
+                direction = sm.vec3.new(-1, 0, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
             },
 
             effects = {
@@ -915,8 +998,16 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.45), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.35), bone_name = nil}
             },
+            debris = {
+                position = sm.vec3.new(0.0, -0.16, -0.5),
+                direction = sm.vec3.new(0, -1, 0),
+                spread = 50,
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+            },
+
             pose_animation = {
                 {particles = {"shoot"}}
             }
@@ -943,17 +1034,17 @@ local _Database = {
             },
 
             debris = {
-                position = sm.vec3.new(0.2, 0, -0.5),
-                direction = sm.vec3.new(1, 0, 0),
+                position = sm.vec3.new(-0.05, 0, -0.57),
+                direction = sm.vec3.new(-1, 0, 0),
                 spread = 50,
-                velocity = 5,
-                uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+                velocity = 3,
+                uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
             },
 
             pose_animation = {
                 {particles = {"shoot"}},
                 {pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
+                {pose = 0, start_value = 1.0, end_value = 0.0, time = 0.09}
             }
         }
     }
