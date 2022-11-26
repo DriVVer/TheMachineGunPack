@@ -1,4 +1,4 @@
 /Cache
-*.fbx
 *.blend1
 *.mtl
+/Tools/Animations/**/*.fbx
