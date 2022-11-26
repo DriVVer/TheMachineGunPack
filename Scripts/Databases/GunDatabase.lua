@@ -198,7 +198,7 @@ local _Database = {
                     max = 400.0
                 },
                 recoil = sm.vec3.new(0, 0, -400),
-                reload_time = 9,
+                reload_time = 7,
                 auto_reload = true
             },
             projectile = {
@@ -266,7 +266,7 @@ local _Database = {
                     max = 450.0
                 },
                 recoil = sm.vec3.new(0, 0, -400),
-                reload_time = 7,
+                reload_time = 5,
                 auto_reload = true
             },
             projectile = {
@@ -300,7 +300,7 @@ local _Database = {
                     max = 1000.0
                 },
                 recoil = sm.vec3.new(0, 0, -1000),
-                reload_time = 3,
+                reload_time = 2,
                 auto_reload = true
             },
             projectile = {
@@ -336,7 +336,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 4,
                 auto_reload = true,
             },
             projectile = {
@@ -354,7 +354,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.9), bone_name = nil}
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -372,7 +372,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 4,
                 auto_reload = true,
             },
             projectile = {
@@ -390,7 +390,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.35), bone_name = nil}
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -406,7 +406,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 6,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 1.9),
             },
@@ -425,7 +425,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+                shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -443,7 +443,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 7,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
             },
@@ -486,7 +486,7 @@ local _Database = {
                     max = 500.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -494,7 +494,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, -0.04, 0.57), bone_name = nil} 
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.57), bone_name = nil} 
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -512,7 +512,7 @@ local _Database = {
                     max = 500.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -520,13 +520,37 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, -0.04, 0.37), bone_name = nil}                
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.37), bone_name = nil}                
             },
             pose_animation = {
                 {particles = {"shoot"}}
             }
         }
     },
+    ["690ce3fd-6f14-4d6d-9a47-8576fec4350d"] = { --Mac-31 LMG
+    server = {
+        cannon = {
+            spread = 0.3,
+            fire_force = {
+                min = 800.0,
+                max = 800.0
+            },
+            recoil = sm.vec3.new(0, 0, -100),
+            reload_time = 3,
+            auto_reload = true,
+            projectile_offset = sm.vec3.new(0, 0, 1),
+            projectile = "potato"
+        }
+    },
+    client = {
+        effects = {
+            shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
+        },
+        pose_animation = {
+            {particles = {"shoot"}}
+        }
+    }
+},
     ["1e731dbe-d89e-4722-b955-d347f92eec62"] = { --Maschinegewher Mg-34 LMG
         server = {
             cannon = {
@@ -536,15 +560,15 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
-                projectile_offset = sm.vec3.new(0, 0, 1),
+                projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato"
             }
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.6), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -560,7 +584,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 1),
                 projectile = "potato"
@@ -568,7 +592,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -634,7 +658,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}},
@@ -652,7 +676,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato"
@@ -660,7 +684,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.63), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -676,7 +700,7 @@ local _Database = {
                     max = 700.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.9),
                 projectile = "potato"
@@ -684,7 +708,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.95), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.95), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -700,7 +724,7 @@ local _Database = {
                     max = 600.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
                 projectile = "potato"
@@ -708,7 +732,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -724,7 +748,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
                 projectile = "potato",
@@ -735,7 +759,7 @@ local _Database = {
         client = {
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.44), bone_name = nil}         
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}         
             },
 
 
@@ -759,7 +783,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
                 projectile = "potato",
@@ -770,7 +794,7 @@ local _Database = {
         client = {
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.44), bone_name = nil}         
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}         
             },
 
 
@@ -794,7 +818,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 3,
+                reload_time = 2,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
                 projectile = "potato",
@@ -805,7 +829,7 @@ local _Database = {
         client = {
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.4), bone_name = nil}         
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.28), bone_name = nil}         
             },
 
 
@@ -832,7 +856,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 3,
+                reload_time = 2,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
                 projectile = "potato",
@@ -848,7 +872,7 @@ local _Database = {
             },
 
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.575), bone_name = nil},
                 overheat = {name = "overheat", offset = sm.vec3.new(0, 0, 0.77)},
                 reload = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
 
@@ -883,7 +907,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
                 projectile = "potato"
@@ -891,7 +915,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.45), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.45), bone_name = nil}
             },
             pose_animation = {
                 {particles = {"shoot"}}
@@ -907,7 +931,7 @@ local _Database = {
                     max = 800.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 5,
+                reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.45),
                 projectile = "potato"
@@ -915,7 +939,7 @@ local _Database = {
         },
         client = {
             effects = {
-                shoot = {name = "SpudgunSpinner - SpinnerMuzzel", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+                shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
             },
 
             pose_animation = {

@@ -281,6 +281,7 @@
 		]
 	},
 	"Boom12":
+	
 	{
 		"parameterList":
 		{
@@ -309,23 +310,67 @@
 		]
 	},
 	"BoomMuzzle12":
+
 	{
+		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0},
+		"parameterCurves":{
+			"intensity":{"timeline":[{"time":0.03,"value":1.3},{"time":0.2,"value":0.0}]}
+		},
 		"effectList":
 		[
 			{
-				"type": "audio",
-				"name": "PotatoRifle - Shoot",
-				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
-				"delay": 0.0
+				"type":"pointLight",
+				"name":"",
+				"offset":{"x":0.0,"y":0.0,"z":0.0},
+				"parameters":["color","radius","intensity"],
+				"duration":0.1
 			},
 			{
+				"type": "audio",
+				"name": "event:/weapons/spudgun/frier_fire",
+				"delay": 0.0,
+				"duration": 0.24
+			},	
+			{
 				"type": "particle",
-				"name": "p_spudgun_muzzel_spinner",
+				"name": "Muzzle_flash_1_fp",
 				"attached": true,
-				"delay": 0.05
+				"delay": 0.0
 			}
 		]
 	},
+
+	"BoomMuzzle7":
+
+	{
+		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0},
+		"parameterCurves":{
+			"intensity":{"timeline":[{"time":0.03,"value":1.3},{"time":0.2,"value":0.0}]}
+		},
+		"effectList":
+		[
+			{
+				"type":"pointLight",
+				"name":"",
+				"offset":{"x":0.0,"y":0.0,"z":0.0},
+				"parameters":["color","radius","intensity"],
+				"duration":0.05
+			},
+			{
+				"type": "audio",
+				"name": "event:/weapons/spudgun/spinner_fire",
+				"delay": 0.0,
+				"duration": 0.24
+			},	
+			{
+				"type": "particle",
+				"name": "Muzzle_flash_1_fp",
+				"attached": true,
+				"delay": 0.0
+			}
+		]
+	},
+
 
 	"TommyReload":
 	{
