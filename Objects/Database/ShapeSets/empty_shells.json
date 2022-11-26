@@ -24,13 +24,13 @@
 				"x": 1,
 				"y": 1,
 				"z": 1,
-				"col": "$MOD_DATA/Objects/Mesh/7mm_case.obj"
+				"col": "$MOD_DATA/Objects/Mesh/7mm_case_col.obj"
 			},
 			"density": 100,
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
-			"showInInventory": false
+			"showInInventory": true
 		},
 		{
 			"uuid": "40a3242a-7416-47b2-847c-f23a759a26a0",
@@ -56,13 +56,13 @@
 				"x": 1,
 				"y": 1,
 				"z": 1,
-				"col": "$MOD_DATA/Objects/Mesh/12mm_case.obj"
+				"col": "$MOD_DATA/Objects/Mesh/12mm_case_col.obj"
 			},
 			"density": 100,
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
-			"showInInventory": false
+			"showInInventory": true
 		},
 		{
 			"uuid": "0d4d66a0-532a-49e4-83c5-8ec8bb95ea8e",
