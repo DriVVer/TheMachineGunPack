@@ -1,0 +1,16 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Projectiles/Mesh/BulletMesh.obj",
+			"subMeshList": [
+				{
+					"material": "DifAsg",
+					"textureList": [
+						"$CONTENT_DATA/Projectiles/Textures/bullet_orange_dif.png",
+						"$CONTENT_DATA/Projectiles/Textures/bullet_asg.png"
+					]
+				}
+			]
+		}
+	]
+}

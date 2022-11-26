@@ -486,10 +486,10 @@ local _Database = {
                     max = 500.0
                 },
                 recoil = sm.vec3.new(0, 0, -100),
-                reload_time = 4,
+                reload_time = 4,                                                        
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -515,7 +515,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -539,7 +539,7 @@ local _Database = {
             reload_time = 3,
             auto_reload = true,
             projectile_offset = sm.vec3.new(0, 0, 1),
-            projectile = "potato"
+            projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
         }
     },
     client = {
@@ -563,7 +563,7 @@ local _Database = {
                 reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -587,7 +587,7 @@ local _Database = {
                 reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 1),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -613,7 +613,7 @@ local _Database = {
             reload_time = 100,
             auto_reload = true,
             projectile_offset = sm.vec3.new(0, 0, 0.7),
-            projectile = "potato",
+            projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 
             magazine_capacity = 5
         }
@@ -653,7 +653,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.65),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -679,7 +679,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -703,7 +703,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.9),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -727,7 +727,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -751,7 +751,7 @@ local _Database = {
                 reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
-                projectile = "potato",
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 
                
             }
@@ -786,7 +786,7 @@ local _Database = {
                 reload_time = 3,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.4),
-                projectile = "potato",
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 
                
             }
@@ -821,7 +821,7 @@ local _Database = {
                 reload_time = 2,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.5),
-                projectile = "potato",
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 
                
             }
@@ -859,7 +859,7 @@ local _Database = {
                 reload_time = 2,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.7),
-                projectile = "potato",
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 
                 magazine_capacity = 50
             }
@@ -910,7 +910,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.6),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
@@ -934,7 +934,7 @@ local _Database = {
                 reload_time = 4,
                 auto_reload = true,
                 projectile_offset = sm.vec3.new(0, 0, 0.45),
-                projectile = "potato"
+                projectile = "18a2dffb-ea20-4ab1-9bb3-bb66a2571854"
             }
         },
         client = {
