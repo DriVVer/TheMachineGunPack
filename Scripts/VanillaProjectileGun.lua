@@ -61,7 +61,8 @@ function VGun:server_onFixedUpdate(dt)
 
             local _RandomForce = math.random(sCannonSet.fire_force.min, sCannonSet.fire_force.max)
             local _Direction = sm.noise.gunSpread(sm.vec3.new(0, 0, 1), sCannonSet.spread) * _RandomForce
-            sm.projectile.shapeFire(self.shape, sCannonSet.projectile, sCannonSet.projectile_offset, _Direction)
+            local v_projDamage = sCannonSet.proj_damage or 10
+            sm.projectile.shapeProjectileAttack(sCannonSet.projectile, v_projDamage, sCannonSet.projectile_offset, _Direction, self.shape)
 
             sm.physics.applyImpulse(self.shape, sCannonSet.recoil)
         end
