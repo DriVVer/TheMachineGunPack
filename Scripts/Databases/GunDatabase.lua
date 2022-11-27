@@ -23,7 +23,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 0.5),
 				lifetime = 20.0,

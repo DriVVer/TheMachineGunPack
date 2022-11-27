@@ -2,7 +2,7 @@
 	Copyright (c) 2022 Questionable Mark
 ]]
 
-if ExplGun then return end
+--if ExplGun then return end
 
 dofile("Databases/GunDatabase.lua")
 dofile("Utils/AnimationUtil.lua")
@@ -146,7 +146,7 @@ function ExplGun:client_onFixedUpdate(dt)
 			end
 
 			if bullet.dir:length() > 0.0001 then
-				local _Rotation = sm.vec3.getRotation(sm.vec3.new(0, 0, 1), bullet.dir)
+				local _Rotation = sm.vec3.getRotation(sm.vec3.new(0, -1, 0), bullet.dir)
 				bullet.effect:setRotation(_Rotation)
 			end
 
@@ -171,6 +171,11 @@ function ExplGun:client_onOtherAnim(data)
 	AnimUtil_SetAnimation(self, data)
 end
 
+local g_cannonEffects =
+{
+	["f0f14c15-4d9c-4dc3-8518-4ae65af491da"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) } --Hispano 20mm Gun
+}
+
 function ExplGun:client_onShoot(data)
 	if not BetterExists(self.shape) then
 		print("Couldn't spawn explosive projectile")
@@ -180,6 +185,13 @@ function ExplGun:client_onShoot(data)
 	local v_shellEffect = sm.effect.createEffect(data.effect)
 	local v_offsetPos = self.shape.worldPosition + self.shape.worldRotation * data.effectOffset --[[@as Vec3]]
 	v_shellEffect:setPosition(v_offsetPos)
+
+	local v_projEffData = g_cannonEffects[tostring(self.shape.uuid)]
+	if v_projEffData then
+		v_shellEffect:setParameter("uuid", v_projEffData.uuid)
+		v_shellEffect:setScale(v_projEffData.scale)
+	end
+
 	v_shellEffect:start()
 
 	local _Bullet = {

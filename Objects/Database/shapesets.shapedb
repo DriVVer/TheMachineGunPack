@@ -3,6 +3,7 @@
 		"$CONTENT_DATA/Objects/Database/ShapeSets/parts.json",
 		"$CONTENT_DATA/Objects/Database/ShapeSets/parts exp.json",
 		"$CONTENT_DATA/Objects/Database/ShapeSets/empty_shells.json",
-		"$CONTENT_DATA/Objects/Database/ShapeSets/grenades.json"
+		"$CONTENT_DATA/Objects/Database/ShapeSets/grenades.json",
+		"$CONTENT_DATA/Objects/Database/ShapeSets/cannon_shells.json"
 	]
 }
