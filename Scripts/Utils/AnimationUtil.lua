@@ -145,65 +145,6 @@ function AnimUtil_AnimationTypes.delay_handler(self, track, dt)
 	end
 end
 
-local AnimUtil_AnimMethod = {
-	[1] = function(self, dt)
-		if not self.anim.active then return end
-
-		if not self.anim.timer then
-			local cur_anim_data = self.anim.data
-
-			if self.anim.step < #cur_anim_data then
-				self.anim.step = self.anim.step + 1
-				self.anim.timer = cur_anim_data[self.anim.step].time
-
-				self.anim.type = AnimUtil_AnimationTypes.anim_selector
-			else
-				self.anim.active = false
-				self.anim.step = 0
-
-				return
-			end
-		end
-
-		self.anim.type(self, dt)
-	end;
-	[2] = function(self, dt)
-		if not self.anim.active then return end
-
-		if not self.anim.timer then
-			local cur_anim_data = self.anim.cur_data
-
-			if self.anim.step < #cur_anim_data then
-				self.anim.step = self.anim.step + 1
-				self.anim.timer = cur_anim_data[self.anim.step].time or 0
-
-				self.anim.type = AnimUtil_AnimationTypes.anim_selector
-			else
-				self.anim.step = 0
-
-				if #self.anim.state_queue > 0 then
-					local cur_state = self.anim.state_queue[1]
-					if cur_state == "overheat" then
-						self.cl_cannon_heat = 0
-					end
-
-					self.anim.cur_data = self.anim.data[cur_state]
-
-					table.remove(self.anim.state_queue, 1)
-				else
-					self.anim.active = false
-					self.anim.cur_state = nil
-					self.sv_anim_wait = false
-				end
-
-				return
-			end
-		end
-
-		self.anim.type(self, dt)
-	end
-}
-
 function AnimUtil_SendAnimationData(self, player)
 	self.network:sendToClient(player, "client_receiveAnimData", self.cl_cannon_heat)
 end
@@ -268,42 +209,6 @@ function AnimUtil_SetAnimation(self, anim_name)
 		end
 	end
 end
-
-local AnimUtil_AnimPushFunctions = {
-	[1] = function(self, state)
-		self.cl_animator_reset(self)
-
-		self.anim.active = true
-		self.anim.step = 0
-		self.anim.timer = nil
-	end;
-	[2] = function(self, state)
-		local is_state_string = (type(state) == "string")
-
-		local can_skip_anim = not self.anim.cur_state or (self.anim.cur_state == "shoot" and state == "shoot")
-		if can_skip_anim then
-			local cur_state = state
-			if not is_state_string then
-				cur_state = state[1]
-				table.remove(state, 1)
-
-				for k, v in pairs(state) do
-					table.insert(self.anim.state_queue, v)
-				end
-			end
-
-			AnimUtil_PushAnimationStateInternal(self, cur_state)
-		else
-			if is_state_string then
-				table.insert(self.anim.state_queue, state)
-			else --is table
-				for k, v in pairs(state) do
-					table.insert(self.anim.state_queue, v)
-				end
-			end
-		end
-	end
-}
 
 function AnimUtil_InitializeEffects(self, effect_data)
 	self.effects = {}
