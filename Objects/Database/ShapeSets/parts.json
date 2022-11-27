@@ -6,6 +6,7 @@
             "renderable": {
                 "lodList": [
                     {
+                        "mesh": "$MOD_DATA/Objects/Mesh/Mac-31_R_Model.fbx",
                         "subMeshList": [
                             {
                                 "textureList": [
@@ -13,11 +14,15 @@
                                     "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
                                     "$MOD_DATA/Objects/Textures/nonor_nor.tga"
                                 ],
-                                "material": "DifAsgNor"
+                                "material": "SkelAnimDifAsgNor"
                             }
+
+                            
                         ],
-                        "mesh": "$MOD_DATA/Objects/Mesh/Mac-31_R_Model.fbx"
-                    
+                        "animationList": [
+                        {"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx"},
+                        {"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx"}       
+                        ]                                
                     }
                 ]
             },

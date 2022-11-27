@@ -561,8 +561,10 @@ local _Database = {
             recoil = sm.vec3.new(0, 0, -100),
             reload_time = 3,
             auto_reload = true,
-            projectile_offset = sm.vec3.new(0, 0, 1),
-            projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854")
+            projectile_offset = sm.vec3.new(0, 0, 0.3),
+            projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
+
+            magazine_capacity = 150
         }
     },
     client = {
@@ -576,8 +578,18 @@ local _Database = {
             velocity = 2,
             uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
         },
-        pose_animation = {
-            {particles = {"shoot"}}
+        bone_animation = {
+            required_animations = {"Shots", "Reload"},
+            animation_states = {
+                shoot = {
+                    {particles = {"shoot"}}, --time can be removed if you need no delay
+                    {anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.23}
+                },
+                reload = { --will never get executed if magazine_capacity variable is 0 or missing
+                    
+                    {anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 2.5}
+                }
+            }
         }
     }
 },
