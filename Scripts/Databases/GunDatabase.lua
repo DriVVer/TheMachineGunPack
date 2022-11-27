@@ -40,7 +40,13 @@ local _Database = {
 				shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{ type = mgp_shape_anim_enum.particle, particles = {"shoot"} }
+						}
+					}
+				}
 			}
 		}
 	},
@@ -74,7 +80,13 @@ local _Database = {
 				shoot = {name = "BombSmall", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{ type = mgp_shape_anim_enum.particle, particles = { "shoot" } }
+						}
+					}
+				}
 			}
 		}
 	},
@@ -107,12 +119,14 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomRusznica", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
 			},
-			bone_animation = {
-				required_animations = {"PTRD"},
+			animation = {
+				required_animations = { "PTRD" },
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}},
-						{anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+						}
 					}
 				}
 			}
@@ -147,12 +161,14 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomRusznica", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
 			},
-			bone_animation = {
+			animation = {
 				required_animations = {"PTRD"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}},
-						{anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"PTRD"}, start_value = 0.0, end_value = 1.0, time = 3.0}
+						}
 					}
 				}
 			}
@@ -187,12 +203,14 @@ local _Database = {
 			effects = {
 				shoot = {name = "BombSmall", offset = sm.vec3.new(0, 0, 1.5), bone_name = nil}
 			},
-			bone_animation = {
+			animation = {
 				required_animations = {"reload"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}},
-						{anims = {"reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+						}
 					}
 				}
 			}
@@ -228,7 +246,13 @@ local _Database = {
 				shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 1.0), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -262,7 +286,13 @@ local _Database = {
 				shoot = {name = "PropaneTank - ExplosionSmall", offset = sm.vec3.new(0, 0, 1.4), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -296,7 +326,13 @@ local _Database = {
 				shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 0.62), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -330,9 +366,15 @@ local _Database = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0.08, 1.0), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.03}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.03}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -366,9 +408,15 @@ local _Database = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -401,9 +449,14 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
 			},
-			
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -438,9 +491,15 @@ local _Database = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -474,7 +533,6 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
 			},
-			
 			debris = {
 				position = sm.vec3.new(0.0, -0.16, -0.4),
 				direction = sm.vec3.new(0, -1, 0),
@@ -483,7 +541,13 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -493,8 +557,8 @@ local _Database = {
 		NON-EXPLOSIVE CANNONS
 
 	]]
-	
-	
+
+
 	["e33ed886-b55b-489a-b11d-7f590cea0be7"] = { --Maxim M1905
 		server = {
 			cannon = {
@@ -522,9 +586,15 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -555,7 +625,13 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -573,7 +649,7 @@ local _Database = {
 				projectile_offset = sm.vec3.new(0, 0, 0.3),
 				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
 
-				magazine_capacity = 10
+				magazine_capacity = 150
 			}
 		},
 		client = {
@@ -599,17 +675,12 @@ local _Database = {
 					},
 					reload = { --will never get executed if magazine_capacity variable is 0 or missing
 						[1] = {
-							--{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 0.3, time = 0.6},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 2.5}
 						},
 						[2] = {
 							{type = mgp_shape_anim_enum.delay, time = 0.6},
 							{type = mgp_shape_anim_enum.debris, uuid = sm.uuid.new("355e465a-bf4d-45c5-a49c-a063972b2781"), bone = "Rotation", offset = sm.vec3.new(0.05, 0, 0)}
 						}
-						--[[[2] = {
-							{type = mgp_shape_anim_enum.delay, time = 0.6},
-							{type = mgp_shape_anim_enum.debris, uuid = sm.uuid.new("355e465a-bf4d-45c5-a49c-a063972b2781"), bone = "Rotation", offset = sm.vec3.new(0.05, 0, 0)}
-						}]]
 					}
 				}
 			}
@@ -642,7 +713,13 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -666,52 +743,60 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.05}
+						}
+					}
+				}
 			}
 		}
 	},
 	["6d98a168-f0c5-4774-a6ac-e0972fd9f1a4"] = { --Mosin-Nagant 1891 Rifle
-	server = {
-		cannon = {
-			spread = 0.01,
-			fire_force = {
-				min = 1200.0,
-				max = 1200.0
-			},
-			recoil = sm.vec3.new(0, 0, -100),
-			reload_time = 100,
-			auto_reload = true,
-			projectile_offset = sm.vec3.new(0, 0, 0.7),
-			projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
-
-			magazine_capacity = 5
-		}
-	},
-	client = {
-		effects = {
-			shoot = {name = "MosinShot", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
-			reload = {name = "MosinReload", offset = sm.vec3.new(0, 0, 0.77)}
-
-		},
-
-
-		bone_animation = {
-			required_animations = {"Shots", "Reload"},
-			animation_states = {
-				shoot = {
-					{particles = {"shoot"}}, --time can be removed if you need no delay
-					{anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 2.2}
+		server = {
+			cannon = {
+				spread = 0.01,
+				fire_force = {
+					min = 1200.0,
+					max = 1200.0
 				},
-				reload = { --will never get executed if magazine_capacity variable is 0 or missing
-					{particles = {"reload"}},
-					{anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 3.3}
+				recoil = sm.vec3.new(0, 0, -100),
+				reload_time = 100,
+				auto_reload = true,
+				projectile_offset = sm.vec3.new(0, 0, 0.7),
+				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
+
+				magazine_capacity = 5
+			}
+		},
+		client = {
+			effects = {
+				shoot = {name = "MosinShot", offset = sm.vec3.new(0, 0, 0.7), bone_name = nil},
+				reload = {name = "MosinReload", offset = sm.vec3.new(0, 0, 0.77)}
+
+			},
+			animation = {
+				required_animations = {"Shots", "Reload"},
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 2.2}
+						}
+					},
+					reload = { --will never get executed if magazine_capacity variable is 0 or missing
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"reload"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 3.3}
+						}
+					}
 				}
 			}
 		}
-	}
-},
+	},
 	["dee496d2-a9a9-4708-9a2f-50910f59f8fa"] = { -- AK-47 Kalashnikov
 		server = {
 			cannon = {
@@ -739,9 +824,15 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -772,7 +863,13 @@ local _Database = {
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -796,7 +893,13 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.95), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -820,7 +923,13 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.55), bone_name = nil}
 			},
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -840,11 +949,9 @@ local _Database = {
 			}
 		},
 		client = {
-
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
-
 			debris = {
 				position = sm.vec3.new(0.0, -0.16, -0.4),
 				direction = sm.vec3.new(0, -1, 0),
@@ -852,14 +959,14 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
-
-			bone_animation = {
+			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}}, --time can be removed if you need no delay
-						{anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						}
 					}
 				}
 			}
@@ -877,17 +984,13 @@ local _Database = {
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.4),
-				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
-
-			   
+				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854")
 			}
 		},
 		client = {
-
 			effects = {
-				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}         
+				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
-
 			debris = {
 				position = sm.vec3.new(0.0, -0.16, -0.4),
 				direction = sm.vec3.new(0, -1, 0),
@@ -895,14 +998,14 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
-
-			bone_animation = {
+			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}}, --time can be removed if you need no delay
-						{anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						}
 					}
 				}
 			}
@@ -920,17 +1023,13 @@ local _Database = {
 				reload_time = 2,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.5),
-				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
-
-			   
+				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854")
 			}
 		},
 		client = {
-
 			effects = {
-				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.28), bone_name = nil}         
+				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.28), bone_name = nil}
 			},
-
 			debris = {
 				position = sm.vec3.new(-0.15, 0.02, -0.4),
 				direction = sm.vec3.new(-1, 0, 0),
@@ -938,17 +1037,14 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
-
-			bone_animation = {
+			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}}, --time can be removed if you need no delay
-						{anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
-					},
-					overheat = { --will never get executed if heat_per_shot variable is 0 or not present
-						{anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						}
 					}
 				}
 			}
@@ -967,7 +1063,6 @@ local _Database = {
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
 				projectile = sm.uuid.new("18a2dffb-ea20-4ab1-9bb3-bb66a2571854"),
-
 				magazine_capacity = 50
 			}
 		},
@@ -977,7 +1072,6 @@ local _Database = {
 				cooling_speed = 0.05, --cooling per second
 				uv_overheat_anim_max = 64.0
 			},
-
 			debris = {
 				position = sm.vec3.new(-0.15, 0.02, -0.1),
 				direction = sm.vec3.new(-1, 0, 0),
@@ -985,27 +1079,31 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
 			effects = {
 				shoot    = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.575), bone_name = nil},
 				overheat = {name = "overheat", offset = sm.vec3.new(0, 0, 0.77)},
 				reload   = {name = "MG42reload", offset = sm.vec3.new(0, 0, 0.77)}
 			},
-
-			bone_animation = {
+			animation = {
 				required_animations = {"Shots", "BarrelExchange", "Reload"},
 				animation_states = {
 					shoot = {
-						{particles = {"shoot"}}, --time can be removed if you need no delay
-						{anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+						}
 					},
 					overheat = { --will never get executed if heat_per_shot variable is 0 or not present
-						{particles = {"overheat"}},
-						{anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"overheat"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"BarrelExchange"}, start_value = 0.0, end_value = 1.0, time = 4.0}
+						}
 					},
 					reload = { --will never get executed if magazine_capacity variable is 0 or missing
-						{particles = {"reload"}},
-						{anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 6.0}
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"reload"}},
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 6.0}
+						}
 					}
 				}
 			}
@@ -1037,9 +1135,14 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
 			pose_animation = {
-				{particles = {"shoot"}}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -1062,7 +1165,6 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
 			},
-
 			debris = {
 				position = sm.vec3.new(-0.05, 0, -0.57),
 				direction = sm.vec3.new(-1, 0, 0),
@@ -1070,11 +1172,16 @@ local _Database = {
 				velocity = 3,
 				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
 			},
-
 			pose_animation = {
-				{particles = {"shoot"}},
-				{pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-				{pose = 0, start_value = 1.0, end_value = 0.0, time = 0.09}
+				animation_states = {
+					shoot = {
+						[1] = {
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.09}
+						}
+					}
+				}
 			}
 		}
 	}

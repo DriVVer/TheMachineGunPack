@@ -2,7 +2,7 @@
 	Copyright (c) 2022 Questionable Mark
 ]]
 
---if VGun then return end
+if VGun then return end
 
 dofile("Databases/GunDatabase.lua")
 dofile("Utils/AnimationUtil.lua")
@@ -83,8 +83,6 @@ end
 function VGun:client_onUpdate(dt)
 	AnimUtil_UpdateAnimations(self, dt)
 	self.cl_dt = dt
-
-	self.interactable:setSubMeshVisible("1", false)
 end
 
 local v_deb_color = sm.color.new(0xffffffff)

@@ -21,13 +21,13 @@
 					"Size"
 				],
 				"delay": 0.0
-			},
-			{
-				"type": "particle",
-				"name": "potato",
-				"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
-				"delay": 0.0
-			}
+			}//,
+			//{
+			//	"type": "particle",
+			//	"name": "potato",
+			//	"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
+			//	"delay": 0.0
+			//}
 		]
 	},
 	"overheat":

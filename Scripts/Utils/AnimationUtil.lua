@@ -68,15 +68,25 @@ function AnimUtil_AnimationTypes.setup_pose_anim(self, track, dt)
 end
 
 function AnimUtil_AnimationTypes.pose_animation(self, track, dt)
-	--[[local _CurAnim = self.anim.data[self.anim.step]
-		local _PredictTime = (self.anim.timer - dt)
+	local v_anim_data = track.step_data
+	local v_predict_time = track.time - dt
 
-		local _AnimProg = (_CurAnim.time - math.max(_PredictTime, 0)) / _CurAnim.time
-		local _NormalizedValue = math.min(math.max(_AnimProg, 0), 1)
-		local _FinalValue = sm.util.lerp(_CurAnim.start_value, _CurAnim.end_value, _NormalizedValue)
+	local v_anim_prog = (v_anim_data.time - math.max(v_predict_time, 0)) / v_anim_data.time
+	local v_norm_value = math.min(math.max(v_anim_prog, 0), 1)
+	local v_final_val = sm.util.lerp(v_anim_data.start_value, v_anim_data.end_value, v_norm_value)
 
-		self.interactable:setPoseWeight(_CurAnim.pose, _FinalValue)
-		self.anim.timer = (_PredictTime > 0 and self.anim.timer - dt) or nil]]
+	self.interactable:setPoseWeight(v_anim_data.pose, v_final_val)
+
+	if track.time then
+		track.time = v_predict_time
+
+		if track.time <= 0 then
+			track.time = nil
+
+			track.func = AnimUtil_AnimationTypes.anim_selector
+			track.func(self, track, dt)
+		end
+	end
 end
 
 function AnimUtil_AnimationTypes.particle(self, track, dt)
@@ -209,25 +219,6 @@ function AnimUtil_ReceiveAnimationData(self, cannon_heat)
 	end
 end
 
-local function AnimUtil_PushAnimationStateInternal(self, state)
-	self.anim.cur_data = self.anim.data[state]
-	self.anim.cur_state = state
-
-	self.cl_animator_reset(self)
-
-	self.anim.active = true
-	self.anim.step = 0
-	self.anim.timer = nil
-
-	if state == "shoot" and self.cl_heat_per_shot then
-		self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
-	end
-end
-
-function AnimUtil_PushAnimationState(self, state)
-	self.anim.push_method(self, state)
-end
-
 local function AnimUtil_SetAnimationInternal(self, anim_name)
 	local anim_data = self.cl_animator_animations[anim_name]
 
@@ -247,9 +238,14 @@ end
 
 local function AnimUtil_LoadAnimFromQueue(self)
 	if self.anim.state_q_sz > 0 then
-		AnimUtil_SetAnimationInternal(self, self.anim.state_queue[1])
-		table.remove(self.anim.state_queue, 1)
+		local v_cur_anim = self.anim.state_queue[1]
+		if v_cur_anim == "overheat" then
+			self.cl_cannon_heat = 0
+		end
 
+		AnimUtil_SetAnimationInternal(self, v_cur_anim)
+
+		table.remove(self.anim.state_queue, 1)
 		self.anim.state_q_sz = self.anim.state_q_sz - 1
 
 		return true
@@ -266,6 +262,10 @@ function AnimUtil_SetAnimation(self, anim_name)
 		self.cl_animator_reset(self)
 	else
 		AnimUtil_SetAnimationInternal(self, anim_name)
+
+		if anim_name == "shoot" and self.cl_heat_per_shot then
+			self.cl_cannon_heat = (self.cl_cannon_heat or 0.0) + self.cl_heat_per_shot
+		end
 	end
 end
 
