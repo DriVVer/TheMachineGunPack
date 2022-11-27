@@ -138,13 +138,10 @@ function AnimUtil_AnimationTypes.shape_debris(self, track, dt)
 
 	local v_dir = sm.noise.gunSpread(s_shape.worldRotation * v_deb_set.dir --[[@as Vec3]], v_deb_set.spread) * v_deb_set.velocity
 	local v_deb_lifetime = math.random(2, 10)
-	local v_ang_velocity = sm.vec3.new(
-		math.random(1, 500) / 10,
-		math.random(1, 500) / 10,
-		math.random(1, 500) / 10
-	)
+	local v_debri_rot = s_shape.worldRotation * sm.quat.angleAxis(math.rad(90), sm.vec3.new(1, 0, 0))
+	local v_ang_velocity = v_debri_rot * sm.vec3.new(0, 0, math.random(1, 500) / 10)
 
-	sm.debris.createDebris(v_deb_set.uuid, v_final_pos, g_debri_def_quat, v_dir + s_shape.velocity, v_ang_velocity, debri_color, v_deb_lifetime)
+	sm.debris.createDebris(v_deb_set.uuid, v_final_pos, v_debri_rot, v_dir + s_shape.velocity, v_ang_velocity, debri_color, v_deb_lifetime)
 
 	track.func = AnimUtil_AnimationTypes.anim_selector
 	track.func(self, track, dt)
