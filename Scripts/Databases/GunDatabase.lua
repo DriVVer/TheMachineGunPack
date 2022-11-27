@@ -5,8 +5,11 @@ local mgp_shape_anim_enum =
 	bone_animation = 1,
 	pose_animation = 2,
 	particle       = 3,
+	--Debris that are attached to the bone
 	debris         = 4,
-	delay          = 5
+	--Debris that are attached to the shape
+	shape_debris   = 5,
+	delay          = 6
 }
 
 local _Database = {
@@ -533,18 +536,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.8), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.16, -0.4),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							}
 						}
 					}
 				}
@@ -578,18 +582,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.48), bone_name = nil} 
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.08, -0.3),
-				direction = sm.vec3.new(0, 0, 1),
-				spread = 50,
-				velocity = 2,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.08, -0.3),
+								dir = sm.vec3.new(0, 0, 1),
+								spread = 50,
+								velocity = 2,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
 						}
@@ -617,18 +622,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, -0.04, 0.27), bone_name = nil}                
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.08, -0.55),
-				direction = sm.vec3.new(0, 0, 1),
-				spread = 50,
-				velocity = 2,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.08, -0.55),
+								dir = sm.vec3.new(0, 0, 1),
+								spread = 50,
+								velocity = 2,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							}
 						}
 					}
 				}
@@ -657,19 +663,20 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.25), bone_name = nil}
 			},
 			bone_tracker = { "Rotation" },
-			debris = {
-				position = sm.vec3.new(0.0, -0.21, -0.59),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 2,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			animation = {
 				required_animations = {"Shots", "Reload"},
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.21, -0.59),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 2,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.23}
 						}
 					},
@@ -705,18 +712,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.6), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(-0.15, 0.03, -0.28),
-				direction = sm.vec3.new(-1, 0, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(-0.15, 0.03, -0.28),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							}
 						}
 					}
 				}
@@ -816,18 +824,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(-0.15, 0.02, -0.05),
-				direction = sm.vec3.new(-1, 0, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(-0.15, 0.02, -0.05),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
 						}
@@ -855,18 +864,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.63), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.16, -0.13),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.13),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							}
 						}
 					}
 				}
@@ -952,19 +962,20 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.16, -0.4),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.4),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
 						}
 					}
@@ -991,19 +1002,20 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.16, -0.4),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.4),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
 						}
 					}
@@ -1030,19 +1042,20 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.28), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(-0.15, 0.02, -0.4),
-				direction = sm.vec3.new(-1, 0, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			animation = {
 				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(-0.15, 0.02, -0.4),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
 						}
 					}
@@ -1072,13 +1085,6 @@ local _Database = {
 				cooling_speed = 0.05, --cooling per second
 				uv_overheat_anim_max = 64.0
 			},
-			debris = {
-				position = sm.vec3.new(-0.15, 0.02, -0.1),
-				direction = sm.vec3.new(-1, 0, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			effects = {
 				shoot    = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.575), bone_name = nil},
 				overheat = {name = "overheat", offset = sm.vec3.new(0, 0, 0.77)},
@@ -1090,6 +1096,14 @@ local _Database = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}, --time can be removed if you need no delay
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(-0.15, 0.02, -0.1),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
 						}
 					},
@@ -1102,7 +1116,7 @@ local _Database = {
 					reload = { --will never get executed if magazine_capacity variable is 0 or missing
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"reload"}},
-							{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 6.0}
+							{type = mgp_shape_anim_enum.bone_animation, anims = {"Reload"}, start_value = 0.0, end_value = 1.0, time = 4.0}
 						}
 					}
 				}
@@ -1128,18 +1142,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.35), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(0.0, -0.16, -0.5),
-				direction = sm.vec3.new(0, -1, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.5),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							}
 						}
 					}
 				}
@@ -1165,18 +1180,19 @@ local _Database = {
 			effects = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.42), bone_name = nil}
 			},
-			debris = {
-				position = sm.vec3.new(-0.05, 0, -0.57),
-				direction = sm.vec3.new(-1, 0, 0),
-				spread = 50,
-				velocity = 3,
-				uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-			},
 			pose_animation = {
 				animation_states = {
 					shoot = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(-0.05, 0.0, -0.57),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+							},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.09}
 						}

@@ -8,7 +8,8 @@ local g_type_to_func_name =
 	[2] = "setup_pose_anim",
 	[3] = "particle",
 	[4] = "debris",
-	[5] = "delay_setup"
+	[5] = "shape_debris",
+	[6] = "delay_setup"
 }
 
 local AnimUtil_AnimationTypes = {}
@@ -127,6 +128,28 @@ function AnimUtil_AnimationTypes.debris(self, track, dt)
 	track.func(self, track, dt)
 end
 
+local g_debri_def_quat = sm.quat.identity()
+function AnimUtil_AnimationTypes.shape_debris(self, track, dt)
+	local v_deb_set = track.step_data
+
+	local s_shape = self.shape
+	local v_pos = s_shape.worldPosition + s_shape.worldRotation * v_deb_set.offset
+	local v_final_pos = v_pos + (s_shape.velocity * dt) * 1.9 --[[@as Vec3]]
+
+	local v_dir = sm.noise.gunSpread(s_shape.worldRotation * v_deb_set.dir --[[@as Vec3]], v_deb_set.spread) * v_deb_set.velocity
+	local v_deb_lifetime = math.random(2, 10)
+	local v_ang_velocity = sm.vec3.new(
+		math.random(1, 500) / 10,
+		math.random(1, 500) / 10,
+		math.random(1, 500) / 10
+	)
+
+	sm.debris.createDebris(v_deb_set.uuid, v_final_pos, g_debri_def_quat, v_dir + s_shape.velocity, v_ang_velocity, debri_color, v_deb_lifetime)
+
+	track.func = AnimUtil_AnimationTypes.anim_selector
+	track.func(self, track, dt)
+end
+
 function AnimUtil_AnimationTypes.delay_setup(self, track, dt)
 	track.time = track.step_data.time
 
@@ -220,9 +243,7 @@ function AnimUtil_InitializeEffects(self, effect_data)
 	end
 end
 
-function AnimUtil_InitializeAnimationUtil(self)
-	local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
-
+function AnimUtil_InitializeAnimationUtil(self, _data)
 	local overheat_eff = _data.overheat_effect
 	if overheat_eff then
 		self.cl_heat_per_shot = overheat_eff.heat_per_shot

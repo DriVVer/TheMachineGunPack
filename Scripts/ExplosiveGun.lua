@@ -2,7 +2,7 @@
 	Copyright (c) 2022 Questionable Mark
 ]]
 
---if ExplGun then return end
+if ExplGun then return end
 
 dofile("Databases/GunDatabase.lua")
 dofile("Utils/AnimationUtil.lua")
@@ -34,16 +34,15 @@ ExplGun.colorHighlight = sm.color.new(0xee0a00ff)
 ExplGun.poseWeightCount = 3
 
 function ExplGun:client_onCreate()
-	AnimUtil_InitializeAnimationUtil(self)
-
 	self.projectiles = {}
+
+	local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
+	AnimUtil_InitializeAnimationUtil(self, _data)
+	BoneTracker_Initialize(self, _data.bone_tracker)
 
 	if not self.sv_server_host then
 		self.network:sendToServer("server_requestAnimData")
 	end
-
-	local _data = DatabaseLoader.getClientSettings(self.shape.uuid)
-	BoneTracker_Initialize(self, _data.bone_tracker)
 end
 
 function ExplGun:server_onCreate()
