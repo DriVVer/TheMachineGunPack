@@ -46,7 +46,15 @@ local _Database = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{ type = mgp_shape_anim_enum.particle, particles = {"shoot"} }
+							{ type = mgp_shape_anim_enum.particle, particles = {"shoot"} },
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -106,7 +114,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 0.9),
 				lifetime = 20.0,
@@ -148,7 +156,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 0.9),
 				lifetime = 20.0,
@@ -232,7 +240,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 0.9),
 				lifetime = 20.0,
@@ -252,7 +260,15 @@ local _Database = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -312,7 +328,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 0.6),
 				lifetime = 20.0,
@@ -332,7 +348,15 @@ local _Database = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, 0.06, -1.07),
+								dir = sm.vec3.new(-1, 0, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -352,7 +376,7 @@ local _Database = {
 				auto_reload = true
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom20",
 				effectOffset = sm.vec3.new(0, 0, 1.0),
 				lifetime = 20.0,
@@ -374,7 +398,15 @@ local _Database = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.00001},
-							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.03}
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.03},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -394,7 +426,7 @@ local _Database = {
 				auto_reload = true,
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom12",
 				effectOffset = sm.vec3.new(0, 0, 1.9),
 				lifetime = 20.0,
@@ -416,7 +448,15 @@ local _Database = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -436,7 +476,7 @@ local _Database = {
 				auto_reload = true,
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom12",
 				effectOffset = sm.vec3.new(0, 0, 1.9),
 				lifetime = 20.0,
@@ -456,7 +496,15 @@ local _Database = {
 				animation_states = {
 					shoot = {
 						[1] = {
-							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}}
+							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -477,7 +525,7 @@ local _Database = {
 				projectile_offset = sm.vec3.new(0, 0, 1.9),
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom12",
 				effectOffset = sm.vec3.new(0, 0, 1.9),
 				lifetime = 20.0,
@@ -499,7 +547,15 @@ local _Database = {
 						[1] = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 0.0, end_value = 1.0, time = 0.001},
-							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1}
+							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1},
+							{
+								type = mgp_shape_anim_enum.shape_debris,
+								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								dir = sm.vec3.new(0, -1, 0),
+								spread = 50,
+								velocity = 3,
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+							}
 						}
 					}
 				}
@@ -520,7 +576,7 @@ local _Database = {
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
 			},
 			projectile = {
-				effect = "boom",
+				effect = "ShapeRenderable",
 				explosionEffect = "Boom12",
 				effectOffset = sm.vec3.new(0, 0, 0.73),
 				lifetime = 20.0,
@@ -547,7 +603,7 @@ local _Database = {
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
 								velocity = 3,
-								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
+								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
 							}
 						}
 					}

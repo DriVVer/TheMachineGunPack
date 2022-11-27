@@ -172,7 +172,13 @@ end
 
 local g_cannonEffects =
 {
-	["f0f14c15-4d9c-4dc3-8518-4ae65af491da"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) } --Hispano 20mm Gun
+	["f0f14c15-4d9c-4dc3-8518-4ae65af491da"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, --Hispano 20mm Gun
+	["05f70a50-3bb4-4a00-b7fb-f1c931d585ca"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, -- 12mm dszk
+	["f9213740-d7ca-41ed-b1c8-23dd704c9063"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, -- .50 air
+	["de609e41-58d1-409a-b981-447be0257609"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, -- .50 1x1
+	["bdd9e357-35f7-4140-8b19-477abef20e0f"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, -- .50 brow
+	["9fec1f9f-9f39-4d95-95d3-c15c4389e095"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) }, -- 20mm wz38
+	["073d0f36-9bee-47e4-b4b6-c42568648e3b"] = { uuid = sm.uuid.new("d7a0fd34-6a9c-4be8-be10-4e7016e05861"), scale = sm.vec3.new(0.25, 10.25, 0.25) } -- 20mm mg 151
 }
 
 function ExplGun:client_onShoot(data)
