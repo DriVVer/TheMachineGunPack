@@ -7,6 +7,22 @@ if ExplGun then return end
 dofile("Utils/AnimationUtil.lua")
 dofile("Databases/GunDatabase.lua")
 
+---@class ExplProj
+---@field effect Effect
+---@field hit Vec3
+---@field explosionLevel integer
+---@field explosionRadius integer
+---@field explosionImpulseRadius integer
+---@field explosionImpulseStrength integer
+---@field explosionEffect string
+---@field friction integer
+---@field gravity integer
+---@field pos Vec3
+---@field dir Vec3
+
+---@class ExplGun : ShapeClass
+---@field sv_anim_wait boolean
+---@field projectiles ExplProj[]
 ExplGun = class()
 ExplGun.maxParentCount = 1
 ExplGun.maxChildCount  = 0
@@ -17,7 +33,7 @@ ExplGun.colorHighlight = sm.color.new(0xee0a00ff)
 ExplGun.poseWeightCount = 3
 
 function ExplGun:client_onCreate()
-    AnimUtil.InitializeAnimationUtil(self)
+    AnimUtil_InitializeAnimationUtil(self)
 
     self.projectiles = {}
 
@@ -48,17 +64,17 @@ function ExplGun:server_onCreate()
 end
 
 function ExplGun:server_requestAnimData(data, player)
-    AnimUtil.SendAnimationData(self, player)
+    AnimUtil_SendAnimationData(self, player)
 end
 
 function ExplGun:client_receiveAnimData(data)
-    AnimUtil.ReceiveAnimationData(self, data)
+    AnimUtil_ReceiveAnimationData(self, data)
 end
 
 function ExplGun:server_onFixedUpdate(dt)
     if not sm.exists(self.interactable) then return end
 
-    AnimUtil.server_performDataCheck(self, "client_onOtherAnim")
+    AnimUtil_server_performDataCheck(self, "client_onOtherAnim")
 
     local sCannonSet = self.cannon_settings
     if not self.reload then
@@ -107,19 +123,19 @@ function ExplGun:client_onFixedUpdate(dt)
             local up = self.shape.up:cross(right)
 
             local hit, result = sm.physics.raycast( bullet.pos, bullet.pos + bullet.dir * dt*1.1 )
-            if not hit then 
+            if not hit then
                 hit, result = sm.physics.raycast( bullet.pos, bullet.pos + bullet.dir * dt*1.1 + up/8 + right/8)
-                if not hit then 
+                if not hit then
                     hit, result = sm.physics.raycast( bullet.pos, bullet.pos + bullet.dir * dt*1.1 + up/8 - right/8)
-                    if not hit then 
+                    if not hit then
                         hit, result = sm.physics.raycast( bullet.pos, bullet.pos + bullet.dir * dt*1.1 - up/8 - right/8)
-                        if not hit then 
+                        if not hit then
                             hit, result = sm.physics.raycast( bullet.pos, bullet.pos + bullet.dir * dt*1.1 - up/8 + right/8)
                         end
                     end
                 end
             end
-            
+
             if hit or bullet.lifetime <= 0.0 then
                 bullet.hit = (hit and result.pointWorld or bullet.pos)
                 bullet.effect:setPosition(sm.vec3.new(0, 0, 10000))
@@ -144,11 +160,11 @@ local function BetterExists(object)
 end
 
 function ExplGun:client_onUpdate(dt)
-    AnimUtil.UpdateAnimations(self, dt)
+    AnimUtil_UpdateAnimations(self, dt)
 end
 
 function ExplGun:client_onOtherAnim(data)
-    AnimUtil.PushAnimationState(self, data)
+    AnimUtil_PushAnimationState(self, data)
 end
 
 function ExplGun:client_onShoot(data)
@@ -157,14 +173,14 @@ function ExplGun:client_onShoot(data)
         return
     end
 
-    local _ShellEffect = sm.effect.createEffect(data.effect)
-    local _OffsetPosition = self.shape.worldPosition + self.shape.worldRotation * data.effectOffset
-    _ShellEffect:setPosition(_OffsetPosition)
-    _ShellEffect:start()
+    local v_shellEffect = sm.effect.createEffect(data.effect)
+    local v_offsetPos = self.shape.worldPosition + self.shape.worldRotation * data.effectOffset --[[@as Vec3]]
+    v_shellEffect:setPosition(v_offsetPos)
+    v_shellEffect:start()
 
     local _Bullet = {
-        effect = _ShellEffect,
-        pos = _OffsetPosition,
+        effect = v_shellEffect,
+        pos = v_offsetPos,
         dir = data.dir,
         gravity = data.gravity,
         friction = data.friction,
@@ -178,11 +194,11 @@ function ExplGun:client_onShoot(data)
 
     self.projectiles[#self.projectiles + 1] = _Bullet
 
-    AnimUtil.PushAnimationState(self, "shoot")
+    AnimUtil_PushAnimationState(self, "shoot")
 end
 
 function ExplGun:client_onDestroy()
-    AnimUtil.DestroyEffects(self)
+    AnimUtil_DestroyEffects(self)
 
     for k, bullet in pairs(self.projectiles) do
         if bullet and BetterExists(bullet.effect) then

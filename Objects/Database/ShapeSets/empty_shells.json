@@ -30,7 +30,7 @@
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
-			"showInInventory": true
+			"showInInventory": false
 		},
 		{
 			"uuid": "40a3242a-7416-47b2-847c-f23a759a26a0",
@@ -62,7 +62,7 @@
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
-			"showInInventory": true
+			"showInInventory": false
 		},
 		{
 			"uuid": "0d4d66a0-532a-49e4-83c5-8ec8bb95ea8e",
@@ -159,6 +159,38 @@
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
 			"showInInventory": false
+		},
+		{
+			"uuid": "355e465a-bf4d-45c5-a49c-a063972b2781",
+			"renderable": {
+				"lodList": [
+					{
+						"mesh": "$MOD_DATA/Objects/Mesh/Mac-31_Mag.fbx",
+						"subMeshList": [
+							{
+								"textureList": [
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+								],
+								"material": "DifAsgNor"
+							}
+						]
+					}
+				]
+			},
+			"color": "939291",
+			"hull": {
+				"x": 1,
+				"y": 1,
+				"z": 1,
+				"col": "$MOD_DATA/Objects/Mesh/Mac-31_Mag.fbx"
+			},
+			"density": 1000,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": true
 		}
 	]
 }

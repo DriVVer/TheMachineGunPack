@@ -1,4 +1,4 @@
-mgp_tool_anim_enum =
+local mgp_tool_anim_enum =
 {
 	bone_animation    = 1,
 	effect            = 2,
