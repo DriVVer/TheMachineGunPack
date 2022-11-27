@@ -9,7 +9,7 @@
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
-			"showInInventory": true
+			"showInInventory": false
 		}
 	]
 }
