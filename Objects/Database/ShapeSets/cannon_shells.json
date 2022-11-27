@@ -1,0 +1,15 @@
+{
+	"partList": [
+		{
+			"uuid": "d7a0fd34-6a9c-4be8-be10-4e7016e05861",
+			"renderable": "$CONTENT_DATA/Projectiles/Renderables/Bullet_or.rend",
+			"color": "939291",
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"density": 100,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": true
+		}
+	]
+}
