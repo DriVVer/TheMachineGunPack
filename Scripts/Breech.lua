@@ -3,7 +3,11 @@
 ]]
 
 dofile("Databases/BreechDatabase.lua")
+dofile("Utils/BoneTracker.lua")
 
+---@class Breech : ShapeClass
+---@field anim_step_data table
+---@field cl_bone_tracker BoneData[]
 Breech = class()
 Breech.maxParentCount = 1
 Breech.maxChildCount  = 0
@@ -37,16 +41,7 @@ AnimationUpdateFunctions.anim_selector = function(self, dt)
 		self.anim_step_data = nil
 		self.anim_step = 0
 
-		for k, v in pairs(self.bone_tracker) do
-			self.bone_tracker[k] =
-			{
-				pos = self.interactable:getWorldBonePosition(k),
-				vel = sm.vec3.zero(),
-				angular_vel = sm.vec3.zero(),
-				angles = { 0, 0 },
-				b_end = v.b_end
-			}
-		end
+		BoneTracker_Reset(self)
 	end
 end
 
@@ -63,7 +58,7 @@ AnimationUpdateFunctions.anim_handler = function(self, dt)
 	local c_anim_time = cur_data.time
 
 	local predict_time = (self.anim_time - dt)
-	
+
 	local anim_prog = 0.0
 	if c_anim_time > 0 then
 		anim_prog = (c_anim_time - math.max(predict_time, 0)) / c_anim_time
@@ -77,7 +72,7 @@ AnimationUpdateFunctions.anim_handler = function(self, dt)
 		s_interactable:setAnimProgress(anim_name, final_value)
 	end
 
-	self:client_trackBones(dt)
+	BoneTracker_clientOnUpdate(self, dt)
 
 	if self.anim_time then
 		self.anim_time = predict_time
@@ -137,12 +132,13 @@ AnimationUpdateFunctions.delay_handler = function(self, dt)
 end
 
 local debri_color = sm.color.new(0x000000ff)
+---@param self Breech
 AnimationUpdateFunctions.debris_handler = function(self, dt)
 	local cur_data = self.anim_step_data
 
 	--Calculate direction
 	local bone_name = cur_data.bone
-	local tracked_bone = self.bone_tracker[bone_name]
+	local tracked_bone = self.cl_bone_tracker[bone_name]
 	local debri_pos = self.interactable:getWorldBonePosition(bone_name)
 	local dir_calc  = self.interactable:getWorldBonePosition(bone_name.."_end")
 	local direction = (debri_pos - dir_calc):normalize()
@@ -153,7 +149,7 @@ AnimationUpdateFunctions.debris_handler = function(self, dt)
 
 	--Calculate other things
 	local debri_time = math.random(2, 15)
-	local debri_offset = debri_rot * cur_data.offset
+	local debri_offset = debri_rot * cur_data.offset --[[@as Vec3]]
 	local debri_pos_final = debri_pos + debri_offset
 	local world_vel = (debri_rot * tracked_bone.vel) + self.shape.velocity
 	local world_ang_vel = debri_rot * tracked_bone.angular_vel
@@ -194,55 +190,13 @@ function Breech:client_onCreate()
 	self.anim_step_count = #anim_data.animation + 1
 	self.anim_func = AnimationUpdateFunctions.no_animation
 
-	--Create bone tracker
-	local bone_tracker_tmp = {}
-	for k, v in ipairs(anim_data.bone_tracker or {}) do
-		bone_tracker_tmp[v] =
-		{
-			pos = self.interactable:getWorldBonePosition(v),
-			vel = sm.vec3.zero(),
-			angular_vel = sm.vec3.zero(),
-			angles = {0, 0},
-			b_end = v.."_end"
-		}
-	end
-
-	self.bone_tracker = bone_tracker_tmp
+	BoneTracker_Initialize(self, anim_data.bone_tracker)
 end
 
 function Breech:client_startAnimation(reloadTime)
 	if self.anim_step == 0 then
 		self.anim_func = AnimationUpdateFunctions.anim_selector
 		self.anim_wait_time = reloadTime
-	end
-end
-
-function Breech:client_trackBones(dt)
-	local s_interactable = self.interactable
-	for k, b_data in pairs(self.bone_tracker) do
-		local prev_pos = b_data.pos
-		local new_pos = s_interactable:getLocalBonePosition(k)
-		local b_end_pos = s_interactable:getLocalBonePosition(b_data.b_end)
-		local b_dir = (new_pos - b_end_pos):normalize()
-
-		local prev_angles = b_data.angles
-		local new_pitch = math.asin(b_dir.z)
-		local new_yaw = math.atan2(b_dir.y, b_dir.x) - math.pi / 2
-
-		local new_ang_vel = sm.vec3.new(
-			(prev_angles[1] - new_pitch) / dt,
-			0,
-			(prev_angles[2] - new_yaw) / dt
-		)
-
-		self.bone_tracker[k] =
-		{
-			pos = new_pos,
-			vel = (new_pos - prev_pos) / dt,
-			angular_vel = new_ang_vel,
-			angles = { new_pitch, new_yaw },
-			b_end = b_data.b_end
-		}
 	end
 end
 
@@ -266,14 +220,14 @@ function Breech:server_checkParent(s_interactable)
 					local allowed_ports = p_pub_data.allowedPorts
 					if allowed_ports and allowed_ports[tostring(self.shape.uuid)] == true then
 						return
-					end 
+					end
 				end
 			end
 
 			cur_parent:disconnect(s_interactable)
 			self.sv_saved_parent = nil
 		end
-	end	
+	end
 end
 
 function Breech:client_onReloadError(min_reload_time)
