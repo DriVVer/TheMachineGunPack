@@ -1,6 +1,38 @@
 {
 	"partList": [
 		{
+			"uuid": "ac32da4e-105d-47aa-8fb8-6e42778c4a50",
+			"renderable": {
+				"lodList": [
+					{
+						"mesh": "$MOD_DATA/Objects/Mesh/20mm_case.obj",
+						"subMeshList": [
+							{
+								"textureList": [
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+								],
+								"material": "DifAsgNor"
+							}
+						]
+					}
+				]
+			},
+			"color": "939291",
+			"hull": {
+				"x": 1,
+				"y": 1,
+				"z": 1,
+				"col": "$MOD_DATA/Objects/Mesh/12mm_case_col.obj"
+			},
+			"density": 100,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": false
+		},
+		{
 			"uuid": "b2fbb673-aab7-4eef-bb69-c5913e8b17b8",
 			"renderable": {
 				"lodList": [
