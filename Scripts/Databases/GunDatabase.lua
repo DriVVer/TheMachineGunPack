@@ -53,7 +53,7 @@ local _Database = {
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
 								velocity = 3,
-								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+								uuid = sm.uuid.new("ac32da4e-105d-47aa-8fb8-6e42778c4a50")
 							}
 						}
 					}
@@ -263,11 +263,11 @@ local _Database = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.16, -0.67),
-								dir = sm.vec3.new(0, -1, 0),
+								offset = sm.vec3.new(-0.1, 0.03, -1.17),
+								dir = sm.vec3.new(-1, 0, 0),
 								spread = 50,
 								velocity = 3,
-								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+								uuid = sm.uuid.new("ac32da4e-105d-47aa-8fb8-6e42778c4a50")
 							}
 						}
 					}
@@ -351,11 +351,11 @@ local _Database = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, 0.06, -1.07),
+								offset = sm.vec3.new(-0.15, 0.06, -1.00),
 								dir = sm.vec3.new(-1, 0, 0),
 								spread = 50,
-								velocity = 3,
-								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
+								velocity = 2,
+								uuid = sm.uuid.new("ac32da4e-105d-47aa-8fb8-6e42778c4a50")
 							}
 						}
 					}
@@ -499,10 +499,10 @@ local _Database = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								offset = sm.vec3.new(0.0, -0.18, -1.15),
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
-								velocity = 3,
+								velocity = 2,
 								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
 							}
 						}
@@ -550,10 +550,10 @@ local _Database = {
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.16, -0.67),
+								offset = sm.vec3.new(0.0, -0.18, -0.8),
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
-								velocity = 3,
+								velocity = 2,
 								uuid = sm.uuid.new("40a3242a-7416-47b2-847c-f23a759a26a0")
 							}
 						}
