@@ -189,14 +189,16 @@ function ExplGun:client_onShoot(data)
 
 	local v_shellEffect = sm.effect.createEffect(data.effect)
 	local v_offsetPos = self.shape.worldPosition + self.shape.worldRotation * data.effectOffset --[[@as Vec3]]
-	v_shellEffect:setPosition(v_offsetPos)
-
+	
 	local v_projEffData = g_cannonEffects[tostring(self.shape.uuid)]
 	if v_projEffData then
 		v_shellEffect:setParameter("uuid", v_projEffData.uuid)
 		v_shellEffect:setScale(v_projEffData.scale)
-	end
 
+		v_offsetPos = v_offsetPos + (data.dir:normalize() * (v_projEffData.scale.y * 0.25)) --[[@as Vec3]]
+	end
+	
+	v_shellEffect:setPosition(v_offsetPos)
 	v_shellEffect:start()
 
 	local _Bullet = {
