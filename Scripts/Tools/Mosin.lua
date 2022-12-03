@@ -4,6 +4,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
+dofile("ToolSwimUtil.lua")
 
 local Damage = 70
 
@@ -274,6 +275,31 @@ local aim_animation_blacklist =
 	["cock_hammer_aim"] = true
 }
 
+function Mosin:client_updateAimWeights(dt)
+	local v_aiming = self.aiming and not TSU_IsOwnerSwimming(self)
+
+	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+
+	-- Camera update
+	local bobbingFp = 1
+	if v_aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
+		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
+		bobbingFp = 0.12
+	else
+		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 0.0, weight_blend )
+		bobbingFp = 1
+	end
+
+	if v_aiming then
+		self.aimWeight = sm.util.lerp(self.aimWeight, 1.0, weight_blend)
+	else
+		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
+	end
+
+	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+end
+
 function Mosin.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
@@ -345,11 +371,16 @@ function Mosin.client_onUpdate( self, dt )
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
+	TSU_OnUpdate(self)
+
+	self:client_updateAimWeights(dt)
+
 	if not self.equipped then
 		if self.wantEquipped then
 			self.wantEquipped = false
 			self.equipped = true
 		end
+
 		return
 	end
 
@@ -534,32 +565,13 @@ function Mosin.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-
-	-- Camera update
-	local bobbingFp = 1
-	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
-		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
-		bobbingFp = 0.12
-	else
-		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 0.0, weight_blend )
-		bobbingFp = 1
-	end
-
-	if self.aiming then
-		self.aimWeight = sm.util.lerp(self.aimWeight, 1.0, weight_blend)
-	else
-		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
-	end
-
-
-	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
-function Mosin:client_onEquip(animate)
+function Mosin:client_onEquip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -600,7 +612,11 @@ function Mosin:client_onEquip(animate)
 	end
 end
 
-function Mosin.client_onUnequip( self, animate )
+function Mosin:client_onUnequip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	self.scope_enabled = false
 	self.wantEquipped = false
 	self.equipped = false
@@ -615,16 +631,25 @@ function Mosin.client_onUnequip( self, animate )
 		sm.gui.endFadeToBlack(0.8)
 	end
 
-	if sm.exists( self.tool ) then
+	local s_tool = self.tool
+	if sm.exists(s_tool) then
 		if animate then
-			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
+			sm.audio.play( "PotatoRifle - Unequip", s_tool:getPosition() )
 		end
+
+		if is_custom then
+			s_tool:setTpRenderables({})
+			s_tool:setFpRenderables({})
+		end
+
 		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
-			self.tool:setMovementSlowDown( false )
-			self.tool:setBlockSprint( false )
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
+		if s_tool:isLocal() then
+			s_tool:setDispersionFraction(0.0)
+			s_tool:setMovementSlowDown( false )
+			s_tool:setBlockSprint( false )
+			s_tool:setCrossHairAlpha( 1.0 )
+			s_tool:setInteractionTextSuppressed( false )
+
 			if self.fpAnimations.currentAnimation ~= "unequip" then
 				swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
 			end
@@ -720,106 +745,105 @@ end
 
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
 function Mosin.cl_onPrimaryUse(self, state)
-	if state == sm.tool.interactState.start then
-		if self:client_isGunReloading(reload_anims2) then return end
+	if state ~= sm.tool.interactState.start then return end
+	if self:client_isGunReloading(reload_anims2) or not self.equipped then return end
 
-		local v_toolOwner = self.tool:getOwner()
-		if not v_toolOwner then
+	local v_toolOwner = self.tool:getOwner()
+	if not v_toolOwner then
+		return
+	end
+
+	local v_toolChar = v_toolOwner.character
+	if not (v_toolChar and sm.exists(v_toolChar)) then
+		return
+	end
+
+	if self.fireCooldownTimer <= 0.0 then
+		if self.tool:isSprinting() then
 			return
 		end
 
-		local v_toolChar = v_toolOwner.character
-		if not (v_toolChar and sm.exists(v_toolChar)) then
-			return
-		end
+		if self.cl_hammer_cocked then
+			if self.ammo_in_mag > 0 then
+			--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+				self.ammo_in_mag = self.ammo_in_mag - 1
 
-		if self.fireCooldownTimer <= 0.0 then
-			if self.tool:isSprinting() then
-				return
-			end
+				local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
-			if self.cl_hammer_cocked then
-				if self.ammo_in_mag > 0 then
-				--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-					self.ammo_in_mag = self.ammo_in_mag - 1
+				local dir = sm.camera.getDirection()
+				local firePos = nil
+				if self.tool:isInFirstPersonView() then
+					if self.aiming then
+						firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
 
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+						local hit, result = sm.localPlayer.getRaycast(300)
+						if hit then
+							local v_resultPos = result.pointWorld
 
-					local dir = sm.camera.getDirection()
-					local firePos = nil
-					if self.tool:isInFirstPersonView() then
-						if self.aiming then
-							firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
-
-							local hit, result = sm.localPlayer.getRaycast(300)
-							if hit then
-								local v_resultPos = result.pointWorld
-
-								local dir_calc = (v_resultPos - firePos):normalize()
-								dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
-							end
-						else
-							firePos = self.tool:getFpBonePos("pejnt_barrel")
+							local dir_calc = (v_resultPos - firePos):normalize()
+							dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
 						end
 					else
-						firePos = self.tool:getTpBonePos("pejnt_barrel")
-					end
-
-					-- Spread
-					local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-					local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-					spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-					local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-					dir = sm.noise.gunSpread( dir, spreadDeg )
-					sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
-
-					-- Timers
-					self.fireCooldownTimer = fireMode.fireCooldown
-					self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-					self.sprintCooldownTimer = self.sprintCooldown
-
-					-- Send TP shoot over network and directly to self
-					self:onShoot(1)
-					self.network:sendToServer("sv_n_onShoot", 1)
-
-					sm.camera.setShake(0.07)
-
-					if not self.aiming then
-						-- Play FP shoot animation
-						setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+						firePos = self.tool:getFpBonePos("pejnt_barrel")
 					end
 				else
-					self:onShoot()
-					self.network:sendToServer("sv_n_onShoot")
+					firePos = self.tool:getTpBonePos("pejnt_barrel")
+				end
 
-					self.fireCooldownTimer = 0.3
-					sm.audio.play( "PotatoRifle - NoAmmo" )
+				-- Spread
+				local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+				local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+				spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+				local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+				dir = sm.noise.gunSpread( dir, spreadDeg )
+				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
+
+				-- Timers
+				self.fireCooldownTimer = fireMode.fireCooldown
+				self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+				self.sprintCooldownTimer = self.sprintCooldown
+
+				-- Send TP shoot over network and directly to self
+				self:onShoot(1)
+				self.network:sendToServer("sv_n_onShoot", 1)
+
+				sm.camera.setShake(0.07)
+
+				if not self.aiming then
+					-- Play FP shoot animation
+					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 				end
 			else
-				if self.ammo_in_mag == 0 then
-					self:client_onReload()
-					return
+				self:onShoot()
+				self.network:sendToServer("sv_n_onShoot")
+
+				self.fireCooldownTimer = 0.3
+				sm.audio.play( "PotatoRifle - NoAmmo" )
+			end
+		else
+			if self.ammo_in_mag == 0 then
+				self:client_onReload()
+				return
+			else
+				self.fireCooldownTimer = 1.0
+
+				self.network:sendToServer("sv_n_cockHammer", self.aiming)
+
+				if self.aiming then
+					setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+					setTpAnimation(self.tpAnimations, v_toolChar:isCrouching() and "bolt_action_crouch" or "bolt_action_aim", 1.0)
+					mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
 				else
-					self.fireCooldownTimer = 1.0
-
-					self.network:sendToServer("sv_n_cockHammer", self.aiming)
-
-					if self.aiming then
-						setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-						setTpAnimation(self.tpAnimations, v_toolChar:isCrouching() and "bolt_action_crouch" or "bolt_action_aim", 1.0)
-						mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
-					else
-						setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-						setTpAnimation(self.tpAnimations, "bolt_action", 1.0)
-						mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-					end
+					setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+					setTpAnimation(self.tpAnimations, "bolt_action", 1.0)
+					mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
 				end
 			end
-
-			self.cl_hammer_cocked = not self.cl_hammer_cocked
 		end
+
+		self.cl_hammer_cocked = not self.cl_hammer_cocked
 	end
 end
 
@@ -918,7 +942,7 @@ end
 
 local _intstate = sm.tool.interactState
 function Mosin.cl_onSecondaryUse( self, state )
-	if self.scope_timer then return end
+	if self.scope_timer or not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading(reload_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
