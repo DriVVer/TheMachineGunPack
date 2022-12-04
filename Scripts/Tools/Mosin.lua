@@ -282,13 +282,11 @@ local aim_animation_blacklist =
 }
 
 function Mosin:client_updateAimWeights(dt)
-	local v_aiming = self.aiming and not TSU_IsOwnerSwimming(self)
-
 	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
 
 	-- Camera update
 	local bobbingFp = 1
-	if v_aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
+	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -296,7 +294,7 @@ function Mosin:client_updateAimWeights(dt)
 		bobbingFp = 1
 	end
 
-	if v_aiming then
+	if self.aiming then
 		self.aimWeight = sm.util.lerp(self.aimWeight, 1.0, weight_blend)
 	else
 		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
