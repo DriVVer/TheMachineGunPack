@@ -645,10 +645,10 @@ function Mosin:client_onUnequip(animate, is_custom)
 
 		if is_custom then
 			s_tool:setTpRenderables({})
-			s_tool:setFpRenderables({})
+		else
+			setTpAnimation(self.tpAnimations, "putdown")
 		end
 
-		setTpAnimation( self.tpAnimations, "putdown" )
 		if s_tool:isLocal() then
 			s_tool:setDispersionFraction(0.0)
 			s_tool:setMovementSlowDown( false )
@@ -898,7 +898,7 @@ function Mosin:cl_initReloadAnim(anim_id)
 end
 
 function Mosin:client_onReload()
-	if self.ammo_in_mag ~= self.mag_capacity then
+	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if self.cl_hammer_cocked then
 			sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
 			return true
@@ -929,7 +929,7 @@ function Mosin:cl_startCheckMagAnim()
 end
 
 function Mosin:client_onToggle()
-	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 0.7
 
@@ -947,7 +947,7 @@ function Mosin:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Mosin.cl_onSecondaryUse( self, state )
+function Mosin:cl_onSecondaryUse(state)
 	if self.scope_timer or not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading(reload_anims) or (self.aim_timer ~= nil)

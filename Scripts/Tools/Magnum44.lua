@@ -4,6 +4,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
+dofile("ToolSwimUtil.lua")
 
 local Damage = 45
 
@@ -45,9 +46,17 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function Magnum44.client_onCreate( self )
+function Magnum44:client_initAimVals()
+	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
+	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+end
+
+function Magnum44:client_onCreate()
 	self.mag_capacity = 6
 	self.ammo_in_mag = self.mag_capacity
+
+	self.aimBlendSpeed = 8.0
+	self:client_initAimVals()
 
 	self.cl_hammer_cocked = false
 
@@ -172,13 +181,12 @@ function Magnum44.loadAnimations( self )
 	self.sprintCooldownTimer = 0.0
 	self.sprintCooldown = 0.3
 
-	self.aimBlendSpeed = 8.0
 	self.blendTime = 0.2
 
 	self.jointWeight = 0.0
 	self.spineWeight = 0.0
-	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
-	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+
+	self:client_initAimVals()
 end
 
 local actual_reload_anims =
@@ -202,7 +210,24 @@ local aim_animation_list02 =
 	["aimShoot"] = true
 }
 
-function Magnum44.client_onUpdate( self, dt )
+function Magnum44:client_updateAimWeights(dt)
+	-- Camera update
+	local bobbing = 1
+	if self.aiming then
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
+		bobbing = 0.12
+	else
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
+		bobbing = 1
+	end
+
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+end
+
+function Magnum44:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	if self.cl_show_ammo_timer then
@@ -258,6 +283,10 @@ function Magnum44.client_onUpdate( self, dt )
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
+	TSU_OnUpdate(self)
+
+	self:client_updateAimWeights(dt)
+
 	if not self.equipped then
 		if self.wantEquipped then
 			self.wantEquipped = false
@@ -266,38 +295,10 @@ function Magnum44.client_onUpdate( self, dt )
 		return
 	end
 
-	local effectPos, rot
-
-	if self.tool:isLocal() then
-
-		local zOffset = 0.6
-		if self.tool:isCrouching() then
-			zOffset = 0.29
-		end
-
-		local dir = sm.localPlayer.getDirection()
-		local firePos = self.tool:getFpBonePos( "pejnt_barrel" )
-
-		if not self.aiming then
-			effectPos = firePos + dir * 0.2
-		else
-			effectPos = firePos + dir * 0.45
-		end
-
-		rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-	end
-	local pos = self.tool:getTpBonePos( "pejnt_barrel" )
-	local dir = self.tool:getTpBoneDir( "pejnt_barrel" )
-
-	effectPos = pos + dir * 0.2
-
-	rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-
 	-- Timers
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
-
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -428,25 +429,13 @@ function Magnum44.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function Magnum44:client_onEquip(animate)
+function Magnum44:client_onEquip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -464,7 +453,7 @@ function Magnum44:client_onEquip(animate)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	
+
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
 
 	--Set the tp and fp renderables before actually loading animations
@@ -488,22 +477,35 @@ function Magnum44:client_onEquip(animate)
 	end
 end
 
-function Magnum44.client_onUnequip( self, animate )
+function Magnum44:client_onUnequip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 	mgp_toolAnimator_reset(self)
-	
-	if sm.exists( self.tool ) then
+
+	local s_tool = self.tool
+	if sm.exists(s_tool) then
 		if animate then
-			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
+			sm.audio.play( "PotatoRifle - Unequip", s_tool:getPosition() )
 		end
-		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
-			self.tool:setMovementSlowDown( false )
-			self.tool:setBlockSprint( false )
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
+
+		if is_custom then
+			s_tool:setTpRenderables({})
+		else
+			setTpAnimation( self.tpAnimations, "putdown" )
+		end
+
+		if s_tool:isLocal() then
+			s_tool:setMovementSlowDown( false )
+			s_tool:setBlockSprint( false )
+			s_tool:setCrossHairAlpha( 1.0 )
+			s_tool:setInteractionTextSuppressed( false )
+			s_tool:setDispersionFraction(0.0)
+
 			if self.fpAnimations.currentAnimation ~= "unequip" then
 				swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
 			end
@@ -654,99 +656,98 @@ end
 
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
 function Magnum44.cl_onPrimaryUse(self, state)
-	if state == sm.tool.interactState.start then
-		if self:client_isGunReloading() then return end
+	if state ~= sm.tool.interactState.start then return end
+	if self:client_isGunReloading() or not self.equipped then return end
 
-		if self.tool:getOwner().character == nil then
-			return
-		end
+	local v_toolOwner = self.tool:getOwner()
+	if not (v_toolOwner and sm.exists(v_toolOwner)) then
+		return
+	end
 
-		
-		if self.fireCooldownTimer <= 0.0 then
-			if self.cl_hammer_cocked then
-				if self.ammo_in_mag > 0 then
-				--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-					self.ammo_in_mag = self.ammo_in_mag - 1
-					local firstPerson = self.tool:isInFirstPersonView()
-			
-					local dir = sm.localPlayer.getDirection()
-			
-					local firePos = self:calculateFirePosition()
-					local fakePosition = self:calculateTpMuzzlePos()
-					local fakePositionSelf = fakePosition
-					if firstPerson then
-						fakePositionSelf = self:calculateFpMuzzlePos()
-					end
-			
-					-- Aim assist
-					if not firstPerson then
-						local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-						local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
-						if hit then
-							local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-							local dirDot = norDir:dot( dir )
-			
-							if dirDot > 0.96592583 then -- max 15 degrees off
-								dir = norDir
-							else
-								local radsOff = math.asin( dirDot )
-								dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-							end
+	local v_ownerChar = v_toolOwner.character
+	if not (v_ownerChar and sm.exists(v_ownerChar)) then
+		return
+	end
+
+	if self.fireCooldownTimer <= 0.0 then
+		if self.cl_hammer_cocked then
+			if self.ammo_in_mag > 0 then
+			--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+				self.ammo_in_mag = self.ammo_in_mag - 1
+				local firstPerson = self.tool:isInFirstPersonView()
+
+				local dir = sm.localPlayer.getDirection()
+
+				local firePos = self:calculateFirePosition()
+				local fakePosition = self:calculateTpMuzzlePos()
+				local fakePositionSelf = fakePosition
+				if firstPerson then
+					fakePositionSelf = self:calculateFpMuzzlePos()
+				end
+
+				-- Aim assist
+				if not firstPerson then
+					local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+					local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+					if hit then
+						local norDir = sm.vec3.normalize( result.pointWorld - firePos )
+						local dirDot = norDir:dot( dir )
+
+						if dirDot > 0.96592583 then -- max 15 degrees off
+							dir = norDir
+						else
+							local radsOff = math.asin( dirDot )
+							dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
 						end
 					end
-			
-					dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
-			
-					-- Spread
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-					local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-			
-					local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-					spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-					local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-			
-					dir = sm.noise.gunSpread( dir, spreadDeg )
-			
-					local owner = self.tool:getOwner()
-					if owner then
-						sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
-					end
-			
-					-- Timers
-					self.fireCooldownTimer = fireMode.fireCooldown
-					self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-					self.sprintCooldownTimer = self.sprintCooldown
-			
-					-- Send TP shoot over network and dircly to self
-					self:onShoot(1)
-					self.network:sendToServer("sv_n_onShoot", 1)
-			
-					-- Play FP shoot animation
-					setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-				else
-					self:onShoot(nil)
-					self.network:sendToServer("sv_n_onShoot", nil)
-
-					local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-					self.fireCooldownTimer = 0.3
-					sm.audio.play( "PotatoRifle - NoAmmo" )
 				end
+
+				dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
+
+				-- Spread
+				local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+				local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+				local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+				spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+				local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+				dir = sm.noise.gunSpread( dir, spreadDeg )
+
+				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
+
+				-- Timers
+				self.fireCooldownTimer = fireMode.fireCooldown
+				self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+				self.sprintCooldownTimer = self.sprintCooldown
+
+				-- Send TP shoot over network and dircly to self
+				self:onShoot(1)
+				self.network:sendToServer("sv_n_onShoot", 1)
+
+				-- Play FP shoot animation
+				setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 			else
-				self.fireCooldownTimer = 0.4
+				self:onShoot(nil)
+				self.network:sendToServer("sv_n_onShoot", nil)
 
-				self.network:sendToServer("sv_n_cockHammer")
-				
-				if self.aiming then
-					setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-					mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
-				else
-					setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-					mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-				end
+				self.fireCooldownTimer = 0.3
+				sm.audio.play( "PotatoRifle - NoAmmo" )
 			end
+		else
+			self.fireCooldownTimer = 0.4
+			self.network:sendToServer("sv_n_cockHammer")
 
-			self.cl_hammer_cocked = not self.cl_hammer_cocked
+			if self.aiming then
+				setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+				mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+			else
+				setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+			end
 		end
+
+		self.cl_hammer_cocked = not self.cl_hammer_cocked
 	end
 end
 
@@ -802,10 +803,12 @@ function Magnum44:cl_initReloadAnim(anim_id)
 end
 
 function Magnum44:client_onReload()
-	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
-	if not is_mag_full then
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			self:cl_initReloadAnim(self.ammo_in_mag)
+	if self.equipped then
+		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		if not is_mag_full then
+			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+				self:cl_initReloadAnim(self.ammo_in_mag)
+			end
 		end
 	end
 
@@ -829,7 +832,7 @@ function Magnum44:cl_startCheckMagAnim()
 end
 
 function Magnum44:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 0.5
 
@@ -847,7 +850,9 @@ function Magnum44:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Magnum44.cl_onSecondaryUse( self, state )
+function Magnum44:cl_onSecondaryUse(state)
+	if not self.equipped then return end
+
 	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
