@@ -75,9 +75,18 @@ local reload_anims2 =
 	["reload4"] = true
 }
 
+function Mosin:client_initAimVals()
+	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
+	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+	self.aimWeightFp = self.aimWeight
+end
+
 function Mosin.client_onCreate( self )
 	self.mag_capacity = 5
 	self.ammo_in_mag = self.mag_capacity
+
+	self:client_initAimVals()
+	self.aimBlendSpeed = 3.0
 
 	self.cl_hammer_cocked = true
 
@@ -235,14 +244,11 @@ function Mosin.loadAnimations( self )
 	self.sprintCooldownTimer = 0.0
 	self.sprintCooldown = 0.3
 
-	self.aimBlendSpeed = 3.0
 	self.blendTime = 0.2
 
 	self.jointWeight = 0.0
 	self.spineWeight = 0.0
-	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
-	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
-	self.aimWeightFp = self.aimWeight
+	self:client_initAimVals()
 end
 
 local actual_reload_anims =
