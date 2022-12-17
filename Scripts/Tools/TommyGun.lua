@@ -4,6 +4,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
+dofile("ToolSwimUtil.lua")
 
 local Damage = 24
 
@@ -45,9 +46,17 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function TommyGun.client_onCreate( self )
+function TommyGun:client_initAimVals()
+	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
+	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+end
+
+function TommyGun:client_onCreate()
 	self.mag_capacity = 30
 	self.ammo_in_mag = self.mag_capacity
+
+	self.aimBlendSpeed = 10.0
+	self:client_initAimVals()
 
 	mgp_toolAnimator_initialize(self, "tommy_gun")
 end
@@ -168,13 +177,12 @@ function TommyGun.loadAnimations( self )
 	self.sprintCooldownTimer = 0.0
 	self.sprintCooldown = 0.3
 
-	self.aimBlendSpeed = 10.0
 	self.blendTime = 0.2
 
 	self.jointWeight = 0.0
 	self.spineWeight = 0.0
-	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
-	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+
+	self:client_initAimVals()
 end
 
 local actual_reload_anims =
@@ -182,6 +190,23 @@ local actual_reload_anims =
 	["reload"] = true,
 	["reload_empty"] = true
 }
+
+function TommyGun:client_updateAimWeights(dt)
+	-- Camera update
+	local bobbing = 1
+	if self.aiming then
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
+		bobbing = 0.12
+	else
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
+		bobbing = 1
+	end
+
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+end
 
 function TommyGun.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
@@ -221,6 +246,10 @@ function TommyGun.client_onUpdate( self, dt )
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
+	TSU_OnUpdate(self)
+
+	self:client_updateAimWeights(dt)
+
 	if not self.equipped then
 		if self.wantEquipped then
 			self.wantEquipped = false
@@ -228,33 +257,6 @@ function TommyGun.client_onUpdate( self, dt )
 		end
 		return
 	end
-
-	local effectPos, rot
-
-	if self.tool:isLocal() then
-
-		local zOffset = 0.6
-		if self.tool:isCrouching() then
-			zOffset = 0.29
-		end
-
-		local dir = sm.localPlayer.getDirection()
-		local firePos = self.tool:getFpBonePos( "pejnt_barrel" )
-
-		if not self.aiming then
-			effectPos = firePos + dir * 0.2
-		else
-			effectPos = firePos + dir * 0.45
-		end
-
-		rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
-	end
-	local pos = self.tool:getTpBonePos( "pejnt_barrel" )
-	local dir = self.tool:getTpBoneDir( "pejnt_barrel" )
-
-	effectPos = pos + dir * 0.2
-
-	rot = sm.vec3.getRotation( sm.vec3.new( 0, 0, 1 ), dir )
 
 	-- Timers
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
@@ -392,25 +394,13 @@ function TommyGun.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_spine2", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.10 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_spine3", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), ( 0.45 + crouchSpineWeight ) * finalJointWeight )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
-
-
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function TommyGun.client_onEquip( self, animate )
+function TommyGun:client_onEquip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
@@ -446,22 +436,35 @@ function TommyGun.client_onEquip( self, animate )
 	end
 end
 
-function TommyGun.client_onUnequip( self, animate )
+function TommyGun:client_onUnequip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 	mgp_toolAnimator_reset(self)
-	
-	if sm.exists( self.tool ) then
+
+	local s_tool = self.tool
+	if sm.exists(s_tool) then
 		if animate then
-			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
+			sm.audio.play( "PotatoRifle - Unequip", s_tool:getPosition() )
 		end
-		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
-			self.tool:setMovementSlowDown( false )
-			self.tool:setBlockSprint( false )
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
+
+		if is_custom then
+			s_tool:setTpRenderables({})
+		else
+			setTpAnimation( self.tpAnimations, "putdown" )
+		end
+
+		if s_tool:isLocal() then
+			s_tool:setMovementSlowDown(false)
+			s_tool:setBlockSprint(false)
+			s_tool:setCrossHairAlpha(1.0)
+			s_tool:setInteractionTextSuppressed(false)
+			s_tool:setDispersionFraction(0.0)
+
 			if self.fpAnimations.currentAnimation ~= "unequip" then
 				swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
 			end
@@ -596,12 +599,17 @@ function TommyGun.calculateFpMuzzlePos( self )
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function TommyGun.cl_onPrimaryUse( self, is_shooting )
-	if not is_shooting then return end
-
+function TommyGun:cl_onPrimaryUse(is_shooting)
+	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
-	if self.tool:getOwner().character == nil then
+	local v_toolOwner = self.tool:getOwner()
+	if not (v_toolOwner and sm.exists(v_toolOwner)) then
+		return
+	end
+
+	local v_ownerChar = v_toolOwner.character
+	if not (v_ownerChar and sm.exists(v_ownerChar)) then
 		return
 	end
 
@@ -649,10 +657,7 @@ function TommyGun.cl_onPrimaryUse( self, is_shooting )
 
 			dir = sm.noise.gunSpread( dir, spreadDeg )
 
-			local owner = self.tool:getOwner()
-			if owner then
-				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, owner, fakePosition, fakePositionSelf )
-			end
+			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
 			-- Timers
 			self.fireCooldownTimer = fireMode.fireCooldown
@@ -726,15 +731,17 @@ function TommyGun:cl_initReloadAnim(anim_name)
 end
 
 function TommyGun:client_onReload()
-	local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
-	if not is_mag_full then
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			local cur_anim_name = "reload"
-			if self.ammo_in_mag == 0 then
-				cur_anim_name = "reload_empty"
-			end 
+	if self.equipped then
+		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		if not is_mag_full then
+			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+				local cur_anim_name = "reload"
+				if self.ammo_in_mag == 0 then
+					cur_anim_name = "reload_empty"
+				end
 
-			self:cl_initReloadAnim(cur_anim_name)
+				self:cl_initReloadAnim(cur_anim_name)
+			end
 		end
 	end
 
@@ -757,7 +764,7 @@ function TommyGun:cl_startCheckMagAnim()
 end
 
 function TommyGun:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("TommyGun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
@@ -776,6 +783,8 @@ end
 
 local _intstate = sm.tool.interactState
 function TommyGun.cl_onSecondaryUse( self, state )
+	if not self.equipped then return end
+
 	local is_reloading = self:client_isGunReloading()
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
