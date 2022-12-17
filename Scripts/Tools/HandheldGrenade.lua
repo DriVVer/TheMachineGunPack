@@ -702,12 +702,12 @@ HandheldGrenade.mgp_tool_config =
 	{
 		timer = 4,
 		expl_lvl = 6,
-		expl_rad = 1,
+		expl_rad = 3,
 		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
-			min_count = 10, max_count = 25,
+			min_count = 30, max_count = 50,
 			min_speed = 60, max_speed = 200,
-			min_damage = 20, max_damage = 50,
+			min_damage = 30, max_damage = 60,
 			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 		}
 	}

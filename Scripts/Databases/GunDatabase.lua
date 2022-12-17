@@ -414,30 +414,20 @@ local _Database = {
 		}
 	},
 	["bdd9e357-35f7-4140-8b19-477abef20e0f"] = { --Browning .50 HMG
-		server = {
-			cannon = {
-				spread = 0.5,
-				fire_force = {
-					min = 600.0,
-					max = 600.0
-				},
-				recoil = sm.vec3.new(0, 0, -100),
-				reload_time = 4,
-				auto_reload = true,
+	server = {
+		cannon = {
+			spread = 0.5,
+			fire_force = {
+				min = 600.0,
+				max = 600.0
 			},
-			projectile = {
-				effect = "ShapeRenderable",
-				explosionEffect = "Boom12",
-				effectOffset = sm.vec3.new(0, 0, 1.9),
-				lifetime = 20.0,
-				gravity = 10.0,
-				friction = 0.001,
-				explosionLevel = 1,
-				explosionRadius = 0.3,
-				explosionImpulseStrength = 4,
-				explosionImpulseRadius = 2
-			}
-		},
+			recoil = sm.vec3.new(0, 0, -100),
+			reload_time = 4,
+			auto_reload = true,
+			projectile_offset = sm.vec3.new(0, 0, 1.0),
+			projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
+		}
+	},
 		client = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
@@ -451,7 +441,7 @@ local _Database = {
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.11, -0.8),
+								offset = sm.vec3.new(0.0, -0.14, -0.8),
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
 								velocity = 3,
@@ -474,18 +464,8 @@ local _Database = {
 				recoil = sm.vec3.new(0, 0, -100),
 				reload_time = 4,
 				auto_reload = true,
-			},
-			projectile = {
-				effect = "ShapeRenderable",
-				explosionEffect = "Boom12",
-				effectOffset = sm.vec3.new(0, 0, 1.9),
-				lifetime = 20.0,
-				gravity = 10.0,
-				friction = 0.001,
-				explosionLevel = 1,
-				explosionRadius = 0.3,
-				explosionImpulseStrength = 4,
-				explosionImpulseRadius = 2
+				projectile_offset = sm.vec3.new(0, 0, 0.5),
+				projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
 			}
 		},
 		client = {
@@ -499,7 +479,7 @@ local _Database = {
 							{type = mgp_shape_anim_enum.particle, particles = {"shoot"}},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.12, -1.15),
+								offset = sm.vec3.new(0.0, -0.14, -1.15),
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
 								velocity = 2,
@@ -522,19 +502,8 @@ local _Database = {
 				recoil = sm.vec3.new(0, 0, -100),
 				reload_time = 4,
 				auto_reload = true,
-				projectile_offset = sm.vec3.new(0, 0, 1.9),
-			},
-			projectile = {
-				effect = "ShapeRenderable",
-				explosionEffect = "Boom12",
-				effectOffset = sm.vec3.new(0, 0, 1.9),
-				lifetime = 20.0,
-				gravity = 10.0,
-				friction = 0.003,
-				explosionLevel = 1,
-				explosionRadius = 0.3,
-				explosionImpulseStrength = 4,
-				explosionImpulseRadius = 2
+				projectile_offset = sm.vec3.new(0, 0, 0.8),
+				projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
 			}
 		},
 		client = {
@@ -550,7 +519,7 @@ local _Database = {
 							{type = mgp_shape_anim_enum.pose_animation, pose = 0, start_value = 1.0, end_value = 0.0, time = 0.1},
 							{
 								type = mgp_shape_anim_enum.shape_debris,
-								offset = sm.vec3.new(0.0, -0.12, -0.8),
+								offset = sm.vec3.new(0.0, -0.14, -0.8),
 								dir = sm.vec3.new(0, -1, 0),
 								spread = 50,
 								velocity = 2,
@@ -563,31 +532,20 @@ local _Database = {
 		}
 	},
 	["05f70a50-3bb4-4a00-b7fb-f1c931d585ca"] = { --12mm DSzK Machine Gun
-		server = {
-			cannon = {
-				spread = 0.5,
-				fire_force = {
-					min = 600.0,
-					max = 600.0
-				},
-				recoil = sm.vec3.new(0, 0, -100),
-				reload_time = 4,
-				auto_reload = true,
-				projectile_offset = sm.vec3.new(0, 0, 0.7),
+	server = {
+		cannon = {
+			spread = 0.5,
+			fire_force = {
+				min = 600.0,
+				max = 600.0
 			},
-			projectile = {
-				effect = "ShapeRenderable",
-				explosionEffect = "Boom12",
-				effectOffset = sm.vec3.new(0, 0, 0.73),
-				lifetime = 20.0,
-				gravity = 10.0,
-				friction = 0.003,
-				explosionLevel = 1,
-				explosionRadius = 0.3,
-				explosionImpulseStrength = 2,
-				explosionImpulseRadius = 3
-			}
-		},
+			recoil = sm.vec3.new(0, 0, -100),
+			reload_time = 4,
+			auto_reload = true,
+			projectile_offset = sm.vec3.new(0, 0, 0.7),
+			projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
+		}
+	},
 		client = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.69), bone_name = nil}

@@ -57,7 +57,7 @@
 			"radius": 0.25,
 			"friction": 0.5,
 			"spin": 7.0,
-			"mesh": "$GAME_DATA/Projectiles/Renderables/potato.rend",
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet_yel.rend",
 			"effect": "ShrapnelProjectile - Hit",
 			"audiomass": 250.0,
 			"effectmaterial": "",
@@ -153,8 +153,33 @@
 			"enableImpactEffect": true
 		},
 		{
-			"uuid": "36b158ad-212b-4c81-8666-0c29f751c21a",
+			"uuid": "2d17fddd-851a-46ee-8017-22255f58d74f",
 			"name": "mgp_12mm",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet_yel.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"attachedEffect": "",
+			"enableGravity": true,
+			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 1 },
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 0.9 },
+					{ "qualityLevel": 3, "chance": 0.5 },
+					{ "qualityLevel": 4, "chance": 0.05 },
+					{ "qualityLevel": 5, "chance": 0.0 }
+				]
+			},
+			"enableImpactEffect": true
+		},
+		{
+			"uuid": "36b158ad-212b-4c81-8666-0c29f751c21a",
+			"name": "mgp_20mm",
 			"mass": 3.0,
 			"radius": 0.25,
 			"friction": 0.2,

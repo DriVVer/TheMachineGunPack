@@ -27,7 +27,7 @@
                     {"x": 0, "y": 0, "z": -2}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -289,7 +289,7 @@
                     {"x": 0, "y": 0, "z": -5}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -326,7 +326,7 @@
                     {"x": 0, "y": 0, "z": -3}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -360,7 +360,7 @@
                     {"x": 0, "y": 0, "z": -1}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -394,7 +394,7 @@
                     {"x": 0, "y": 0, "z": -3}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
@@ -428,7 +428,7 @@
                     {"x": 0, "y": 0, "z": -3}
                 ]
             },
-            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
+            "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "VGun"},
             "density": 1000,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
