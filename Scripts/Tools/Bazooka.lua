@@ -26,21 +26,20 @@ Bazooka = class()
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend"
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Barrel.rend"
 }
 
 local renderablesTp =
 {
 	"$CONTENT_DATA/Tools/Renderables/DB/char_male_tp_DB.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/DB/char_male_fp_DB.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )

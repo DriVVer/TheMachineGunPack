@@ -46,6 +46,17 @@
 			}
 		},
 		{
+			"name": "Bazooka",
+			"uuid": "872b6328-37d4-4922-847d-0aef8803ac94",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Bazooka.lua",
+				"class": "Bazooka",
+				"data": {}
+			}
+		},
+		{
 			"name": "DoubleBarrel",
 			"uuid": "b0c08b35-4b40-40fe-b933-ca123f99eef8",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
