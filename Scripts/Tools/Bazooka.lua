@@ -32,13 +32,13 @@ local renderables =
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_male_tp_DB.rend",
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_male_tp.rend",
 	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_male_fp_DB.rend",
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_male_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
@@ -51,7 +51,7 @@ function Bazooka.client_onCreate( self )
 	self.ammo_in_mag = self.mag_capacity
 
 	BazookaProjectile_clientInitialize()
-	mgp_toolAnimator_initialize(self, "DB")
+	mgp_toolAnimator_initialize(self, "Bazooka")
 end
 
 function Bazooka.client_onDestroy(self)
@@ -118,7 +118,7 @@ function Bazooka.loadAnimations( self )
 				equip = { "DB_pickup", { nextAnimation = "idle" } },
 				unequip = { "DB_putdown" },
 
-				idle = { "DB_idle_1", { nextAnimation = "idle" } },
+				idle = { "Bazooka_idle", { nextAnimation = "idle" } },
 				inspect = { "DB_idle_2", { nextAnimation = "idle" } },
 
 				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },

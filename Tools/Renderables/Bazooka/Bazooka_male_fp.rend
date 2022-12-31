@@ -5,9 +5,9 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "DB_idle_1", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_idle.dae" },
+				{ "name": "Bazooka_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_idle.dae" },
 				{ "name": "DB_idle_2", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_idle_relax.dae" },
-				{ "name": "DB_shoot_1", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_shoot_1.dae" },
+				{ "name": "DB_shoot_1", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_idle.dae" },
 				{ "name": "DB_shoot_2", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_shoot_2.dae" },
 
 				{ "name": "DB_reload_0", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_2.dae" },
