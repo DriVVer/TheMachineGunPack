@@ -772,7 +772,7 @@ local mgp_tool_database =
 		},
 		renderables = {
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Base.rend", enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/BazookaB_Anim.rend" , enabled_by_default = true }
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Barrel.rend" , enabled_by_default = true }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_aim_shoot_reset_table,
@@ -817,8 +817,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 1.0 } },
-						tp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 1.0 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					},
 					{
@@ -827,8 +827,8 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload_Anim", start_val = 2.66, end_val = 3.66 } },
-						tp_anim = { { name = "DB_Reload_Anim", start_val = 2.66, end_val = 3.66 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 2.66, end_val = 3.66 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 2.66, end_val = 3.66 } },
 						time = 1.0
 					}
 				},
@@ -836,8 +836,8 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 0.6 } },
-						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 0.6 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 0.6 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 0.6 } },
 						time = 0.7
 					},
 					{
@@ -846,8 +846,8 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 2.66, end_val = 3.66 } },
-						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 2.66, end_val = 3.66 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 2.66, end_val = 3.66 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 2.66, end_val = 3.66 } },
 						time = 1.0
 					}
 				},
@@ -887,16 +887,16 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 3.66 } },
-						tp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 3.66 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 3.66 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 3.66 } },
 						time = 3.66
 					}
 				},
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 3.66 } },
-						tp_anim = { { name = "DB_Ammo_Reload1_Anim", start_val = 0.0, end_val = 0.0 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 3.66 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 0.0 } },
 						time = 3.66
 					},
 				},
@@ -962,16 +962,16 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Reload_Anim", start_val = 0.0, end_val = 5.5 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 5.5 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 5.5 } },
 						time = 5.5
 					}
 				},
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_Ammo_Reload2_Anim", start_val = 0.0, end_val = 0.0 } },
+						fp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 5.5 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 0.0, end_val = 0.0 } },
 						time = 5.5
 					}
 				},
