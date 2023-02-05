@@ -1,5 +1,6 @@
 {
 	"shapeSetList" : [
+		"$CONTENT_DATA/Objects/Database/ShapeSets/ammo.json",
 		"$CONTENT_DATA/Objects/Database/ShapeSets/parts.json",
 		"$CONTENT_DATA/Objects/Database/ShapeSets/parts exp.json",
 		"$CONTENT_DATA/Objects/Database/ShapeSets/empty_shells.json",

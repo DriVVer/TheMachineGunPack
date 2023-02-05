@@ -1,0 +1,23 @@
+[
+	{
+		//this is the uuid of your part
+		"itemId": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", //shotgun ammo
+		"quantity": 1,
+		"craftTime": 10,
+		"ingredientList": [
+			//this is where you define ingredients for your crafting recipe
+			{
+				"quantity": 5,
+				"itemId": "628b2d61-5ceb-43e9-8334-a4135566df7a" //plastic
+			},
+			{
+				"quantity": 2,
+				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+            {
+				"quantity": 10,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	}
+]

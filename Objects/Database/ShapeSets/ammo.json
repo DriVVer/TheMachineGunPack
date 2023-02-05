@@ -1,0 +1,100 @@
+{
+	"partList": [
+		{
+			"uuid": "9f9fda0d-9e65-4ffe-907c-5150218a03e1",
+			"name": "gun_powder",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_gun_powder.rend",
+			"color": "f71905",
+			"box": {
+				"x": 2,
+				"y": 2,
+				"z": 2
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 100
+		},
+		{
+			"uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13",
+			"name": "obj_pistol_ammo",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_pistol_ammo.rend",
+			"color": "bd2709",
+			"box": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 100
+		},
+		{
+			"uuid": "3f4644d5-47cb-477d-b22d-901ab2ed2e0f",
+			"name": "obj_rifle_ammo",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_rifle_ammo.rend",
+			"color": "2c6311",
+			"box": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 100
+		},
+		{
+			"uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2",
+			"name": "obj_shotgun_ammo",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_shotgun_ammo.rend",
+			"color": "e6d693",
+			"box": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 100
+		}
+	]
+}

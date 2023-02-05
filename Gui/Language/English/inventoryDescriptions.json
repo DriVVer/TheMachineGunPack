@@ -1,11 +1,23 @@
 {
 	
+	"af84d5d9-00b1-4bab-9c5a-102c11e14a13": {
+		"title": "Pistol Ammo",
+		"description": "Used for: \n-Thompson SMG\n-Revolver"
+	},
+	"3f4644d5-47cb-477d-b22d-901ab2ed2e0f": {
+		"title": "Rifle Ammo",
+		"description": "Used for: \n-Mosin-Nagant"
+	},
+	"a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2": {
+		"title": "Shotgun Ammo",
+		"description": "Used for: \n-Double Barrel Shotgun"
+	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
-		"title": "Magnum .44 Revolver",
+		"title": "Revolver",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
