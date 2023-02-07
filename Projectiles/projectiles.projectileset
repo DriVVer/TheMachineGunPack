@@ -38,7 +38,32 @@
 			"effectmaterial": "Potato",
 			"attachedEffect": "",
 			"enableGravity": true,
-			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 1 },
+			"ammo": { "uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", "cost": 1 },
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 1.0 },
+					{ "qualityLevel": 3, "chance": 0.8 },
+					{ "qualityLevel": 4, "chance": 0.6 },
+					{ "qualityLevel": 5, "chance": 0.2 }
+				]
+			},
+			"enableImpactEffect": true
+		},
+		{
+			"uuid": "033cea84-d6ad-4eb9-82dd-f576b60c1e70",
+			"name": "mgp_Sniper",
+			"mass": 2.0,
+			"radius": 0.1,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet1.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"attachedEffect": "",
+			"enableGravity": true,
+			"ammo": { "uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", "cost": 1 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0 },
@@ -89,7 +114,7 @@
 			"attachedEffect": "",
 			"enableGravity": true,
 			"amount": 8,
-			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 2 },
+			"ammo": { "uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2", "cost": 2 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
@@ -114,7 +139,7 @@
 			"attachedEffect": "",
 			"enableGravity": true,
 			"amount": 16,
-			"ammo": { "uuid": "bfcfac34-db0f-42d6-bd0c-74a7a5c95e82", "cost": 2 },
+			"ammo": { "uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2", "cost": 2 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },

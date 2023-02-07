@@ -747,7 +747,7 @@ local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
 	return direction
 end
 
-local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
+local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
 function Mosin.cl_onPrimaryUse(self, state)
 	if state ~= sm.tool.interactState.start then return end
 	if self:client_isGunReloading(reload_anims2) or not self.equipped then return end

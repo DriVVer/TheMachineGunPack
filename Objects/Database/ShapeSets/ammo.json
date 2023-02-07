@@ -22,7 +22,7 @@
 			},
 			"flammable": true,
 			"consumable": true,
-			"stackSize": 100
+			"stackSize": 200
 		},
 		{
 			"uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13",
@@ -46,7 +46,31 @@
 			},
 			"flammable": true,
 			"consumable": true,
-			"stackSize": 100
+			"stackSize": 120
+		},
+		{
+			"uuid": "295481d0-910a-48d4-a04a-e1bf1290e510",
+			"name": "obj_sniper_ammo",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_sniper_ammo.rend",
+			"color": "bd2709",
+			"box": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 25
 		},
 		{
 			"uuid": "3f4644d5-47cb-477d-b22d-901ab2ed2e0f",
@@ -70,7 +94,7 @@
 			},
 			"flammable": true,
 			"consumable": true,
-			"stackSize": 100
+			"stackSize": 80
 		},
 		{
 			"uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2",
@@ -94,7 +118,7 @@
 			},
 			"flammable": true,
 			"consumable": true,
-			"stackSize": 100
+			"stackSize": 40
 		}
 	]
 }

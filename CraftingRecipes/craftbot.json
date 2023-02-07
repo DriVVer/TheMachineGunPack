@@ -1,21 +1,109 @@
 [
+	// scrap metal 	1f7ac0bb-ad45-4246-9817-59bdf7f7ab39
+	//lvl 1 		8aedf6c2-94e1-4506-89d4-a0227c552f1e
+// lvl 2 			1016cafc-9f6b-40c9-8713-9019d399783f
+// lvl 3 			c0dfdea5-a39d-433a-b94a-299345a5df46
+
 	{
 		//this is the uuid of your part
-		"itemId": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", //shotgun ammo
-		"quantity": 1,
-		"craftTime": 10,
+		"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1", //gun powder
+		"quantity": 20,
+		"craftTime": 30,
 		"ingredientList": [
 			//this is where you define ingredients for your crafting recipe
 			{
-				"quantity": 5,
-				"itemId": "628b2d61-5ceb-43e9-8334-a4135566df7a" //plastic
+				"quantity": 10,
+				"itemId": "f74c2891-79a9-45e0-982e-4896651c2e25" // chem
+			},
+			{
+				"quantity": 30,
+				"itemId": "c56700d9-bbe5-4b17-95ed-cef05bd8be1b" // sand
 			},
 			{
 				"quantity": 2,
+				"itemId": "267e0c93-62e3-45ad-9470-a14035cb9ca4" // ember
+			},
+            {
+				"quantity": 20,
+				"itemId": "1f7ac0bb-ad45-4246-9817-59bdf7f7ab39" // scrap
+			}
+		]
+	},
+	{
+		"itemId": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2", //shotgun ammo
+		"quantity": 10,
+		"craftTime": 30,
+		"ingredientList": [
+			{
+				"quantity": 20,
+				"itemId": "f0cba95b-2dc4-4492-8fd9-36546a4cb5aa" //cardboard
+			},
+			{
+				"quantity": 30,
+				"itemId": "1f7ac0bb-ad45-4246-9817-59bdf7f7ab39" //scrap
+			},
+            {
+				"quantity": 15,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	},
+	{
+
+		"itemId": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", //pistol ammo
+		"quantity": 20,
+		"craftTime": 30,
+		"ingredientList": [
+			{
+				"quantity": 25,
 				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+			{
+				"quantity": 10,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
 			},
             {
 				"quantity": 10,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	},
+	{
+
+		"itemId": "3f4644d5-47cb-477d-b22d-901ab2ed2e0f", //rifle ammo
+		"quantity": 20,
+		"craftTime": 30,
+		"ingredientList": [		
+			{
+				"quantity": 50,
+				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+			{
+				"quantity": 20,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 15,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	},
+	{
+
+		"itemId": "295481d0-910a-48d4-a04a-e1bf1290e510", //sniper ammo
+		"quantity": 20,
+		"craftTime": 60,
+		"ingredientList": [		
+			{
+				"quantity": 75,
+				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+			{
+				"quantity": 25,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 25,
 				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
 			}
 		]
