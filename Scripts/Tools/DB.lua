@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 18
+local Damage = 16
 
 ---@class DoubleBarrel : ToolClass
 ---@field fpAnimations table
@@ -145,7 +145,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 200.0,
+		fireVelocity = 100.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -160,7 +160,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 500.0,
+		fireVelocity = 100.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
