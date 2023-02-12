@@ -23,6 +23,7 @@ local Damage = 45
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 Magnum44 = class()
+Magnum44.mag_capacity = 6
 
 local renderables =
 {
@@ -51,9 +52,36 @@ function Magnum44:client_initAimVals()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
+function Magnum44:server_onCreate()
+	self.sv_ammo_counter = 0
+
+	local v_saved_ammo = self.storage:load()
+	if v_saved_ammo ~= nil then
+		self.sv_ammo_counter = v_saved_ammo
+	else
+		if not sm.game.getEnableAmmoConsumption() then
+			self.sv_ammo_counter = self.mag_capacity
+		end
+
+		self:server_updateAmmoCounter()
+	end
+
+	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+end
+
+function Magnum44:server_updateAmmoCounter(data, caller)
+	if data ~= nil or caller ~= nil then return end
+
+	self.storage:save(self.sv_ammo_counter)
+	print("save ammo", self.sv_ammo_counter, self.tool)
+end
+
+function Magnum44:client_receiveAmmo(ammo_count)
+	self.ammo_in_mag = ammo_count
+end
+
 function Magnum44:client_onCreate()
-	self.mag_capacity = 6
-	self.ammo_in_mag = self.mag_capacity
+	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 8.0
 	self:client_initAimVals()
@@ -227,6 +255,43 @@ function Magnum44:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
+local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+function Magnum44:server_onFixedUpdate(dt)
+	local fp_anim = self.fpAnimations
+	if fp_anim == nil then
+		return
+	end
+
+	local cur_anim_cache = fp_anim.currentAnimation
+	local anim_data = fp_anim.animations[cur_anim_cache]
+	local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+	if anim_data and is_reload_anim then
+		local time_predict = anim_data.time + anim_data.playRate * dt
+		local info_duration = anim_data.info.duration
+
+		if time_predict >= info_duration then
+			local v_owner = self.tool:getOwner()
+			if v_owner == nil then return end
+
+			local v_inventory = v_owner:getInventory()
+			if v_inventory == nil then return end
+
+			local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+			if v_available_ammo == 0 then return end
+
+			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
+			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+			sm.container.beginTransaction()
+			sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
+			sm.container.endTransaction()
+
+			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+			self:server_updateAmmoCounter()
+		end
+	end
+end
+
 function Magnum44:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
@@ -263,7 +328,7 @@ function Magnum44:client_onUpdate(dt)
 				local info_duration = anim_data.info.duration
 
 				if time_predict >= info_duration then
-					self.ammo_in_mag = self.mag_capacity
+					self.ammo_in_mag = self.cl_should_spend
 				end
 			end
 
@@ -532,6 +597,11 @@ end
 
 function Magnum44.sv_n_onShoot( self, dir )
 	self.network:sendToClients( "cl_n_onShoot", dir )
+
+	if dir ~= nil and self.sv_ammo_counter > 0 then
+		self.sv_ammo_counter = self.sv_ammo_counter - 1
+		self:server_updateAmmoCounter()
+	end
 end
 
 function Magnum44.cl_n_onShoot( self, dir )
@@ -672,7 +742,6 @@ function Magnum44.cl_onPrimaryUse(self, state)
 	if self.fireCooldownTimer <= 0.0 then
 		if self.cl_hammer_cocked then
 			if self.ammo_in_mag > 0 then
-			--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 				self.ammo_in_mag = self.ammo_in_mag - 1
 				local firstPerson = self.tool:isInFirstPersonView()
 
@@ -713,7 +782,6 @@ function Magnum44.cl_onPrimaryUse(self, state)
 				local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 				dir = sm.noise.gunSpread( dir, spreadDeg )
-
 				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
 				-- Timers
@@ -793,6 +861,19 @@ function Magnum44:client_isGunReloading()
 end
 
 function Magnum44:cl_initReloadAnim(anim_id)
+	if sm.game.getEnableAmmoConsumption() then
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
+		if v_available_ammo == 0 then
+			sm.gui.displayAlertText("No Ammo", 3)
+			return true
+		end
+
+		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
+		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+		self.cl_should_spend = self.ammo_in_mag + v_spend_count
+	end
+
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
 	setFpAnimation(self.fpAnimations, (anim_id == 0) and "reload_empty" or "reload", 0.0)

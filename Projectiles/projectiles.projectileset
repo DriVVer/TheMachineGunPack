@@ -38,7 +38,6 @@
 			"effectmaterial": "Potato",
 			"attachedEffect": "",
 			"enableGravity": true,
-			"ammo": { "uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", "cost": 1 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0 },
@@ -63,7 +62,6 @@
 			"effectmaterial": "Potato",
 			"attachedEffect": "",
 			"enableGravity": true,
-			"ammo": { "uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", "cost": 1 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0 },
