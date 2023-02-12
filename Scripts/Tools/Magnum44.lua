@@ -872,6 +872,8 @@ function Magnum44:cl_initReloadAnim(anim_id)
 		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
 		self.cl_should_spend = self.ammo_in_mag + v_spend_count
+	else
+		self.cl_should_spend = self.mag_capacity
 	end
 
 	local anim_name = ammo_count_to_anim_name[anim_id]
