@@ -19,6 +19,14 @@
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
 					]
+				},
+				{
+					"material": "DifAsg",
+					"textureList": [
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_nor.tga"
+					]
 				}
 			]
 		}
