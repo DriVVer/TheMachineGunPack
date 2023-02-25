@@ -414,6 +414,8 @@ function Eoka:client_onEquip(animate, is_custom)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
+	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
