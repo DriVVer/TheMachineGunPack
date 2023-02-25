@@ -32,13 +32,13 @@ local renderablesTp =
 {
 	--"$CONTENT_DATA/Tools/Renderables/Revolver/char_male_tp_Magnum44.rend",
 	"$CONTENT_DATA/Tools/Renderables/Eoka/char_male_tp_Eoka.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_fp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/Eoka/char_male_fp_Eoka.rend",
-	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_fp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )

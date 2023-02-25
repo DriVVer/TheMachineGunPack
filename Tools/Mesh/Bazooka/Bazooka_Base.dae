@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-02-18T09:56:53Z</created><keywords></keywords><modified>2023-02-18T09:56:53Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-02-25T20:03:43Z</created><keywords></keywords><modified>2023-02-25T20:03:43Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_images>
     <image id="base_color_texture-image" name="base_color_texture"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\TommyGunDif.png</init_from></image>
   </library_images>
@@ -17029,26 +17029,20 @@
         <bind_shape_matrix>1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 </bind_shape_matrix>
         <source id="CylinderController-Joints">
-          <Name_array id="CylinderController-Joints-array" count="7">
- jnt_bazooka pejnt_barrel jnt_barrel Barrel AP_Rocket HE_Rocket Lever</Name_array>
+          <Name_array id="CylinderController-Joints-array" count="1">
+ jnt_bazooka</Name_array>
           <technique_common>
-            <accessor source="#CylinderController-Joints-array" count="7">
+            <accessor source="#CylinderController-Joints-array" count="1">
               <param type="name"/>
             </accessor>
           </technique_common>
         </source>
         <source id="CylinderController-Matrices">
-          <float_array id="CylinderController-Matrices-array" count="112">
+          <float_array id="CylinderController-Matrices-array" count="16">
 
-1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000002 0.000000 0.000001 0.000000 0.000000 1.000000 -0.200000 -0.000002 -1.000000 0.000000 0.500000 0.000000 0.000000 0.000000 1.000000
-1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 -0.300000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 -0.900000 -0.000000 -1.000000 -0.000000 0.500000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 1.000000 1.500000 -0.000000 -1.000000 -0.000000 0.500000 0.000000 0.000000 0.000000 1.000000
-1.000000 -0.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 1.500000 -0.000000 -1.000000 -0.000000 0.500000 0.000000 0.000000 0.000000 1.000000
-0.999996 -0.000000 0.002936 -0.209732 -0.000000 1.000000 0.000000 -0.342417 -0.002936 -0.000000 0.999996 -0.440062 0.000000 0.000000 0.000000 1.000000</float_array>
+1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
           <technique_common>
-            <accessor source="#CylinderController-Matrices-array" count="7" stride="16">
+            <accessor source="#CylinderController-Matrices-array" count="1" stride="16">
               <param type="float4x4"/>
             </accessor>
           </technique_common>
@@ -17228,104 +17222,24 @@
           </technique>
         </extra>
       </node>
-     
+      
         <node name="jnt_bazooka" id="jnt_bazooka" sid="jnt_bazooka" type="JOINT">
-          <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+          <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
             <technique profile="FCOLLADA">
               <visibility>1.000000</visibility>
             </technique>
           </extra>
-          <node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT">
-            <matrix sid="matrix">1.000000 0.000000 -0.000002 0.000000 -0.000002 0.000000 -1.000000 0.500000 0.000000 1.000000 0.000000 0.200000 0.000000 0.000000 0.000000 1.000000</matrix>
+          <node name="jnt_bazooka_end" id="jnt_bazooka_end" sid="jnt_bazooka_end" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.300000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
                 <visibility>1.000000</visibility>
               </technique>
             </extra>
-            <node name="pejnt_barrel_end" id="pejnt_barrel_end" sid="pejnt_barrel_end" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.600000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-            </node>
-          </node>
-          <node name="jnt_barrel" id="jnt_barrel" sid="jnt_barrel" type="JOINT">
-            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.300000 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="Barrel" id="Barrel" sid="Barrel" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.200000 -0.000000 1.000000 -0.000000 0.900000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="Barrel_end" id="Barrel_end" sid="Barrel_end" type="JOINT">
-                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.700000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-              </node>
-            </node>
-            <node name="AP_Rocket" id="AP_Rocket" sid="AP_Rocket" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.200000 -0.000000 1.000000 -0.000000 -1.500000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="AP_Rocket_end" id="AP_Rocket_end" sid="AP_Rocket_end" type="JOINT">
-                <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.700000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-              </node>
-            </node>
-            <node name="HE_Rocket" id="HE_Rocket" sid="HE_Rocket" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.200000 -0.000000 1.000000 -0.000000 -1.500000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="HE_Rocket_end" id="HE_Rocket_end" sid="HE_Rocket_end" type="JOINT">
-                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.500000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-              </node>
-            </node>
-            <node name="Lever" id="Lever" sid="Lever" type="JOINT">
-              <matrix sid="matrix">0.999996 -0.000000 -0.002936 0.208439 -0.000000 1.000000 -0.000000 0.042417 0.002936 0.000000 0.999996 0.440676 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="Lever_end" id="Lever_end" sid="Lever_end" type="JOINT">
-                <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 0.000000 0.413098 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-              </node>
-            </node>
           </node>
         </node>
-      
+     
       <extra>
         <technique profile="MAX3D">
           <frame_rate>30.000000</frame_rate>
