@@ -123,7 +123,6 @@ local mgp_tool_database =
 		}
 	},
 
-
 	HandheldGrenadeBase =
 	{
 		required_effects = {
@@ -480,6 +479,7 @@ local mgp_tool_database =
 			}
 		}
 	},
+
 	DB =
 	{
 		required_effects = {
@@ -1035,6 +1035,44 @@ local mgp_tool_database =
 		}
 	},
 
+	Eoka =
+	{
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+		},
+		on_unequip_action = {
+			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Eoka/Eoka_Model.rend", enabled_by_default = true }
+		},
+		animation_reset = {
+			cock_the_hammer = mgp_aim_shoot_reset_table,
+			cock_the_hammer_aim = mgp_shoot_reset_table,
+			no_ammo = mgp_aim_shoot_reset_table,
+			no_ammo_aim = mgp_shoot_reset_table,
+			shoot = mgp_aim_shoot_reset_table,
+			shoot_aim = mgp_shoot_reset_table
+		},
+		animation = {
+
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					}
+				}
+			},
+		}
+	},
 
 	Mosin =
 	{

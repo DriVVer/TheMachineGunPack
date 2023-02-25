@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"name": "Eoka",
+			"uuid": "5a1ca305-513f-42db-ae71-52bd0a9247fc",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Eoka/Eoka_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Eoka.lua",
+				"class": "Eoka",
+				"data": {}
+			}
+		},
+		{
 			"name": "Mosin",
 			"uuid": "c0cb7836-075a-478a-af3d-0b7360721527",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Preview.rend",
