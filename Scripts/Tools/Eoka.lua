@@ -69,7 +69,7 @@ function Eoka.loadAnimations( self )
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
-			
+
 			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "TommyGun_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
@@ -215,7 +215,45 @@ function Eoka:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
+function Eoka:server_onFixedUpdate(dt)
+	if self.sv_gun_timer then
+		self.sv_gun_timer = self.sv_gun_timer - dt
+
+		if self.sv_gun_timer <= 0.0 then
+			self.sv_gun_timer = nil
+
+			local v_tool_owner = self.tool:getOwner()
+			if not (v_tool_owner and sm.exists(v_tool_owner)) then
+				return
+			end
+
+			local v_pl_hotbar = v_tool_owner:getHotbar()
+			if not (v_pl_hotbar and sm.exists(v_pl_hotbar)) then
+				return
+			end
+
+			local v_eoka_uuid = "5a1ca305-513f-42db-ae71-52bd0a9247fc"
+			for i = 1, v_pl_hotbar:getSize() do
+				local v_cur_item = v_pl_hotbar:getItem(i)
+				if tostring(v_cur_item.uuid) == v_eoka_uuid then
+					if v_cur_item.instance == self.tool.id then
+						sm.container.beginTransaction()
+						sm.container.spendFromSlot(v_pl_hotbar, i, v_cur_item.uuid, 1, true)
+						sm.container.endTransaction()
+
+						break
+					end
+				end
+			end
+		end
+	end
+end
+
 function Eoka:client_onUpdate(dt)
+	if not sm.exists(self.tool) then
+		return
+	end
+
 	if self.aim_timer then
 		self.aim_timer = self.aim_timer - dt
 		if self.aim_timer <= 0.0 then
@@ -469,41 +507,40 @@ function Eoka:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Eoka.sv_n_onAim( self, aiming )
+function Eoka:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Eoka.cl_n_onAim( self, aiming )
+function Eoka:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onAim( aiming )
+		self:onAim(aiming)
 	end
 end
 
-function Eoka.onAim( self, aiming )
+function Eoka:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Eoka.sv_n_onShoot( self, dir )
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function Eoka:sv_n_onShoot(gun_slot)
+	self.network:sendToClients("cl_n_onShoot")
+	self.sv_gun_timer = 1.0
 end
 
-function Eoka.cl_n_onShoot( self, dir )
+function Eoka:cl_n_onShoot()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot( dir )
+		self:onShoot()
 	end
 end
 
-function Eoka.onShoot( self, dir )
+function Eoka:onShoot()
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	if dir ~= nil then
-		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-	end
+	setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
 end
 
 ---@return Vec3
@@ -597,26 +634,11 @@ function Eoka.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
----@param player Player
-function Eoka:sv_destroyWeapon(v_slot, player)
-	local v_inventory = nil
-	if sm.game.getLimitedInventory() then
-		v_inventory = player:getInventory()
-	else
-		v_inventory = player:getHotbar()
-	end
-
-	local v_cur_item = v_inventory:getItem(v_slot)
-	if tostring(v_cur_item.uuid) == "5a1ca305-513f-42db-ae71-52bd0a9247fc" then
-		sm.container.beginTransaction()
-		sm.container.spendFromSlot(v_inventory, v_slot, v_cur_item.uuid, 1, true)
-		sm.container.endTransaction()
-	end
-end
-
 local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
 function Eoka.cl_onPrimaryUse(self, state)
 	if state ~= sm.tool.interactState.start or not self.equipped then return end
+
+	if self.gun_used then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not (v_toolOwner and sm.exists(v_toolOwner)) then
@@ -627,6 +649,8 @@ function Eoka.cl_onPrimaryUse(self, state)
 	if not (v_ownerChar and sm.exists(v_ownerChar)) then
 		return
 	end
+
+	self.gun_used = true
 
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -674,8 +698,8 @@ function Eoka.cl_onPrimaryUse(self, state)
 	self.sprintCooldownTimer = self.sprintCooldown
 
 	-- Send TP shoot over network and dircly to self
-	self:onShoot(1)
-	self.network:sendToServer("sv_n_onShoot", 1)
+	self:onShoot()
+	self.network:sendToServer("sv_n_onShoot")
 
 	-- Play FP shoot animation
 	setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
@@ -686,16 +710,6 @@ local reload_anims =
 	["reload"]       = true,
 	["reload_empty"] = true,
 	["ammo_check"]   = true
-}
-
-local ammo_count_to_anim_name =
-{
-	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4",
-	[5] = "reload5"
 }
 
 function Eoka:sv_n_onReload(anim_id)
