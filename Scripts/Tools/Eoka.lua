@@ -233,7 +233,7 @@ function Eoka:server_onFixedUpdate(dt)
 			end
 
 			local v_eoka_uuid = "5a1ca305-513f-42db-ae71-52bd0a9247fc"
-			for i = 1, v_pl_hotbar:getSize() do
+			for i = 0, v_pl_hotbar:getSize() - 1 do
 				local v_cur_item = v_pl_hotbar:getItem(i)
 				if tostring(v_cur_item.uuid) == v_eoka_uuid then
 					if v_cur_item.instance == self.tool.id then
