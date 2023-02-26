@@ -897,12 +897,12 @@ end
 
 function Mosin:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if self.cl_hammer_cocked then
-			sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
-			return true
-		end
-
 		if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			if self.cl_hammer_cocked then
+				sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
+				return true
+			end
+
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
