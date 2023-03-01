@@ -30,7 +30,6 @@ local renderables =
 
 local renderablesTp =
 {
-	--"$CONTENT_DATA/Tools/Renderables/Revolver/char_male_tp_Magnum44.rend",
 	"$CONTENT_DATA/Tools/Renderables/Eoka/char_male_tp_Eoka.rend",
 	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
