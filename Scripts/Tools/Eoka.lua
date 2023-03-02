@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolSwimUtil.lua")
 
-local Damage = 45
+local Damage = 9
 
 ---@class Eoka : ToolClass
 ---@field fpAnimations table
@@ -136,7 +136,7 @@ function Eoka.loadAnimations( self )
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
 		spreadMaxAngle = 15,
-		fireVelocity = 300.0,
+		fireVelocity = 60.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -525,7 +525,7 @@ end
 
 function Eoka:sv_n_onShoot(gun_slot)
 	self.network:sendToClients("cl_n_onShoot")
-	self.sv_gun_timer = 1.0
+	self.sv_gun_timer = 2.5
 end
 
 function Eoka:cl_n_onShoot()
@@ -633,7 +633,7 @@ function Eoka.calculateFpMuzzlePos( self )
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-local mgp_projectile_potato = sm.uuid.new("bef985da-1271-489f-9c5a-99c08642f982")
+local mgp_projectile_potato = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
 function Eoka.cl_onPrimaryUse(self, state)
 	if state ~= sm.tool.interactState.start or not self.equipped then return end
 

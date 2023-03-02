@@ -1,7 +1,7 @@
 {
    "lodList" : [
       {
-         "mesh" : "$CONTENT_DATA/Tools/Mesh/Eoka/Eoka.fbx",
+         "mesh" : "$CONTENT_DATA/Tools/Mesh/Eoka/Eoka_preview.fbx",
          "subMeshList" : [
             {
 					"material": "DifAsg",
