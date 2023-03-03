@@ -23,6 +23,7 @@ local Damage = 16
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 DB = class()
+DB.mag_capacity = 2
 
 local renderables =
 {
@@ -52,9 +53,38 @@ function DB:client_initAimVals()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
+function DB:server_onCreate()
+	self.sv_ammo_counter = 0
+
+	local v_saved_ammo = self.storage:load()
+	if v_saved_ammo ~= nil then
+		self.sv_ammo_counter = v_saved_ammo
+	else
+		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
+			self.sv_ammo_counter = self.mag_capacity
+		end
+
+		self:server_updateAmmoCounter()
+	end
+
+	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+end
+
+function DB:server_updateAmmoCounter(data, caller)
+	if data ~= nil or caller ~= nil then return end
+
+	self.storage:save(self.sv_ammo_counter)
+end
+
+function DB:client_receiveAmmo(ammo_count)
+	self.ammo_in_mag = ammo_count
+	self.waiting_for_ammo = nil
+end
+
 function DB:client_onCreate()
-	self.mag_capacity = 2
 	self.ammo_in_mag = self.mag_capacity
+
+	self.waiting_for_ammo = true
 
 	self.aimBlendSpeed = 3.0
 	self:client_initAimVals()
@@ -191,6 +221,47 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
+local mgp_shotgun_ammo = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2")
+function DB:server_onFixedUpdate(dt)
+	local fp_anim = self.fpAnimations
+	if fp_anim == nil then
+		return
+	end
+
+	local cur_anim_cache = fp_anim.currentAnimation
+	local anim_data = fp_anim.animations[cur_anim_cache]
+	local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+	if anim_data and is_reload_anim then
+		local time_predict = anim_data.time + anim_data.playRate * dt
+		local info_duration = anim_data.info.duration
+
+		if time_predict >= info_duration then
+			local v_owner = self.tool:getOwner()
+			if v_owner == nil then return end
+
+			local v_inventory = v_owner:getInventory()
+			if v_inventory == nil then return end
+
+			local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_shotgun_ammo)
+			if v_available_ammo == 0 then return end
+
+			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
+			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+			print(v_spend_count, self.sv_ammo_counter, v_spend_count)
+
+			sm.container.beginTransaction()
+			sm.container.spend(v_inventory, mgp_shotgun_ammo, v_spend_count)
+			sm.container.endTransaction()
+
+			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+			self:server_updateAmmoCounter()
+
+			self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
+		end
+	end
+end
+
 function DB:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
@@ -227,7 +298,7 @@ function DB:client_onUpdate(dt)
 				local info_duration = anim_data.info.duration
 
 				if time_predict >= info_duration then
-					self.ammo_in_mag = self.mag_capacity
+					self.ammo_in_mag = self.cl_should_spend
 				end
 			end
 
@@ -417,6 +488,7 @@ function DB:client_onUnequip(animate, is_custom)
 		return
 	end
 
+	self.waiting_for_ammo = nil
 	self.wantEquipped = false
 	self.equipped = false
 	mgp_toolAnimator_reset(self)
@@ -449,6 +521,15 @@ end
 
 function DB:sv_n_onShoot(doubleShot)
 	self.network:sendToClients("cl_n_onShoot", doubleShot)
+
+	if self.sv_ammo_counter > 0 then
+		local v_to_spend = doubleShot and 2 or 1
+
+		if self.sv_ammo_counter >= v_to_spend then
+			self.sv_ammo_counter = self.sv_ammo_counter - v_to_spend
+			self:server_updateAmmoCounter()
+		end
+	end
 end
 
 function DB:cl_n_onShoot(doubleShot)
@@ -463,7 +544,6 @@ function DB:onShoot(doubleShot)
 
 	if self.tool:isCrouching() then
 		setTpAnimation(self.tpAnimations, "crouch_shoot", 1.0)
-		print("crouch shoot")
 	else
 		setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 	end
@@ -493,7 +573,6 @@ function DB:cl_onPrimaryUse(is_double_shot)
 		local ammo_to_consume = ammo_count + 1
 
 		if self.ammo_in_mag > ammo_count then
-		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 			self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
 
 			local dir = sm.camera.getDirection()
@@ -558,6 +637,10 @@ function DB:cl_startReloadAnim(anim_name)
 end
 
 function DB:client_isGunReloading()
+	if self.waiting_for_ammo then
+		return true
+	end
+
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
 		return (reload_anims[fp_anims.currentAnimation] == true)
@@ -567,6 +650,23 @@ function DB:client_isGunReloading()
 end
 
 function DB:cl_initReloadAnim(anim_id)
+	if sm.game.getEnableAmmoConsumption() then
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_shotgun_ammo)
+		if v_available_ammo == 0 then
+			sm.gui.displayAlertText("No Ammo", 3)
+			return true
+		end
+
+		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
+		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+		self.cl_should_spend = self.ammo_in_mag + v_spend_count
+	else
+		self.cl_should_spend = self.mag_capacity
+	end
+
+	self.waiting_for_ammo = true
+
 	local anim_name = ammo_count_to_anim_name[anim_id]
 
 	setFpAnimation(self.fpAnimations, anim_name, 0.0)

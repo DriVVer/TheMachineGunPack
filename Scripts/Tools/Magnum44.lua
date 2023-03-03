@@ -73,7 +73,6 @@ function Magnum44:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
-	print("save ammo", self.sv_ammo_counter, self.tool)
 end
 
 function Magnum44:client_receiveAmmo(ammo_count)
@@ -551,6 +550,7 @@ function Magnum44:client_onUnequip(animate, is_custom)
 		return
 	end
 
+	self.waiting_for_ammo = nil
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
