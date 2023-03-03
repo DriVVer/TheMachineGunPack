@@ -439,6 +439,10 @@ function Eoka:client_onEquip(animate, is_custom)
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
 	end
 
+	if self.gun_used then
+		return
+	end
+
 	self.wantEquipped = true
 	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
