@@ -412,8 +412,6 @@ function Magnum44:client_onUpdate(dt)
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
 	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
 
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
-
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
 	up = clamp( angle, 0.0, 1.0 )
@@ -875,13 +873,6 @@ function Magnum44:cl_initReloadAnim(anim_id)
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
-
-		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
-		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
-
-		self.cl_should_spend = self.ammo_in_mag + v_spend_count
-	else
-		self.cl_should_spend = self.mag_capacity
 	end
 
 	self.waiting_for_ammo = true
@@ -892,7 +883,7 @@ function Magnum44:cl_initReloadAnim(anim_id)
 	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_id)
+	self.network:sendToServer("sv_n_onReload", anim_name)
 end
 
 function Magnum44:client_onReload()
