@@ -1533,7 +1533,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBombSensor.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBombSensor.lua", "classname": "ExplosiveBombSensor"},
 			"qualityLevel": 20,
 			"color": "3c5200",
 			"hull": {
@@ -1568,7 +1568,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
 			"qualityLevel": 20,
 			"color": "556b2f",
 			"hull": {
@@ -1602,7 +1602,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
 			"qualityLevel": 20,
 			"color": "556b2f",
 			"hull": {
@@ -1636,7 +1636,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
 			"qualityLevel": 20,
 			"color": "556b2f",
 			"hull": {
@@ -1740,7 +1740,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
 			"qualityLevel": 20,
 			"color": "556b2f",
 			"box": {"x": 1, "y": 1, "z": 1},
@@ -1794,7 +1794,7 @@
 					}
 				]
 			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "Explosive"},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
 			"qualityLevel": 20,
 			"color": "54616a",
 			"box": {"x": 1, "y": 1, "z": 1},

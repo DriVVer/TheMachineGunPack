@@ -1,17 +1,30 @@
 -- Explosive.lua --
 
 ---@class ExplosiveBombSensor : ShapeClass
-Explosive = class()
-Explosive.poseWeightCount = 1
+---@field range integer
+---@field counting boolean
+---@field fireDelay integer
+---@field destructionLevel integer
+---@field destructionRadius integer
+---@field impulseRadius integer
+---@field impulseMagnitude integer
+---@field explosionEffectName string
+---@field alive boolean
+---@field client_counting boolean
+---@field fuseDelay integer
+---@field activateEffect Effect
+---@field singleHitEffect Effect
+ExplosiveBombSensor = class()
+ExplosiveBombSensor.poseWeightCount = 1
 
-Explosive.maxChildCount = -1 -- ************** test on connection activation
-Explosive.maxParentCount = 1
-Explosive.connectionInput = sm.interactable.connectionType.logic + 2048
-Explosive.connectionOutput = 2048
-Explosive.colorNormal = sm.color.new( 0xcb0a00ff )
-Explosive.colorHighlight = sm.color.new( 0xee0a00ff ) -- ************** test on connection activation
+ExplosiveBombSensor.maxChildCount = -1 -- ************** test on connection activation
+ExplosiveBombSensor.maxParentCount = 1
+ExplosiveBombSensor.connectionInput = sm.interactable.connectionType.logic + 2048
+ExplosiveBombSensor.connectionOutput = 2048
+ExplosiveBombSensor.colorNormal = sm.color.new( 0xcb0a00ff )
+ExplosiveBombSensor.colorHighlight = sm.color.new( 0xee0a00ff ) -- ************** test on connection activation
 
-Explosive.BombData = {
+ExplosiveBombSensor.BombData = {
     ["b660f72a-7640-4446-b8bb-2df3cad61bbb"] = { --Bomb Sensor
         destructionLevel = 5,
         destructionRadius = 5.0,
@@ -28,17 +41,17 @@ Explosive.BombData = {
 --[[ Server ]]
 
 -- (Event) Called upon creation on server
-function Explosive.server_onCreate( self )
+function ExplosiveBombSensor.server_onCreate( self )
 	self:server_init()
 end
 
 -- (Event) Called when script is refreshed (in [-dev])
-function Explosive.server_onRefresh( self )
+function ExplosiveBombSensor.server_onRefresh( self )
 	self:server_init()
 end
 
 -- Initialize explosive
-function Explosive.server_init( self )
+function ExplosiveBombSensor.server_init( self )
 	self.alive = true
 	self.counting = false
 	self.activated = false
@@ -57,7 +70,7 @@ function Explosive.server_init( self )
 end
 
 -- (Event) Called upon game tick. (40 times a second)
-function Explosive.server_onFixedUpdate( self, timeStep )
+function ExplosiveBombSensor.server_onFixedUpdate( self, timeStep )
 	if self.interactable then
 		local parent = self.interactable:getSingleParent() -- ************** test on connection activation
 		if ((parent and parent:isActive())) then
@@ -110,7 +123,7 @@ function Explosive.server_onFixedUpdate( self, timeStep )
 end
 
 -- Attempt to create an explosion
-function Explosive.server_tryExplode( self )
+function ExplosiveBombSensor.server_tryExplode( self )
 	if self.alive then
 		self.alive = false
 		self.counting = false
@@ -123,7 +136,7 @@ function Explosive.server_tryExplode( self )
 end
 
 -- (Event) Called upon getting hit by a sledgehammer.
-function Explosive.server_onSledgehammer( self, hitPos, player )
+function ExplosiveBombSensor.server_onSledgehammer( self, hitPos, player )
 	if self.alive then
 		if self.counting then
 			self.fireDelayProgress = self.fireDelayProgress + self.fireDelay * 0.5
@@ -136,7 +149,7 @@ function Explosive.server_onSledgehammer( self, hitPos, player )
 end
 
 -- (Event) Called upon collision with an explosion nearby
-function Explosive.server_onExplosion( self, center, destructionLevel )
+function ExplosiveBombSensor.server_onExplosion( self, center, destructionLevel )
 	-- Explode within a few ticks
 	if self.alive then
 		self.fireDelay = 1
@@ -145,7 +158,7 @@ function Explosive.server_onExplosion( self, center, destructionLevel )
 end
 
 -- (Event) Called upon collision with another object
-function Explosive.server_onCollision( self, other, collisionPosition, selfPointVelocity, otherPointVelocity, collisionNormal )
+function ExplosiveBombSensor.server_onCollision( self, other, collisionPosition, selfPointVelocity, otherPointVelocity, collisionNormal )
 	local collisionDirection = (selfPointVelocity - otherPointVelocity):normalize()
 	local diffVelocity = (selfPointVelocity - otherPointVelocity):length()
 	local selfPointVelocityLength = selfPointVelocity:length()
@@ -174,7 +187,7 @@ function Explosive.server_onCollision( self, other, collisionPosition, selfPoint
 end
 
 -- Start countdown and update clients
-function Explosive.server_startCountdown( self )
+function ExplosiveBombSensor.server_startCountdown( self )
 	self.counting = true
 	self.network:sendToClients( "client_startCountdown" )
 end
@@ -183,7 +196,7 @@ end
 --[[ Client ]]
 
 -- (Event) Called upon creation on client
-function Explosive.client_onCreate( self )
+function ExplosiveBombSensor.client_onCreate( self )
 	self.client_counting = false
 	self.client_fuseDelayProgress = 0
 	self.client_fireDelayProgress = 0
@@ -197,7 +210,7 @@ function Explosive.client_onCreate( self )
 end
 
 -- (Event) Called upon every frame. (Same as fps)
-function Explosive.client_onUpdate( self, dt )
+function ExplosiveBombSensor.client_onUpdate( self, dt )
 	if self.client_counting then
 		if self.interactable then
 			self.interactable:setPoseWeight( 0,(self.client_fuseDelayProgress*1.5) +self.client_poseScale )
@@ -217,7 +230,7 @@ function Explosive.client_onUpdate( self, dt )
 end
 
 -- Called from server upon getting triggered by a hit
-function Explosive.client_hitActivation( self, hitPos )
+function ExplosiveBombSensor.client_hitActivation( self, hitPos )
 	local localPos = self.shape:transformPoint( hitPos )
 
 	local smokeDirection = ( hitPos - self.shape.worldPosition ):normalize()
@@ -230,7 +243,7 @@ function Explosive.client_hitActivation( self, hitPos )
 end
 
 -- Called from server upon countdown start
-function Explosive.client_startCountdown( self )
+function ExplosiveBombSensor.client_startCountdown( self )
 	self.client_counting = true
 	if self.activateEffect then
 		self.activateEffect:start()
