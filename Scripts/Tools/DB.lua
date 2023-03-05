@@ -21,7 +21,6 @@ local Damage = 16
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field aim_timer integer
 DB = class()
 DB.mag_capacity = 2
 
@@ -276,13 +275,6 @@ function DB:client_onUpdate(dt)
 		end
 	end
 
-	if self.aim_timer then
-		self.aim_timer = self.aim_timer - dt
-		if self.aim_timer <= 0.0 then
-			self.aim_timer = nil
-		end
-	end
-
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
@@ -456,7 +448,6 @@ function DB:client_onEquip(animate, is_custom)
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
-	self.aim_timer = 1.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}

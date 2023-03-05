@@ -21,7 +21,6 @@ local Damage = 25
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field aim_timer integer
 Bazooka = class()
 
 local renderables =
@@ -170,7 +169,7 @@ function Bazooka.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 1.2
+	self.fireCooldownTimer = 3.5
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
@@ -218,13 +217,6 @@ end
 
 function Bazooka.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
-
-	if self.aim_timer then
-		self.aim_timer = self.aim_timer - dt
-		if self.aim_timer <= 0.0 then
-			self.aim_timer = nil
-		end
-	end
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
@@ -398,7 +390,6 @@ function Bazooka:client_onEquip(animate)
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
-	self.aim_timer = 10.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
@@ -476,7 +467,7 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 or not self.aim_timer then
+	if self.fireCooldownTimer <= 0.0 then
 		if self.tool:isSprinting() then
 			return
 		end
