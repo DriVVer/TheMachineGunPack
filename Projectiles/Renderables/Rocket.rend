@@ -6,8 +6,8 @@
             {
                "material" : "DifAsg",
                "textureList" : [
-                  "$CONTENT_DATA/Projectiles/Textures/bullet_dif.png",
-                  "$CONTENT_DATA/Projectiles/Textures/bullet_asg.png"
+                 "$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+		 "$CONTENT_DATA/Tools/Textures/TommyGunAsg.png"
                ]
             }
          ]

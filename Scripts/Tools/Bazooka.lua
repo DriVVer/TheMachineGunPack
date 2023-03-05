@@ -47,7 +47,7 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 function Bazooka.client_onCreate( self )
-	self.mag_capacity = 2
+	self.mag_capacity = 10
 	self.ammo_in_mag = self.mag_capacity
 
 	BazookaProjectile_clientInitialize()
@@ -79,9 +79,7 @@ function Bazooka.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "DB_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "DB_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
+			reload = { "Bazooka_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -115,19 +113,15 @@ function Bazooka.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "DB_pickup", { nextAnimation = "idle" } },
-				unequip = { "DB_putdown" },
+				equip = { "Bazooka_pickup", { nextAnimation = "idle" } },
+				unequip = { "Bazooka_putdown" },
 
 				idle = { "Bazooka_idle", { nextAnimation = "idle" } },
-				inspect = { "DB_idle_2", { nextAnimation = "idle" } },
+				inspect = { "Bazooka_inspect", { nextAnimation = "idle" } },
 
-				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
-				shoot_2 = { "DB_shoot_2", { nextAnimation = "idle" } },
+				shoot = { "Bazooka_shoot", { nextAnimation = "idle" } },
 
-				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
-
-				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "Bazooka_reload", { nextAnimation = "idle", duration = 1.0 } },
 
 				--[[
 				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
@@ -139,9 +133,9 @@ function Bazooka.loadAnimations( self )
 				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
 				]]
 
-				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "DB_sprint_idle", { looping = true } },
+				sprintInto = { "Bazooka_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Bazooka_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Bazooka_sprint_idle", { looping = true } },
 			}
 		)
 	end
@@ -306,7 +300,7 @@ function Bazooka.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -391,15 +385,20 @@ function Bazooka.client_onUpdate( self, dt )
 end
 
 function Bazooka:client_onEquip(animate)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
+		mgp_toolAnimator_setAnimation(self, "on_equip")
 	end
 
 	self.wantEquipped = true
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
-	self.aim_timer = 1.0
+	self.aim_timer = 10.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
@@ -477,7 +476,7 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 then
+	if self.fireCooldownTimer <= 0.0 or not self.aim_timer then
 		if self.tool:isSprinting() then
 			return
 		end

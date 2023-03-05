@@ -4,7 +4,7 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Bazooka/Bazooka_Barrel.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "BZ_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Bazooka/Bazooka_Idle.dae" }
+				{ "name": "BZ_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Bazooka/Bazooka_Anim.dae" }
 			],
 			"subMeshList": [
 				{
