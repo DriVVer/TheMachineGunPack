@@ -673,7 +673,7 @@ function Magnum44:calculateTpMuzzlePos()
 	local pitchFraction = pitch / ( math.pi * 0.5 )
 	if crouching then
 		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
+		fakeOffset = fakeOffset + up * 0.1 --[[@as Vec3]]
 		fakeOffset = fakeOffset - right * 0.05
 
 		if pitchFraction > 0.0 then
@@ -701,10 +701,10 @@ function Magnum44:calculateFpMuzzlePos()
 
 	if self.aiming then
 		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
+		muzzlePos45 = muzzlePos45 + dir * 0.5 --[[@as Vec3]]
 
 		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
+		muzzlePos90 = muzzlePos90 - dir * 0.6 --[[@as Vec3]]
 	else
 		muzzlePos45 = muzzlePos45 - up * 0.15
 		muzzlePos45 = muzzlePos45 + right * 0.2
@@ -960,7 +960,7 @@ function Magnum44:cl_onSecondaryUse(state)
 	end
 end
 
-function Magnum44.client_onEquippedUpdate(self, primaryState, secondaryState)
+function Magnum44:client_onEquippedUpdate(primaryState, secondaryState)
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState

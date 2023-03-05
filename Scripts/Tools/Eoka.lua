@@ -17,7 +17,7 @@ local Damage = 9
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
----@field aim_timer integer
+---@field gun_used boolean|nil
 Eoka = class()
 Eoka.mag_capacity = 6
 
@@ -52,11 +52,11 @@ function Eoka:client_onCreate()
 	self:client_initAimVals()
 end
 
-function Eoka.client_onRefresh( self )
+function Eoka:client_onRefresh()
 	self:loadAnimations()
 end
 
-function Eoka.loadAnimations( self )
+function Eoka:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -189,13 +189,6 @@ end
 function Eoka:client_onUpdate(dt)
 	if not sm.exists(self.tool) then
 		return
-	end
-
-	if self.aim_timer then
-		self.aim_timer = self.aim_timer - dt
-		if self.aim_timer <= 0.0 then
-			self.aim_timer = nil
-		end
 	end
 
 	if self.cl_remove_timer then
@@ -371,7 +364,6 @@ function Eoka:client_onEquip(animate, is_custom)
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
-	self.aim_timer = 1.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
@@ -451,7 +443,7 @@ function Eoka:onShoot()
 end
 
 ---@return Vec3
-function Eoka.calculateFirePosition( self )
+function Eoka:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -476,7 +468,7 @@ function Eoka.calculateFirePosition( self )
 	return GetOwnerPosition(self.tool) + fireOffset
 end
 
-function Eoka.calculateTpMuzzlePos( self )
+function Eoka:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -494,7 +486,7 @@ function Eoka.calculateTpMuzzlePos( self )
 	local pitchFraction = pitch / ( math.pi * 0.5 )
 	if crouching then
 		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
+		fakeOffset = fakeOffset + up * 0.1 --[[@as Vec3]]
 		fakeOffset = fakeOffset - right * 0.05
 
 		if pitchFraction > 0.0 then
@@ -510,7 +502,7 @@ function Eoka.calculateTpMuzzlePos( self )
 	return fakePosition
 end
 
-function Eoka.calculateFpMuzzlePos( self )
+function Eoka:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -532,7 +524,7 @@ function Eoka.calculateFpMuzzlePos( self )
 end
 
 local mgp_projectile_potato = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
-function Eoka.cl_onPrimaryUse(self, state)
+function Eoka:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start or not self.equipped then return end
 
 	if self.gun_used then return end
@@ -599,39 +591,9 @@ function Eoka.cl_onPrimaryUse(self, state)
 	setFpAnimation( self.fpAnimations, "shoot", 0.0 )
 end
 
-local reload_anims =
-{
-	["reload"]       = true,
-	["reload_empty"] = true,
-	["ammo_check"]   = true
-}
-
-function Eoka:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
-end
-
-function Eoka:cl_n_onReload(anim_id)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(anim_id)
-	end
-end
-
-function Eoka:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, "reload", 1.0)
-end
-
-function Eoka:client_isGunReloading()
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
 function Eoka:client_onReload() return true end
 
-function Eoka.client_onEquippedUpdate(self, primaryState, secondaryState)
+function Eoka:client_onEquippedUpdate(primaryState, secondaryState)
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState

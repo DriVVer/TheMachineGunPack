@@ -1,5 +1,6 @@
 -- Explosive.lua --
 
+---@class ExplosiveBomb : ShapeClass
 Explosive = class()
 Explosive.poseWeightCount = 1
 

@@ -380,8 +380,6 @@ function TommyGun.client_onUpdate( self, dt )
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
 	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
 
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
-
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
 	up = clamp( angle, 0.0, 1.0 )
@@ -542,24 +540,24 @@ function TommyGun:client_onUnequip(animate, is_custom)
 	end
 end
 
-function TommyGun.sv_n_onAim( self, aiming )
+function TommyGun:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function TommyGun.cl_n_onAim( self, aiming )
+function TommyGun:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onAim( aiming )
+		self:onAim(aiming)
 	end
 end
 
-function TommyGun.onAim( self, aiming )
+function TommyGun:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function TommyGun.sv_n_onShoot( self, dir )
+function TommyGun:sv_n_onShoot(dir)
 	self.network:sendToClients( "cl_n_onShoot", dir )
 
 	if dir ~= nil and self.sv_ammo_counter > 0 then
@@ -568,13 +566,13 @@ function TommyGun.sv_n_onShoot( self, dir )
 	end
 end
 
-function TommyGun.cl_n_onShoot( self, dir )
+function TommyGun:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot( dir )
+		self:onShoot(dir)
 	end
 end
 
-function TommyGun.onShoot( self, dir )
+function TommyGun:onShoot(dir)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -583,7 +581,7 @@ function TommyGun.onShoot( self, dir )
 	mgp_toolAnimator_setAnimation(self, "shoot")
 end
 
-function TommyGun.calculateFirePosition( self )
+function TommyGun:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -610,7 +608,7 @@ function TommyGun.calculateFirePosition( self )
 	return firePosition
 end
 
-function TommyGun.calculateTpMuzzlePos( self )
+function TommyGun:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -628,7 +626,7 @@ function TommyGun.calculateTpMuzzlePos( self )
 	local pitchFraction = pitch / ( math.pi * 0.5 )
 	if crouching then
 		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1
+		fakeOffset = fakeOffset + up * 0.1 --[[@as Vec3]]
 		fakeOffset = fakeOffset - right * 0.05
 
 		if pitchFraction > 0.0 then
@@ -644,7 +642,7 @@ function TommyGun.calculateTpMuzzlePos( self )
 	return fakePosition
 end
 
-function TommyGun.calculateFpMuzzlePos( self )
+function TommyGun:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -656,10 +654,10 @@ function TommyGun.calculateFpMuzzlePos( self )
 
 	if self.aiming then
 		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
+		muzzlePos45 = muzzlePos45 + dir * 0.5 --[[@as Vec3]]
 
 		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
+		muzzlePos90 = muzzlePos90 - dir * 0.6 --[[@as Vec3]]
 	else
 		muzzlePos45 = muzzlePos45 - up * 0.15
 		muzzlePos45 = muzzlePos45 + right * 0.2
