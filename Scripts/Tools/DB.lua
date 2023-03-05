@@ -65,8 +65,10 @@ function DB:server_onCreate()
 
 		self:server_updateAmmoCounter()
 	end
+end
 
-	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+function DB:server_requestAmmo(data, caller)
+	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
 function DB:server_updateAmmoCounter(data, caller)
@@ -90,6 +92,8 @@ function DB:client_onCreate()
 	self:client_initAimVals()
 
 	mgp_toolAnimator_initialize(self, "DB")
+
+	self.network:sendToServer("server_requestAmmo")
 end
 
 function DB.client_onDestroy(self)

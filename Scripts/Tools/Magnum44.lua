@@ -65,8 +65,10 @@ function Magnum44:server_onCreate()
 
 		self:server_updateAmmoCounter()
 	end
+end
 
-	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+function Magnum44:server_requestAmmo(data, caller)
+	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
 function Magnum44:server_updateAmmoCounter(data, caller)
@@ -91,6 +93,8 @@ function Magnum44:client_onCreate()
 	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "Magnum44")
+
+	self.network:sendToServer("server_requestAmmo")
 end
 
 function Magnum44.client_onDestroy(self)

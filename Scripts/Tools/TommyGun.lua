@@ -65,8 +65,10 @@ function TommyGun:server_onCreate()
 
 		self:server_updateAmmoCounter()
 	end
+end
 
-	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+function TommyGun:server_requestAmmo(data, caller)
+	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
 function TommyGun:server_updateAmmoCounter(data, caller)
@@ -90,6 +92,8 @@ function TommyGun:client_onCreate()
 	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "tommy_gun")
+
+	self.network:sendToServer("server_requestAmmo")
 end
 
 function TommyGun.client_onDestroy(self)
