@@ -59,7 +59,7 @@ function Magnum44:server_onCreate()
 	if v_saved_ammo ~= nil then
 		self.sv_ammo_counter = v_saved_ammo
 	else
-		if not sm.game.getEnableAmmoConsumption() then
+		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
 			self.sv_ammo_counter = self.mag_capacity
 		end
 
@@ -73,11 +73,11 @@ function Magnum44:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
-	print("save ammo", self.sv_ammo_counter, self.tool)
 end
 
 function Magnum44:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
+	self.waiting_for_ammo = nil
 end
 
 function Magnum44:client_onCreate()
@@ -87,6 +87,7 @@ function Magnum44:client_onCreate()
 	self:client_initAimVals()
 
 	self.cl_hammer_cocked = false
+	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "Magnum44")
 end
@@ -288,6 +289,8 @@ function Magnum44:server_onFixedUpdate(dt)
 
 			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
 			self:server_updateAmmoCounter()
+
+			self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 		end
 	end
 end
@@ -547,6 +550,7 @@ function Magnum44:client_onUnequip(animate, is_custom)
 		return
 	end
 
+	self.waiting_for_ammo = nil
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
@@ -852,6 +856,10 @@ function Magnum44:cl_startReloadAnim(anim_name)
 end
 
 function Magnum44:client_isGunReloading()
+	if self.waiting_for_ammo then
+		return true
+	end
+
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
 		return (reload_anims[fp_anims.currentAnimation] == true)
@@ -875,6 +883,8 @@ function Magnum44:cl_initReloadAnim(anim_id)
 	else
 		self.cl_should_spend = self.mag_capacity
 	end
+
+	self.waiting_for_ammo = true
 
 	local anim_name = ammo_count_to_anim_name[anim_id]
 

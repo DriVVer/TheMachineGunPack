@@ -12,13 +12,11 @@ local Damage = 9
 ---@field tpAnimations table
 ---@field aiming boolean
 ---@field mag_capacity integer
----@field aimFireMode table
 ---@field normalFireMode table
 ---@field movementDispersion integer
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
----@field fireCooldownTimer integer
 ---@field aim_timer integer
 Eoka = class()
 Eoka.mag_capacity = 6
@@ -63,8 +61,6 @@ function Eoka.loadAnimations( self )
 		self.tool,
 		{
 			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
-			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
-			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
@@ -113,15 +109,6 @@ function Eoka.loadAnimations( self )
 
 				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "Magnum_E_reload", { nextAnimation = "idle", duration = 1.0 } },
-				cock_hammer = { "Magnum_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "Magnum_aim_c_hammer", { nextAnimation = "aimIdle" } },
-
-				ammo_check = { "Magnum_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
-
-				aimInto = { "Magnum_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "Magnum_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Magnum_aim_idle", { looping = true } },
-				aimShoot = { "Magnum_aim_shoot", { nextAnimation = "aimIdle"} },
 
 				sprintInto = { "Eoka_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Eoka_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -145,28 +132,7 @@ function Eoka.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.aimFireMode = {
-		fireCooldown = 0.2,
-		spreadCooldown = 1.0,
-		spreadIncrement = 1.3,
-		spreadMinAngle = 0,
-		spreadMaxAngle = 5,
-		fireVelocity =  250.0,
-
-		minDispersionStanding = 0.01,
-		minDispersionCrouching = 0.01,
-
-		maxMovementDispersion = 0.4,
-		jumpDispersionMultiplier = 2
-	}
-
-	self.fireCooldownTimer = 1.2
-	self.spreadCooldownTimer = 0.0
-
 	self.movementDispersion = 0.0
-
-	self.sprintCooldownTimer = 0.0
-	self.sprintCooldown = 0.3
 
 	self.blendTime = 0.2
 
@@ -176,39 +142,11 @@ function Eoka.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-local actual_reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true
-}
-
-local aim_animation_list01 =
-{
-	["aimInto"]         = true,
-	["aimIdle"]         = true,
-	["aimShoot"]        = true,
-	["cock_hammer_aim"] = true
-}
-
-local aim_animation_list02 =
-{
-	["aimInto"]  = true,
-	["aimIdle"]  = true,
-	["aimShoot"] = true
-}
-
 function Eoka:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
+	local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+	self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
 
 	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
@@ -260,6 +198,15 @@ function Eoka:client_onUpdate(dt)
 		end
 	end
 
+	if self.cl_remove_timer then
+		self.cl_remove_timer = self.cl_remove_timer - dt
+
+		if self.cl_remove_timer <= 0.0 then
+			self.cl_remove_timer = nil
+			self.tool:setFpRenderables({})
+		end
+	end
+
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
@@ -270,13 +217,6 @@ function Eoka:client_onUpdate(dt)
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
-			end
-
-			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
@@ -294,14 +234,9 @@ function Eoka:client_onUpdate(dt)
 		return
 	end
 
-	-- Timers
-	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
-	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
-	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
-
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local fireMode = self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -320,26 +255,14 @@ function Eoka:client_onUpdate(dt)
 
 		self.movementDispersion = dispersion
 
-		self.spreadCooldownTimer = clamp( self.spreadCooldownTimer, 0.0, fireMode.spreadCooldown )
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+		self.tool:setDispersionFraction( clamp( self.movementDispersion, 0.0, 1.0 ) )
 
-		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
-
-		if self.aiming then
-			if self.tool:isInFirstPersonView() then
-				self.tool:setCrossHairAlpha( 0.0 )
-			else
-				self.tool:setCrossHairAlpha( 1.0 )
-			end
-			self.tool:setInteractionTextSuppressed( true )
-		else
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
-		end
+		self.tool:setCrossHairAlpha( 1.0 )
+		self.tool:setInteractionTextSuppressed( false )
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0)
+	self.tool:setBlockSprint(self.cl_remove_timer ~= nil)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -363,13 +286,13 @@ function Eoka:client_onUpdate(dt)
 
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
+					setTpAnimation( self.tpAnimations, "idle", 10.0 )
 				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
+					setTpAnimation( self.tpAnimations, "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
+					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -396,7 +319,7 @@ function Eoka:client_onUpdate(dt)
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -440,11 +363,11 @@ function Eoka:client_onEquip(animate, is_custom)
 	end
 
 	if self.gun_used then
+		self.tool:setTpRenderables({})
 		return
 	end
 
 	self.wantEquipped = true
-	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
@@ -459,7 +382,7 @@ function Eoka:client_onEquip(animate, is_custom)
 	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 
 	--Set the tp and fp renderables before actually loading animations
-	self.tool:setTpRenderables( currentRenderablesTp )
+	self.tool:setTpRenderables(currentRenderablesTp)
 	local is_tool_local = self.tool:isLocal()
 	if is_tool_local then
 		self.tool:setFpRenderables(currentRenderablesFp)
@@ -482,7 +405,6 @@ function Eoka:client_onUnequip(animate, is_custom)
 
 	self.wantEquipped = false
 	self.equipped = false
-	self.aiming = false
 
 	local s_tool = self.tool
 	if sm.exists(s_tool) then
@@ -510,26 +432,9 @@ function Eoka:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Eoka:sv_n_onAim(aiming)
-	self.network:sendToClients( "cl_n_onAim", aiming )
-end
-
-function Eoka:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onAim(aiming)
-	end
-end
-
-function Eoka:onAim(aiming)
-	self.aiming = aiming
-	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
-		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
-	end
-end
-
 function Eoka:sv_n_onShoot(gun_slot)
 	self.network:sendToClients("cl_n_onShoot")
-	self.sv_gun_timer = 2.5
+	self.sv_gun_timer = 3.0
 end
 
 function Eoka:cl_n_onShoot()
@@ -541,9 +446,8 @@ end
 function Eoka:onShoot()
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
-	self.tpAnimations.animations.aimShoot.time = 0
 
-	setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
+	setTpAnimation(self.tpAnimations, "shoot", 10.0)
 end
 
 ---@return Vec3
@@ -563,9 +467,7 @@ function Eoka.calculateFirePosition( self )
 	end
 
 	if firstPerson then
-		if not self.aiming then
-			fireOffset = fireOffset + right * 0.05
-		end
+		fireOffset = fireOffset + right * 0.05
 	else
 		fireOffset = fireOffset + right * 0.25
 		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
@@ -618,21 +520,13 @@ function Eoka.calculateFpMuzzlePos( self )
 	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
 	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
 
-	if self.aiming then
-		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5
+	muzzlePos45 = muzzlePos45 - up * 0.15
+	muzzlePos45 = muzzlePos45 + right * 0.2
+	muzzlePos45 = muzzlePos45 + dir * 1.25
 
-		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6
-	else
-		muzzlePos45 = muzzlePos45 - up * 0.15
-		muzzlePos45 = muzzlePos45 + right * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 1.25
-
-		muzzlePos90 = muzzlePos90 - up * 0.15
-		muzzlePos90 = muzzlePos90 + right * 0.2
-		muzzlePos90 = muzzlePos90 + dir * 0.25
-	end
+	muzzlePos90 = muzzlePos90 - up * 0.15
+	muzzlePos90 = muzzlePos90 + right * 0.2
+	muzzlePos90 = muzzlePos90 + dir * 0.25
 
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
@@ -685,27 +579,24 @@ function Eoka.cl_onPrimaryUse(self, state)
 	dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 	-- Spread
-	local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+	local fireMode = self.normalFireMode
 	local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
-	local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-	spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+	local spreadFactor = clamp( self.movementDispersion * recoilDispersion, 0.0, 1.0 )
 	local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 	dir = sm.noise.gunSpread( dir, spreadDeg )
 	sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
 	-- Timers
-	self.fireCooldownTimer = fireMode.fireCooldown
-	self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-	self.sprintCooldownTimer = self.sprintCooldown
+	self.cl_remove_timer = 2.5
 
 	-- Send TP shoot over network and dircly to self
 	self:onShoot()
 	self.network:sendToServer("sv_n_onShoot")
 
 	-- Play FP shoot animation
-	setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+	setFpAnimation( self.fpAnimations, "shoot", 0.0 )
 end
 
 local reload_anims =
@@ -740,30 +631,10 @@ end
 
 function Eoka:client_onReload() return true end
 
-local _intstate = sm.tool.interactState
-function Eoka:cl_onSecondaryUse(state)
-	if not self.equipped then return end
-
-	local new_state = (state == _intstate.start or state == _intstate.hold) and (self.aim_timer == nil)
-	if self.aiming ~= new_state then
-		self.aiming = new_state
-		self.tpAnimations.animations.idle.time = 0
-
-		self.tool:setMovementSlowDown(self.aiming)
-		self:onAim(self.aiming)
-		self.network:sendToServer("sv_n_onAim", self.aiming)
-	end
-end
-
 function Eoka.client_onEquippedUpdate(self, primaryState, secondaryState)
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState
-	end
-
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
 	end
 
 	return true, true

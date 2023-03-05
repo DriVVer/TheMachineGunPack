@@ -112,7 +112,6 @@
 			"attachedEffect": "",
 			"enableGravity": true,
 			"amount": 8,
-			"ammo": { "uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2", "cost": 2 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
@@ -137,7 +136,6 @@
 			"attachedEffect": "",
 			"enableGravity": true,
 			"amount": 16,
-			"ammo": { "uuid": "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2", "cost": 2 },
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
