@@ -41,9 +41,9 @@ local renderablesFp =
 	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
-sm.tool.preloadRenderables( renderables )
-sm.tool.preloadRenderables( renderablesTp )
-sm.tool.preloadRenderables( renderablesFp )
+--sm.tool.preloadRenderables( renderables )
+--sm.tool.preloadRenderables( renderablesTp )
+--sm.tool.preloadRenderables( renderablesFp )
 
 function Bazooka.client_onCreate( self )
 	self.mag_capacity = 10

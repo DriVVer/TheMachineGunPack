@@ -1,6 +1,9 @@
 ---@class TSUTool : ToolClass
 ---@field equipped boolean
 ---@field wantEquipped boolean
+TSUTool = {} --added to make the lua preprocessor finally shut up
+function TSUTool:client_onUnequip(self, data) end
+function TSUTool:client_onEquip(self, data) end
 
 ---@param self TSUTool|ToolClass
 function TSU_IsOwnerSwimming(self)

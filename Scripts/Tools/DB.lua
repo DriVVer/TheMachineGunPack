@@ -81,7 +81,7 @@ function DB:client_receiveAmmo(ammo_count)
 end
 
 function DB:client_onCreate()
-	self.ammo_in_mag = self.mag_capacity
+	self.ammo_in_mag = 0
 
 	self.waiting_for_ammo = true
 
@@ -246,8 +246,6 @@ function DB:server_onFixedUpdate(dt)
 
 			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
-
-			print(v_spend_count, self.sv_ammo_counter, v_spend_count)
 
 			sm.container.beginTransaction()
 			sm.container.spend(v_inventory, mgp_shotgun_ammo, v_spend_count)

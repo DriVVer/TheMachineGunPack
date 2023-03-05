@@ -22,6 +22,7 @@ local Damage = 24
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 TommyGun = class()
+TommyGun.mag_capacity = 30
 
 local renderables =
 {
@@ -51,12 +52,41 @@ function TommyGun:client_initAimVals()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
+function TommyGun:server_onCreate()
+	self.sv_ammo_counter = 0
+
+	local v_saved_ammo = self.storage:load()
+	if v_saved_ammo ~= nil then
+		self.sv_ammo_counter = v_saved_ammo
+	else
+		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
+			self.sv_ammo_counter = self.mag_capacity
+		end
+
+		self:server_updateAmmoCounter()
+	end
+
+	self.network:sendToClient(self.tool:getOwner(), "client_receiveAmmo", self.sv_ammo_counter)
+end
+
+function TommyGun:server_updateAmmoCounter(data, caller)
+	if data ~= nil or caller ~= nil then return end
+
+	self.storage:save(self.sv_ammo_counter)
+end
+
+function TommyGun:client_receiveAmmo(ammo_count)
+	self.ammo_in_mag = ammo_count
+	self.waiting_for_ammo = nil
+end
+
 function TommyGun:client_onCreate()
-	self.mag_capacity = 30
-	self.ammo_in_mag = self.mag_capacity
+	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
 	self:client_initAimVals()
+
+	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "tommy_gun")
 end
@@ -79,7 +109,7 @@ function TommyGun.loadAnimations( self )
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
-			
+
 			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "TommyGun_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
@@ -208,6 +238,45 @@ function TommyGun:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
+local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+function TommyGun:server_onFixedUpdate(dt)
+	local fp_anim = self.fpAnimations
+	if fp_anim == nil then
+		return
+	end
+
+	local cur_anim_cache = fp_anim.currentAnimation
+	local anim_data = fp_anim.animations[cur_anim_cache]
+	local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+	if anim_data and is_reload_anim then
+		local time_predict = anim_data.time + anim_data.playRate * dt
+		local info_duration = anim_data.info.duration
+
+		if time_predict >= info_duration then
+			local v_owner = self.tool:getOwner()
+			if v_owner == nil then return end
+
+			local v_inventory = v_owner:getInventory()
+			if v_inventory == nil then return end
+
+			local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+			if v_available_ammo == 0 then return end
+
+			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
+			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+			sm.container.beginTransaction()
+			sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
+			sm.container.endTransaction()
+
+			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+			self:server_updateAmmoCounter()
+
+			self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
+		end
+	end
+end
+
 function TommyGun.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
@@ -226,7 +295,7 @@ function TommyGun.client_onUpdate( self, dt )
 				local info_duration = anim_data.info.duration
 
 				if time_predict >= info_duration then
-					self.ammo_in_mag = self.mag_capacity
+					self.ammo_in_mag = self.cl_should_spend
 				end
 			end
 
@@ -441,6 +510,7 @@ function TommyGun:client_onUnequip(animate, is_custom)
 		return
 	end
 
+	self.waiting_for_ammo = nil
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
@@ -491,6 +561,11 @@ end
 
 function TommyGun.sv_n_onShoot( self, dir )
 	self.network:sendToClients( "cl_n_onShoot", dir )
+
+	if dir ~= nil and self.sv_ammo_counter > 0 then
+		self.sv_ammo_counter = self.sv_ammo_counter - 1
+		self:server_updateAmmoCounter()
+	end
 end
 
 function TommyGun.cl_n_onShoot( self, dir )
@@ -613,68 +688,69 @@ function TommyGun:cl_onPrimaryUse(is_shooting)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 then
-		if self.ammo_in_mag > 0 then
-		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-			self.ammo_in_mag = self.ammo_in_mag - 1
-			local firstPerson = self.tool:isInFirstPersonView()
+	if self.fireCooldownTimer > 0.0 then
+		return
+	end
 
-			local dir = sm.localPlayer.getDirection()
+	if self.ammo_in_mag > 0 then
+		self.ammo_in_mag = self.ammo_in_mag - 1
+		local firstPerson = self.tool:isInFirstPersonView()
 
-			local firePos = self:calculateFirePosition()
-			local fakePosition = self:calculateTpMuzzlePos()
-			local fakePositionSelf = fakePosition
-			if firstPerson then
-				fakePositionSelf = self:calculateFpMuzzlePos()
-			end
+		local dir = sm.localPlayer.getDirection()
 
-			-- Aim assist
-			if not firstPerson then
-				local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
-				if hit then
-					local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-					local dirDot = norDir:dot( dir )
+		local firePos = self:calculateFirePosition()
+		local fakePosition = self:calculateTpMuzzlePos()
+		local fakePositionSelf = fakePosition
+		if firstPerson then
+			fakePositionSelf = self:calculateFpMuzzlePos()
+		end
 
-					if dirDot > 0.96592583 then -- max 15 degrees off
-						dir = norDir
-					else
-						local radsOff = math.asin( dirDot )
-						dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-					end
+		-- Aim assist
+		if not firstPerson then
+			local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+			local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+			if hit then
+				local norDir = sm.vec3.normalize( result.pointWorld - firePos )
+				local dirDot = norDir:dot( dir )
+
+				if dirDot > 0.96592583 then -- max 15 degrees off
+					dir = norDir
+				else
+					local radsOff = math.asin( dirDot )
+					dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
 				end
 			end
-
-			dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-			-- Spread
-			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-			dir = sm.noise.gunSpread( dir, spreadDeg )
-
-			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
-
-			-- Timers
-			self.fireCooldownTimer = fireMode.fireCooldown
-			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-			self.sprintCooldownTimer = self.sprintCooldown
-
-			-- Send TP shoot over network and dircly to self
-			self:onShoot( dir )
-			self.network:sendToServer( "sv_n_onShoot", dir )
-
-			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-		else
-			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-			self.fireCooldownTimer = fireMode.fireCooldown
-			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
+
+		dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
+
+		-- Spread
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+		dir = sm.noise.gunSpread( dir, spreadDeg )
+
+		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
+
+		-- Timers
+		self.fireCooldownTimer = fireMode.fireCooldown
+		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+		self.sprintCooldownTimer = self.sprintCooldown
+
+		-- Send TP shoot over network and dircly to self
+		self:onShoot( dir )
+		self.network:sendToServer( "sv_n_onShoot", dir )
+
+		-- Play FP shoot animation
+		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+	else
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		self.fireCooldownTimer = fireMode.fireCooldown
+		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
 
@@ -713,6 +789,10 @@ function TommyGun:cl_startReloadAnim(anim_name)
 end
 
 function TommyGun:client_isGunReloading()
+	if self.waiting_for_ammo then
+		return true
+	end
+
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
 		return (reload_anims[fp_anims.currentAnimation] == true)
@@ -722,6 +802,23 @@ function TommyGun:client_isGunReloading()
 end
 
 function TommyGun:cl_initReloadAnim(anim_name)
+	if sm.game.getEnableAmmoConsumption() then
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
+		if v_available_ammo == 0 then
+			sm.gui.displayAlertText("No Ammo", 3)
+			return true
+		end
+
+		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
+		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+		self.cl_should_spend = self.ammo_in_mag + v_spend_count
+	else
+		self.cl_should_spend = self.mag_capacity
+	end
+
+	self.waiting_for_ammo = true
+
 	--Start fp and tp animations locally
 	setFpAnimation(self.fpAnimations, anim_name, 0.0)
 	self:cl_startReloadAnim(anim_name)

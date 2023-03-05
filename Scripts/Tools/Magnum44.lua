@@ -43,9 +43,9 @@ local renderablesFp =
 	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_fp_animlist.rend"
 }
 
-sm.tool.preloadRenderables( renderables )
-sm.tool.preloadRenderables( renderablesTp )
-sm.tool.preloadRenderables( renderablesFp )
+--sm.tool.preloadRenderables( renderables )
+--sm.tool.preloadRenderables( renderablesTp )
+--sm.tool.preloadRenderables( renderablesFp )
 
 function Magnum44:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
@@ -628,7 +628,7 @@ function Magnum44.onShoot( self, dir )
 end
 
 ---@return Vec3
-function Magnum44.calculateFirePosition( self )
+function Magnum44:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -655,7 +655,7 @@ function Magnum44.calculateFirePosition( self )
 	return GetOwnerPosition(self.tool) + fireOffset
 end
 
-function Magnum44.calculateTpMuzzlePos( self )
+function Magnum44:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -689,7 +689,7 @@ function Magnum44.calculateTpMuzzlePos( self )
 	return fakePosition
 end
 
-function Magnum44.calculateFpMuzzlePos( self )
+function Magnum44:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -743,84 +743,86 @@ function Magnum44.cl_onPrimaryUse(self, state)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 then
-		if self.cl_hammer_cocked then
-			if self.ammo_in_mag > 0 then
-				self.ammo_in_mag = self.ammo_in_mag - 1
-				local firstPerson = self.tool:isInFirstPersonView()
+	if self.fireCooldownTimer > 0.0 then
+		return
+	end
 
-				local dir = sm.localPlayer.getDirection()
+	if self.cl_hammer_cocked then
+		if self.ammo_in_mag > 0 then
+			self.ammo_in_mag = self.ammo_in_mag - 1
+			local firstPerson = self.tool:isInFirstPersonView()
 
-				local firePos = self:calculateFirePosition()
-				local fakePosition = self:calculateTpMuzzlePos()
-				local fakePositionSelf = fakePosition
-				if firstPerson then
-					fakePositionSelf = self:calculateFpMuzzlePos()
-				end
+			local dir = sm.localPlayer.getDirection()
 
-				-- Aim assist
-				if not firstPerson then
-					local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-					local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
-					if hit then
-						local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-						local dirDot = norDir:dot( dir )
+			local firePos = self:calculateFirePosition()
+			local fakePosition = self:calculateTpMuzzlePos()
+			local fakePositionSelf = fakePosition
+			if firstPerson then
+				fakePositionSelf = self:calculateFpMuzzlePos()
+			end
 
-						if dirDot > 0.96592583 then -- max 15 degrees off
-							dir = norDir
-						else
-							local radsOff = math.asin( dirDot )
-							dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-						end
+			-- Aim assist
+			if not firstPerson then
+				local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+				if hit then
+					local norDir = sm.vec3.normalize( result.pointWorld - firePos )
+					local dirDot = norDir:dot( dir )
+
+					if dirDot > 0.96592583 then -- max 15 degrees off
+						dir = norDir
+					else
+						local radsOff = math.asin( dirDot )
+						dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
 					end
 				end
-
-				dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-				-- Spread
-				local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-				local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-				local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-				spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-				local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-				dir = sm.noise.gunSpread( dir, spreadDeg )
-				sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
-
-				-- Timers
-				self.fireCooldownTimer = fireMode.fireCooldown
-				self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-				self.sprintCooldownTimer = self.sprintCooldown
-
-				-- Send TP shoot over network and dircly to self
-				self:onShoot(1)
-				self.network:sendToServer("sv_n_onShoot", 1)
-
-				-- Play FP shoot animation
-				setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-			else
-				self:onShoot(nil)
-				self.network:sendToServer("sv_n_onShoot", nil)
-
-				self.fireCooldownTimer = 0.3
-				sm.audio.play( "PotatoRifle - NoAmmo" )
 			end
+
+			dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
+
+			-- Spread
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+			dir = sm.noise.gunSpread( dir, spreadDeg )
+			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
+
+			-- Timers
+			self.fireCooldownTimer = fireMode.fireCooldown
+			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+			self.sprintCooldownTimer = self.sprintCooldown
+
+			-- Send TP shoot over network and dircly to self
+			self:onShoot(1)
+			self.network:sendToServer("sv_n_onShoot", 1)
+
+			-- Play FP shoot animation
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 		else
-			self.fireCooldownTimer = 0.4
-			self.network:sendToServer("sv_n_cockHammer")
+			self:onShoot(nil)
+			self.network:sendToServer("sv_n_onShoot", nil)
 
-			if self.aiming then
-				setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-				mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
-			else
-				setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-			end
+			self.fireCooldownTimer = 0.3
+			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
+	else
+		self.fireCooldownTimer = 0.4
+		self.network:sendToServer("sv_n_cockHammer")
 
-		self.cl_hammer_cocked = not self.cl_hammer_cocked
+		if self.aiming then
+			setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+			mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+		else
+			setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+			mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+		end
 	end
+
+	self.cl_hammer_cocked = not self.cl_hammer_cocked
 end
 
 local reload_anims =
