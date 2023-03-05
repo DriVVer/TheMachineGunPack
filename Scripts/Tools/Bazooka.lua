@@ -120,7 +120,7 @@ function Bazooka.loadAnimations( self )
 
 				shoot = { "Bazooka_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Bazooka_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "Bazooka_reload", { nextAnimation = "idle", duration = 1.0 } },
 
 				--[[
 				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
