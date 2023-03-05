@@ -46,7 +46,7 @@ local renderablesFp =
 --sm.tool.preloadRenderables( renderablesFp )
 
 function Bazooka.client_onCreate( self )
-	self.mag_capacity = 10
+	self.mag_capacity = 1
 	self.ammo_in_mag = self.mag_capacity
 
 	BazookaProjectile_clientInitialize()
