@@ -438,22 +438,21 @@ function Bazooka.client_onUnequip( self, animate )
 	end
 end
 
-function Bazooka:sv_n_onShoot(doubleShot)
-	self.network:sendToClients("cl_n_onShoot", doubleShot)
+function Bazooka:sv_n_onShoot(v_proj_hit)
+	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
 end
 
-function Bazooka:cl_n_onShoot(doubleShot)
+function Bazooka:cl_n_onShoot(v_proj_hit)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(doubleShot)
+		self:onShoot(v_proj_hit)
 	end
 end
 
-function Bazooka:onShoot(doubleShot)
-	mgp_toolAnimator_setAnimation(self, doubleShot and "shoot_2" or "shoot")
+function Bazooka:onShoot(v_proj_hit)
+	mgp_toolAnimator_setAnimation(self, "shoot")
+	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 100 }, self.tool:isLocal())
 end
 
-local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
-local mgp_projectile_powerful = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
 function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 	if self:client_isGunReloading() then return end
 
@@ -467,56 +466,53 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 then
-		if self.tool:isSprinting() then
-			return
-		end
+	if self.fireCooldownTimer > 0.0 then
+		return
+	end
 
-		local ammo_count = is_double_shot and 1 or 0
-		local ammo_to_consume = ammo_count + 1
+	if self.tool:isSprinting() then
+		return
+	end
 
-		if self.ammo_in_mag > ammo_count then
-		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-			self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
+	local ammo_count = is_double_shot and 1 or 0
+	local ammo_to_consume = ammo_count + 1
 
-			local dir = sm.camera.getDirection()
-			local firePos = nil
-			if self.tool:isInFirstPersonView() then
-				firePos = self.tool:getFpBonePos("pejnt_barrel")
-			else
-				firePos = self.tool:getTpBonePos("pejnt_barrel")
-			end
+	if self.ammo_in_mag > ammo_count then
+	--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+		self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
 
-			local fireMode = self.normalFireMode
-
-			local v_proj_hit = nil
-			local hit, result = sm.localPlayer.getRaycast(1000)
-			if hit then
-				v_proj_hit = result.pointWorld
-			else
-				v_proj_hit = firePos + dir * 1000
-			end
-
-			--local proj_type = is_double_shot and mgp_projectile_powerful or mgp_projectile_potato
-			--sm.projectile.projectileAttack(proj_type, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
-
-			BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 100 }, true)
-
-			-- Timers
-			self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
-			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-			self.sprintCooldownTimer = self.sprintCooldown
-
-			-- Send TP shoot over network and dircly to self
-			self:onShoot(is_double_shot)
-			self.network:sendToServer("sv_n_onShoot", is_double_shot)
-
-			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
+		local dir = sm.camera.getDirection()
+		local firePos = nil
+		if self.tool:isInFirstPersonView() then
+			firePos = self.tool:getFpBonePos("pejnt_barrel")
 		else
-			self.fireCooldownTimer = 0.3
-			sm.audio.play( "PotatoRifle - NoAmmo" )
+			firePos = self.tool:getTpBonePos("pejnt_barrel")
 		end
+
+		local fireMode = self.normalFireMode
+
+		local v_proj_hit = nil
+		local hit, result = sm.localPlayer.getRaycast(1000)
+		if hit then
+			v_proj_hit = result.pointWorld
+		else
+			v_proj_hit = firePos + dir * 1000
+		end
+
+		-- Timers
+		self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
+		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+		self.sprintCooldownTimer = self.sprintCooldown
+
+		-- Send TP shoot over network and dircly to self
+		self:onShoot(v_proj_hit)
+		self.network:sendToServer("sv_n_onShoot", v_proj_hit)
+
+		-- Play FP shoot animation
+		setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
+	else
+		self.fireCooldownTimer = 0.3
+		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
 

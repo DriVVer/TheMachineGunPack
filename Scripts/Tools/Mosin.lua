@@ -973,10 +973,7 @@ function Mosin:cl_initReloadAnim(anim_id)
 		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
 		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
-		self.cl_should_spend = self.ammo_in_mag + v_spend_count
 		v_cur_anim_id = (#ammo_count_to_anim_name - v_spend_count)
-	else
-		self.cl_should_spend = self.mag_capacity
 	end
 
 	self.waiting_for_ammo = true
