@@ -103,6 +103,7 @@ function Mosin:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
+	print("Mosin ammo_update -> Id:", self.tool.id, "Ammo:", self.sv_ammo_counter)
 end
 
 function Mosin:client_receiveAmmo(ammo_count)

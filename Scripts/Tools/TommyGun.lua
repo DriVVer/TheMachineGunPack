@@ -73,6 +73,7 @@ function TommyGun:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
+	print("TommyGun ammo_update -> Id:", self.tool.id, "Ammo:", self.sv_ammo_counter)
 end
 
 function TommyGun:client_receiveAmmo(ammo_count)
@@ -239,42 +240,35 @@ function TommyGun:client_updateAimWeights(dt)
 end
 
 local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function TommyGun:server_onFixedUpdate(dt)
-	local fp_anim = self.fpAnimations
-	if fp_anim == nil then
-		return
-	end
+function TommyGun:server_spendAmmo(data, player)
+	if data ~= nil or player ~= nil then return end
 
-	local cur_anim_cache = fp_anim.currentAnimation
-	local anim_data = fp_anim.animations[cur_anim_cache]
-	local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-	if anim_data and is_reload_anim then
-		local time_predict = anim_data.time + anim_data.playRate * dt
-		local info_duration = anim_data.info.duration
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
 
-		if time_predict >= info_duration then
-			local v_owner = self.tool:getOwner()
-			if v_owner == nil then return end
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
 
-			local v_inventory = v_owner:getInventory()
-			if v_inventory == nil then return end
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+	if v_available_ammo == 0 then return end
 
-			local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
-			if v_available_ammo == 0 then return end
+	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
+	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
-			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
-			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
+	sm.container.endTransaction()
 
-			sm.container.beginTransaction()
-			sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
-			sm.container.endTransaction()
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+	self:server_updateAmmoCounter()
+end
 
-			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
-			self:server_updateAmmoCounter()
+function TommyGun:sv_n_trySpendAmmo(data, player)
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil or v_owner ~= player then return end
 
-			self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
-		end
-	end
+	self:server_spendAmmo()
+	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
 function TommyGun.client_onUpdate( self, dt )
@@ -295,7 +289,7 @@ function TommyGun.client_onUpdate( self, dt )
 				local info_duration = anim_data.info.duration
 
 				if time_predict >= info_duration then
-					self.ammo_in_mag = self.cl_should_spend
+					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 			end
 

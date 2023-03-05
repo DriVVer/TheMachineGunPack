@@ -73,6 +73,7 @@ function Magnum44:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
+	print("Magnum44 ammo_update -> Id:", self.tool.id, "Ammo:", self.sv_ammo_counter)
 end
 
 function Magnum44:client_receiveAmmo(ammo_count)
@@ -257,42 +258,35 @@ function Magnum44:client_updateAimWeights(dt)
 end
 
 local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function Magnum44:server_onFixedUpdate(dt)
-	local fp_anim = self.fpAnimations
-	if fp_anim == nil then
-		return
-	end
+function Magnum44:server_spendAmmo(data, player)
+	if data ~= nil or player ~= nil then return end
 
-	local cur_anim_cache = fp_anim.currentAnimation
-	local anim_data = fp_anim.animations[cur_anim_cache]
-	local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-	if anim_data and is_reload_anim then
-		local time_predict = anim_data.time + anim_data.playRate * dt
-		local info_duration = anim_data.info.duration
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
 
-		if time_predict >= info_duration then
-			local v_owner = self.tool:getOwner()
-			if v_owner == nil then return end
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
 
-			local v_inventory = v_owner:getInventory()
-			if v_inventory == nil then return end
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+	if v_available_ammo == 0 then return end
 
-			local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
-			if v_available_ammo == 0 then return end
+	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
+	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
-			local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
-			local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
+	sm.container.endTransaction()
 
-			sm.container.beginTransaction()
-			sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
-			sm.container.endTransaction()
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+	self:server_updateAmmoCounter()
+end
 
-			self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
-			self:server_updateAmmoCounter()
+function Magnum44:sv_n_trySpendAmmo(data, player)
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil or v_owner ~= player then return end
 
-			self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
-		end
-	end
+	self:server_spendAmmo()
+	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
 function Magnum44:client_onUpdate(dt)
@@ -331,7 +325,7 @@ function Magnum44:client_onUpdate(dt)
 				local info_duration = anim_data.info.duration
 
 				if time_predict >= info_duration then
-					self.ammo_in_mag = self.cl_should_spend
+					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 			end
 
@@ -582,24 +576,24 @@ function Magnum44:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Magnum44.sv_n_onAim( self, aiming )
+function Magnum44:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Magnum44.cl_n_onAim( self, aiming )
+function Magnum44:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function Magnum44.onAim( self, aiming )
+function Magnum44:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Magnum44.sv_n_onShoot( self, dir )
+function Magnum44:sv_n_onShoot(dir)
 	self.network:sendToClients( "cl_n_onShoot", dir )
 
 	if dir ~= nil and self.sv_ammo_counter > 0 then
@@ -608,13 +602,13 @@ function Magnum44.sv_n_onShoot( self, dir )
 	end
 end
 
-function Magnum44.cl_n_onShoot( self, dir )
+function Magnum44:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onShoot( dir )
 	end
 end
 
-function Magnum44.onShoot( self, dir )
+function Magnum44:onShoot(dir)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
