@@ -1,4 +1,4 @@
----@type ShapeClass
+---@class Grenade : ShapeClass
 Grenade = class()
 
 function Grenade:server_onCreate()
