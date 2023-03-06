@@ -75,7 +75,6 @@ function DB:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
-	print("DB ammo_update -> Id:", self.tool.id, "Ammo:", self.sv_ammo_counter)
 end
 
 function DB:client_receiveAmmo(ammo_count)
