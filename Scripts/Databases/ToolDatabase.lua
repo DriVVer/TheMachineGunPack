@@ -1654,12 +1654,15 @@ local mgp_tool_database =
 			reload_empty =
 			{
 				[1] = {
-					
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BZ_Anim", start_val = 3.50, end_val = 6.25 } },
-						tp_anim = { { name = "BZ_Anim", start_val = 3.50, end_val = 6.25 } },
-						time = 3.3
+						fp_anim = { { name = "BZ_Anim", start_val = 3.60, end_val = 6.25 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 3.60, end_val = 6.25 } },
+						time = 3.2
 					}
 				}
 			}

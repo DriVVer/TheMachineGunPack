@@ -78,7 +78,7 @@ function Bazooka.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "Bazooka_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
+			reload_empty = { "Bazooka_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -309,6 +309,8 @@ function Bazooka.client_onUpdate( self, dt )
 
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
+					setTpAnimation( self.tpAnimations, "idle", 10.0 )
+				elseif name == "idle" then
 					setTpAnimation( self.tpAnimations, "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, "idle", 0.001 )
