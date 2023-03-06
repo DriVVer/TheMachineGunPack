@@ -6,7 +6,7 @@
 	},
 	"295481d0-910a-48d4-a04a-e1bf1290e510": {
 		"title": "Long Rifle Ammo",
-		"description": "Used for: \n- Mosin-Nagant\n- Revolver"
+		"description": "Used for: \n- Mosin-Nagant"
 	},
 	"3f4644d5-47cb-477d-b22d-901ab2ed2e0f": {
 		"title": "Short Rifle Ammo",
@@ -15,6 +15,18 @@
 	"a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2": {
 		"title": "Shotgun Ammo",
 		"description": "Used for: \n- Double Barrel Shotgun"
+	},
+	"9f9fda0d-9e65-4ffe-907c-5150218a03e1": {
+		"title": "Gun Powder",
+		"description": "Main ammo ingredient"
+	},
+	"5a1ca305-513f-42db-ae71-52bd0a9247fc": {
+		"title": "Eoka Gun",
+		"description": "The Machine Gun Pack\n\nEoka.\n\nSingle Use"
+	},
+	"872b6328-37d4-4922-847d-0aef8803ac94": {
+		"title": "Bazooka M20",
+		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
 	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",

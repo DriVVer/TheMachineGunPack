@@ -73,6 +73,26 @@ ExplosiveBomb.BombData = {
 		effectActivate = "PropaneTank - ActivateBig",
 		fireDelay = 1,
 		fuseDelay = 0.0625
+	},
+	["2d132e4e-5084-4178-839c-c75e06e19153"] = { --tank shells.
+		destructionLevel = 4,
+		destructionRadius = 8.0,
+		impulseRadius = 10.0,
+		impulseMagnitude = 30.0,
+		effectExplosion = "PropaneTank - ExplosionBig",
+		effectActivate = "PropaneTank - ActivateBig",
+		fireDelay = 1,
+		fuseDelay = 0.5
+	},
+	["9f9fda0d-9e65-4ffe-907c-5150218a03e1"] = { --gun powder.
+		destructionLevel = 3,
+		destructionRadius = 5.0,
+		impulseRadius = 10.0,
+		impulseMagnitude = 30.0,
+		effectExplosion = "PropaneTank - ExplosionBig",
+		effectActivate = "PropaneTank - ActivateBig",
+		fireDelay = 1,
+		fuseDelay = 0.5
 	}
 }
 

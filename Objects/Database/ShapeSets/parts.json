@@ -1246,6 +1246,8 @@
 					}
 				]
 			},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
+			"qualityLevel": 20,
 			"rotationSet": "PropFull",
 			"color": "df7f00",
 			"box": {"x": 1, "y": 1, "z": 1},

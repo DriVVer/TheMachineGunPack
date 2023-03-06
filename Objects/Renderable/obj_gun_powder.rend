@@ -2,24 +2,16 @@
 				"lodList": [
 					{
 						"minViewSize": 20,
-						"subMeshMap": {
-							"chemicalconsumable": {
+						"subMeshList": [
+							{
 								"material": "DifAsgNor",
-								"textureList": [
-									"$SURVIVAL_DATA/Objects/Textures/consumable/Obj_consumable_chemical_dif.tga",
-									"$SURVIVAL_DATA/Objects/Textures/consumable/Obj_consumable_chemical_asg.tga",
-									"$SURVIVAL_DATA/Objects/Textures/consumable/Obj_consumable_chemical_nor.tga"
-								]
-							},
-							"glass": {
-								"material": "DifAsgNor",
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_nor.tga"
+								"textureList": [ 
+									"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+									"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+									"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
 								]
 							}
-						},
+						],
 						"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/GunPowder.fbx"
 					}
 				]

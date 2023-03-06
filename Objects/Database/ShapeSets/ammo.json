@@ -16,10 +16,12 @@
 			"physicsMaterial": "Metal",
 			"ratings": {
 				"density": 1,
-				"durability": 3,
+				"durability": 5,
 				"friction": 4,
-				"buoyancy": 4
+				"buoyancy": 6
 			},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
+			"qualityLevel": 20,
 			"flammable": true,
 			"consumable": true,
 			"stackSize": 200
