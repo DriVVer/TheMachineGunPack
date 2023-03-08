@@ -69,10 +69,8 @@ function Bazooka.loadAnimations( self )
 			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
 			shoot_2 = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
 
-			--[[
 			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
-			]]
 
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
@@ -122,15 +120,10 @@ function Bazooka.loadAnimations( self )
 
 				reload_empty = { "Bazooka_reload", { nextAnimation = "idle", duration = 1.0 } },
 
-				--[[
-				cock_hammer = { "DB_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "DB_aim_c_hammer", { nextAnimation = "aimIdle" } },
-
 				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "DB_aim_idle", { looping = true } },
 				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
-				]]
 
 				sprintInto = { "Bazooka_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Bazooka_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -174,7 +167,7 @@ function Bazooka.loadAnimations( self )
 
 	self.movementDispersion = 0.0
 
-	self.sprintCooldownTimer = 0.0
+	self.sprintCooldownTimer = 3.5
 	self.sprintCooldown = 0.3
 
 	self.aimBlendSpeed = 3.0
@@ -242,6 +235,13 @@ function Bazooka.client_onUpdate( self, dt )
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
+
+			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+			end
+			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+			end
 		end
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
@@ -263,7 +263,7 @@ function Bazooka.client_onUpdate( self, dt )
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.normalFireMode
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -287,12 +287,21 @@ function Bazooka.client_onUpdate( self, dt )
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
-		self.tool:setCrossHairAlpha( 1.0 )
-		self.tool:setInteractionTextSuppressed( false )
+		if self.aiming then
+			if self.tool:isInFirstPersonView() then
+				self.tool:setCrossHairAlpha( 0.0 )
+			else
+				self.tool:setCrossHairAlpha( 1.0 )
+			end
+			self.tool:setInteractionTextSuppressed( true )
+		else
+			self.tool:setCrossHairAlpha( 1.0 )
+			self.tool:setInteractionTextSuppressed( false )
+		end
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() )
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -309,13 +318,13 @@ function Bazooka.client_onUpdate( self, dt )
 
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, "idle", 10.0 )
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "idle" then
-					setTpAnimation( self.tpAnimations, "idle", 10.0 )
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, "idle", 0.001 )
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, "idle", 2 )
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
@@ -344,7 +353,7 @@ function Bazooka.client_onUpdate( self, dt )
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -388,6 +397,7 @@ function Bazooka:client_onEquip(animate)
 		mgp_toolAnimator_setAnimation(self, "on_equip")
 	end
 
+	self.aiming = false
 	self.wantEquipped = true
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
@@ -421,6 +431,7 @@ end
 function Bazooka.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
+	self.aiming = false
 	mgp_toolAnimator_reset(self)
 
 	if sm.exists( self.tool ) then
@@ -440,6 +451,23 @@ function Bazooka.client_onUnequip( self, animate )
 	end
 end
 
+function Bazooka:sv_n_onAim(aiming)
+	self.network:sendToClients( "cl_n_onAim", aiming )
+end
+
+function Bazooka:cl_n_onAim(aiming)
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:onAim( aiming )
+	end
+end
+
+function Bazooka:onAim(aiming)
+	self.aiming = aiming
+	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
+		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
+	end
+end
+
 function Bazooka:sv_n_onShoot(v_proj_hit)
 	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
 end
@@ -451,7 +479,10 @@ function Bazooka:cl_n_onShoot(v_proj_hit)
 end
 
 function Bazooka:onShoot(v_proj_hit)
-	mgp_toolAnimator_setAnimation(self, "shoot")
+	local v_shoot_anim  = (self.aiming and "aimShoot" or "shoot")
+
+	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
+	setTpAnimation(self.tpAnimations, v_shoot_anim)
 	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 100 }, self.tool:isLocal())
 end
 
@@ -511,7 +542,7 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 		self.network:sendToServer("sv_n_onShoot", v_proj_hit)
 
 		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
+		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
 		self.fireCooldownTimer = 0.3
 		sm.audio.play( "PotatoRifle - NoAmmo" )
@@ -523,8 +554,10 @@ local reload_anims =
 	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
-	["reload"]          = true,
-	["reload_empty"]    = true
+	["reload"         ] = true,
+	["reload_empty"   ] = true,
+	["sprintExit"     ] = true,
+	["aimExit"        ] = true
 }
 
 local ammo_count_to_anim_name =
@@ -569,7 +602,7 @@ end
 
 function Bazooka:client_onReload()
 	if self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
@@ -594,7 +627,7 @@ function Bazooka:cl_startCheckMagAnim()
 end
 
 function Bazooka:client_onToggle()
-	if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+	--[[if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("DB: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 
@@ -607,8 +640,24 @@ function Bazooka:client_onToggle()
 			self:cl_initReloadAnim(0)
 		end
 	end
-
+]]
 	return true
+end
+
+local _intstate = sm.tool.interactState
+function Bazooka:cl_onSecondaryUse(state)
+	if not self.equipped then return end
+
+	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
+	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
+	if self.aiming ~= new_state then
+		self.aiming = new_state
+		self.tpAnimations.animations.idle.time = 0
+
+		self.tool:setMovementSlowDown(self.aiming)
+		self:onAim(self.aiming)
+		self.network:sendToServer("sv_n_onAim", self.aiming)
+	end
 end
 
 function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
@@ -616,8 +665,9 @@ function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self:cl_onPrimaryUse(false)
 	end
 
-	if secondaryState == sm.tool.interactState.start then
-		self:cl_onPrimaryUse(true)
+	if secondaryState ~= self.cl_prevSecondaryStatesecondaryUse then
+		self:cl_onSecondaryUse(secondaryState)
+		self.prevSecondaryState = secondaryState
 	end
 
 	if f and not self:client_isGunReloading() and not self.tool:isSprinting() and self.fpAnimations.currentAnimation ~= "inspect" then

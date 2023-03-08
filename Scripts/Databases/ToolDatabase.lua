@@ -1635,6 +1635,30 @@ local mgp_tool_database =
 				}
 
 			},
+
+			aimShoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "BZ_Anim", start_val = 4.0, end_val = 4.30 } },
+						tp_anim = { { name = "BZ_Anim", start_val = 4.0, end_val = 4.30 } },
+						time = 0.1
+					}
+				}
+
+			},
 			
 			reload =
 			{
