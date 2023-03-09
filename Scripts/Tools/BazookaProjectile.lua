@@ -16,6 +16,11 @@ local function BazookaProjectile_UpdateProjectileRotation(proj)
 	end
 end
 
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
 ---@param self Bazooka
 function BazookaProjectile_clientSpawnProjectile(self, data, is_local)
 	local s_tool = self.tool
@@ -23,6 +28,9 @@ function BazookaProjectile_clientSpawnProjectile(self, data, is_local)
 	local v_proj_pos = nil
 	if is_local and s_tool:isLocal() and s_tool:isInFirstPersonView() then
 		v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
+
+		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()
+		v_proj_pos = v_proj_pos + calculateRightVector(v_char_dir) * 0.1
 	else
 		v_proj_pos = s_tool:getTpBonePos("pejnt_barrel")
 	end
@@ -32,19 +40,65 @@ function BazookaProjectile_clientSpawnProjectile(self, data, is_local)
 	local v_proj_velocity = v_proj_direction * data[2]
 
 	local v_proj_effect = sm.effect.createEffect("Bazooka - Projectile")
+	v_proj_effect:setScale(sm.vec3.new(0.5, 0.5, 0.5))
 
 	local v_new_projectile =
 	{
 		[1] = v_proj_pos,
 		[2] = v_proj_velocity,
 		[3] = v_proj_effect,
-		[4] = 10               --projectile lifetime
+		[4] = 10,               --projectile lifetime
+		[5] = s_tool:getOwner()
 	}
 
 	g_bazookaProjectiles[#g_bazookaProjectiles + 1] = v_new_projectile
 	BazookaProjectile_UpdateProjectileRotation(v_new_projectile)
 
 	v_proj_effect:start()
+end
+
+local g_bazooka_sharpnel = sm.uuid.new("9a151748-e5fa-4029-9a72-1d3264874b73")
+local function BazookaProjectile_serverCreateExplosion(proj_data)
+	local v_shape = proj_data[7] --[[@as Shape]]
+	if v_shape ~= nil and sm.exists(v_shape) then
+		local v_quality = sm.item.getQualityLevel(v_shape.uuid)
+		if v_quality <= 6 then
+			local v_proj_owner = proj_data[5]
+			if v_proj_owner and sm.exists(v_proj_owner) then
+				local v_spawn_dir = proj_data[2]
+				local v_spawn_pos = proj_data[1] + v_spawn_dir:normalize() * 0.25 --[[@as Vec3]]
+
+				sm.physics.explode(proj_data[1], 7, 0.3, 1, 10, "PropaneTank - ExplosionSmall")
+
+				for i = 1, math.random(5, 40) do
+					local v_dir = sm.noise.gunSpread(v_spawn_dir, 80)
+					local v_proj_delay = math.random(0, 8)
+
+					sm.projectile.projectileAttack(g_bazooka_sharpnel, 50, v_spawn_pos, v_dir, v_proj_owner, nil, nil, v_proj_delay)
+				end
+
+				return
+			end
+		end
+
+		local v_is_part = sm.item.isPart(v_shape.uuid)
+		local v_is_shape = sm.item.isBlock(v_shape.uuid)
+
+		if v_is_part or v_is_shape then
+			sm.effect.playEffect("PropaneTank - ExplosionSmall", proj_data[1])
+		end
+
+		if v_is_part then
+			v_shape:destroyShape()
+			return
+		elseif v_is_shape then
+			local v_local_pos = v_shape:getClosestBlockLocalPosition(proj_data[1])
+			v_shape:destroyBlock(v_local_pos, sm.vec3.one())
+			return
+		end
+	end
+
+	sm.physics.explode(proj_data[1], 7, 0.3, 1, 1, "PropaneTank - ExplosionSmall")
 end
 
 function BazookaProjectile_serverOnFixedUpdate(dt)
@@ -54,8 +108,8 @@ function BazookaProjectile_serverOnFixedUpdate(dt)
 
 		--Update the projectiles in here
 		for k, proj in pairs(g_bazookaProjectiles) do
-			if proj[5] == true then
-				sm.physics.explode(proj[1], 10, 1, 10, 100, "PropaneTank - ExplosionSmall")
+			if proj[6] == true then
+				BazookaProjectile_serverCreateExplosion(proj)
 			end
 		end
 	end
@@ -67,7 +121,7 @@ function BazookaProjectile_clientOnFixedUpdate(dt)
 		g_bazookaClientTick = v_newTick
 
 		for k, proj in pairs(g_bazookaProjectiles) do
-			if proj[5] == true then
+			if proj[6] == true then
 				g_bazookaProjectiles[k] = nil
 			else
 				proj[4] = proj[4] - dt
@@ -82,7 +136,11 @@ function BazookaProjectile_clientOnFixedUpdate(dt)
 				if hit or (proj[4] <= 0) then
 					proj[1] = (v_lifetime_over and proj[1] or result.pointWorld)
 
-					proj[5] = true
+					proj[6] = true
+					if result.type == "body" then
+						proj[7] = result:getShape()
+					end
+
 					proj[3]:stopImmediate()
 				else
 					proj[1] = v_pos + v_dir * dt

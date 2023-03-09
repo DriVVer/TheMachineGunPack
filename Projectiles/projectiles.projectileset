@@ -222,6 +222,31 @@
 				]
 			},
 			"enableImpactEffect": true
+		},
+		{
+			"uuid": "9a151748-e5fa-4029-9a72-1d3264874b73",
+			"name": "rocket_sharpnel",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet_yel.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"attachedEffect": "",
+			"enableGravity": true,
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 1.0 },
+					{ "qualityLevel": 3, "chance": 1.0 },
+					{ "qualityLevel": 4, "chance": 1.0 },
+					{ "qualityLevel": 5, "chance": 0.9 },
+					{ "qualityLevel": 6, "chance": 0.8 }
+				]
+			},
+			"enableImpactEffect": false
 		}
 	]
 }

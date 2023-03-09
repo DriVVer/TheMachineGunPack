@@ -43,9 +43,9 @@ local renderablesFp =
 	"$CONTENT_DATA/Tools/Renderables/Revolver/char_Magnum44_fp_animlist.rend"
 }
 
---sm.tool.preloadRenderables( renderables )
---sm.tool.preloadRenderables( renderablesTp )
---sm.tool.preloadRenderables( renderablesFp )
+sm.tool.preloadRenderables( renderables )
+sm.tool.preloadRenderables( renderablesTp )
+sm.tool.preloadRenderables( renderablesFp )
 
 function Magnum44:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()

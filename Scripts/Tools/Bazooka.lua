@@ -21,6 +21,7 @@ local Damage = 25
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
+---@field equipped boolean
 Bazooka = class()
 
 local renderables =
@@ -41,19 +42,27 @@ local renderablesFp =
 	"$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_offset.rend"
 }
 
---sm.tool.preloadRenderables( renderables )
---sm.tool.preloadRenderables( renderablesTp )
---sm.tool.preloadRenderables( renderablesFp )
+sm.tool.preloadRenderables( renderables )
+sm.tool.preloadRenderables( renderablesTp )
+sm.tool.preloadRenderables( renderablesFp )
 
-function Bazooka.client_onCreate( self )
+function Bazooka:client_initAimVals()
+	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
+	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+end
+
+function Bazooka:client_onCreate()
 	self.mag_capacity = 1
 	self.ammo_in_mag = self.mag_capacity
+
+	self:client_initAimVals()
+	self.aimBlendSpeed = 10.0
 
 	BazookaProjectile_clientInitialize()
 	mgp_toolAnimator_initialize(self, "Bazooka")
 end
 
-function Bazooka.client_onDestroy(self)
+function Bazooka:client_onDestroy()
 	BazookaProjectile_clientDestroy()
 	mgp_toolAnimator_destroy(self)
 end
@@ -170,13 +179,12 @@ function Bazooka.loadAnimations( self )
 	self.sprintCooldownTimer = 3.5
 	self.sprintCooldown = 0.3
 
-	self.aimBlendSpeed = 3.0
 	self.blendTime = 0.2
 
 	self.jointWeight = 0.0
 	self.spineWeight = 0.0
-	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
-	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+
+	self:client_initAimVals()
 end
 
 local actual_reload_anims =
@@ -208,7 +216,35 @@ function Bazooka:server_onFixedUpdate(dt)
 	BazookaProjectile_serverOnFixedUpdate(dt)
 end
 
-function Bazooka.client_onUpdate( self, dt )
+function Bazooka:client_updateAimWeights(dt)
+	-- Camera update
+	local bobbing = 1
+	if self.aiming then
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
+		bobbing = 0.12
+	else
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
+		bobbing = 1
+	end
+
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+end
+
+local function predict_animation_end(anim_data, dt)
+	if anim_data == nil then
+		return false
+	end
+
+	local time_predict = anim_data.time + anim_data.playRate * dt
+	local info_duration = anim_data.info.duration
+
+	return time_predict >= info_duration
+end
+
+function Bazooka:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -220,32 +256,36 @@ function Bazooka.client_onUpdate( self, dt )
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
 			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
+			if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
+				self.ammo_in_mag = self.mag_capacity
+			end
 
-				if time_predict >= info_duration then
-					self.ammo_in_mag = self.mag_capacity
+			if cur_anim_cache ~= "equip" then
+				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+				end
+			else
+				if predict_animation_end(anim_data, dt) then
+					self.cl_barrel_attached = true
 				end
 			end
 
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
-			end
-
-			if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+			if self.aiming and aim_animation_list01[cur_anim_cache] == nil then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+			if not self.aiming and aim_animation_list02[cur_anim_cache] == true then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
+
+	TSU_OnUpdate(self)
+
+	self:client_updateAimWeights(dt)
 
 	if not self.equipped then
 		if self.wantEquipped then
@@ -387,21 +427,16 @@ function Bazooka.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function Bazooka:client_onEquip(animate)
+function Bazooka:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
 
-	if animate then
-		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
-		mgp_toolAnimator_setAnimation(self, "on_equip")
-	end
-
-	self.aiming = false
-	self.wantEquipped = true
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
+	self.wantEquipped = true
 	self.jointWeight = 0.0
+	self.aiming = false
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
@@ -410,7 +445,7 @@ function Bazooka:client_onEquip(animate)
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
-
+	
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	local is_tool_local = self.tool:isLocal()
@@ -421,32 +456,60 @@ function Bazooka:client_onEquip(animate)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	--Set tp and fp animations
-	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
-		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+	if animate and not is_custom then
+		sm.audio.play("PotatoRifle - Equip", self.tool:getPosition())
+	end
+
+	if is_custom and self.cl_barrel_attached then
+		if is_tool_local then
+			self.tool:updateFpAnimation("BZ_Anim", 3.5, 1.0)
+			swapFpAnimation(self.fpAnimations, "unequip", "sprintExit", 0.2)
+		end
+	else
+		mgp_toolAnimator_setAnimation(self, "on_equip")
+
+		--Set tp and fp animations
+		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
+		if is_tool_local then
+			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+		end
 	end
 end
 
-function Bazooka.client_onUnequip( self, animate )
+function Bazooka:client_onUnequip(animate, is_custom)
+	if not is_custom and TSU_IsOwnerSwimming(self) then
+		return
+	end
+
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 	mgp_toolAnimator_reset(self)
 
-	if sm.exists( self.tool ) then
+	local s_tool = self.tool
+	if sm.exists(s_tool) then
 		if animate then
-			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
+			sm.audio.play("PotatoRifle - Unequip", s_tool:getPosition())
 		end
-		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
-			self.tool:setMovementSlowDown( false )
-			self.tool:setBlockSprint( false )
-			self.tool:setCrossHairAlpha( 1.0 )
-			self.tool:setInteractionTextSuppressed( false )
-			if self.fpAnimations.currentAnimation ~= "unequip" then
-				swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
+
+		if is_custom then
+			s_tool:setTpRenderables({})
+		else
+			setTpAnimation( self.tpAnimations, "putdown" )
+		end
+
+		if s_tool:isLocal() then
+			s_tool:setMovementSlowDown( false )
+			s_tool:setBlockSprint( false )
+			s_tool:setCrossHairAlpha( 1.0 )
+			s_tool:setInteractionTextSuppressed( false )
+			s_tool:setDispersionFraction(0.0)
+
+			if self.fpAnimations.currentAnimation == "equip" then
+				s_tool:updateFpAnimation("BZ_Anim", 0.0, 1.0)
 			end
+
+			setFpAnimation(self.fpAnimations, "unequip", 0.2)
 		end
 	end
 end
@@ -511,7 +574,6 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 	local ammo_to_consume = ammo_count + 1
 
 	if self.ammo_in_mag > ammo_count then
-	--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 		self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
 
 		local dir = sm.camera.getDirection()
@@ -557,7 +619,8 @@ local reload_anims =
 	["reload"         ] = true,
 	["reload_empty"   ] = true,
 	["sprintExit"     ] = true,
-	["aimExit"        ] = true
+	["aimExit"        ] = true,
+	["equip"          ] = true
 }
 
 local ammo_count_to_anim_name =
@@ -648,7 +711,7 @@ local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading() or (self.aim_timer ~= nil)
+	local is_reloading = self:client_isGunReloading()
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
@@ -665,7 +728,7 @@ function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self:cl_onPrimaryUse(false)
 	end
 
-	if secondaryState ~= self.cl_prevSecondaryStatesecondaryUse then
+	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse(secondaryState)
 		self.prevSecondaryState = secondaryState
 	end

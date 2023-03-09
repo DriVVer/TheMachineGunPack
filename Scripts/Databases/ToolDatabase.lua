@@ -1581,7 +1581,6 @@ local mgp_tool_database =
 			}
 		}
 	},
-
 	Bazooka =
 	{
 		required_effects = {
@@ -1598,8 +1597,10 @@ local mgp_tool_database =
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Base.rend", enabled_by_default = true },
 			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Barrel.rend" , enabled_by_default = true }
 		},
+		animation_reset = {
+			on_equip = { fp = { { "BZ_Anim", 3.0 } }, tp = { { "BZ_Anim", 3.0 } } }
+		},
 		animation = {
-
 			on_equip =
 			{
 				[1] = {
@@ -1611,7 +1612,6 @@ local mgp_tool_database =
 					}
 				}
 			},
-
 			shoot =
 			{
 				[1] = {
@@ -1635,7 +1635,6 @@ local mgp_tool_database =
 				}
 
 			},
-
 			aimShoot =
 			{
 				[1] = {
@@ -1659,7 +1658,6 @@ local mgp_tool_database =
 				}
 
 			},
-			
 			reload =
 			{
 				[1] = {
