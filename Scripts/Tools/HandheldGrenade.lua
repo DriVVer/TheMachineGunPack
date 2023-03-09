@@ -3,6 +3,8 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
+dofile("ExplosionUtil.lua")
+
 ---@class HandheldGrenadeBase : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
@@ -441,7 +443,7 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 				end
 			end
 
-			sm.physics.explode(owner_char.worldPosition, grenade_settings.expl_lvl, grenade_settings.expl_rad, 5, 4, "PropaneTank - ExplosionSmall")
+			mgp_better_explosion_exc(owner_char.worldPosition, grenade_settings.expl_lvl, grenade_settings.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", nil, owner_char)
 			sm.event.sendToPlayer(grenade_owner, "sv_e_receiveDamage", { damage = 1000 })
 		end
 	end

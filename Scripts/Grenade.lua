@@ -1,6 +1,8 @@
 ---@class Grenade : ShapeClass
 Grenade = class()
 
+dofile("Tools/ExplosionUtil.lua")
+
 function Grenade:server_onCreate()
 	local s_inter = self.interactable
 	if s_inter then
@@ -78,7 +80,7 @@ function Grenade:server_onFixedUpdate(dt)
 				end
 			end
 
-			sm.physics.explode(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", self.shape)
+			mgp_better_explosion(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", self.shape)
 			self.shape:destroyShape(0)
 
 			self.timer = nil

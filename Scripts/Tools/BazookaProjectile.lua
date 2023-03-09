@@ -1,3 +1,5 @@
+dofile("ExplosionUtil.lua")
+
 local g_bazookaProjectiles = {}
 local g_bazookaActiveInstances = 0
 local g_bazookaServerTick = 0
@@ -68,7 +70,7 @@ local function BazookaProjectile_serverCreateExplosion(proj_data)
 				local v_spawn_dir = proj_data[2]
 				local v_spawn_pos = proj_data[1] + v_spawn_dir:normalize() * 0.25 --[[@as Vec3]]
 
-				sm.physics.explode(proj_data[1], 7, 0.3, 1, 10, "PropaneTank - ExplosionSmall")
+				mgp_better_explosion(proj_data[1], 7, 0.3, 5, 10, "PropaneTank - ExplosionSmall")
 
 				for i = 1, math.random(5, 40) do
 					local v_dir = sm.noise.gunSpread(v_spawn_dir, 80)
@@ -98,7 +100,7 @@ local function BazookaProjectile_serverCreateExplosion(proj_data)
 		end
 	end
 
-	sm.physics.explode(proj_data[1], 7, 0.3, 1, 1, "PropaneTank - ExplosionSmall")
+	mgp_better_explosion(proj_data[1], 7, 0.3, 5, 1, "PropaneTank - ExplosionSmall")
 end
 
 function BazookaProjectile_serverOnFixedUpdate(dt)
