@@ -120,10 +120,10 @@ function Bazooka.loadAnimations( self )
 
 				reload_empty = { "Bazooka_reload", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "DB_aim_idle", { looping = true } },
-				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "Bazooka_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "Bazooka_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "Bazooka_aim_idle", { looping = true } },
+				aimShoot = { "Bazooka_aim_shoot", { nextAnimation = "aimIdle"} },
 
 				sprintInto = { "Bazooka_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Bazooka_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
