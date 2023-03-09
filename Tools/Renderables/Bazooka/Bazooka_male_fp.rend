@@ -6,7 +6,7 @@
 			"maxViewDistance": 1000.0,
 			"animationList": [
 				{ "name": "Bazooka_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_idle.dae" },
-				{ "name": "Bazooka_shoot", 	 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_idle.dae" },
+				{ "name": "Bazooka_shoot", 	 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_shoot.dae" },
 
 				{ "name": "Bazooka_reload", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_reload.dae" },
 
