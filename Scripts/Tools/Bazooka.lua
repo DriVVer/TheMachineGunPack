@@ -546,7 +546,7 @@ function Bazooka:onShoot(v_proj_hit)
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 100 }, self.tool:isLocal())
+	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 80 }, self.tool:isLocal())
 end
 
 function Bazooka.cl_onPrimaryUse(self, is_double_shot)
