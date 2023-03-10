@@ -164,18 +164,24 @@ function Eoka:server_onFixedUpdate(dt)
 				return
 			end
 
-			local v_pl_hotbar = v_tool_owner:getHotbar()
-			if not (v_pl_hotbar and sm.exists(v_pl_hotbar)) then
+			local v_pl_inventory = nil
+			if sm.game.getLimitedInventory() then
+				v_pl_inventory = v_tool_owner:getInventory()
+			else
+				v_pl_inventory = v_tool_owner:getHotbar()
+			end
+
+			if not (v_pl_inventory and sm.exists(v_pl_inventory)) then
 				return
 			end
 
 			local v_eoka_uuid = "5a1ca305-513f-42db-ae71-52bd0a9247fc"
-			for i = 0, v_pl_hotbar:getSize() - 1 do
-				local v_cur_item = v_pl_hotbar:getItem(i)
+			for i = 0, v_pl_inventory:getSize() - 1 do
+				local v_cur_item = v_pl_inventory:getItem(i)
 				if tostring(v_cur_item.uuid) == v_eoka_uuid then
 					if v_cur_item.instance == self.tool.id then
 						sm.container.beginTransaction()
-						sm.container.spendFromSlot(v_pl_hotbar, i, v_cur_item.uuid, 1, true)
+						sm.container.spendFromSlot(v_pl_inventory, i, v_cur_item.uuid, 1, true)
 						sm.container.endTransaction()
 
 						break
@@ -200,18 +206,29 @@ function Eoka:client_onUpdate(dt)
 		end
 	end
 
+	if self.cl_restore_timer then
+		self.cl_restore_timer = self.cl_restore_timer - dt
+		if self.cl_restore_timer <= 0.0 then
+			self.cl_restore_timer = nil
+
+			self.gun_used = nil
+			self:client_onEquip(true)
+		end
+	end
+
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
 	if self.tool:isLocal() then
-		if self.equipped then
+		if self.equipped and not self.cl_restore_timer then
 			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -230,7 +247,6 @@ function Eoka:client_onUpdate(dt)
 	if self.tool:isLocal() then
 		local dispersion = 0.0
 		local fireMode = self.normalFireMode
-		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
 			dispersion = fireMode.minDispersionCrouching
@@ -255,13 +271,10 @@ function Eoka:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.cl_remove_timer ~= nil)
+	self.tool:setBlockSprint(self.cl_remove_timer ~= nil or self.cl_restore_timer ~= nil)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	local linareAngleDown = clamp( -linareAngle, 0.0, 1.0 )
 
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
@@ -426,7 +439,10 @@ end
 
 function Eoka:sv_n_onShoot(gun_slot)
 	self.network:sendToClients("cl_n_onShoot")
-	self.sv_gun_timer = 3.0
+
+	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+		self.sv_gun_timer = 3.0
+	end
 end
 
 function Eoka:cl_n_onShoot()
@@ -534,12 +550,21 @@ function Eoka:cl_onPrimaryUse(state)
 		return
 	end
 
+	if self.tool:isSprinting() then
+		return
+	end
+
 	local v_ownerChar = v_toolOwner.character
 	if not (v_ownerChar and sm.exists(v_ownerChar)) then
 		return
 	end
 
 	self.gun_used = true
+	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+		self.cl_remove_timer = 2.5
+	else
+		self.cl_restore_timer = 2.5
+	end
 
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -579,9 +604,6 @@ function Eoka:cl_onPrimaryUse(state)
 
 	dir = sm.noise.gunSpread( dir, spreadDeg )
 	sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
-
-	-- Timers
-	self.cl_remove_timer = 2.5
 
 	-- Send TP shoot over network and dircly to self
 	self:onShoot()
