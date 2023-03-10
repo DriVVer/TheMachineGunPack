@@ -359,8 +359,6 @@ function Bazooka:client_onUpdate(dt)
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
-				elseif name == "idle" then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
