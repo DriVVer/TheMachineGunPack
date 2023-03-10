@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyGUI type="Layout" version="3.2.0">
+	<Widget type="ImageBox" skin="ImageBox" position_real="0 0 1 1" align="HStretch VStretch" name="Scope">
+		<Property key="ImageTexture" value="$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Gui/bazooka_sight.png"/>
+	</Widget>
+	<CodeGeneratorSettings/>
+</MyGUI>

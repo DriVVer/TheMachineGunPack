@@ -58,11 +58,27 @@ function Bazooka:client_onCreate()
 	self:client_initAimVals()
 	self.aimBlendSpeed = 10.0
 
+	self.cl_sight_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/BazookaSight.layout", false, {
+		isHud = true,
+		isInteractive = false,
+		needsCursor = false,
+		hidesHotbar = false
+	})
+
 	BazookaProjectile_clientInitialize()
 	mgp_toolAnimator_initialize(self, "Bazooka")
 end
 
 function Bazooka:client_onDestroy()
+	local v_sight_hud = self.cl_sight_hud
+	if v_sight_hud and sm.exists(v_sight_hud) then
+		if v_sight_hud:isActive() then
+			v_sight_hud:close()
+		end
+
+		v_sight_hud:destroy()
+	end
+
 	BazookaProjectile_clientDestroy()
 	mgp_toolAnimator_destroy(self)
 end
@@ -283,6 +299,23 @@ function Bazooka:client_onUpdate(dt)
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
+	if self.cl_sight_timer then
+		self.cl_sight_timer = self.cl_sight_timer - dt
+		if self.cl_sight_timer <= 0.0 then
+			self.cl_sight_timer = nil
+		end
+	end
+
+	if self.aiming and self.cl_sight_timer == nil then
+		if not self.cl_sight_hud:isActive() then
+			self.cl_sight_hud:open()
+		end
+	else
+		if self.cl_sight_hud:isActive() then
+			self.cl_sight_hud:close()
+		end
+	end
+
 	TSU_OnUpdate(self)
 
 	self:client_updateAimWeights(dt)
@@ -482,6 +515,7 @@ function Bazooka:client_onUnequip(animate, is_custom)
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
+	self.cl_sight_timer = nil
 	mgp_toolAnimator_reset(self)
 
 	local s_tool = self.tool
@@ -714,6 +748,10 @@ function Bazooka:cl_onSecondaryUse(state)
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
+
+		if self.aiming then
+			self.cl_sight_timer = 0.5
+		end
 
 		self.tool:setMovementSlowDown(self.aiming)
 		self:onAim(self.aiming)
