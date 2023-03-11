@@ -9,6 +9,7 @@
 		"ParticleEffects/Smoke_new_tp.json",
 		"ParticleEffects/Muzzle_flash_1_fp.json",
 		"ParticleEffects/Muzzle_flash_1_tp.json",
-		"ParticleEffects/Muzzle_flash_star.json"
+		"ParticleEffects/Muzzle_flash_star.json",
+		"ParticleEffects/Bazooka_Rocket_Exhaust.json"
 	]
 }

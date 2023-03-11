@@ -143,7 +143,9 @@ function BazookaProjectile_clientOnFixedUpdate(dt)
 						proj[7] = result:getShape()
 					end
 
-					proj[3]:stopImmediate()
+					local v_cur_proj = proj[3]
+					v_cur_proj:setPosition(sm.vec3.new(0, 0, 10000))
+					v_cur_proj:stop()
 				else
 					proj[1] = v_pos + v_dir * dt
 					BazookaProjectile_UpdateProjectileRotation(proj)

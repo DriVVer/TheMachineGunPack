@@ -4,6 +4,10 @@
 			{
 				"type": "renderable",
 				"name": "$CONTENT_DATA/Projectiles/Renderables/Rocket.rend"
+			},
+			{
+				"type": "particle",
+				"name": "Bazooka_Rocket_Exhaust"
 			}
 		]
 	}

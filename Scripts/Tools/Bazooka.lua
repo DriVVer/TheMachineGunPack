@@ -19,7 +19,6 @@ local Damage = 25
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
----@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 ---@field equipped boolean
 Bazooka = class()
@@ -52,8 +51,7 @@ function Bazooka:client_initAimVals()
 end
 
 function Bazooka:client_onCreate()
-	self.mag_capacity = 1
-	self.ammo_in_mag = self.mag_capacity
+	self.cl_is_loaded = true
 
 	self:client_initAimVals()
 	self.aimBlendSpeed = 10.0
@@ -273,7 +271,7 @@ function Bazooka:client_onUpdate(dt)
 			local cur_anim_cache = fp_anim.currentAnimation
 			local anim_data = fp_anim.animations[cur_anim_cache]
 			if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
-				self.ammo_in_mag = self.mag_capacity
+				self.cl_is_loaded = true
 			end
 
 			if cur_anim_cache ~= "equip" then
@@ -603,10 +601,9 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 	end
 
 	local ammo_count = is_double_shot and 1 or 0
-	local ammo_to_consume = ammo_count + 1
 
-	if self.ammo_in_mag > ammo_count then
-		self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
+	if self.cl_is_loaded then
+		self.cl_is_loaded = false
 
 		local dir = sm.camera.getDirection()
 		local firePos = nil
@@ -655,25 +652,19 @@ local reload_anims =
 	["equip"          ] = true
 }
 
-local ammo_count_to_anim_name =
-{
-	[0] = "reload_empty",
-	[1] = "reload"
-}
-
-function Bazooka:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Bazooka:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
-function Bazooka:cl_n_onReload(anim_id)
+function Bazooka:cl_n_onReload()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function Bazooka:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function Bazooka:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload_empty", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload_empty")
 end
 
 function Bazooka:client_isGunReloading()
@@ -686,19 +677,17 @@ function Bazooka:client_isGunReloading()
 end
 
 function Bazooka:cl_initReloadAnim(anim_id)
-	local anim_name = ammo_count_to_anim_name[anim_id]
-
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_id)
+	self.network:sendToServer("sv_n_onReload")
 end
 
 function Bazooka:client_onReload()
-	if self.ammo_in_mag ~= self.mag_capacity then
+	if not self.cl_is_loaded then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			self:cl_initReloadAnim(self.ammo_in_mag)
+			self:cl_initReloadAnim()
 		end
 	end
 
@@ -721,23 +710,7 @@ function Bazooka:cl_startCheckMagAnim()
 	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
-function Bazooka:client_onToggle()
-	--[[if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("DB: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
-
-			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
-
-			self:cl_startCheckMagAnim()
-			self.network:sendToServer("sv_n_checkMag")
-		else
-			sm.gui.displayAlertText("DB: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim(0)
-		end
-	end
-]]
-	return true
-end
+function Bazooka:client_onToggle() return true end
 
 local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
