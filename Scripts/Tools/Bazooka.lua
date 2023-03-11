@@ -65,6 +65,8 @@ function Bazooka:client_onCreate()
 
 	BazookaProjectile_clientInitialize()
 	mgp_toolAnimator_initialize(self, "Bazooka")
+
+	self.cl_barrel_exhaust = sm.effect.createEffect("Bazooka - BarrelExhaust")
 end
 
 function Bazooka:client_onDestroy()
@@ -75,6 +77,12 @@ function Bazooka:client_onDestroy()
 		end
 
 		v_sight_hud:destroy()
+	end
+
+	local v_exhaust_effect = self.cl_barrel_exhaust
+	if v_exhaust_effect and sm.exists(v_exhaust_effect) then
+		v_exhaust_effect:stopImmediate()
+		v_exhaust_effect:destroy()
 	end
 
 	BazookaProjectile_clientDestroy()
@@ -185,7 +193,6 @@ function Bazooka.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 3.5
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
@@ -297,6 +304,14 @@ function Bazooka:client_onUpdate(dt)
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
+	if self.equipped then
+		local v_fumes_dir = self.tool:getTpBoneDir("pejnt_barrel")
+		local v_fumes_pos = self.tool:getTpBonePos("pejnt_barrel") - v_fumes_dir
+
+		self.cl_barrel_exhaust:setPosition(v_fumes_pos)
+		self.cl_barrel_exhaust:setRotation(sm.vec3.getRotation(v_fumes_dir, sm.vec3.new(0, 0, 1)))
+	end
+
 	if self.cl_sight_timer then
 		self.cl_sight_timer = self.cl_sight_timer - dt
 		if self.cl_sight_timer <= 0.0 then
@@ -304,13 +319,15 @@ function Bazooka:client_onUpdate(dt)
 		end
 	end
 
-	if self.aiming and self.cl_sight_timer == nil then
-		if not self.cl_sight_hud:isActive() then
-			self.cl_sight_hud:open()
-		end
-	else
-		if self.cl_sight_hud:isActive() then
-			self.cl_sight_hud:close()
+	if self.tool:isLocal() then
+		if self.aiming and self.cl_sight_timer == nil then
+			if not self.cl_sight_hud:isActive() then
+				self.cl_sight_hud:open()
+			end
+		else
+			if self.cl_sight_hud:isActive() then
+				self.cl_sight_hud:close()
+			end
 		end
 	end
 
@@ -474,7 +491,7 @@ function Bazooka:client_onEquip(animate, is_custom)
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
-	
+
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	local is_tool_local = self.tool:isLocal()
@@ -489,7 +506,14 @@ function Bazooka:client_onEquip(animate, is_custom)
 		sm.audio.play("PotatoRifle - Equip", self.tool:getPosition())
 	end
 
-	if is_custom and self.cl_barrel_attached then
+	if not self.cl_is_loaded then
+		self.tool:updateAnimation("BZ_Anim", 4.3, 1.0)
+		self.fireCooldownTimer = 1.0
+	else
+		self.fireCooldownTimer = 3.5
+	end
+
+	if (is_custom and self.cl_barrel_attached) or not self.cl_is_loaded then
 		if is_tool_local then
 			self.tool:updateFpAnimation("BZ_Anim", 3.5, 1.0)
 			swapFpAnimation(self.fpAnimations, "unequip", "sprintExit", 0.2)
@@ -577,9 +601,11 @@ function Bazooka:onShoot(v_proj_hit)
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
 	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 120 }, self.tool:isLocal())
+
+	self.cl_barrel_exhaust:start()
 end
 
-function Bazooka.cl_onPrimaryUse(self, is_double_shot)
+function Bazooka.cl_onPrimaryUse(self)
 	if self:client_isGunReloading() then return end
 
 	local v_toolOwner = self.tool:getOwner()
@@ -599,8 +625,6 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 	if self.tool:isSprinting() then
 		return
 	end
-
-	local ammo_count = is_double_shot and 1 or 0
 
 	if self.cl_is_loaded then
 		self.cl_is_loaded = false
@@ -624,7 +648,7 @@ function Bazooka.cl_onPrimaryUse(self, is_double_shot)
 		end
 
 		-- Timers
-		self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
+		self.fireCooldownTimer = 0.5
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
@@ -734,7 +758,7 @@ end
 
 function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if primaryState == sm.tool.interactState.start then
-		self:cl_onPrimaryUse(false)
+		self:cl_onPrimaryUse()
 	end
 
 	if secondaryState ~= self.prevSecondaryState then

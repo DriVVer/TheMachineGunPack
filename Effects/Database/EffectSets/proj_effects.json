@@ -10,5 +10,13 @@
 				"name": "Bazooka_Rocket_Exhaust"
 			}
 		]
+	},
+	"Bazooka - BarrelExhaust": {
+		"effectList": [
+			{
+				"type": "particle",
+				"name": "Bazooka_Barrel_Exhaust"
+			}
+		]
 	}
 }
