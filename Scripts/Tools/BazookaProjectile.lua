@@ -88,6 +88,7 @@ local function BazookaProjectile_serverCreateExplosion(proj_data)
 
 		if v_is_part or v_is_shape then
 			sm.effect.playEffect("PropaneTank - ExplosionSmall", proj_data[1])
+			mgp_apply_damage_in_sphere(proj_data[1], 5, 100, 200)
 		end
 
 		if v_is_part then
