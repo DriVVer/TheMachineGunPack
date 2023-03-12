@@ -11,6 +11,7 @@
 				{ "name": "Bazooka_reload", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_reload.dae" },
 
 				{ "name": "Bazooka_pickup", 	   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_pickup.dae" },
+				{ "name": "Bazooka_pickup_short", 	   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_pickup_short.dae" },
 				{ "name": "Bazooka_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_putdown.dae" },
 
 				{ "name": "Bazooka_aim_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_aim_into.dae" },
