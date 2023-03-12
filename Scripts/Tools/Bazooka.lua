@@ -45,6 +45,34 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
+local g_close_anim_block =
+{
+	["reload"         ] = true,
+	["reload_empty"   ] = true,
+	["aimExit"        ] = true,
+	["equip"          ] = true
+}
+
+local g_sprint_block_anims =
+{
+	["reload_empty"] = true,
+	["reload"      ] = true,
+	["sprintExit"  ] = true,
+	["aimExit"     ] = true,
+	["equip"       ] = true
+}
+
+local g_action_block_anims =
+{
+	["reload_empty"] = true,
+	["reload"      ] = true,
+	["sprintExit"  ] = true,
+	["sprintIdle"  ] = true,
+	["sprintInto"  ] = true,
+	["aimExit"     ] = true,
+	["equip"       ] = true
+}
+
 function Bazooka:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
@@ -145,7 +173,6 @@ function Bazooka.loadAnimations( self )
 				unequip = { "Bazooka_putdown" },
 
 				idle = { "Bazooka_idle", { nextAnimation = "idle" } },
-				inspect = { "Bazooka_inspect", { nextAnimation = "idle" } },
 
 				shoot = { "Bazooka_shoot", { nextAnimation = "idle" } },
 
@@ -274,30 +301,59 @@ function Bazooka:client_onUpdate(dt)
 
 	if self.tool:isLocal() then
 		if self.equipped then
-			local fp_anim = self.fpAnimations
-			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
-				self.cl_is_loaded = true
-			end
-
-			if cur_anim_cache ~= "equip" then
-				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
-					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
-					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			local hit, result = sm.localPlayer.getRaycast(1.5)
+			if hit and not self:cl_isAnimPlaying(g_close_anim_block) then
+				local v_cur_anim = self.fpAnimations.currentAnimation
+				if v_cur_anim ~= "sprintInto" and v_cur_anim ~= "sprintExit" then
+					if v_cur_anim == "sprintIdle" then
+						self.fpAnimations.animations.sprintIdle.time = 0
+					else
+						swapFpAnimation(self.fpAnimations, "sprintExit", "sprintInto", 0.0)
+					end
 				end
 			else
-				if predict_animation_end(anim_data, dt) then
-					self.cl_barrel_attached = true
+				local fp_anim = self.fpAnimations
+				local cur_anim_cache = fp_anim.currentAnimation
+				local anim_data = fp_anim.animations[cur_anim_cache]
+				if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
+					self.cl_is_loaded = true
+				end
+
+				if cur_anim_cache ~= "equip" then
+					if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+						swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+					elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+						swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+					end
+				else
+					if predict_animation_end(anim_data, dt) then
+						self.cl_barrel_attached = true
+					end
+				end
+
+				if self.aiming and aim_animation_list01[cur_anim_cache] == nil then
+					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+				end
+				if not self.aiming and aim_animation_list02[cur_anim_cache] == true then
+					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 				end
 			end
+		end
 
-			if self.aiming and aim_animation_list01[cur_anim_cache] == nil then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+		if self.cl_sight_timer then
+			self.cl_sight_timer = self.cl_sight_timer - dt
+			if self.cl_sight_timer <= 0.0 then
+				self.cl_sight_timer = nil
 			end
-			if not self.aiming and aim_animation_list02[cur_anim_cache] == true then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+		end
+
+		if self.aiming and self.cl_sight_timer == nil then
+			if not self.cl_sight_hud:isActive() then
+				self.cl_sight_hud:open()
+			end
+		else
+			if self.cl_sight_hud:isActive() then
+				self.cl_sight_hud:close()
 			end
 		end
 
@@ -309,26 +365,7 @@ function Bazooka:client_onUpdate(dt)
 		local v_fumes_pos = self.tool:getTpBonePos("pejnt_barrel") - v_fumes_dir
 
 		self.cl_barrel_exhaust:setPosition(v_fumes_pos)
-		self.cl_barrel_exhaust:setRotation(sm.vec3.getRotation(v_fumes_dir, sm.vec3.new(0, 0, 1)))
-	end
-
-	if self.cl_sight_timer then
-		self.cl_sight_timer = self.cl_sight_timer - dt
-		if self.cl_sight_timer <= 0.0 then
-			self.cl_sight_timer = nil
-		end
-	end
-
-	if self.tool:isLocal() then
-		if self.aiming and self.cl_sight_timer == nil then
-			if not self.cl_sight_hud:isActive() then
-				self.cl_sight_hud:open()
-			end
-		else
-			if self.cl_sight_hud:isActive() then
-				self.cl_sight_hud:close()
-			end
-		end
+		self.cl_barrel_exhaust:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, -1), v_fumes_dir))
 	end
 
 	TSU_OnUpdate(self)
@@ -389,7 +426,7 @@ function Bazooka:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() )
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:cl_isAnimPlaying(g_sprint_block_anims) )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -606,7 +643,7 @@ function Bazooka:onShoot(v_proj_hit)
 end
 
 function Bazooka.cl_onPrimaryUse(self)
-	if self:client_isGunReloading() then return end
+	if self:cl_isAnimPlaying(g_action_block_anims) then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not v_toolOwner then
@@ -664,17 +701,14 @@ function Bazooka.cl_onPrimaryUse(self)
 	end
 end
 
-local reload_anims =
-{
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-	["reload"         ] = true,
-	["reload_empty"   ] = true,
-	["sprintExit"     ] = true,
-	["aimExit"        ] = true,
-	["equip"          ] = true
-}
+function Bazooka:cl_isAnimPlaying(anim_table)
+	local fp_anims = self.fpAnimations
+	if fp_anims ~= nil then
+		return (anim_table[fp_anims.currentAnimation] == true)
+	end
+
+	return false
+end
 
 function Bazooka:sv_n_onReload()
 	self.network:sendToClients("cl_n_onReload")
@@ -691,15 +725,6 @@ function Bazooka:cl_startReloadAnim()
 	mgp_toolAnimator_setAnimation(self, "reload_empty")
 end
 
-function Bazooka:client_isGunReloading()
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
 function Bazooka:cl_initReloadAnim(anim_id)
 	setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
 	self:cl_startReloadAnim()
@@ -710,7 +735,7 @@ end
 
 function Bazooka:client_onReload()
 	if not self.cl_is_loaded then
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:cl_isAnimPlaying(g_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim()
 		end
 	end
@@ -740,7 +765,7 @@ local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading()
+	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
@@ -766,20 +791,5 @@ function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self.prevSecondaryState = secondaryState
 	end
 
-	if f and not self:client_isGunReloading() and not self.tool:isSprinting() and self.fpAnimations.currentAnimation ~= "inspect" then
-		self.network:sendToServer("sv_onInspect")
-	end
-
 	return true, true
-end
-
-function Bazooka:sv_onInspect()
-	self.network:sendToClients("cl_onInspect")
-end
-
-function Bazooka:cl_onInspect()
-	--setTpAnimation(self.tpAnimations, "inspect", 1)
-	if self.tool:isLocal() then
-		setFpAnimation(self.fpAnimations, "inspect", 0.0)
-	end
 end
