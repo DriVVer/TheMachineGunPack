@@ -810,10 +810,7 @@ function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self:cl_onPrimaryUse()
 	end
 
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse(secondaryState)
-		self.prevSecondaryState = secondaryState
-	end
+	self:cl_onSecondaryUse(secondaryState)
 
 	if f ~= self.prevFState then
 		self.prevFState = f
