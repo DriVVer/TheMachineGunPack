@@ -170,6 +170,7 @@ function Bazooka.loadAnimations( self )
 			self.tool,
 			{
 				equip = { "Bazooka_pickup", { nextAnimation = "idle" } },
+				equip_short = { "Bazooka_pickup_short", { nextAnimation = "idle" } },
 				unequip = { "Bazooka_putdown" },
 
 				idle = { "Bazooka_idle", { nextAnimation = "idle" } },
@@ -362,7 +363,7 @@ function Bazooka:client_onUpdate(dt)
 
 	if self.equipped then
 		local v_fumes_dir = self.tool:getTpBoneDir("pejnt_barrel")
-		local v_fumes_pos = self.tool:getTpBonePos("pejnt_barrel") - v_fumes_dir
+		local v_fumes_pos = self.tool:getTpBonePos("pejnt_barrel") - (v_fumes_dir * 0.8)
 
 		self.cl_barrel_exhaust:setPosition(v_fumes_pos)
 		self.cl_barrel_exhaust:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, -1), v_fumes_dir))
@@ -553,7 +554,7 @@ function Bazooka:client_onEquip(animate, is_custom)
 	if (is_custom and self.cl_barrel_attached) or not self.cl_is_loaded then
 		if is_tool_local then
 			self.tool:updateFpAnimation("BZ_Anim", 3.5, 1.0)
-			swapFpAnimation(self.fpAnimations, "unequip", "sprintExit", 0.2)
+			swapFpAnimation(self.fpAnimations, "unequip", "equip_short", 0.2)
 		end
 	else
 		mgp_toolAnimator_setAnimation(self, "on_equip")
