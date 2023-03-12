@@ -782,6 +782,29 @@ function Bazooka:cl_onSecondaryUse(state)
 	end
 end
 
+function Bazooka:cl_showRange()
+	if not self.cl_sight_hud:isActive() then
+		return
+	end
+
+	if self:cl_isAnimPlaying(g_action_block_anims) then
+		return
+	end
+
+	local v_output_text = "#ffff00Range Estimation#ffffff: %s meters"
+
+	local hit, result = sm.localPlayer.getRaycast(300)
+	if hit then
+		local v_distance = (result.pointWorld - result.originWorld):length()
+		local v_range_text = ("#ff2d03%0.0f#ffffff"):format(v_distance)
+		v_output_text = v_output_text:format(v_range_text)
+	else
+		v_output_text = v_output_text:format("More than #ff2d03300#ffffff")
+	end
+
+	sm.gui.displayAlertText(v_output_text, 2)
+end
+
 function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if primaryState == sm.tool.interactState.start then
 		self:cl_onPrimaryUse()
@@ -790,6 +813,13 @@ function Bazooka:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse(secondaryState)
 		self.prevSecondaryState = secondaryState
+	end
+
+	if f ~= self.prevFState then
+		self.prevFState = f
+		if f then
+			self:cl_showRange()
+		end
 	end
 
 	return true, true
