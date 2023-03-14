@@ -263,6 +263,13 @@ end
 
 function Bazooka:server_onFixedUpdate(dt)
 	BazookaProjectile_serverOnFixedUpdate(dt)
+
+	if self.sv_shoot_timer then
+		self.sv_shoot_timer = self.sv_shoot_timer - dt
+		if self.sv_shoot_timer <= 0.0 then
+			self.sv_shoot_timer = nil
+		end
+	end
 end
 
 function Bazooka:client_updateAimWeights(dt)
@@ -624,6 +631,11 @@ function Bazooka:onAim(aiming)
 end
 
 function Bazooka:sv_n_onShoot(v_proj_hit)
+	if self.sv_shoot_timer ~= nil then
+		return
+	end
+
+	self.sv_shoot_timer = 5.5
 	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
 end
 
@@ -634,7 +646,7 @@ function Bazooka:cl_n_onShoot(v_proj_hit)
 end
 
 function Bazooka:onShoot(v_proj_hit)
-	local v_shoot_anim  = (self.aiming and "aimShoot" or "shoot")
+	local v_shoot_anim = (self.aiming and "aimShoot" or "shoot")
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
@@ -742,22 +754,6 @@ function Bazooka:client_onReload()
 	end
 
 	return true
-end
-
-function Bazooka:sv_n_checkMag()
-	self.network:sendToClients("cl_n_checkMag")
-end
-
-function Bazooka:cl_n_checkMag()
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		self:cl_startCheckMagAnim()
-	end
-end
-
-function Bazooka:cl_startCheckMagAnim()
-	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
 function Bazooka:client_onToggle() return true end
