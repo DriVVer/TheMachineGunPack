@@ -21,6 +21,7 @@ dofile("ExplosionUtil.lua")
 ---@field mgp_tp_animation_list table
 ---@field mgp_movement_animations table
 ---@field mgp_fp_animation_list table
+---@field grenade_used boolean
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
@@ -103,6 +104,9 @@ local function calculateUpVector(vector)
 end
 
 function HandheldGrenadeBase:client_onUpdate(dt)
+	if not sm.exists(self.tool) then
+		return
+	end
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
@@ -117,8 +121,27 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 		end
 	end
 
+	if self.grenade_used then
+		local v_fp_anims = self.fpAnimations
+		if v_fp_anims.currentAnimation == "throw" then
+			local v_anim_data = v_fp_anims.animations[v_fp_anims.currentAnimation]
+			v_anim_data.time = sm.util.clamp(v_anim_data.time, 0.0, 1.1)
+
+			if v_anim_data.time == 1.1 then
+				self.tool:setFpRenderables({})
+			end
+		end
+	end
+
+	if self.cl_remove_timer then
+		self.cl_remove_timer = self.cl_remove_timer - dt
+		if self.cl_remove_timer <= 0.0 then
+			self.cl_remove_timer = nil
+		end
+	end
+
 	if self.tool:isLocal() then
-		if self.equipped then
+		if self.equipped and not self.grenade_used then
 			local fp_anims = self.fpAnimations
 			local cur_anim = fp_anims.currentAnimation
 
@@ -143,6 +166,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 				end
 			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -200,7 +224,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint( self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() )
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() or self.cl_remove_timer ~= nil or self.cl_remove_timer ~= nil)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -282,7 +306,11 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function HandheldGrenadeBase.client_onEquip( self, animate )
+function HandheldGrenadeBase:client_onEquip(animate)
+	if self.grenade_used then
+		self.tool:setTpRenderables({})
+		return
+	end
 
 	if animate then
 		sm.audio.play( "PotatoRifle - Equip", self.tool:getPosition() )
@@ -383,6 +411,38 @@ function HandheldGrenadeBase:cl_n_throwGrenade()
 	end
 end
 
+local function sv_remove_grenade(self)
+	local v_tool_owner = self.tool:getOwner()
+	if not (v_tool_owner and sm.exists(v_tool_owner)) then
+		return
+	end
+
+	local v_pl_inventory = nil
+	if sm.game.getLimitedInventory() then
+		v_pl_inventory = v_tool_owner:getInventory()
+	else
+		v_pl_inventory = v_tool_owner:getHotbar()
+	end
+
+	if not (v_pl_inventory and sm.exists(v_pl_inventory)) then
+		return
+	end
+
+	local v_grenade_uuid = "c3e4dc43-a841-4c0f-82a6-7225d1bf210e"
+	for i = 0, v_pl_inventory:getSize() - 1 do
+		local v_cur_item = v_pl_inventory:getItem(i)
+		if tostring(v_cur_item.uuid) == v_grenade_uuid then
+			if v_cur_item.instance == self.tool.id then
+				sm.container.beginTransaction()
+				sm.container.spendFromSlot(v_pl_inventory, i, v_cur_item.uuid, 1, true)
+				sm.container.endTransaction()
+
+				break
+			end
+		end
+	end
+end
+
 local _math_random = math.random
 local _sm_vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
@@ -395,7 +455,7 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 			self.sv_grenade_activation_timer = nil
 		end
 	end
-	
+
 	if self.sv_grenade_timer then
 		self.sv_grenade_timer = self.sv_grenade_timer - dt
 
@@ -445,6 +505,20 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 
 			mgp_better_explosion_exc(owner_char.worldPosition, grenade_settings.expl_lvl, grenade_settings.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", nil, owner_char)
 			sm.event.sendToPlayer(grenade_owner, "sv_e_receiveDamage", { damage = 1000 })
+
+			if sm.game.getLimitedInventory() and sm.game.getEnableAmmoConsumption() then
+				sv_remove_grenade(self)
+				return
+			end
+		end
+	end
+
+	if self.sv_remove_timer then
+		self.sv_remove_timer = self.sv_remove_timer - dt
+
+		if self.sv_remove_timer <= 0.0 then
+			self.sv_remove_timer = nil
+			sv_remove_grenade(self)
 		end
 	end
 end
@@ -460,6 +534,10 @@ end
 
 function HandheldGrenadeBase:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
+
+	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+		self.sv_remove_timer = 1.2
+	end
 end
 
 function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
@@ -499,6 +577,10 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 	end
 
 	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
+
+	if sm.game.getLimitedInventory() and sm.game.getEnableAmmoConsumption() then
+		sv_remove_grenade(self)
+	end
 end
 
 local _math_sqrt = math.sqrt
@@ -576,6 +658,14 @@ function HandheldGrenadeBase:cl_shouldBlockSprint()
 end
 
 function HandheldGrenadeBase:cl_onPrimaryUse(state)
+	if state ~= sm.tool.interactState.start then
+		return
+	end
+
+	if self.grenade_used then
+		return
+	end
+
 	if self.tool:getOwner().character == nil then
 		return
 	end
@@ -584,26 +674,31 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		return
 	end
 
-	if self.fireCooldownTimer <= 0.0 and state == sm.tool.interactState.start then
-		if self.grenade_active then
-			self.fireCooldownTimer = 2.0
+	if self.fireCooldownTimer > 0.0 then
+		return
+	end
 
-			self.grenade_active = false
-			self.cl_grenade_timer = nil
+	if self.grenade_active then
+		self.grenade_active = false
+		if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+			self.cl_remove_timer = 1.0
+			self.grenade_used = true
+		end
 
-			self.grenade_spawn_timer = 0.35
+		self.grenade_spawn_timer = 0.35
+		self.fireCooldownTimer = 2.0
+		self.cl_grenade_timer = nil
 
-			self:onThrowGrenade()
-			self.network:sendToServer("sv_n_throwGrenade")
+		self:onThrowGrenade()
+		self.network:sendToServer("sv_n_throwGrenade")
 
-			setFpAnimation(self.fpAnimations, "throw", 0.0)
-		else
-			if not self.tool:isSprinting() then
-				setFpAnimation(self.fpAnimations, "activate", 0.0)
+		setFpAnimation(self.fpAnimations, "throw", 0.0)
+	else
+		if not self.tool:isSprinting() then
+			setFpAnimation(self.fpAnimations, "activate", 0.0)
 
-				self:onActivateGrenade()
-				self.network:sendToServer("sv_n_activateGrenade")
-			end
+			self:onActivateGrenade()
+			self.network:sendToServer("sv_n_activateGrenade")
 		end
 	end
 end
