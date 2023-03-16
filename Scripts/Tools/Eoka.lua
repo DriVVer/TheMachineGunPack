@@ -50,6 +50,21 @@ end
 function Eoka:client_onCreate()
 	self.aimBlendSpeed = 8.0
 	self:client_initAimVals()
+
+	self.cl_shoot_tp = sm.effect.createEffect("Muzzle_Flash_SmallCal_tp")
+	self.cl_shoot_fp = sm.effect.createEffect("Muzzle_Flash_SmallCal_fp")
+end
+
+function Eoka:client_onDestroy()
+	local function destroy_effect(eff)
+		if eff and sm.exists(eff) then
+			eff:stopImmediate()
+			eff:destroy()
+		end
+	end
+
+	destroy_effect(self.cl_shoot_tp)
+	destroy_effect(self.cl_shoot_fp)
 end
 
 function Eoka:client_onRefresh()
@@ -243,6 +258,24 @@ function Eoka:client_onUpdate(dt)
 		end
 		return
 	end
+
+	if self.tool:isLocal() then
+		local dir = sm.localPlayer.getDirection()
+		local fire_pos = self.tool:getFpBonePos("pejnt_barrel")
+
+		local fp_eff = self.cl_shoot_fp
+		fp_eff:setPosition(fire_pos + dir * 0.05)
+		fp_eff:setVelocity(self.tool:getMovementVelocity())
+		fp_eff:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), dir))
+	end
+
+	local shoot_pos = self.tool:getTpBonePos("pejnt_barrel")
+	local shoot_dir = self.tool:getTpBoneDir("pejnt_barrel")
+
+	local tp_eff = self.cl_shoot_tp
+	tp_eff:setPosition(shoot_pos)
+	tp_eff:setVelocity(self.tool:getMovementVelocity())
+	tp_eff:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), shoot_dir))
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -452,10 +485,15 @@ function Eoka:cl_n_onShoot()
 end
 
 function Eoka:onShoot()
-	self.tpAnimations.animations.idle.time     = 0
-	self.tpAnimations.animations.shoot.time    = 0
+	self.tpAnimations.animations.idle.time  = 0
+	self.tpAnimations.animations.shoot.time = 0
 
 	setTpAnimation(self.tpAnimations, "shoot", 10.0)
+	if self.tool:isInFirstPersonView() then
+		self.cl_shoot_fp:start()
+	else
+		self.cl_shoot_tp:start()
+	end
 end
 
 ---@return Vec3
