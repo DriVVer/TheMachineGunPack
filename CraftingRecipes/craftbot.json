@@ -108,6 +108,29 @@
 			}
 		]
 	},
+	{
+		"itemId": "903b737a-42b9-459d-a169-c4171016cfab", //rockets
+		"quantity": 2,
+		"craftTime": 30,
+		"ingredientList": [
+			{
+				"quantity": 1,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 20,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+			{
+				"quantity": 10,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			},
+			{
+				"quantity": 5,
+				"itemId": "d4d68946-aa03-4b8f-b1af-96b81ad4e305" //gas
+			}
+		]
+	}
 
 	//Guns
 
@@ -292,4 +315,6 @@
 			}
 		]
 	}
+	
+
 ]

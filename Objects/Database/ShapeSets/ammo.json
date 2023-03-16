@@ -27,6 +27,32 @@
 			"stackSize": 200
 		},
 		{
+			"uuid": "903b737a-42b9-459d-a169-c4171016cfab",
+			"name": "obj_rockets",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_rocket_ammo.rend",
+			"color": "f71905",
+			"box": {
+				"x": 1,
+				"y": 3,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropYZm",
+			"sticky": "+Y-Y-Z",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 5,
+				"friction": 4,
+				"buoyancy": 6
+			},
+			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
+			"qualityLevel": 20,
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 10
+		},
+		{
 			"uuid": "af84d5d9-00b1-4bab-9c5a-102c11e14a13",
 			"name": "obj_pistol_ammo",
 			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_pistol_ammo.rend",
