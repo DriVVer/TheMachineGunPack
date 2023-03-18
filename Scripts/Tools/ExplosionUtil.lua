@@ -89,9 +89,9 @@ function mgp_apply_damage_in_sphere(position, radius, player_damage, unit_damage
 		mgp_explosion_damage_player(player, radius, player_damage, position)
 	end
 
-	for k, unit in pairs(sm.unit.getAllUnits()) do
+	--[[for k, unit in pairs(sm.unit.getAllUnits()) do
 		mgp_explosion_damage_unit(unit, radius, unit_damage, position)
-	end
+	end]]
 end
 
 function mgp_apply_damage_in_sphere_exc(position, radius, player_damage, unit_damage, player_exception)
@@ -101,9 +101,9 @@ function mgp_apply_damage_in_sphere_exc(position, radius, player_damage, unit_da
 		end
 	end
 
-	for k, unit in pairs(sm.unit.getAllUnits()) do
+	--[[for k, unit in pairs(sm.unit.getAllUnits()) do
 		mgp_explosion_damage_unit(unit, radius, unit_damage, position)
-	end
+	end]]
 end
 
 function mgp_better_explosion(position, lvl, rad, impRad, impStr, eff, ignore_shape)
