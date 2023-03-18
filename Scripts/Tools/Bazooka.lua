@@ -6,8 +6,6 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("BazookaProjectile.lua")
 
-local Damage = 25
-
 ---@class Bazooka : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
@@ -78,8 +76,37 @@ function Bazooka:client_initAimVals()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
+function Bazooka:sv_updateAmmoCounter()
+	self.storage:save(self.sv_bazooka_loaded)
+end
+
+function Bazooka:server_onCreate()
+	local v_bz_loaded = self.storage:load()
+	if v_bz_loaded ~= nil then
+		self.sv_bazooka_loaded = v_bz_loaded
+	else
+		if not sm.game.getEnableAggro() or not sm.game.getLimitedInventory() then
+			self.sv_bazooka_loaded = true
+		end
+
+		self:sv_updateAmmoCounter()
+	end
+end
+
+function Bazooka:cl_receiveBazookaState(state)
+	self.cl_waiting_for_data = nil
+	self.cl_is_loaded = state
+end
+
+function Bazooka:sv_requestBazookaState(data, player)
+	self.network:sendToClient(player, "cl_receiveBazookaState", self.sv_bazooka_loaded)
+end
+
 function Bazooka:client_onCreate()
 	self.cl_is_loaded = true
+
+	self.cl_waiting_for_data = true
+	self.network:sendToServer("sv_requestBazookaState")
 
 	self:client_initAimVals()
 	self.aimBlendSpeed = 10.0
@@ -289,6 +316,36 @@ function Bazooka:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
+local mgp_bazooka_ammo = sm.uuid.new("903b737a-42b9-459d-a169-c4171016cfab")
+function Bazooka:server_spendAmmo(data, player)
+	if self.sv_bazooka_loaded then return end
+
+	if data ~= nil or player ~= nil then return end
+
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	if not v_inventory:canSpend(mgp_bazooka_ammo, 1) then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, mgp_bazooka_ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_bazooka_loaded = true
+	self:sv_updateAmmoCounter()
+end
+
+function Bazooka:sv_n_trySpendAmmo(data, player)
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil or v_owner ~= player then return end
+
+	self:server_spendAmmo()
+	self.network:sendToClient(v_owner, "cl_receiveBazookaState", self.sv_bazooka_loaded)
+end
+
 local function predict_animation_end(anim_data, dt)
 	if anim_data == nil then
 		return false
@@ -324,7 +381,8 @@ function Bazooka:client_onUpdate(dt)
 				local cur_anim_cache = fp_anim.currentAnimation
 				local anim_data = fp_anim.animations[cur_anim_cache]
 				if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
-					self.cl_is_loaded = true
+					--self.cl_is_loaded = true
+					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 
 				if cur_anim_cache ~= "equip" then
@@ -583,6 +641,7 @@ function Bazooka:client_onUnequip(animate, is_custom)
 	self.equipped = false
 	self.aiming = false
 	self.cl_sight_timer = nil
+	self.cl_waiting_for_data = nil
 	mgp_toolAnimator_reset(self)
 
 	local s_tool = self.tool
@@ -631,12 +690,15 @@ function Bazooka:onAim(aiming)
 end
 
 function Bazooka:sv_n_onShoot(v_proj_hit)
-	if self.sv_shoot_timer ~= nil then
+	if self.sv_shoot_timer ~= nil or not self.sv_bazooka_loaded then
 		return
 	end
 
 	self.sv_shoot_timer = 5.5
 	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
+
+	self.sv_bazooka_loaded = false
+	self:sv_updateAmmoCounter()
 end
 
 function Bazooka:cl_n_onShoot(v_proj_hit)
@@ -656,7 +718,9 @@ function Bazooka:onShoot(v_proj_hit)
 end
 
 function Bazooka.cl_onPrimaryUse(self)
-	if self:cl_isAnimPlaying(g_action_block_anims) then return end
+	if self:cl_isAnimPlaying(g_action_block_anims) or self.cl_waiting_for_data then
+		return
+	end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not v_toolOwner then
@@ -668,11 +732,7 @@ function Bazooka.cl_onPrimaryUse(self)
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 then
-		return
-	end
-
-	if self.tool:isSprinting() then
+	if self.fireCooldownTimer > 0.0 or self.tool:isSprinting() then
 		return
 	end
 
@@ -744,11 +804,20 @@ function Bazooka:cl_initReloadAnim(anim_id)
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload")
+	self.cl_waiting_for_data = true
 end
 
 function Bazooka:client_onReload()
 	if not self.cl_is_loaded then
-		if not self:cl_isAnimPlaying(g_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:cl_isAnimPlaying(g_action_block_anims) and not self.cl_waiting_for_data and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+				if not sm.localPlayer.getInventory():canSpend(mgp_bazooka_ammo, 1) then
+					sm.gui.displayAlertText("Bazooka: No Ammo")
+					sm.audio.play("PotatoRifle - NoAmmo")
+					return true
+				end
+			end
+
 			self:cl_initReloadAnim()
 		end
 	end
@@ -762,7 +831,7 @@ local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims)
+	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims) and not self.cl_waiting_for_data
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
