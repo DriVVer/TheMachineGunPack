@@ -578,8 +578,10 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 
 	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
 
-	if sm.game.getLimitedInventory() and sm.game.getEnableAmmoConsumption() then
-		sv_remove_grenade(self)
+	if self.grenade_spawn_timer ~= nil then
+		if sm.game.getLimitedInventory() and sm.game.getEnableAmmoConsumption() then
+			sv_remove_grenade(self)
+		end
 	end
 end
 
