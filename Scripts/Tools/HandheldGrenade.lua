@@ -576,9 +576,10 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 		return
 	end
 
+	local v_can_remove = (self.sv_grenade_timer ~= nil)
 	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
 
-	if self.grenade_spawn_timer ~= nil then
+	if v_can_remove then
 		if sm.game.getLimitedInventory() and sm.game.getEnableAmmoConsumption() then
 			sv_remove_grenade(self)
 		end
