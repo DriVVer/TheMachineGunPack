@@ -68,6 +68,7 @@ local g_action_block_anims =
 	["sprintIdle"  ] = true,
 	["sprintInto"  ] = true,
 	["aimExit"     ] = true,
+	["equip_short" ] = true,
 	["equip"       ] = true
 }
 
@@ -831,7 +832,7 @@ local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims) and not self.cl_waiting_for_data
+	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims) or self.cl_waiting_for_data ~= nil
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
