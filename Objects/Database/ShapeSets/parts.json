@@ -1686,7 +1686,8 @@
 			"density": 300,
 			"physicsMaterial": "Metal",
 			"sensor": {},
-			"qualityLevel": 1
+			"qualityLevel": 1,
+			"showInInventory": false
 		},
 		{
 			"uuid": "1a74c9b1-dea5-42ab-86ad-08f1d24507d3",
@@ -1749,7 +1750,8 @@
 			"density": 1500,
 			"physicsMaterial": "Metal",
 			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
+			"sticky": "+Y-Y+Z-Z+X-X",
+			"showInInventory": false
 		},
 		{
 			"uuid": "820f8c24-37a5-42c4-9443-f60f0724c6b1",
@@ -1775,7 +1777,8 @@
 			"density": 10000,
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		},
 		{
 			"uuid": "77a65230-9c33-490f-b24d-e80cd63f6802",
@@ -1842,7 +1845,8 @@
 			"density": 250,
 			"physicsMaterial": "Metal",
 			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3
+			"qualityLevel": 3,
+			"showInInventory": false
 		},
 		{
 			"uuid": "b40dbc55-65f3-40ae-be5e-4d8976c7d970",
@@ -1881,7 +1885,8 @@
 			"density": 250,
 			"physicsMaterial": "Metal",
 			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3
+			"qualityLevel": 3,
+			"showInInventory": false
 		},
 		{
 			"uuid": "27839ef0-bc1e-4fed-a715-7adb9c9701b1",
@@ -1920,7 +1925,8 @@
 			"density": 250,
 			"physicsMaterial": "Metal",
 			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3
+			"qualityLevel": 3,
+			"showInInventory": false
 		},
 		{
 			"uuid": "cb8d96c9-2b7b-4bfc-ae07-e308455dee6b",
