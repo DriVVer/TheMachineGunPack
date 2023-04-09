@@ -414,20 +414,30 @@ local _Database = {
 		}
 	},
 	["bdd9e357-35f7-4140-8b19-477abef20e0f"] = { --Browning .50 HMG
-	server = {
-		cannon = {
-			spread = 0.5,
-			fire_force = {
-				min = 600.0,
-				max = 600.0
+		server = {
+			cannon = {
+				spread = 0.5,
+				fire_force = {
+					min = 600.0,
+					max = 600.0
+				},
+				recoil = sm.vec3.new(0, 0, -100),
+				reload_time = 4,
+				auto_reload = true
 			},
-			recoil = sm.vec3.new(0, 0, -100),
-			reload_time = 4,
-			auto_reload = true,
-			projectile_offset = sm.vec3.new(0, 0, 1.0),
-			projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
-		}
-	},
+			projectile = {
+				effect = "ShapeRenderable",
+				explosionEffect = "Boom12",
+				effectOffset = sm.vec3.new(0, 0, 1.5),
+				lifetime = 20.0,
+				gravity = 10.0,
+				friction = 0.003,
+				explosionLevel = 4,
+				explosionRadius = 0.5,
+				explosionImpulseStrength = 4,
+				explosionImpulseRadius = 2
+			}
+		},
 		client = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.75), bone_name = nil}
@@ -465,7 +475,18 @@ local _Database = {
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.5),
-				projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
+			},
+			projectile = {
+				effect = "ShapeRenderable",
+				explosionEffect = "Boom12",
+				effectOffset = sm.vec3.new(0, 0, 1.5),
+				lifetime = 20.0,
+				gravity = 10.0,
+				friction = 0.003,
+				explosionLevel = 4,
+				explosionRadius = 0.5,
+				explosionImpulseStrength = 4,
+				explosionImpulseRadius = 2
 			}
 		},
 		client = {
@@ -504,6 +525,18 @@ local _Database = {
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.8),
 				projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
+			},
+			projectile = {
+				effect = "ShapeRenderable",
+				explosionEffect = "Boom12",
+				effectOffset = sm.vec3.new(0, 0, 1.5),
+				lifetime = 20.0,
+				gravity = 10.0,
+				friction = 0.003,
+				explosionLevel = 4,
+				explosionRadius = 0.5,
+				explosionImpulseStrength = 4,
+				explosionImpulseRadius = 2
 			}
 		},
 		client = {
@@ -532,20 +565,31 @@ local _Database = {
 		}
 	},
 	["05f70a50-3bb4-4a00-b7fb-f1c931d585ca"] = { --12mm DSzK Machine Gun
-	server = {
-		cannon = {
-			spread = 0.5,
-			fire_force = {
-				min = 600.0,
-				max = 600.0
+		server = {
+			cannon = {
+				spread = 0.5,
+				fire_force = {
+					min = 600.0,
+					max = 600.0
+				},
+				recoil = sm.vec3.new(0, 0, -100),
+				reload_time = 4,
+				auto_reload = true,
+				projectile_offset = sm.vec3.new(0, 0, 0.7)
 			},
-			recoil = sm.vec3.new(0, 0, -100),
-			reload_time = 4,
-			auto_reload = true,
-			projectile_offset = sm.vec3.new(0, 0, 0.7),
-			projectile = sm.uuid.new("2d17fddd-851a-46ee-8017-22255f58d74f")
-		}
-	},
+			projectile = {
+				effect = "ShapeRenderable",
+				explosionEffect = "Boom12",
+				effectOffset = sm.vec3.new(0, 0, 1.5),
+				lifetime = 20.0,
+				gravity = 10.0,
+				friction = 0.003,
+				explosionLevel = 4,
+				explosionRadius = 0.5,
+				explosionImpulseStrength = 4,
+				explosionImpulseRadius = 2
+			}
+		},
 		client = {
 			effects = {
 				shoot = {name = "BoomMuzzle12", offset = sm.vec3.new(0, 0, 0.69), bone_name = nil}
