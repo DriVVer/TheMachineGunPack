@@ -35,15 +35,15 @@
 		"craftTime": 30,
 		"ingredientList": [
 			{
-				"quantity": 20,
+				"quantity": 40,
 				"itemId": "f0cba95b-2dc4-4492-8fd9-36546a4cb5aa" //cardboard
 			},
 			{
-				"quantity": 30,
+				"quantity": 60,
 				"itemId": "1f7ac0bb-ad45-4246-9817-59bdf7f7ab39" //scrap
 			},
             {
-				"quantity": 15,
+				"quantity": 25,
 				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
 			}
 		]
@@ -91,7 +91,7 @@
 	{
 
 		"itemId": "295481d0-910a-48d4-a04a-e1bf1290e510", //sniper ammo
-		"quantity": 20,
+		"quantity": 10,
 		"craftTime": 60,
 		"ingredientList": [		
 			{
