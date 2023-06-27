@@ -132,7 +132,7 @@
 		]
 	},
 
-	//Guns
+	//Guns 
 
 	{
 		"itemId": "c0cb7836-075a-478a-af3d-0b7360721527", //mosin
@@ -161,6 +161,32 @@
 			}
 		]
 	},
+
+	{
+		"itemId": "0ca4320e-5ddb-4dc1-843d-6037d65b2e4a", //garand
+		"quantity": 1,
+		"craftTime": 60,
+		"ingredientList": [
+			{
+				"quantity": 40,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 60,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 5,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 1,
+				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
+			}
+		]
+	},
+
+
 	{
 		"itemId": "c3e4dc43-a841-4c0f-82a6-7225d1bf210e", //granade
 		"quantity": 1,

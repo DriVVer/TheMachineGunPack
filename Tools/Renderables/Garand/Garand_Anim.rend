@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Garand/Mosin_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "Mosin_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mosin/Mosin_tp_shoot.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [ 
+						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$CONTENT_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}

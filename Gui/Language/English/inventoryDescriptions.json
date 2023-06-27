@@ -41,8 +41,12 @@
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
-		"title": "Mosin-Nagant M44",
+		"title": "Mosin-Nagant M44 rifle",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+	},
+	"0ca4320e-5ddb-4dc1-843d-6037d65b2e4a": {
+		"title": "M1 Garand rifle",
+		"description": "The Machine Gun Pack\n\nWeapon based on well known 'M1 Garand rifle' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"c3e4dc43-a841-4c0f-82a6-7225d1bf210e": {
 		"title": "Stielhandgranate 24",
