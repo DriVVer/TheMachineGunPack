@@ -527,6 +527,44 @@
 		]
 	},
 
+	"GarandPing":
+	{
+		"parameterList":
+		{
+			"size": 0.003, 
+			"velocity_max_50": 46.0,
+			"phys_energy": 300.0,
+			"material": 9.0
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/coll/impact_single",
+				"parameters":
+				[
+					"Size"
+				],
+				"delay": 0.0
+			}
+		]
+	},
+
+	"GarandThumb":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/painttool/pt_equip",
+				"delay": 0.0
+			}
+		]
+	},
+
 	"MosinBoltClose":
 	{
 		
