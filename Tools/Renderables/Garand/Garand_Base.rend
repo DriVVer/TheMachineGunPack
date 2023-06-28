@@ -31,7 +31,7 @@
 				{
 					"material": "DifAsg",
 					"textureList": [
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/char_connecttool_dif.png",
 						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_asg.tga",
 						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_nor.tga"
 					]
