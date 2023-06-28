@@ -634,8 +634,8 @@ function Garand:onAim(aiming)
 	end
 end
 
-function Garand:sv_n_onShoot(dir)
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function Garand:sv_n_onShoot(ammo_in_mag)
+	self.network:sendToClients("cl_n_onShoot", ammo_in_mag)
 
 	if dir ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
@@ -643,20 +643,20 @@ function Garand:sv_n_onShoot(dir)
 	end
 end
 
-function Garand:cl_n_onShoot(dir)
+function Garand:cl_n_onShoot(ammo_in_mag)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(dir)
+		self:onShoot(ammo_in_mag)
 	end
 end
 
-function Garand:onShoot(dir)
+function Garand:onShoot(ammo_in_mag)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	if dir ~= nil then
+	if ammo_in_mag ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, "shoot")
+		mgp_toolAnimator_setAnimation(self, ammo_in_mag == 0 and "last_shot" or "shoot")
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
@@ -688,6 +688,30 @@ local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
 	return direction
 end
 
+function Garand:cl_getFirePosition(fireMode)
+	local v_direction = sm.camera.getDirection()
+
+	if not self.tool:isInFirstPersonView() then
+		return self.tool:getTpBonePos("pejnt_barrel"), v_direction
+	end
+
+	if not self.aiming then
+		return self.tool:getFpBonePos("pejnt_barrel"), v_direction
+	end
+
+	local v_fire_pos = sm.camera.getPosition() + v_direction * 0.5
+
+	local hit, result = sm.localPlayer.getRaycast(300)
+	if hit then
+		local v_resultPos = result.pointWorld
+
+		local dir_calc = (v_resultPos - v_fire_pos):normalize()
+		v_direction = SolveBallisticArc(v_fire_pos, v_resultPos, fireMode.fireVelocity, dir_calc)
+	end
+
+	return v_fire_pos, v_direction
+end
+
 local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
 function Garand:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then return end
@@ -708,30 +732,10 @@ function Garand:cl_onPrimaryUse(state)
 	end
 
 	if self.ammo_in_mag > 0 then
-	--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
 		self.ammo_in_mag = self.ammo_in_mag - 1
 
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-
-		local dir = sm.camera.getDirection()
-		local firePos = nil
-		if self.tool:isInFirstPersonView() then
-			if self.aiming then
-				firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
-
-				local hit, result = sm.localPlayer.getRaycast(300)
-				if hit then
-					local v_resultPos = result.pointWorld
-
-					local dir_calc = (v_resultPos - firePos):normalize()
-					dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
-				end
-			else
-				firePos = self.tool:getFpBonePos("pejnt_barrel")
-			end
-		else
-			firePos = self.tool:getTpBonePos("pejnt_barrel")
-		end
+		local firePos, dir = self:cl_getFirePosition(fireMode)
 
 		-- Spread
 		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -749,7 +753,7 @@ function Garand:cl_onPrimaryUse(state)
 		self.sprintCooldownTimer = self.sprintCooldown
 
 		-- Send TP shoot over network and directly to self
-		self:onShoot(1)
+		self:onShoot(self.ammo_in_mag)
 		self.network:sendToServer("sv_n_onShoot", 1)
 
 		sm.camera.setShake(0.07)
