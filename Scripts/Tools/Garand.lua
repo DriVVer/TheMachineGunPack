@@ -55,7 +55,7 @@ local reload_anims =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-	["garand_thumb"] = true
+	["reload_gt"] = true
 }
 
 ---Reload anims with all the other reload anims
@@ -66,7 +66,7 @@ local reload_anims2 =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-	["garand_thumb"] = true
+	["reload_gt"] = true
 }
 
 function Garand:client_initAimVals()
@@ -246,7 +246,7 @@ end
 local actual_reload_anims =
 {
 	["reload"] = true,
-	["garand_thumb"] = true
+	["reload_gt"] = true
 }
 
 local aim_animation_list01 =
@@ -474,7 +474,7 @@ function Garand:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "garand_thumb" ) then
+				elseif ( name == "reload" or name == "reload_gt" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -781,8 +781,10 @@ local garand_ordinary_reload = "reload"
 local garand_thumb_reload = "reload_gt"
 
 function Garand:cl_startReloadAnim(is_garand_thumb)
-	setTpAnimation(self.tpAnimations, garand_ordinary_reload, 1.0)
-	mgp_toolAnimator_setAnimation(self, garand_ordinary_reload)
+	local v_cur_anim = is_garand_thumb and garand_thumb_reload or garand_ordinary_reload
+
+	setTpAnimation(self.tpAnimations, v_cur_anim, 1.0)
+	mgp_toolAnimator_setAnimation(self, v_cur_anim)
 end
 
 function Garand:client_isGunReloading(reload_table)
@@ -809,7 +811,9 @@ function Garand:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	setFpAnimation(self.fpAnimations, garand_ordinary_reload, 0.0)
+	local has_garand_thumb = math.random(0, 100) > 70
+
+	setFpAnimation(self.fpAnimations, has_garand_thumb and garand_thumb_reload or garand_ordinary_reload, 0.0)
 	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
