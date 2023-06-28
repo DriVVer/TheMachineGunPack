@@ -8,8 +8,8 @@
 				{ "name": "Gun_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
 				{ "name": "Gun_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_shoot.dae" },
 
-				{ "name": "Reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Mosin_fp_reload.dae" },
-				{ "name": "ReloadGT", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Mosin_fp_reload_thumb.dae" },
+				{ "name": "Reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_reload.dae" },
+				{ "name": "ReloadGT", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_reload_thumb.dae" },
 
 				{ "name": "Gun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
 				{ "name": "Gun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
