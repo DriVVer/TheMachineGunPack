@@ -8,7 +8,7 @@ dofile("ToolSwimUtil.lua")
 
 local Damage = 70
 
----@class Mosin : ToolClass
+---@class Garand : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -22,10 +22,9 @@ local Damage = 70
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
----@field cl_hammer_cocked boolean
 ---@field scope_hud GuiInterface
 Garand = class()
-Garand.mag_capacity = 5
+Garand.mag_capacity = 8
 
 local renderables =
 {
@@ -118,31 +117,14 @@ function Garand:client_onCreate()
 	self:client_initAimVals()
 	self.aimBlendSpeed = 3.0
 
-	self.cl_hammer_cocked = true
 	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "Garand")
-
-	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
-		isHud = true,
-		isInteractive = false,
-		needsCursor = false,
-		hidesHotbar = true
-	})
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
 function Garand:client_onDestroy()
-	local v_scopeHud = self.scope_hud
-	if v_scopeHud and sm.exists(v_scopeHud) then
-		if v_scopeHud:isActive() then
-			v_scopeHud:close()
-		end
-
-		v_scopeHud:destroy()
-	end
-
 	mgp_toolAnimator_destroy(self)
 end
 
@@ -320,7 +302,7 @@ function Garand:client_updateAimWeights(dt)
 
 	-- Camera update
 	local bobbingFp = 1
-	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
+	if self.aiming and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -407,7 +389,6 @@ function Garand:client_onUpdate(dt)
 
 				if time_predict >= info_duration then
 					self.network:sendToServer("sv_n_trySpendAmmo")
-					self.cl_hammer_cocked = true
 				end
 			end
 
@@ -464,45 +445,8 @@ function Garand:client_onUpdate(dt)
 
 		if self.scope_timer <= 0.0 then
 			self.scope_timer = nil
-
-			if self.aiming then
-				self.scope_enabled = true
-			end
 		end
 	end
-
-	if self.scope_enabled then
-		local v_isInFirstPerson = self.tool:isInFirstPersonView()
-		local v_aimState = self.aiming
-		local v_isAimReload = self.fpAnimations.currentAnimation == "cock_hammer_aim"
-		if v_isInFirstPerson and v_aimState and not v_isAimReload then
-			if not self.scope_hud:isActive() then
-				self.scope_hud:open()
-
-				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
-				self.fpAnimations.animations.aim_anim.time = 0.5
-
-				sm.gui.startFadeToBlack(1.0, 0.5)
-				sm.gui.endFadeToBlack(0.8)
-			end
-		else
-			if not v_isAimReload then
-				if not v_aimState then
-					self.scope_enabled = false
-				end
-
-				setFpAnimation(self.fpAnimations, "aimExit", 0.0)
-			end
-
-			if self.scope_hud:isActive() then
-				self.scope_hud:close()
-
-				sm.gui.startFadeToBlack(1.0, 0.5)
-				sm.gui.endFadeToBlack(0.8)
-			end
-		end
-	end
-
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -673,10 +617,6 @@ function Garand:client_onEquip(animate, is_custom)
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
-
-	if self.cl_hammer_cocked then
-		mgp_toolAnimator_setAnimation(self, "cock_the_hammer_on_equip")
-	end
 end
 
 function Garand:client_onUnequip(animate, is_custom)
@@ -685,19 +625,11 @@ function Garand:client_onUnequip(animate, is_custom)
 	end
 
 	self.waiting_for_ammo = nil
-	self.scope_enabled = false
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 
 	mgp_toolAnimator_reset(self)
-
-	if self.scope_hud:isActive() then
-		self.scope_hud:close()
-
-		sm.gui.startFadeToBlack(1.0, 0.5)
-		sm.gui.endFadeToBlack(0.8)
-	end
 
 	local s_tool = self.tool
 	if sm.exists(s_tool) then
@@ -831,120 +763,86 @@ function Garand:cl_onPrimaryUse(state)
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 then
+	if self.fireCooldownTimer > 0.0 or self.tool:isSprinting() then
 		return
 	end
 
-	if self.tool:isSprinting() then
-		return
-	end
+	if self.ammo_in_mag > 0 then
+	--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+		self.ammo_in_mag = self.ammo_in_mag - 1
 
-	if self.cl_hammer_cocked then
-		if self.ammo_in_mag > 0 then
-		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
-			self.ammo_in_mag = self.ammo_in_mag - 1
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
-			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local dir = sm.camera.getDirection()
+		local firePos = nil
+		if self.tool:isInFirstPersonView() then
+			if self.aiming then
+				firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
 
-			local dir = sm.camera.getDirection()
-			local firePos = nil
-			if self.tool:isInFirstPersonView() then
-				if self.aiming then
-					firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
+				local hit, result = sm.localPlayer.getRaycast(300)
+				if hit then
+					local v_resultPos = result.pointWorld
 
-					local hit, result = sm.localPlayer.getRaycast(300)
-					if hit then
-						local v_resultPos = result.pointWorld
-
-						local dir_calc = (v_resultPos - firePos):normalize()
-						dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
-					end
-				else
-					firePos = self.tool:getFpBonePos("pejnt_barrel")
+					local dir_calc = (v_resultPos - firePos):normalize()
+					dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
 				end
 			else
-				firePos = self.tool:getTpBonePos("pejnt_barrel")
-			end
-
-			-- Spread
-			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-			dir = sm.noise.gunSpread( dir, spreadDeg )
-			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
-
-			-- Timers
-			self.fireCooldownTimer = fireMode.fireCooldown
-			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-			self.sprintCooldownTimer = self.sprintCooldown
-
-			-- Send TP shoot over network and directly to self
-			self:onShoot(1)
-			self.network:sendToServer("sv_n_onShoot", 1)
-
-			sm.camera.setShake(0.07)
-
-			if not self.aiming then
-				-- Play FP shoot animation
-				setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+				firePos = self.tool:getFpBonePos("pejnt_barrel")
 			end
 		else
-			self:onShoot()
-			self.network:sendToServer("sv_n_onShoot")
+			firePos = self.tool:getTpBonePos("pejnt_barrel")
+		end
 
-			self.fireCooldownTimer = 0.3
-			sm.audio.play( "PotatoRifle - NoAmmo" )
+		-- Spread
+		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
+		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+
+		dir = sm.noise.gunSpread( dir, spreadDeg )
+		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
+
+		-- Timers
+		self.fireCooldownTimer = fireMode.fireCooldown
+		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+		self.sprintCooldownTimer = self.sprintCooldown
+
+		-- Send TP shoot over network and directly to self
+		self:onShoot(1)
+		self.network:sendToServer("sv_n_onShoot", 1)
+
+		sm.camera.setShake(0.07)
+
+		if not self.aiming then
+			-- Play FP shoot animation
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 		end
 	else
-		if self.ammo_in_mag == 0 then
-			self:client_onReload()
-			return
-		else
-			self.fireCooldownTimer = 1.0
+		self:onShoot()
+		self.network:sendToServer("sv_n_onShoot")
 
-			self.network:sendToServer("sv_n_cockHammer", self.aiming)
-
-			if self.aiming then
-				setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
-				setTpAnimation(self.tpAnimations, v_toolChar:isCrouching() and "bolt_action_crouch" or "bolt_action_aim", 1.0)
-				mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
-			else
-				setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
-				setTpAnimation(self.tpAnimations, "bolt_action", 1.0)
-				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-			end
-		end
+		self.fireCooldownTimer = 0.3
+		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
-
-	self.cl_hammer_cocked = not self.cl_hammer_cocked
 end
 
-local ammo_count_to_anim_name =
-{
-	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4",
-	[5] = "reload5"
-}
-
-function Garand:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Garand:sv_n_onReload(is_garand_thumb)
+	self.network:sendToClients("cl_n_onReload", is_garand_thumb)
 end
 
-function Garand:cl_n_onReload(anim_id)
+function Garand:cl_n_onReload(is_garand_thumb)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
+		self:cl_startReloadAnim(is_garand_thumb)
 	end
 end
 
-function Garand:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+local garand_ordinary_reload = "reload0"
+local garand_thumb_reload = "reload0"
+
+function Garand:cl_startReloadAnim(is_garand_thumb)
+	setTpAnimation(self.tpAnimations, garand_ordinary_reload, 1.0)
+	mgp_toolAnimator_setAnimation(self, garand_ordinary_reload)
 end
 
 function Garand:client_isGunReloading(reload_table)
@@ -960,27 +858,19 @@ function Garand:client_isGunReloading(reload_table)
 	return false
 end
 
-function Garand:cl_initReloadAnim(anim_id)
-	local v_cur_anim_id = anim_id
+function Garand:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
 		if v_available_ammo == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
-
-		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
-		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
-
-		v_cur_anim_id = (#ammo_count_to_anim_name - v_spend_count)
 	end
 
 	self.waiting_for_ammo = true
 
-	local anim_name = ammo_count_to_anim_name[v_cur_anim_id]
-
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, garand_ordinary_reload, 0.0)
+	self:cl_startReloadAnim(garand_ordinary_reload)
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload", v_cur_anim_id)
@@ -989,12 +879,12 @@ end
 function Garand:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			if self.cl_hammer_cocked then
-				sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
+			if self.ammo_in_mag ~= 0 then
+				sm.gui.displayAlertText("Garand: can't reload while magazine is not empty")
 				return true
 			end
 
-			self:cl_initReloadAnim(self.ammo_in_mag)
+			self:cl_initReloadAnim()
 		end
 	end
 
@@ -1028,7 +918,7 @@ function Garand:client_onToggle()
 			self.network:sendToServer("sv_n_checkMag")
 		else
 			sm.gui.displayAlertText("Garand: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim(0)
+			self:cl_initReloadAnim()
 		end
 	end
 
