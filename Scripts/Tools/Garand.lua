@@ -201,9 +201,9 @@ function Garand:loadAnimations()
 		fireCooldown = 0.13,
 		spreadCooldown = 0.05,
 		spreadIncrement = 1,
-		spreadMinAngle = 0.05,
-		spreadMaxAngle = 0.10,
-		fireVelocity = 600.0,
+		spreadMinAngle = 1.1,
+		spreadMaxAngle = 3.6,
+		fireVelocity = 400.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -216,9 +216,9 @@ function Garand:loadAnimations()
 		fireCooldown = 0.13,
 		spreadCooldown = 0.01,
 		spreadIncrement = 1,
-		spreadMinAngle = 0.05,
-		spreadMaxAngle = 0.1,
-		fireVelocity = 600.0,
+		spreadMinAngle = 0.1,
+		spreadMaxAngle = 1.0,
+		fireVelocity = 400.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -290,7 +290,7 @@ function Garand:client_updateAimWeights(dt)
 	end
 
 	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+	self.tool:updateFpCamera( 20.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
 local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
@@ -756,7 +756,7 @@ function Garand:cl_onPrimaryUse(state)
 		self:onShoot(self.ammo_in_mag)
 		self.network:sendToServer("sv_n_onShoot", 1)
 
-		sm.camera.setShake(0.07)
+		sm.camera.setShake(0.04)
 
 		if not self.aiming then
 			-- Play FP shoot animation
@@ -815,7 +815,7 @@ function Garand:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	local has_garand_thumb = math.random(0, 100) > 70
+	local has_garand_thumb = math.random(0, 100) > 80
 
 	setFpAnimation(self.fpAnimations, has_garand_thumb and garand_thumb_reload or garand_ordinary_reload, 0.0)
 	self:cl_startReloadAnim()
@@ -858,7 +858,7 @@ end
 function Garand:client_onToggle()
 	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			self.cl_show_ammo_timer = 0.7
+			self.cl_show_ammo_timer = 1.2
 
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 

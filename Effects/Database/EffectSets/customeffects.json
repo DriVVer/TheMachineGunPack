@@ -531,10 +531,10 @@
 	{
 		"parameterList":
 		{
-			"size": 0.003, 
-			"velocity_max_50": 46.0,
-			"phys_energy": 300.0,
-			"material": 9.0
+			"Size": 0.003, 
+			"Velocity_max_50": 46.0,
+			"Phys_energy": 300.0,
+			"Material": 9.0
 		},
 		
 		"effectList":
@@ -544,7 +544,10 @@
 				"name": "event:/coll/impact_single",
 				"parameters":
 				[
-					"Size"
+					"Size",
+					"Velocity_max_50",
+					"Phys_energy",
+					"Material"
 				],
 				"delay": 0.0
 			}
