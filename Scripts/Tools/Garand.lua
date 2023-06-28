@@ -54,11 +54,8 @@ local reload_anims =
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
+	["reload"] = true,
+	["garand_thumb"] = true
 }
 
 ---Reload anims with all the other reload anims
@@ -68,11 +65,8 @@ local reload_anims2 =
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
+	["reload"] = true,
+	["garand_thumb"] = true
 }
 
 function Garand:client_initAimVals()
@@ -143,18 +137,8 @@ function Garand:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
-			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
-			bolt_action_crouch = { "spudgun_crouch_aim_bolt_action", { nextAnimation = "idle" } },
+			reload = { "Mosin_Reload5", { nextAnimation = "idle" } },
 
-			reload0 = { "Mosin_Reload5", { nextAnimation = "idle" } },
-			reload1 = { "Mosin_Reload4", { nextAnimation = "idle" } },
-			reload2 = { "Mosin_Reload3", { nextAnimation = "idle" } },
-			reload3 = { "Mosin_Reload2", { nextAnimation = "idle" } },
-			reload4 = { "Mosin_Reload1", { nextAnimation = "idle" } },
-
-			reload_empty = { "Mosin_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "Mosin_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
@@ -196,16 +180,8 @@ function Garand:loadAnimations()
 				idle = { "Gun_idle", { looping = true } },
 				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Gun_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Gun_E_reload", { nextAnimation = "idle", duration = 1.0 } },
-				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
-				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
-
-				reload0 = { "Reload0", { nextAnimation = "idle" } },
-				reload1 = { "Reload1", { nextAnimation = "idle" } },
-				reload2 = { "Reload2", { nextAnimation = "idle" } },
-				reload3 = { "Reload3", { nextAnimation = "idle" } },
-				reload4 = { "Reload4", { nextAnimation = "idle" } },
+				reload = { "Reload", { nextAnimation = "idle" } },
+				reload_gt = { "ReloadGT", { nextAnimation = "idle" } },
 
 				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -269,11 +245,8 @@ end
 
 local actual_reload_anims =
 {
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
+	["reload"] = true,
+	["garand_thumb"] = true
 }
 
 local aim_animation_list01 =
@@ -398,18 +371,6 @@ function Garand:client_onUpdate(dt)
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.fpAnimations.currentAnimation == "cock_hammer_aim" then
-				local v_animData = self.fpAnimations.animations.cock_hammer_aim
-
-				local v_timePredict = v_animData.time + dt
-				if v_timePredict >= v_animData.info.duration then
-					if self.aiming then
-						setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
-						self.fpAnimations.animations.aim_anim.time = 0.5
-					end
-				end
-			end
-
 			if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
 				if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
 					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
@@ -419,6 +380,7 @@ function Garand:client_onUpdate(dt)
 				end
 			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -512,10 +474,8 @@ function Garand:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload0" or name == "reload1" or name == "reload2" or name == "reload3" or name == "reload4" ) then
+				elseif ( name == "reload" or name == "garand_thumb" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
-				elseif ( name == "bolt_action" or name == "bolt_action_aim" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
@@ -702,26 +662,6 @@ function Garand:onShoot(dir)
 	end
 end
 
-function Garand:sv_n_cockHammer(data)
-	self.network:sendToClients("cl_n_cockHammer", data)
-end
-
-function Garand:cl_n_cockHammer(aim_data)
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
-
-		local v_animName = nil
-		if aim_data then
-			v_animName = s_tool:isCrouching() and "bolt_action_crouch" or "bolt_action_aim"
-		else
-			v_animName = "bolt_action"
-		end
-
-		setTpAnimation(self.tpAnimations, v_animName, 1.0)
-	end
-end
-
 local function calculateRightVector(vector)
 	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
 	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
@@ -837,8 +777,8 @@ function Garand:cl_n_onReload(is_garand_thumb)
 	end
 end
 
-local garand_ordinary_reload = "reload0"
-local garand_thumb_reload = "reload0"
+local garand_ordinary_reload = "reload"
+local garand_thumb_reload = "reload_gt"
 
 function Garand:cl_startReloadAnim(is_garand_thumb)
 	setTpAnimation(self.tpAnimations, garand_ordinary_reload, 1.0)
@@ -870,10 +810,10 @@ function Garand:cl_initReloadAnim()
 	self.waiting_for_ammo = true
 
 	setFpAnimation(self.fpAnimations, garand_ordinary_reload, 0.0)
-	self:cl_startReloadAnim(garand_ordinary_reload)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", v_cur_anim_id)
+	self.network:sendToServer("sv_n_onReload", WIP_garand_thumb)
 end
 
 function Garand:client_onReload()
