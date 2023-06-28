@@ -137,7 +137,7 @@ function Garand:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "Mosin_Reload5", { nextAnimation = "idle" } },
+			reload = { "Mosin_Reload1", { nextAnimation = "idle" } },
 
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
@@ -198,7 +198,7 @@ function Garand:loadAnimations()
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.2,
+		fireCooldown = 0.13,
 		spreadCooldown = 0.05,
 		spreadIncrement = 1,
 		spreadMinAngle = 0.05,
@@ -213,7 +213,7 @@ function Garand:loadAnimations()
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.2,
+		fireCooldown = 0.13,
 		spreadCooldown = 0.01,
 		spreadIncrement = 1,
 		spreadMinAngle = 0.05,

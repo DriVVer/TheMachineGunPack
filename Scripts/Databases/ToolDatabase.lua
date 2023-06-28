@@ -1328,8 +1328,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.2, end_val = 0.3 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.2, end_val = 0.3 } },
 						time = 0.2
 					}
 				}
@@ -1339,8 +1339,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.2, end_val = 0.3 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.2, end_val = 0.3 } },
 						time = 0.2
 					},
 				}
@@ -1367,9 +1367,15 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.2 } },
-						time = 0.2
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.1 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.1 } },
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.1, end_val = 0.0 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.1, end_val = 0.0 } },
+						time = 0.1
 					}
 				}
 			},
@@ -1377,10 +1383,14 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 3.33 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 3.33 } },
-						time = 3.33
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.1, end_val = 3.33 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.1, end_val = 3.33 } },
+						time = 3.23
 					}
 				},
 				[2] = {
