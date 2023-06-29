@@ -198,7 +198,7 @@ function Garand:loadAnimations()
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.13,
+		fireCooldown = 0.18,
 		spreadCooldown = 0.05,
 		spreadIncrement = 1,
 		spreadMinAngle = 1.1,
@@ -213,7 +213,7 @@ function Garand:loadAnimations()
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.13,
+		fireCooldown = 0.18,
 		spreadCooldown = 0.01,
 		spreadIncrement = 1,
 		spreadMinAngle = 0.1,
@@ -767,7 +767,7 @@ function Garand:cl_onPrimaryUse(state)
 		self.network:sendToServer("sv_n_onShoot")
 
 		self.fireCooldownTimer = 0.3
-		sm.audio.play( "PotatoRifle - NoAmmo" )
+		sm.audio.play( "event:/vehicle/triggers/trigger_toggle_off" )
 	end
 end
 

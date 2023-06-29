@@ -527,6 +527,20 @@
 		]
 	},
 
+	"GarandClip":
+	{
+		
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/weldtool/wt_weld",
+				"delay": 0.0
+			}
+		]
+	},
+
 	"GarandPing":
 	{
 		"parameterList":
@@ -554,15 +568,78 @@
 		]
 	},
 
-	"GarandThumb":
+	"GarandReciever":
 	{
-		
+		"parameterList":
+		{
+			"Size": 0.03, 
+			"Velocity_max_50": 4.0,
+			"Phys_energy": 60.0,
+			"Material": 9.0
+		},
 		
 		"effectList":
 		[
 			{
 				"type": "audio",
-				"name": "event:/tools/painttool/pt_equip",
+				"name": "event:/coll/impact_single",
+				"parameters":
+				[
+					"Size",
+					"Velocity_max_50",
+					"Phys_energy",
+					"Material"
+				],
+				"delay": 0.0
+			}
+		]
+	},
+
+	"GarandRecieverMove":
+	{
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/props/installations/elevator/elevatordoor_open",
+				"duration" : 0.4,
+				"delay": 0.0
+			}
+		]
+	},
+
+	"GarandClipTake":
+	{
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_putdown",
+				"delay": 0.0
+			}
+		]
+	},
+
+	"GarandThumb":
+	{
+		"parameterList":
+		{
+			"Damage": 0.9, 
+			"Char": 1.0
+		},
+		
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/char/health/impact",
+				"parameters":
+				[
+					"Damage",
+					"Char"
+				],
 				"delay": 0.0
 			}
 		]
