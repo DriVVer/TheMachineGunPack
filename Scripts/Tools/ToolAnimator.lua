@@ -256,7 +256,7 @@ end
 
 function mgp_toolAnimator_update(self, dt)
 	if self.cl_animator_current_track_count > 0 then
-		for id, track in ipairs(self.cl_animator_tracks) do
+		for id, track in pairs(self.cl_animator_tracks) do
 			local track_func = track.func
 			if track_func ~= nil then
 				track_func(self, track, dt)

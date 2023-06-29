@@ -1314,7 +1314,7 @@ local mgp_tool_database =
 			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
-			stop_effects = { "GarandPing", "BoltClose", "BulletPut" }
+			stop_effects = { "Ping", "BoltClose", "BulletPut" }
 		},
 		animation_reset = {
 			no_ammo = mgp_aim_shoot_reset_table,
@@ -1406,12 +1406,10 @@ local mgp_tool_database =
 						time = 0.35
 					}
 				},
-
 				[2] = {
-
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.9
+						time = 0.1
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -1421,7 +1419,22 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
+					}
+				}
+			},
+			reload_gt =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.7
 					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 3.33 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 3.33 } },
+						time = 2.63
+					}
 				}
 			},
 			reload =
