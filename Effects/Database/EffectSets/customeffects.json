@@ -21,13 +21,7 @@
 					"Size"
 				],
 				"delay": 0.0
-			}//,
-			//{
-			//	"type": "particle",
-			//	"name": "potato",
-			//	"offset": { "x": 0.0, "y": 0.0, "z": 0.0 },
-			//	"delay": 0.0
-			//}
+			}
 		]
 	},
 	"overheat":
@@ -570,26 +564,12 @@
 
 	"GarandReciever":
 	{
-		"parameterList":
-		{
-			"Size": 0.03, 
-			"Velocity_max_50": 4.0,
-			"Phys_energy": 60.0,
-			"Material": 9.0
-		},
 		
 		"effectList":
 		[
 			{
 				"type": "audio",
-				"name": "event:/coll/impact_single",
-				"parameters":
-				[
-					"Size",
-					"Velocity_max_50",
-					"Phys_energy",
-					"Material"
-				],
+				"name": "event:/props/mapinspector/mi_off",
 				"delay": 0.0
 			}
 		]
@@ -603,7 +583,7 @@
 			{
 				"type": "audio",
 				"name": "event:/props/installations/elevator/elevatordoor_open",
-				"duration" : 0.4,
+				"duration" : 0.3,
 				"delay": 0.0
 			}
 		]

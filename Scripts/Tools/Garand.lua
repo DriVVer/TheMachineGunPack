@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 70
+local Damage = 60
 
 ---@class Garand : ToolClass
 ---@field fpAnimations table
@@ -151,9 +151,10 @@ function Garand:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "Mosin_Reload1", { nextAnimation = "idle" } },
+			reload = { "Garand_reload", { nextAnimation = "idle" } },
+			reload_GT = { "Garand_reload_GT", { nextAnimation = "idle" } },
 
-			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
+			ammo_check = { "Garand_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-06-28T21:09:06Z</created><keywords></keywords><modified>2023-06-28T21:09:06Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-06-30T14:34:26Z</created><keywords></keywords><modified>2023-06-30T14:34:26Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Character-anim" name="Character"><animation><source id="Character-Matrix-animation-input"><float_array id="Character-Matrix-animation-input-array" count="15">
 
@@ -1747,8 +1747,8 @@ LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt
 LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_left_toeend-Interpolations-array" count="15"><param type="name"/></accessor></technique_common></source><sampler id="jnt_left_toeend-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_left_toeend-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_left_toeend-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_left_toeend-Interpolations"/></sampler><channel source="#jnt_left_toeend-Matrix-animation-transform" target="jnt_left_toeend/matrix"/></animation></animation>
   </library_animations>
   <library_visual_scenes>
-   <visual_scene id="Scene" name="Scene">
-        
+  <visual_scene id="Scene" name="Scene">
+      
             <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
                 <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                 <extra>
@@ -2613,7 +2613,7 @@ LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt
                     </node>
                 </node>
             </node>
-       
+   
         <extra>
             <technique profile="MAX3D">
                 <frame_rate>60.000000</frame_rate>

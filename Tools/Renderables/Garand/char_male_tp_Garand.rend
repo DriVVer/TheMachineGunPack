@@ -15,17 +15,9 @@
 				{ "name": "spudgun_aim",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_idle.dae", "looping": true },
 				{ "name": "spudgun_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_shoot.dae" },
 
-				{ "name": "Mosin_tp_empty_reload",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_empty_reload.dae" },
-				{ "name": "Mosin_tp_reload",          "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload.dae" },
-				{ "name": "Mosin_tp_ammo_check",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
-				{ "name": "Mosin_tp_bolt_action",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_bolt.dae" },
-				{ "name": "Mosin_tp_aim_bolt_action", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_bolt.dae" },
-
-				{ "name": "Mosin_Reload1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_1.dae" },
-				{ "name": "Mosin_Reload2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_2.dae" },
-				{ "name": "Mosin_Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_3.dae" },
-				{ "name": "Mosin_Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_4.dae" },
-				{ "name": "Mosin_Reload5", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_5.dae" },
+				{ "name": "Garand_reload_GT",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Garand/Garand_tp_reload_GT.dae" },
+				{ "name": "Garand_reload",          "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Garand/Garand_tp_reload.dae" },
+				{ "name": "Garand_ammo_check",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Garand/Garand_tp_ammo_check.dae" },
 				
 				{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 				{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
