@@ -655,7 +655,7 @@ end
 function Garand:sv_n_onShoot(ammo_in_mag)
 	self.network:sendToClients("cl_n_onShoot", ammo_in_mag)
 
-	if dir ~= nil and self.sv_ammo_counter > 0 then
+	if ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
