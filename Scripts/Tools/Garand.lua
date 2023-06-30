@@ -758,10 +758,8 @@ function Garand:cl_onPrimaryUse(state)
 
 		sm.camera.setShake(0.04)
 
-		if not self.aiming then
-			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-		end
+		-- Play FP shoot animation
+		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
 		self:onShoot()
 		self.network:sendToServer("sv_n_onShoot")
@@ -818,7 +816,7 @@ function Garand:cl_initReloadAnim()
 	local has_garand_thumb = math.random(0, 100) > 80
 
 	setFpAnimation(self.fpAnimations, has_garand_thumb and garand_thumb_reload or garand_ordinary_reload, 0.0)
-	self:cl_startReloadAnim()
+	self:cl_startReloadAnim(has_garand_thumb)
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload", WIP_garand_thumb)
