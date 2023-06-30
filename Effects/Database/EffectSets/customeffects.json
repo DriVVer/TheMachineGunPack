@@ -530,6 +530,7 @@
 			{
 				"type": "audio",
 				"name": "event:/tools/weldtool/wt_weld",
+				"duration" : 0.3,
 				"delay": 0.0
 			}
 		]
