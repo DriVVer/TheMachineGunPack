@@ -152,7 +152,7 @@ function Garand:loadAnimations()
 			putdown = { "spudgun_putdown" },
 
 			reload = { "Garand_reload", { nextAnimation = "idle" } },
-			reload_GT = { "Garand_reload_GT", { nextAnimation = "idle" } },
+			reload_gt = { "Garand_reload_GT", { nextAnimation = "idle" } },
 
 			ammo_check = { "Garand_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
