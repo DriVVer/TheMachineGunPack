@@ -681,54 +681,14 @@ function Garand:onShoot(ammo_in_mag)
 	end
 end
 
-local function calculateRightVector(vector)
-	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
-	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
-end
-
-local _math_sqrt = math.sqrt
-local _math_asin = math.asin
-local function SolveBalArcInternal(launchPos, hitPos, velocity)
-	local g = 10
-
-	local a = (launchPos.x - hitPos.x)^2
-	local b = (launchPos.y - hitPos.y)^2
-	local R = _math_sqrt(a + b)
-
-	return _math_asin(g * R / velocity^2) / 2
-end
-
-local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
-	local angle = SolveBalArcInternal(start_pos, end_pos, velocity)
-	if angle == angle then
-		return direction:rotate(angle, calculateRightVector(direction))
-	end
-
-	return direction
-end
-
-function Garand:cl_getFirePosition(fireMode)
+function Garand:cl_getFirePosition()
 	local v_direction = sm.camera.getDirection()
 
 	if not self.tool:isInFirstPersonView() then
 		return self.tool:getTpBonePos("pejnt_barrel"), v_direction
 	end
 
-	if not self.aiming then
-		return self.tool:getFpBonePos("pejnt_barrel"), v_direction
-	end
-
-	local v_fire_pos = sm.camera.getPosition() + v_direction * 0.5
-
-	local hit, result = sm.localPlayer.getRaycast(300)
-	if hit then
-		local v_resultPos = result.pointWorld
-
-		local dir_calc = (v_resultPos - v_fire_pos):normalize()
-		v_direction = SolveBallisticArc(v_fire_pos, v_resultPos, fireMode.fireVelocity, dir_calc)
-	end
-
-	return v_fire_pos, v_direction
+	return self.tool:getFpBonePos("pejnt_barrel"), v_direction
 end
 
 local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
@@ -754,7 +714,7 @@ function Garand:cl_onPrimaryUse(state)
 		self.ammo_in_mag = self.ammo_in_mag - 1
 
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local firePos, dir = self:cl_getFirePosition(fireMode)
+		local firePos, dir = self:cl_getFirePosition()
 
 		-- Spread
 		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
