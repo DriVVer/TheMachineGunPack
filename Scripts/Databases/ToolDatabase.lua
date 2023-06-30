@@ -1384,6 +1384,17 @@ local mgp_tool_database =
 					}
 				}
 			},
+			last_shot_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 0.7 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 0.7 } },
+						time = 0.0
+					}
+				}
+			},
 			last_shot =
 			{
 				[1] = {
@@ -1445,7 +1456,7 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.8
-					},				
+					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -1524,7 +1535,7 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.8
-					},				
+					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -1559,8 +1570,7 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
-					}
-					
+					}			
 				}
 			},
 			ammo_check =

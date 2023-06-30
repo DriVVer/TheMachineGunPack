@@ -69,6 +69,20 @@ local reload_anims2 =
 	["reload_gt"] = true
 }
 
+---A list of animations that will slow the player down
+local reload_anims3 =
+{
+	["cock_hammer_aim"] = true,
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
+
+	["reload"] = true,
+	["reload_gt"] = true,
+	["aimInto"] = true,
+	["aimExit"] = true,
+	["sprintExit"] = true
+}
+
 function Garand:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
@@ -450,7 +464,7 @@ function Garand:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(reload_anims2))
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(reload_anims3))
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -576,6 +590,10 @@ function Garand:client_onEquip(animate, is_custom)
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+	end
+
+	if self.ammo_in_mag <= 0 then
+		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
 	end
 end
 
