@@ -1505,7 +1505,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.15
+						time = 1.0
 					},
 					{
 						type = mgp_tool_anim_enum.effect,

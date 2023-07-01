@@ -541,8 +541,8 @@
 		"parameterList":
 		{
 			"Size": 0.003, 
-			"Velocity_max_50": 46.0,
-			"Phys_energy": 300.0,
+			"Velocity_max_50": 6.0,
+			"Phys_energy": 40.0,
 			"Material": 9.0
 		},
 		
@@ -559,7 +559,13 @@
 					"Material"
 				],
 				"delay": 0.0
+			},
+			{
+				"type": "audio",
+				"name": "event:/props/installations/elevator/elevator_ding",
+				"delay": 0.0
 			}
+			
 		]
 	},
 
@@ -636,7 +642,7 @@
 				"type": "audio",
 				"name": "event:/tools/painttool/pt_putdown",
 				"delay": 0.0,
-				"duration" : 0.5
+				"duration" : 0.3
 			}
 		]
 	},
