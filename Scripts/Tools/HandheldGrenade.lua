@@ -24,6 +24,10 @@ dofile("ExplosionUtil.lua")
 ---@field grenade_used boolean
 HandheldGrenadeBase = class()
 
+function HandheldGrenadeBase:server_onCreate()
+	self.cached_dt = 1 / 60
+end
+
 function HandheldGrenadeBase:client_onCreate()
 	self.grenade_active = false
 end
@@ -107,6 +111,8 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	if not sm.exists(self.tool) then
 		return
 	end
+
+	self.cached_dt = dt
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
@@ -448,7 +454,7 @@ local _sm_vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
 function HandheldGrenadeBase:server_onFixedUpdate(dt)
 	if self.sv_grenade_activation_timer then
-		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - dt
+		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - self.cached_dt
 
 		if self.sv_grenade_activation_timer <= 0.0 then
 			self.sv_grenade_ready = true
@@ -528,7 +534,7 @@ function HandheldGrenadeBase:sv_n_startGrenadeTimer()
 end
 
 function HandheldGrenadeBase:sv_n_activateGrenade()
-	self.sv_grenade_activation_timer = 2.46667
+	self.sv_grenade_activation_timer = 1.4
 	self.network:sendToClients("cl_n_activateGrenade")
 end
 
@@ -625,26 +631,23 @@ function HandheldGrenadeBase:sv_n_spawnGrenade(data)
 	end
 
 	local char_dir = owner_char.direction
-	local grenade_pos = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2 + char_dir * 0.7
+	local grenade_pos = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2 + char_dir * 0.8
 	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
 
 	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
+	if not s_grenade then return end
+
 	local grd_mass = s_grenade:getMass()
-	local grd_vel = 20
+	local grd_vel = 1200 ---20 / (1 / 75) original value is 20, that's why it's used in SolveBallisticArc
 	local grenade_direction = owner_char.direction
 	local hit, result = sm.physics.raycast(grenade_pos, grenade_pos + char_dir * 300)
 	if hit then
 		local dir_calc = (result.pointWorld - result.originWorld):normalize()
-		grenade_direction = SolveBallisticArc(result.originWorld, result.pointWorld, grd_vel, dir_calc)
+		grenade_direction = SolveBallisticArc(result.originWorld, result.pointWorld, 20, dir_calc)
 	end
-	if s_grenade then
-		--Apply forward impulse
-		sm.physics.applyImpulse(s_grenade, grenade_direction * (grd_mass * grd_vel), true)
 
-		--Apply rotation
-		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
-		sm.physics.applyImpulse(s_grenade, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
-	end
+	local grd_pub_data = s_grenade.interactable.publicData
+	grd_pub_data.force_velocity = grenade_direction * (grd_mass * grd_vel)
 end
 
 local blocking_animations =
@@ -665,19 +668,11 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		return
 	end
 
-	if self.grenade_used then
+	if self.grenade_used or self.tool:getOwner().character == nil then
 		return
 	end
 
-	if self.tool:getOwner().character == nil then
-		return
-	end
-
-	if self:cl_shouldBlockSprint() then
-		return
-	end
-
-	if self.fireCooldownTimer > 0.0 then
+	if self:cl_shouldBlockSprint() or self.fireCooldownTimer > 0.0 then
 		return
 	end
 
