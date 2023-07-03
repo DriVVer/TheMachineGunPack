@@ -1,7 +1,7 @@
 {
 	"lodList": [
 		{
-			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGunPreview.fbx",
+			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGun/TommyGunPreview.fbx",
 			"subMeshList": [
 				{
 					"material": "DifAsgNor",

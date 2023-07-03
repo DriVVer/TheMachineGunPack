@@ -6,90 +6,52 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 65
+local Damage = 21
 
----@class Garand : ToolClass
+---@class Mp40 : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
----@field aiming boolean
 ---@field mag_capacity integer
+---@field aiming boolean
 ---@field aimFireMode table
 ---@field normalFireMode table
----@field movementDispersion integer
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
+---@field movementDispersion integer
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field aim_timer integer
----@field scope_hud GuiInterface
-Garand = class()
-Garand.mag_capacity = 8
+Mp40 = class()
+Mp40.mag_capacity = 32
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Garand/Garand_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Garand/Garand_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Garand/char_male_tp_Garand.rend",
-	"$CONTENT_DATA/Tools/Renderables/Garand/char_Garand_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mp40/char_male_tp_Mp40.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mp40/char_Mp40_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Garand/char_male_fp_Garand.rend",
-	"$CONTENT_DATA/Tools/Renderables/Garand/char_Garand_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mp40/char_male_fp_Mp40.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mp40/char_Mp40_fp_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
----Reload anim without the aim reload
-local reload_anims =
-{
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-
-	["reload"] = true,
-	["reload_gt"] = true
-}
-
----Reload anims with all the other reload anims
-local reload_anims2 =
-{
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-
-	["reload"] = true,
-	["reload_gt"] = true
-}
-
----A list of animations that will slow the player down
-local reload_anims3 =
-{
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-
-	["reload"] = true,
-	["reload_gt"] = true,
-	["aimInto"] = true,
-	["aimExit"] = true,
-	["sprintExit"] = true
-}
-
-function Garand:client_initAimVals()
+function Mp40:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
-	self.aimWeightFp = self.aimWeight
 end
 
-function Garand:server_onCreate()
+function Mp40:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -104,43 +66,43 @@ function Garand:server_onCreate()
 	end
 end
 
-function Garand:server_requestAmmo(data, caller)
+function Mp40:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Garand:server_updateAmmoCounter(data, caller)
+function Mp40:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function Garand:client_receiveAmmo(ammo_count)
+function Mp40:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function Garand:client_onCreate()
+function Mp40:client_onCreate()
 	self.ammo_in_mag = 0
 
+	self.aimBlendSpeed = 10.0
 	self:client_initAimVals()
-	self.aimBlendSpeed = 3.0
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "Garand")
+	mgp_toolAnimator_initialize(self, "Mp40")
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function Garand:client_onDestroy()
+function Mp40.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function Garand:client_onRefresh()
+function Mp40.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function Garand:loadAnimations()
+function Mp40.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -151,10 +113,9 @@ function Garand:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "Garand_reload", { nextAnimation = "idle" } },
-			reload_gt = { "Garand_reload_GT", { nextAnimation = "idle" } },
-
-			ammo_check = { "Garand_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
+			reload_empty = { "Mp40_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload = { "Mp40_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "Mp40_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -188,37 +149,36 @@ function Garand:loadAnimations()
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "Gun_pickup", { nextAnimation = "idle" } },
-				unequip = { "Gun_putdown" },
-				aim_anim = { "Gun_putdown" },
+				equip = { "Mp40_pickup", { nextAnimation = "idle" } },
+				unequip = { "Mp40_putdown" },
 
-				idle = { "Gun_idle", { looping = true } },
-				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
+				idle = { "Mp40_idle", { looping = true } },
+				shoot = { "Mp40_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Reload", { nextAnimation = "idle" } },
-				reload_gt = { "ReloadGT", { nextAnimation = "idle" } },
+				reload = { "Mp40_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "Mp40_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
-				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "Mp40_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "Gun_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "Gun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Gun_aim_idle", { looping = true } },
-				aimShoot = { "Gun_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "Mp40_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "Mp40_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "Mp40_aim_idle", { looping = true } },
+				aimShoot = { "Mp40_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "Gun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "Gun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "Gun_sprint_idle", { looping = true } },
+				sprintInto = { "Mp40_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Mp40_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Mp40_sprint_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.18,
-		spreadCooldown = 0.05,
-		spreadIncrement = 1,
-		spreadMinAngle = 1.1,
-		spreadMaxAngle = 3.6,
-		fireVelocity = 400.0,
+		fireCooldown = 0.10,
+		spreadCooldown = 0.18,
+		spreadIncrement = 2.6,
+		spreadMinAngle = 1.7,
+		spreadMaxAngle = 14,
+		fireVelocity = 260.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -228,12 +188,12 @@ function Garand:loadAnimations()
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.18,
-		spreadCooldown = 0.01,
-		spreadIncrement = 1,
-		spreadMinAngle = 0.1,
-		spreadMaxAngle = 1.0,
-		fireVelocity = 400.0,
+		fireCooldown = 0.10,
+		spreadCooldown = 0.18,
+		spreadIncrement = 1.3,
+		spreadMinAngle = 1,
+		spreadMaxAngle = 7,
+		fireVelocity =  260.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -242,7 +202,7 @@ function Garand:loadAnimations()
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 1.2
+	self.fireCooldownTimer = 0.8
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
@@ -261,55 +221,28 @@ end
 local actual_reload_anims =
 {
 	["reload"] = true,
-	["reload_gt"] = true
+	["reload_empty"] = true
 }
 
-local aim_animation_list01 =
-{
-	["aimInto"]         = true,
-	["aimIdle"]         = true,
-	["aimShoot"]        = true,
-	["cock_hammer_aim"] = true
-}
-
-local aim_animation_list02 =
-{
-	["aimInto"]  = true,
-	["aimIdle"]  = true,
-	["aimShoot"] = true
-}
-
-local aim_animation_blacklist =
-{
-	["aim_anim"] = true,
-	["cock_hammer_aim"] = true
-}
-
-function Garand:client_updateAimWeights(dt)
-	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-
+function Mp40:client_updateAimWeights(dt)
 	-- Camera update
-	local bobbingFp = 1
-	if self.aiming and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
-		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
-		bobbingFp = 0.12
-	else
-		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 0.0, weight_blend )
-		bobbingFp = 1
-	end
-
+	local bobbing = 1
 	if self.aiming then
-		self.aimWeight = sm.util.lerp(self.aimWeight, 1.0, weight_blend)
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
+		bobbing = 0.12
 	else
-		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
+		bobbing = 1
 	end
 
-	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 20.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
-function Garand:server_spendAmmo(data, player)
+local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+function Mp40:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -318,21 +251,21 @@ function Garand:server_spendAmmo(data, player)
 	local v_inventory = v_owner:getInventory()
 	if v_inventory == nil then return end
 
-	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_sniper_ammo)
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
 	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_sniper_ammo, v_spend_count)
+	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
 	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
 	self:server_updateAmmoCounter()
 end
 
-function Garand:sv_n_trySpendAmmo(data, player)
+function Mp40:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -340,26 +273,8 @@ function Garand:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Garand:client_onUpdate(dt)
+function Mp40.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
-
-	if self.cl_show_ammo_timer then
-		self.cl_show_ammo_timer = self.cl_show_ammo_timer - dt
-
-		if self.cl_show_ammo_timer <= 0.0 then
-			self.cl_show_ammo_timer = nil
-			if self.tool:isEquipped() then
-				sm.gui.displayAlertText(("Garand: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
-			end
-		end
-	end
-
-	if self.aim_timer then
-		self.aim_timer = self.aim_timer - dt
-		if self.aim_timer <= 0.0 then
-			self.aim_timer = nil
-		end
-	end
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
@@ -386,16 +301,13 @@ function Garand:client_onUpdate(dt)
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
-				if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-				end
-				if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
-				end
+			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+			end
+			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
-
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -408,7 +320,6 @@ function Garand:client_onUpdate(dt)
 			self.wantEquipped = false
 			self.equipped = true
 		end
-
 		return
 	end
 
@@ -417,13 +328,6 @@ function Garand:client_onUpdate(dt)
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
-	if self.scope_timer then
-		self.scope_timer = self.scope_timer - dt
-
-		if self.scope_timer <= 0.0 then
-			self.scope_timer = nil
-		end
-	end
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -465,10 +369,12 @@ function Garand:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(reload_anims3))
+	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
+	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
+	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
 
 	down = clamp( -angle, 0.0, 1.0 )
 	fwd = ( 1.0 - math.abs( angle ) )
@@ -489,7 +395,7 @@ function Garand:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_gt" ) then
+				elseif ( name == "reload" or name == "reload_empty" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -553,7 +459,7 @@ function Garand:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function Garand:client_onEquip(animate, is_custom)
+function Mp40:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -567,16 +473,15 @@ function Garand:client_onEquip(animate, is_custom)
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
-	self.aim_timer = 1.0
 
 	currentRenderablesTp = {}
 	currentRenderablesFp = {}
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-
-	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
-
+	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
+	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	local is_tool_local = self.tool:isLocal()
@@ -592,13 +497,9 @@ function Garand:client_onEquip(animate, is_custom)
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
-
-	if self.ammo_in_mag <= 0 then
-		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
-	end
 end
 
-function Garand:client_onUnequip(animate, is_custom)
+function Mp40:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -607,7 +508,6 @@ function Garand:client_onUnequip(animate, is_custom)
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
-
 	mgp_toolAnimator_reset(self)
 
 	local s_tool = self.tool
@@ -619,15 +519,15 @@ function Garand:client_onUnequip(animate, is_custom)
 		if is_custom then
 			s_tool:setTpRenderables({})
 		else
-			setTpAnimation(self.tpAnimations, "putdown")
+			setTpAnimation( self.tpAnimations, "putdown" )
 		end
 
 		if s_tool:isLocal() then
+			s_tool:setMovementSlowDown(false)
+			s_tool:setBlockSprint(false)
+			s_tool:setCrossHairAlpha(1.0)
+			s_tool:setInteractionTextSuppressed(false)
 			s_tool:setDispersionFraction(0.0)
-			s_tool:setMovementSlowDown( false )
-			s_tool:setBlockSprint( false )
-			s_tool:setCrossHairAlpha( 1.0 )
-			s_tool:setInteractionTextSuppressed( false )
 
 			if self.fpAnimations.currentAnimation ~= "unequip" then
 				swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
@@ -636,87 +536,190 @@ function Garand:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Garand:sv_n_onAim(aiming)
+function Mp40:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Garand:cl_n_onAim(aiming)
+function Mp40:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onAim( aiming )
+		self:onAim(aiming)
 	end
 end
 
-function Garand:onAim(aiming)
+function Mp40:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Garand:sv_n_onShoot(ammo_in_mag)
-	self.network:sendToClients("cl_n_onShoot", ammo_in_mag)
+function Mp40:sv_n_onShoot(dir)
+	self.network:sendToClients( "cl_n_onShoot", dir )
 
-	if ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
+	if dir ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function Garand:cl_n_onShoot(ammo_in_mag)
+function Mp40:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(ammo_in_mag)
+		self:onShoot(dir)
 	end
 end
 
-function Garand:onShoot(ammo_in_mag)
-	self.tpAnimations.animations.idle.time     = 0
-	self.tpAnimations.animations.shoot.time    = 0
+function Mp40:onShoot(dir)
+	self.tpAnimations.animations.idle.time = 0
+	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	if ammo_in_mag ~= nil then
-		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, ammo_in_mag == 0 and "last_shot" or "shoot")
+	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
+	mgp_toolAnimator_setAnimation(self, "shoot")
+end
+
+function Mp40:calculateFirePosition()
+	local crouching = self.tool:isCrouching()
+	local firstPerson = self.tool:isInFirstPersonView()
+	local dir = sm.localPlayer.getDirection()
+	local pitch = math.asin( dir.z )
+	local right = sm.localPlayer.getRight()
+
+	local fireOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
+
+	if crouching then
+		fireOffset.z = 0.15
 	else
-		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
-	end
-end
-
-function Garand:cl_getFirePosition()
-	local v_direction = sm.camera.getDirection()
-
-	if not self.tool:isInFirstPersonView() then
-		return self.tool:getTpBonePos("pejnt_barrel"), v_direction
+		fireOffset.z = 0.45
 	end
 
-	return self.tool:getFpBonePos("pejnt_barrel"), v_direction
+	if firstPerson then
+		if not self.aiming then
+			fireOffset = fireOffset + right * 0.05
+		end
+	else
+		fireOffset = fireOffset + right * 0.25
+		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
+	end
+	local firePosition = GetOwnerPosition( self.tool ) + fireOffset
+	return firePosition
 end
 
-local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
-function Garand:cl_onPrimaryUse(state)
-	if state ~= sm.tool.interactState.start then return end
-	if self:client_isGunReloading(reload_anims2) or not self.equipped then return end
+function Mp40:calculateTpMuzzlePos()
+	local crouching = self.tool:isCrouching()
+	local dir = sm.localPlayer.getDirection()
+	local pitch = math.asin( dir.z )
+	local right = sm.localPlayer.getRight()
+	local up = right:cross(dir)
+
+	local fakeOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
+
+	--General offset
+	fakeOffset = fakeOffset + right * 0.25
+	fakeOffset = fakeOffset + dir * 0.5
+	fakeOffset = fakeOffset + up * 0.25
+
+	--Action offset
+	local pitchFraction = pitch / ( math.pi * 0.5 )
+	if crouching then
+		fakeOffset = fakeOffset + dir * 0.2
+		fakeOffset = fakeOffset + up * 0.1 --[[@as Vec3]]
+		fakeOffset = fakeOffset - right * 0.05
+
+		if pitchFraction > 0.0 then
+			fakeOffset = fakeOffset - up * 0.2 * pitchFraction
+		else
+			fakeOffset = fakeOffset + up * 0.1 * math.abs( pitchFraction )
+		end
+	else
+		fakeOffset = fakeOffset + up * 0.1 *  math.abs( pitchFraction )
+	end
+
+	local fakePosition = fakeOffset + GetOwnerPosition( self.tool )
+	return fakePosition
+end
+
+function Mp40:calculateFpMuzzlePos()
+	local fovScale = ( sm.camera.getFov() - 45 ) / 45
+
+	local up = sm.localPlayer.getUp()
+	local dir = sm.localPlayer.getDirection()
+	local right = sm.localPlayer.getRight()
+
+	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
+	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
+
+	if self.aiming then
+		muzzlePos45 = muzzlePos45 - up * 0.2
+		muzzlePos45 = muzzlePos45 + dir * 0.5 --[[@as Vec3]]
+
+		muzzlePos90 = muzzlePos90 - up * 0.5
+		muzzlePos90 = muzzlePos90 - dir * 0.6 --[[@as Vec3]]
+	else
+		muzzlePos45 = muzzlePos45 - up * 0.15
+		muzzlePos45 = muzzlePos45 + right * 0.2
+		muzzlePos45 = muzzlePos45 + dir * 1.25
+
+		muzzlePos90 = muzzlePos90 - up * 0.15
+		muzzlePos90 = muzzlePos90 + right * 0.2
+		muzzlePos90 = muzzlePos90 + dir * 0.25
+	end
+
+	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
+end
+
+local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
+function Mp40:cl_onPrimaryUse(is_shooting)
+	if not is_shooting or not self.equipped then return end
+	if self:client_isGunReloading() then return end
 
 	local v_toolOwner = self.tool:getOwner()
-	if not v_toolOwner then
+	if not (v_toolOwner and sm.exists(v_toolOwner)) then
 		return
 	end
 
-	local v_toolChar = v_toolOwner.character
-	if not (v_toolChar and sm.exists(v_toolChar)) then
+	local v_ownerChar = v_toolOwner.character
+	if not (v_ownerChar and sm.exists(v_ownerChar)) then
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 or self.tool:isSprinting() then
+	if self.fireCooldownTimer > 0.0 then
 		return
 	end
 
 	if self.ammo_in_mag > 0 then
 		self.ammo_in_mag = self.ammo_in_mag - 1
+		local firstPerson = self.tool:isInFirstPersonView()
 
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local firePos, dir = self:cl_getFirePosition()
+		local dir = sm.localPlayer.getDirection()
+
+		local firePos = self:calculateFirePosition()
+		local fakePosition = self:calculateTpMuzzlePos()
+		local fakePositionSelf = fakePosition
+		if firstPerson then
+			fakePositionSelf = self:calculateFpMuzzlePos()
+		end
+
+		-- Aim assist
+		if not firstPerson then
+			local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+			local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+			if hit then
+				local norDir = sm.vec3.normalize( result.pointWorld - firePos )
+				local dirDot = norDir:dot( dir )
+
+				if dirDot > 0.96592583 then -- max 15 degrees off
+					dir = norDir
+				else
+					local radsOff = math.asin( dirDot )
+					dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
+				end
+			end
+		end
+
+		dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 		-- Spread
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
@@ -724,66 +727,77 @@ function Garand:cl_onPrimaryUse(state)
 		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 		dir = sm.noise.gunSpread( dir, spreadDeg )
-		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
+
+		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
 		-- Timers
 		self.fireCooldownTimer = fireMode.fireCooldown
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
-		-- Send TP shoot over network and directly to self
-		self:onShoot(self.ammo_in_mag)
-		self.network:sendToServer("sv_n_onShoot", 1)
-
-		sm.camera.setShake(0.04)
+		-- Send TP shoot over network and dircly to self
+		self:onShoot( dir )
+		self.network:sendToServer( "sv_n_onShoot", dir )
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
-		self:onShoot()
-		self.network:sendToServer("sv_n_onShoot")
-
-		self.fireCooldownTimer = 0.3
-		sm.audio.play( "event:/vehicle/triggers/trigger_toggle_off" )
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		self.fireCooldownTimer = fireMode.fireCooldown
+		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
 
-function Garand:sv_n_onReload(is_garand_thumb)
-	self.network:sendToClients("cl_n_onReload", is_garand_thumb)
+local reload_anims =
+{
+	["reload"] = true,
+	["reload_empty"] = true,
+	["ammo_check"] = true
+}
+
+local anim_name_to_id =
+{
+	["reload"] = 1,
+	["reload_empty"] = 2
+}
+
+local id_to_anim_name =
+{
+	[1] = "reload",
+	[2] = "reload_empty"
+}
+
+function Mp40:sv_n_onReload(anim_id)
+	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function Garand:cl_n_onReload(is_garand_thumb)
+function Mp40:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(is_garand_thumb)
+		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
 
-local garand_ordinary_reload = "reload"
-local garand_thumb_reload = "reload_gt"
-
-function Garand:cl_startReloadAnim(is_garand_thumb)
-	local v_cur_anim = is_garand_thumb and garand_thumb_reload or garand_ordinary_reload
-
-	setTpAnimation(self.tpAnimations, v_cur_anim, 1.0)
-	mgp_toolAnimator_setAnimation(self, v_cur_anim)
+function Mp40:cl_startReloadAnim(anim_name)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function Garand:client_isGunReloading(reload_table)
+function Mp40:client_isGunReloading()
 	if self.waiting_for_ammo then
 		return true
 	end
 
 	local fp_anims = self.fpAnimations
 	if fp_anims ~= nil then
-		return (reload_table[fp_anims.currentAnimation] == true)
+		return (reload_anims[fp_anims.currentAnimation] == true)
 	end
 
 	return false
 end
 
-function Garand:cl_initReloadAnim()
+function Mp40:cl_initReloadAnim(anim_name)
 	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
 		if v_available_ammo == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
@@ -792,58 +806,59 @@ function Garand:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	local has_garand_thumb = math.random(0, 100) > 80
-
-	setFpAnimation(self.fpAnimations, has_garand_thumb and garand_thumb_reload or garand_ordinary_reload, 0.0)
-	self:cl_startReloadAnim(has_garand_thumb)
+	--Start fp and tp animations locally
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
+	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", WIP_garand_thumb)
+	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
 end
 
-function Garand:client_onReload()
-	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			if self.ammo_in_mag ~= 0 then
-				sm.gui.displayAlertText("Garand: can't reload while magazine is not empty")
-				return true
-			end
+function Mp40:client_onReload()
+	if self.equipped then
+		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		if not is_mag_full then
+			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+				local cur_anim_name = "reload"
+				if self.ammo_in_mag == 0 then
+					cur_anim_name = "reload_empty"
+				end
 
-			self:cl_initReloadAnim()
+				self:cl_initReloadAnim(cur_anim_name)
+			end
 		end
 	end
 
 	return true
 end
 
-function Garand:sv_n_checkMag()
+function Mp40:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function Garand:cl_n_checkMag()
+function Mp40:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function Garand:cl_startCheckMagAnim()
+function Mp40:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
-function Garand:client_onToggle()
-	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+function Mp40:client_onToggle()
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			self.cl_show_ammo_timer = 1.2
-
+			sm.gui.displayAlertText(("Mp40: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
 		else
-			sm.gui.displayAlertText("Garand: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim()
+			sm.gui.displayAlertText("Mp40: No Ammo. Reloading...", 3)
+
+			self:cl_initReloadAnim("reload_empty")
 		end
 	end
 
@@ -851,21 +866,14 @@ function Garand:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Garand:cl_onSecondaryUse(state)
-	if self.scope_timer or not self.equipped then return end
+function Mp40.cl_onSecondaryUse( self, state )
+	if not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading(reload_anims) or (self.aim_timer ~= nil)
+	local is_reloading = self:client_isGunReloading()
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
-
-		if self.aiming then
-			self.scope_timer = 0.3
-		else
-			self.fireCooldownTimer = 0.4
-			self.scope_timer = 0.5
-		end
 
 		self.tool:setMovementSlowDown(self.aiming)
 		self:onAim(self.aiming)
@@ -873,13 +881,13 @@ function Garand:cl_onSecondaryUse(state)
 	end
 end
 
-function Garand:client_onEquippedUpdate(primaryState, secondaryState)
-	if primaryState ~= self.prevPrimaryState then
-		self:cl_onPrimaryUse(primaryState)
-		self.prevPrimaryState = primaryState
-	end
+function Mp40.client_onEquippedUpdate( self, primaryState, secondaryState )
+	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
-	self:cl_onSecondaryUse( secondaryState )
+	if secondaryState ~= self.prevSecondaryState then
+		self:cl_onSecondaryUse( secondaryState )
+		self.prevSecondaryState = secondaryState
+	end
 
 	return true, true
 end

@@ -1,7 +1,7 @@
 {
 	"lodList": [
 		{
-			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGun_Model.dae",
+			"mesh": "$CONTENT_DATA/Tools/Mesh/TommyGun/TommyGun_Model.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"subMeshList": [
 				{

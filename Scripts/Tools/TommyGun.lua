@@ -26,21 +26,21 @@ TommyGun.mag_capacity = 30
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Receiver.rend",
-	"$CONTENT_DATA/Tools/Renderables/TommyGun_Model_Mag.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_Model.rend",
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_Model_Receiver.rend",
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_Model_Mag.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/char_male_tp_TommyGun.rend",
-	"$CONTENT_DATA/Tools/Renderables/char_TommyGun_tp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_male_tp_TommyGun.rend",
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_TommyGun_tp_animlist.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/char_male_fp_TommyGun.rend",
-	"$CONTENT_DATA/Tools/Renderables/char_TommyGun_fp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_male_fp_TommyGun.rend",
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_TommyGun_fp_animlist.rend"
 }
 
 sm.tool.preloadRenderables( renderables )

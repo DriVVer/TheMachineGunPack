@@ -4,11 +4,22 @@
 		{
 			"name": "TommyGun",
 			"uuid": "336a7328-4d50-432c-8698-2ed511187cc7",
-			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/TommyGun_InventoryPreview.rend",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_InventoryPreview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/TommyGun.lua",
 				"class": "TommyGun",
+				"data": {}
+			}
+		},
+		{
+			"name": "Mp40",
+			"uuid": "d64d4f6c-1a21-47f5-adf9-63397aa6a3a0",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Mp40.lua",
+				"class": "Mp40",
 				"data": {}
 			}
 		},
