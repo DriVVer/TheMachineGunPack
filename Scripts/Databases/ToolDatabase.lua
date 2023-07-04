@@ -144,7 +144,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, 0.1, 0.0),
 						apply_velocity = false
 					},
 					{
