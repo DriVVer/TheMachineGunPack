@@ -629,16 +629,23 @@ function HandheldGrenadeBase:sv_n_spawnGrenade(data)
 	local grenade_pos = grenade_pos_first + char_dir * 0.8
 	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
 
-	local force_fixed_position = sm.physics.spherecast(owner_char.worldPosition, owner_char.worldPosition + char_dir, 0.15, owner_char)
+	local force_fixed_position, result = sm.physics.spherecast(
+		owner_char.worldPosition, owner_char.worldPosition + char_dir, 0.15, owner_char)
+
+	local grd_vel_original = 20
+	local grd_vel = grd_vel_original / (1 / 60) --grenade force
 	if force_fixed_position then
-		grenade_pos = grenade_pos_first
+		local v_length = (result.originWorld - result.pointWorld):length()
+		grd_vel = math.min(1.0, v_length) * grd_vel
+
+		local v_distance_adjust = math.min(math.max(v_length - 0.4, 0.0), 0.7)
+		grenade_pos = grenade_pos_first + char_dir * v_distance_adjust
 	end
 
 	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
 	if not s_grenade then return end
 
 	local grd_mass = s_grenade:getMass()
-	local grd_vel = 1200 ---20 / (1 / 75) original value is 20, that's why it's used in SolveBallisticArc
 	local grenade_direction = owner_char.direction
 	local hit, result = sm.physics.raycast(grenade_pos, grenade_pos + char_dir * 300)
 	if hit then
