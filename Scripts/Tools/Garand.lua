@@ -290,7 +290,7 @@ function Garand:client_updateAimWeights(dt)
 
 	-- Camera update
 	local bobbingFp = 1
-	if self.aiming and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
+	if self.aiming then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -400,7 +400,6 @@ function Garand:client_onUpdate(dt)
 	end
 
 	TSU_OnUpdate(self)
-
 	self:client_updateAimWeights(dt)
 
 	if not self.equipped then
