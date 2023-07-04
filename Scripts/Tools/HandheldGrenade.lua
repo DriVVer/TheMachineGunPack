@@ -24,10 +24,6 @@ dofile("ExplosionUtil.lua")
 ---@field grenade_used boolean
 HandheldGrenadeBase = class()
 
-function HandheldGrenadeBase:server_onCreate()
-	self.cached_dt = 1 / 60
-end
-
 function HandheldGrenadeBase:client_onCreate()
 	self.grenade_active = false
 end
@@ -39,7 +35,7 @@ end
 function HandheldGrenadeBase.loadAnimations( self )
 
 	self.tpAnimations = createTpAnimations(self.tool, self.mgp_tp_animation_list)
-	
+
 	for name, animation in pairs( self.mgp_movement_animations ) do
 		self.tool:setMovementAnimation( name, animation )
 	end
@@ -111,8 +107,6 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	if not sm.exists(self.tool) then
 		return
 	end
-
-	self.cached_dt = dt
 
 	-- First person animation
 	local isSprinting =  self.tool:isSprinting()
@@ -454,7 +448,7 @@ local _sm_vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
 function HandheldGrenadeBase:server_onFixedUpdate(dt)
 	if self.sv_grenade_activation_timer then
-		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - self.cached_dt
+		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - dt
 
 		if self.sv_grenade_activation_timer <= 0.0 then
 			self.sv_grenade_ready = true
