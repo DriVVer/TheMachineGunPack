@@ -135,6 +135,17 @@ local mgp_tool_database =
 			stop_effects = { "reloadTG", "reloadETG" }
 		},
 		animation = {
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mp40_anims", start_val = 0.13, end_val = 0.13 } },
+						tp_anim = { { name = "Mp40_anims", start_val = 0.13, end_val = 0.13 } },
+						time = 0.0
+					}
+				}
+			},
 			shoot =
 			{
 				[1] = {

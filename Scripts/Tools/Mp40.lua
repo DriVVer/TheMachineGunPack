@@ -497,6 +497,8 @@ function Mp40:client_onEquip(animate, is_custom)
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
+
+	mgp_toolAnimator_setAnimation(self, "equip")
 end
 
 function Mp40:client_onUnequip(animate, is_custom)
