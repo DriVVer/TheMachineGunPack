@@ -109,8 +109,8 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	end
 
 	-- First person animation
-	local isSprinting =  self.tool:isSprinting()
-	local isCrouching =  self.tool:isCrouching()
+	local isSprinting = self.tool:isSprinting()
+	local isCrouching = self.tool:isCrouching()
 
 	if self.cl_grenade_timer then
 		self.cl_grenade_timer = self.cl_grenade_timer - dt
@@ -625,8 +625,14 @@ function HandheldGrenadeBase:sv_n_spawnGrenade(data)
 	end
 
 	local char_dir = owner_char.direction
-	local grenade_pos = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2 + char_dir * 0.8
+	local grenade_pos_first = owner_char.worldPosition + calculateRightVector(char_dir) * 0.2
+	local grenade_pos = grenade_pos_first + char_dir * 0.8
 	local grenade_rotation = sm.vec3.getRotation(char_dir, sm.vec3.new(0, 0, 1))
+
+	local force_fixed_position = sm.physics.spherecast(owner_char.worldPosition, owner_char.worldPosition + char_dir, 0.15, owner_char)
+	if force_fixed_position then
+		grenade_pos = grenade_pos_first
+	end
 
 	local s_grenade = self:sv_createGrenadeObject({ pos = grenade_pos, rot = grenade_rotation })
 	if not s_grenade then return end
@@ -662,7 +668,10 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 		return
 	end
 
-	if self.grenade_used or self.tool:getOwner().character == nil then
+	local v_owner = self.tool:getOwner()
+	if not v_owner then return end
+
+	if self.grenade_used or not v_owner.character then
 		return
 	end
 
@@ -736,7 +745,7 @@ HandheldGrenade.mgp_tp_animation_list =
 	idle = { "glowstick_idle" },
 	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
 	putdown = { "glowstick_putdown" },
-	
+
 	throw = { "glowstick_use", { nextAnimation = "idle", blendNext = 0 } },
 	activate = { "glowstick_activ", { nextAnimation = "idle" } }
 }
@@ -747,7 +756,7 @@ HandheldGrenade.mgp_fp_animation_list =
 	unequip = { "glowstick_putdown" },
 
 	idle = { "glowstick_idle", { looping = true } },
-	
+
 	activate = { "glowstick_activ", { nextAnimation = "idle" } },
 	throw = { "glowstick_throw", { nextAnimation = "idle" } },
 
