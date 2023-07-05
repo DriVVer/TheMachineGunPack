@@ -104,12 +104,14 @@ sm.tool.preloadRenderables(FragGrenade.mgp_renderables)
 sm.tool.preloadRenderables(FragGrenade.mgp_renderables_tp)
 sm.tool.preloadRenderables(FragGrenade.mgp_renderables_fp)
 
-local HandheldGrenadeBase_onEquipBase = HandheldGrenadeBase.client_onEquip
-function FragGrenade:client_onEquip(animate)
-	HandheldGrenadeBase_onEquipBase(self, animate)
+function FragGrenade:client_onCreate()
+	HandheldGrenadeBase.client_onCreate(self)
+	mgp_toolAnimator_initialize(self, "Frag")
+end
 
+function FragGrenade:client_onEquip(animate)
+	HandheldGrenadeBase.client_onEquip(self, animate)
 	self.ready_to_throw = false
-	print(self.grenade_active, self.ready_to_throw)
 end
 
 function FragGrenade:sv_n_startGrenadeTimer()
@@ -125,6 +127,8 @@ function FragGrenade:sv_getGrenadeTimer()
 end
 
 function FragGrenade:client_onGrenadeUpdate(dt)
+	mgp_toolAnimator_update(self, dt)
+
 	if self.ready_to_throw and self.grenade_active and not self.is_holding_grenade then
 		self.ready_to_throw = false
 		self.grenade_active = false
@@ -168,6 +172,7 @@ function FragGrenade:cl_onPrimaryUse(state)
 			self.ready_to_throw = true
 
 			setFpAnimation(self.fpAnimations, "activate", 0.0)
+			mgp_toolAnimator_setAnimation(self, "activate")
 
 			self:onActivateGrenade()
 			self.network:sendToServer("sv_n_activateGrenade")
