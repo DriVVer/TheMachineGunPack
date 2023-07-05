@@ -87,7 +87,7 @@ HandheldGrenade.mgp_tool_config =
 	{
 		timer = 4,
 		expl_lvl = 6,
-		expl_rad = 4,
+		expl_rad = 3,
 		expl_effect = "PropaneTank - ExplosionBig",
 		shrapnel_data = {
 			min_count = 110, max_count = 200,

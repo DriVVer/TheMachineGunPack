@@ -58,7 +58,7 @@
 	},
 	"0c27e043-0cff-492b-9bcf-091520a99764": {
 		"title": "RG-42 Grenade",
-		"description": "The Machine Gun Pack\n\nGrenade based on well known Soviet 'RG-42' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
+		"description": "The Machine Gun Pack\n\nGrenade based on well known Soviet 'RG-42' made of scrap.\n\nHold LMB to activate timer\nRelease LMB to throw the granade"
 	},
 	"b0c08b35-4b40-40fe-b933-ca123f99eef8": {
 		"title": "Double Barrel Shotgun",

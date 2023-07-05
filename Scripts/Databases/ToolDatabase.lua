@@ -300,10 +300,6 @@ local mgp_tool_database =
 	{
 		required_effects = {},
 		on_unequip_action = {},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Base.rend", enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Anim.rend", enabled_by_default = true },
-		},
 		animation_reset = {},
 		animation = {
 			activate =
@@ -324,7 +320,17 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
 						tp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
-						time = 0.25
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.4
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Frag_anims", start_val = 1.25, end_val = 0.0 } },
+						tp_anim = { { name = "Frag_anims", start_val = 1.25, end_val = 0.0 } },
+						time = 0.1
 					}
 				}
 			}
