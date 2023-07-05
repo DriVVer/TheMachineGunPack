@@ -1,0 +1,21 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Frag/Frag_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "Frag_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Frag/Frag_fp_activation.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsg",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset>
-    <contributor>
-      <author></author>
-      <authoring_tool>FBX COLLADA exporter</authoring_tool>
-      <comments></comments>
-    </contributor>
-    <created>2022-08-16T23:44:48Z</created>
-    <keywords></keywords>
-    <modified>2022-08-16T23:44:48Z</modified>
-    <revision></revision>
-    <subject></subject>
-    <title></title>
-    <unit meter="0.010000" name="centimeter"></unit>
-    <up_axis>Y_UP</up_axis>
-  </asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-07-05T11:20:45Z</created><keywords></keywords><modified>2023-07-05T11:20:45Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_visual_scenes>
-    <visual_scene id="Scene" name="Scene">
+   <visual_scene id="Scene" name="Scene">
      
         <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
           <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -26,14 +12,14 @@
             </technique>
           </extra>
           <node name="jnt_grenade_base" id="jnt_grenade_base" sid="jnt_grenade_base" type="JOINT">
-            <matrix sid="matrix">0.999963 0.007609 0.004110 -0.080938 -0.006950 0.989883 -0.141713 0.001432 -0.005147 0.141679 0.989899 -0.116585 0.000000 0.000000 0.000000 1.000000</matrix>
+            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
                 <visibility>1.000000</visibility>
               </technique>
             </extra>
             <node name="jnt_grenade_base_end" id="jnt_grenade_base_end" sid="jnt_grenade_base_end" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 1.000000 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.700000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
               <extra>
                 <technique profile="FCOLLADA">
                   <visibility>1.000000</visibility>

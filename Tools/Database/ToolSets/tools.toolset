@@ -79,6 +79,17 @@
 			}
 		},
 		{
+			"name": "Frag",
+			"uuid": "0c27e043-0cff-492b-9bcf-091520a99764",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Prewiev.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Frag.lua",
+				"class": "Frag",
+				"data": {}
+			}
+		},
+		{
 			"name": "Bazooka",
 			"uuid": "872b6328-37d4-4922-847d-0aef8803ac94",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Preview.rend",

@@ -1,0 +1,28 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "Frag_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+				{ "name": "Frag_throw", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_throw.dae" },
+
+				{ "name": "Frag_activ", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_activation.dae" },
+				{ "name": "Frag_aim_activ", 	    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_activation.dae" },
+
+				{ "name": "Frag_pickup", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_pickup.dae" },
+				{ "name": "Frag_putdown", 	 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_putdown.dae" },
+
+				{ "name": "Frag_sprint_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+				{ "name": "Frag_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+				{ "name": "Frag_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+
+				{ "name": "Frag_aim_into",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+				{ "name": "Frag_aim_exit",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" },
+				{ "name": "Frag_aim_shoot",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_throw.dae" },
+				{ "name": "Frag_aim_idle",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Frag/Frag_fp_idle.dae" }
+			]
+		}
+	]
+} 

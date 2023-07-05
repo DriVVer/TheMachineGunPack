@@ -214,6 +214,32 @@
 			}
 		]
 	},
+
+	{
+		"itemId": "0c27e043-0cff-492b-9bcf-091520a99764", //frag
+		"quantity": 1,
+		"craftTime": 30,
+		"ingredientList": [
+			
+			{
+				"quantity": 15,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 2,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 3,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			},
+			{
+				"quantity": 1,
+				"itemId": "d4d68946-aa03-4b8f-b1af-96b81ad4e305" //gas
+			}
+		]
+	},
+
 	{
 		"itemId": "336a7328-4d50-432c-8698-2ed511187cc7", //Tommy
 		"quantity": 1,

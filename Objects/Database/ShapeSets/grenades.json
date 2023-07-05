@@ -17,6 +17,24 @@
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
 			"showInInventory": false
+		},
+		{
+			"uuid": "63f18d12-41eb-4de7-9ce3-54f5b3a25a14",
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Base.rend",
+			"color": "939291",
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"scripted": { "filename": "$CONTENT_DATA/Scripts/Grenade.lua", "classname": "Grenade" },
+			"density": 1000,
+			"ratings": {
+				"density": 4,
+				"durability": 20,
+				"friction": 5,
+				"buoyancy": 1
+			},
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		}
 	]
 }

@@ -298,6 +298,56 @@ local mgp_tool_database =
 		}
 	},
 
+	Frag =
+	{
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+		},
+		on_unequip_action = {
+			stop_effects = { "reloadTG", "reloadETG" }
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Base.rend"    , enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Anim.rend", enabled_by_default = true },
+		},
+		animation_reset = {
+			cock_the_hammer = mgp_aim_shoot_reset_table,
+			cock_the_hammer_aim = mgp_shoot_reset_table,
+			no_ammo = mgp_aim_shoot_reset_table,
+			no_ammo_aim = mgp_shoot_reset_table,
+			shoot = mgp_aim_shoot_reset_table,
+			shoot_aim = mgp_shoot_reset_table
+		},
+		animation = {
+			Granade_activ =
+			{
+				[1] = {
+					
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Frag_anims", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Frag_anims", start_val = 0.0, end_val = 1.0 } },
+						time = 1.0
+					}
+					
+				}
+			},
+			throw =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
+						tp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
+						time = 0.25
+					}
+				}
+			},
+
+		}
+	},
+
 	Magnum44 =
 	{
 		required_effects = {

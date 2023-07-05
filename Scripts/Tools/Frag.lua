@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ExplosionUtil.lua")
 
----@class HandheldGrenadeBase : ToolClass
+---@class Frag : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -22,17 +22,17 @@ dofile("ExplosionUtil.lua")
 ---@field mgp_movement_animations table
 ---@field mgp_fp_animation_list table
 ---@field grenade_used boolean
-HandheldGrenadeBase = class()
+Frag = class()
 
-function HandheldGrenadeBase:client_onCreate()
+function Frag:client_onCreate()
 	self.grenade_active = false
 end
 
-function HandheldGrenadeBase:client_onRefresh()
+function Frag:client_onRefresh()
 	self:loadAnimations()
 end
 
-function HandheldGrenadeBase.loadAnimations( self )
+function Frag.loadAnimations( self )
 
 	self.tpAnimations = createTpAnimations(self.tool, self.mgp_tp_animation_list)
 
@@ -103,7 +103,7 @@ local function calculateUpVector(vector)
 	return calculateRightVector(vector):cross(vector)
 end
 
-function HandheldGrenadeBase:client_onUpdate(dt)
+function Frag:client_onUpdate(dt)
 	if not sm.exists(self.tool) then
 		return
 	end
@@ -306,7 +306,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function HandheldGrenadeBase:client_onEquip(animate)
+function Frag:client_onEquip(animate)
 	if self.grenade_used then
 		self.tool:setTpRenderables({})
 		return
@@ -345,7 +345,7 @@ function HandheldGrenadeBase:client_onEquip(animate)
 	end
 end
 
-function HandheldGrenadeBase.client_onUnequip( self, animate )
+function Frag.client_onUnequip( self, animate )
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
@@ -370,34 +370,34 @@ function HandheldGrenadeBase.client_onUnequip( self, animate )
 	end
 end
 
-function HandheldGrenadeBase.sv_n_onAim( self, aiming )
+function Frag.sv_n_onAim( self, aiming )
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function HandheldGrenadeBase.cl_n_onAim( self, aiming )
+function Frag.cl_n_onAim( self, aiming )
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function HandheldGrenadeBase.onAim( self, aiming )
+function Frag.onAim( self, aiming )
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function HandheldGrenadeBase:onActivateGrenade()
+function Frag:onActivateGrenade()
 	setTpAnimation(self.tpAnimations, "activate", 1.0)
 end
 
-function HandheldGrenadeBase:cl_n_activateGrenade()
+function Frag:cl_n_activateGrenade()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onActivateGrenade()
 	end
 end
 
-function HandheldGrenadeBase:onThrowGrenade()
+function Frag:onThrowGrenade()
 	--self.tpAnimations.animations.idle.time = 0
 	--self.tpAnimations.animations.shoot.time = 0
 	--self.tpAnimations.animations.aimShoot.time = 0
@@ -405,7 +405,7 @@ function HandheldGrenadeBase:onThrowGrenade()
 	setTpAnimation( self.tpAnimations, "throw", 10.0 )
 end
 
-function HandheldGrenadeBase:cl_n_throwGrenade()
+function Frag:cl_n_throwGrenade()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onThrowGrenade()
 	end
@@ -446,7 +446,7 @@ end
 local _math_random = math.random
 local _sm_vec3_new = sm.vec3.new
 local _sm_noise_gunSpread = sm.noise.gunSpread
-function HandheldGrenadeBase:server_onFixedUpdate(dt)
+function Frag:server_onFixedUpdate(dt)
 	if self.sv_grenade_activation_timer then
 		self.sv_grenade_activation_timer = self.sv_grenade_activation_timer - dt
 
@@ -523,16 +523,16 @@ function HandheldGrenadeBase:server_onFixedUpdate(dt)
 	end
 end
 
-function HandheldGrenadeBase:sv_n_startGrenadeTimer()
+function Frag:sv_n_startGrenadeTimer()
 	self.sv_grenade_timer = self.mgp_tool_config.grenade_fuse_time
 end
 
-function HandheldGrenadeBase:sv_n_activateGrenade()
+function Frag:sv_n_activateGrenade()
 	self.sv_grenade_activation_timer = 1.4
 	self.network:sendToClients("cl_n_activateGrenade")
 end
 
-function HandheldGrenadeBase:sv_n_throwGrenade()
+function Frag:sv_n_throwGrenade()
 	self.network:sendToClients("cl_n_throwGrenade")
 
 	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
@@ -540,7 +540,7 @@ function HandheldGrenadeBase:sv_n_throwGrenade()
 	end
 end
 
-function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
+function Frag:sv_createGrenadeObject(data, caller)
 	if caller ~= nil or self.sv_grenade_timer == nil then
 		return nil
 	end
@@ -565,7 +565,7 @@ function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
 	return s_grenade
 end
 
-function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
+function Frag:sv_n_unequipGrenade(data, caller)
 	local grenade_owner = self.tool:getOwner()
 	if not grenade_owner then
 		return
@@ -589,7 +589,7 @@ end
 local _math_sqrt = math.sqrt
 local _math_asin = math.asin
 local function SolveBalArcInternal(launchPos, hitPos, velocity)
-	local g = 10
+	local g = 8
 
 	local a = (launchPos.x - hitPos.x)^2
 	local b = (launchPos.y - hitPos.y)^2
@@ -607,7 +607,7 @@ local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
 	return direction
 end
 
-function HandheldGrenadeBase:sv_n_spawnGrenade(data)
+function Frag:sv_n_spawnGrenade(data)
 	if not self.sv_grenade_ready then
 		return
 	end
@@ -662,7 +662,7 @@ local blocking_animations =
 	["activate"] = true
 }
 
-function HandheldGrenadeBase:cl_shouldBlockSprint()
+function Frag:cl_shouldBlockSprint()
 	if self.tool:isLocal() and self.equipped then
 		return (blocking_animations[self.fpAnimations.currentAnimation] == true)
 	end
@@ -670,7 +670,7 @@ function HandheldGrenadeBase:cl_shouldBlockSprint()
 	return false
 end
 
-function HandheldGrenadeBase:cl_onPrimaryUse(state)
+function Frag:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then
 		return
 	end
@@ -711,11 +711,11 @@ function HandheldGrenadeBase:cl_onPrimaryUse(state)
 	end
 end
 
-function HandheldGrenadeBase.client_onReload()
+function Frag.client_onReload()
 	return true
 end
 
-function HandheldGrenadeBase.client_onEquippedUpdate( self, primaryState, secondaryState )
+function Frag.client_onEquippedUpdate( self, primaryState, secondaryState )
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse( primaryState )
 		self.prevPrimaryState = primaryState
@@ -726,28 +726,28 @@ end
 
 --Custom class definitions
 
----@type HandheldGrenadeBase
-HandheldGrenade = class(HandheldGrenadeBase)
+---@type Frag
+Frag = class(Frag)
 
-HandheldGrenade.mgp_renderables =
+Frag.mgp_renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"--,
-	--"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_Anim.rend"
 }
 
-HandheldGrenade.mgp_renderables_tp =
+Frag.mgp_renderables_tp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_tp_animlist.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_tp_animlist.rend",
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_tp_offset.rend"
 }
 
-HandheldGrenade.mgp_renderables_fp =
+Frag.mgp_renderables_fp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_fp_animlist.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_fp_animlist.rend",
+	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_fp_offset.rend"
 }
 
-HandheldGrenade.mgp_tp_animation_list =
+Frag.mgp_tp_animation_list =
 {
 	idle = { "glowstick_idle" },
 	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
@@ -757,27 +757,27 @@ HandheldGrenade.mgp_tp_animation_list =
 	activate = { "glowstick_activ", { nextAnimation = "idle" } }
 }
 
-HandheldGrenade.mgp_fp_animation_list =
+Frag.mgp_fp_animation_list =
 {
-	equip = { "glowstick_pickup", { nextAnimation = "idle" } },
-	unequip = { "glowstick_putdown" },
+	equip = { "Frag_pickup", { nextAnimation = "idle" } },
+	unequip = { "Frag_putdown" },
 
-	idle = { "glowstick_idle", { looping = true } },
+	idle = { "Frag_idle", { looping = true } },
 
-	activate = { "glowstick_activ", { nextAnimation = "idle" } },
-	throw = { "glowstick_throw", { nextAnimation = "idle" } },
+	activate = { "Frag_activ", { nextAnimation = "idle" } },
+	throw = { "Frag_throw", { nextAnimation = "idle" } },
 
-	aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
-	aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-	aimIdle = { "glowstick_aim_idle", { looping = true } },
-	aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
+	aimInto = { "Frag_aim_into", { nextAnimation = "aimIdle" } },
+	aimExit = { "Frag_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+	aimIdle = { "Frag_aim_idle", { looping = true } },
+	aimShoot = { "Frag_aim_shoot", { nextAnimation = "aimIdle"} },
 
-	sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-	sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-	sprintIdle = { "glowstick_sprint_idle", { looping = true } }
+	sprintInto = { "Frag_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+	sprintExit = { "Frag_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+	sprintIdle = { "Frag_sprint_idle", { looping = true } }
 }
 
-HandheldGrenade.mgp_movement_animations =
+Frag.mgp_movement_animations =
 {
 	idle = "glowstick_idle",
 	idleRelaxed = "glowstick_idle",
@@ -799,25 +799,25 @@ HandheldGrenade.mgp_movement_animations =
 	crouchBwd = "glowstick_crouch_bwd"
 }
 
-HandheldGrenade.mgp_tool_config =
+Frag.mgp_tool_config =
 {
-	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
-	grenade_fuse_time = 4,
+	grenade_uuid = sm.uuid.new("63f18d12-41eb-4de7-9ce3-54f5b3a25a14"),
+	grenade_fuse_time = 3,
 	grenade_settings =
 	{
-		timer = 4,
-		expl_lvl = 6,
-		expl_rad = 4,
-		expl_effect = "PropaneTank - ExplosionBig",
+		timer = 3,
+		expl_lvl = 1,
+		expl_rad = 6,
+		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
-			min_count = 110, max_count = 200,
-			min_speed = 100, max_speed = 150,
-			min_damage = 40, max_damage = 80,
-			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
+			min_count = 60, max_count = 120,
+			min_speed = 70, max_speed = 120,
+			min_damage = 80, max_damage = 90,
+			proj_uuid = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
 		}
 	}
 }
 
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_tp)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_fp)
+sm.tool.preloadRenderables(Frag.mgp_renderables)
+sm.tool.preloadRenderables(Frag.mgp_renderables_tp)
+sm.tool.preloadRenderables(Frag.mgp_renderables_fp)

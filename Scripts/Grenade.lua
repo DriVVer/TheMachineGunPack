@@ -84,7 +84,7 @@ function Grenade:server_updateTimer(dt)
 		end
 	end
 
-	mgp_better_explosion(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 5, 4, "PropaneTank - ExplosionSmall", self.shape)
+	mgp_better_explosion(self.shape.worldPosition, self.expl_lvl, self.expl_rad, 5, 4, "PropaneTank - ExplosionBig", self.shape)
 	self.shape:destroyShape(0)
 
 	self.timer = nil

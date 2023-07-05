@@ -6,11 +6,11 @@
 	},
 	"af84d5d9-00b1-4bab-9c5a-102c11e14a13": {
 		"title": "Pistol Ammo",
-		"description": "Used for: \n- Thompson SMG\n- Revolver"
+		"description": "Used for: \n- Thompson SMG\n- Revolver\n- Mp 40 SMG"
 	},
 	"295481d0-910a-48d4-a04a-e1bf1290e510": {
 		"title": "Long Rifle Ammo",
-		"description": "Used for: \n- Mosin-Nagant"
+		"description": "Used for: \n- Mosin-Nagant\n- M1 Garand"
 	},
 	"3f4644d5-47cb-477d-b22d-901ab2ed2e0f": {
 		"title": "Short Rifle Ammo",
@@ -55,6 +55,10 @@
 	"c3e4dc43-a841-4c0f-82a6-7225d1bf210e": {
 		"title": "Stielhandgranate 24",
 		"description": "The Machine Gun Pack\n\nGrenade based on well known German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
+	},
+	"0c27e043-0cff-492b-9bcf-091520a99764": {
+		"title": "RG-42 Grenade",
+		"description": "The Machine Gun Pack\n\nGrenade based on well known Soviet 'RG-42' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
 	},
 	"b0c08b35-4b40-40fe-b933-ca123f99eef8": {
 		"title": "Double Barrel Shotgun",
