@@ -16,6 +16,7 @@ function Grenade:server_onCreate()
 			self.shrapnel_data = inter_data.shrapnel_data
 
 			self.force_velocity = inter_data.force_velocity
+			self.spin_force = inter_data.spin_force or 10
 		end
 	end
 end
@@ -101,9 +102,10 @@ function Grenade:server_onFixedUpdate(dt)
 		--Apply main impulse
 		sm.physics.applyImpulse(v_shape, self.force_velocity * self.sv_delta, true)
 
+		local v_mass = v_shape.mass
 		--Apply rotation
-		sm.physics.applyImpulse(v_shape, sm.vec3.new(0, 0, 30), false, sm.vec3.new(0, 0.1, 0))
-		sm.physics.applyImpulse(v_shape, sm.vec3.new(0, 0, -30), false, sm.vec3.new(0, -0.1, 0))
+		sm.physics.applyImpulse(v_shape, sm.vec3.new(0, 0, self.spin_force), false, sm.vec3.new(0, 0.1, 0))
+		sm.physics.applyImpulse(v_shape, sm.vec3.new(0, 0, -self.spin_force), false, sm.vec3.new(0, -0.1, 0))
 
 		self.force_velocity = nil
 	end

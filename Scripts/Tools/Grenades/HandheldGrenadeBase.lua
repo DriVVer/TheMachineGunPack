@@ -3,7 +3,7 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("ExplosionUtil.lua")
+dofile("../ExplosionUtil.lua")
 
 ---@class HandheldGrenadeBase : ToolClass
 ---@field fpAnimations table
@@ -22,6 +22,7 @@ dofile("ExplosionUtil.lua")
 ---@field mgp_movement_animations table
 ---@field mgp_fp_animation_list table
 ---@field grenade_used boolean
+---@field sv_activation_timer integer
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
@@ -33,7 +34,6 @@ function HandheldGrenadeBase:client_onRefresh()
 end
 
 function HandheldGrenadeBase.loadAnimations( self )
-
 	self.tpAnimations = createTpAnimations(self.tool, self.mgp_tp_animation_list)
 
 	for name, animation in pairs( self.mgp_movement_animations ) do
@@ -103,10 +103,14 @@ local function calculateUpVector(vector)
 	return calculateRightVector(vector):cross(vector)
 end
 
+function HandheldGrenadeBase:client_onGrenadeUpdate(dt) end
+
 function HandheldGrenadeBase:client_onUpdate(dt)
 	if not sm.exists(self.tool) then
 		return
 	end
+
+	self:client_onGrenadeUpdate(dt)
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
@@ -161,7 +165,11 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 
 				if anim_time >= anim_duration then
 					self.grenade_active = true
-					self.cl_grenade_timer = self.mgp_tool_config.grenade_fuse_time
+
+					if self.mgp_tool_config.grenade_fuse_time then
+						self.cl_grenade_timer = self.mgp_tool_config.grenade_fuse_time
+					end
+
 					self.network:sendToServer("sv_n_startGrenadeTimer")
 				end
 			end
@@ -224,7 +232,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() or self.cl_remove_timer ~= nil or self.cl_remove_timer ~= nil)
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:cl_shouldBlockSprint() or self.cl_remove_timer ~= nil)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -428,7 +436,7 @@ local function sv_remove_grenade(self)
 		return
 	end
 
-	local v_grenade_uuid = "c3e4dc43-a841-4c0f-82a6-7225d1bf210e"
+	local v_grenade_uuid = tostring(self.mgp_tool_config.grenade_tool_uuid)
 	for i = 0, v_pl_inventory:getSize() - 1 do
 		local v_cur_item = v_pl_inventory:getItem(i)
 		if tostring(v_cur_item.uuid) == v_grenade_uuid then
@@ -528,7 +536,7 @@ function HandheldGrenadeBase:sv_n_startGrenadeTimer()
 end
 
 function HandheldGrenadeBase:sv_n_activateGrenade()
-	self.sv_grenade_activation_timer = 1.4
+	self.sv_grenade_activation_timer = self.sv_activation_timer
 	self.network:sendToClients("cl_n_activateGrenade")
 end
 
@@ -540,17 +548,22 @@ function HandheldGrenadeBase:sv_n_throwGrenade()
 	end
 end
 
+function HandheldGrenadeBase:sv_getGrenadeTimer()
+	return self.sv_grenade_timer
+end
+
 function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
-	if caller ~= nil or self.sv_grenade_timer == nil then
+	local v_grenade_timer = self:sv_getGrenadeTimer()
+	if caller ~= nil or v_grenade_timer == nil then
 		return nil
 	end
 
-	local grenade_timer_saved = self.sv_grenade_timer
+	self.sv_grenade_can_spawn = nil
 	self.sv_grenade_timer = nil
 
 	local tool_config = self.mgp_tool_config
 	local s_grenade = sm.shape.createPart(tool_config.grenade_uuid, data.pos, data.rot, true, true)
-	
+
 	local g_inter = s_grenade.interactable
 	if g_inter then
 		local g_settings_copy = {}
@@ -558,7 +571,7 @@ function HandheldGrenadeBase:sv_createGrenadeObject(data, caller)
 			g_settings_copy[k] = v
 		end
 
-		g_settings_copy.timer = grenade_timer_saved
+		g_settings_copy.timer = v_grenade_timer
 		g_inter.publicData = g_settings_copy
 	end
 
@@ -576,7 +589,7 @@ function HandheldGrenadeBase:sv_n_unequipGrenade(data, caller)
 		return
 	end
 
-	local v_can_remove = (self.sv_grenade_timer ~= nil)
+	local v_can_remove = self:sv_getGrenadeTimer() ~= nil
 	self:sv_createGrenadeObject({ pos = owner_char.worldPosition, rot = sm.quat.identity() })
 
 	if v_can_remove then
@@ -723,101 +736,3 @@ function HandheldGrenadeBase.client_onEquippedUpdate( self, primaryState, second
 
 	return true, true
 end
-
---Custom class definitions
-
----@type HandheldGrenadeBase
-HandheldGrenade = class(HandheldGrenadeBase)
-
-HandheldGrenade.mgp_renderables =
-{
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"--,
-	--"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend"
-}
-
-HandheldGrenade.mgp_renderables_tp =
-{
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_tp_animlist.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_tp_offset.rend"
-}
-
-HandheldGrenade.mgp_renderables_fp =
-{
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_granade_fp_animlist.rend",
-	"$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_fp_offset.rend"
-}
-
-HandheldGrenade.mgp_tp_animation_list =
-{
-	idle = { "glowstick_idle" },
-	pickup = { "glowstick_pickup", { nextAnimation = "idle" } },
-	putdown = { "glowstick_putdown" },
-
-	throw = { "glowstick_use", { nextAnimation = "idle", blendNext = 0 } },
-	activate = { "glowstick_activ", { nextAnimation = "idle" } }
-}
-
-HandheldGrenade.mgp_fp_animation_list =
-{
-	equip = { "glowstick_pickup", { nextAnimation = "idle" } },
-	unequip = { "glowstick_putdown" },
-
-	idle = { "glowstick_idle", { looping = true } },
-
-	activate = { "glowstick_activ", { nextAnimation = "idle" } },
-	throw = { "glowstick_throw", { nextAnimation = "idle" } },
-
-	aimInto = { "glowstick_aim_into", { nextAnimation = "aimIdle" } },
-	aimExit = { "glowstick_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-	aimIdle = { "glowstick_aim_idle", { looping = true } },
-	aimShoot = { "glowstick_aim_shoot", { nextAnimation = "aimIdle"} },
-
-	sprintInto = { "glowstick_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-	sprintExit = { "glowstick_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-	sprintIdle = { "glowstick_sprint_idle", { looping = true } }
-}
-
-HandheldGrenade.mgp_movement_animations =
-{
-	idle = "glowstick_idle",
-	idleRelaxed = "glowstick_idle",
-
-	sprint = "glowstick_sprint",
-	runFwd = "glowstick_run_fwd",
-	runBwd = "glowstick_run_bwd",
-
-	jump = "glowstick_jump",
-	jumpUp = "glowstick_jump_up",
-	jumpDown = "glowstick_jump_down",
-
-	land = "glowstick_idle",
-	landFwd = "glowstick_idle",
-	landBwd = "glowstick_idle",
-
-	crouchIdle = "glowstick_crouch_idle",
-	crouchFwd = "glowstick_crouch_fwd",
-	crouchBwd = "glowstick_crouch_bwd"
-}
-
-HandheldGrenade.mgp_tool_config =
-{
-	grenade_uuid = sm.uuid.new("b4a6a717-f54b-4df7-a44c-bb5308a494a2"),
-	grenade_fuse_time = 4,
-	grenade_settings =
-	{
-		timer = 4,
-		expl_lvl = 6,
-		expl_rad = 4,
-		expl_effect = "PropaneTank - ExplosionBig",
-		shrapnel_data = {
-			min_count = 110, max_count = 200,
-			min_speed = 100, max_speed = 150,
-			min_damage = 40, max_damage = 80,
-			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
-		}
-	}
-}
-
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_tp)
-sm.tool.preloadRenderables(HandheldGrenade.mgp_renderables_fp)

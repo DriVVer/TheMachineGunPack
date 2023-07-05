@@ -73,19 +73,19 @@
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
-				"file": "$CONTENT_DATA/Scripts/Tools/HandheldGrenade.lua",
+				"file": "$CONTENT_DATA/Scripts/Tools/Grenades/HandheldGrenade.lua",
 				"class": "HandheldGrenade",
 				"data": {}
 			}
 		},
 		{
-			"name": "Frag",
+			"name": "FragGrenade",
 			"uuid": "0c27e043-0cff-492b-9bcf-091520a99764",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Prewiev.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
-				"file": "$CONTENT_DATA/Scripts/Tools/Frag.lua",
-				"class": "Frag",
+				"file": "$CONTENT_DATA/Scripts/Tools/Grenades/FragGrenade.lua",
+				"class": "FragGrenade",
 				"data": {}
 			}
 		},
