@@ -298,7 +298,10 @@ local mgp_tool_database =
 	},
 	Frag =
 	{
-		required_effects = {},
+		required_effects = {
+			Clip = "GarandClip",
+			ClipTake = "GarandClipTake",
+		},
 		on_unequip_action = {},
 		animation_reset = {},
 		animation = {
@@ -311,6 +314,23 @@ local mgp_tool_database =
 						tp_anim = { { name = "Frag_anims", start_val = 0.0, end_val = 1.0 } },
 						time = 1.0
 					}
+				},
+				[2] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_lever",
+						name_tp = "ClipTake",
+						name_fp = "ClipTake",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+
 				}
 			},
 			throw =
@@ -320,7 +340,7 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
 						tp_anim = { { name = "Frag_anims", start_val = 1.0, end_val = 1.25 } },
-						time = 0.1
+						time = 0.20
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -331,6 +351,19 @@ local mgp_tool_database =
 						fp_anim = { { name = "Frag_anims", start_val = 1.25, end_val = 0.0 } },
 						tp_anim = { { name = "Frag_anims", start_val = 1.25, end_val = 0.0 } },
 						time = 0.1
+					}
+				},
+
+				[2] = {
+
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_lever",
+						name_tp = "Clip",
+						name_fp = "Clip",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
 					}
 				}
 			}

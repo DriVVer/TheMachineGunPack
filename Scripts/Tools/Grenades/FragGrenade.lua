@@ -92,7 +92,7 @@ FragGrenade.mgp_tool_config =
 			min_count = 60, max_count = 120,
 			min_speed = 70, max_speed = 120,
 			min_damage = 80, max_damage = 90,
-			proj_uuid = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
+			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 		},
 		spin_force = 5
 	}
