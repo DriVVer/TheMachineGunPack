@@ -146,6 +146,7 @@ function FragGrenade:client_onGrenadeUpdate(dt)
 		self.network:sendToServer("sv_n_throwGrenade")
 
 		setFpAnimation(self.fpAnimations, "throw", 0.0)
+		mgp_toolAnimator_setAnimation(self, "throw")
 	end
 end
 
