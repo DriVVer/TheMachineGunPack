@@ -1,18 +1,18 @@
 {
-   "lodList" : [
-      {
-         "mesh" : "$CONTENT_DATA/Tools/Mesh/Eoka/Eoka_preview.fbx",
-         "subMeshList" : [
-            {
-					"material": "DifAsg",
+	"lodList" : [
+		{
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/Eoka/Eoka_preview.fbx",
+			"subMeshList" : [
+				{
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
 					]
 				},
-            {
-					"material": "DifAsg",
+				{
+					"material": "DifAsgNor",
 					"textureList": [
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
@@ -20,14 +20,14 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$GAME_DATA/Character/Char_Tools/Char_spudgun/Base/char_spudgun_base_dif.tga",
 						"$GAME_DATA/Character/Char_Tools/Char_spudgun/Base/char_spudgun_base_asg.tga",
 						"$GAME_DATA/Character/Char_Tools/Char_spudgun/Base/char_spudgun_base_nor.tga"
 					]
 				}
-         ]
-      }
-   ]
+			]
+		}
+	]
 }

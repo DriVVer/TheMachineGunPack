@@ -8,7 +8,7 @@
 			],
 			"subMeshList": [
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",

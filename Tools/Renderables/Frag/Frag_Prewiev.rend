@@ -4,7 +4,7 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Frag/Frag_Preview.fbx",
 			"subMeshList": [
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
@@ -12,14 +12,13 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/obj_interactive_propanetank_small_dif.tga",
 						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_asg.tga",
 						"$GAME_DATA/Objects/Textures/interactive/obj_interactive_propanetank_small_nor.tga"
 					]
 				}
-				
 			]
 		}
 	]

@@ -5,7 +5,7 @@
 			"includes": ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
 			"subMeshList": [
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
@@ -13,7 +13,7 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
@@ -21,7 +21,7 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",

@@ -16,7 +16,7 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",

@@ -1,26 +1,28 @@
 {
-	"lodList": [
+	"lodList" : [
 		{
-			"mesh": "$CONTENT_DATA/Tools/Mesh/Garand/Garand_Anim.dae",
-			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
-			"animationList": [
-				{ "name": "Mosin_Anim", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Garand/Garand_anims.dae" }
-			],
-			"subMeshList": [
+			"animationList" : [
 				{
-					"material": "DifAsgNor",
-					"textureList": [ 
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Garand/Garand_anims.dae",
+					"name" : "Mosin_Anim"
+				}
+			],
+			"includes" : [
+				"POSITION",
+				"UV0",
+				"NORMAL",
+				"TANGENTS",
+				"BLEND_INDICES",
+				"BLEND_WEIGHTS"
+			],
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/Garand/Garand_Anim.dae",
+			"subMeshList" : [
+				{
+					"material" : "DifAsgNor",
+					"textureList" : [
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
-					]
-				},
-				{
-					"material": "DifAsgNor",
-					"textureList": [ 
-						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-						"$CONTENT_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}
 			]
