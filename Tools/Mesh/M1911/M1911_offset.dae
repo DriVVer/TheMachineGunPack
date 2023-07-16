@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-07-16T21:25:02Z</created><keywords></keywords><modified>2023-07-16T21:25:02Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_animations>
+    <animation id="Offset-anim" name="Offset"><animation><source id="Offset-Matrix-animation-input"><float_array id="Offset-Matrix-animation-input-array" count="2">
+
+0.000000 0.033333</float_array><technique_common><accessor source="#Offset-Matrix-animation-input-array" count="2"><param name="TIME" type="float"/></accessor></technique_common></source><source id="Offset-Matrix-animation-output-transform"><float_array id="Offset-Matrix-animation-output-transform-array" count="32">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#Offset-Matrix-animation-output-transform-array" count="2" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="Offset-Interpolations"><Name_array id="Offset-Interpolations-array" count="2">
+ LINEAR LINEAR</Name_array><technique_common><accessor source="#Offset-Interpolations-array" count="2"><param type="name"/></accessor></technique_common></source><sampler id="Offset-Matrix-animation-transform"><input semantic="INPUT" source="#Offset-Matrix-animation-input"/><input semantic="OUTPUT" source="#Offset-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#Offset-Interpolations"/></sampler><channel source="#Offset-Matrix-animation-transform" target="Offset/matrix"/></animation></animation>
+    <animation id="jnt_right_weapon-anim" name="jnt_right_weapon"><animation><source id="jnt_right_weapon-Matrix-animation-input"><float_array id="jnt_right_weapon-Matrix-animation-input-array" count="2">
+
+0.000000 0.033333</float_array><technique_common><accessor source="#jnt_right_weapon-Matrix-animation-input-array" count="2"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_right_weapon-Matrix-animation-output-transform"><float_array id="jnt_right_weapon-Matrix-animation-output-transform-array" count="32">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_right_weapon-Matrix-animation-output-transform-array" count="2" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_right_weapon-Interpolations"><Name_array id="jnt_right_weapon-Interpolations-array" count="2">
+ LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_right_weapon-Interpolations-array" count="2"><param type="name"/></accessor></technique_common></source><sampler id="jnt_right_weapon-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_right_weapon-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_right_weapon-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_right_weapon-Interpolations"/></sampler><channel source="#jnt_right_weapon-Matrix-animation-transform" target="jnt_right_weapon/matrix"/></animation></animation>
+    <animation id="jnt_weapon-anim" name="jnt_weapon"><animation><source id="jnt_weapon-Matrix-animation-input"><float_array id="jnt_weapon-Matrix-animation-input-array" count="2">
+
+0.000000 0.033333</float_array><technique_common><accessor source="#jnt_weapon-Matrix-animation-input-array" count="2"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_weapon-Matrix-animation-output-transform"><float_array id="jnt_weapon-Matrix-animation-output-transform-array" count="32">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_weapon-Matrix-animation-output-transform-array" count="2" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_weapon-Interpolations"><Name_array id="jnt_weapon-Interpolations-array" count="2">
+ LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_weapon-Interpolations-array" count="2"><param type="name"/></accessor></technique_common></source><sampler id="jnt_weapon-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_weapon-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_weapon-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_weapon-Interpolations"/></sampler><channel source="#jnt_weapon-Matrix-animation-transform" target="jnt_weapon/matrix"/></animation></animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+     
+        <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
+          <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+          <extra>
+            <technique profile="FCOLLADA">
+              <visibility>1.000000</visibility>
+            </technique>
+          </extra>
+          <node name="jnt_weapon" id="jnt_weapon" sid="jnt_weapon" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+            <node name="jnt_weapon_end" id="jnt_weapon_end" sid="jnt_weapon_end" type="JOINT">
+              <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.700000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+            </node>
+          </node>
+        </node>
+     
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.000000</start_time>
+          <end_time>1.000000</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"></instance_visual_scene>
+  </scene>
+</COLLADA>

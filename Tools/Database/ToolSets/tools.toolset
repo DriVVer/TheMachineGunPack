@@ -13,6 +13,17 @@
 			}
 		},
 		{
+			"name": "M1911",
+			"uuid": "e4ed32d5-d891-40e3-b82e-db975884dbb3",
+			"previewRenderable": "$CONTENT_DATA/Tools/Guns/M1911/Renderables/M1911_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/M1911.lua",
+				"class": "M1911",
+				"data": {}
+			}
+		},
+		{
 			"name": "Mp40",
 			"uuid": "d64d4f6c-1a21-47f5-adf9-63397aa6a3a0",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Preview.rend",

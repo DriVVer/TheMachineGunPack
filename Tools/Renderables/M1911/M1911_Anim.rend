@@ -1,14 +1,14 @@
 {
 	"lodList": [
 		{
-			"mesh": "$CONTENT_DATA/Tools/Mesh/Mp40/Mp40_Anim.dae",
+			"mesh": "$CONTENT_DATA/Tools/Mesh/M1911/M1911_Anim.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "Mp40_anims",       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Mp40/Mp40_anims.dae" }
+				{ "name": "M1911_anims",       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anim/M1911/M1911_anims.dae" }
 			],
 			"subMeshList": [
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
@@ -16,7 +16,7 @@
 					]
 				},
 				{
-					"material": "DifAsg",
+					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/char_connecttool_dif.png",
 						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_asg.tga",
