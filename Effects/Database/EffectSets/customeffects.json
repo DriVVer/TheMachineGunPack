@@ -681,7 +681,7 @@
 
 	"Muzzle_Flash_SmallCal_tp":
 	{
-		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0},
+		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0, "DLM_Volume": 25.0, "DLM_Reverb": 5.0},
 		"parameterCurves":{
 			"intensity":{"timeline":[{"time":0.03,"value":1.3},{"time":0.2,"value":0.0}]}
 		},
@@ -697,6 +697,7 @@
 			{
 				"type": "audio",
 				"name": "9mm_TMGP_Gunshot",
+				"parameters": ["DLM_Volume", "DLM_Reverb"],
 				"delay": 0.0
 			},	
 			{

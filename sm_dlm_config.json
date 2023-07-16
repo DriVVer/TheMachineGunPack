@@ -1,8 +1,9 @@
 {
     "soundList": {
         "9mm_TMGP_Gunshot": {
-            "path":"$CONTENT_DATA/Audio/9mm_TMGP_Gunshot.mp3",
-            "is3D": true
+            "path":"$CONTENT_DATA/Audio/Pistol_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
         }
     }
 }
