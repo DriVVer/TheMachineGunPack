@@ -1,0 +1,8 @@
+{
+    "soundList": {
+        "9mm_TMGP_Gunshot": {
+            "path":"$CONTENT_DATA/Audio/9mm_TMGP_Gunshot.mp3",
+            "is3D": true
+        }
+    }
+}

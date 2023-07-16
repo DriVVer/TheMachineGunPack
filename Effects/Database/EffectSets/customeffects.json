@@ -696,9 +696,8 @@
 			},
 			{
 				"type": "audio",
-				"name": "event:/char/npc/bots/enemies/tapebot/tapebot_takedamage",
-				"delay": 0.0,
-				"duration": 0.24
+				"name": "9mm_TMGP_Gunshot",
+				"delay": 0.0
 			},	
 			{
 				"type": "particle",
@@ -732,9 +731,8 @@
 			},
 			{
 				"type": "audio",
-				"name": "event:/char/npc/bots/enemies/tapebot/tapebot_takedamage",
-				"delay": 0.0,
-				"duration": 0.24
+				"name": "9mm_TMGP_Gunshot",
+				"delay": 0.0
 			},	
 			{
 				"type": "particle",
