@@ -26,6 +26,10 @@ local mgp_tool_database =
 {
 	tommy_gun =
 	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp"
+		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",

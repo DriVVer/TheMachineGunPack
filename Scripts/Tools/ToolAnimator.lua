@@ -337,8 +337,20 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	local anim_data = mgp_getToolData(tool_name)
 
 	self.cl_animator_effects = {}
-	for eff_id, eff_name in pairs(anim_data.required_effects) do
-		self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+	if sm.dlm_injected and anim_data.dlm_required_effects then
+		for eff_id, eff_name in pairs(anim_data.dlm_required_effects) do
+			self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+		end
+
+		for eff_id, eff_name in pairs(anim_data.required_effects) do
+			if self.cl_animator_effects[eff_id] == nil then
+				self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+			end
+		end
+	else
+		for eff_id, eff_name in pairs(anim_data.required_effects) do
+			self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
+		end
 	end
 
 	local anim_data_renderables = anim_data.renderables

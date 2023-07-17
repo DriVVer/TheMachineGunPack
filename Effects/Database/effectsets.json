@@ -1,6 +1,8 @@
 {
 	"effectSetList": [
 		"$MOD_DATA/Effects/Database/EffectSets/customeffects.json",
-		"$MOD_DATA/Effects/Database/EffectSets/proj_effects.json"
+		"$MOD_DATA/Effects/Database/EffectSets/proj_effects.json",
+
+		"$CONTENT_DATA/Effects/Database/EffectSets/dlm_customeffects.json"
 	]
 }

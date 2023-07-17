@@ -1,0 +1,79 @@
+{
+    "DLM_Muzzle_Flash_SmallCal_tp":
+	{
+		"parameterList":{
+            "color":"f2eea0",
+            "radius":3.0,
+            "intensity":0.0
+        },
+		"parameterCurves":{
+			"intensity":{"timeline":[{"time":0.03,"value":1.3},{"time":0.2,"value":0.0}]}
+		},
+		"effectList":
+		[
+			{
+				"type":"pointLight",
+				"name":"",
+				"offset":{"x":0.0,"y":0.0,"z":0.1},
+				"parameters":["color","radius","intensity"],
+				"duration":0.3
+			},
+			{
+				"type": "audio",
+				"name": "9mm_TMGP_Gunshot",
+				"delay": 0.0
+			},	
+			{
+				"type": "particle",
+				"name": "Muzzle_flash_1_tp",
+				"attached": true,
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "Smoke_new_tp",
+				"attached": false,
+				"delay": 0.05
+			}
+		]
+	},
+	"DLM_Muzzle_Flash_SmallCal_fp":
+	{
+		"parameterList":{
+            "color":"f2eea0",
+            "radius":3.0,
+            "intensity":0.0
+        },
+		"parameterCurves":{
+			"intensity":{"timeline":[{"time":0.03,"value":1.3},{"time":0.2,"value":0.0}]}
+		},
+		"effectList":
+		[
+			{
+				"type":"pointLight",
+				"name":"",
+				"offset":{"x":0.0,"y":0.0,"z":0.0},
+				"parameters":["color","radius","intensity"],
+				"duration":0.3
+			},
+			{
+				"type": "audio",
+				"name": "9mm_TMGP_Gunshot",
+				"delay": 0.0
+			},	
+			{
+				"type": "particle",
+				"name": "Muzzle_flash_1_fp",
+				"attached": true,
+				"delay": 0.0
+			},
+			{
+				"type": "particle",
+				"name": "Smoke_new_fp",
+				"attached": false,
+				"delay": 0.1
+
+			}
+		]
+	}
+}
