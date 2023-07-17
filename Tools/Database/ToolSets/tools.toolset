@@ -15,7 +15,7 @@
 		{
 			"name": "M1911",
 			"uuid": "e4ed32d5-d891-40e3-b82e-db975884dbb3",
-			"previewRenderable": "$CONTENT_DATA/Tools/Guns/M1911/Renderables/M1911_Preview.rend",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/M1911/M1911_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/M1911.lua",

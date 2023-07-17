@@ -26,15 +26,6 @@
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
 						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
 					]
-				},
-				
-				{
-					"material": "DifAsgNor",
-					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/char_connecttool_dif.png",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_asg.tga",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_nor.tga"
-					]
 				}
 			]
 		}

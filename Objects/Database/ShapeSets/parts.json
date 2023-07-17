@@ -380,19 +380,11 @@
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
 								"material": "SkelAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
 							}
 						],
 						"animationList": [
 							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"},
-							{"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
+							{"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
 						]
 					}
 				]
@@ -425,19 +417,11 @@
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
 								"material": "SkelAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
 							}
 						],
 						"animationList": [
 							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"},
-							{"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
+							{"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
 						]
 					}
 				]
@@ -605,19 +589,10 @@
 								"custom": {
 									"uv0": { "u": 0.01, "v": 0.01 }
 								}
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
 							}
 						],
 						"animationList": [
 							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"}
-							
 						]
 					}
 				]
@@ -1224,6 +1199,7 @@
 			"renderable": {
 				"lodList": [
 					{
+						"mesh": "$MOD_DATA/Objects/Mesh/2Shells.fbx",
 						"subMeshList": [
 							{
 								"textureList": [
@@ -1232,17 +1208,8 @@
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
 								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
 							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/2Shells.fbx"
+						]
 					}
 				]
 			},
@@ -1261,6 +1228,7 @@
 			"renderable": {
 				"lodList": [
 					{
+						"mesh": "$MOD_DATA/Objects/Mesh/AmmoRack37.fbx",
 						"subMeshList": [
 							{
 								"textureList": [
@@ -1269,17 +1237,8 @@
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
 								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
 							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/AmmoRack37.fbx"
+						]
 					}
 				]
 			},
@@ -1289,9 +1248,7 @@
 			"density": 100,
 			"physicsMaterial": "Metal",
 			"sticky": "+X-X+Z-Z+Y-Y"
-		  
 		},
-		
 		{
 			"uuid": "029e27bd-f589-4a15-b8fc-19a553f34fd0",
 			"renderable": {

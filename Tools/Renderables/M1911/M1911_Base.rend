@@ -27,14 +27,6 @@
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
 					]
-				},
-				{
-					"material": "DifAsgNor",
-					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/char_connecttool_dif.png",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_asg.tga",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_nor.tga"
-					]
 				}
 			]
 		}

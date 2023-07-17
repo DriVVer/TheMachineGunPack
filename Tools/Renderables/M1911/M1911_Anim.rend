@@ -4,7 +4,7 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/M1911/M1911_Anim.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "M1911_anims",       "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/M1911/M1911_anims.dae" }
+				{ "name": "M1911_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/M1911/M1911_anims.dae" }
 			],
 			"subMeshList": [
 				{
@@ -13,14 +13,6 @@
 						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
 						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
-					]
-				},
-				{
-					"material": "DifAsgNor",
-					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/char_connecttool_dif.png",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_asg.tga",
-						"$CONTENT_DATA/Character/Char_Tools/Char_connecttool/char_connecttool_nor.tga"
 					]
 				}
 			]
