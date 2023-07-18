@@ -173,7 +173,7 @@ function M1911.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.125,
+		fireCooldown = 0.15,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 1.25,
@@ -188,7 +188,7 @@ function M1911.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.125,
+		fireCooldown = 0.15,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,

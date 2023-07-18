@@ -1,7 +1,7 @@
 {
     "soundList": {
-        "Pistol_TMGP_Shot_1": {
-            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
+        "Pistol_TMGP_Shot_3": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_3.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
@@ -19,6 +19,12 @@
             "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Shot_3.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Shot_4": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+            
         },
         "BoltRifle_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Distance_Shot.mp3",

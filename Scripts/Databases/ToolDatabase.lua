@@ -144,7 +144,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "Pistol_Shot_1"
+			gunshot = "Pistol_Shot_3"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -178,9 +178,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 1.0 } },
-						tp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 1.0 } },
-						time = 1.0
+						fp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 0.12 } },
+						tp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 0.12 } },
+						time = 0.12
 					}
 				},
 				[2] = {
@@ -194,6 +194,29 @@ local mgp_tool_database =
 						apply_velocity = false
 					},
 				}
+			},
+			last_shot_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "M1911_anims", start_val = 2.1, end_val = 2.11 } },
+						tp_anim = { { name = "M1911_anims", start_val = 2.1, end_val = 2.11 } },
+						time = 0.1
+					}
+				}
+			},
+			last_shot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
+						tp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
+						time = 0.1
+					}
+				}
+
 			},
 			reload =
 			{
@@ -209,10 +232,14 @@ local mgp_tool_database =
 
 					},
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.12
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "M1911_anims", start_val = 0.12, end_val = 1.9 } },
+						tp_anim = { { name = "M1911_anims", start_val = 0.12, end_val = 1.9 } },
+						time = 1.78
 					}
 				}
 			},
@@ -229,13 +256,28 @@ local mgp_tool_database =
 						apply_velocity = false
 					},
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.10
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "M1911_anims", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
+						tp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
+						time = 1.65
 					}
 				}
-			}
+			},
+			ammo_check =
+			{
+				[1] = { --first animation track
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
+						tp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
+						time = 1.75
+					}
+				}
+			},
 		}
 	},
 
@@ -244,7 +286,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "SMG_Shot_3"
+			gunshot = "SMG_Shot_4"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
