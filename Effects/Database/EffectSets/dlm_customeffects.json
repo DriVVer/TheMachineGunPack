@@ -17,11 +17,6 @@
 				"offset":{"x":0.0,"y":0.0,"z":0.1},
 				"parameters":["color","radius","intensity"],
 				"duration":0.3
-			},
-			{
-				"type": "audio",
-				"name": "9mm_TMGP_Gunshot",
-				"delay": 0.0
 			},	
 			{
 				"type": "particle",
@@ -57,11 +52,6 @@
 				"duration":0.3
 			},
 			{
-				"type": "audio",
-				"name": "9mm_TMGP_Gunshot",
-				"delay": 0.0
-			},	
-			{
 				"type": "particle",
 				"name": "Muzzle_flash_1_fp",
 				"attached": true,
@@ -73,6 +63,62 @@
 				"attached": false,
 				"delay": 0.1
 
+			}
+		]
+	},
+
+	"Pistol_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pistol_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"SMG_Shot_3":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Shot_3",
+				"delay": 0.0
+			}
+		]
+	},
+	"HighCal_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "HighCal_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"SemiRifle_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SemiRifle_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"BoltRifle_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "BoltRifle_TMGP_Shot_1",
+				"delay": 0.0
 			}
 		]
 	}

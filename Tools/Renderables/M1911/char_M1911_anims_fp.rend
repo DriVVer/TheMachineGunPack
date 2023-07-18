@@ -6,14 +6,14 @@
 			"maxViewDistance": 1000.0,
 			"animationList": [
 				{ "name": "M1911_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
-				{ "name": "M1911_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
+				{ "name": "M1911_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_shoot.dae" },
 
-				{ "name": "M1911_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
-				{ "name": "M1911_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
+				{ "name": "M1911_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_pickup.dae" },
+				{ "name": "M1911_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_putdown.dae" },
 
-				{ "name": "M1911_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
-				{ "name": "M1911_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
-				{ "name": "M1911_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
+				{ "name": "M1911_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_into.dae" },
+				{ "name": "M1911_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_exit.dae" },
+				{ "name": "M1911_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_idle.dae" },
 
 				{ "name": "M1911_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },
 				{ "name": "M1911_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" },

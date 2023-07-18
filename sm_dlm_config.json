@@ -1,9 +1,50 @@
 {
     "soundList": {
-        "9mm_TMGP_Gunshot": {
+        "Pistol_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Shot_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Shot_3": {
             "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Shot_3.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
+        },
+        "BoltRifle_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Distance_Shot.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AssaultRifle_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_DistanceShot.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SemiRifle_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Shot.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SilentRifle_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/SilencedRifle_TMGP_Shot.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "HighCal_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Powerful_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
         }
+
     }
 }

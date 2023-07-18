@@ -28,6 +28,10 @@
 		"title": "Eoka Gun",
 		"description": "The Machine Gun Pack\n\nEoka.\n\nSingle Use"
 	},
+	"e4ed32d5-d891-40e3-b82e-db975884dbb3": {
+		"title": "Colt M1911 Pistol",
+		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+	},
 	"872b6328-37d4-4922-847d-0aef8803ac94": {
 		"title": "Bazooka M20",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
