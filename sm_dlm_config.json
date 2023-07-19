@@ -50,8 +50,6 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
-
-
         "Pistol_TMGP_SlideDrop": {
             "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_SlideDrop.mp3",
             "is3D": true,
@@ -64,6 +62,41 @@
         },
         "Pistol_TMGP_MagOut": {
             "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_MagOut.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AK_TMGP_Rack": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_Rack_AK.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AK_TMGP_MagIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_MagIn_AK.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AK_TMGP_MagOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_MagOut_AK.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AR_TMGP_Rack": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_Rack_AR.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AR_TMGP_Rack_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_Rack_1_AR.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AR_TMGP_MagIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_MagIn_AR.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AR_TMGP_MagOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_MagOut_AR.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         }

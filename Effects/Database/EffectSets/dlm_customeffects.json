@@ -1,5 +1,8 @@
 {
-    "DLM_Muzzle_Flash_SmallCal_tp":
+    
+	//gunshot effects
+	
+	"DLM_Muzzle_Flash_SmallCal_tp":
 	{
 		"parameterList":{
             "color":"f2eea0",
@@ -136,9 +139,86 @@
 
 
 
+	//reload_effects
 
 
-
+	"AR_Rack":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AR_TMGP_Rack",
+				"delay": 0.0
+			}
+		]
+	},
+	"AR_Rack_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AR_TMGP_Rack_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"AR_MagOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AR_TMGP_MagOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"AR_MagIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AR_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"AK_Rack":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AK_TMGP_Rack",
+				"delay": 0.0
+			}
+		]
+	},
+	"AK_MagOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AK_TMGP_MagOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"AK_MagIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AK_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
+	},
 	"Pistol_SlideDrop":
 	{
 		"effectList":
@@ -168,6 +248,28 @@
 			{
 				"type": "audio",
 				"name": "Pistol_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"Rifle_BoltClose":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_BoltClose",
+				"delay": 0.0
+			}
+		]
+	},
+	"Rifle_BoltOpen":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_BoltOpen",
 				"delay": 0.0
 			}
 		]
