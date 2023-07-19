@@ -132,5 +132,44 @@
 				"delay": 0.0
 			}
 		]
+	},
+
+
+
+
+
+
+	"Pistol_SlideDrop":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pistol_TMGP_SlideDrop",
+				"delay": 0.0
+			}
+		]
+	},
+	"Pistol_MagOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pistol_TMGP_MagOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"Pistol_MagIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pistol_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
 	}
 }

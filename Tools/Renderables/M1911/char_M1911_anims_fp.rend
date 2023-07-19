@@ -22,7 +22,7 @@
 
 				{ "name": "M1911_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_reload.dae" },
 				{ "name": "M1911_reload_empty", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_reload_empty.dae"},
-				{ "name": "M1911_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" }
+				{ "name": "M1911_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_ammo_check.dae" }
 			]
 		}
 	]

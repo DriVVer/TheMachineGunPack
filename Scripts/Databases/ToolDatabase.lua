@@ -144,7 +144,10 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "Pistol_Shot_3"
+			gunshot = "Pistol_Shot_3",
+			slidedrop = "Pistol_SlideDrop",
+			magin = "Pistol_MagIn",
+			magout = "Pistol_MagOut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -221,16 +224,7 @@ local mgp_tool_database =
 			reload =
 			{
 				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
+					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.12
@@ -241,20 +235,40 @@ local mgp_tool_database =
 						tp_anim = { { name = "M1911_anims", start_val = 0.12, end_val = 1.9 } },
 						time = 1.78
 					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.42
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.60
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
 				}
 			},
 			reload_empty =
 			{
 				[1] = { --first animation track
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadETG",
-						name_fp = "reloadETG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false
-					},
+
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.10
@@ -264,6 +278,47 @@ local mgp_tool_database =
 						fp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
 						tp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
 						time = 1.65
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "slidedrop",
+						name_fp = "slidedrop",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
 					}
 				}
 			},

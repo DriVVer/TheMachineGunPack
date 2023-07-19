@@ -176,8 +176,8 @@ function M1911.loadAnimations( self )
 		fireCooldown = 0.15,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = 1.25,
-		spreadMaxAngle = 12,
+		spreadMinAngle = 3.25,
+		spreadMaxAngle = 16,
 		fireVelocity = 250.0,
 
 		minDispersionStanding = 0.1,
@@ -190,9 +190,9 @@ function M1911.loadAnimations( self )
 	self.aimFireMode = {
 		fireCooldown = 0.15,
 		spreadCooldown = 0.18,
-		spreadIncrement = 1.3,
-		spreadMinAngle = 0,
-		spreadMaxAngle = 5,
+		spreadIncrement = 1.5,
+		spreadMinAngle = 2,
+		spreadMaxAngle = 7,
 		fireVelocity =  250.0,
 
 		minDispersionStanding = 0.01,

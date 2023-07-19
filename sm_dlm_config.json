@@ -24,7 +24,6 @@
             "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
-            
         },
         "BoltRifle_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Distance_Shot.mp3",
@@ -48,6 +47,23 @@
         },
         "HighCal_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Powerful_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+
+
+        "Pistol_TMGP_SlideDrop": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_SlideDrop.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Pistol_TMGP_MagIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_MagIn.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Pistol_TMGP_MagOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_MagOut.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         }
