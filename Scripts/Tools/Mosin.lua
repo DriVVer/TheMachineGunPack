@@ -245,7 +245,7 @@ function Mosin:loadAnimations()
 		spreadIncrement = 1,
 		spreadMinAngle = 0.05,
 		spreadMaxAngle = 0.10,
-		fireVelocity = 600.0,
+		fireVelocity = 800.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -260,7 +260,7 @@ function Mosin:loadAnimations()
 		spreadIncrement = 1,
 		spreadMinAngle = 0.05,
 		spreadMaxAngle = 0.1,
-		fireVelocity = 600.0,
+		fireVelocity = 800.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,

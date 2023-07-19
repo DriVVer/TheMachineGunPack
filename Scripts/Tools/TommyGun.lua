@@ -177,9 +177,9 @@ function TommyGun.loadAnimations( self )
 		fireCooldown = 0.125,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = 1.25,
+		spreadMinAngle = 3.25,
 		spreadMaxAngle = 12,
-		fireVelocity = 250.0,
+		fireVelocity = 400.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -192,9 +192,9 @@ function TommyGun.loadAnimations( self )
 		fireCooldown = 0.125,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
-		spreadMinAngle = 0,
+		spreadMinAngle = 1,
 		spreadMaxAngle = 5,
-		fireVelocity =  250.0,
+		fireVelocity =  400.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,

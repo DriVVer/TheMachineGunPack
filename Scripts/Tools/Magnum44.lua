@@ -182,7 +182,7 @@ function Magnum44.loadAnimations( self )
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
 		spreadMaxAngle = 15,
-		fireVelocity = 300.0,
+		fireVelocity = 400.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -197,7 +197,7 @@ function Magnum44.loadAnimations( self )
 		spreadIncrement = 1.3,
 		spreadMinAngle = 0,
 		spreadMaxAngle = 5,
-		fireVelocity =  250.0,
+		fireVelocity =  400.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,

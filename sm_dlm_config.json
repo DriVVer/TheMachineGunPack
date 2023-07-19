@@ -36,7 +36,7 @@
             "reverb": "MOUNTAINS"
         },
         "SemiRifle_TMGP_Shot_1": {
-            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Shot.mp3",
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Shot_1.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

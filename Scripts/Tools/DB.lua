@@ -178,7 +178,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 100.0,
+		fireVelocity = 180.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -193,7 +193,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 100.0,
+		fireVelocity = 180.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,

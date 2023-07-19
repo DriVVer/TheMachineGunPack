@@ -218,7 +218,7 @@ function Garand:loadAnimations()
 		spreadIncrement = 1,
 		spreadMinAngle = 1.1,
 		spreadMaxAngle = 3.6,
-		fireVelocity = 400.0,
+		fireVelocity = 550.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -233,7 +233,7 @@ function Garand:loadAnimations()
 		spreadIncrement = 1,
 		spreadMinAngle = 0.1,
 		spreadMaxAngle = 1.0,
-		fireVelocity = 400.0,
+		fireVelocity = 550.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
