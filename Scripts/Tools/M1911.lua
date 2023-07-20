@@ -494,7 +494,7 @@ function M1911:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	local v_gun_color = sm.color.new("ff00ff")
+	local v_gun_color = sm.color.new("3b281c")
 	self.tool:setTpColor(v_gun_color)
 	self.tool:setFpColor(v_gun_color)
 

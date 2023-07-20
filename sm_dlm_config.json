@@ -65,6 +65,31 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Rifle_TMGP_Ping": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Ping.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Rifle_TMGP_BoltOpen": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_BoltOpen.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Rifle_TMGP_BoltClose": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_BoltClose.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Gun_TMGP_Ammo": {
+            "path":"$CONTENT_DATA/Effects/Audio/Revolver_TMGP_Ammo.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Gun_TMGP_AmmoCheck": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Check.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "AK_TMGP_Rack": {
             "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_Rack_AK.mp3",
             "is3D": true,
@@ -97,6 +122,11 @@
         },
         "AR_TMGP_MagOut": {
             "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_MagOut_AR.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Rack": {
+            "path":"$CONTENT_DATA/Effects/Audio/Gun_TMGP_Action_3.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         }

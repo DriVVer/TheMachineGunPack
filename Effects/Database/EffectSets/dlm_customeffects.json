@@ -140,8 +140,73 @@
 
 
 	//reload_effects
-
-
+	
+	"Gun_AmmoCheck":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gun_TMGP_AmmoCheck",
+				"delay": 0.0
+			}
+		]
+	},
+	"Gun_Ammo":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Gun_TMGP_Ammo",
+				"delay": 0.0
+			}
+		]
+	},
+	"Rifle_Ping":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_Ping",
+				"delay": 0.0
+			}
+		]
+	},
+	"Rifle_Bolt_Open":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_BoltOpen",
+				"delay": 0.0
+			}
+		]
+	},
+	"Rifle_Bolt_Close":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_BoltClose",
+				"delay": 0.0
+			}
+		]
+	},
+	"SMG_Rack":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Rack",
+				"delay": 0.0
+			}
+		]
+	},
 	"AR_Rack":
 	{
 		"effectList":

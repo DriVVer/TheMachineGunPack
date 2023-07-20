@@ -14,6 +14,7 @@
 				{ "name": "M1911_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_into.dae" },
 				{ "name": "M1911_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_exit.dae" },
 				{ "name": "M1911_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_idle.dae" },
+				{ "name": "M1911_sprint_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_sprint_shoot.dae" },
 
 				{ "name": "M1911_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_aim_into.dae" },
 				{ "name": "M1911_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_aim_exit.dae" },
