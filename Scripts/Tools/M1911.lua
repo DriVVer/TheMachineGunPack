@@ -254,6 +254,8 @@ function M1911:server_spendAmmo(data, player)
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
+	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
+
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
@@ -261,7 +263,7 @@ function M1911:server_spendAmmo(data, player)
 	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
 	self:server_updateAmmoCounter()
 end
 
@@ -492,10 +494,18 @@ function M1911:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
+	local v_gun_color = sm.color.new("ff00ff")
+	self.tool:setTpColor(v_gun_color)
+	self.tool:setFpColor(v_gun_color)
+
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+	end
+
+	if self.ammo_in_mag <= 0 then
+		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
 	end
 end
 
@@ -553,28 +563,28 @@ function M1911:onAim(aiming)
 	end
 end
 
-function M1911:sv_n_onShoot(dir)
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function M1911:sv_n_onShoot(is_last_shot)
+	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
-	if dir ~= nil and self.sv_ammo_counter > 0 then
+	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function M1911:cl_n_onShoot(dir)
+function M1911:cl_n_onShoot(is_last_shot)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(dir)
+		self:onShoot(is_last_shot)
 	end
 end
 
-function M1911:onShoot(dir)
+function M1911:onShoot(is_last_shot)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-	mgp_toolAnimator_setAnimation(self, "shoot")
+	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or "shoot")
 end
 
 function M1911:calculateFirePosition()
@@ -735,9 +745,11 @@ function M1911:cl_onPrimaryUse(is_shooting)
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
+		local is_last_shot = self.ammo_in_mag == 0
+
 		-- Send TP shoot over network and dircly to self
-		self:onShoot( dir )
-		self.network:sendToServer( "sv_n_onShoot", dir )
+		self:onShoot(is_last_shot)
+		self.network:sendToServer("sv_n_onShoot", is_last_shot)
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
@@ -816,7 +828,7 @@ end
 
 function M1911:client_onReload()
 	if self.equipped then
-		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
 		if not is_mag_full then
 			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 				local cur_anim_name = "reload"
@@ -855,6 +867,8 @@ function M1911:client_onToggle()
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
+
+			mgp_toolAnimator_setAnimation(self, "ammo_check")
 		else
 			sm.gui.displayAlertText("M1911: No Ammo. Reloading...", 3)
 

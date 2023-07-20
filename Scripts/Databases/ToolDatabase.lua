@@ -236,7 +236,6 @@ local mgp_tool_database =
 			stop_effects = { "reloadTG", "reloadETG" }
 		},
 		animation = {
-			
 			shoot =
 			{
 				[1] = {
@@ -273,7 +272,7 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, 0.07, 0),
 						apply_velocity = false
-					},
+					}
 				}
 			},
 			last_shot_equip =
@@ -291,17 +290,44 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, -0.07, 0),
+						tp_offset = sm.vec3.new(0, 0, 0),
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "jnt_slide"
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
 						tp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
 						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
 					}
 				}
 			},
 			reload =
 			{
 				[1] = {
-					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.12
