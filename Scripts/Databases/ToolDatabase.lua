@@ -210,20 +210,9 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = {}
 		},
 		animation = {
-
-			equip =
-			{
-				[1] = {
-					type = mgp_tool_anim_enum.bone_animation,
-					fp_anim = { { name = "M1911_anims", start_val = 0.15, end_val = 0.15 } },
-					tp_anim = { { name = "M1911_anims", start_val = 0.15, end_val = 0.15 } },
-					time = 0.001
-				}
-
-			},
 			shoot =
 			{
 				[1] = {
@@ -260,6 +249,17 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, 0.07, 0),
 						apply_velocity = false
+					}
+				}
+			},
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "M1911_anims", start_val = 0.2, end_val = 0.2 } },
+						tp_anim = { { name = "M1911_anims", start_val = 0.2, end_val = 0.2 } },
+						time = 0.0
 					}
 				}
 			},
@@ -451,7 +451,7 @@ local mgp_tool_database =
 						apply_velocity = false
 					}
 				}
-			},
+			}
 		}
 	},
 

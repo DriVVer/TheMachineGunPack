@@ -378,8 +378,12 @@ function mgp_toolAnimator_reset(self)
 	local effects_to_stop = self.cl_animator_on_unequip.stop_effects
 	for k, v in ipairs(effects_to_stop) do
 		local cur_effect = self.cl_animator_effects[v]
-		if cur_effect:isPlaying() then
-			cur_effect:stopImmediate()
+		if cur_effect ~= nil then
+			if cur_effect:isPlaying() then
+				cur_effect:stopImmediate()
+			end
+		else
+			print("[MGP] Reset: effect", v, "is invalid!")
 		end
 	end
 end

@@ -504,9 +504,7 @@ function M1911:client_onEquip(animate, is_custom)
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
-	if self.ammo_in_mag <= 0 then
-		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
-	end
+	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
 end
 
 function M1911:client_onUnequip(animate, is_custom)
@@ -896,7 +894,7 @@ function M1911.cl_onSecondaryUse( self, state )
 end
 
 function M1911.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
+	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )
