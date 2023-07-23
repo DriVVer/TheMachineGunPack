@@ -239,6 +239,7 @@
 			}
 		]
 	},
+	
 
 	{
 		"itemId": "336a7328-4d50-432c-8698-2ed511187cc7", //Tommy
@@ -267,6 +268,55 @@
 			}
 		]
 	},
+
+	{
+		"itemId": "1e5f445b-934a-4366-b5c2-0bc11fd3580f", //Walter
+		"quantity": 1,
+		"craftTime": 40,
+		"ingredientList": [
+			{
+				"quantity": 6,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 25,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 2,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 1,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+
+	{
+		"itemId": "e4ed32d5-d891-40e3-b82e-db975884dbb3", //Colt
+		"quantity": 1,
+		"craftTime": 40,
+		"ingredientList": [
+			{
+				"quantity": 5,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 20,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 2,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 1,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+	
 
 	{
 		"itemId": "d64d4f6c-1a21-47f5-adf9-63397aa6a3a0", //mp40

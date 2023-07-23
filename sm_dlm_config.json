@@ -1,5 +1,10 @@
 {
     "soundList": {
+        "NoAmmo_TMGP": {
+            "path":"$CONTENT_DATA/Effects/Audio/NoAmmo_TMGP.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Pistol_TMGP_Shot_3": {
             "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_3.mp3",
             "is3D": true,
@@ -62,6 +67,16 @@
         },
         "HighCal_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Powerful_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AT_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/ATRifle_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AT_TMGP_Shot_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/ATRifle_TMGP_Shot_2.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

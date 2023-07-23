@@ -1,4 +1,16 @@
 {
+	
+	"NoAudio":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "NoAudio_TMGP",
+				"delay": 0.0
+			}
+		]
+	},
 	"boom":
 	{
 		"parameterList":

@@ -247,6 +247,7 @@
 
 	//reload_effects
 	
+	
 	"DLM_Gun_AmmoCheck":
 	{
 		"effectList":
@@ -259,6 +260,8 @@
 		]
 	},
 	"DLM_Rocket_Flyin": {
+
+		"parameterList":{"DLM_Volume" : 10},
 		"effectList": [
 			{
 				"type": "renderable",
@@ -271,7 +274,31 @@
 			{
 				"type": "audio",
 				"name": "Rocket_TMGP_Flyin",
-				"duration": 10.0
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 2.3,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 4.6,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 6.9,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 9.2,
+				"parameters" : ["DLM_Volume"]
 			}
 		]
 	},
@@ -282,6 +309,28 @@
 			{
 				"type": "audio",
 				"name": "Gun_TMGP_Ammo",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_AT_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AT_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_AT_Shot_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AT_TMGP_Shot_2",
 				"delay": 0.0
 			}
 		]

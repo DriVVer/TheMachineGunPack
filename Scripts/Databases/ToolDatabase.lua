@@ -51,7 +51,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -76,7 +76,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -223,7 +223,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
 					{
@@ -248,7 +248,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -284,7 +284,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
 					{
@@ -309,7 +309,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -339,7 +339,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -352,7 +352,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -383,7 +383,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -396,7 +396,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -409,7 +409,7 @@ local mgp_tool_database =
 						name_tp = "slidedrop",
 						name_fp = "slidedrop",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -435,7 +435,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -448,7 +448,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -484,7 +484,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
 					{
@@ -509,7 +509,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -545,7 +545,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
 					{
@@ -570,7 +570,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -600,7 +600,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -613,7 +613,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -644,7 +644,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -657,7 +657,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -670,7 +670,7 @@ local mgp_tool_database =
 						name_tp = "slidedrop",
 						name_fp = "slidedrop",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -696,7 +696,7 @@ local mgp_tool_database =
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 					{
@@ -709,7 +709,7 @@ local mgp_tool_database =
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}
 				}
@@ -757,7 +757,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.1, 0.0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0.0),
 						apply_velocity = false
 					},
 					{
@@ -782,7 +782,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -1197,7 +1197,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -1228,7 +1228,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -1640,7 +1640,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -2347,7 +2347,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -2412,7 +2412,7 @@ local mgp_tool_database =
 						name_tp = "gunshot",
 						name_fp = "gunshot",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
 				}
@@ -2598,12 +2598,17 @@ local mgp_tool_database =
 
 	DB =
 	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_AT_Shot_2"
+		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			MagOpen = "DLM_DBOpen",
-			BoltClose = "DLM_MosinBoltClose",
-			BulletPut = "DLM_MosinBulletPut"
+			MagOpen = "DBOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
 		},
 		on_unequip_action = {
 			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
@@ -2875,6 +2880,11 @@ local mgp_tool_database =
 	},
 	Bazooka =
 	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_AT_Shot_2"
+		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
@@ -2924,6 +2934,17 @@ local mgp_tool_database =
 						tp_anim = { { name = "BZ_Anim", start_val = 4.0, end_val = 4.30 } },
 						time = 0.1
 					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
 				}
 
 			},
@@ -2947,6 +2968,17 @@ local mgp_tool_database =
 						tp_anim = { { name = "BZ_Anim", start_val = 4.0, end_val = 4.30 } },
 						time = 0.1
 					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
 				}
 
 			},
