@@ -41,7 +41,7 @@ function BazookaProjectile_clientSpawnProjectile(self, data, is_local)
 	v_proj_pos = v_proj_pos + v_proj_direction
 	local v_proj_velocity = v_proj_direction * data[2]
 
-	local v_proj_effect = sm.effect.createEffect("Bazooka - Projectile")
+	local v_proj_effect = sm.effect.createEffect (sm.dlm_injected and "DLM_Rocket_Flyin" or "Bazooka - Projectile")
 	v_proj_effect:setScale(sm.vec3.new(0.5, 0.5, 0.5))
 
 	local v_new_projectile =

@@ -40,7 +40,7 @@ local _Database = {
 		},
 		client = {
 			effects = {
-				shoot = {name = "BoomMuzlle20", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
+				shoot = {name = "BoomMuzzlle20", offset = sm.vec3.new(0, 0, 0.5), bone_name = nil}
 			},
 			pose_animation = {
 				animation_states = {

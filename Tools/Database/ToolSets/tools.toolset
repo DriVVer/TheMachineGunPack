@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"name": "P38",
+			"uuid": "1e5f445b-934a-4366-b5c2-0bc11fd3580f",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/P38/P38_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/P38.lua",
+				"class": "P38",
+				"data": {}
+			}
+		},
+		{
 			"name": "Mp40",
 			"uuid": "d64d4f6c-1a21-47f5-adf9-63397aa6a3a0",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Preview.rend",

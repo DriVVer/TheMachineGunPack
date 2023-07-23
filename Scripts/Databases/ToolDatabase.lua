@@ -29,10 +29,10 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "SMG_Shot_4",
-			rack = "SMG_Rack",
-			magin = "AR_MagIn",
-			magout = "AR_MagOut"
+			gunshot = "DLM_SMG_Shot_4",
+			rack = "DLM_SMG_Rack",
+			magin = "DLM_AR_MagIn",
+			magout = "DLM_AR_MagOut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -200,10 +200,11 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "Pistol_Shot_3",
-			slidedrop = "Pistol_SlideDrop",
-			magin = "Pistol_MagIn",
-			magout = "Pistol_MagOut"
+			gunshot = "DLM_Pistol_Shot_3",
+			slidedrop = "DLM_Pistol_SlideDrop",
+			magin = "DLM_Pistol_MagIn",
+			magout = "DLM_Pistol_MagOut",
+			holster = "DLM_Pistol_Holster"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -455,15 +456,276 @@ local mgp_tool_database =
 		}
 	},
 
+	p38 =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_Pistol_Shot_3",
+			slidedrop = "DLM_Pistol_SlideDrop",
+			magin = "DLM_Pistol_MagIn",
+			magout = "DLM_Pistol_MagOut",
+			holster = "DLM_Pistol_Holster"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp"
+		},
+		on_unequip_action = {
+			stop_effects = {}
+		},
+		animation = {
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, -0.07, 0),
+						tp_offset = sm.vec3.new(0, 0, 0),
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "jnt_slide"
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 0.00, end_val = 0.2 } },
+						tp_anim = { { name = "P38_anims", start_val = 0.00, end_val = 0.2 } },
+						time = 0.15
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 0.2, end_val = 0.2 } },
+						tp_anim = { { name = "P38_anims", start_val = 0.2, end_val = 0.2 } },
+						time = 0.0
+					}
+				}
+			},
+			last_shot_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 2.1, end_val = 2.11 } },
+						tp_anim = { { name = "P38_anims", start_val = 2.1, end_val = 2.11 } },
+						time = 0.1
+					}
+				}
+			},
+			last_shot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, -0.07, 0),
+						tp_offset = sm.vec3.new(0, 0, 0),
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "jnt_slide"
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 2.0, end_val = 2.10 } },
+						tp_anim = { { name = "P38_anims", start_val = 2.0, end_val = 2.10 } },
+						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			reload =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.15
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 0.15, end_val = 1.9 } },
+						tp_anim = { { name = "P38_anims", start_val = 0.15, end_val = 1.9 } },
+						time = 1.75
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.42
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.60
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			reload_empty =
+			{
+				[1] = { --first animation track
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.10
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 2.10, end_val = 3.75 } },
+						tp_anim = { { name = "P38_anims", start_val = 2.10, end_val = 3.75 } },
+						time = 1.65
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "slidedrop",
+						name_fp = "slidedrop",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			ammo_check =
+			{
+				[1] = { --first animation track
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "P38_anims", start_val = 3.75, end_val = 5.5 } },
+						tp_anim = { { name = "P38_anims", start_val = 3.75, end_val = 5.5 } },
+						time = 1.75
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.20
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.80
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.07, 0),
+						apply_velocity = false
+					}
+				}
+			}
+		}
+	},
+
 	Mp40 =
 	{
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "SMG_Shot_4",
-			rack = "SMG_Rack",
-			magin = "AR_MagIn",
-			magout = "AR_MagOut"
+			gunshot = "DLM_SMG_Shot_4",
+			rack = "DLM_SMG_Rack",
+			magin = "DLM_AR_MagIn",
+			magout = "DLM_AR_MagOut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -841,7 +1103,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "HighCal_Shot_1"
+			gunshot = "DLM_HighCal_Shot_1"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -1153,10 +1415,10 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "BoltRifle_Shot_1",
-			BoltOpen = "Rifle_Bolt_Open",
-			BoltClose = "Rifle_Bolt_Close",
-			BulletPut = "Gun_Ammo"
+			gunshot = "DLM_BoltRifle_Shot_1",
+			BoltOpen = "DLM_Rifle_Bolt_Open",
+			BoltClose = "DLM_Rifle_Bolt_Close",
+			BulletPut = "DLM_Gun_Ammo"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -1996,10 +2258,10 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "SemiRifle_Shot_1",
-			ping = "Rifle_Ping",
-			ammocheck = "Gun_AmmoCheck",
-			slidedrop = "Pistol_SlideDrop"
+			gunshot = "DLM_SemiRifle_Shot_1",
+			ping = "DLM_Rifle_Ping",
+			ammocheck = "DLM_Gun_AmmoCheck",
+			slidedrop = "DLM_Pistol_SlideDrop"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -2339,9 +2601,9 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			MagOpen = "DBOpen",
-			BoltClose = "MosinBoltClose",
-			BulletPut = "MosinBulletPut"
+			MagOpen = "DLM_DBOpen",
+			BoltClose = "DLM_MosinBoltClose",
+			BulletPut = "DLM_MosinBulletPut"
 		},
 		on_unequip_action = {
 			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }

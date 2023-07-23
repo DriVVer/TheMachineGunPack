@@ -8,7 +8,7 @@ dofile("ToolSwimUtil.lua")
 
 local Damage = 30
 
----@class M1911 : ToolClass
+---@class P38 : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field mag_capacity integer
@@ -21,37 +21,37 @@ local Damage = 30
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
-M1911 = class()
-M1911.mag_capacity = 7
+P38 = class()
+P38.mag_capacity = 8
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/M1911/M1911_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/M1911/M1911_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/P38/P38_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/P38/P38_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_anims_tp.rend",
-	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_offset_tp.rend"
+	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_anims_tp.rend",
+	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_offset_tp.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_anims_fp.rend",
-	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_offset_fp.rend"
+	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_anims_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_offset_fp.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function M1911:client_initAimVals()
+function P38:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function M1911:server_onCreate()
+function P38:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -66,22 +66,22 @@ function M1911:server_onCreate()
 	end
 end
 
-function M1911:server_requestAmmo(data, caller)
+function P38:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function M1911:server_updateAmmoCounter(data, caller)
+function P38:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function M1911:client_receiveAmmo(ammo_count)
+function P38:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function M1911:client_onCreate()
+function P38:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
@@ -89,20 +89,20 @@ function M1911:client_onCreate()
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "m1911")
+	mgp_toolAnimator_initialize(self, "p38")
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function M1911.client_onDestroy(self)
+function P38.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function M1911.client_onRefresh( self )
+function P38.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function M1911.loadAnimations( self )
+function P38.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -113,9 +113,9 @@ function M1911.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "M1911_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "M1911_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "M1911_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			reload_empty = { "P38_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload = { "P38_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "P38_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -149,25 +149,25 @@ function M1911.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "M1911_pickup", { nextAnimation = "idle" } },
-				unequip = { "M1911_putdown" },
+				equip = { "P38_pickup", { nextAnimation = "idle" } },
+				unequip = { "P38_putdown" },
 
-				idle = { "M1911_idle", { looping = true } },
-				shoot = { "M1911_shoot", { nextAnimation = "idle" } },
+				idle = { "P38_idle", { looping = true } },
+				shoot = { "P38_shoot", { nextAnimation = "idle" } },
 
-				reload = { "M1911_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "M1911_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "P38_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "P38_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
-				ammo_check = { "M1911_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "P38_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "M1911_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "M1911_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "M1911_aim_idle", { looping = true } },
-				aimShoot = { "M1911_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "P38_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "P38_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "P38_aim_idle", { looping = true } },
+				aimShoot = { "P38_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "M1911_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "M1911_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "M1911_sprint_idle", { looping = true } },
+				sprintInto = { "P38_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "P38_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "P38_sprint_idle", { looping = true } },
 			}
 		)
 	end
@@ -224,7 +224,7 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
-function M1911:client_updateAimWeights(dt)
+function P38:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
@@ -242,7 +242,7 @@ function M1911:client_updateAimWeights(dt)
 end
 
 local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function M1911:server_spendAmmo(data, player)
+function P38:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -267,7 +267,7 @@ function M1911:server_spendAmmo(data, player)
 	self:server_updateAmmoCounter()
 end
 
-function M1911:sv_n_trySpendAmmo(data, player)
+function P38:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -275,7 +275,7 @@ function M1911:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function M1911.client_onUpdate( self, dt )
+function P38.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -461,7 +461,7 @@ function M1911.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function M1911:client_onEquip(animate, is_custom)
+function P38:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -494,7 +494,7 @@ function M1911:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	local v_gun_color = sm.color.new("4d2714")
+	local v_gun_color = sm.color.new("c4b68d")
 	self.tool:setTpColor(v_gun_color)
 	self.tool:setFpColor(v_gun_color)
 
@@ -507,7 +507,7 @@ function M1911:client_onEquip(animate, is_custom)
 	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
 end
 
-function M1911:client_onUnequip(animate, is_custom)
+function P38:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -544,24 +544,24 @@ function M1911:client_onUnequip(animate, is_custom)
 	end
 end
 
-function M1911:sv_n_onAim(aiming)
+function P38:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function M1911:cl_n_onAim(aiming)
+function P38:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function M1911:onAim(aiming)
+function P38:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function M1911:sv_n_onShoot(is_last_shot)
+function P38:sv_n_onShoot(is_last_shot)
 	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
 	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
@@ -570,13 +570,13 @@ function M1911:sv_n_onShoot(is_last_shot)
 	end
 end
 
-function M1911:cl_n_onShoot(is_last_shot)
+function P38:cl_n_onShoot(is_last_shot)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onShoot(is_last_shot)
 	end
 end
 
-function M1911:onShoot(is_last_shot)
+function P38:onShoot(is_last_shot)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -585,7 +585,7 @@ function M1911:onShoot(is_last_shot)
 	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or "shoot")
 end
 
-function M1911:calculateFirePosition()
+function P38:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -612,7 +612,7 @@ function M1911:calculateFirePosition()
 	return firePosition
 end
 
-function M1911:calculateTpMuzzlePos()
+function P38:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -646,7 +646,7 @@ function M1911:calculateTpMuzzlePos()
 	return fakePosition
 end
 
-function M1911:calculateFpMuzzlePos()
+function P38:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -676,7 +676,7 @@ function M1911:calculateFpMuzzlePos()
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function M1911:cl_onPrimaryUse(is_shooting)
+function P38:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
@@ -777,22 +777,22 @@ local id_to_anim_name =
 	[2] = "reload_empty"
 }
 
-function M1911:sv_n_onReload(anim_id)
+function P38:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function M1911:cl_n_onReload(anim_id)
+function P38:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
 
-function M1911:cl_startReloadAnim(anim_name)
+function P38:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function M1911:client_isGunReloading()
+function P38:client_isGunReloading()
 	if self.waiting_for_ammo then
 		return true
 	end
@@ -805,7 +805,7 @@ function M1911:client_isGunReloading()
 	return false
 end
 
-function M1911:cl_initReloadAnim(anim_name)
+function P38:cl_initReloadAnim(anim_name)
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
 		if v_available_ammo == 0 then
@@ -824,7 +824,7 @@ function M1911:cl_initReloadAnim(anim_name)
 	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
 end
 
-function M1911:client_onReload()
+function P38:client_onReload()
 	if self.equipped then
 		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
 		if not is_mag_full then
@@ -842,25 +842,25 @@ function M1911:client_onReload()
 	return true
 end
 
-function M1911:sv_n_checkMag()
+function P38:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function M1911:cl_n_checkMag()
+function P38:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function M1911:cl_startCheckMagAnim()
+function P38:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 end
 
-function M1911:client_onToggle()
+function P38:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("M1911: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			sm.gui.displayAlertText(("P38: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
@@ -868,7 +868,7 @@ function M1911:client_onToggle()
 
 			mgp_toolAnimator_setAnimation(self, "ammo_check")
 		else
-			sm.gui.displayAlertText("M1911: No Ammo. Reloading...", 3)
+			sm.gui.displayAlertText("P38: No Ammo. Reloading...", 3)
 
 			self:cl_initReloadAnim("reload_empty")
 		end
@@ -878,7 +878,7 @@ function M1911:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function M1911.cl_onSecondaryUse( self, state )
+function P38.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -893,7 +893,7 @@ function M1911.cl_onSecondaryUse( self, state )
 	end
 end
 
-function M1911.client_onEquippedUpdate( self, primaryState, secondaryState )
+function P38.client_onEquippedUpdate( self, primaryState, secondaryState )
 	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then
