@@ -132,6 +132,18 @@
 				"class": "DB",
 				"data": {}
 			}
+		},
+		{
+			"name" : "GameHook",
+			"previewRenderable" : "$GAME_DATA/Character/Char_Tools/char_spudgun_preview.rend",
+			"previewRotation" : [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script" : {
+			   "class" : "GameHook",
+			   "data" : {},
+			   "file" : "$CONTENT_DATA/Scripts/GameHook.lua"
+			},
+			"autoTool": true,
+			"uuid" : "d63e26bf-eeef-40b2-99dd-6f4bf687c842"
 		}
 	]
 }

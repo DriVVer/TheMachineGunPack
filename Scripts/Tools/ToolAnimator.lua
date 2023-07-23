@@ -92,15 +92,17 @@ AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 			effect_offset = cur_data.tp_offset
 		end
 
-		effect_offset = sm.camera.getRotation() * effect_offset
+		if cur_effect then
+			effect_offset = sm.camera.getRotation() * effect_offset
 
-		cur_effect:setPosition(effect_pos + effect_offset)
-		cur_effect:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), effect_dir))
-		if cur_data.apply_velocity then
-			cur_effect:setVelocity(s_tool:getMovementVelocity())
+			cur_effect:setPosition(effect_pos + effect_offset)
+			cur_effect:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), effect_dir))
+			if cur_data.apply_velocity then
+				cur_effect:setVelocity(s_tool:getMovementVelocity())
+			end
+
+			cur_effect:start()
 		end
-
-		cur_effect:start()
 	end
 
 	track.func = AnimationUpdateFunctions.anim_selector
