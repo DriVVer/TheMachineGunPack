@@ -767,6 +767,8 @@ function Bazooka.cl_onPrimaryUse(self)
 		self:onShoot(v_proj_hit)
 		self.network:sendToServer("sv_n_onShoot", v_proj_hit)
 
+		sm.camera.setShake(0.2)
+
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else

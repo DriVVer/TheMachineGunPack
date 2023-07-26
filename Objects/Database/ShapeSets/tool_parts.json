@@ -1,196 +1,148 @@
 {
-   "partList" : [
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_tommygun",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_InventoryPreview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "c4966054-2c7e-451a-b946-090604696d78"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_m1911",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/M1911/M1911_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "db67924a-39b0-4522-a3a5-270ef2a8538b"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_p38",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/P38/P38_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "873b01f3-4b50-460f-b7fc-98bbdf4b50e3"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_mp40",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "dc99f421-04c4-4e64-bce5-ea1d83f8b40c"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_magnum44",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_InventoryPreview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "d9d3c67a-0186-45c2-af76-4bb1b0951c21"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_eoka",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Eoka/Eoka_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "03cca028-d7d9-40bb-b733-211929d5b6d8"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_mosin",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "0f3d71b7-93fd-4703-8263-dacdf648a667"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_garand",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Garand/Garand_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "4f0340c8-3d62-4ee9-a363-b4dbd6a5e014"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_handheldGrenade",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "9ba22a32-89d8-435a-b969-2006b3531ac6"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_fragGrenade",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Prewiev.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "f41176ae-095c-4749-9954-448b63e44ce8"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_bazooka",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "25e799e2-cc38-4994-a4b0-bd1742026ac8"
-      },
-      {
-         "box" : {
-            "x" : 1,
-            "y" : 1,
-            "z" : 1
-         },
-         "color" : "ffffff",
-         "name" : "obj_tool_doubleBarrel",
-         "physicsMaterial" : "Plastic",
-         "ratings" : {},
-         "renderable" : "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
-         "rotationSet" : "PropY",
-         "showInInventory" : false,
-         "stackSize" : 1,
-         "uuid" : "d9c36e6d-0878-4a87-909d-d71b4dca51e7"
-      }
-   ]
+	"partList": [
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_tommygun",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_InventoryPreview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "c4966054-2c7e-451a-b946-090604696d78"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_m1911",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/M1911/M1911_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "db67924a-39b0-4522-a3a5-270ef2a8538b"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_p38",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/P38/P38_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "873b01f3-4b50-460f-b7fc-98bbdf4b50e3"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_mp40",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "dc99f421-04c4-4e64-bce5-ea1d83f8b40c"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_magnum44",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_InventoryPreview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "d9d3c67a-0186-45c2-af76-4bb1b0951c21"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_eoka",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Eoka/Eoka_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "03cca028-d7d9-40bb-b733-211929d5b6d8"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_mosin",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "0f3d71b7-93fd-4703-8263-dacdf648a667"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_garand",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Garand/Garand_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "4f0340c8-3d62-4ee9-a363-b4dbd6a5e014"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_handheldGrenade",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_prewiev.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "9ba22a32-89d8-435a-b969-2006b3531ac6"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_fragGrenade",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Prewiev.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "f41176ae-095c-4749-9954-448b63e44ce8"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_bazooka",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "25e799e2-cc38-4994-a4b0-bd1742026ac8"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_doubleBarrel",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "d9c36e6d-0878-4a87-909d-d71b4dca51e7"
+		}
+	]
 }
