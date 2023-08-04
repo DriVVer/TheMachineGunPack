@@ -235,9 +235,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.2 } },
-						tp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.2 } },
-						time = 0.1
+						fp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.15 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.15 } },
+						time = 0.4
 					}
 				},
 				[2] = {
@@ -261,9 +261,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 3.0 } },
-						tp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 3.0 } },
-						time = 2.8
+						fp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 2.2 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 2.2 } },
+						time = 2.0
 					}
 				},
 				[2] = {
@@ -301,10 +301,14 @@ local mgp_tool_database =
 			{
 				[1] = { --first animation track
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "Gun_anims", start_val = 3.2, end_val = 6.0 } },
+						tp_anim = { { name = "Gun_anims", start_val = 3.2, end_val = 6.0 } },
+						time = 2.8
 					}
 				},
 				[2] = {
@@ -338,7 +342,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.15
+						time = 1.25
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
