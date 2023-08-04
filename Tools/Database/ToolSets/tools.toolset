@@ -13,6 +13,17 @@
 			}
 		},
 		{
+			"name": "PPSh",
+			"uuid": "d8ba1dfe-172c-41ea-83e1-2c977e21d9e9",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/PPSh.lua",
+				"class": "PPSh",
+				"data": {}
+			}
+		},
+		{
 			"name": "M1911",
 			"uuid": "e4ed32d5-d891-40e3-b82e-db975884dbb3",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/M1911/M1911_Preview.rend",

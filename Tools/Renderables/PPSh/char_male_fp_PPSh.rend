@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "PPSh_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_idle.dae" },
+				{ "name": "PPSh_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_shoot.dae" },
+
+				{ "name": "PPSh_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_pickup.dae" },
+				{ "name": "PPSh_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_putdown.dae" },
+
+				{ "name": "PPSh_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_sprint_into.dae" },
+				{ "name": "PPSh_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_sprint_exit.dae" },
+				{ "name": "PPSh_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_sprint_idle.dae" },
+
+				{ "name": "PPSh_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_aim_into.dae" },
+				{ "name": "PPSh_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_aim_exit.dae" },
+				{ "name": "PPSh_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_aim_shoot.dae" },
+				{ "name": "PPSh_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_aim_idle.dae" },
+
+				{ "name": "PPSh_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_reload.dae" },
+				{ "name": "PPSh_reload_empty", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_reload_empty.dae"},
+				{ "name": "PPSh_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPSh/PPSh_fp_ammo_check.dae" }
+			]
+		}
+	]
+} 

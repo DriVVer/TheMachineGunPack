@@ -6,9 +6,9 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 26
+local Damage = 19
 
----@class P38 : ToolClass
+---@class PPSh : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field mag_capacity integer
@@ -21,37 +21,37 @@ local Damage = 26
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
-P38 = class()
-P38.mag_capacity = 8
+PPSh = class()
+PPSh.mag_capacity = 35
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/P38/P38_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/P38/P38_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_anims_tp.rend",
-	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_offset_tp.rend"
+	"$CONTENT_DATA/Tools/Renderables/PPSh/char_male_tp_PPSh.rend",
+	"$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_anims_fp.rend",
-	"$CONTENT_DATA/Tools/Renderables/P38/char_P38_offset_fp.rend"
+	"$CONTENT_DATA/Tools/Renderables/PPSh/char_male_fp_PPSh.rend",
+	"$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_fp_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function P38:client_initAimVals()
+function PPSh:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function P38:server_onCreate()
+function PPSh:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -66,22 +66,22 @@ function P38:server_onCreate()
 	end
 end
 
-function P38:server_requestAmmo(data, caller)
+function PPSh:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function P38:server_updateAmmoCounter(data, caller)
+function PPSh:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function P38:client_receiveAmmo(ammo_count)
+function PPSh:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function P38:client_onCreate()
+function PPSh:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
@@ -89,20 +89,20 @@ function P38:client_onCreate()
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "p38")
+	mgp_toolAnimator_initialize(self, "ppsh")
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function P38.client_onDestroy(self)
+function PPSh.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function P38.client_onRefresh( self )
+function PPSh.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function P38.loadAnimations( self )
+function PPSh.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -113,9 +113,9 @@ function P38.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "P38_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "P38_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "P38_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			reload_empty = { "PPSh_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload = { "PPSh_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "PPSh_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -149,35 +149,35 @@ function P38.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "P38_pickup", { nextAnimation = "idle" } },
-				unequip = { "P38_putdown" },
+				equip = { "PPSh_pickup", { nextAnimation = "idle" } },
+				unequip = { "PPSh_putdown" },
 
-				idle = { "P38_idle", { looping = true } },
-				shoot = { "P38_shoot", { nextAnimation = "idle" } },
+				idle = { "PPSh_idle", { looping = true } },
+				shoot = { "PPSh_shoot", { nextAnimation = "idle" } },
 
-				reload = { "P38_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "P38_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "PPSh_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "PPSh_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
-				ammo_check = { "P38_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "PPSh_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "P38_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "P38_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "P38_aim_idle", { looping = true } },
-				aimShoot = { "P38_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "PPSh_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "PPSh_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "PPSh_aim_idle", { looping = true } },
+				aimShoot = { "PPSh_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "P38_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "P38_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "P38_sprint_idle", { looping = true } },
+				sprintInto = { "PPSh_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "PPSh_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "PPSh_sprint_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.15,
+		fireCooldown = 0.08,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 4.25,
-		spreadMaxAngle = 16,
+		spreadMaxAngle = 15,
 		fireVelocity = 350.0,
 
 		minDispersionStanding = 0.1,
@@ -188,11 +188,11 @@ function P38.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.15,
+		fireCooldown = 0.08,
 		spreadCooldown = 0.18,
-		spreadIncrement = 1.5,
-		spreadMinAngle = 1,
-		spreadMaxAngle = 3,
+		spreadIncrement = 1.3,
+		spreadMinAngle = 2,
+		spreadMaxAngle = 6,
 		fireVelocity =  350.0,
 
 		minDispersionStanding = 0.01,
@@ -224,7 +224,7 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
-function P38:client_updateAimWeights(dt)
+function PPSh:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
@@ -242,7 +242,7 @@ function P38:client_updateAimWeights(dt)
 end
 
 local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function P38:server_spendAmmo(data, player)
+function PPSh:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -254,8 +254,6 @@ function P38:server_spendAmmo(data, player)
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
-	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
-
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
@@ -263,11 +261,11 @@ function P38:server_spendAmmo(data, player)
 	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
 	self:server_updateAmmoCounter()
 end
 
-function P38:sv_n_trySpendAmmo(data, player)
+function PPSh:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -275,7 +273,7 @@ function P38:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function P38.client_onUpdate( self, dt )
+function PPSh.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -461,7 +459,7 @@ function P38.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function P38:client_onEquip(animate, is_custom)
+function PPSh:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -494,20 +492,14 @@ function P38:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	local v_gun_color = sm.color.new("c4b68d")
-	self.tool:setTpColor(v_gun_color)
-	self.tool:setFpColor(v_gun_color)
-
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if is_tool_local then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
-
-	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
 end
 
-function P38:client_onUnequip(animate, is_custom)
+function PPSh:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -544,48 +536,48 @@ function P38:client_onUnequip(animate, is_custom)
 	end
 end
 
-function P38:sv_n_onAim(aiming)
+function PPSh:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function P38:cl_n_onAim(aiming)
+function PPSh:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function P38:onAim(aiming)
+function PPSh:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function P38:sv_n_onShoot(is_last_shot)
-	self.network:sendToClients("cl_n_onShoot", is_last_shot)
+function PPSh:sv_n_onShoot(dir)
+	self.network:sendToClients( "cl_n_onShoot", dir )
 
-	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
+	if dir ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function P38:cl_n_onShoot(is_last_shot)
+function PPSh:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(is_last_shot)
+		self:onShoot(dir)
 	end
 end
 
-function P38:onShoot(is_last_shot)
+function PPSh:onShoot(dir)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or "shoot")
+	mgp_toolAnimator_setAnimation(self, "shoot")
 end
 
-function P38:calculateFirePosition()
+function PPSh:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -612,7 +604,7 @@ function P38:calculateFirePosition()
 	return firePosition
 end
 
-function P38:calculateTpMuzzlePos()
+function PPSh:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -646,7 +638,7 @@ function P38:calculateTpMuzzlePos()
 	return fakePosition
 end
 
-function P38:calculateFpMuzzlePos()
+function PPSh:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -676,7 +668,7 @@ function P38:calculateFpMuzzlePos()
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function P38:cl_onPrimaryUse(is_shooting)
+function PPSh:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
@@ -743,11 +735,9 @@ function P38:cl_onPrimaryUse(is_shooting)
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
-		local is_last_shot = self.ammo_in_mag == 0
-
 		-- Send TP shoot over network and dircly to self
-		self:onShoot(is_last_shot)
-		self.network:sendToServer("sv_n_onShoot", is_last_shot)
+		self:onShoot( dir )
+		self.network:sendToServer( "sv_n_onShoot", dir )
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
@@ -777,22 +767,22 @@ local id_to_anim_name =
 	[2] = "reload_empty"
 }
 
-function P38:sv_n_onReload(anim_id)
+function PPSh:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function P38:cl_n_onReload(anim_id)
+function PPSh:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
 
-function P38:cl_startReloadAnim(anim_name)
+function PPSh:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function P38:client_isGunReloading()
+function PPSh:client_isGunReloading()
 	if self.waiting_for_ammo then
 		return true
 	end
@@ -805,7 +795,7 @@ function P38:client_isGunReloading()
 	return false
 end
 
-function P38:cl_initReloadAnim(anim_name)
+function PPSh:cl_initReloadAnim(anim_name)
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
 		if v_available_ammo == 0 then
@@ -824,9 +814,9 @@ function P38:cl_initReloadAnim(anim_name)
 	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
 end
 
-function P38:client_onReload()
+function PPSh:client_onReload()
 	if self.equipped then
-		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
+		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 		if not is_mag_full then
 			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 				local cur_anim_name = "reload"
@@ -842,33 +832,31 @@ function P38:client_onReload()
 	return true
 end
 
-function P38:sv_n_checkMag()
+function PPSh:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function P38:cl_n_checkMag()
+function PPSh:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function P38:cl_startCheckMagAnim()
+function PPSh:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 end
 
-function P38:client_onToggle()
+function PPSh:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("P38: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			sm.gui.displayAlertText(("PPSh: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
-
-			mgp_toolAnimator_setAnimation(self, "ammo_check")
 		else
-			sm.gui.displayAlertText("P38: No Ammo. Reloading...", 3)
+			sm.gui.displayAlertText("PPSh: No Ammo. Reloading...", 3)
 
 			self:cl_initReloadAnim("reload_empty")
 		end
@@ -878,7 +866,7 @@ function P38:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function P38.cl_onSecondaryUse( self, state )
+function PPSh.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -893,8 +881,8 @@ function P38.cl_onSecondaryUse( self, state )
 	end
 end
 
-function P38.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start)
+function PPSh.client_onEquippedUpdate( self, primaryState, secondaryState )
+	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )
