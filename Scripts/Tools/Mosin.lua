@@ -764,7 +764,7 @@ function Mosin:onShoot(dir)
 
 	if dir ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, "shoot")
+		mgp_toolAnimator_setAnimation(self, self.scope_hud:isActive() and "shoot_aim" or "shoot")
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
