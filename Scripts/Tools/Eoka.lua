@@ -227,7 +227,9 @@ function Eoka:client_onUpdate(dt)
 			self.cl_restore_timer = nil
 
 			self.gun_used = nil
-			self:client_onEquip(true)
+			if self.tool:isEquipped() then
+				self:client_onEquip(true)
+			end
 		end
 	end
 
