@@ -202,7 +202,7 @@ local mgp_tool_database =
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_4",
 			rack = "DLM_SMG_Rack",
-			magin = "DLM_AK_MagIn",
+			magin = "DLM_AR_MagIn",
 			magout = "DLM_AK_MagOut"
 		},
 		required_effects = {
