@@ -91,6 +91,17 @@
 			}
 		]
 	},
+	"DLM_Pistol_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pistol_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_SMG_Shot_1":
 	{
 		"effectList":
@@ -98,6 +109,17 @@
 			{
 				"type": "audio",
 				"name": "SMG_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SMG_Shot_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Shot_2",
 				"delay": 0.0
 			}
 		]
@@ -120,6 +142,17 @@
 			{
 				"type": "audio",
 				"name": "SMG_TMGP_Shot_4",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SMG_Shot_5":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Shot_5",
 				"delay": 0.0
 			}
 		]
@@ -313,6 +346,17 @@
 			}
 		]
 	},
+	"DLM_Bazooka_Ammo":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Bazooka_TMGP_Ammo",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Gun_Ammo":
 	{
 		"effectList":
@@ -379,13 +423,35 @@
 			}
 		]
 	},
-	"DLM_SMG_Rack":
+	"DLM_SMG_Rack_1":
 	{
 		"effectList":
 		[
 			{
 				"type": "audio",
-				"name": "SMG_TMGP_Rack",
+				"name": "SMG_TMGP_Rack_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SMG_Rack_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Rack_2",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SMG_Rack_3":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Rack_3",
 				"delay": 0.0
 			}
 		]

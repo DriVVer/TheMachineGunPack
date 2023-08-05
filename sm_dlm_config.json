@@ -10,6 +10,11 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Pistol_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "20Cannon_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/20_Cannon_TMGP_Shot.mp3",
             "is3D": true,
@@ -22,6 +27,11 @@
         },
         "7MG_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/LMG_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Bazooka_TMGP_Ammo": {
+            "path":"$CONTENT_DATA/Effects/Audio/Bazooka_TMGP_Ammo_1.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
@@ -42,6 +52,11 @@
         },
         "SMG_TMGP_Shot_4": {
             "path":"$CONTENT_DATA/Effects/Audio/Pistol_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Shot_5": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Shot_5.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
@@ -155,8 +170,18 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
-        "SMG_TMGP_Rack": {
-            "path":"$CONTENT_DATA/Effects/Audio/Gun_TMGP_Action_3.mp3",
+        "SMG_TMGP_Rack_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Rack_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Rack_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Rack_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SMG_TMGP_Rack_3": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Rack_3.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

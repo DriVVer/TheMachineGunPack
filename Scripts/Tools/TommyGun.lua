@@ -174,7 +174,7 @@ function TommyGun.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.125,
+		fireCooldown = 0.11,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 3.25,
@@ -189,7 +189,7 @@ function TommyGun.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.125,
+		fireCooldown = 0.11,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 1,

@@ -25,7 +25,7 @@ local Damage = 200
 ---@field aim_timer integer
 ---@field scope_hud GuiInterface
 PTRD = class()
-PTRD.mag_capacity = 1
+PTRD.mag_capacity = 100
 
 local renderables =
 {
@@ -161,12 +161,12 @@ function PTRD:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
-			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
-			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
-			idle = { "spudgun_idle" },
-			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
-			putdown = { "spudgun_putdown" },
+			shoot = { "spudPTRD_shoot", { crouch = "spudPTRD_crouch_shoot" } },
+			aim = { "spudPTRD_aim", { crouch = "spudPTRD_crouch_aim" } },
+			aimShoot = { "spudPTRD_aim_shoot", { crouch = "spudPTRD_crouch_aim_shoot" } },
+			idle = { "spudPTRD_idle" },
+			pickup = { "spudPTRD_pickup", { nextAnimation = "idle" } },
+			putdown = { "spudPTRD_putdown" },
 
 			reload = { "PTRD_reload", { nextAnimation = "idle" } },
 			reload_gt = { "PTRD_reload_GT", { nextAnimation = "idle" } },
@@ -175,24 +175,24 @@ function PTRD:loadAnimations()
 		}
 	)
 	local movementAnimations = {
-		idle = "spudgun_idle",
-		idleRelaxed = "spudgun_relax",
+		idle = "spudPTRD_idle",
+		idleRelaxed = "spudPTRD_relax",
 
-		sprint = "spudgun_sprint",
-		runFwd = "spudgun_run_fwd",
-		runBwd = "spudgun_run_bwd",
+		sprint = "spudPTRD_sprint",
+		runFwd = "spudPTRD_run_fwd",
+		runBwd = "spudPTRD_run_bwd",
 
-		jump = "spudgun_jump",
-		jumpUp = "spudgun_jump_up",
-		jumpDown = "spudgun_jump_down",
+		jump = "spudPTRD_jump",
+		jumpUp = "spudPTRD_jump_up",
+		jumpDown = "spudPTRD_jump_down",
 
-		land = "spudgun_jump_land",
-		landFwd = "spudgun_jump_land_fwd",
-		landBwd = "spudgun_jump_land_bwd",
+		land = "spudPTRD_jump_land",
+		landFwd = "spudPTRD_jump_land_fwd",
+		landBwd = "spudPTRD_jump_land_bwd",
 
-		crouchIdle = "spudgun_crouch_idle",
-		crouchFwd = "spudgun_crouch_fwd",
-		crouchBwd = "spudgun_crouch_bwd"
+		crouchIdle = "spudPTRD_crouch_idle",
+		crouchFwd = "spudPTRD_crouch_fwd",
+		crouchBwd = "spudPTRD_crouch_bwd"
 	}
 
 	for name, animation in pairs( movementAnimations ) do
@@ -205,26 +205,26 @@ function PTRD:loadAnimations()
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "Gun_pickup", { nextAnimation = "idle" } },
-				unequip = { "Gun_putdown" },
-				aim_anim = { "Gun_putdown" },
+				equip = { "PTRD_pickup", { nextAnimation = "idle" } },
+				unequip = { "PTRD_putdown" },
+				aim_anim = { "PTRD_putdown" },
 
-				idle = { "Gun_idle", { looping = true } },
-				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
+				idle = { "PTRD_idle", { looping = true } },
+				shoot = { "PTRD_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Reload", { nextAnimation = "idle" } },
-				reload_gt = { "ReloadGT", { nextAnimation = "idle" } },
+				reload = { "PTRD_reload", { nextAnimation = "idle" } },
+				reload_gt = { "PTRD_reload", { nextAnimation = "idle" } },
 
-				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "PTRD_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "Gun_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "Gun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Gun_aim_idle", { looping = true } },
-				aimShoot = { "Gun_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "PTRD_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "PTRD_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "PTRD_aim_idle", { looping = true } },
+				aimShoot = { "PTRD_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "Gun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "Gun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "Gun_sprint_idle", { looping = true } },
+				sprintInto = { "PTRD_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "PTRD_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "PTRD_sprint_idle", { looping = true } },
 			}
 		)
 	end
@@ -560,7 +560,7 @@ function PTRD:client_onUpdate(dt)
 	end
 
 	local finalAngle = ( 0.5 + angle * 0.5 )
-	self.tool:updateAnimation( "spudgun_spine_bend", finalAngle, self.spineWeight )
+	self.tool:updateAnimation( "spudPTRD_spine_bend", finalAngle, self.spineWeight )
 
 	local totalOffsetZ = lerp( -22.0, -26.0, crouchWeight )
 	local totalOffsetY = lerp( 6.0, 12.0, crouchWeight )

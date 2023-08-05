@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-05T21:37:17Z</created><keywords></keywords><modified>2023-08-05T21:37:17Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+     
+        <node name="jnt_anim" id="jnt_anim" sid="jnt_anim" type="JOINT">
+          <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+          <extra>
+            <technique profile="FCOLLADA">
+              <visibility>1.000000</visibility>
+            </technique>
+          </extra>
+          <node name="jnt_recoil" id="jnt_recoil" sid="jnt_recoil" type="JOINT">
+            <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 -1.300000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+            <node name="jnt_ammo" id="jnt_ammo" sid="jnt_ammo" type="JOINT">
+              <matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.000000 -0.000001 -0.000000 -1.000000 0.164037 -0.000000 1.000000 -0.000000 1.332322 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+              <node name="jnt_ammo_end" id="jnt_ammo_end" sid="jnt_ammo_end" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 0.000000 -0.000000 0.000000 1.000000 0.000000 0.600000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
+            </node>
+            <node name="jnt_case" id="jnt_case" sid="jnt_case" type="JOINT">
+              <matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.000000 -0.000001 -0.000000 -1.000000 0.164037 -0.000000 1.000000 -0.000000 1.262165 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+              <node name="jnt_case_end" id="jnt_case_end" sid="jnt_case_end" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.300000 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+              </node>
+            </node>
+            <node name="jnt_bolt_loc" id="jnt_bolt_loc" sid="jnt_bolt_loc" type="JOINT">
+              <matrix sid="matrix">1.000000 -0.000000 -0.000001 -0.000000 -0.000001 -0.000000 -1.000000 0.164037 -0.000000 1.000000 -0.000000 0.406040 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+              <node name="jnt_bolt_rot" id="jnt_bolt_rot" sid="jnt_bolt_rot" type="JOINT">
+                <matrix sid="matrix">1.000000 0.000001 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 -0.000000 -0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                  <technique profile="FCOLLADA">
+                    <visibility>1.000000</visibility>
+                  </technique>
+                </extra>
+                <node name="jnt_bolt_rot_end" id="jnt_bolt_rot_end" sid="jnt_bolt_rot_end" type="JOINT">
+                  <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.600000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                  <extra>
+                    <technique profile="FCOLLADA">
+                      <visibility>1.000000</visibility>
+                    </technique>
+                  </extra>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node name="jnt_trigger" id="jnt_trigger" sid="jnt_trigger" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000001 0.000000 0.000000 -1.000000 -0.000000 -0.150599 -0.000001 0.000000 -1.000000 -0.981923 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+            <node name="jnt_trigger_end" id="jnt_trigger_end" sid="jnt_trigger_end" type="JOINT">
+              <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.600000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+            </node>
+          </node>
+          <node name="jnt_spring" id="jnt_spring" sid="jnt_spring" type="JOINT">
+            <matrix sid="matrix">1.000000 -0.000000 -0.000002 0.000000 -0.000002 -0.000000 -1.000000 -0.032188 -0.000000 1.000000 -0.000000 -2.084843 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+            <node name="jnt_spring_end" id="jnt_spring_end" sid="jnt_spring_end" type="JOINT">
+              <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.600000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <extra>
+                <technique profile="FCOLLADA">
+                  <visibility>1.000000</visibility>
+                </technique>
+              </extra>
+            </node>
+          </node>
+        </node>
+      
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.000000</start_time>
+          <end_time>1.000000</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"></instance_visual_scene>
+  </scene>
+</COLLADA>
