@@ -200,7 +200,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_SMG_Shot_4",
+			gunshot = "DLM_SMG_Shot_1",
 			rack = "DLM_SMG_Rack",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AK_MagOut"
@@ -886,7 +886,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_SMG_Shot_4",
+			gunshot = "DLM_SMG_Shot_1",
 			rack = "DLM_SMG_Rack",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AR_MagOut"
@@ -2442,7 +2442,7 @@ local mgp_tool_database =
 		}
 	},
 
-	Garand =
+	PTRD =
 	{
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
@@ -2776,6 +2776,164 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "ammocheck",
 						name_fp = "ammocheck",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
+				}
+			}
+		}
+	},
+
+	Garand =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_SemiRifle_Shot_1",
+			ping = "DLM_Rifle_Ping",
+			ammocheck = "DLM_Gun_AmmoCheck",
+			slidedrop = "DLM_Pistol_SlideDrop"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			Clip = "GarandClip",
+			Check = "GarandRecieverMove",
+			Reciever = "GarandReciever",
+			ping = "GarandPing",
+			ClipTake = "GarandClipTake",
+			BulletPut = "MosinBulletPut",
+			GarandThumb = "GarandThumb"
+
+		},
+		on_unequip_action = {
+			stop_effects = { "Ping", "GarandThumb", "BulletPut" }
+		},
+		animation_reset = {
+			no_ammo = mgp_aim_shoot_reset_table,
+			no_ammo_aim = mgp_shoot_reset_table,
+			shoot = mgp_aim_shoot_reset_table,
+			shoot_aim = mgp_shoot_reset_table
+		},
+		animation = {
+			no_ammo =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.6, end_val = 0.7 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.6, end_val = 0.7 } },
+						time = 0.2
+					}
+				}
+			},
+			no_ammo_aim =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.6, end_val = 0.7 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.6, end_val = 0.7 } },
+						time = 0.2
+					},
+				}
+			},
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, 0, 0),
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "Clip"
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.15 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.15 } },
+						time = 0.01
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.15, end_val = 0.0 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.15, end_val = 0.0 } },
+						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+				}
+			},
+			reload =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.7
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 2.5 } },
+						tp_anim = { { name = "Mosin_Anim", start_val = 0.7, end_val = 2.5 } },
+						time = 1.80
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.8
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "ClipTake",
+						name_fp = "ClipTake",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.95
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "Clip",
+						name_fp = "Clip",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.4
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "slidedrop",
+						name_fp = "slidedrop",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false

@@ -91,6 +91,17 @@
 			}
 		]
 	},
+	"DLM_SMG_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_SMG_Shot_3":
 	{
 		"effectList":

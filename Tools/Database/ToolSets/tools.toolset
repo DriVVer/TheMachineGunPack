@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"name": "PTRD",
+			"uuid": "8f97ff41-6498-46f7-84aa-fd0c11918512",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/PTRD/PTRD_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/PTRD.lua",
+				"class": "PTRD",
+				"data": {}
+			}
+		},
+		{
 			"name": "M1911",
 			"uuid": "e4ed32d5-d891-40e3-b82e-db975884dbb3",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/M1911/M1911_Preview.rend",
