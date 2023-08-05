@@ -5,6 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("BazookaProjectile.lua")
+dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 
 ---@class Bazooka : ToolClass
 ---@field fpAnimations table
@@ -368,7 +369,7 @@ function Bazooka:client_onUpdate(dt)
 	if self.tool:isLocal() then
 		if self.equipped then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
-			if hit and not self:cl_isAnimPlaying(g_close_anim_block) then
+			if hit and not mgp_tool_isAnimPlaying(self, g_close_anim_block) then
 				local v_cur_anim = self.fpAnimations.currentAnimation
 				if v_cur_anim ~= "sprintInto" and v_cur_anim ~= "sprintExit" then
 					if v_cur_anim == "sprintIdle" then
@@ -493,7 +494,7 @@ function Bazooka:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:cl_isAnimPlaying(g_sprint_block_anims) )
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or mgp_tool_isAnimPlaying(self, g_sprint_block_anims) )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -719,7 +720,7 @@ function Bazooka:onShoot(v_proj_hit)
 end
 
 function Bazooka.cl_onPrimaryUse(self)
-	if self:cl_isAnimPlaying(g_action_block_anims) or self.cl_waiting_for_data then
+	if mgp_tool_isAnimPlaying(self, g_action_block_anims) or self.cl_waiting_for_data then
 		return
 	end
 
@@ -777,15 +778,6 @@ function Bazooka.cl_onPrimaryUse(self)
 	end
 end
 
-function Bazooka:cl_isAnimPlaying(anim_table)
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (anim_table[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
 function Bazooka:sv_n_onReload()
 	self.network:sendToClients("cl_n_onReload")
 end
@@ -812,7 +804,7 @@ end
 
 function Bazooka:client_onReload()
 	if not self.cl_is_loaded then
-		if not self:cl_isAnimPlaying(g_action_block_anims) and not self.cl_waiting_for_data and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not mgp_tool_isAnimPlaying(self, g_action_block_anims) and not self.cl_waiting_for_data and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
 				if not sm.localPlayer.getInventory():canSpend(mgp_bazooka_ammo, 1) then
 					sm.gui.displayAlertText("Bazooka: No Ammo")
@@ -834,7 +826,7 @@ local _intstate = sm.tool.interactState
 function Bazooka:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local is_reloading = self:cl_isAnimPlaying(g_action_block_anims) or self.cl_waiting_for_data ~= nil
+	local is_reloading = mgp_tool_isAnimPlaying(self, g_action_block_anims) or self.cl_waiting_for_data ~= nil
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
@@ -855,7 +847,7 @@ function Bazooka:cl_showRange()
 		return
 	end
 
-	if self:cl_isAnimPlaying(g_action_block_anims) then
+	if mgp_tool_isAnimPlaying(self, g_action_block_anims) then
 		return
 	end
 

@@ -49,21 +49,7 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
----Reload anim without the aim reload
-local reload_anims =
-{
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
-
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
-}
-
----Reload anims with all the other reload anims
-local reload_anims2 =
+local mosin_action_block_anims =
 {
 	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
@@ -73,7 +59,61 @@ local reload_anims2 =
 	["reload1"] = true,
 	["reload2"] = true,
 	["reload3"] = true,
-	["reload4"] = true
+	["reload4"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true,
+
+	["equip"] = true
+}
+
+local mosin_aim_block_anims =
+{
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true
+}
+
+local mosin_sprint_block_anims =
+{
+	["ammo_check"] = true,
+	["cock_hammer"] = true,
+	["cock_hammer_aim"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
+	["sprintExit"] = true,
+	["aimExit"] = true
+}
+
+local mosin_obstacle_block_anims =
+{
+	["ammo_check"] = true,
+	["cock_hammer"] = true,
+	["cock_hammer_aim"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
+	["equip"] = true,
+	["aimExit"] = true
 }
 
 function Mosin:client_initAimVals()
@@ -397,44 +437,56 @@ function Mosin:client_onUpdate(dt)
 
 	if self.tool:isLocal() then
 		if self.equipped then
-			local fp_anim = self.fpAnimations
-			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
-
-				if time_predict >= info_duration then
-					self.network:sendToServer("sv_n_trySpendAmmo")
-					self.cl_hammer_cocked = true
-				end
-			end
-
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
-			end
-
-			if self.fpAnimations.currentAnimation == "cock_hammer_aim" then
-				local v_animData = self.fpAnimations.animations.cock_hammer_aim
-
-				local v_timePredict = v_animData.time + dt
-				if v_timePredict >= v_animData.info.duration then
-					if self.aiming then
-						setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
-						self.fpAnimations.animations.aim_anim.time = 0.5
+			local hit, result = sm.localPlayer.getRaycast(1.5)
+			if hit and not self:client_isGunReloading(mosin_obstacle_block_anims) then
+				local v_cur_anim = self.fpAnimations.currentAnimation
+				if v_cur_anim ~= "sprintInto" and v_cur_anim ~= "sprintExit" then
+					if v_cur_anim == "sprintIdle" then
+						self.fpAnimations.animations.sprintIdle.time = 0
+					else
+						swapFpAnimation(self.fpAnimations, "sprintExit", "sprintInto", 0.0)
 					end
 				end
-			end
+			else
+				local fp_anim = self.fpAnimations
+				local cur_anim_cache = fp_anim.currentAnimation
+				local anim_data = fp_anim.animations[cur_anim_cache]
+				local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+				if anim_data and is_reload_anim then
+					local time_predict = anim_data.time + anim_data.playRate * dt
+					local info_duration = anim_data.info.duration
 
-			if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
-				if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+					if time_predict >= info_duration then
+						self.network:sendToServer("sv_n_trySpendAmmo")
+						self.cl_hammer_cocked = true
+					end
 				end
-				if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+
+				if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+				elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+				end
+
+				if self.fpAnimations.currentAnimation == "cock_hammer_aim" then
+					local v_animData = self.fpAnimations.animations.cock_hammer_aim
+
+					local v_timePredict = v_animData.time + dt
+					if v_timePredict >= v_animData.info.duration then
+						if self.aiming then
+							setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+							self.fpAnimations.animations.aim_anim.time = 0.5
+						end
+					end
+				end
+
+				if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
+					if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+						swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+					end
+					if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+						swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+					end
 				end
 			end
 		end
@@ -544,7 +596,7 @@ function Mosin:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(reload_anims2))
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(mosin_sprint_block_anims))
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -819,7 +871,7 @@ end
 local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
 function Mosin:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then return end
-	if self:client_isGunReloading(reload_anims2) or not self.equipped then return end
+	if self:client_isGunReloading(mosin_action_block_anims) or not self.equipped then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not v_toolOwner then
@@ -952,12 +1004,7 @@ function Mosin:client_isGunReloading(reload_table)
 		return true
 	end
 
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_table[fp_anims.currentAnimation] == true)
-	end
-
-	return false
+	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
 function Mosin:cl_initReloadAnim(anim_id)
@@ -988,7 +1035,7 @@ end
 
 function Mosin:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if self.cl_hammer_cocked then
 				sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
 				return true
@@ -1018,7 +1065,7 @@ function Mosin:cl_startCheckMagAnim()
 end
 
 function Mosin:client_onToggle()
-	if not self:client_isGunReloading(reload_anims2) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+	if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 0.7
 
@@ -1039,7 +1086,7 @@ local _intstate = sm.tool.interactState
 function Mosin:cl_onSecondaryUse(state)
 	if self.scope_timer or not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading(reload_anims) or (self.aim_timer ~= nil)
+	local is_reloading = self:client_isGunReloading(mosin_aim_block_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
