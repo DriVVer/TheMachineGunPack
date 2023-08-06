@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-06T00:59:40Z</created><keywords></keywords><modified>2023-08-06T00:59:40Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-05T22:54:25Z</created><keywords></keywords><modified>2023-08-05T22:54:25Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      
+     
         <node name="jnt_left_weapon" id="jnt_left_weapon" sid="jnt_left_weapon" type="JOINT">
           <matrix sid="matrix">0.000000 1.000000 -0.000000 0.000000 -0.000000 -0.000000 -1.000000 0.000000 -1.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>
@@ -12,14 +12,14 @@
             </technique>
           </extra>
           <node name="jnt_weapon" id="jnt_weapon" sid="jnt_weapon" type="JOINT">
-            <matrix sid="matrix">0.030158 -0.002598 0.999542 0.200000 0.256191 0.966612 -0.005217 0.467763 -0.966155 0.256231 0.029816 0.237189 0.000000 0.000000 0.000000 1.000000</matrix>
+            <matrix sid="matrix">0.000000 0.000000 1.000000 -0.000000 1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
                 <visibility>1.000000</visibility>
               </technique>
             </extra>
             <node name="jnt_weapon_end" id="jnt_weapon_end" sid="jnt_weapon_end" type="JOINT">
-              <matrix sid="matrix">1.000000 0.000000 0.000000 -0.000000 0.000000 1.000000 0.000000 0.500000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+              <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000000 0.500000 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
               <extra>
                 <technique profile="FCOLLADA">
                   <visibility>1.000000</visibility>
@@ -28,7 +28,7 @@
             </node>
           </node>
         </node>
-     
+      
       <extra>
         <technique profile="MAX3D">
           <frame_rate>30.000000</frame_rate>

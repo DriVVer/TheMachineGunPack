@@ -5,10 +5,10 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "PTRD_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "PTRD_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_shoot.dae" },
+				{ "name": "PTRD_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_idle.dae" },
+				{ "name": "PTRD_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_idle.dae" },
 
-				{ "name": "PTRD_reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_reload.dae" },
+				{ "name": "PTRD_reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_reload.dae" },
 
 				{ "name": "PTRD_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
 				{ "name": "PTRD_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },

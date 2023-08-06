@@ -3,7 +3,7 @@
 		{
 			"animationList" : [
 				{
-					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/PTRD/PTRD_anims.dae",
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/PTRD/PTRD_bipod.dae",
 					"name" : "Bipod_Anim"
 				}
 			],
