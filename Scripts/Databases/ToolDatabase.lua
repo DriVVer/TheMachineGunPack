@@ -30,7 +30,7 @@ local mgp_tool_database =
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_4",
-			rack = "DLM_SMG_Rack",
+			rack = "DLM_SMG_Rack_2",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AR_MagOut"
 		},
@@ -201,7 +201,7 @@ local mgp_tool_database =
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_1",
-			rack = "DLM_SMG_Rack",
+			rack = "DLM_SMG_Rack_3",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AK_MagOut"
 		},
@@ -887,7 +887,7 @@ local mgp_tool_database =
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_1",
-			rack = "DLM_SMG_Rack",
+			rack = "DLM_SMG_Rack_1",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AR_MagOut"
 		},
