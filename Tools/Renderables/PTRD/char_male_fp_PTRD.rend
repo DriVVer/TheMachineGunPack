@@ -28,9 +28,7 @@
 				{ "name": "PTRD_aim_bipod_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_into.dae" },
 				{ "name": "PTRD_aim_bipod_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_exit.dae" },
 				{ "name": "PTRD_aim_bipod_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_shot.dae" },
-				{ "name": "PTRD_aim_bipod_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_idle.dae" },
-
-				{ "name": "PTRD_ammo_check", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_ammo_check.dae" }
+				{ "name": "PTRD_aim_bipod_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_idle.dae" }
 			]
 		}
 	]
