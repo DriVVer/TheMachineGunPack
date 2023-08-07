@@ -25,7 +25,7 @@ local Damage = 200
 ---@field aim_timer integer
 ---@field scope_hud GuiInterface
 PTRD = class()
-PTRD.mag_capacity = 10
+PTRD.mag_capacity = 2
 
 local renderables =
 {
