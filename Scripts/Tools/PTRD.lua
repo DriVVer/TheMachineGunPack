@@ -836,7 +836,9 @@ function PTRD:cl_onPrimaryUse(state)
 		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 		dir = sm.noise.gunSpread( dir, spreadDeg )
-		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
+		for k = 0, math.random(0, 3) do
+			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, nil, nil, k * 4 )
+		end
 
 		-- Timers
 		self.fireCooldownTimer = fireMode.fireCooldown
