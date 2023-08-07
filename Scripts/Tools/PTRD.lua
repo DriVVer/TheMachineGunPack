@@ -142,6 +142,9 @@ function PTRD:client_onCreate()
 	self:client_initAimVals()
 	self.aimBlendSpeed = 3.0
 
+	self.bipod_equip_timer = 0.0
+	self.bipod_unequip_timer = 0.0
+
 	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "PTRD")
@@ -208,6 +211,9 @@ function PTRD:loadAnimations()
 				equip = { "PTRD_pickup", { nextAnimation = "idle" } },
 				unequip = { "PTRD_putdown" },
 				aim_anim = { "PTRD_putdown" },
+
+				deploy_bipod = { "PTRD_deploy_bipod", { nextAnimation = "idle" } },
+				hide_bipod = { "PTRD_hide_bipod", { nextAnimation = "idle" } },
 
 				idle = { "PTRD_idle", { looping = true } },
 				shoot = { "PTRD_shoot", { nextAnimation = "idle" } },
@@ -357,6 +363,82 @@ function PTRD:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
+---@param self PTRD
+local function ptrd_can_deploy_bipod(self)
+	local v_owner = self.tool:getOwner()
+	if not (v_owner and sm.exists(v_owner)) then
+		return false
+	end
+
+	local v_owner_char = v_owner.character
+	if not (v_owner_char and sm.exists(v_owner_char)) then
+		return false
+	end
+
+	if v_owner_char:isCrouching() then
+		return false
+	end
+
+	local v_char_pos = v_owner_char.worldPosition
+	v_char_pos.z = v_char_pos.z + v_owner_char:getHeight() * 0.4
+
+	local v_forward_check = v_char_pos + v_owner_char.direction * 0.5
+	local hit, result = sm.physics.raycast(v_char_pos, v_forward_check, v_owner_char)
+	if hit then
+		return false
+	end
+
+	local v_cam_up = sm.camera.getUp()
+	local v_final_check = v_forward_check - v_cam_up * 0.5
+	local final_hit, final_result = sm.physics.raycast(v_forward_check, v_final_check, v_owner_char)
+	if not final_hit then
+		return false
+	end
+
+	local v_up_direction = sm.vec3.new(0, 0, 1)
+	if final_result.fraction < 0.4 or final_result.normalWorld:dot(v_up_direction) < 0.97 or v_cam_up:dot(v_up_direction) < 0.98 then
+		return false
+	end
+
+	return true
+end
+
+function PTRD:client_updateBipod(dt)
+	if ptrd_can_deploy_bipod(self) then
+		self.bipod_unequip_timer = 0.0
+
+		if not self.bipod_deployed then
+			self.bipod_equip_timer = self.bipod_equip_timer + dt
+			if self.bipod_equip_timer >= 1.0 then
+				mgp_toolAnimator_setAnimation(self, "deploy_bipod")
+				setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
+
+				print("deploy bipod")
+				sm.gui.displayAlertText("deploy bipod", 1.0)
+
+				self.bipod_equip_timer = 0.0
+				self.bipod_deployed = true
+			end
+		end
+	else
+		self.bipod_equip_timer = 0.0
+
+		if self.bipod_deployed then
+			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
+			if self.bipod_unequip_timer >= 1.0 then
+				mgp_toolAnimator_setAnimation(self, "hide_bipod")
+				setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
+
+				print("hide bipod")
+				sm.gui.displayAlertText("hide bipod", 1.0)
+
+				self.bipod_unequip_timer = 0.0
+				self.bipod_deployed = false
+			end
+		end
+	end
+end
+
 function PTRD:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
@@ -422,6 +504,8 @@ function PTRD:client_onUpdate(dt)
 						swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 					end
 				end
+
+				self:client_updateBipod(dt)
 			end
 		end
 
@@ -697,15 +781,15 @@ function PTRD:cl_n_onShoot(ammo_in_mag)
 end
 
 function PTRD:onShoot(ammo_in_mag)
-	self.tpAnimations.animations.idle.time     = 0
-	self.tpAnimations.animations.shoot.time    = 0
-	self.tpAnimations.animations.aimShoot.time = 0
-
 	if ammo_in_mag ~= nil then
+		self.tpAnimations.animations.idle.time     = 0
+		self.tpAnimations.animations.shoot.time    = 0
+		self.tpAnimations.animations.aimShoot.time = 0
+
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, ammo_in_mag == 0 and "last_shot" or "shoot")
+		mgp_toolAnimator_setAnimation(self, "shoot")
 	else
-		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
+		--mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
 end
 

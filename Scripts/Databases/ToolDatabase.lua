@@ -2808,7 +2808,7 @@ local mgp_tool_database =
 
 		},
 		on_unequip_action = {
-			stop_effects = { "Ping", "GarandThumb", "BulletPut" }
+			stop_effects = { "ping", "GarandThumb", "BulletPut" }
 		},
 		animation_reset = {
 			no_ammo = mgp_aim_shoot_reset_table,
