@@ -1,5 +1,7 @@
 local ToolItems = {
 	["336a7328-4d50-432c-8698-2ed511187cc7"] = sm.uuid.new("c4966054-2c7e-451a-b946-090604696d78"), --TommyGun
+	["d8ba1dfe-172c-41ea-83e1-2c977e21d9e9"] = sm.uuid.new("7a716b53-04a5-4a39-874b-4a13986dcc69"), --PPSH
+	["8f97ff41-6498-46f7-84aa-fd0c11918512"] = sm.uuid.new("9df34886-8dbb-4c67-ad4d-1b280673b786"), --PTRD
 	["e4ed32d5-d891-40e3-b82e-db975884dbb3"] = sm.uuid.new("db67924a-39b0-4522-a3a5-270ef2a8538b"), --M1911
 	["1e5f445b-934a-4366-b5c2-0bc11fd3580f"] = sm.uuid.new("873b01f3-4b50-460f-b7fc-98bbdf4b50e3"), --P38
 	["d64d4f6c-1a21-47f5-adf9-63397aa6a3a0"] = sm.uuid.new("dc99f421-04c4-4e64-bce5-ea1d83f8b40c"), --MP40

@@ -15,6 +15,30 @@
 		{
 			"box": { "x": 1, "y": 1, "z": 1 },
 			"color": "ffffff",
+			"name": "obj_tool_ppsh",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "7a716b53-04a5-4a39-874b-4a13986dcc69"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_tool_ptrd",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/PTRD/PTRD_Preview.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "9df34886-8dbb-4c67-ad4d-1b280673b786"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
 			"name": "obj_tool_m1911",
 			"physicsMaterial": "Plastic",
 			"ratings": {},
