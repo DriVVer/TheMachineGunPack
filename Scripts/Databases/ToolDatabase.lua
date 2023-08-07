@@ -2818,46 +2818,13 @@ local mgp_tool_database =
 		},
 		animation = {
 
-			equip =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.24 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.24 } },
-						time = 0.2
-					}
-				}
-			},
-			no_ammo =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.6, end_val = 0.7 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.6, end_val = 0.7 } },
-						time = 0.2
-					}
-				}
-			},
-			no_ammo_aim =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.6, end_val = 0.7 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.6, end_val = 0.7 } },
-						time = 0.2
-					},
-				}
-			},
 			hide_bipod =
 			{
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.24 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.24 } },
+						fp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.5 } },
+						tp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.5 } },
 						time = 0.3
 					}
 				}
@@ -2867,8 +2834,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.5, end_val = 0.74 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.5, end_val = 0.74 } },
+						fp_anim = { { name = "Gun_Anim", start_val = 1.0, end_val = 1.5 } },
+						tp_anim = { { name = "Gun_Anim", start_val = 1.0, end_val = 1.5 } },
 						time = 0.3
 					}
 				}
@@ -2887,8 +2854,8 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Gun_Anim", start_val = 0.25, end_val = 0.5 } },
-						tp_anim = { { name = "Gun_Anim", start_val = 0.25, end_val = 0.5 } },
+						fp_anim = { { name = "Gun_Anim", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Gun_Anim", start_val = 0.5, end_val = 1.0 } },
 						time = 0.5
 					}
 				},
