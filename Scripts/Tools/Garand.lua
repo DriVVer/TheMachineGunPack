@@ -51,9 +51,8 @@ sm.tool.preloadRenderables( renderablesFp )
 
 local garand_action_block_anims =
 {
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
 
 	["reload"] = true,
 	["reload_gt"] = true,
@@ -68,8 +67,8 @@ local garand_action_block_anims =
 
 local garand_aim_block_anims =
 {
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
 
 	["reload"] = true,
 	["reload_gt"] = true,
@@ -81,9 +80,8 @@ local garand_aim_block_anims =
 
 local garand_sprint_block_anims =
 {
-	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
 
 	["reload"] = true,
 	["reload_gt"] = true,
@@ -285,8 +283,7 @@ local aim_animation_list01 =
 {
 	["aimInto"]         = true,
 	["aimIdle"]         = true,
-	["aimShoot"]        = true,
-	["cock_hammer_aim"] = true
+	["aimShoot"]        = true
 }
 
 local aim_animation_list02 =
@@ -294,12 +291,6 @@ local aim_animation_list02 =
 	["aimInto"]  = true,
 	["aimIdle"]  = true,
 	["aimShoot"] = true
-}
-
-local aim_animation_blacklist =
-{
-	["aim_anim"] = true,
-	["cock_hammer_aim"] = true
 }
 
 function Garand:client_updateAimWeights(dt)
@@ -408,17 +399,17 @@ function Garand:client_onUpdate(dt)
 					end
 				end
 
-				if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
 					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-				elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
 					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 				end
 
-				if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
-					if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+				if cur_anim_cache ~= "aim_anim" then
+					if self.aiming and aim_animation_list01[cur_anim_cache] == nil then
 						swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 					end
-					if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+					if not self.aiming and aim_animation_list02[cur_anim_cache] == true then
 						swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 					end
 				end
@@ -497,10 +488,6 @@ function Garand:client_onUpdate(dt)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight

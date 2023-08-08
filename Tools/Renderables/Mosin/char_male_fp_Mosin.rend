@@ -28,11 +28,6 @@
 				{ "name": "Gun_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
 				{ "name": "Gun_aim_c_hammer", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_bolt.dae" },
 
-				{ "name": "Gun_reload4",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
-				{ "name": "Gun_reload3",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
-				{ "name": "Gun_reload2",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_2_reload.dae" },
-				{ "name": "Gun_reload1",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_1_reload.dae" },
-				{ "name": "Gun_E_reload",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_0_reload.dae" },
 				{ "name": "Gun_ammo_check", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
 			]
 		}

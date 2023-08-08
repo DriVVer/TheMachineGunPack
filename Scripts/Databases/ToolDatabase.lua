@@ -8,15 +8,13 @@ local mgp_tool_anim_enum =
 	toggle_renderable = 6
 }
 
-local mgp_tommy_shell = sm.uuid.new("553820fd-14a7-4276-a8eb-1f66d4caa775")
-
-local mgp_aim_shoot_reset_table =
+local mgp_magnum_aim_shoot_reset_table =
 {
 	fp = { { "Magnum44_aim_Shoot", 0.0 } },
 	tp = { { "Magnum44_aim_Shoot", 0.0 } }
 }
 
-local mgp_shoot_reset_table =
+local mgp_magnum_shoot_reset_table =
 {
 	fp = { { "Magnum44_Shoot", 0.0 } },
 	tp = { { "Magnum44_Shoot", 0.0 } }
@@ -36,10 +34,12 @@ local mgp_tool_database =
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
-			shoot_fp = "Muzzle_Flash_SmallCal_fp"
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reload = "TommyReload",
+			reload_empty = "TommyEReload"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = { "reload", "reload_empty" }
 		},
 		animation = {
 			shoot =
@@ -92,6 +92,16 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload",
+						name_fp = "reload",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.03
@@ -148,6 +158,16 @@ local mgp_tool_database =
 					}
 				},
 				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.03
@@ -207,10 +227,12 @@ local mgp_tool_database =
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
-			shoot_fp = "Muzzle_Flash_SmallCal_fp"
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reload = "TommyReload",
+			reload_empty = "TommyEReload"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = {}
 		},
 		animation = {
 			shoot =
@@ -268,6 +290,16 @@ local mgp_tool_database =
 				},
 				[2] = {
 					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload",
+						name_fp = "reload",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.13
 					},
@@ -312,6 +344,16 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.03
@@ -372,7 +414,9 @@ local mgp_tool_database =
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
-			shoot_fp = "Muzzle_Flash_SmallCal_fp"
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reload = "PistolReload",
+			reload_empty = "PistolEReload"
 		},
 		on_unequip_action = {
 			stop_effects = {}
@@ -494,6 +538,16 @@ local mgp_tool_database =
 				},
 				[2] = {
 					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload",
+						name_fp = "reload",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
 					},
@@ -537,6 +591,16 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.35
@@ -633,7 +697,9 @@ local mgp_tool_database =
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
-			shoot_fp = "Muzzle_Flash_SmallCal_fp"
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reload = "PistolReload",
+			reload_empty = "PistolEReload"
 		},
 		on_unequip_action = {
 			stop_effects = {}
@@ -755,6 +821,16 @@ local mgp_tool_database =
 				},
 				[2] = {
 					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload",
+						name_fp = "reload",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
+					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
 					},
@@ -798,6 +874,16 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+
+					},
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.35
@@ -894,11 +980,10 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			reloadTG = "TommyReload",
-			reloadETG = "TommyEReload"
+			reload = "MP40Reload"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = { "reload" }
 		},
 		animation = {
 			equip =
@@ -957,94 +1042,12 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
 
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.13
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mp40_anims", start_val = 0.13, end_val = 4.5 } },
-						tp_anim = { { name = "Mp40_anims", start_val = 0.13, end_val = 4.5 } },
-						time = 4.37
-					}
-				},
-				[2] = {
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.15
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.85
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "magout",
-						name_fp = "magout",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 1.2
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "magin",
-						name_fp = "magin",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 1.10
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					}
-				}
-			},
-			reload_empty =
-			{
-				[1] = { --first animation track
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reloadETG",
-						name_fp = "reloadETG",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -1124,23 +1127,13 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			reloadTG = "TommyReload",
-			reloadETG = "TommyEReload"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = {}
 		},
 		renderables = {
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"    , enabled_by_default = true }--,
 			--anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", enabled_by_default = true },
-		},
-		animation_reset = {
-			cock_the_hammer = mgp_aim_shoot_reset_table,
-			cock_the_hammer_aim = mgp_shoot_reset_table,
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
 			activate =
@@ -1196,7 +1189,6 @@ local mgp_tool_database =
 			ClipTake = "GarandClipTake",
 		},
 		on_unequip_action = {},
-		animation_reset = {},
 		animation = {
 			activate =
 			{
@@ -1272,23 +1264,22 @@ local mgp_tool_database =
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			reloadTG = "TommyReload",
-			reloadETG = "TommyEReload"
+			reload = "TommyReload"
 		},
 		on_unequip_action = {
-			stop_effects = { "reloadTG", "reloadETG" }
+			stop_effects = { "reload" }
 		},
 		renderables = {
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"    , enabled_by_default = true },
 			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend", enabled_by_default = true }
 		},
 		animation_reset = {
-			cock_the_hammer = mgp_aim_shoot_reset_table,
-			cock_the_hammer_aim = mgp_shoot_reset_table,
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
+			cock_the_hammer = mgp_magnum_aim_shoot_reset_table,
+			cock_the_hammer_aim = mgp_magnum_shoot_reset_table,
+			no_ammo = mgp_magnum_aim_shoot_reset_table,
+			no_ammo_aim = mgp_magnum_shoot_reset_table,
+			shoot = mgp_magnum_aim_shoot_reset_table,
+			shoot_aim = mgp_magnum_shoot_reset_table
 		},
 		animation = {
 			cock_the_hammer =
@@ -1428,8 +1419,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1461,8 +1452,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1482,8 +1473,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1503,8 +1494,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1524,8 +1515,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1545,8 +1536,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reloadTG",
-						name_fp = "reloadTG",
+						name_tp = "reload",
+						name_fp = "reload",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1593,14 +1584,6 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "BoltOpen", "BoltClose", "BulletPut" }
-		},
-		animation_reset = {
-			cock_the_hammer = mgp_aim_shoot_reset_table,
-			cock_the_hammer_aim = mgp_shoot_reset_table,
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
 			cock_the_hammer_on_equip =
@@ -2458,20 +2441,13 @@ local mgp_tool_database =
 			Clip = "GarandClip",
 			Check = "GarandRecieverMove",
 			Reciever = "GarandReciever",
-			ping = "GarandPing",
+			Ping = "GarandPing",
 			ClipTake = "GarandClipTake",
 			BulletPut = "MosinBulletPut",
 			GarandThumb = "GarandThumb"
-
 		},
 		on_unequip_action = {
 			stop_effects = { "Ping", "GarandThumb", "BulletPut" }
-		},
-		animation_reset = {
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
 			no_ammo =
@@ -2790,7 +2766,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_SemiRifle_Shot_1",
+			gunshot = "DLM_AT_Shot_1",
 			ping = "DLM_Rifle_Ping",
 			ammocheck = "DLM_Gun_AmmoCheck",
 			slidedrop = "DLM_Pistol_SlideDrop"
@@ -2809,12 +2785,6 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "ping", "GarandThumb", "BulletPut" }
-		},
-		animation_reset = {
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
 
@@ -2952,14 +2922,6 @@ local mgp_tool_database =
 			main_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend", enabled_by_default = true },
 			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend" , enabled_by_default = true },
 			ammo_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend" , enabled_by_default = true }
-		},
-		animation_reset = {
-			cock_the_hammer = mgp_aim_shoot_reset_table,
-			cock_the_hammer_aim = mgp_shoot_reset_table,
-			no_ammo = mgp_aim_shoot_reset_table,
-			no_ammo_aim = mgp_shoot_reset_table,
-			shoot = mgp_aim_shoot_reset_table,
-			shoot_aim = mgp_shoot_reset_table
 		},
 		animation = {
 

@@ -211,8 +211,6 @@ function Mosin:loadAnimations()
 			reload3 = { "Mosin_Reload2", { nextAnimation = "idle" } },
 			reload4 = { "Mosin_Reload1", { nextAnimation = "idle" } },
 
-			reload_empty = { "Mosin_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "Mosin_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
@@ -254,8 +252,6 @@ function Mosin:loadAnimations()
 				idle = { "Gun_idle", { looping = true } },
 				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Gun_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Gun_E_reload", { nextAnimation = "idle", duration = 1.0 } },
 				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
@@ -600,10 +596,6 @@ function Mosin:client_onUpdate(dt)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight

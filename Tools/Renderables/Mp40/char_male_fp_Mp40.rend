@@ -21,7 +21,6 @@
 				{ "name": "Mp40_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/TommyGun/ani_char_male_fp_TommyGun_aim_idle.dae" },
 
 				{ "name": "Mp40_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mp40/Mp40_fp_reload.dae" },
-				{ "name": "Mp40_reload_empty", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mp40/Mp40_fp_reload.dae"},
 				{ "name": "Mp40_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/TommyGun/ani_char_male_fp_TommyGun_ammo_check.dae" }
 			]
 		}

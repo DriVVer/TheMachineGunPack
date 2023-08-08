@@ -113,7 +113,6 @@ function Mp40.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "Mp40_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "Mp40_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "Mp40_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
@@ -156,7 +155,6 @@ function Mp40.loadAnimations( self )
 				shoot = { "Mp40_shoot", { nextAnimation = "idle" } },
 
 				reload = { "Mp40_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Mp40_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
 				ammo_check = { "Mp40_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -217,12 +215,6 @@ function Mp40.loadAnimations( self )
 
 	self:client_initAimVals()
 end
-
-local actual_reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true
-}
 
 function Mp40:client_updateAimWeights(dt)
 	-- Camera update
@@ -285,7 +277,7 @@ function Mp40.client_onUpdate( self, dt )
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
 			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+			local is_reload_anim = cur_anim_cache == "reload"
 			if anim_data and is_reload_anim then
 				local time_predict = anim_data.time + anim_data.playRate * dt
 				local info_duration = anim_data.info.duration
@@ -295,16 +287,16 @@ function Mp40.client_onUpdate( self, dt )
 				end
 			end
 
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+			elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if self.aiming and not isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -374,11 +366,6 @@ function Mp40.client_onUpdate( self, dt )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -395,7 +382,7 @@ function Mp40.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
+				elseif name == "reload" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -753,35 +740,22 @@ end
 local reload_anims =
 {
 	["reload"] = true,
-	["reload_empty"] = true,
 	["ammo_check"] = true
 }
 
-local anim_name_to_id =
-{
-	["reload"] = 1,
-	["reload_empty"] = 2
-}
-
-local id_to_anim_name =
-{
-	[1] = "reload",
-	[2] = "reload_empty"
-}
-
-function Mp40:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Mp40:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
-function Mp40:cl_n_onReload(anim_id)
+function Mp40:cl_n_onReload()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(id_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function Mp40:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function Mp40:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload")
 end
 
 function Mp40:client_isGunReloading()
@@ -797,7 +771,7 @@ function Mp40:client_isGunReloading()
 	return false
 end
 
-function Mp40:cl_initReloadAnim(anim_name)
+function Mp40:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
 		if v_available_ammo == 0 then
@@ -809,11 +783,11 @@ function Mp40:cl_initReloadAnim(anim_name)
 	self.waiting_for_ammo = true
 
 	--Start fp and tp animations locally
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
+	self.network:sendToServer("sv_n_onReload")
 end
 
 function Mp40:client_onReload()
@@ -821,12 +795,7 @@ function Mp40:client_onReload()
 		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 		if not is_mag_full then
 			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-				local cur_anim_name = "reload"
-				if self.ammo_in_mag == 0 then
-					cur_anim_name = "reload_empty"
-				end
-
-				self:cl_initReloadAnim(cur_anim_name)
+				self:cl_initReloadAnim()
 			end
 		end
 	end
@@ -860,7 +829,7 @@ function Mp40:client_onToggle()
 		else
 			sm.gui.displayAlertText("Mp40: No Ammo. Reloading...", 3)
 
-			self:cl_initReloadAnim("reload_empty")
+			self:cl_initReloadAnim()
 		end
 	end
 

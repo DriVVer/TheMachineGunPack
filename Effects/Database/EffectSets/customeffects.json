@@ -519,6 +519,116 @@
 		]
 	},
 
+	"MP40Reload":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"attached": true,
+				"delay": 0.2
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/suspension",
+				"attached": true,
+				"delay": 0.3
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"attached": true,
+				"delay": 0.4
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/connectiontool/connectiontool_equip",
+				"attached": true,
+				"delay": 1.2
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/multitool_refine",
+				"attached": true,
+				"delay": 2.3
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/suspension",
+				"attached": true,
+				"delay": 3.2
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"attached": true,
+				"delay": 3.3
+			}
+		]
+	},
+
+	"PistolReload":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/multitool_refine",
+				"attached": true,
+				"delay": 0.35
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/suspension",
+				"attached": true,
+				"delay": 1
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"attached": true,
+				"delay": 1
+			}
+		]
+	},
+	"PistolEReload":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "event:/tools/multitool_refine",
+				"attached": true,
+				"delay": 0.20
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/suspension",
+				"attached": true,
+				"delay": 0.20
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/suspension",
+				"attached": true,
+				"delay": 0.85
+			},
+			{
+				"type": "audio",
+				"name": "event:/vehicle/triggers/trigger_switch_on",
+				"attached": true,
+				"delay": 0.85
+			},
+			{
+				"type": "audio",
+				"name": "event:/tools/multitool_refine",
+				"attached": true,
+				"delay": 1.2
+			}
+		]
+	},
+
 	"MosinBoltOpen":
 	{
 		

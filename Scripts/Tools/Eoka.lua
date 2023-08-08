@@ -79,10 +79,6 @@ function Eoka:loadAnimations()
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
-
-			reload_empty = { "TommyGun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "TommyGun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "TommyGun_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -121,9 +117,6 @@ function Eoka:loadAnimations()
 
 				idle = { "Eoka_idle", { looping = true } },
 				shoot = { "Eoka_shoot", { nextAnimation = "idle" } },
-
-				reload = { "Magnum_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Magnum_E_reload", { nextAnimation = "idle", duration = 1.0 } },
 
 				sprintInto = { "Eoka_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Eoka_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -330,8 +323,6 @@ function Eoka:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
