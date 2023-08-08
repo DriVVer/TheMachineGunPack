@@ -244,7 +244,6 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(-0.01, 0, -0.06),
 						tp_offset = sm.vec3.new(0, 0, 0),
-						direction = sm.vec3.new(0, 1, 1):normalize(),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever"

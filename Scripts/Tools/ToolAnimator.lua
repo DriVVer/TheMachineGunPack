@@ -150,7 +150,6 @@ end
 ---@class ParticleHandlerTrack
 ---@field fp_offset Vec3
 ---@field tp_offset Vec3
----@field direction Vec3
 ---@field name_fp string
 ---@field name_tp string
 ---@field bone_name string
@@ -179,7 +178,7 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 
 		--Calculate rotation quaternion
 		local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
-		particle_rot = sm.quat.angleAxis(math.rad(90), cur_data.direction or sm.vec3.new(0, 0, 1)) * particle_rot
+		particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
 
 		--Calculate final position
 		local offset_final = sm.camera.getRotation() * particle_offset
