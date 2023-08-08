@@ -80,15 +80,14 @@ AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 		local effect_offset
 
 		local cur_bone = cur_data.bone
-		if sm.localPlayer.isInFirstPersonView() and s_tool:isLocal() then
+		effect_dir = s_tool:getTpBoneDir(cur_bone)
+		if s_tool:isInFirstPersonView() then
 			cur_effect = self.cl_animator_effects[cur_data.name_fp]
 			effect_pos = s_tool:getFpBonePos(cur_bone)
-			effect_dir = s_tool:getTpBoneDir(cur_bone)
 			effect_offset = cur_data.fp_offset
 		else
 			cur_effect = self.cl_animator_effects[cur_data.name_tp]
 			effect_pos = s_tool:getTpBonePos(cur_bone)
-			effect_dir = sm.localPlayer.getDirection()
 			effect_offset = cur_data.tp_offset
 		end
 
@@ -151,6 +150,7 @@ end
 ---@class ParticleHandlerTrack
 ---@field fp_offset Vec3
 ---@field tp_offset Vec3
+---@field direction Vec3
 ---@field name_fp string
 ---@field name_tp string
 ---@field bone_name string
@@ -167,7 +167,7 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 		local particle_name = nil
 
 		local bone_name = cur_data.bone_name
-		if sm.localPlayer.isInFirstPersonView() and s_tool:isLocal() then
+		if s_tool:isInFirstPersonView() then
 			particle_pos = s_tool:getFpBonePos(bone_name)
 			particle_offset = cur_data.fp_offset
 			particle_name = cur_data.name_fp
@@ -179,7 +179,7 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 
 		--Calculate rotation quaternion
 		local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
-		particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+		particle_rot = sm.quat.angleAxis(math.rad(90), cur_data.direction or sm.vec3.new(0, 0, 1)) * particle_rot
 
 		--Calculate final position
 		local offset_final = sm.camera.getRotation() * particle_offset

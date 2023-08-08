@@ -587,5 +587,27 @@
 				"delay": 0.0
 			}
 		]
+	},
+	"DLM_Shotgun_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_Shot_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Shot_2",
+				"delay": 0.0
+			}
+		]
 	}
 }

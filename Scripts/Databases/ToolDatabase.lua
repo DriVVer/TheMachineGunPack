@@ -100,7 +100,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -114,7 +113,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -128,7 +126,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					}
 				}
 			},
@@ -166,7 +163,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -180,7 +176,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -194,7 +189,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -208,7 +202,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					}
 				}
 			}
@@ -249,8 +242,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.07, 0),
+						fp_offset = sm.vec3.new(-0.01, 0, -0.06),
 						tp_offset = sm.vec3.new(0, 0, 0),
+						direction = sm.vec3.new(0, 1, 1):normalize(),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever"
@@ -297,7 +291,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -311,7 +304,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -325,7 +317,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					}
 				}
 			},
@@ -352,7 +343,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -366,7 +356,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -380,7 +369,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -394,7 +382,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					}
 				}
 			}
@@ -545,7 +532,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -599,7 +585,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -828,7 +813,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -882,7 +866,6 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
@@ -1631,9 +1614,7 @@ local mgp_tool_database =
 						time = 0.75
 					}
 				},
-
 				[2] = {
-
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.10
@@ -1706,9 +1687,7 @@ local mgp_tool_database =
 						time = 0.3
 					}
 				},
-
 				[2] = {
-
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.15
@@ -1735,8 +1714,6 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					}
-
-
 				}
 			},
 			no_ammo =
@@ -2659,7 +2636,6 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					}
-					
 				}
 			},
 			reload =
@@ -2906,7 +2882,11 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_AT_Shot_2"
+			shoot_single = "DLM_Shotgun_Shot_1",
+			shoot_double = "DLM_Shotgun_Shot_2",
+			MagOpen = "DBOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -2924,7 +2904,6 @@ local mgp_tool_database =
 			ammo_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend" , enabled_by_default = true }
 		},
 		animation = {
-
 			shoot =
 			{
 				[1] = {
@@ -2933,6 +2912,15 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_single",
+						name_fp = "shoot_single",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
@@ -2947,6 +2935,15 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_double",
+						name_fp = "shoot_double",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
@@ -2973,7 +2970,6 @@ local mgp_tool_database =
 						time = 1.0
 					}
 				},
-
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -2992,7 +2988,6 @@ local mgp_tool_database =
 						time = 1.0
 					}
 				},
-
 				[3] = {
 
 					{
@@ -3041,7 +3036,6 @@ local mgp_tool_database =
 						time = 3.66
 					},
 				},
-
 				[3] = {
 
 					{
@@ -3116,7 +3110,6 @@ local mgp_tool_database =
 						time = 5.5
 					}
 				},
-
 				[3] = {
 
 					{
@@ -3244,7 +3237,6 @@ local mgp_tool_database =
 						apply_velocity = false
 					},
 				}
-
 			},
 			aimShoot =
 			{

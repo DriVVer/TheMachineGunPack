@@ -194,8 +194,16 @@
             "path":"$CONTENT_DATA/Effects/Audio/Rocket_TMGP_Loop_1.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Shot_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Shot_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Shot_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
         }
-
-
     }
 }
