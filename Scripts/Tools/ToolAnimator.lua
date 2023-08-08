@@ -339,7 +339,7 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	local anim_data = mgp_getToolData(tool_name)
 
 	self.cl_animator_effects = {}
-	if sm.dlm_injected and false and anim_data.dlm_required_effects then
+	if sm.dlm_injected and anim_data.dlm_required_effects then
 		for eff_id, eff_name in pairs(anim_data.dlm_required_effects) do
 			self.cl_animator_effects[eff_id] = sm.effect.createEffect(eff_name)
 		end
