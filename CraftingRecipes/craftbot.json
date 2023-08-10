@@ -345,6 +345,34 @@
 			}
 		]
 	},
+
+	{
+		"itemId": "d8ba1dfe-172c-41ea-83e1-2c977e21d9e9", //ppsh
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 50,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 40,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 6,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 1,
+				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
+			},
+			{
+				"quantity": 2,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
 	{
 		"itemId": "96f3b45c-8729-4573-bc14-bbe1cc7fd2bb", //revolver
 		"quantity": 1,

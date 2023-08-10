@@ -45,8 +45,9 @@
 					{ "qualityLevel": 4, "chance": 1.0 },
 					{ "qualityLevel": 5, "chance": 1.0 },
 					{ "qualityLevel": 6, "chance": 0.9 },
-					{ "qualityLevel": 7, "chance": 0.3 },
-					{ "qualityLevel": 7, "chance": 0.2 }
+					{ "qualityLevel": 7, "chance": 0.8 },
+					{ "qualityLevel": 8, "chance": 0.3 },
+					{ "qualityLevel": 9, "chance": 0.1 }
 				]
 			},
 			"enableImpactEffect": true
