@@ -228,6 +228,17 @@ local mgp_tool_database =
 			stop_effects = {}
 		},
 		animation = {
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Gun_anims", start_val = 0.15, end_val = 0.15 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.15, end_val = 0.15 } },
+						time = 0.0
+					}
+				}
+			},
 			shoot =
 			{
 				[1] = {

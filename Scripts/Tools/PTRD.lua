@@ -56,7 +56,6 @@ local PTRD_action_block_anims =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-	["reload_gt"] = true,
 
 	["equip"] = true,
 	["aimExit"] = true,
@@ -72,7 +71,6 @@ local PTRD_aim_block_anims =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-	["reload_gt"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
@@ -86,7 +84,6 @@ local PTRD_sprint_block_anims =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-	["reload_gt"] = true,
 	["aimExit"] = true,
 	["sprintExit"] = true
 }
@@ -95,7 +92,6 @@ local PTRD_obstacle_block_anims =
 {
 	["ammo_check"] = true,
 	["reload"    ] = true,
-	["reload_gt" ] = true,
 	["equip"     ] = true,
 	["aimExit"   ] = true
 }
@@ -172,7 +168,6 @@ function PTRD:loadAnimations()
 			putdown = { "spudgun_putdown" },
 
 			reload = { "PTRD_reload", { nextAnimation = "idle" } },
-			reload_gt = { "PTRD_reload_GT", { nextAnimation = "idle" } },
 
 			ammo_check = { "PTRD_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
@@ -219,7 +214,6 @@ function PTRD:loadAnimations()
 				shoot = { "PTRD_shoot", { nextAnimation = "idle" } },
 
 				reload = { "PTRD_reload", { nextAnimation = "idle" } },
-				reload_gt = { "PTRD_reload", { nextAnimation = "idle" } },
 
 				ammo_check = { "PTRD_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -283,8 +277,7 @@ end
 
 local actual_reload_anims =
 {
-	["reload"] = true,
-	["reload_gt"] = true
+	["reload"] = true
 }
 
 local aim_animation_list01 =
@@ -601,7 +594,7 @@ function PTRD:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_gt" ) then
+				elseif name == "reload" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -873,13 +866,10 @@ function PTRD:cl_n_onReload(is_PTRD_thumb)
 end
 
 local PTRD_ordinary_reload = "reload"
-local PTRD_thumb_reload = "reload_gt"
 
-function PTRD:cl_startReloadAnim(is_PTRD_thumb)
-	local v_cur_anim = is_PTRD_thumb and PTRD_thumb_reload or PTRD_ordinary_reload
-
-	setTpAnimation(self.tpAnimations, v_cur_anim, 1.0)
-	mgp_toolAnimator_setAnimation(self, v_cur_anim)
+function PTRD:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, PTRD_ordinary_reload, 1.0)
+	mgp_toolAnimator_setAnimation(self, PTRD_ordinary_reload)
 end
 
 function PTRD:client_isGunReloading(reload_table)
@@ -901,10 +891,8 @@ function PTRD:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	local has_PTRD_thumb = math.random(0, 100) > 80
-
-	setFpAnimation(self.fpAnimations, has_PTRD_thumb and PTRD_thumb_reload or PTRD_ordinary_reload, 0.0)
-	self:cl_startReloadAnim(has_PTRD_thumb)
+	setFpAnimation(self.fpAnimations, PTRD_ordinary_reload, 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload", WIP_PTRD_thumb)
