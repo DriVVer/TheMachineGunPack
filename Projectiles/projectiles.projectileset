@@ -25,6 +25,32 @@
 			"enableImpactEffect": true
 		},
 		{
+			"uuid": "35427377-f2ee-40d7-a251-884a57a0f40e",
+			"name": "mgp_AT",
+			"mass": 3.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet1.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"attachedEffect": "",
+			"enableGravity": true,
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "chance": 1.0 },
+					{ "qualityLevel": 2, "chance": 1.0 },
+					{ "qualityLevel": 3, "chance": 1.0 },
+					{ "qualityLevel": 4, "chance": 1.0 },
+					{ "qualityLevel": 5, "chance": 0.9 },
+					{ "qualityLevel": 6, "chance": 0.3 },
+					{ "qualityLevel": 7, "chance": 0.1 }
+				]
+			},
+			"enableImpactEffect": true
+		},
+		{
 			"uuid": "bef985da-1271-489f-9c5a-99c08642f982",
 			"name": "mgp_Magnum",
 			"mass": 3.0,

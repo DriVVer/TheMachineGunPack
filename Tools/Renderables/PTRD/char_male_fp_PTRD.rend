@@ -20,10 +20,10 @@
 				{ "name": "PTRD_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
 				{ "name": "PTRD_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
 
-				{ "name": "PTRD_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_into.dae" },
+				{ "name": "PTRD_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_idle.dae" },
 				{ "name": "PTRD_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_exit.dae" },
 				{ "name": "PTRD_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_shot.dae" },
-				{ "name": "PTRD_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_idle.dae" },
+				{ "name": "PTRD_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_idle.dae" },
 
 				{ "name": "PTRD_aim_bipod_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_into.dae" },
 				{ "name": "PTRD_aim_bipod_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Garand/Garand_fp_aim_exit.dae" },

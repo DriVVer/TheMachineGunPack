@@ -25,7 +25,7 @@ local Damage = 200
 ---@field aim_timer integer
 ---@field scope_hud GuiInterface
 PTRD = class()
-PTRD.mag_capacity = 2
+PTRD.mag_capacity = 1
 
 local renderables =
 {
@@ -803,7 +803,7 @@ function PTRD:cl_getFirePosition()
 	return self.tool:getFpBonePos("pejnt_barrel"), v_direction
 end
 
-local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
+local mgp_projectile_potato = sm.uuid.new("35427377-f2ee-40d7-a251-884a57a0f40e")
 function PTRD:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then return end
 	if self:client_isGunReloading(PTRD_action_block_anims) or not self.equipped then return end
