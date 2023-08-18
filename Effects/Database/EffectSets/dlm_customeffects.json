@@ -423,6 +423,28 @@
 			}
 		]
 	},
+	"DLM_AT_Bolt_Open":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AT_TMGP_BoltOpen",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_AT_Bolt_Close":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AT_TMGP_BoltClose",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_SMG_Rack_1":
 	{
 		"effectList":

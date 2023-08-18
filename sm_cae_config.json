@@ -125,6 +125,16 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "AT_TMGP_BoltOpen": {
+            "path":"$CONTENT_DATA/Effects/Audio/AT_TMGP_BoltOpen.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "AT_TMGP_BoltClose": {
+            "path":"$CONTENT_DATA/Effects/Audio/AT_TMGP_BoltClose.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Gun_TMGP_Ammo": {
             "path":"$CONTENT_DATA/Effects/Audio/Revolver_TMGP_Ammo.mp3",
             "is3D": true,

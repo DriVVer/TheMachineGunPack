@@ -2752,25 +2752,17 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_AT_Shot_1",
-			ping = "DLM_Rifle_Ping",
-			ammocheck = "DLM_Gun_AmmoCheck",
-			slidedrop = "DLM_Pistol_SlideDrop"
+			gunshot = "DLM_BoltRifle_Shot_1",
+			BoltOpen = "DLM_AT_Bolt_Open",
+			BoltClose = "DLM_AT_Bolt_Close",
+			BulletPut = "DLM_Gun_Ammo"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-			Clip = "GarandClip",
-			Check = "GarandRecieverMove",
-			Reciever = "GarandReciever",
-			ping = "GarandPing",
-			ClipTake = "GarandClipTake",
-			BulletPut = "MosinBulletPut",
-			GarandThumb = "GarandThumb"
-
-		},
-		on_unequip_action = {
-			stop_effects = { "ping", "GarandThumb", "BulletPut" }
+			BoltOpen = "MosinBoltOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
 		},
 		animation = {
 
@@ -2871,8 +2863,51 @@ local mgp_tool_database =
 						tp_anim = { { name = "Gun_Anim", start_val = 2.5, end_val = 5.5 } },
 						time = 3.0
 					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.55
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltOpen",
+						name_fp = "BoltOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.85
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltClose",
+						name_fp = "BoltClose",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
 				}
+			
 			},
+			
 			reload_bipod =
 			{
 				[1] = {
