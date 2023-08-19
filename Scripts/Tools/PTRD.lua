@@ -7,7 +7,7 @@ dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 
-local Damage = 200
+local Damage = 120
 
 ---@class PTRD : ToolClass
 ---@field fpAnimations table
@@ -270,10 +270,10 @@ function PTRD:loadAnimations()
 
 	self.normalFireMode = {
 		fireCooldown = 0.18,
-		spreadCooldown = 0.05,
-		spreadIncrement = 1,
-		spreadMinAngle = 1.1,
-		spreadMaxAngle = 3.6,
+		spreadCooldown = 0.005,
+		spreadIncrement = 0.5,
+		spreadMinAngle = 0.01,
+		spreadMaxAngle = 0.1,
 		fireVelocity = 550.0,
 
 		minDispersionStanding = 0.1,
@@ -286,9 +286,9 @@ function PTRD:loadAnimations()
 	self.aimFireMode = {
 		fireCooldown = 0.18,
 		spreadCooldown = 0.01,
-		spreadIncrement = 1,
-		spreadMinAngle = 0.1,
-		spreadMaxAngle = 1.0,
+		spreadIncrement = 0.5,
+		spreadMinAngle = 0.01,
+		spreadMaxAngle = 0.1,
 		fireVelocity = 550.0,
 
 		minDispersionStanding = 0.01,
