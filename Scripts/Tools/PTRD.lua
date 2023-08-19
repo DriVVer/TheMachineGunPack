@@ -434,6 +434,16 @@ local function ptrd_can_deploy_bipod(self)
 	return true
 end
 
+function PTRD:server_updateBipodAnim(is_deploy)
+	self.network:sendToClients("client_receiveBipodAnim", is_deploy)
+end
+
+function PTRD:client_receiveBipodAnim(is_deploy)
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		mgp_toolAnimator_setAnimation(self, is_deploy and "deploy_bipod" or "hide_bipod")
+	end
+end
+
 function PTRD:client_updateBipod(dt)
 	if self:client_isGunReloading(PTRD_bipod_block_anims) then
 		self.bipod_unequip_timer = 0.0
@@ -446,9 +456,10 @@ function PTRD:client_updateBipod(dt)
 
 		if not self.bipod_deployed then
 			self.bipod_equip_timer = self.bipod_equip_timer + dt
-			if self.bipod_equip_timer >= 1.0 then
-				mgp_toolAnimator_setAnimation(self, "deploy_bipod")
+			if self.bipod_equip_timer >= 0.5 then
+				self.network:sendToServer("server_updateBipodAnim", true)
 
+				mgp_toolAnimator_setAnimation(self, "deploy_bipod")
 				if not self.aiming then
 					setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
 				end
@@ -466,8 +477,9 @@ function PTRD:client_updateBipod(dt)
 		if self.bipod_deployed then
 			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
 			if self.bipod_unequip_timer >= 1.0 then
-				mgp_toolAnimator_setAnimation(self, "hide_bipod")
+				self.network:sendToServer("server_updateBipodAnim", false)
 
+				mgp_toolAnimator_setAnimation(self, "hide_bipod")
 				if not self.aiming then
 					setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
 				end
