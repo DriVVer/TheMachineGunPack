@@ -27,7 +27,7 @@
 
 				{ "name": "PTRD_aim_bipod_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_into_bipod.dae" },
 				{ "name": "PTRD_aim_bipod_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_exit_bipod.dae" },
-				{ "name": "PTRD_aim_bipod_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_shot_bipod.dae" },
+				{ "name": "PTRD_aim_bipod_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_idle_bipod.dae" },
 				{ "name": "PTRD_aim_bipod_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_idle_bipod.dae" }
 			]
 		}
