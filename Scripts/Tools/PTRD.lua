@@ -102,6 +102,14 @@ local PTRD_aim_block_anims =
 	["sprintExit"] = true
 }
 
+local PTRD_smooth_aim_anims =
+{
+	["aimInto"] = true,
+	["aimExit"] = true,
+	["bipodAimInto"] = true,
+	["bipodAimExit"] = true
+}
+
 local PTRD_sprint_block_anims =
 {
 	["cock_hammer_aim"] = true,
@@ -340,7 +348,7 @@ local aim_animation_blacklist =
 }
 
 function PTRD:client_updateAimWeights(dt)
-	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 10 )
 
 	-- Camera update
 	local bobbingFp = 1
@@ -358,8 +366,8 @@ function PTRD:client_updateAimWeights(dt)
 		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
 	end
 
-	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 15.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
 local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
@@ -593,14 +601,6 @@ function PTRD:client_onUpdate(dt)
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
-
-	if self.scope_timer then
-		self.scope_timer = self.scope_timer - dt
-
-		if self.scope_timer <= 0.0 then
-			self.scope_timer = nil
-		end
-	end
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -1030,7 +1030,12 @@ end
 
 local _intstate = sm.tool.interactState
 function PTRD:cl_onSecondaryUse(state)
-	if self.scope_timer or not self.equipped then return end
+	if not self.equipped then return end
+
+	local v_fp_anims = self.fpAnimations
+	if v_fp_anims and PTRD_smooth_aim_anims[v_fp_anims.currentAnimation] == true then
+		return
+	end
 
 	local is_reloading = self:client_isGunReloading(PTRD_aim_block_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
@@ -1038,11 +1043,8 @@ function PTRD:cl_onSecondaryUse(state)
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
 
-		if self.aiming then
-			self.scope_timer = 0.3
-		else
+		if not self.aiming then
 			self.fireCooldownTimer = 0.4
-			self.scope_timer = 0.5
 		end
 
 		self.tool:setMovementSlowDown(self.aiming)
@@ -1058,6 +1060,5 @@ function PTRD:client_onEquippedUpdate(primaryState, secondaryState)
 	end
 
 	self:cl_onSecondaryUse( secondaryState )
-
 	return true, true
 end
