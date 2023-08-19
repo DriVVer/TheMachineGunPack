@@ -917,7 +917,7 @@ function PTRD:cl_onPrimaryUse(state)
 		self:onShoot(self.ammo_in_mag)
 		self.network:sendToServer("sv_n_onShoot", 1)
 
-		sm.camera.setShake(0.4)
+		sm.camera.setShake(0.01)
 
 		-- Play FP shoot animation
 		local sel_shoot_anim = nil

@@ -6,8 +6,8 @@
 			"maxViewDistance": 1000.0,
 			"animationList": [
 				{ "name": "PTRD_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_idle.dae" },
-				{ "name": "PTRD_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_shoot.dae" },
-				{ "name": "PTRD_shoot_bipod",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_shoot_bipod.dae" },
+				{ "name": "PTRD_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_idle.dae" },
+				{ "name": "PTRD_shoot_bipod",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_idle.dae" },
 				{ "name": "PTRD_deploy_bipod",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_bipod_deploy.dae" },
 				{ "name": "PTRD_hide_bipod",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_bipod_hide.dae" },
 
