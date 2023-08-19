@@ -441,6 +441,7 @@ end
 function PTRD:client_receiveBipodAnim(is_deploy)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		mgp_toolAnimator_setAnimation(self, is_deploy and "deploy_bipod" or "hide_bipod")
+		self.bipod_deployed = is_deploy
 	end
 end
 
@@ -476,7 +477,7 @@ function PTRD:client_updateBipod(dt)
 
 		if self.bipod_deployed then
 			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
-			if self.bipod_unequip_timer >= 1.0 then
+			if self.bipod_unequip_timer >= 0.5 then
 				self.network:sendToServer("server_updateBipodAnim", false)
 
 				mgp_toolAnimator_setAnimation(self, "hide_bipod")
@@ -769,6 +770,7 @@ function PTRD:client_onEquip(animate, is_custom)
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
+	mgp_toolAnimator_setAnimation(self, "hide_bipod")
 	--if self.ammo_in_mag <= 0 then
 --		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
 --	end
@@ -834,7 +836,7 @@ function PTRD:onAim(aiming)
 end
 
 function PTRD:sv_n_onShoot(ammo_in_mag)
-	self.network:sendToClients("cl_n_onShoot", ammo_in_mag)
+	self.network:sendToClients("cl_n_onShoot")
 
 	if ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
@@ -842,23 +844,27 @@ function PTRD:sv_n_onShoot(ammo_in_mag)
 	end
 end
 
-function PTRD:cl_n_onShoot(ammo_in_mag)
+function PTRD:cl_n_onShoot()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(ammo_in_mag)
+		self:onShoot()
 	end
 end
 
-function PTRD:onShoot(ammo_in_mag)
-	if ammo_in_mag ~= nil then
-		self.tpAnimations.animations.idle.time     = 0
-		self.tpAnimations.animations.shoot.time    = 0
-		self.tpAnimations.animations.aimShoot.time = 0
-
-		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, "shoot")
-	else
-		--mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
+function PTRD:cl_chooseShootAnim()
+	if self.bipod_deployed then
+		return self.aiming and "bipodAimShoot" or "shoot_bipod"
 	end
+
+	return self.aiming and "aimShoot" or "shoot"
+end
+
+function PTRD:onShoot()
+	self.tpAnimations.animations.idle.time     = 0
+	self.tpAnimations.animations.shoot.time    = 0
+	self.tpAnimations.animations.aimShoot.time = 0
+
+	setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
+	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "shoot_bipod" or "shoot")
 end
 
 function PTRD:cl_getFirePosition()
@@ -914,35 +920,29 @@ function PTRD:cl_onPrimaryUse(state)
 		self.sprintCooldownTimer = self.sprintCooldown
 
 		-- Send TP shoot over network and directly to self
-		self:onShoot(self.ammo_in_mag)
+		self:onShoot()
 		self.network:sendToServer("sv_n_onShoot", 1)
 
 		sm.camera.setShake(0.4)
 
 		-- Play FP shoot animation
-		local sel_shoot_anim = nil
-		if self.bipod_deployed then
-			sel_shoot_anim = self.aiming and "bipodAimShoot" or "shoot_bipod"
-		else
-			sel_shoot_anim = self.aiming and "aimShoot" or "shoot"
-		end
-		setFpAnimation( self.fpAnimations, sel_shoot_anim, 0.0 )
+		setFpAnimation( self.fpAnimations, self:cl_chooseShootAnim(), 0.0 )
 	else
-		self:onShoot()
-		self.network:sendToServer("sv_n_onShoot")
+		--self:onShoot()
+		--self.network:sendToServer("sv_n_onShoot")
 
 		self.fireCooldownTimer = 0.3
 		sm.audio.play( "event:/vehicle/triggers/trigger_toggle_off" )
 	end
 end
 
-function PTRD:sv_n_onReload(is_PTRD_thumb)
-	self.network:sendToClients("cl_n_onReload", is_PTRD_thumb)
+function PTRD:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
 function PTRD:cl_n_onReload(is_PTRD_thumb)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim(is_PTRD_thumb)
+		self:cl_startReloadAnim()
 	end
 end
 
@@ -950,7 +950,7 @@ local PTRD_ordinary_reload = "reload"
 
 function PTRD:cl_startReloadAnim()
 	setTpAnimation(self.tpAnimations, PTRD_ordinary_reload, 1.0)
-	mgp_toolAnimator_setAnimation(self, PTRD_ordinary_reload)
+	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "reload_bipod" or PTRD_ordinary_reload)
 end
 
 function PTRD:client_isGunReloading(reload_table)
@@ -976,7 +976,7 @@ function PTRD:cl_initReloadAnim()
 	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", WIP_PTRD_thumb)
+	self.network:sendToServer("sv_n_onReload")
 end
 
 function PTRD:client_onReload()
