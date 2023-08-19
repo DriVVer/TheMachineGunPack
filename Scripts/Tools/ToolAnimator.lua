@@ -376,7 +376,12 @@ end
 function mgp_toolAnimator_reset(self)
 	self.cl_animator_tracks = {}
 
-	local effects_to_stop = self.cl_animator_on_unequip.stop_effects
+	local cl_on_unequip = self.cl_animator_on_unequip
+	if cl_on_unequip == nil then return end
+
+	local effects_to_stop = cl_on_unequip.stop_effects
+	if effects_to_stop == nil then return end
+
 	for k, v in ipairs(effects_to_stop) do
 		local cur_effect = self.cl_animator_effects[v]
 		if cur_effect ~= nil then

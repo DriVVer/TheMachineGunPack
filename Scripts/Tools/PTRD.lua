@@ -65,6 +65,31 @@ local PTRD_action_block_anims =
 	["sprintExit"] = true
 }
 
+local PTRD_bipod_block_anims =
+{
+	["cock_hammer_aim"] = true,
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
+
+	["reload"] = true,
+	["equip"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true,
+
+	["aimInto"]  = true,
+	["aimIdle"]  = true,
+	["aimExit"]  = true,
+	["aimShoot"] = true,
+
+	["bipodAimIdle"]  = true,
+	["bipodAimShoot"] = true,
+
+	["shoot"] = true,
+	["shoot_bipod"] = true
+}
+
 local PTRD_aim_block_anims =
 {
 	["ammo_check"     ] = true,
@@ -212,6 +237,7 @@ function PTRD:loadAnimations()
 
 				idle = { "PTRD_idle", { looping = true } },
 				shoot = { "PTRD_shoot", { nextAnimation = "idle" } },
+				shoot_bipod = { "PTRD_shoot_bipod", { nextAnimation = "idle" } },
 
 				reload = { "PTRD_reload", { nextAnimation = "idle" } },
 
@@ -221,6 +247,11 @@ function PTRD:loadAnimations()
 				aimExit = { "PTRD_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "PTRD_aim_idle", { looping = true } },
 				aimShoot = { "PTRD_aim_shoot", { nextAnimation = "aimIdle"} },
+
+				bipodAimInto = { "PTRD_aim_bipod_into", { nextAnimation = "bipodAimIdle" } },
+				bipodAimExit = { "PTRD_aim_bipod_exit", { nextAnimation = "idle", blendNext = 0 } },
+				bipodAimIdle = { "PTRD_aim_bipod_idle", { looping = true } },
+				bipodAimShoot = { "PTRD_aim_bipod_shoot", { nextAnimation = "bipodAimIdle" } },
 
 				sprintInto = { "PTRD_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "PTRD_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -293,6 +324,13 @@ local aim_animation_list02 =
 	["aimInto"]  = true,
 	["aimIdle"]  = true,
 	["aimShoot"] = true
+}
+
+local bipod_aim_animation_list01 =
+{
+	["bipodAimInto"] = true,
+	["bipodAimIdle"] = true,
+	["bipodAimShoot"] = true
 }
 
 local aim_animation_blacklist =
@@ -397,6 +435,12 @@ local function ptrd_can_deploy_bipod(self)
 end
 
 function PTRD:client_updateBipod(dt)
+	if self:client_isGunReloading(PTRD_bipod_block_anims) then
+		self.bipod_unequip_timer = 0.0
+		self.bipod_equip_timer = 0.0
+		return
+	end
+
 	if ptrd_can_deploy_bipod(self) then
 		self.bipod_unequip_timer = 0.0
 
@@ -404,7 +448,10 @@ function PTRD:client_updateBipod(dt)
 			self.bipod_equip_timer = self.bipod_equip_timer + dt
 			if self.bipod_equip_timer >= 1.0 then
 				mgp_toolAnimator_setAnimation(self, "deploy_bipod")
-				setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
+
+				if not self.aiming then
+					setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
+				end
 
 				print("deploy bipod")
 				sm.gui.displayAlertText("deploy bipod", 1.0)
@@ -420,7 +467,10 @@ function PTRD:client_updateBipod(dt)
 			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
 			if self.bipod_unequip_timer >= 1.0 then
 				mgp_toolAnimator_setAnimation(self, "hide_bipod")
-				setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
+
+				if not self.aiming then
+					setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
+				end
 
 				print("hide bipod")
 				sm.gui.displayAlertText("hide bipod", 1.0)
@@ -490,11 +540,20 @@ function PTRD:client_onUpdate(dt)
 				end
 
 				if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
-					if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-						swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-					end
-					if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-						swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+					if self.bipod_deployed then
+						if self.aiming and bipod_aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+							swapFpAnimation(self.fpAnimations, "bipodAimExit", "bipodAimInto", 0.0)
+						end
+						if not self.aiming and bipod_aim_animation_list01[self.fpAnimations.currentAnimation] == true then
+							swapFpAnimation(self.fpAnimations, "bipodAimInto", "bipodAimExit", 0.0)
+						end
+					else
+						if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+							swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+						end
+						if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+							swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+						end
 					end
 				end
 
@@ -698,15 +757,19 @@ function PTRD:client_onEquip(animate, is_custom)
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
-	if self.ammo_in_mag <= 0 then
-		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
-	end
+	--if self.ammo_in_mag <= 0 then
+--		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
+--	end
 end
 
 function PTRD:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
+
+	self.bipod_equip_timer = 0.0
+	self.bipod_unequip_timer = 0.0
+	self.bipod_deployed = false
 
 	self.waiting_for_ammo = nil
 	self.wantEquipped = false
@@ -845,7 +908,13 @@ function PTRD:cl_onPrimaryUse(state)
 		sm.camera.setShake(0.4)
 
 		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+		local sel_shoot_anim = nil
+		if self.bipod_deployed then
+			sel_shoot_anim = self.aiming and "bipodAimShoot" or "shoot_bipod"
+		else
+			sel_shoot_anim = self.aiming and "aimShoot" or "shoot"
+		end
+		setFpAnimation( self.fpAnimations, sel_shoot_anim, 0.0 )
 	else
 		self:onShoot()
 		self.network:sendToServer("sv_n_onShoot")
