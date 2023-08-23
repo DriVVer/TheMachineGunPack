@@ -500,6 +500,28 @@
 			}
 		]
 	},
+	"DLM_Drum_MagOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Drum_TMGP_MagOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Drum_MagIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Drum_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_AR_MagOut":
 	{
 		"effectList":

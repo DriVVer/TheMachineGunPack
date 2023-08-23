@@ -180,6 +180,16 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Drum_TMGP_MagIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/Drum_TMGP_MagIn.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Drum_TMGP_MagOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/Drum_TMGP_MagOut.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "SMG_TMGP_Rack_1": {
             "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Rack_1.mp3",
             "is3D": true,
