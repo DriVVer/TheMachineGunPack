@@ -56,13 +56,14 @@ local PTRD_action_block_anims =
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
-
 	["equip"] = true,
-	["aimExit"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
-	["sprintExit"] = true
+	["sprintExit"] = true,
+
+	["aimInto"] = true,
+	["aimExit"] = true
 }
 
 local PTRD_bipod_block_anims =
@@ -107,6 +108,13 @@ local PTRD_smooth_aim_anims =
 	["aimInto"] = true,
 	["aimExit"] = true,
 	["bipodAimInto"] = true,
+	["bipodAimExit"] = true
+}
+
+local PTRD_bipod_aim_anims =
+{
+	["bipodAimInto"] = true,
+	["bipodAimIdle"] = true,
 	["bipodAimExit"] = true
 }
 
@@ -473,9 +481,6 @@ function PTRD:client_updateBipod(dt)
 					setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
 				end
 
-				print("deploy bipod")
-				sm.gui.displayAlertText("deploy bipod", 1.0)
-
 				self.bipod_equip_timer = 0.0
 				self.bipod_deployed = true
 			end
@@ -492,9 +497,6 @@ function PTRD:client_updateBipod(dt)
 				if not self.aiming then
 					setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
 				end
-
-				print("hide bipod")
-				sm.gui.displayAlertText("hide bipod", 1.0)
 
 				self.bipod_unequip_timer = 0.0
 				self.bipod_deployed = false
@@ -910,8 +912,8 @@ function PTRD:cl_onPrimaryUse(state)
 		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 		dir = sm.noise.gunSpread( dir, spreadDeg )
-		for k = 0, math.random(0, 3) do
-			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, nil, nil, k * 4 )
+		for k = 0, 3 do
+			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, nil, nil, k * 3 )
 		end
 
 		-- Timers
@@ -1011,7 +1013,7 @@ function PTRD:cl_startCheckMagAnim()
 end
 
 function PTRD:client_onToggle()
-	if not self:client_isGunReloading(PTRD_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+	--[[if not self:client_isGunReloading(PTRD_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 1.2
 
@@ -1023,7 +1025,7 @@ function PTRD:client_onToggle()
 			sm.gui.displayAlertText("PTRD: No Ammo. Reloading...", 3)
 			self:cl_initReloadAnim()
 		end
-	end
+	end]]
 
 	return true
 end
@@ -1032,13 +1034,28 @@ local _intstate = sm.tool.interactState
 function PTRD:cl_onSecondaryUse(state)
 	if not self.equipped then return end
 
-	local v_fp_anims = self.fpAnimations
-	if v_fp_anims and PTRD_smooth_aim_anims[v_fp_anims.currentAnimation] == true then
-		return
+	local is_reloading = self:client_isGunReloading(PTRD_aim_block_anims) or (self.aim_timer ~= nil)
+	local new_state = false
+	if self.should_aim_again then
+		if state == _intstate.stop then
+			self.should_aim_again = nil
+		end
+	else
+		new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	end
 
-	local is_reloading = self:client_isGunReloading(PTRD_aim_block_anims) or (self.aim_timer ~= nil)
-	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
+	local v_fp_anims = self.fpAnimations
+	if v_fp_anims then
+		if PTRD_smooth_aim_anims[v_fp_anims.currentAnimation] == true then
+			return
+		end
+
+		if PTRD_bipod_aim_anims[v_fp_anims.currentAnimation] == true and not ptrd_can_deploy_bipod(self) then
+			self.should_aim_again = true
+			new_state = false
+		end
+	end
+
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
