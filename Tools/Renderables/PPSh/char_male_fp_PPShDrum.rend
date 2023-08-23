@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "PPShDrum_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_idle.dae" },
+				{ "name": "PPShDrum_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_shoot.dae" },
+
+				{ "name": "PPShDrum_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_pickup.dae" },
+				{ "name": "PPShDrum_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_putdown.dae" },
+
+				{ "name": "PPShDrum_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_sprint_into.dae" },
+				{ "name": "PPShDrum_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_sprint_exit.dae" },
+				{ "name": "PPShDrum_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_sprint_idle.dae" },
+
+				{ "name": "PPShDrum_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_aim_into.dae" },
+				{ "name": "PPShDrum_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_aim_exit.dae" },
+				{ "name": "PPShDrum_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_aim_shoot.dae" },
+				{ "name": "PPShDrum_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_aim_idle.dae" },
+
+				{ "name": "PPShDrum_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_reload.dae" },
+				{ "name": "PPShDrum_reload_empty", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_reload_empty.dae"},
+				{ "name": "PPShDrum_ammo_check",   "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PPShDrum/PPShDrum_ammo_check.dae" }
+			]
+		}
+	]
+} 

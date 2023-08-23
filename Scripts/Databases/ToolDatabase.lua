@@ -382,7 +382,189 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
+						time = 1.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "rack",
+						name_fp = "rack",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					}
+				}
+			}
+		}
+	},
+
+	ppsh_drum =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_SMG_Shot_1",
+			rack = "DLM_SMG_Rack_3",
+			magin = "DLM_AR_MagIn",
+			magout = "DLM_AK_MagOut"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			reload = "TommyReload",
+			reload_empty = "TommyEReload"
+		},
+		on_unequip_action = {
+			stop_effects = {}
+		},
+		animation = {
+			equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Gun_anims", start_val = 0.15, end_val = 0.15 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.15, end_val = 0.15 } },
+						time = 0.0
+					}
+				}
+			},
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.15 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.0, end_val = 0.15 } },
+						time = 0.4
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+				}
+			},
+			reload =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 2.2 } },
+						tp_anim = { { name = "Gun_anims", start_val = 0.2, end_val = 2.2 } },
+						time = 2.0
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload",
+						name_fp = "reload",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.13
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
 						time = 1.15
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					}
+				}
+			},
+			reload_empty =
+			{
+				[1] = { --first animation track
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Gun_anims", start_val = 3.2, end_val = 6.0 } },
+						tp_anim = { { name = "Gun_anims", start_val = 3.2, end_val = 6.0 } },
+						time = 2.8
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.03
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.15
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.35
 					},
 					{
 						type = mgp_tool_anim_enum.effect,

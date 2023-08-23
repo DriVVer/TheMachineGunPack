@@ -278,16 +278,16 @@ function PTRD:loadAnimations()
 
 	self.normalFireMode = {
 		fireCooldown = 0.18,
-		spreadCooldown = 0.005,
+		spreadCooldown = 0.5,
 		spreadIncrement = 0.5,
-		spreadMinAngle = 0.01,
-		spreadMaxAngle = 0.1,
+		spreadMinAngle = 5.0,
+		spreadMaxAngle = 16.0,
 		fireVelocity = 550.0,
 
-		minDispersionStanding = 0.1,
-		minDispersionCrouching = 0.04,
+		minDispersionStanding = 0.8,
+		minDispersionCrouching = 0.3,
 
-		maxMovementDispersion = 0.4,
+		maxMovementDispersion = 0.99,
 		jumpDispersionMultiplier = 2
 	}
 

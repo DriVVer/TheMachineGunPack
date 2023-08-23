@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"name": "PPShDrum",
+			"uuid": "1e1960d3-1a4e-4127-8937-d4171cd5d324",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_PreviewDrum.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/PPShDrum.lua",
+				"class": "PPShDrum",
+				"data": {}
+			}
+		},
+		{
 			"name": "PTRD",
 			"uuid": "8f97ff41-6498-46f7-84aa-fd0c11918512",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/PTRD/PTRD_Preview.rend",

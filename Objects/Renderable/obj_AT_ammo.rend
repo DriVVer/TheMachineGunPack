@@ -1,0 +1,20 @@
+{
+				"lodList": [
+					{
+						"minViewSize": 20,
+						"subMeshList": [
+							{
+								"idx": 0,
+								"textureList": [
+									
+									"$MOD_DATA/Tools/Textures/TommyGunDif.png",
+									"$MOD_DATA/Tools/Textures/TommyGunAsg.png",
+									"$MOD_DATA/Tools/Textures/TommyGunNor.tga"
+								],
+								"material": "DifAsgNor"
+							}
+						],
+						"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/AT_Ammo.fbx"
+					}
+				]
+			} 

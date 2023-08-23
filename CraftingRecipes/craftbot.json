@@ -109,6 +109,26 @@
 		]
 	},
 	{
+
+		"itemId": "d80e4edd-8823-42f6-9f17-1dc130ba51ce", //at ammo
+		"quantity": 3,
+		"craftTime": 60,
+		"ingredientList": [		
+			{
+				"quantity": 30,
+				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+			{
+				"quantity": 15,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 20,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	},
+	{
 		"itemId": "903b737a-42b9-459d-a169-c4171016cfab", //rockets
 		"quantity": 2,
 		"craftTime": 30,
@@ -369,6 +389,29 @@
 			},
 			{
 				"quantity": 2,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+	{
+		"itemId": "1e1960d3-1a4e-4127-8937-d4171cd5d324", //ppsh drum
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 1,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //ppsh
+			},
+			{
+				"quantity": 10,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 2,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 1,
 				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
 			}
 		]
