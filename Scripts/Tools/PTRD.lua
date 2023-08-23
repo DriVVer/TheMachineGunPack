@@ -52,7 +52,6 @@ sm.tool.preloadRenderables( renderablesFp )
 local PTRD_action_block_anims =
 {
 	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
@@ -69,7 +68,6 @@ local PTRD_action_block_anims =
 local PTRD_bipod_block_anims =
 {
 	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
@@ -93,8 +91,7 @@ local PTRD_bipod_block_anims =
 
 local PTRD_aim_block_anims =
 {
-	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
+	["cock_hammer"] = true,
 
 	["reload"] = true,
 
@@ -121,7 +118,6 @@ local PTRD_bipod_aim_anims =
 local PTRD_sprint_block_anims =
 {
 	["cock_hammer_aim"] = true,
-	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
 	["reload"] = true,
@@ -131,7 +127,6 @@ local PTRD_sprint_block_anims =
 
 local PTRD_obstacle_block_anims =
 {
-	["ammo_check"] = true,
 	["reload"    ] = true,
 	["equip"     ] = true,
 	["aimExit"   ] = true
@@ -209,8 +204,6 @@ function PTRD:loadAnimations()
 			putdown = { "spudgun_putdown" },
 
 			reload = { "PTRD_reload", { nextAnimation = "idle" } },
-
-			ammo_check = { "PTRD_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -256,8 +249,6 @@ function PTRD:loadAnimations()
 				shoot_bipod = { "PTRD_shoot_bipod", { nextAnimation = "idle" } },
 
 				reload = { "PTRD_reload", { nextAnimation = "idle" } },
-
-				ammo_check = { "PTRD_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
 				aimInto = { "PTRD_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "PTRD_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
@@ -649,10 +640,6 @@ function PTRD:client_onUpdate(dt)
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
 
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
-
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
 
@@ -670,8 +657,6 @@ function PTRD:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
 				elseif name == "reload" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
-				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -992,40 +977,6 @@ function PTRD:client_onReload()
 			self:cl_initReloadAnim()
 		end
 	end
-
-	return true
-end
-
-function PTRD:sv_n_checkMag()
-	self.network:sendToClients("cl_n_checkMag")
-end
-
-function PTRD:cl_n_checkMag()
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		self:cl_startCheckMagAnim()
-	end
-end
-
-function PTRD:cl_startCheckMagAnim()
-	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-	mgp_toolAnimator_setAnimation(self, "ammo_check")
-end
-
-function PTRD:client_onToggle()
-	--[[if not self:client_isGunReloading(PTRD_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
-		if self.ammo_in_mag > 0 then
-			self.cl_show_ammo_timer = 1.2
-
-			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
-
-			self:cl_startCheckMagAnim()
-			self.network:sendToServer("sv_n_checkMag")
-		else
-			sm.gui.displayAlertText("PTRD: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim()
-		end
-	end]]
 
 	return true
 end
