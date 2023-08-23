@@ -153,6 +153,7 @@ end
 ---@field name_fp string
 ---@field name_tp string
 ---@field bone_name string
+---@field offsetAngle number
 
 ---@param self ToolClass
 AnimationUpdateFunctions.particle_handler = function(self, track, dt)
@@ -177,14 +178,19 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 		end
 
 		--Calculate rotation quaternion
-		local particle_rot = sm.vec3.getRotation(sm.camera.getDirection(), sm.camera.getUp())
-		particle_rot = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+		local camDir = sm.camera.getDirection()
+		local particle_rot = sm.vec3.getRotation(camDir, sm.camera.getUp())
+		local particle_rot_final = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+
+		if cur_data.offsetAngle then
+			particle_rot_final = sm.quat.angleAxis(math.rad(cur_data.offsetAngle), camDir) * particle_rot_final
+		end
 
 		--Calculate final position
 		local offset_final = sm.camera.getRotation() * particle_offset
 		local particle_pos_final = particle_pos + offset_final
 
-		sm.particle.createParticle(particle_name, particle_pos_final, particle_rot, debri_color)
+		sm.particle.createParticle(particle_name, particle_pos_final, particle_rot_final, debri_color)
 	end
 
 	track.func = AnimationUpdateFunctions.anim_selector

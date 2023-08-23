@@ -27,6 +27,18 @@
 		{
 			"box": { "x": 1, "y": 1, "z": 1 },
 			"color": "ffffff",
+			"name": "obj_tool_ppsh_drum",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": "$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_PreviewDrum.rend",
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "616fc02a-e31f-4dcb-998d-6f03c4a7dfe8"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
 			"name": "obj_tool_ptrd",
 			"physicsMaterial": "Plastic",
 			"ratings": {},
