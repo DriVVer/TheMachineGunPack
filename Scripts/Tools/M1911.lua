@@ -582,7 +582,7 @@ function M1911:onShoot(is_last_shot)
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	local anim = self.aiming and "aimShoot" or "shoot"
-	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
+	setTpAnimation( self.tpAnimations, anim, 10.0 )
 	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
 end
 
