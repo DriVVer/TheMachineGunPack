@@ -26,21 +26,20 @@ DB.mag_capacity = 2
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Model.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Ammo.rend"
+	"$CONTENT_DATA/Tools/Renderables/DB/DB_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_male_tp_DB.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/DB/char_tp_DB_anim.rend",
+	"$CONTENT_DATA/Tools/Renderables/DB/DB_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_male_fp_DB.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/DB/char_fp_DB_anim.rend",
+	"$CONTENT_DATA/Tools/Renderables/DB/DB_fp_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
