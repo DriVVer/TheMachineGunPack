@@ -22,7 +22,7 @@ local Damage = 19
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 PPShDrum = class()
-PPShDrum.mag_capacity = 11
+PPShDrum.mag_capacity = 71
 
 local renderables =
 {
