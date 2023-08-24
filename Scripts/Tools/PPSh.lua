@@ -575,8 +575,9 @@ function PPSh:onShoot(dir)
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-	mgp_toolAnimator_setAnimation(self, "shoot")
+	local anim = self.aiming and "aimShoot" or "shoot"
+	setTpAnimation( self.tpAnimations, anim, 10.0 )
+	mgp_toolAnimator_setAnimation(self, anim)
 end
 
 function PPSh:calculateFirePosition()

@@ -850,8 +850,9 @@ function PTRD:onShoot()
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "shoot_bipod" or "shoot")
+	local anim = self.aiming and "aimShoot" or "shoot"
+	setTpAnimation(self.tpAnimations, anim, 10.0)
+	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "shoot_bipod" or anim)
 end
 
 function PTRD:cl_getFirePosition()

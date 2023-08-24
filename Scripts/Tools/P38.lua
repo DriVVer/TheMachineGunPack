@@ -581,8 +581,9 @@ function P38:onShoot(is_last_shot)
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
+	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation( self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0 )
-	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or "shoot")
+	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
 end
 
 function P38:calculateFirePosition()

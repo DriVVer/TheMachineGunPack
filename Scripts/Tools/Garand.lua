@@ -689,8 +689,9 @@ function Garand:onShoot(ammo_in_mag)
 		self.tpAnimations.animations.shoot.time    = 0
 		self.tpAnimations.animations.aimShoot.time = 0
 
-		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, ammo_in_mag == 0 and "last_shot" or "shoot")
+		local anim = self.aiming and "aimShoot" or "shoot"
+		setTpAnimation(self.tpAnimations, anim, 10.0)
+		mgp_toolAnimator_setAnimation(self, ammo_in_mag == 0 and "last_shot" or anim)
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
