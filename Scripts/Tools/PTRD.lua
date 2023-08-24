@@ -286,8 +286,8 @@ function PTRD:loadAnimations()
 		fireCooldown = 0.18,
 		spreadCooldown = 0.01,
 		spreadIncrement = 0.5,
-		spreadMinAngle = 0.01,
-		spreadMaxAngle = 0.1,
+		spreadMinAngle = 2.0,
+		spreadMaxAngle = 5.5,
 		fireVelocity = 550.0,
 
 		minDispersionStanding = 0.01,
@@ -890,14 +890,17 @@ function PTRD:cl_onPrimaryUse(state)
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local firePos, dir = self:cl_getFirePosition()
 
-		-- Spread
-		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+		if not self.bipod_deployed then
+			-- Spread
+			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
 
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
-		dir = sm.noise.gunSpread( dir, spreadDeg )
+			dir = sm.noise.gunSpread( dir, spreadDeg )
+		end
+
 		for k = 0, 3 do
 			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, nil, nil, k * 3 )
 		end
