@@ -397,10 +397,10 @@ function DB:client_onUpdate(dt)
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot" or name == "crouch_shoot" ) then
-					setTpAnimation( self.tpAnimations, "idle", 0.1 )
+				if ( name == "shoot" or name == "aimShoot" ) then
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10 )
 				elseif name == "pickup" then
-					setTpAnimation( self.tpAnimations, "idle", 0.001 )
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
 					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
