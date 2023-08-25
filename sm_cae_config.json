@@ -90,8 +90,23 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "AT_TMGP_Ammo": {
+            "path":"$CONTENT_DATA/Effects/Audio/ATRifle_TMGP_Ammo.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "AT_TMGP_Shot_2": {
             "path":"$CONTENT_DATA/Effects/Audio/ATRifle_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Bipod_TMGP_Deploy": {
+            "path":"$CONTENT_DATA/Effects/Audio/Bipod_TMGP_Deploy.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Bipod_TMGP_Hide": {
+            "path":"$CONTENT_DATA/Effects/Audio/Bipod_TMGP_Hide.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

@@ -3224,7 +3224,9 @@ local mgp_tool_database =
 			gunshot = "DLM_BoltRifle_Shot_1",
 			BoltOpen = "DLM_AT_Bolt_Open",
 			BoltClose = "DLM_AT_Bolt_Close",
-			BulletPut = "DLM_Gun_Ammo"
+			BulletPut = "DLM_Gun_Ammo",
+			BipodDeploy = "DLM_Bipod_Deploy",
+			BipodHide = "DLM_Bipod_Hide"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -3244,6 +3246,21 @@ local mgp_tool_database =
 						tp_anim = { { name = "Gun_Anim", start_val = 0.0, end_val = 0.5 } },
 						time = 0.3
 					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BipodHide",
+						name_fp = "BipodHide",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					}
 				}
 			},
 			deploy_bipod =
@@ -3255,7 +3272,22 @@ local mgp_tool_database =
 						tp_anim = { { name = "Gun_Anim", start_val = 1.0, end_val = 1.5 } },
 						time = 0.3
 					}
-				}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BipodDeploy",
+						name_fp = "BipodDeploy",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					}
+				}	
 			},
 			shoot =
 			{
@@ -3584,9 +3616,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 3.66 } },
-						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 3.66 } },
-						time = 3.66
+						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
 					}
 				},
 				[2] = {
@@ -3650,9 +3682,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.5 } },
-						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.5 } },
-						time = 5.5
+						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
+						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
+						time = 5.0
 					}
 				},
 				[2] = {

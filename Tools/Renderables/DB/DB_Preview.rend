@@ -14,19 +14,20 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
-						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
-						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_nor.tga"
 					]
 				},
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_nor.tga"
+						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
+						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
+						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
 					]
 				}
+				
 			]
 		}
 	]

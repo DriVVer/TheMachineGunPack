@@ -368,6 +368,39 @@
 			}
 		]
 	},
+	"DLM_Bipod_Deploy":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Bipod_TMGP_Deploy",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Bipod_Hide":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Bipod_TMGP_Hide",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_AT_Ammo":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "AT_TMGP_Ammo",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_AT_Shot_1":
 	{
 		"effectList":
