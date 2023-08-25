@@ -106,9 +106,9 @@ function DB.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot1", { nextAnimation = "idle" } },
-			shoot_2 = { "spudgun_shoot2", { nextAnimation = "idle" } },
-			crouch_shoot = { "spudgun_crouch_shoot", { nextAnimation = "idle" } },
+			shoot = { "spudgun_shoot", { nextAnimation = "idle" } },
+			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
+			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
 
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
@@ -154,15 +154,16 @@ function DB.loadAnimations( self )
 				unequip = { "DB_putdown" },
 
 				idle = { "DB_idle_1", { nextAnimation = "idle" } },
-				inspect = { "DB_idle_2", { nextAnimation = "idle" } },
 
 				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
-				shoot_2 = { "DB_shoot_2", { nextAnimation = "idle" } },
-
 				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
-
 				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+
+				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "DB_aim_idle", { looping = true } },
+				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
 
 				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -222,6 +223,23 @@ local actual_reload_anims =
 	["reload"] = true,
 	["reload_empty"] = true
 }
+
+function DB:client_updateAimWeights(dt)
+	-- Camera update
+	local bobbing = 1
+	if self.aiming then
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
+		bobbing = 0.12
+	else
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
+		bobbing = 1
+	end
+
+	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+end
 
 local mgp_shotgun_ammo = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2")
 function DB:server_spendAmmo(data, player)
@@ -293,12 +311,21 @@ function DB:client_onUpdate(dt)
 			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
+
+			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+			end
+			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+			end
 		end
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
 	TSU_OnUpdate(self)
+
+	self:client_updateAimWeights(dt)
 
 	if not self.equipped then
 		if self.wantEquipped then
@@ -316,7 +343,7 @@ function DB:client_onUpdate(dt)
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
-		local fireMode = self.normalFireMode
+		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -340,8 +367,17 @@ function DB:client_onUpdate(dt)
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
-		self.tool:setCrossHairAlpha( 1.0 )
-		self.tool:setInteractionTextSuppressed( false )
+		if self.aiming then
+			if self.tool:isInFirstPersonView() then
+				self.tool:setCrossHairAlpha( 0.0 )
+			else
+				self.tool:setCrossHairAlpha( 1.0 )
+			end
+			self.tool:setInteractionTextSuppressed( true )
+		else
+			self.tool:setCrossHairAlpha( 1.0 )
+			self.tool:setInteractionTextSuppressed( false )
+		end
 	end
 
 	-- Sprint block
@@ -361,7 +397,7 @@ function DB:client_onUpdate(dt)
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot1" or name == "crouch_shoot" ) then
+				if ( name == "shoot" or name == "crouch_shoot" ) then
 					setTpAnimation( self.tpAnimations, "idle", 0.1 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, "idle", 0.001 )
@@ -395,7 +431,7 @@ function DB:client_onUpdate(dt)
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -439,6 +475,7 @@ function DB:client_onEquip(animate, is_custom)
 	end
 
 	self.wantEquipped = true
+	self.aiming = false
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.jointWeight = 0.0
@@ -476,6 +513,7 @@ function DB:client_onUnequip(animate, is_custom)
 	self.waiting_for_ammo = nil
 	self.wantEquipped = false
 	self.equipped = false
+	self.aiming = false
 	mgp_toolAnimator_reset(self)
 
 	local s_tool = self.tool
@@ -504,39 +542,47 @@ function DB:client_onUnequip(animate, is_custom)
 	end
 end
 
-function DB:sv_n_onShoot(doubleShot)
-	self.network:sendToClients("cl_n_onShoot", doubleShot)
+function DB:sv_n_onAim(aiming)
+	self.network:sendToClients( "cl_n_onAim", aiming )
+end
+
+function DB:cl_n_onAim(aiming)
+	if not self.tool:isLocal() and self.tool:isEquipped() then
+		self:onAim(aiming)
+	end
+end
+
+function DB:onAim(aiming)
+	self.aiming = aiming
+	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
+		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
+	end
+end
+
+
+function DB:sv_n_onShoot()
+	self.network:sendToClients("cl_n_onShoot")
 
 	if self.sv_ammo_counter > 0 then
-		local v_to_spend = doubleShot and 2 or 1
-
-		if self.sv_ammo_counter >= v_to_spend then
-			self.sv_ammo_counter = self.sv_ammo_counter - v_to_spend
-			self:server_updateAmmoCounter()
-		end
+		self.sv_ammo_counter = self.sv_ammo_counter - 1
+		self:server_updateAmmoCounter()
 	end
 end
 
-function DB:cl_n_onShoot(doubleShot)
+function DB:cl_n_onShoot()
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot(doubleShot)
+		self:onShoot()
 	end
 end
 
-function DB:onShoot(doubleShot)
-	local v_anim_name = doubleShot and "shoot_2" or "shoot"
+function DB:onShoot()
+	local v_anim_name = self.aiming and "aimShoot" or "shoot"
 	mgp_toolAnimator_setAnimation(self, v_anim_name)
-
-	if self.tool:isCrouching() then
-		setTpAnimation(self.tpAnimations, "crouch_shoot", 1.0)
-	else
-		setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
-	end
+	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
 local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
-local mgp_projectile_powerful = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
-function DB:cl_onPrimaryUse(is_double_shot)
+function DB:cl_onPrimaryUse()
 	if self:client_isGunReloading() then return end
 
 	local v_toolOwner = self.tool:getOwner()
@@ -554,11 +600,8 @@ function DB:cl_onPrimaryUse(is_double_shot)
 			return
 		end
 
-		local ammo_count = is_double_shot and 1 or 0
-		local ammo_to_consume = ammo_count + 1
-
-		if self.ammo_in_mag > ammo_count then
-			self.ammo_in_mag = self.ammo_in_mag - ammo_to_consume
+		if self.ammo_in_mag > 0 then
+			self.ammo_in_mag = self.ammo_in_mag - 1
 
 			local dir = sm.camera.getDirection()
 			local firePos = nil
@@ -568,24 +611,23 @@ function DB:cl_onPrimaryUse(is_double_shot)
 				firePos = self.tool:getTpBonePos("pejnt_barrel")
 			end
 
-			local fireMode = self.normalFireMode
-
-			local proj_type = is_double_shot and mgp_projectile_powerful or mgp_projectile_potato
-			sm.projectile.projectileAttack(proj_type, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+			sm.projectile.projectileAttack(mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
-			self.fireCooldownTimer = is_double_shot and 1.0 or 0.5
+			self.fireCooldownTimer = fireMode.fireCooldown
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
 			-- Send TP shoot over network and dircly to self
-			self:onShoot(is_double_shot)
-			self.network:sendToServer("sv_n_onShoot", is_double_shot)
+			self:onShoot()
+			self.network:sendToServer("sv_n_onShoot")
 
 			-- Play FP shoot animation
-			setFpAnimation( self.fpAnimations, is_double_shot and "shoot_2" or "shoot", 0.0 )
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 		else
-			self.fireCooldownTimer = 0.3
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+			self.fireCooldownTimer = fireMode.fireCooldown
 			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
 	end
@@ -593,9 +635,7 @@ end
 
 local reload_anims =
 {
-	["cock_hammer_aim"] = true,
 	["ammo_check"     ] = true,
-	["cock_hammer"    ] = true,
 	["reload"         ] = true,
 	["reload_empty"   ] = true
 }
@@ -656,7 +696,7 @@ end
 
 function DB:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
 		end
 	end
@@ -681,7 +721,7 @@ function DB:cl_startCheckMagAnim()
 end
 
 function DB:client_onToggle()
-	if not self:client_isGunReloading() and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 0.3
 
@@ -698,31 +738,31 @@ function DB:client_onToggle()
 	return true
 end
 
+local _intstate = sm.tool.interactState
+function DB.cl_onSecondaryUse( self, state )
+	if not self.equipped then return end
+
+	local is_reloading = self:client_isGunReloading()
+	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
+	if self.aiming ~= new_state then
+		self.aiming = new_state
+		self.tpAnimations.animations.idle.time = 0
+
+		self.tool:setMovementSlowDown(self.aiming)
+		self:onAim(self.aiming)
+		self.network:sendToServer("sv_n_onAim", self.aiming)
+	end
+end
+
 function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
-	if self.equipped then
-		if primaryState == sm.tool.interactState.start then
-			self:cl_onPrimaryUse(false)
-		end
+	if primaryState == sm.tool.interactState.start then
+		self:cl_onPrimaryUse()
+	end
 
-		if secondaryState == sm.tool.interactState.start then
-			self:cl_onPrimaryUse(true)
-		end
-
-		if f and not self:client_isGunReloading() and not self.tool:isSprinting() and self.fpAnimations.currentAnimation ~= "inspect" then
-			self.network:sendToServer("sv_onInspect")
-		end
+	if secondaryState ~= self.prevSecondaryState then
+		self:cl_onSecondaryUse( secondaryState )
+		self.prevSecondaryState = secondaryState
 	end
 
 	return true, true
-end
-
-function DB:sv_onInspect()
-	self.network:sendToClients("cl_onInspect")
-end
-
-function DB:cl_onInspect()
-	--setTpAnimation(self.tpAnimations, "inspect", 1)
-	if self.tool:isLocal() then
-		setFpAnimation(self.fpAnimations, "inspect", 0.0)
-	end
 end

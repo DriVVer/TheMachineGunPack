@@ -3538,7 +3538,7 @@ local mgp_tool_database =
 					}
 				}
 			},
-			shoot_2 =
+			aimShoot =
 			{
 				[1] = {
 					{
@@ -3547,16 +3547,16 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "shoot_double",
-						name_fp = "shoot_double",
+						name_tp = "shoot_single",
+						name_fp = "shoot_single",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					}
 				}
