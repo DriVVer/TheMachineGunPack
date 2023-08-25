@@ -21,6 +21,7 @@ local Damage = 24
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
+---@field spineWeight number
 TommyGun = class()
 TommyGun.mag_capacity = 30
 
@@ -375,11 +376,6 @@ function TommyGun.client_onUpdate( self, dt )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -397,9 +393,9 @@ function TommyGun.client_onUpdate( self, dt )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
 				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
+					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -482,7 +478,7 @@ function TommyGun:client_onEquip(animate, is_custom)
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
 	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	
+
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	local is_tool_local = self.tool:isLocal()
