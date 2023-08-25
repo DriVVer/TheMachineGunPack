@@ -91,7 +91,7 @@
             "reverb": "MOUNTAINS"
         },
         "AT_TMGP_Ammo": {
-            "path":"$CONTENT_DATA/Effects/Audio/ATRifle_TMGP_Ammo.mp3",
+            "path":"$CONTENT_DATA/Effects/Audio/AT_TMGP_Ammo.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
@@ -227,6 +227,16 @@
         },
         "Rocket_TMGP_Flyin": {
             "path":"$CONTENT_DATA/Effects/Audio/Rocket_TMGP_Loop_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Break": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Break.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Close": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Close.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

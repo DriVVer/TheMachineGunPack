@@ -665,6 +665,28 @@
 			}
 		]
 	},
+	"DLM_Shotgun_Break":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Break",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_Close":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Close",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Shotgun_Shot_1":
 	{
 		"effectList":
