@@ -237,9 +237,6 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 
 				_table_insert(self.cl_animator_fp_renderables, rend_data.path)
 				_table_insert(self.cl_animator_tp_renderables, rend_data.path)
-
-				s_tool:setFpRenderables(self.cl_animator_fp_renderables)
-				s_tool:setTpRenderables(self.cl_animator_tp_renderables)
 			end
 		else
 			if rend_data.enabled then
@@ -250,11 +247,11 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 
 				rend_data.tp_id = nil
 				rend_data.fp_id = nil
-
-				s_tool:setFpRenderables(self.cl_animator_fp_renderables)
-				s_tool:setTpRenderables(self.cl_animator_tp_renderables)
 			end
 		end
+
+		s_tool:setFpRenderables(self.cl_animator_fp_renderables)
+		s_tool:setTpRenderables(self.cl_animator_tp_renderables)
 	end
 
 	track.func = AnimationUpdateFunctions.anim_selector

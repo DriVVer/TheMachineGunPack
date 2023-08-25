@@ -1553,8 +1553,8 @@ local mgp_tool_database =
 			stop_effects = {}
 		},
 		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend"    , enabled_by_default = true }--,
-			--anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", enabled_by_default = true },
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",		enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", 	enabled_by_default = true },
 		},
 		animation = {
 			activate =
@@ -1689,10 +1689,6 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "reload" }
-		},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_Model.rend"    , enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_AnimModel.rend", enabled_by_default = true }
 		},
 		animation_reset = {
 			cock_the_hammer = mgp_magnum_aim_shoot_reset_table,
@@ -3486,10 +3482,6 @@ local mgp_tool_database =
 		on_unequip_action = {
 			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
 		},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Base.rend", enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend" , enabled_by_default = true }
-		},
 		animation = {
 			shoot =
 			{
@@ -3738,10 +3730,6 @@ local mgp_tool_database =
 		},
 		on_unequip_action = {
 			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
-		},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Base.rend", enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Bazooka/Bazooka_Barrel.rend" , enabled_by_default = true }
 		},
 		animation_reset = {
 			on_equip = { fp = { { "BZ_Anim", 3.0 } }, tp = { { "BZ_Anim", 3.0 } } }
