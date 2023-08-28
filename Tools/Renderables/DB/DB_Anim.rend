@@ -4,7 +4,9 @@
 			"mesh": "$CONTENT_DATA/Tools/Mesh/DB/DB_Anim.dae",
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
-				{ "name": "DB_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims.dae" }
+				{ "name": "DB_anims_0", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_0.dae" },
+				{ "name": "DB_anims_1", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_1.dae" },
+				{ "name": "DB_anims_T", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anim_T.dae" }
 			],
 			"subMeshList": [
 				{

@@ -164,16 +164,12 @@
 				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
 			},
 			{
-				"quantity": 30,
+				"quantity": 35,
 				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
 			},
             {
 				"quantity": 3,
 				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
-			},
-			{
-				"quantity": 2,
-				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
 			},
 			{
 				"quantity": 5,
@@ -227,10 +223,6 @@
 			{
 				"quantity": 10,
 				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
-			},
-			{
-				"quantity": 5,
-				"itemId": "d4d68946-aa03-4b8f-b1af-96b81ad4e305" //gas
 			}
 		]
 	},
@@ -271,16 +263,12 @@
 				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
 			},
 			{
-				"quantity": 40,
+				"quantity": 45,
 				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
 			},
             {
 				"quantity": 4,
 				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
-			},
-			{
-				"quantity": 1,
-				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
 			},
 			{
 				"quantity": 1,
@@ -348,16 +336,12 @@
 				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
 			},
 			{
-				"quantity": 45,
+				"quantity": 50,
 				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
 			},
             {
 				"quantity": 5,
 				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
-			},
-			{
-				"quantity": 1,
-				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
 			},
 			{
 				"quantity": 1,
@@ -376,16 +360,12 @@
 				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
 			},
 			{
-				"quantity": 40,
+				"quantity": 45,
 				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
 			},
             {
 				"quantity": 6,
 				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
-			},
-			{
-				"quantity": 1,
-				"itemId": "927d80d8-84ee-44f0-9d8b-cb7a688e0b6c" //pipe long
 			},
 			{
 				"quantity": 2,
@@ -436,10 +416,6 @@
             {
 				"quantity": 2,
 				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
-			},
-			{
-				"quantity": 3,
-				"itemId": "0dba257b-b907-4919-baaf-2fefe19f4e24" //pipe short
 			}
 		]
 	},
@@ -448,10 +424,7 @@
 		"quantity": 1,
 		"craftTime": 60,
 		"ingredientList": [
-			{
-				"quantity": 5,
-				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
-			},
+			
 			{
 				"quantity": 50,
 				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3

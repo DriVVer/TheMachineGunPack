@@ -263,6 +263,9 @@ local mgp_tool_database =
 			reload = "TommyReload",
 			reload_empty = "TommyEReload"
 		},
+		on_unequip_action = {
+			stop_effects = {}
+		},
 		animation = {
 			equip =
 			{
@@ -490,6 +493,9 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "TommyReload",
 			reload_empty = "TommyEReload"
+		},
+		on_unequip_action = {
+			stop_effects = {}
 		},
 		animation = {
 			equip =
@@ -719,6 +725,9 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "PistolReload",
 			reload_empty = "PistolEReload"
+		},
+		on_unequip_action = {
+			stop_effects = {}
 		},
 		animation = {
 			shoot =
@@ -1036,6 +1045,9 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "PistolReload",
 			reload_empty = "PistolEReload"
+		},
+		on_unequip_action = {
+			stop_effects = {}
 		},
 		animation = {
 			shoot =
@@ -1531,12 +1543,73 @@ local mgp_tool_database =
 		}
 	},
 
+	HandheldGrenadeBase =
+	{
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+		},
+		on_unequip_action = {
+			stop_effects = {}
+		},
+		renderables = {
+			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",		enabled_by_default = true },
+			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", 	enabled_by_default = true },
+		},
+		animation = {
+			activate =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_body",
+						enabled = true
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
+						time = 1.0
+					},
+					{
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_body",
+						enabled = false
+					}
+				}
+			},
+			throw =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "anim_body",
+						enabled = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.4
+					},
+					{
+						type = mgp_tool_anim_enum.toggle_renderable,
+						name = "main_body",
+						enabled = true
+					}
+				}
+			}
+		}
+	},
 	Frag =
 	{
 		required_effects = {
 			Clip = "GarandClip",
 			ClipTake = "GarandClipTake",
 		},
+		on_unequip_action = {},
 		animation = {
 			activate =
 			{
@@ -2824,12 +2897,11 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0.05, 0, -0.05),
+						fp_offset = sm.vec3.new(0, 0, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "Clip",
-						offsetAngle = -60
+						bone_name = "Clip"
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -2870,12 +2942,11 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, 0.35, -0.05),
+						fp_offset = sm.vec3.new(0, 0.25, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "Clip",
-						offsetAngle = -60
+						bone_name = "Clip"
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -3545,9 +3616,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "DB_anims_1", start_val = 0.0, end_val = 3.5 } },
+						tp_anim = { { name = "DB_anims_1", start_val = 0.0, end_val = 3.5 } },
+						time = 3.5
 					}
 				},
 				[2] = {
@@ -3611,16 +3682,82 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "DB_anims", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "DB_anims_0", start_val = 0.0, end_val = 4.416 } },
+						tp_anim = { { name = "DB_anims_0", start_val = 0.0, end_val = 4.416 } },
+						time = 4.416
 					}
 				},
 				[2] = {
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.28
+						time = 0.25
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "Open",
+						name_fp = "Open",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.62
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.85
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "Close",
+						name_fp = "Close",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			reload_type =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "DB_anims_T", start_val = 0.0, end_val = 4.75 } },
+						tp_anim = { { name = "DB_anims_T", start_val = 0.0, end_val = 4.75 } },
+						time = 4.75
+					}
+				},
+				[2] = {
+
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.25
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
