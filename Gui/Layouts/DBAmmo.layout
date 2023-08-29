@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MyGUI type="Layout" version="3.2.0">
+    <Widget type="Widget" skin="PanelEmpty" position_real="0 0 0.20833333333333334 0.27777777777777779" name="BackPanel">
+        <Widget type="Canvas" skin="BackgroundEngineNoUpgrade" position_real="0.025000000000000001 0.033333333333333333 0.94999999999999996 0.93333333333333335">
+            <Widget type="Button" skin="SecondaryButton" position_real="0.065789473684210523 0.089285714285714288 0.26315789473684209 0.35714285714285715" name="ammo1">
+                <Widget type="ImageBox" skin="ImageBox" position_real="0.050000000000000003 0.050000000000000003 0.90000000000000002 0.90000000000000002" name="ammo1_img">
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                </Widget>
+            </Widget>
+            <Widget type="Button" skin="SecondaryButton" position_real="0.36842105263157893 0.089285714285714288 0.26315789473684209 0.35714285714285715" name="ammo2">
+                <Widget type="ImageBox" skin="ImageBox" position_real="0.050000000000000003 0.050000000000000003 0.90000000000000002 0.90000000000000002" name="ammo2_img">
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                </Widget>
+            </Widget>
+        </Widget>
+    </Widget>
+    <CodeGeneratorSettings/>
+</MyGUI>

@@ -7,7 +7,8 @@ local type_to_func_name =
 	[3] = "delay_setup",
 	[4] = "debris_handler",
 	[5] = "particle_handler",
-	[6] = "renderable_handler"
+	[6] = "renderable_handler",
+	[7] = "event_handler"
 }
 
 local AnimationUpdateFunctions = {}
@@ -253,6 +254,14 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 		s_tool:setFpRenderables(self.cl_animator_fp_renderables)
 		s_tool:setTpRenderables(self.cl_animator_tp_renderables)
 	end
+
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
+end
+
+AnimationUpdateFunctions.event_handler = function(self, track, dt)
+	local func_data = track.step_data
+	self[func_data.callback](self, func_data.args)
 
 	track.func = AnimationUpdateFunctions.anim_selector
 	track.func(self, track, dt)

@@ -5,7 +5,8 @@ local mgp_tool_anim_enum =
 	delay             = 3,
 	debris            = 4,
 	particle          = 5,
-	toggle_renderable = 6
+	toggle_renderable = 6,
+	event			  = 7
 }
 
 local mgp_magnum_aim_shoot_reset_table =
@@ -263,9 +264,6 @@ local mgp_tool_database =
 			reload = "TommyReload",
 			reload_empty = "TommyEReload"
 		},
-		on_unequip_action = {
-			stop_effects = {}
-		},
 		animation = {
 			equip =
 			{
@@ -493,9 +491,6 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "TommyReload",
 			reload_empty = "TommyEReload"
-		},
-		on_unequip_action = {
-			stop_effects = {}
 		},
 		animation = {
 			equip =
@@ -725,9 +720,6 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "PistolReload",
 			reload_empty = "PistolEReload"
-		},
-		on_unequip_action = {
-			stop_effects = {}
 		},
 		animation = {
 			shoot =
@@ -1045,9 +1037,6 @@ local mgp_tool_database =
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "PistolReload",
 			reload_empty = "PistolEReload"
-		},
-		on_unequip_action = {
-			stop_effects = {}
 		},
 		animation = {
 			shoot =
@@ -1543,73 +1532,12 @@ local mgp_tool_database =
 		}
 	},
 
-	HandheldGrenadeBase =
-	{
-		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
-			shoot_fp = "Muzzle_Flash_SmallCal_fp",
-		},
-		on_unequip_action = {
-			stop_effects = {}
-		},
-		renderables = {
-			main_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_base.rend",		enabled_by_default = true },
-			anim_body = { path = "$CONTENT_DATA/Tools/Renderables/Grenade/s_grenade_screw.rend", 	enabled_by_default = true },
-		},
-		animation = {
-			activate =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "anim_body",
-						enabled = true
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
-						tp_anim = { { name = "Activation_unscrew", start_val = 0.0, end_val = 1.0 } },
-						time = 1.0
-					},
-					{
-						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "anim_body",
-						enabled = false
-					}
-				}
-			},
-			throw =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "anim_body",
-						enabled = false
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.4
-					},
-					{
-						type = mgp_tool_anim_enum.toggle_renderable,
-						name = "main_body",
-						enabled = true
-					}
-				}
-			}
-		}
-	},
 	Frag =
 	{
 		required_effects = {
 			Clip = "GarandClip",
 			ClipTake = "GarandClipTake",
 		},
-		on_unequip_action = {},
 		animation = {
 			activate =
 			{
@@ -3762,7 +3690,15 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.62
+						time = 1.32
+					},
+					{
+						type = mgp_tool_anim_enum.event,
+						callback = "cl_changeColour"
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.3
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
