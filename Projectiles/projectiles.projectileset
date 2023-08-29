@@ -127,7 +127,7 @@
 		},
 		{
 			"uuid": "228fb03c-9b81-4460-b841-5fdc2eea3596",
-			"name": "double_barrel_shotgun_ammo",
+			"name": "shotgun_birdshot",
 			"mass": 0.75,
 			"radius": 0.0625,
 			"friction": 0.2,
@@ -151,7 +151,7 @@
 		},
 		{
 			"uuid": "35588452-1e08-46e8-aaf1-e8abb0cf7692",
-			"name": "double_barrel_shotgun_ammo_powerful",
+			"name": "shotgun_buckshot",
 			"mass": 0.75,
 			"radius": 0.0625,
 			"friction": 0.2,
@@ -162,7 +162,7 @@
 			"effectmaterial": "Potato",
 			"attachedEffect": "",
 			"enableGravity": true,
-			"amount": 16,
+			"amount": 1,
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },

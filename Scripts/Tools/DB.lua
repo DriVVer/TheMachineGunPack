@@ -27,12 +27,14 @@ DB.mag_capacity = 2
 DB.ammoTypes = {
 	[1] = {
 		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
-		colour = sm.color.new(1,0,0),
+		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
+		colour = sm.color.new("#7b3030ff"),
 		icon = "$CONTENT_DATA/Gui/DB_shells_red.png"
 	},
 	[2] = {
 		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
-		colour = sm.color.new(0,1,0),
+		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
+		colour = sm.color.new("#307326ff"),
 		icon = "$CONTENT_DATA/Gui/DB_shells_green.png"
 	}
 }
@@ -76,7 +78,7 @@ function DB:server_onCreate()
 			self.sv_ammo_counter = self.mag_capacity
 		end
 
-		self:server_updateAmmoCounter()
+		self:server_updateStorage()
 	end
 
 	local ammoType = saved_data.type
@@ -91,7 +93,7 @@ function DB:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function DB:server_updateAmmoCounter(data, caller)
+function DB:server_updateStorage(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save({ ammo = self.sv_ammo_counter, type = self.sv_ammoType })
@@ -276,7 +278,6 @@ function DB:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 40.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-local mgp_shotgun_ammo = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2")
 function DB:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
@@ -286,6 +287,7 @@ function DB:server_spendAmmo(data, player)
 	local v_inventory = v_owner:getInventory()
 	if v_inventory == nil then return end
 
+	local mgp_shotgun_ammo = self.ammoTypes[self.sv_ammoType].shells
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_shotgun_ammo)
 	if v_available_ammo == 0 then return end
 
@@ -297,7 +299,7 @@ function DB:server_spendAmmo(data, player)
 	sm.container.endTransaction()
 
 	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
-	self:server_updateAmmoCounter()
+	self:server_updateStorage()
 end
 
 function DB:sv_n_trySpendAmmo(data, player)
@@ -602,7 +604,7 @@ function DB:sv_n_onShoot()
 
 	if self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
-		self:server_updateAmmoCounter()
+		self:server_updateStorage()
 	end
 end
 
@@ -712,8 +714,18 @@ end
 
 function DB:cl_initReloadAnim(anim_id)
 	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_shotgun_ammo)
-		if v_available_ammo == 0 then
+		local inv = sm.localPlayer.getInventory()
+		local quantity = sm.container.totalQuantity
+		local v_available_ammo = quantity(inv, self.ammoTypes[self.ammoType].shells)
+		if v_available_ammo < self.mag_capacity then
+			for k, v in pairs(self.ammoTypes) do
+				if quantity(inv, v.shells) >= self.mag_capacity then
+					setFpAnimation(self.fpAnimations, "reload_type", 0.001)
+					self.network:sendToServer("sv_playSwitch", k)
+					return true
+				end
+			end
+
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
@@ -803,9 +815,24 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if f ~= self.prevF then
 		self.prevF = f
 		if f then
+			local consume = sm.game.getEnableAmmoConsumption()
+			local quantity = sm.container.totalQuantity
+			local inv = sm.localPlayer.getInventory()
+			local ammoTypes = 0
 			for i = 1, #self.ammoTypes do
-				self.gui:setButtonState("ammo"..i, self.ammoType == i)
+				local widget = "ammo"..i
+				local display = not consume or quantity(inv, self.ammoTypes[i].shells) > 0
+
+				if display then ammoTypes = ammoTypes + 1 end
+				self.gui:setVisible(widget, display)
+				self.gui:setButtonState(widget, self.ammoType == i)
 			end
+
+			if ammoTypes < 2 then
+				sm.gui.displayAlertText("You dont have other ammo types!", 2)
+				return true, true
+			end
+
 			self.gui:open()
 		end
 	end
@@ -822,14 +849,27 @@ function DB:cl_onGuiClose()
 	self.newAmmpType = nil
 end
 
-function DB:sv_playSwitch(ammoType)
+function DB:sv_playSwitch(ammoType, player)
+	sm.container.beginTransaction()
+	local inv = player:getInventory()
+	sm.container.collect(inv, self.ammoTypes[self.sv_ammoType].shells, self.sv_ammo_counter)
+
+	local newShells = self.ammoTypes[ammoType].shells
+	sm.container.spend(inv, newShells, sm.util.clamp(sm.container.totalQuantity(inv, newShells), 0, self.mag_capacity))
+	sm.container.endTransaction()
+
 	self.sv_ammoType = ammoType
-	self:server_updateAmmoCounter()
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateStorage()
 	self.network:sendToClients("cl_playSwitch", ammoType)
 end
 
 function DB:cl_playSwitch(ammoType)
 	self.ammoType = ammoType
+	if self.tool:isLocal() then
+		self:client_receiveAmmo(self.mag_capacity)
+	end
+
 	setTpAnimation(self.tpAnimations, "reload_type", 10)
 	mgp_toolAnimator_setAnimation(self, "reload_type")
 end
