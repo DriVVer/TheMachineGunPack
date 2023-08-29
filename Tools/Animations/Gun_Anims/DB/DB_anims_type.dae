@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-28T23:43:20Z</created><keywords></keywords><modified>2023-08-28T23:43:20Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-29T10:58:58Z</created><keywords></keywords><modified>2023-08-29T10:58:58Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Armature.002-anim" name="Armature.002"><animation><source id="Armature.002-Matrix-animation-input"><float_array id="Armature.002-Matrix-animation-input-array" count="143">
 
@@ -2175,146 +2175,146 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_push_end-Interpolations-array" count="143"><param type="name"/></accessor></technique_common></source><sampler id="jnt_push_end-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_push_end-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_push_end-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_push_end-Interpolations"/></sampler><channel source="#jnt_push_end-Matrix-animation-transform" target="jnt_push_end/matrix"/></animation></animation>
   </library_animations>
   <library_visual_scenes>
-    <visual_scene id="Scene" name="Scene">
-     
-        <node name="jnt_anim" id="jnt_anim" sid="jnt_anim" type="JOINT">
-          <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-          <extra>
-            <technique profile="FCOLLADA">
-              <visibility>1.000000</visibility>
+   <visual_scene id="Scene" name="Scene">
+       
+            <node name="jnt_anim" id="jnt_anim" sid="jnt_anim" type="JOINT">
+                <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                <extra>
+                    <technique profile="FCOLLADA">
+                        <visibility>1.000000</visibility>
+                    </technique>
+                </extra>
+                <node name="jnt_release" id="jnt_release" sid="jnt_release" type="JOINT">
+                    <matrix sid="matrix">0.000000 -0.000000 -1.000000 -0.000000 0.838034 -0.545617 0.000000 0.312428 -0.545617 -0.838034 -0.000000 0.195024 0.000000 0.000000 0.000000 1.000000</matrix>
+                    <extra>
+                        <technique profile="FCOLLADA">
+                            <visibility>1.000000</visibility>
+                        </technique>
+                    </extra>
+                    <node name="jnt_release_end" id="jnt_release_end" sid="jnt_release_end" type="JOINT">
+                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.476775 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_release_end_end" id="jnt_release_end_end" sid="jnt_release_end_end" type="JOINT">
+                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.476775 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                        </node>
+                    </node>
+                </node>
+                <node name="jnt_break" id="jnt_break" sid="jnt_break" type="JOINT">
+                    <matrix sid="matrix">0.000000 0.000000 -1.000000 -0.000000 -1.000000 -0.000000 -0.000000 -0.017512 -0.000000 1.000000 0.000000 0.811648 0.000000 0.000000 0.000000 1.000000</matrix>
+                    <extra>
+                        <technique profile="FCOLLADA">
+                            <visibility>1.000000</visibility>
+                        </technique>
+                    </extra>
+                    <node name="jnt_ammo_1" id="jnt_ammo_1" sid="jnt_ammo_1" type="JOINT">
+                        <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 0.000000 -0.313023 -0.000000 -0.000000 1.000000 -0.075494 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_type_1" id="jnt_type_1" sid="jnt_type_1" type="JOINT">
+                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.165469 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                            <node name="jnt_type_1_end" id="jnt_type_1_end" sid="jnt_type_1_end" type="JOINT">
+                                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <extra>
+                                    <technique profile="FCOLLADA">
+                                        <visibility>1.000000</visibility>
+                                    </technique>
+                                </extra>
+                                <node name="jnt_type_1_end_end" id="jnt_type_1_end_end" sid="jnt_type_1_end_end" type="JOINT">
+                                    <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.362810 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <extra>
+                                        <technique profile="FCOLLADA">
+                                            <visibility>1.000000</visibility>
+                                        </technique>
+                                    </extra>
+                                </node>
+                            </node>
+                        </node>
+                    </node>
+                    <node name="jnt_ammo_2" id="jnt_ammo_2" sid="jnt_ammo_2" type="JOINT">
+                        <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 0.000000 -0.313023 -0.000000 -0.000000 1.000000 0.075494 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_type_2" id="jnt_type_2" sid="jnt_type_2" type="JOINT">
+                            <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 -0.000000 0.165469 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                            <node name="jnt_type_2_end" id="jnt_type_2_end" sid="jnt_type_2_end" type="JOINT">
+                                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <extra>
+                                    <technique profile="FCOLLADA">
+                                        <visibility>1.000000</visibility>
+                                    </technique>
+                                </extra>
+                                <node name="jnt_type_2_end_end" id="jnt_type_2_end_end" sid="jnt_type_2_end_end" type="JOINT">
+                                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.362810 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                    <extra>
+                                        <technique profile="FCOLLADA">
+                                            <visibility>1.000000</visibility>
+                                        </technique>
+                                    </extra>
+                                </node>
+                            </node>
+                        </node>
+                    </node>
+                    <node name="jnt_push" id="jnt_push" sid="jnt_push" type="JOINT">
+                        <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 -0.000000 -0.370569 -0.000000 0.000000 1.000000 0.001023 0.000000 0.000000 0.000000 1.000000</matrix>
+                        <extra>
+                            <technique profile="FCOLLADA">
+                                <visibility>1.000000</visibility>
+                            </technique>
+                        </extra>
+                        <node name="jnt_push_end" id="jnt_push_end" sid="jnt_push_end" type="JOINT">
+                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                            <extra>
+                                <technique profile="FCOLLADA">
+                                    <visibility>1.000000</visibility>
+                                </technique>
+                            </extra>
+                            <node name="jnt_push_end_end" id="jnt_push_end_end" sid="jnt_push_end_end" type="JOINT">
+                                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.362810 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+                                <extra>
+                                    <technique profile="FCOLLADA">
+                                        <visibility>1.000000</visibility>
+                                    </technique>
+                                </extra>
+                            </node>
+                        </node>
+                    </node>
+                </node>
+            </node>
+        
+        <extra>
+            <technique profile="MAX3D">
+                <frame_rate>60.000000</frame_rate>
             </technique>
-          </extra>
-          <node name="jnt_release" id="jnt_release" sid="jnt_release" type="JOINT">
-            <matrix sid="matrix">0.000000 -0.000000 -1.000000 -0.000000 0.838034 -0.545617 0.000000 0.312428 -0.545617 -0.838034 -0.000000 0.195024 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="jnt_release_end" id="jnt_release_end" sid="jnt_release_end" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.476775 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="jnt_release_end_end" id="jnt_release_end_end" sid="jnt_release_end_end" type="JOINT">
-                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.476775 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-              </node>
-            </node>
-          </node>
-          <node name="jnt_break" id="jnt_break" sid="jnt_break" type="JOINT">
-            <matrix sid="matrix">0.000000 0.000000 -1.000000 -0.000000 -1.000000 -0.000000 -0.000000 -0.017512 -0.000000 1.000000 0.000000 0.811648 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="jnt_ammo_1" id="jnt_ammo_1" sid="jnt_ammo_1" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 0.000000 -0.313023 -0.000000 -0.000000 1.000000 -0.075494 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="jnt_type_1" id="jnt_type_1" sid="jnt_type_1" type="JOINT">
-                <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.165469 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-                <node name="jnt_type_1_end" id="jnt_type_1_end" sid="jnt_type_1_end" type="JOINT">
-                  <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                  <extra>
-                    <technique profile="FCOLLADA">
-                      <visibility>1.000000</visibility>
-                    </technique>
-                  </extra>
-                  <node name="jnt_type_1_end_end" id="jnt_type_1_end_end" sid="jnt_type_1_end_end" type="JOINT">
-                    <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.362810 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                    <extra>
-                      <technique profile="FCOLLADA">
-                        <visibility>1.000000</visibility>
-                      </technique>
-                    </extra>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <node name="jnt_ammo_2" id="jnt_ammo_2" sid="jnt_ammo_2" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 0.000000 -0.313023 -0.000000 -0.000000 1.000000 0.075494 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="jnt_type_2" id="jnt_type_2" sid="jnt_type_2" type="JOINT">
-                <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.000000 0.000000 1.000000 -0.000000 0.165469 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-                <node name="jnt_type_2_end" id="jnt_type_2_end" sid="jnt_type_2_end" type="JOINT">
-                  <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                  <extra>
-                    <technique profile="FCOLLADA">
-                      <visibility>1.000000</visibility>
-                    </technique>
-                  </extra>
-                  <node name="jnt_type_2_end_end" id="jnt_type_2_end_end" sid="jnt_type_2_end_end" type="JOINT">
-                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.362810 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                    <extra>
-                      <technique profile="FCOLLADA">
-                        <visibility>1.000000</visibility>
-                      </technique>
-                    </extra>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <node name="jnt_push" id="jnt_push" sid="jnt_push" type="JOINT">
-              <matrix sid="matrix">1.000000 -0.000000 0.000000 -0.244895 0.000000 1.000000 -0.000000 -0.370569 -0.000000 0.000000 1.000000 0.001023 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-              <node name="jnt_push_end" id="jnt_push_end" sid="jnt_push_end" type="JOINT">
-                <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.362810 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                <extra>
-                  <technique profile="FCOLLADA">
-                    <visibility>1.000000</visibility>
-                  </technique>
-                </extra>
-                <node name="jnt_push_end_end" id="jnt_push_end_end" sid="jnt_push_end_end" type="JOINT">
-                  <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.362810 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                  <extra>
-                    <technique profile="FCOLLADA">
-                      <visibility>1.000000</visibility>
-                    </technique>
-                  </extra>
-                </node>
-              </node>
-            </node>
-          </node>
-        </node>
-     
-      <extra>
-        <technique profile="MAX3D">
-          <frame_rate>60.000000</frame_rate>
-        </technique>
-        <technique profile="FCOLLADA">
-          <start_time>0.000000</start_time>
-          <end_time>1.000000</end_time>
-        </technique>
-      </extra>
+            <technique profile="FCOLLADA">
+                <start_time>0.000000</start_time>
+                <end_time>1.000000</end_time>
+            </technique>
+        </extra>
     </visual_scene>
   </library_visual_scenes>
   <scene>
