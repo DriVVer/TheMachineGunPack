@@ -90,7 +90,7 @@
 	},
 	"b0c08b35-4b40-40fe-b933-ca123f99eef8": {
 		"title": "Double Barrel Shotgun",
-		"description": "The Machine Gun Pack\n\n'Double Barrel Shotgun' made of scrap.\n\n\nLMB to shoot single barrel\nRMB to shoot 2 both barrels at once\n2-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress F to inspect your weapon"
+		"description": "The Machine Gun Pack\n\n'Double Barrel Shotgun' made of scrap.\n\n\n2-round magazine\nPress R to reload\nPress Q to check how much ammo left\nPress F to switch between ammo types"
 	},
 	"bdd9e357-35f7-4140-8b19-477abef20e0f": {
 		"title": "Browning .50 HMG",
