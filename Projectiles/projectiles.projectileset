@@ -138,13 +138,13 @@
 			"effectmaterial": "Potato",
 			"attachedEffect": "",
 			"enableGravity": true,
-			"amount": 8,
+			"amount": 12,
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
 					{ "qualityLevel": 2, "chance": 0.5  },
 					{ "qualityLevel": 3, "chance": 0.2  },
-					{ "qualityLevel": 4, "chance": 0.05 }
+					{ "qualityLevel": 4, "chance": 0.0 }
 				]
 			},
 			"enableImpactEffect": false
@@ -166,11 +166,11 @@
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
-					{ "qualityLevel": 2, "chance": 0.8  },
-					{ "qualityLevel": 3, "chance": 0.6  },
+					{ "qualityLevel": 2, "chance": 1.0  },
+					{ "qualityLevel": 3, "chance": 0.9  },
 					{ "qualityLevel": 4, "chance": 0.3  },
-					{ "qualityLevel": 5, "chance": 0.1  },
-					{ "qualityLevel": 6, "chance": 0.03 }
+					{ "qualityLevel": 5, "chance": 0.0  },
+					{ "qualityLevel": 6, "chance": 0.0  }
 				]
 			},
 			"enableImpactEffect": false
