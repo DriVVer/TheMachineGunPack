@@ -21,8 +21,21 @@ local Damage = 16
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
+---@field ammoType number
 DB = class()
 DB.mag_capacity = 2
+DB.ammoTypes = {
+	[1] = {
+		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
+		colour = sm.color.new(1,0,0),
+		icon = "$CONTENT_DATA/Gui/DB_shells_red.png"
+	},
+	[2] = {
+		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
+		colour = sm.color.new(0,1,0),
+		icon = "$CONTENT_DATA/Gui/DB_shells_green.png"
+	}
+}
 
 local renderables =
 {
@@ -54,7 +67,8 @@ end
 function DB:server_onCreate()
 	self.sv_ammo_counter = 0
 
-	local v_saved_ammo = self.storage:load()
+	local saved_data = self.storage:load() or {}
+	local v_saved_ammo = saved_data.ammo
 	if v_saved_ammo ~= nil then
 		self.sv_ammo_counter = v_saved_ammo
 	else
@@ -64,6 +78,13 @@ function DB:server_onCreate()
 
 		self:server_updateAmmoCounter()
 	end
+
+	local ammoType = saved_data.type
+	if ammoType then
+		self.network:sendToClients("cl_loadSavedType", ammoType)
+	end
+
+	self.sv_ammoType = ammoType or 1
 end
 
 function DB:server_requestAmmo(data, caller)
@@ -73,7 +94,7 @@ end
 function DB:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
-	self.storage:save(self.sv_ammo_counter)
+	self.storage:save({ ammo = self.sv_ammo_counter, type = self.sv_ammoType })
 end
 
 function DB:client_receiveAmmo(ammo_count)
@@ -92,6 +113,18 @@ function DB:client_onCreate()
 	mgp_toolAnimator_initialize(self, "DB")
 
 	self.network:sendToServer("server_requestAmmo")
+
+	self.ammoType = 1
+	if self.tool:isLocal() then
+		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
+		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
+		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
+		self.gui:setOnCloseCallback("cl_onGuiClose")
+
+		for k, v in pairs(self.ammoTypes) do
+			self.gui:setImage("ammo"..k.."_img", v.icon)
+		end
+	end
 end
 
 function DB.client_onDestroy(self)
@@ -115,6 +148,7 @@ function DB.loadAnimations( self )
 			putdown = { "spudgun_putdown" },
 
 			reload_empty = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload_type = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "DB_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "DB_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
@@ -158,6 +192,7 @@ function DB.loadAnimations( self )
 				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
 				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
+				reload_type = { "DB_reload_type", { nextAnimation = "idle", duration = 1.0 } },
 				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
 				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
@@ -495,6 +530,8 @@ function DB:client_onEquip(animate, is_custom)
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
+	self:cl_changeColour()
+
 	--Load animations before setting them
 	self:loadAnimations()
 
@@ -581,7 +618,6 @@ function DB:onShoot()
 	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
-local mgp_projectile_potato = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596")
 function DB:cl_onPrimaryUse()
 	if self:client_isGunReloading() then return end
 
@@ -612,7 +648,7 @@ function DB:cl_onPrimaryUse()
 			end
 
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-			sm.projectile.projectileAttack(mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
+			sm.projectile.projectileAttack(self.ammoTypes[self.ammoType].projectile, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
 			self.fireCooldownTimer = fireMode.fireCooldown
@@ -764,5 +800,57 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self.prevSecondaryState = secondaryState
 	end
 
+	if f ~= self.prevF then
+		self.prevF = f
+		if f then
+			for i = 1, #self.ammoTypes do
+				self.gui:setButtonState("ammo"..i, self.ammoType == i)
+			end
+			self.gui:open()
+		end
+	end
+
 	return true, true
+end
+
+function DB:cl_onGuiClose()
+	if not self.newAmmpType or self.newAmmpType == self.ammoType then return end
+
+	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
+
+	self.newAmmpType = self.ammoType == 1 and 2 or 1
+	self.network:sendToServer("sv_playSwitch", self.newAmmpType)
+	self.newAmmpType = nil
+end
+
+function DB:sv_playSwitch(ammoType)
+	self.sv_ammoType = ammoType
+	self:server_updateAmmoCounter()
+	self.network:sendToClients("cl_playSwitch", ammoType)
+end
+
+function DB:cl_playSwitch(ammoType)
+	self.ammoType = ammoType
+	setTpAnimation(self.tpAnimations, "reload_type", 10)
+	mgp_toolAnimator_setAnimation(self, "reload_type")
+end
+
+function DB:cl_changeColour()
+	local col = self.ammoTypes[self.ammoType].colour
+	self.tool:setTpColor(col)
+	if self.tool:isLocal() then
+		self.tool:setFpColor(col)
+	end
+end
+
+function DB:cl_loadSavedType(ammoType)
+	self.ammoType = ammoType
+end
+
+function DB:cl_ammoSelect(widget)
+	self.newAmmpType = tonumber(widget:sub(5, 5))
+
+	for i = 1, #self.ammoTypes do
+		self.gui:setButtonState("ammo"..i, self.newAmmpType == i)
+	end
 end
