@@ -171,6 +171,30 @@
 			"flammable": true,
 			"consumable": true,
 			"stackSize": 40
+		},
+		{
+			"uuid": "a2a1b12e-8045-4ab0-9577-8b63c06a55c2",
+			"name": "obj_shotgun_s_ammo",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_shotgun_s_ammo.rend",
+			"color": "e6d693",
+			"box": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Metal",
+			"ratings": {
+				"density": 1,
+				"durability": 3,
+				"friction": 4,
+				"buoyancy": 4
+			},
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 40
 		}
 	]
 }

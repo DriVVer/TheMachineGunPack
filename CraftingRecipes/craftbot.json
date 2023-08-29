@@ -49,6 +49,25 @@
 		]
 	},
 	{
+		"itemId": "a2a1b12e-8045-4ab0-9577-8b63c06a55c2", //shotgun sabot ammo
+		"quantity": 10,
+		"craftTime": 30,
+		"ingredientList": [
+			{
+				"quantity": 40,
+				"itemId": "f0cba95b-2dc4-4492-8fd9-36546a4cb5aa" //cardboard
+			},
+			{
+				"quantity": 60,
+				"itemId": "8aedf6c2-94e1-4506-89d4-a0227c552f1e" //metal 1
+			},
+            {
+				"quantity": 25,
+				"itemId": "9f9fda0d-9e65-4ffe-907c-5150218a03e1" //gun powder
+			}
+		]
+	},
+	{
 
 		"itemId": "af84d5d9-00b1-4bab-9c5a-102c11e14a13", //pistol ammo
 		"quantity": 20,
@@ -179,6 +198,30 @@
 	},
 
 	{
+		"itemId": "8f97ff41-6498-46f7-84aa-fd0c11918512", //ptrd
+		"quantity": 1,
+		"craftTime": 60,
+		"ingredientList": [
+			{
+				"quantity": 30,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+			{
+				"quantity": 50,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 1,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 2,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+
+	{
 		"itemId": "0ca4320e-5ddb-4dc1-843d-6037d65b2e4a", //garand
 		"quantity": 1,
 		"craftTime": 60,
@@ -188,7 +231,7 @@
 				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
 			},
 			{
-				"quantity": 60,
+				"quantity": 50,
 				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
 			},
             {
