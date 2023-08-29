@@ -17,7 +17,11 @@
 		"description": "Used for: \n- COMMING SOON"
 	},
 	"a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2": {
-		"title": "Shotgun Ammo",
+		"title": "Birdshot Shells",
+		"description": "Used for: \n- Double Barrel Shotgun"
+	},
+	"a2a1b12e-8045-4ab0-9577-8b63c06a55c2": {
+		"title": "Buckshot Shells",
 		"description": "Used for: \n- Double Barrel Shotgun"
 	},
 	"d80e4edd-8823-42f6-9f17-1dc130ba51ce": {
