@@ -235,6 +235,11 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Shotgun_TMGP_Open": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Open.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Shotgun_TMGP_Close": {
             "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Close.mp3",
             "is3D": true,
@@ -249,6 +254,17 @@
             "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Shot_2.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Ammo_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Ammo_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_Ammo_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Ammo_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
         }
+        
     }
 }

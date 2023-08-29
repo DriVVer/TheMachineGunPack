@@ -676,6 +676,17 @@
 			}
 		]
 	},
+	"DLM_Shotgun_Open":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Open",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Shotgun_Close":
 	{
 		"effectList":
@@ -705,6 +716,28 @@
 			{
 				"type": "audio",
 				"name": "Shotgun_TMGP_Shot_2",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_AmmoIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Ammo_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_AmmoOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Ammo_2",
 				"delay": 0.0
 			}
 		]

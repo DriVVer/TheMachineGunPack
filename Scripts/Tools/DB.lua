@@ -173,7 +173,7 @@ function DB.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.02,
+		fireCooldown = 0.25,
 		spreadCooldown = 0.2,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
@@ -188,7 +188,7 @@ function DB.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.02,
+		fireCooldown = 0.25,
 		spreadCooldown = 0.3,
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
@@ -228,7 +228,7 @@ function DB:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 20 )
 		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
 		bobbing = 0.12
 	else
@@ -237,8 +237,8 @@ function DB:client_updateAimWeights(dt)
 		bobbing = 1
 	end
 
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
+	self.tool:updateCamera( 2.8, 40.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 40.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
 local mgp_shotgun_ammo = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2")

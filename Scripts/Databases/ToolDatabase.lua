@@ -3501,8 +3501,10 @@ local mgp_tool_database =
 			shoot_single = "DLM_Shotgun_Shot_1",
 			shoot_double = "DLM_Shotgun_Shot_2",
 			Open = "DLM_Shotgun_Break",
+			Open2 = "DLM_Shotgun_Open",
 			Close = "DLM_Shotgun_Close",
-			BulletPut = "DLM_Gun_Ammo"
+			BulletPut = "DLM_Shotgun_AmmoIn",
+			BulletTake = "DLM_Shotgun_AmmoOut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -3625,33 +3627,33 @@ local mgp_tool_database =
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.15
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "Open",
-						name_fp = "Open",
+						name_tp = "Open2",
+						name_fp = "Open2",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.5
+						time = 0.8
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "BulletPut",
-						name_fp = "BulletPut",
+						name_tp = "BulletTake",
+						name_fp = "BulletTake",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.2
+						time = 1.13
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3691,7 +3693,7 @@ local mgp_tool_database =
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.25
+						time = 0.22
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3704,7 +3706,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.62
+						time = 1.52
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3717,7 +3719,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.35
+						time = 1.20
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3730,7 +3732,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.85
+						time = 0.77
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
