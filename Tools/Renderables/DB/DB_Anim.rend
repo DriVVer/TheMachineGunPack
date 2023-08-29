@@ -6,7 +6,7 @@
 			"animationList": [
 				{ "name": "DB_anims_0", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_0.dae" },
 				{ "name": "DB_anims_1", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_1.dae" },
-				{ "name": "DB_anims_T", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_1.dae" },
+				{ "name": "DB_anims_T", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_T.dae" },
 				{ "name": "DB_anims_check", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DB/DB_anims_check.dae" }
 			],
 			"subMeshList": [

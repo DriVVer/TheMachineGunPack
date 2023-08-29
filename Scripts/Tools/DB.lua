@@ -148,7 +148,7 @@ function DB.loadAnimations( self )
 			putdown = { "spudgun_putdown" },
 
 			reload_empty = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload_type = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload_type = { "DB_tp_type", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "DB_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "DB_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
