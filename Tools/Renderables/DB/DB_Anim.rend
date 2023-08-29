@@ -18,6 +18,7 @@
 						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
 					]
 				},
+				
 				{
 					"material": "DifAsgNor",
 					"textureList": [
@@ -32,6 +33,14 @@
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
 						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_nor.tga"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}
 			]
