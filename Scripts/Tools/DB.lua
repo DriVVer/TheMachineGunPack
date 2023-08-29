@@ -123,7 +123,6 @@ function DB:client_onCreate()
 		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
 		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
 		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
-		self.gui:setOnCloseCallback("cl_onGuiClose")
 
 		for k, v in pairs(self.ammoTypes) do
 			self.gui:setImage("ammo"..k.."_img", v.icon)
@@ -844,15 +843,6 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	return true, true
 end
 
-function DB:cl_onGuiClose()
-	if not self.newAmmpType or self.newAmmpType == self.ammoType then return end
-
-	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
-
-	self.network:sendToServer("sv_playSwitch", self.newAmmpType)
-	self.newAmmpType = nil
-end
-
 function DB:sv_playSwitch(ammoType, player)
 	sm.container.beginTransaction()
 	local inv = player:getInventory()
@@ -891,9 +881,10 @@ function DB:cl_loadSavedType(ammoType)
 end
 
 function DB:cl_ammoSelect(widget)
-	self.newAmmpType = tonumber(widget:sub(5, 5))
+	local ammoType = tonumber(widget:sub(5, 5))
+	if ammoType == self.ammoType then return end
 
-	for i = 1, #self.ammoTypes do
-		self.gui:setButtonState("ammo"..i, self.newAmmpType == i)
-	end
+	self.gui:close()
+	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
+	self.network:sendToServer("sv_playSwitch", ammoType)
 end
