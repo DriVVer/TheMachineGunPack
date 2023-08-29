@@ -9,7 +9,7 @@
 									
 									"$MOD_DATA/Tools/Textures/TommyGunDif.png",
 									"$MOD_DATA/Tools/Textures/TommyGunAsg.png",
-									"$MOD_DATA/Tools/Textures/TommyGunNor.tga"
+									"$MOD_DATA/Tools/Textures/TommyGunNor.png"
 								],
 								"material": "DifAsgNor"
 							}

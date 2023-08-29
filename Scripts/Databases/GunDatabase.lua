@@ -1021,7 +1021,6 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
 			animation = {
-				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
 						[1] = {
@@ -1033,8 +1032,7 @@ local _Database = {
 								spread = 50,
 								velocity = 3,
 								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-							},
-							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+							}
 						}
 					}
 				}
@@ -1061,7 +1059,6 @@ local _Database = {
 				shoot = {name = "BoomMuzzle7", offset = sm.vec3.new(0, 0, 0.32), bone_name = nil}
 			},
 			animation = {
-				required_animations = {"Shots"},
 				animation_states = {
 					shoot = {
 						[1] = {
@@ -1073,8 +1070,7 @@ local _Database = {
 								spread = 50,
 								velocity = 3,
 								uuid = sm.uuid.new("b2fbb673-aab7-4eef-bb69-c5913e8b17b8")
-							},
-							{type = mgp_shape_anim_enum.bone_animation, anims = {"Shots"}, start_value = 0.0, end_value = 1.0, time = 0.2}
+							}
 						}
 					}
 				}

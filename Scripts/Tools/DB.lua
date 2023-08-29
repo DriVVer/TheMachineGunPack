@@ -29,13 +29,15 @@ DB.ammoTypes = {
 		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
 		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
 		colour = sm.color.new("#7b3030ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_red.png"
+		icon = "$CONTENT_DATA/Gui/DB_shells_red.png",
+		name = "Birdshot"
 	},
 	[2] = {
 		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
 		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
 		colour = sm.color.new("#307326ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_green.png"
+		icon = "$CONTENT_DATA/Gui/DB_shells_green.png",
+		name = "Sabot"
 	}
 }
 
@@ -319,7 +321,7 @@ function DB:client_onUpdate(dt)
 		if self.cl_show_ammo_timer <= 0.0 then
 			self.cl_show_ammo_timer = nil
 			if self.tool:isEquipped() then
-				sm.gui.displayAlertText(("DB: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+				sm.gui.displayAlertText(("DB: %s #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammoTypes[self.ammoType].name, self.ammo_in_mag, self.mag_capacity), 2)
 			end
 		end
 	end

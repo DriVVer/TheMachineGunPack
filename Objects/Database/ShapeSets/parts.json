@@ -379,12 +379,8 @@
 									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
-								"material": "SkelAnimDifAsgNor"
+								"material": "DifAsgNor"
 							}
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"},
-							{"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
 						]
 					}
 				]
@@ -416,12 +412,8 @@
 									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
 									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 								],
-								"material": "SkelAnimDifAsgNor"
+								"material": "DifAsgNor"
 							}
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"},
-							{"name": "Reload", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/M1919_nomag.fbx"}
 						]
 					}
 				]
