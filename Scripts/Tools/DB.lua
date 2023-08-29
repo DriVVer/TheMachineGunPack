@@ -675,9 +675,10 @@ end
 
 local reload_anims =
 {
-	["ammo_check"     ] = true,
-	["reload"         ] = true,
-	["reload_empty"   ] = true
+	["ammo_check"   ] = true,
+	["reload"		] = true,
+	["reload_empty"	] = true,
+	["reload_type"	] = true
 }
 
 local ammo_count_to_anim_name =
