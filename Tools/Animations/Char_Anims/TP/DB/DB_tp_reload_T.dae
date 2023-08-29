@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-29T13:29:51Z</created><keywords></keywords><modified>2023-08-29T13:29:51Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2023-08-29T17:13:11Z</created><keywords></keywords><modified>2023-08-29T17:13:11Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Character-anim" name="Character"><animation><source id="Character-Matrix-animation-input"><float_array id="Character-Matrix-animation-input-array" count="135">
 
