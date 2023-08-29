@@ -818,7 +818,6 @@ function DB:cl_onGuiClose()
 
 	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
 
-	self.newAmmpType = self.ammoType == 1 and 2 or 1
 	self.network:sendToServer("sv_playSwitch", self.newAmmpType)
 	self.newAmmpType = nil
 end
