@@ -28,7 +28,6 @@ DB.ammoTypes = {
 		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
 		damage = 16,
 		colour = sm.color.new("#7b3030ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_red.png",
 		name = "Birdshot"
 	},
 	[2] = {
@@ -36,7 +35,6 @@ DB.ammoTypes = {
 		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
 		damage = 32,
 		colour = sm.color.new("#307326ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_green.png",
 		name = "Sabot"
 	}
 }
@@ -123,9 +121,12 @@ function DB:client_onCreate()
 		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
 		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
 		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
+		self.gui:setVisible("ammo3", false)
 
 		for k, v in pairs(self.ammoTypes) do
-			self.gui:setImage("ammo"..k.."_img", v.icon)
+			local widget = "ammo"..k
+			self.gui:setIconImage(widget.."_img", v.shells)
+			self.gui:setText(widget.."_title", v.name)
 		end
 	end
 end
@@ -821,7 +822,7 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 			local consume = sm.game.getEnableAmmoConsumption()
 			local quantity = sm.container.totalQuantity
 			local inv = sm.localPlayer.getInventory()
-			local ammoTypes = 0
+			local ammoTypes = self.ammo_in_mag > 0 and 1 or 0
 			for i = 1, #self.ammoTypes do
 				local widget = "ammo"..i
 				local display = not consume or quantity(inv, self.ammoTypes[i].shells) > 0

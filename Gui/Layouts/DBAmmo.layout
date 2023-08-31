@@ -1,22 +1,56 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <MyGUI type="Layout" version="3.2.0">
-    <Widget type="Widget" skin="PanelEmpty" position_real="0 0 0.20833333333333334 0.27777777777777779" name="BackPanel">
-        <Widget type="Canvas" skin="BackgroundEngineNoUpgrade" position_real="0.025000000000000001 0.033333333333333333 0.94999999999999996 0.93333333333333335">
-            <Widget type="Button" skin="SecondaryButton" position_real="0.065789473684210523 0.089285714285714288 0.26315789473684209 0.35714285714285715" name="ammo1">
-                <Widget type="ImageBox" skin="ImageBox" position_real="0.050000000000000003 0.050000000000000003 0.90000000000000002 0.90000000000000002" name="ammo1_img">
+    <Widget type="Widget" skin="PanelEmpty" position_real="0 0 0.20833333333333334 0.18055555555555555" name="BackPanel">
+        <Widget type="Canvas" skin="BackgroundInteractableNarrow" position_real="0.025000000000000001 0.05128205128205128 0.94999999999999996 0.89743589743589747">
+            <Widget type="Button" skin="BeaconIconBorder" position_real="0.065789473684210523 0.2857142857142857 0.26315789473684209 0.5714285714285714" name="ammo1">
+                <Widget type="ImageBox" skin="ImageBox" position_real="0.20000000000000001 0.10000000000000001 0.59999999999999998 0.59999999999999998" name="ammo1_img">
                     <Property key="InheritsAlpha" value="false"/>
                     <Property key="NeedMouse" value="false"/>
                     <Property key="NeedKey" value="false"/>
                     <Property key="InheritsPick" value="false"/>
+                </Widget>
+                <Widget type="TextBox" skin="TextBox" position_real="0.050000000000000003 0.69999999999999996 0.90000000000000002 0.20000000000000001" name="ammo1_title">
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="TextAlign" value="Center"/>
                 </Widget>
             </Widget>
-            <Widget type="Button" skin="SecondaryButton" position_real="0.36842105263157893 0.089285714285714288 0.26315789473684209 0.35714285714285715" name="ammo2">
-                <Widget type="ImageBox" skin="ImageBox" position_real="0.050000000000000003 0.050000000000000003 0.90000000000000002 0.90000000000000002" name="ammo2_img">
+            <Widget type="Button" skin="BeaconIconBorder" position_real="0.36842105263157893 0.2857142857142857 0.26315789473684209 0.5714285714285714" name="ammo2">
+                <Widget type="ImageBox" skin="ImageBox" position_real="0.20000000000000001 0.10000000000000001 0.59999999999999998 0.59999999999999998" name="ammo2_img">
                     <Property key="InheritsAlpha" value="false"/>
                     <Property key="NeedKey" value="false"/>
                     <Property key="NeedMouse" value="false"/>
                     <Property key="InheritsPick" value="false"/>
                 </Widget>
+                <Widget type="TextBox" skin="TextBox" position_real="0.050000000000000003 0.69999999999999996 0.90000000000000002 0.20000000000000001" name="ammo2_title">
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                    <Property key="TextAlign" value="Center"/>
+                </Widget>
+            </Widget>
+            <Widget type="Button" skin="BeaconIconBorder" position_real="0.67105263157894735 0.2857142857142857 0.26315789473684209 0.5714285714285714" name="ammo3">
+                <Widget type="ImageBox" skin="ImageBox" position_real="0.20000000000000001 0.10000000000000001 0.59999999999999998 0.59999999999999998" name="ammo3_img">
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                </Widget>
+                <Widget type="TextBox" skin="TextBox" position_real="0.050000000000000003 0.69999999999999996 0.90000000000000002 0.20000000000000001" name="ammo3_title">
+                    <Property key="InheritsAlpha" value="false"/>
+                    <Property key="InheritsPick" value="false"/>
+                    <Property key="NeedKey" value="false"/>
+                    <Property key="NeedMouse" value="false"/>
+                    <Property key="TextAlign" value="Center"/>
+                </Widget>
+            </Widget>
+            <Widget type="TextBox" skin="TextBox" position_real="0 0.040000000000000001 1 0.20000000000000001">
+                <Property key="Caption" value="Select ammo type"/>
+                <Property key="FontName" value="SM_HeaderLarge_Narrow"/>
+                <Property key="TextAlign" value="Center"/>
             </Widget>
         </Widget>
     </Widget>
