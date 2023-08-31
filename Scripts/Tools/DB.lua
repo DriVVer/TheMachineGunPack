@@ -825,7 +825,7 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 			local ammoTypes = self.ammo_in_mag > 0 and 1 or 0
 			for i = 1, #self.ammoTypes do
 				local widget = "ammo"..i
-				local display = not consume or quantity(inv, self.ammoTypes[i].shells) > 0
+				local display = not consume or quantity(inv, self.ammoTypes[i].shells) >= self.mag_capacity
 
 				if display then ammoTypes = ammoTypes + 1 end
 				self.gui:setVisible(widget, display)
