@@ -914,7 +914,7 @@ function PTRD:cl_onPrimaryUse(state)
 		self:onShoot()
 		self.network:sendToServer("sv_n_onShoot", 1)
 
-		sm.camera.setShake(0.01)
+		sm.camera.setShake(0.5)
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self:cl_chooseShootAnim(), 0.0 )

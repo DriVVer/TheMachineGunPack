@@ -86,12 +86,12 @@ FragGrenade.mgp_tool_config =
 	{
 		timer = 3,
 		expl_lvl = 1,
-		expl_rad = 6,
+		expl_rad = 3,
 		expl_effect = "PropaneTank - ExplosionSmall",
 		shrapnel_data = {
-			min_count = 60, max_count = 120,
-			min_speed = 70, max_speed = 120,
-			min_damage = 80, max_damage = 90,
+			min_count = 200, max_count = 320,
+			min_speed = 80, max_speed = 120,
+			min_damage = 50, max_damage = 90,
 			proj_uuid = sm.uuid.new("7a3887dd-0fd2-489c-ac04-7306a672ae35")
 		},
 		spin_force = 5
