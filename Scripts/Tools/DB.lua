@@ -848,9 +848,7 @@ function DB:sv_playSwitch(ammoType, player)
 	sm.container.beginTransaction()
 	local inv = player:getInventory()
 	sm.container.collect(inv, self.ammoTypes[self.sv_ammoType].shells, self.sv_ammo_counter)
-
-	local newShells = self.ammoTypes[ammoType].shells
-	sm.container.spend(inv, newShells, sm.util.clamp(sm.container.totalQuantity(inv, newShells), 0, self.mag_capacity))
+	sm.container.spend(inv, self.ammoTypes[ammoType].shells, self.mag_capacity)
 	sm.container.endTransaction()
 
 	self.sv_ammoType = ammoType
