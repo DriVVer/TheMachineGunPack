@@ -26,14 +26,14 @@ DB.ammoTypes = {
 	[1] = {
 		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
 		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
-		damage = 16,
+		damage = 14,
 		colour = sm.color.new("#7b3030ff"),
 		name = "Birdshot"
 	},
 	[2] = {
 		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
 		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
-		damage = 32,
+		damage = 80,
 		colour = sm.color.new("#307326ff"),
 		name = "Sabot"
 	}
@@ -217,7 +217,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 180.0,
+		fireVelocity = 150.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -232,7 +232,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 180.0,
+		fireVelocity = 150.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
