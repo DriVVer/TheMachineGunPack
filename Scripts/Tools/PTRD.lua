@@ -5,9 +5,8 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("PTRDProjectile.lua")
 dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
-
-local Damage = 120
 
 ---@class PTRD : ToolClass
 ---@field fpAnimations table
@@ -180,12 +179,14 @@ function PTRD:client_onCreate()
 	self.waiting_for_ammo = true
 
 	mgp_toolAnimator_initialize(self, "PTRD")
+	PTRDProjectile_clientInitialize()
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
 function PTRD:client_onDestroy()
 	mgp_toolAnimator_destroy(self)
+	PTRDProjectile_clientDestroy()
 end
 
 function PTRD:client_onRefresh()
@@ -345,6 +346,14 @@ local aim_animation_blacklist =
 	["aim_anim"] = true,
 	["cock_hammer_aim"] = true
 }
+
+function PTRD:client_onFixedUpdate(dt)
+	PTRDProjectile_clientOnFixedUpdate(dt)
+end
+
+function PTRD:server_onFixedUpdate(dt)
+	PTRDProjectile_serverOnFixedUpdate(dt)
+end
 
 function PTRD:client_updateAimWeights(dt)
 	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 10 )
@@ -822,18 +831,18 @@ function PTRD:onAim(aiming)
 	end
 end
 
-function PTRD:sv_n_onShoot(ammo_in_mag)
-	self.network:sendToClients("cl_n_onShoot")
+function PTRD:sv_n_onShoot(data)
+	self.network:sendToClients("cl_n_onShoot", data.dir)
 
-	if ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
+	if data.ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function PTRD:cl_n_onShoot()
+function PTRD:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:onShoot()
+		self:onShoot(dir)
 	end
 end
 
@@ -845,7 +854,7 @@ function PTRD:cl_chooseShootAnim()
 	return self.aiming and "aimShoot" or "shoot"
 end
 
-function PTRD:onShoot()
+function PTRD:onShoot(dir)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -853,6 +862,8 @@ function PTRD:onShoot()
 	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation(self.tpAnimations, anim, 10.0)
 	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "shoot_bipod" or anim)
+
+	PTRDProjectile_clientSpawnProjectile(self, dir, self.tool:isLocal())
 end
 
 function PTRD:cl_getFirePosition()
@@ -865,7 +876,6 @@ function PTRD:cl_getFirePosition()
 	return self.tool:getFpBonePos("pejnt_barrel"), v_direction
 end
 
-local mgp_projectile_potato = sm.uuid.new("35427377-f2ee-40d7-a251-884a57a0f40e")
 function PTRD:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then return end
 	if self:client_isGunReloading(PTRD_action_block_anims) or not self.equipped then return end
@@ -901,18 +911,14 @@ function PTRD:cl_onPrimaryUse(state)
 			dir = sm.noise.gunSpread( dir, spreadDeg )
 		end
 
-		for k = 0, 3 do
-			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, nil, nil, k * 3 )
-		end
-
 		-- Timers
 		self.fireCooldownTimer = fireMode.fireCooldown
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
 		-- Send TP shoot over network and directly to self
-		self:onShoot()
-		self.network:sendToServer("sv_n_onShoot", 1)
+		self:onShoot(dir)
+		self.network:sendToServer("sv_n_onShoot", { ammo_in_mag = 1, dir = dir })
 
 		sm.camera.setShake(0.5)
 
