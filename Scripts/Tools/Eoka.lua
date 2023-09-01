@@ -11,7 +11,6 @@ local Damage = 9
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
----@field mag_capacity integer
 ---@field normalFireMode table
 ---@field movementDispersion integer
 ---@field blendTime integer
@@ -19,7 +18,6 @@ local Damage = 9
 ---@field sprintCooldown integer
 ---@field gun_used boolean|nil
 Eoka = class()
-Eoka.mag_capacity = 6
 
 local renderables =
 {
@@ -570,7 +568,7 @@ function Eoka:calculateFpMuzzlePos()
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-local mgp_projectile_potato = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692")
+local mgp_projectile_potato = sm.uuid.new("50ba2d89-db44-43d6-9c5c-44aad85d8a60")
 function Eoka:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start or not self.equipped then return end
 

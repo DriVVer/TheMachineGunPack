@@ -818,7 +818,7 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 
 	if f ~= self.prevF then
 		self.prevF = f
-		if f then
+		if f and not self:client_isGunReloading() then
 			local consume = sm.game.getEnableAmmoConsumption()
 			local quantity = sm.container.totalQuantity
 			local inv = sm.localPlayer.getInventory()
