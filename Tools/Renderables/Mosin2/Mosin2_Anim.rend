@@ -1,0 +1,31 @@
+{
+	"lodList" : [
+		{
+			"animationList" : [
+				{
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/PTRD/PTRD_anims.dae",
+					"name" : "Gun_Anim"
+				}
+			],
+			"includes" : [
+				"POSITION",
+				"UV0",
+				"NORMAL",
+				"TANGENTS",
+				"BLEND_INDICES",
+				"BLEND_WEIGHTS"
+			],
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/PTRD/PTRD_Anim.dae",
+			"subMeshList" : [
+				{
+					"material" : "DifAsgNor",
+					"textureList" : [
+						"$CONTENT_DATA/Tools/Textures/TommyGunDif.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunAsg.png",
+						"$CONTENT_DATA/Tools/Textures/TommyGunNor.png"
+					]
+				}
+			]
+		}
+	]
+}
