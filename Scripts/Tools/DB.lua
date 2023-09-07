@@ -263,6 +263,13 @@ local actual_reload_anims =
 	["reload_empty"] = true
 }
 
+local aim_animations =
+{
+	["aimInto"]         = true,
+	["aimIdle"]         = true,
+	["aimShoot"]        = true
+}
+
 function DB:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
@@ -351,10 +358,11 @@ function DB:client_onUpdate(dt)
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			local isAimAnim = aim_animations[cur_anim_cache] == true
+			if self.aiming and not isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -420,7 +428,7 @@ function DB:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() or self.aiming)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
