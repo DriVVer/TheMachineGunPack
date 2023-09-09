@@ -1,6 +1,5 @@
 local g_ptrdProjectiles = {}
 local g_ptrdActiveInstances = 0
-local g_ptrdServerTick = 0
 local g_ptrdClientTick = 0
 local g_projectile_noconsume = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
 
@@ -121,7 +120,7 @@ local function PTRDProjectile_serverOnHit(proj_data)
 
 		if not success then
 			local uuid = target.uuid
-			if math.random() < g_destructionLevels[sm.item.getQualityLevel(uuid)] then
+			if math.random() <= g_destructionLevels[sm.item.getQualityLevel(uuid)] then
 				local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), hit.normal )
 				local effectData = { Material = target.materialId, Color = target.color }
 
@@ -149,40 +148,21 @@ local function PTRDProjectile_serverOnHit(proj_data)
 	return false
 end
 
-function PTRDProjectile_serverOnFixedUpdate(self)
-	local v_newTick = sm.game.getCurrentTick()
-	if g_ptrdServerTick ~= v_newTick then
-		g_ptrdServerTick = v_newTick
-
-		--Update the projectiles in here
-		for k, proj in pairs(g_ptrdProjectiles) do
-			if proj[7] then
-				local destroy = PTRDProjectile_serverOnHit(proj)
-				self.network:sendToClients("cl_updatePenetration", { id = k, count = destroy and 0 or proj[6] - 1 })
-
-				proj[7] = nil
-			end
-		end
-	end
-end
-
-function PTRDProjectile_clientOnFixedUpdate(dt)
+function PTRDProjectile_clientOnFixedUpdate(self, dt)
 	local v_newTick = sm.game.getCurrentTick()
 	if g_ptrdClientTick ~= v_newTick then
 		g_ptrdClientTick = v_newTick
 
 		for k, proj in pairs(g_ptrdProjectiles) do
 			if proj[6] <= 0 then
-				if sm.localPlayer.getPlayer().name == "Vajdani" then
-					local effect = sm.effect.createEffect("ShapeRenderable")
-					effect:setParameter("uuid", blk_wood1)
-					effect:setParameter("color", sm.color.new(1,0,0))
-					effect:setPosition(proj[1])
-					effect:setScale(sm.vec3.one() * 0.1)
-					effect:start()
+				local effect = sm.effect.createEffect("ShapeRenderable")
+				effect:setParameter("uuid", blk_wood1)
+				effect:setParameter("color", sm.color.new(1,0,0))
+				effect:setPosition(proj[1])
+				effect:setScale(sm.vec3.one() * 0.1)
+				effect:start()
 
-					sm.effect.playEffect("Part - Upgrade", proj[1])
-				end
+				sm.effect.playEffect("Part - Upgrade", proj[1])
 
 				g_ptrdProjectiles[k] = nil
 				print("blehh ded")
@@ -205,12 +185,14 @@ function PTRDProjectile_clientOnFixedUpdate(dt)
 						sm.effect.playEffect( "Projectile - HitWater", hitPos )
 					else
 						local target = result:getShape() or result:getCharacter()
-						if target then
+						if target and sm.isHost then
 							proj[7] = {
 								normal = result.normalWorld,
 								pos = hitPos,
 								target = target
 							}
+
+							self.network:sendToServer("sv_checkProjectile", k)
 						elseif g_killTypes[_type] == true then
 							proj[6] = 0
 							local v_cur_proj = proj[3]
@@ -225,6 +207,13 @@ function PTRDProjectile_clientOnFixedUpdate(dt)
 			end
 		end
 	end
+end
+
+function PTRD_serverCheckProjecitle(self, id)
+	local proj = g_ptrdProjectiles[id]
+	local destroy = PTRDProjectile_serverOnHit(proj)
+	self.network:sendToClients("cl_updatePenetration", { id = id, count = destroy and 0 or proj[6] - 1 })
+	proj[7] = nil
 end
 
 function PTRD_clientUpdatePenetration(data)

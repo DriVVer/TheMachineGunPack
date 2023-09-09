@@ -338,11 +338,11 @@ local aim_animation_blacklist =
 }
 
 function PTRD:client_onFixedUpdate(dt)
-	PTRDProjectile_clientOnFixedUpdate(dt)
+	PTRDProjectile_clientOnFixedUpdate(self, dt)
 end
 
-function PTRD:server_onFixedUpdate(dt)
-	PTRDProjectile_serverOnFixedUpdate(self)
+function PTRD:sv_checkProjectile(id)
+	PTRD_serverCheckProjecitle(self, id)
 end
 
 function PTRD:cl_updatePenetration(data)
