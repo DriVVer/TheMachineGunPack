@@ -104,7 +104,6 @@ local function PTRDProjectile_serverOnHit(proj_data)
 	local target = hit.target
 	local hitPos = hit.pos
 
-	print("hit", target)
 	local _type = type(target)
 	if _type == "Shape" then
 		local data = sm.item.getFeatureData(target.uuid)
@@ -158,17 +157,7 @@ function PTRDProjectile_clientOnFixedUpdate(self, dt)
 
 		for k, proj in pairs(g_ptrdProjectiles) do
 			if proj[6] <= 0 then
-				local effect = sm.effect.createEffect("ShapeRenderable")
-				effect:setParameter("uuid", blk_wood1)
-				effect:setParameter("color", sm.color.new(1,0,0))
-				effect:setPosition(proj[1])
-				effect:setScale(sm.vec3.one() * 0.1)
-				effect:start()
-
-				sm.effect.playEffect("Part - Upgrade", proj[1])
-
 				g_ptrdProjectiles[k] = nil
-				print("blehh ded")
 			else
 				proj[4] = proj[4] - dt
 

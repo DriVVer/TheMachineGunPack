@@ -889,7 +889,7 @@ function PTRD:cl_onPrimaryUse(state)
 	end
 
 	if self.ammo_in_mag > 0 then
-		--self.ammo_in_mag = self.ammo_in_mag - 1
+		self.ammo_in_mag = self.ammo_in_mag - 1
 
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local firePos, dir = self:cl_getFirePosition()
