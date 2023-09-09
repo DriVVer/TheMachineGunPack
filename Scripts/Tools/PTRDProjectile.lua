@@ -177,7 +177,7 @@ function PTRDProjectile_clientOnFixedUpdate(self, dt)
 						sm.effect.playEffect( "Projectile - HitWater", hitPos )
 					else
 						local target = result:getShape() or result:getCharacter()
-						if target and sm.isHost then
+						if sm.isHost and target and sm.exists(target) then
 							proj[7] = {
 								normal = result.normalWorld,
 								localPos = result.pointLocal,
