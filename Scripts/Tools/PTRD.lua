@@ -50,11 +50,11 @@ sm.tool.preloadRenderables( renderablesFp )
 
 local PTRD_action_block_anims =
 {
-	["cock_hammer_aim"] = true,
-	["cock_hammer"    ] = true,
-
 	["reload"] = true,
 	["equip"] = true,
+
+	["deploy_bipod"] = true,
+	["hide_bipod"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
@@ -66,9 +66,6 @@ local PTRD_action_block_anims =
 
 local PTRD_bipod_block_anims =
 {
-	["cock_hammer_aim"] = true,
-	["cock_hammer"    ] = true,
-
 	["reload"] = true,
 	["equip"] = true,
 
@@ -90,8 +87,6 @@ local PTRD_bipod_block_anims =
 
 local PTRD_aim_block_anims =
 {
-	["cock_hammer"] = true,
-
 	["reload"] = true,
 
 	["sprintInto"] = true,
@@ -116,9 +111,6 @@ local PTRD_bipod_aim_anims =
 
 local PTRD_sprint_block_anims =
 {
-	["cock_hammer_aim"] = true,
-	["cock_hammer"    ] = true,
-
 	["reload"] = true,
 	["aimExit"] = true,
 	["sprintExit"] = true
@@ -323,8 +315,7 @@ local aim_animation_list01 =
 {
 	["aimInto"]         = true,
 	["aimIdle"]         = true,
-	["aimShoot"]        = true,
-	["cock_hammer_aim"] = true
+	["aimShoot"]        = true
 }
 
 local aim_animation_list02 =
@@ -344,7 +335,6 @@ local bipod_aim_animation_list01 =
 local aim_animation_blacklist =
 {
 	["aim_anim"] = true,
-	["cock_hammer_aim"] = true
 }
 
 function PTRD:client_onFixedUpdate(dt)
@@ -352,7 +342,11 @@ function PTRD:client_onFixedUpdate(dt)
 end
 
 function PTRD:server_onFixedUpdate(dt)
-	PTRDProjectile_serverOnFixedUpdate(dt)
+	PTRDProjectile_serverOnFixedUpdate(self)
+end
+
+function PTRD:cl_updatePenetration(data)
+	PTRD_clientUpdatePenetration(data)
 end
 
 function PTRD:client_updateAimWeights(dt)
@@ -877,7 +871,7 @@ function PTRD:cl_getFirePosition()
 end
 
 function PTRD:cl_onPrimaryUse(state)
-	if state ~= sm.tool.interactState.start then return end
+	if state ~= 1 then return end
 	if self:client_isGunReloading(PTRD_action_block_anims) or not self.equipped then return end
 
 	local v_toolOwner = self.tool:getOwner()
@@ -895,7 +889,7 @@ function PTRD:cl_onPrimaryUse(state)
 	end
 
 	if self.ammo_in_mag > 0 then
-		self.ammo_in_mag = self.ammo_in_mag - 1
+		--self.ammo_in_mag = self.ammo_in_mag - 1
 
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local firePos, dir = self:cl_getFirePosition()

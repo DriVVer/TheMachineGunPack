@@ -12,6 +12,23 @@ local g_killTypes = {
 	terrainAsset = true,
 	limiter = true
 }
+local g_destructionLevels = {
+	[1] = 1.0,
+	[2] = 1.0,
+	[3] = 1.0,
+	[4] = 1.0,
+	[5] = 1.0,
+	[6] = 0.9,
+	[7] = 0.8,
+	[8] = 0.3,
+	[9] = 0.1,
+	[10] = 0
+}
+
+local classnameToEvent = {
+	Package = "sv_e_open",
+	Explosive = "server_tryExplode"
+}
 
 function PTRDProjectile_clientInitialize()
 	g_ptrdActiveInstances = g_ptrdActiveInstances + 1
@@ -64,8 +81,7 @@ function PTRDProjectile_clientSpawnProjectile(self, dir, is_local)
 	v_proj_pos = v_proj_pos + dir
 	local v_proj_velocity = dir * g_projectileVelocity
 
-	local v_proj_effect = sm.effect.createEffect("ShapeRenderable")
-	v_proj_effect:setParameter("uuid", sm.uuid.new("d80e4edd-8823-42f6-9f17-1dc130ba51ce"))
+	local v_proj_effect = sm.effect.createEffect("PRTD - Projectile")
 	v_proj_effect:setScale(sm.vec3.one() * 0.25)
 
 	local v_new_projectile =
@@ -92,31 +108,48 @@ local function PTRDProjectile_serverOnHit(proj_data)
 	print("hit", target)
 	local _type = type(target)
 	if _type == "Shape" then
-		local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), hit.normal )
-		local effectData = { Material = target.materialId, Color = target.color }
+		local data = sm.item.getFeatureData(target.uuid)
+		local success = false
 
-		if sm.item.isBlock(target.uuid) then
-			target:destroyBlock(target:getClosestBlockLocalPosition(hitPos))
-		else
-			target:destroyShape()
+		if data and data.classname then
+			local event = classnameToEvent[data.classname]
+			if event then
+				sm.event.sendToInteractable( target.interactable, event )
+				success = true
+			end
 		end
 
-		sm.effect.playEffect( "Sledgehammer - Destroy", hitPos, sm.vec3.zero(), effectRot, sm.vec3.one(), effectData )
+		if not success then
+			local uuid = target.uuid
+			if math.random() < g_destructionLevels[sm.item.getQualityLevel(uuid)] then
+				local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), hit.normal )
+				local effectData = { Material = target.materialId, Color = target.color }
 
+				if sm.item.isBlock(uuid) then
+					target:destroyBlock(target:getClosestBlockLocalPosition(hitPos))
+				else
+					target:destroyShape()
+				end
+
+				sm.effect.playEffect( "Sledgehammer - Destroy", hitPos, sm.vec3.zero(), effectRot, sm.vec3.one(), effectData )
+			else
+				return true
+			end
+		end
 	elseif _type == "Character" then
 		sm.projectile.projectileAttack(
 			g_projectile_noconsume,
 			g_projectileDamage,
 			hitPos,
-			(target.worldPosition - hitPos):normalize(),
+			target.worldPosition - hitPos,
 			proj_data[5]
 		)
-
-		--sm.effect.playEffect("PotatoProjectile - Hit", hit.pos, sm.vec3.zero(), sm.vec3.getRotation(sm.vec3.new(0,0,1), hit.normal))
 	end
+
+	return false
 end
 
-function PTRDProjectile_serverOnFixedUpdate(dt)
+function PTRDProjectile_serverOnFixedUpdate(self)
 	local v_newTick = sm.game.getCurrentTick()
 	if g_ptrdServerTick ~= v_newTick then
 		g_ptrdServerTick = v_newTick
@@ -124,7 +157,9 @@ function PTRDProjectile_serverOnFixedUpdate(dt)
 		--Update the projectiles in here
 		for k, proj in pairs(g_ptrdProjectiles) do
 			if proj[7] then
-				PTRDProjectile_serverOnHit(proj)
+				local destroy = PTRDProjectile_serverOnHit(proj)
+				self.network:sendToClients("cl_updatePenetration", { id = k, count = destroy and 0 or proj[6] - 1 })
+
 				proj[7] = nil
 			end
 		end
@@ -138,8 +173,19 @@ function PTRDProjectile_clientOnFixedUpdate(dt)
 
 		for k, proj in pairs(g_ptrdProjectiles) do
 			if proj[6] <= 0 then
+				if sm.localPlayer.getPlayer().name == "Vajdani" then
+					local effect = sm.effect.createEffect("ShapeRenderable")
+					effect:setParameter("uuid", blk_wood1)
+					effect:setParameter("color", sm.color.new(1,0,0))
+					effect:setPosition(proj[1])
+					effect:setScale(sm.vec3.one() * 0.1)
+					effect:start()
+
+					sm.effect.playEffect("Part - Upgrade", proj[1])
+				end
+
 				g_ptrdProjectiles[k] = nil
-				print"blehh ded"
+				print("blehh ded")
 			else
 				proj[4] = proj[4] - dt
 
@@ -158,14 +204,15 @@ function PTRDProjectile_clientOnFixedUpdate(dt)
 					if _type == "areaTrigger" and IsLiquid(result:getAreaTrigger()) then
 						sm.effect.playEffect( "Projectile - HitWater", hitPos )
 					else
-						proj[7] = hit and {
-							normal = result.normalWorld,
-							pos = hitPos,
-							target = result:getShape() or result:getCharacter()
-						} or nil
-
-						proj[6] = g_killTypes[_type] == true and 0 or proj[6] - 1
-						if proj[6] <= 0 then
+						local target = result:getShape() or result:getCharacter()
+						if target then
+							proj[7] = {
+								normal = result.normalWorld,
+								pos = hitPos,
+								target = target
+							}
+						elseif g_killTypes[_type] == true then
+							proj[6] = 0
 							local v_cur_proj = proj[3]
 							v_cur_proj:setPosition(sm.vec3.new(0, 0, 10000))
 							v_cur_proj:stop()
@@ -177,6 +224,19 @@ function PTRDProjectile_clientOnFixedUpdate(dt)
 				end
 			end
 		end
+	end
+end
+
+function PTRD_clientUpdatePenetration(data)
+	local count = data.count
+	local proj = g_ptrdProjectiles[data.id]
+	proj[6] = count
+	proj[7] = nil
+
+	if count <= 0 then
+		local v_cur_proj = proj[3]
+		v_cur_proj:setPosition(sm.vec3.new(0, 0, 10000))
+		v_cur_proj:stop()
 	end
 end
 
