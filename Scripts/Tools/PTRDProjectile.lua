@@ -121,8 +121,11 @@ local function PTRDProjectile_serverOnHit(proj_data)
 		if not success then
 			local uuid = target.uuid
 			if math.random() <= g_destructionLevels[sm.item.getQualityLevel(uuid)] then
-				local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), hit.normal )
+				local normal = hit.normal
+				local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), normal )
 				local effectData = { Material = target.materialId, Color = target.color }
+
+				sm.physics.applyImpulse(target.body, proj_data[2], true, hit.localPos )
 
 				if sm.item.isBlock(uuid) then
 					target:destroyBlock(target:getClosestBlockLocalPosition(hitPos))
@@ -188,6 +191,7 @@ function PTRDProjectile_clientOnFixedUpdate(self, dt)
 						if target and sm.isHost then
 							proj[7] = {
 								normal = result.normalWorld,
+								localPos = result.pointLocal,
 								pos = hitPos,
 								target = target
 							}
@@ -220,7 +224,6 @@ function PTRD_clientUpdatePenetration(data)
 	local count = data.count
 	local proj = g_ptrdProjectiles[data.id]
 	proj[6] = count
-	proj[7] = nil
 
 	if count <= 0 then
 		local v_cur_proj = proj[3]
