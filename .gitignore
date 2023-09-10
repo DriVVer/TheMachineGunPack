@@ -3,3 +3,4 @@
 *.mtl
 /Tools/Animations/**/*.fbx
 /Blend Files/**/*.fbx
+description.json
