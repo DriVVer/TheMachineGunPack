@@ -1100,8 +1100,8 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 0.00, end_val = 0.2 } },
-						tp_anim = { { name = "M1911_anims", start_val = 0.00, end_val = 0.2 } },
+						fp_anim = { { name = "P38_anims", start_val = 0.00, end_val = 0.2 } },
+						tp_anim = { { name = "P38_anims", start_val = 0.00, end_val = 0.2 } },
 						time = 0.15
 					}
 				},

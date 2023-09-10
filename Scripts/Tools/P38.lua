@@ -21,6 +21,7 @@ local Damage = 26
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
+---@field spineWeight number
 P38 = class()
 P38.mag_capacity = 8
 
@@ -168,6 +169,7 @@ function P38.loadAnimations( self )
 				sprintInto = { "P38_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "P38_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
 				sprintIdle = { "P38_sprint_idle", { looping = true } },
+				sprintShoot = { "P38_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } }
 			}
 		)
 	end
@@ -222,6 +224,13 @@ local actual_reload_anims =
 {
 	["reload"] = true,
 	["reload_empty"] = true
+}
+
+local aim_animations =
+{
+	["aimInto"]         = true,
+	["aimIdle"]         = true,
+	["aimShoot"]        = true
 }
 
 function P38:client_updateAimWeights(dt)
@@ -297,16 +306,19 @@ function P38.client_onUpdate( self, dt )
 				end
 			end
 
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			if cur_anim_cache ~= "sprintShoot" then
+				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+				end
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			local isAimAnim = aim_animations[cur_anim_cache] == true
+			if self.aiming and not isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -371,16 +383,11 @@ function P38.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
+	local blockSprint = self.aiming or self:client_isGunReloading()
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
-	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
-
-	down = clamp( -angle, 0.0, 1.0 )
-	fwd = ( 1.0 - math.abs( angle ) )
-	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -427,7 +434,7 @@ function P38.client_onUpdate( self, dt )
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -751,7 +758,7 @@ function P38:cl_onPrimaryUse(is_shooting)
 		self.network:sendToServer("sv_n_onShoot", is_last_shot)
 
 		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+		setFpAnimation( self.fpAnimations, self.tool:isSprinting() and "sprintShoot" or (self.aiming and "aimShoot" or "shoot"), 0.0 )
 	else
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		self.fireCooldownTimer = fireMode.fireCooldown

@@ -13,7 +13,7 @@
 			"itemStack": {},
 			"rotationSet": "PropY",
 			"sticky": "+Y-Y",
-			"physicsMaterial": "Metal",
+			"physicsMaterial": "Wood",
 			"ratings": {
 				"density": 1,
 				"durability": 5,
@@ -65,7 +65,7 @@
 			"itemStack": {},
 			"rotationSet": "PropY",
 			"sticky": "+Y-Y",
-			"physicsMaterial": "Metal",
+			"physicsMaterial": "Cardboard",
 			"ratings": {
 				"density": 1,
 				"durability": 3,
@@ -137,7 +137,7 @@
 			"itemStack": {},
 			"rotationSet": "PropY",
 			"sticky": "+Y-Y",
-			"physicsMaterial": "Metal",
+			"physicsMaterial": "Cardboard",
 			"ratings": {
 				"density": 1,
 				"durability": 3,
@@ -161,7 +161,7 @@
 			"itemStack": {},
 			"rotationSet": "PropY",
 			"sticky": "+Y-Y",
-			"physicsMaterial": "Metal",
+			"physicsMaterial": "Cardboard",
 			"ratings": {
 				"density": 1,
 				"durability": 3,
@@ -185,7 +185,7 @@
 			"itemStack": {},
 			"rotationSet": "PropY",
 			"sticky": "+Y-Y",
-			"physicsMaterial": "Metal",
+			"physicsMaterial": "Cardboard",
 			"ratings": {
 				"density": 1,
 				"durability": 3,

@@ -5,10 +5,10 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
-dofile("PTRDProjectile.lua")
-dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 
----@class PTRD : ToolClass
+local Damage = 100
+
+---@class Mosin : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -22,114 +22,107 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
+---@field cl_hammer_cocked boolean
 ---@field scope_hud GuiInterface
-PTRD = class()
-PTRD.mag_capacity = 1
+Mosin = class()
+Mosin.mag_capacity = 5
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/PTRD/PTRD_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/PTRD/PTRD_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/PTRD/char_male_tp_PTRD.rend",
-	"$CONTENT_DATA/Tools/Renderables/PTRD/char_PTRD_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_tp_Mosin.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/PTRD/char_male_fp_PTRD.rend",
-	"$CONTENT_DATA/Tools/Renderables/PTRD/char_PTRD_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_fp_Mosin.rend",
+	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_fp_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-local PTRD_action_block_anims =
+local mosin_action_block_anims =
 {
-	["reload"] = true,
-	["equip"] = true,
+	["cock_hammer_aim"] = true,
+	["ammo_check"     ] = true,
+	["cock_hammer"    ] = true,
 
-	["deploy_bipod"] = true,
-	["hide_bipod"] = true,
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
 	["sprintExit"] = true,
 
-	["aimInto"] = true,
+	["equip"] = true
+}
+
+local mosin_aim_block_anims =
+{
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true
+}
+
+local mosin_sprint_block_anims =
+{
+	["ammo_check"] = true,
+	["cock_hammer"] = true,
+	["cock_hammer_aim"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
+	["sprintExit"] = true,
 	["aimExit"] = true
 }
 
-local PTRD_bipod_block_anims =
+local mosin_obstacle_block_anims =
 {
-	["reload"] = true,
+	["ammo_check"] = true,
+	["cock_hammer"] = true,
+	["cock_hammer_aim"] = true,
+
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true,
+
 	["equip"] = true,
-
-	["sprintInto"] = true,
-	["sprintIdle"] = true,
-	["sprintExit"] = true,
-
-	["aimInto"]  = true,
-	["aimIdle"]  = true,
-	["aimExit"]  = true,
-	["aimShoot"] = true,
-
-	["bipodAimIdle"]  = true,
-	["bipodAimShoot"] = true,
-
-	["shoot"] = true,
-	["shoot_bipod"] = true
+	["aimExit"] = true
 }
 
-local PTRD_aim_block_anims =
-{
-	["reload"] = true,
-
-	["sprintInto"] = true,
-	["sprintIdle"] = true,
-	["sprintExit"] = true
-}
-
-local PTRD_smooth_aim_anims =
-{
-	["aimInto"] = true,
-	["aimExit"] = true,
-	["bipodAimInto"] = true,
-	["bipodAimExit"] = true
-}
-
-local PTRD_bipod_aim_anims =
-{
-	["bipodAimInto"] = true,
-	["bipodAimIdle"] = true,
-	["bipodAimExit"] = true
-}
-
-local PTRD_sprint_block_anims =
-{
-	["reload"] = true,
-	["aimExit"] = true,
-	["sprintExit"] = true
-}
-
-local PTRD_obstacle_block_anims =
-{
-	["reload"    ] = true,
-	["equip"     ] = true,
-	["aimExit"   ] = true
-}
-
-function PTRD:client_initAimVals()
+function Mosin:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.aimWeightFp = self.aimWeight
 end
 
-function PTRD:server_onCreate()
+function Mosin:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -144,48 +137,60 @@ function PTRD:server_onCreate()
 	end
 end
 
-function PTRD:server_requestAmmo(data, caller)
+function Mosin:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function PTRD:server_updateAmmoCounter(data, caller)
+function Mosin:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function PTRD:client_receiveAmmo(ammo_count)
+function Mosin:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function PTRD:client_onCreate()
+function Mosin:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self:client_initAimVals()
 	self.aimBlendSpeed = 3.0
 
-	self.bipod_equip_timer = 0.0
-	self.bipod_unequip_timer = 0.0
-
+	self.cl_hammer_cocked = true
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "PTRD")
-	PTRDProjectile_clientInitialize()
+	mgp_toolAnimator_initialize(self, "Mosin")
+
+	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
+		isHud = true,
+		isInteractive = false,
+		needsCursor = false,
+		hidesHotbar = true
+	})
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function PTRD:client_onDestroy()
+function Mosin:client_onDestroy()
+	local v_scopeHud = self.scope_hud
+	if v_scopeHud and sm.exists(v_scopeHud) then
+		if v_scopeHud:isActive() then
+			v_scopeHud:close()
+		end
+
+		v_scopeHud:destroy()
+	end
+
 	mgp_toolAnimator_destroy(self)
-	PTRDProjectile_clientDestroy()
 end
 
-function PTRD:client_onRefresh()
+function Mosin:client_onRefresh()
 	self:loadAnimations()
 end
 
-function PTRD:loadAnimations()
+function Mosin:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -196,7 +201,17 @@ function PTRD:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "PTRD_reload", { nextAnimation = "idle" } },
+			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
+			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
+			bolt_action_crouch = { "spudgun_crouch_aim_bolt_action", { nextAnimation = "idle" } },
+
+			reload0 = { "Mosin_Reload5", { nextAnimation = "idle" } },
+			reload1 = { "Mosin_Reload4", { nextAnimation = "idle" } },
+			reload2 = { "Mosin_Reload3", { nextAnimation = "idle" } },
+			reload3 = { "Mosin_Reload2", { nextAnimation = "idle" } },
+			reload4 = { "Mosin_Reload1", { nextAnimation = "idle" } },
+
+			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
@@ -230,58 +245,58 @@ function PTRD:loadAnimations()
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "PTRD_pickup", { nextAnimation = "idle" } },
-				unequip = { "PTRD_putdown" },
-				aim_anim = { "PTRD_putdown" },
+				equip = { "Gun_pickup", { nextAnimation = "idle" } },
+				unequip = { "Gun_putdown" },
+				aim_anim = { "Gun_putdown" },
 
-				deploy_bipod = { "PTRD_deploy_bipod", { nextAnimation = "idle" } },
-				hide_bipod = { "PTRD_hide_bipod", { nextAnimation = "idle" } },
+				idle = { "Gun_idle", { looping = true } },
+				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
 
-				idle = { "PTRD_idle", { looping = true } },
-				shoot = { "PTRD_shoot", { nextAnimation = "idle" } },
-				shoot_bipod = { "PTRD_shoot_bipod", { nextAnimation = "idle" } },
+				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
+				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
-				reload = { "PTRD_reload", { nextAnimation = "idle" } },
+				reload0 = { "Reload0", { nextAnimation = "idle" } },
+				reload1 = { "Reload1", { nextAnimation = "idle" } },
+				reload2 = { "Reload2", { nextAnimation = "idle" } },
+				reload3 = { "Reload3", { nextAnimation = "idle" } },
+				reload4 = { "Reload4", { nextAnimation = "idle" } },
 
-				aimInto = { "PTRD_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "PTRD_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "PTRD_aim_idle", { looping = true } },
-				aimShoot = { "PTRD_aim_shoot", { nextAnimation = "aimIdle"} },
+				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				bipodAimInto = { "PTRD_aim_bipod_into", { nextAnimation = "bipodAimIdle" } },
-				bipodAimExit = { "PTRD_aim_bipod_exit", { nextAnimation = "idle", blendNext = 0 } },
-				bipodAimIdle = { "PTRD_aim_bipod_idle", { looping = true } },
-				bipodAimShoot = { "PTRD_aim_bipod_shoot", { nextAnimation = "bipodAimIdle" } },
+				aimInto = { "Gun_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "Gun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "Gun_aim_idle", { looping = true } },
+				aimShoot = { "Gun_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "PTRD_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "PTRD_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "PTRD_sprint_idle", { looping = true } },
+				sprintInto = { "Gun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Gun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Gun_sprint_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.18,
-		spreadCooldown = 0.5,
-		spreadIncrement = 0.5,
-		spreadMinAngle = 5.0,
-		spreadMaxAngle = 16.0,
-		fireVelocity = 550.0,
+		fireCooldown = 0.2,
+		spreadCooldown = 0.05,
+		spreadIncrement = 1,
+		spreadMinAngle = 0.05,
+		spreadMaxAngle = 0.10,
+		fireVelocity = 800.0,
 
-		minDispersionStanding = 0.8,
-		minDispersionCrouching = 0.3,
+		minDispersionStanding = 0.1,
+		minDispersionCrouching = 0.04,
 
-		maxMovementDispersion = 0.99,
+		maxMovementDispersion = 0.4,
 		jumpDispersionMultiplier = 2
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.18,
+		fireCooldown = 0.2,
 		spreadCooldown = 0.01,
-		spreadIncrement = 0.5,
-		spreadMinAngle = 2.0,
-		spreadMaxAngle = 5.5,
-		fireVelocity = 550.0,
+		spreadIncrement = 1,
+		spreadMinAngle = 0.05,
+		spreadMaxAngle = 0.1,
+		fireVelocity = 800.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -308,14 +323,19 @@ end
 
 local actual_reload_anims =
 {
-	["reload"] = true
+	["reload0"] = true,
+	["reload1"] = true,
+	["reload2"] = true,
+	["reload3"] = true,
+	["reload4"] = true
 }
 
 local aim_animation_list01 =
 {
 	["aimInto"]         = true,
 	["aimIdle"]         = true,
-	["aimShoot"]        = true
+	["aimShoot"]        = true,
+	["cock_hammer_aim"] = true
 }
 
 local aim_animation_list02 =
@@ -325,36 +345,18 @@ local aim_animation_list02 =
 	["aimShoot"] = true
 }
 
-local bipod_aim_animation_list01 =
-{
-	["bipodAimInto"] = true,
-	["bipodAimIdle"] = true,
-	["bipodAimShoot"] = true
-}
-
 local aim_animation_blacklist =
 {
 	["aim_anim"] = true,
+	["cock_hammer_aim"] = true
 }
 
-function PTRD:client_onFixedUpdate(dt)
-	PTRDProjectile_clientOnFixedUpdate(self, dt)
-end
-
-function PTRD:sv_checkProjectile(id)
-	PTRD_serverCheckProjecitle(self, id)
-end
-
-function PTRD:cl_updatePenetration(data)
-	PTRD_clientUpdatePenetration(data)
-end
-
-function PTRD:client_updateAimWeights(dt)
-	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 10 )
+function Mosin:client_updateAimWeights(dt)
+	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
 
 	-- Camera update
 	local bobbingFp = 1
-	if self.aiming then
+	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -368,12 +370,12 @@ function PTRD:client_updateAimWeights(dt)
 		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
 	end
 
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
 local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
-function PTRD:server_spendAmmo(data, player)
+function Mosin:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -396,7 +398,7 @@ function PTRD:server_spendAmmo(data, player)
 	self:server_updateAmmoCounter()
 end
 
-function PTRD:sv_n_trySpendAmmo(data, player)
+function Mosin:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -404,102 +406,7 @@ function PTRD:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
----@param self PTRD
-local function ptrd_can_deploy_bipod(self)
-	local v_owner = self.tool:getOwner()
-	if not (v_owner and sm.exists(v_owner)) then
-		return false
-	end
-
-	local v_owner_char = v_owner.character
-	if not (v_owner_char and sm.exists(v_owner_char)) then
-		return false
-	end
-
-	if v_owner_char:isCrouching() then
-		return false
-	end
-
-	local v_char_pos = v_owner_char.worldPosition
-	v_char_pos.z = v_char_pos.z + v_owner_char:getHeight() * 0.4
-
-	local v_forward_check = v_char_pos + v_owner_char.direction * 0.5
-	local hit, result = sm.physics.raycast(v_char_pos, v_forward_check, v_owner_char)
-	if hit then
-		return false
-	end
-
-	local v_cam_up = sm.camera.getUp()
-	local v_final_check = v_forward_check - v_cam_up * 0.5
-	local final_hit, final_result = sm.physics.raycast(v_forward_check, v_final_check, v_owner_char)
-	if not final_hit then
-		return false
-	end
-
-	local v_up_direction = sm.vec3.new(0, 0, 1)
-	if final_result.fraction < 0.4 or final_result.normalWorld:dot(v_up_direction) < 0.97 or v_cam_up:dot(v_up_direction) < 0.98 then
-		return false
-	end
-
-	return true
-end
-
-function PTRD:server_updateBipodAnim(is_deploy)
-	self.network:sendToClients("client_receiveBipodAnim", is_deploy)
-end
-
-function PTRD:client_receiveBipodAnim(is_deploy)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
-		mgp_toolAnimator_setAnimation(self, is_deploy and "deploy_bipod" or "hide_bipod")
-		self.bipod_deployed = is_deploy
-	end
-end
-
-function PTRD:client_updateBipod(dt)
-	if self:client_isGunReloading(PTRD_bipod_block_anims) then
-		self.bipod_unequip_timer = 0.0
-		self.bipod_equip_timer = 0.0
-		return
-	end
-
-	if ptrd_can_deploy_bipod(self) then
-		self.bipod_unequip_timer = 0.0
-
-		if not self.bipod_deployed then
-			self.bipod_equip_timer = self.bipod_equip_timer + dt
-			if self.bipod_equip_timer >= 0.5 then
-				self.network:sendToServer("server_updateBipodAnim", true)
-
-				mgp_toolAnimator_setAnimation(self, "deploy_bipod")
-				if not self.aiming then
-					setFpAnimation(self.fpAnimations, "deploy_bipod", 0.0)
-				end
-
-				self.bipod_equip_timer = 0.0
-				self.bipod_deployed = true
-			end
-		end
-	else
-		self.bipod_equip_timer = 0.0
-
-		if self.bipod_deployed then
-			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
-			if self.bipod_unequip_timer >= 0.5 then
-				self.network:sendToServer("server_updateBipodAnim", false)
-
-				mgp_toolAnimator_setAnimation(self, "hide_bipod")
-				if not self.aiming then
-					setFpAnimation(self.fpAnimations, "hide_bipod", 0.0)
-				end
-
-				self.bipod_unequip_timer = 0.0
-				self.bipod_deployed = false
-			end
-		end
-	end
-end
-
-function PTRD:client_onUpdate(dt)
+function Mosin:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	if self.cl_show_ammo_timer then
@@ -508,7 +415,7 @@ function PTRD:client_onUpdate(dt)
 		if self.cl_show_ammo_timer <= 0.0 then
 			self.cl_show_ammo_timer = nil
 			if self.tool:isEquipped() then
-				sm.gui.displayAlertText(("PTRD: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+				sm.gui.displayAlertText(("Mosin: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			end
 		end
 	end
@@ -527,7 +434,7 @@ function PTRD:client_onUpdate(dt)
 	if self.tool:isLocal() then
 		if self.equipped then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
-			if hit and not self:client_isGunReloading(PTRD_obstacle_block_anims) then
+			if hit and not self:client_isGunReloading(mosin_obstacle_block_anims) then
 				local v_cur_anim = self.fpAnimations.currentAnimation
 				if v_cur_anim ~= "sprintInto" and v_cur_anim ~= "sprintExit" then
 					if v_cur_anim == "sprintIdle" then
@@ -547,6 +454,7 @@ function PTRD:client_onUpdate(dt)
 
 					if time_predict >= info_duration then
 						self.network:sendToServer("sv_n_trySpendAmmo")
+						self.cl_hammer_cocked = true
 					end
 				end
 
@@ -556,32 +464,33 @@ function PTRD:client_onUpdate(dt)
 					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 				end
 
-				if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
-					if self.bipod_deployed then
-						if self.aiming and bipod_aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-							swapFpAnimation(self.fpAnimations, "bipodAimExit", "bipodAimInto", 0.0)
-						end
-						if not self.aiming and bipod_aim_animation_list01[self.fpAnimations.currentAnimation] == true then
-							swapFpAnimation(self.fpAnimations, "bipodAimInto", "bipodAimExit", 0.0)
-						end
-					else
-						if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
-							swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-						end
-						if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
-							swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+				if self.fpAnimations.currentAnimation == "cock_hammer_aim" then
+					local v_animData = self.fpAnimations.animations.cock_hammer_aim
+
+					local v_timePredict = v_animData.time + dt
+					if v_timePredict >= v_animData.info.duration then
+						if self.aiming then
+							setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+							self.fpAnimations.animations.aim_anim.time = 0.5
 						end
 					end
 				end
 
-				self:client_updateBipod(dt)
+				if aim_animation_blacklist[self.fpAnimations.currentAnimation] == nil then
+					if self.aiming and aim_animation_list01[self.fpAnimations.currentAnimation] == nil then
+						swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+					end
+					if not self.aiming and aim_animation_list02[self.fpAnimations.currentAnimation] == true then
+						swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
+					end
+				end
 			end
 		end
-
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
 	TSU_OnUpdate(self)
+
 	self:client_updateAimWeights(dt)
 
 	if not self.equipped then
@@ -597,6 +506,51 @@ function PTRD:client_onUpdate(dt)
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
+
+	if self.scope_timer then
+		self.scope_timer = self.scope_timer - dt
+
+		if self.scope_timer <= 0.0 then
+			self.scope_timer = nil
+
+			if self.aiming then
+				self.scope_enabled = true
+			end
+		end
+	end
+
+	if self.scope_enabled then
+		local v_isInFirstPerson = self.tool:isInFirstPersonView()
+		local v_aimState = self.aiming
+		local v_isAimReload = self.fpAnimations.currentAnimation == "cock_hammer_aim"
+		if v_isInFirstPerson and v_aimState and not v_isAimReload then
+			if not self.scope_hud:isActive() then
+				self.scope_hud:open()
+
+				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
+				self.fpAnimations.animations.aim_anim.time = 0.5
+
+				sm.gui.startFadeToBlack(1.0, 0.5)
+				sm.gui.endFadeToBlack(0.8)
+			end
+		else
+			if not v_isAimReload then
+				if not v_aimState then
+					self.scope_enabled = false
+				end
+
+				setFpAnimation(self.fpAnimations, "aimExit", 0.0)
+			end
+
+			if self.scope_hud:isActive() then
+				self.scope_hud:close()
+
+				sm.gui.startFadeToBlack(1.0, 0.5)
+				sm.gui.endFadeToBlack(0.8)
+			end
+		end
+	end
+
 
 	if self.tool:isLocal() then
 		local dispersion = 0.0
@@ -638,7 +592,7 @@ function PTRD:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(PTRD_sprint_block_anims))
+	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(mosin_sprint_block_anims))
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -658,8 +612,12 @@ function PTRD:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif name == "reload" then
+				elseif ( name == "reload0" or name == "reload1" or name == "reload2" or name == "reload3" or name == "reload4" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+				elseif ( name == "bolt_action" or name == "bolt_action_aim" ) then
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 2 )
+				elseif  name == "ammo_check" then
+					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -720,7 +678,7 @@ function PTRD:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function PTRD:client_onEquip(animate, is_custom)
+function Mosin:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -760,27 +718,30 @@ function PTRD:client_onEquip(animate, is_custom)
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
-	mgp_toolAnimator_setAnimation(self, "hide_bipod")
-	--if self.ammo_in_mag <= 0 then
---		mgp_toolAnimator_setAnimation(self, "last_shot_equip")
---	end
+	if self.cl_hammer_cocked then
+		mgp_toolAnimator_setAnimation(self, "cock_the_hammer_on_equip")
+	end
 end
 
-function PTRD:client_onUnequip(animate, is_custom)
+function Mosin:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
 
-	self.bipod_equip_timer = 0.0
-	self.bipod_unequip_timer = 0.0
-	self.bipod_deployed = false
-
 	self.waiting_for_ammo = nil
+	self.scope_enabled = false
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 
 	mgp_toolAnimator_reset(self)
+
+	if self.scope_hud:isActive() then
+		self.scope_hud:close()
+
+		sm.gui.startFadeToBlack(1.0, 0.5)
+		sm.gui.endFadeToBlack(0.8)
+	end
 
 	local s_tool = self.tool
 	if sm.exists(s_tool) then
@@ -808,71 +769,101 @@ function PTRD:client_onUnequip(animate, is_custom)
 	end
 end
 
-function PTRD:sv_n_onAim(aiming)
+function Mosin:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function PTRD:cl_n_onAim(aiming)
+function Mosin:cl_n_onAim(aiming)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function PTRD:onAim(aiming)
+function Mosin:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function PTRD:sv_n_onShoot(data)
-	self.network:sendToClients("cl_n_onShoot", data.dir)
+function Mosin:sv_n_onShoot(dir)
+	self.network:sendToClients( "cl_n_onShoot", dir )
 
-	if data.ammo_in_mag ~= nil and self.sv_ammo_counter > 0 then
+	if dir ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function PTRD:cl_n_onShoot(dir)
+function Mosin:cl_n_onShoot(dir)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
 		self:onShoot(dir)
 	end
 end
 
-function PTRD:cl_chooseShootAnim()
-	if self.bipod_deployed then
-		return self.aiming and "bipodAimShoot" or "shoot_bipod"
-	end
-
-	return self.aiming and "aimShoot" or "shoot"
-end
-
-function PTRD:onShoot(dir)
+function Mosin:onShoot(dir)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	local anim = self.aiming and "aimShoot" or "shoot"
-	setTpAnimation(self.tpAnimations, anim, 10.0)
-	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "shoot_bipod" or anim)
-
-	PTRDProjectile_clientSpawnProjectile(self, dir, self.tool:isLocal())
+	if dir ~= nil then
+		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
+		mgp_toolAnimator_setAnimation(self, self.scope_hud:isActive() and "shoot_aim" or "shoot")
+	else
+		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
+	end
 end
 
-function PTRD:cl_getFirePosition()
-	local v_direction = sm.camera.getDirection()
+function Mosin:sv_n_cockHammer(data)
+	self.network:sendToClients("cl_n_cockHammer", data)
+end
 
-	if not self.tool:isInFirstPersonView() then
-		return self.tool:getTpBonePos("pejnt_barrel"), v_direction
+function Mosin:cl_n_cockHammer(aim_data)
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
+		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+
+		local v_animName = nil
+		if aim_data then
+			v_animName = s_tool:isCrouching() and "bolt_action_crouch" or "bolt_action_aim"
+		else
+			v_animName = "bolt_action"
+		end
+
+		setTpAnimation(self.tpAnimations, v_animName, 1.0)
+	end
+end
+
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
+local _math_sqrt = math.sqrt
+local _math_asin = math.asin
+local function SolveBalArcInternal(launchPos, hitPos, velocity)
+	local g = 10
+
+	local a = (launchPos.x - hitPos.x)^2
+	local b = (launchPos.y - hitPos.y)^2
+	local R = _math_sqrt(a + b)
+
+	return _math_asin(g * R / velocity^2) / 2
+end
+
+local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
+	local angle = SolveBalArcInternal(start_pos, end_pos, velocity)
+	if angle == angle then
+		return direction:rotate(angle, calculateRightVector(direction))
 	end
 
-	return self.tool:getFpBonePos("pejnt_barrel"), v_direction
+	return direction
 end
 
-function PTRD:cl_onPrimaryUse(state)
-	if state ~= 1 then return end
-	if self:client_isGunReloading(PTRD_action_block_anims) or not self.equipped then return end
+local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
+function Mosin:cl_onPrimaryUse(state)
+	if state ~= sm.tool.interactState.start then return end
+	if self:client_isGunReloading(mosin_action_block_anims) or not self.equipped then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not v_toolOwner then
@@ -884,67 +875,123 @@ function PTRD:cl_onPrimaryUse(state)
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 or self.tool:isSprinting() then
+	if self.fireCooldownTimer > 0.0 then
 		return
 	end
 
-	if self.ammo_in_mag > 0 then
-		self.ammo_in_mag = self.ammo_in_mag - 1
+	if self.tool:isSprinting() then
+		return
+	end
 
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local firePos, dir = self:cl_getFirePosition()
+	if self.cl_hammer_cocked then
+		if self.ammo_in_mag > 0 then
+		--if not sm.game.getEnableAmmoConsumption() or (sm.container.canSpend( sm.localPlayer.getInventory(), obj_plantables_potato, 1 ) and self.ammo_in_mag > 0) then
+			self.ammo_in_mag = self.ammo_in_mag - 1
 
-		if not self.bipod_deployed then
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+
+			local dir = sm.camera.getDirection()
+			local firePos = nil
+			if self.tool:isInFirstPersonView() then
+				if self.aiming then
+					firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
+
+					local hit, result = sm.localPlayer.getRaycast(300)
+					if hit then
+						local v_resultPos = result.pointWorld
+
+						local dir_calc = (v_resultPos - firePos):normalize()
+						dir = SolveBallisticArc(firePos, v_resultPos, fireMode.fireVelocity, dir_calc)
+					end
+				else
+					firePos = self.tool:getFpBonePos("pejnt_barrel")
+				end
+			else
+				firePos = self.tool:getTpBonePos("pejnt_barrel")
+			end
+
 			-- Spread
 			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+
 			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
 			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-
 			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
 
 			dir = sm.noise.gunSpread( dir, spreadDeg )
+			sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner )
+
+			-- Timers
+			self.fireCooldownTimer = fireMode.fireCooldown
+			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+			self.sprintCooldownTimer = self.sprintCooldown
+
+			-- Send TP shoot over network and directly to self
+			self:onShoot(1)
+			self.network:sendToServer("sv_n_onShoot", 1)
+
+			sm.camera.setShake(0.07)
+
+			if not self.aiming then
+				-- Play FP shoot animation
+				setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+			end
+		else
+			self:onShoot()
+			self.network:sendToServer("sv_n_onShoot")
+
+			self.fireCooldownTimer = 0.3
+			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
-
-		-- Timers
-		self.fireCooldownTimer = fireMode.fireCooldown
-		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-		self.sprintCooldownTimer = self.sprintCooldown
-
-		-- Send TP shoot over network and directly to self
-		self:onShoot(dir)
-		self.network:sendToServer("sv_n_onShoot", { ammo_in_mag = 1, dir = dir })
-
-		sm.camera.setShake(0.5)
-
-		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, self:cl_chooseShootAnim(), 0.0 )
 	else
-		--self:onShoot()
-		--self.network:sendToServer("sv_n_onShoot")
+		if self.ammo_in_mag == 0 then
+			self:client_onReload()
+			return
+		else
+			self.fireCooldownTimer = 1.0
 
-		self.fireCooldownTimer = 0.3
-		sm.audio.play( "event:/vehicle/triggers/trigger_toggle_off" )
+			self.network:sendToServer("sv_n_cockHammer", self.aiming)
+
+			if self.aiming then
+				setFpAnimation(self.fpAnimations, "cock_hammer_aim", 0.0)
+				setTpAnimation(self.tpAnimations, v_toolChar:isCrouching() and "bolt_action_crouch" or "bolt_action_aim", 1.0)
+				mgp_toolAnimator_setAnimation(self, "cock_the_hammer_aim")
+			else
+				setFpAnimation(self.fpAnimations, "cock_hammer", 0.0)
+				setTpAnimation(self.tpAnimations, "bolt_action", 1.0)
+				mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
+			end
+		end
 	end
+
+	self.cl_hammer_cocked = not self.cl_hammer_cocked
 end
 
-function PTRD:sv_n_onReload()
-	self.network:sendToClients("cl_n_onReload")
+local ammo_count_to_anim_name =
+{
+	[0] = "reload0",
+	[1] = "reload1",
+	[2] = "reload2",
+	[3] = "reload3",
+	[4] = "reload4",
+	[5] = "reload5"
+}
+
+function Mosin:sv_n_onReload(anim_id)
+	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function PTRD:cl_n_onReload(is_PTRD_thumb)
+function Mosin:cl_n_onReload(anim_id)
 	if not self.tool:isLocal() and self.tool:isEquipped() then
-		self:cl_startReloadAnim()
+		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
 	end
 end
 
-local PTRD_ordinary_reload = "reload"
-
-function PTRD:cl_startReloadAnim()
-	setTpAnimation(self.tpAnimations, PTRD_ordinary_reload, 1.0)
-	mgp_toolAnimator_setAnimation(self, self.bipod_deployed and "reload_bipod" or PTRD_ordinary_reload)
+function Mosin:cl_startReloadAnim(anim_name)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function PTRD:client_isGunReloading(reload_table)
+function Mosin:client_isGunReloading(reload_table)
 	if self.waiting_for_ammo then
 		return true
 	end
@@ -952,33 +999,75 @@ function PTRD:client_isGunReloading(reload_table)
 	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
-function PTRD:cl_initReloadAnim()
+function Mosin:cl_initReloadAnim(anim_id)
+	local v_cur_anim_id = anim_id
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
 		if v_available_ammo == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
+
+		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
+		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
+
+		v_cur_anim_id = (#ammo_count_to_anim_name - v_spend_count)
 	end
 
 	self.waiting_for_ammo = true
 
-	setFpAnimation(self.fpAnimations, PTRD_ordinary_reload, 0.0)
-	self:cl_startReloadAnim()
+	local anim_name = ammo_count_to_anim_name[v_cur_anim_id]
+
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
+	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload")
+	self.network:sendToServer("sv_n_onReload", v_cur_anim_id)
 end
 
-function PTRD:client_onReload()
+function Mosin:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading(PTRD_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			if self.ammo_in_mag ~= 0 then
-				sm.gui.displayAlertText("PTRD: can't reload while magazine is not empty")
+		if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			if self.cl_hammer_cocked then
+				sm.gui.displayAlertText("You can't reload while the round is chambered!", 3)
 				return true
 			end
 
-			self:cl_initReloadAnim()
+			self:cl_initReloadAnim(self.ammo_in_mag)
+		end
+	end
+
+	return true
+end
+
+function Mosin:sv_n_checkMag()
+	self.network:sendToClients("cl_n_checkMag")
+end
+
+function Mosin:cl_n_checkMag()
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
+		self:cl_startCheckMagAnim()
+	end
+end
+
+function Mosin:cl_startCheckMagAnim()
+	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
+	mgp_toolAnimator_setAnimation(self, "ammo_check")
+end
+
+function Mosin:client_onToggle()
+	if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+		if self.ammo_in_mag > 0 then
+			self.cl_show_ammo_timer = 0.7
+
+			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
+
+			self:cl_startCheckMagAnim()
+			self.network:sendToServer("sv_n_checkMag")
+		else
+			sm.gui.displayAlertText("Mosin: No Ammo. Reloading...", 3)
+			self:cl_initReloadAnim(0)
 		end
 	end
 
@@ -986,37 +1075,20 @@ function PTRD:client_onReload()
 end
 
 local _intstate = sm.tool.interactState
-function PTRD:cl_onSecondaryUse(state)
-	if not self.equipped then return end
+function Mosin:cl_onSecondaryUse(state)
+	if self.scope_timer or not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading(PTRD_aim_block_anims) or (self.aim_timer ~= nil)
-	local new_state = false
-	if self.should_aim_again then
-		if state == _intstate.stop then
-			self.should_aim_again = nil
-		end
-	else
-		new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
-	end
-
-	local v_fp_anims = self.fpAnimations
-	if v_fp_anims then
-		if PTRD_smooth_aim_anims[v_fp_anims.currentAnimation] == true then
-			return
-		end
-
-		if PTRD_bipod_aim_anims[v_fp_anims.currentAnimation] == true and not ptrd_can_deploy_bipod(self) then
-			self.should_aim_again = true
-			new_state = false
-		end
-	end
-
+	local is_reloading = self:client_isGunReloading(mosin_aim_block_anims) or (self.aim_timer ~= nil)
+	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
 
-		if not self.aiming then
+		if self.aiming then
+			self.scope_timer = 0.3
+		else
 			self.fireCooldownTimer = 0.4
+			self.scope_timer = 0.5
 		end
 
 		self.tool:setMovementSlowDown(self.aiming)
@@ -1025,12 +1097,13 @@ function PTRD:cl_onSecondaryUse(state)
 	end
 end
 
-function PTRD:client_onEquippedUpdate(primaryState, secondaryState)
+function Mosin:client_onEquippedUpdate(primaryState, secondaryState)
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState
 	end
 
 	self:cl_onSecondaryUse( secondaryState )
+
 	return true, true
 end

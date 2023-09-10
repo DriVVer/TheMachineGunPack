@@ -18,5 +18,13 @@
 				"name": "Bazooka_Barrel_Exhaust"
 			}
 		]
+	},
+	"PRTD - Projectile" : {
+		"effectList": [
+			{
+				"type": "renderable",
+				"name": "$CONTENT_DATA/Projectiles/Renderables/Rocket.rend"
+			}
+		]
 	}
 }

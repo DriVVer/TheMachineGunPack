@@ -26,17 +26,15 @@ DB.ammoTypes = {
 	[1] = {
 		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
 		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
-		damage = 16,
+		damage = 14,
 		colour = sm.color.new("#7b3030ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_red.png",
 		name = "Birdshot"
 	},
 	[2] = {
 		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
 		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
-		damage = 32,
+		damage = 80,
 		colour = sm.color.new("#307326ff"),
-		icon = "$CONTENT_DATA/Gui/DB_shells_green.png",
 		name = "Sabot"
 	}
 }
@@ -123,10 +121,12 @@ function DB:client_onCreate()
 		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
 		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
 		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
-		self.gui:setOnCloseCallback("cl_onGuiClose")
+		self.gui:setVisible("ammo3", false)
 
 		for k, v in pairs(self.ammoTypes) do
-			self.gui:setImage("ammo"..k.."_img", v.icon)
+			local widget = "ammo"..k
+			self.gui:setIconImage(widget.."_img", v.shells)
+			self.gui:setText(widget.."_title", v.name)
 		end
 	end
 end
@@ -217,7 +217,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 180.0,
+		fireVelocity = 150.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -232,7 +232,7 @@ function DB.loadAnimations( self )
 		spreadIncrement = 3,
 		spreadMinAngle = 1,
 		spreadMaxAngle = 2,
-		fireVelocity = 180.0,
+		fireVelocity = 150.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -261,6 +261,13 @@ local actual_reload_anims =
 {
 	["reload"] = true,
 	["reload_empty"] = true
+}
+
+local aim_animations =
+{
+	["aimInto"]         = true,
+	["aimIdle"]         = true,
+	["aimShoot"]        = true
 }
 
 function DB:client_updateAimWeights(dt)
@@ -351,10 +358,11 @@ function DB:client_onUpdate(dt)
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			local isAimAnim = aim_animations[cur_anim_cache] == true
+			if self.aiming and not isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and isAimAnim then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -420,7 +428,7 @@ function DB:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() or self.aiming)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
@@ -818,14 +826,14 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 
 	if f ~= self.prevF then
 		self.prevF = f
-		if f then
+		if f and not self:client_isGunReloading() then
 			local consume = sm.game.getEnableAmmoConsumption()
 			local quantity = sm.container.totalQuantity
 			local inv = sm.localPlayer.getInventory()
-			local ammoTypes = 0
+			local ammoTypes = self.ammo_in_mag > 0 and 1 or 0
 			for i = 1, #self.ammoTypes do
 				local widget = "ammo"..i
-				local display = not consume or quantity(inv, self.ammoTypes[i].shells) > 0
+				local display = not consume or quantity(inv, self.ammoTypes[i].shells) >= self.mag_capacity
 
 				if display then ammoTypes = ammoTypes + 1 end
 				self.gui:setVisible(widget, display)
@@ -844,22 +852,11 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	return true, true
 end
 
-function DB:cl_onGuiClose()
-	if not self.newAmmpType or self.newAmmpType == self.ammoType then return end
-
-	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
-
-	self.network:sendToServer("sv_playSwitch", self.newAmmpType)
-	self.newAmmpType = nil
-end
-
 function DB:sv_playSwitch(ammoType, player)
 	sm.container.beginTransaction()
 	local inv = player:getInventory()
 	sm.container.collect(inv, self.ammoTypes[self.sv_ammoType].shells, self.sv_ammo_counter)
-
-	local newShells = self.ammoTypes[ammoType].shells
-	sm.container.spend(inv, newShells, sm.util.clamp(sm.container.totalQuantity(inv, newShells), 0, self.mag_capacity))
+	sm.container.spend(inv, self.ammoTypes[ammoType].shells, self.mag_capacity)
 	sm.container.endTransaction()
 
 	self.sv_ammoType = ammoType
@@ -891,9 +888,10 @@ function DB:cl_loadSavedType(ammoType)
 end
 
 function DB:cl_ammoSelect(widget)
-	self.newAmmpType = tonumber(widget:sub(5, 5))
+	local ammoType = tonumber(widget:sub(5, 5))
+	if ammoType == self.ammoType then return end
 
-	for i = 1, #self.ammoTypes do
-		self.gui:setButtonState("ammo"..i, self.newAmmpType == i)
-	end
+	self.gui:close()
+	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
+	self.network:sendToServer("sv_playSwitch", ammoType)
 end
