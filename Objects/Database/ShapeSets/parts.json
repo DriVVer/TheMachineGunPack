@@ -1,1913 +1,2432 @@
 {
-	"partList": [ 
-		
-		{
-			"uuid": "690ce3fd-6f14-4d6d-9a47-8576fec4350d",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/Mac-31_R_Model.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							}
-
-							
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx"},
-							{"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx"}       
-						]                                
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 1},
-					{"x": 0, "y": 0, "z": -1}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "e33ed886-b55b-489a-b11d-7f590cea0be7",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/MaximPose1.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/MaximPose2.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 3, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 3},
-					{"x": 0, "y": 0, "z": -3}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "7ee6c514-3362-4fd1-b581-d8047b18801f",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/mg 15_1.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/mg 15_2.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 3, "margin": 0.15,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 3},
-					{"x": 0, "y": 0, "z": -3}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "8edb6045-f410-441c-b9a9-a55ab15a90c7",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/Maxim1x1.obj"
-					
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 1},
-					{"x": 0, "y": 0, "z": -1}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "4b62da08-1214-4827-8bc0-b4dface80e0d",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/reflections_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/DSzK Sight.obj"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 200,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "36d496d5-0718-4c53-81cf-eda4836847b1",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/MaximShield.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 200,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "7f25238c-0e9a-4910-b3ff-f63016fc9052",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/dp.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "0ccd6479-f1d8-46e6-acb1-02f9dc20f577",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/dp2.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 1},
-					{"x": 0, "y": 0, "z": -1}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "dee496d2-a9a9-4708-9a2f-50910f59f8fa",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/AKM.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/AKM2.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 3, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 3},
-					{"x": 0, "y": 0, "z": -3}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 500,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "6d98a168-f0c5-4774-a6ac-e0972fd9f1a4",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/MosinAnim.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							}
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx"},
-							{"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx"}
-						]
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.15,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "b23027d0-0a69-4e82-a917-d43acce49057",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/1x8.obj"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 4},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "32e96b7d-a08a-483c-88c6-8a1616ea3123",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/M1919_nomag.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						]
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 2, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 2},
-					{"x": 0, "y": 0, "z": -2}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "45c849b8-9417-446d-b703-75c582bd9b60",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/M1919_nomag.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						]
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 2, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 2},
-					{"x": 0, "y": 0, "z": -2}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "1e731dbe-d89e-4722-b955-d347f92eec62",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/mg 34.obj"
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "c4b65002-2928-4829-8661-84a08a31a253",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/Lewis.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/LewisPose2.obj"
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 3, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 3},
-					{"x": 0, "y": 0, "z": -3}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "b0384020-b6ac-45ae-9df3-045e51cc7e8a",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/mg42_anim.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							},
-							{
-								"material": "SkelUVAnimDifAsgNor",
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"custom": {
-									"uv0": { "u": 0.01, "v": 0.01 }
-								}
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							}
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"},
-							{"name": "BarrelExchange", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"},
-							{"name": "Reload",   "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"}
-						]
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "2779083c-1ee2-4b52-9eb3-586a383c5d4e",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/mg42_1x1.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "SkelAnimDifAsgNor"
-							},
-							{
-								"material": "SkelUVAnimDifAsgNor",
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"custom": {
-									"uv0": { "u": 0.01, "v": 0.01 }
-								}
-							}
-						],
-						"animationList": [
-							{"name": "Shots", "file": "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx"}
-						]
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 1},
-					{"x": 0, "y": 0, "z": -1}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "68337ca8-e957-4b3f-a6dd-c11ac61da064",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/dzialko.obj"
-					}
-				]
-			},
-			"color": "002E1A",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/VanillaProjectileGun.lua", "classname": "VGun"},
-			"density": 400,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "04075bce-2b41-47a2-8753-343b1e0b20f7",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/uchwyt 4.obj"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "ad260178-696b-4f96-b4ac-1f915afb1ce4",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/podporka.obj"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "5099511b-554b-4cba-a425-e07527b9a8f0",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "e9cd2aab-9f63-49c5-8b65-96e8471bfb7f",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_OneAndHalf.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "4c3133fa-02cc-466d-85ed-fd40e7b7a297",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_wedge_1x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "1260c944-c2d6-41be-b6a1-e9d1dfb020c5",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_wedge_1x2.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-
-		
-		{
-			"uuid": "930e02b4-0c2b-49d6-a34a-8045b81b41d9",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_SQ.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "f0bd91ea-5fcd-4679-9cd8-0208473fba96",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_SQ_OneAndHalf.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "5093704c-63d7-4e7c-bd5b-e9306df6e479",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_wedge_SQ_1x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "83d839c5-ff98-44b2-bcaf-629439b85d9b",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankSight_wedge_SQ_1x2.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"sphere": { "diameter": 1 },
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "2fe5a537-657f-43f3-bced-aa1785ba74d9",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor2x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"hull": {
-				"x": 2, "y": 1, "z": 1, "margin": 0.45,
-				"pointList": [
-					{"x": 2, "y": 0, "z": 0},
-					{"x": -2, "y": 0, "z": 0}
-				]
-			},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "1fad8451-7485-42f0-a607-26728b389858",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor45d2x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"hull": {
-				"x": 2, "y": 1, "z": 1, "margin": 0.45,
-				"pointList": [
-					{"x": 2, "y": 0, "z": 0},
-					{"x": -2, "y": 0, "z": 0}
-				]
-			},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "e7b4c12b-f074-4ca5-98f5-15a98c4615ef",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor3x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"hull": {
-				"x": 3, "y": 1, "z": 1, "margin": 0.45,
-				"pointList": [
-					{"x": 3, "y": 0, "z": 0},
-					{"x": -3, "y": 0, "z": 0}
-				]
-			},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "27ddbae7-247a-4955-99b7-190708d46ef4",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/TankDriverVisor3x1x1.fbx"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 3, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "67c2f314-5b3a-442e-ab08-6e6c24699d97",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/TankCommanderVisor3x0.5.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							}
-						]
-					
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 3, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "9d06161a-da39-451f-9ca3-08e1e7a20d4a",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							},
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "Glass"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/PlaneSight.fbx"
-					}
-				]
-			},
-			"rotationSet": "PropFull",
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y"
-		  
-		},
-		{
-			"uuid": "2d132e4e-5084-4178-839c-c75e06e19153",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/2Shells.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						]
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"rotationSet": "PropFull",
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y"
-		  
-		},
-		{
-			"uuid": "0232a807-7615-4049-b600-12583a3ba392",
-			"renderable": {
-				"lodList": [
-					{
-						"mesh": "$MOD_DATA/Objects/Mesh/AmmoRack37.fbx",
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						]
-					}
-				]
-			},
-			"rotationSet": "PropFull",
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y"
-		},
-		{
-			"uuid": "029e27bd-f589-4a15-b8fc-19a553f34fd0",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/SightDIF.png",
-									"$MOD_DATA/Objects/Textures/SightASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {
-										"u": 0.16666667,
-										"v": 0.1645
-									}
-								}
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/Ger_Crossight_on.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/Ger_Crossight_on.obj",
-						"includes": [
-							"POSITION",
-							"UV0",
-							"UV1",
-							"NORMAL",
-							"TANGENTS",
-							"BLEND_INDICES",
-							"BLEND_WEIGHTS"
-						]
-					}
-				]
-			},
-			"rotationSet": "PropZ",
-			"color": "39FF14",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"logic": {}
-		},
-		{
-			"uuid": "4ef479e3-e403-4a3b-a7b5-2c0464549de7",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/SightDIF.png",
-									"$MOD_DATA/Objects/Textures/SightASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {
-										"u": 0.16666667,
-										"v": 0.1645
-									}
-								}
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/US_Crossight_on.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/US_Crossight_on.obj",
-						"includes": [
-							"POSITION",
-							"UV0",
-							"UV1",
-							"NORMAL",
-							"TANGENTS",
-							"BLEND_INDICES",
-							"BLEND_WEIGHTS"
-						]
-					}
-				]
-			},
-			"rotationSet": "PropZ",
-			"color": "39FF14",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"logic": {}
-		},
-		{
-			"uuid": "01f520e7-488c-4456-a4e7-6d4fee7bddb4",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/SightDIF.png",
-									"$MOD_DATA/Objects/Textures/SightASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {
-										"u": 0.16666667,
-										"v": 0.1645
-									}
-								}
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/CAM_Crossight_on.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/CAM_Crossight_on.obj",
-						"includes": [
-							"POSITION",
-							"UV0",
-							"UV1",
-							"NORMAL",
-							"TANGENTS",
-							"BLEND_INDICES",
-							"BLEND_WEIGHTS"
-						]
-					}
-				]
-			},
-			"rotationSet": "PropZ",
-			"color": "39FF14",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"logic": {}
-		},
-		{
-			"uuid": "3423b398-0083-45e8-a5d3-ba7d6dddd668",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/SightDIF.png",
-									"$MOD_DATA/Objects/Textures/SightASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {
-										"u": 0.16666667,
-										"v": 0.1645
-									}
-								}
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/OR_Crossight_on.obj",
-						"pose0": "$MOD_DATA/Objects/Mesh/OR_Crossight_on.obj",
-						"includes": [
-							"POSITION",
-							"UV0",
-							"UV1",
-							"NORMAL",
-							"TANGENTS",
-							"BLEND_INDICES",
-							"BLEND_WEIGHTS"
-						]
-					}
-				]
-			},
-			"rotationSet": "PropZ",
-			"color": "39FF14",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 100,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"logic": {}
-		},
-		{
-			"uuid": "28cc8c06-44e3-48e9-a76e-d0fa178997f0",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/oslona.obj"
-					}
-				]
-			},
-			"color": "F8E08C",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "f6a9f44d-4544-4d4f-b623-559f3e0a0b31",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/pancerz.obj"
-					}
-				]
-			},
-			"color": "df7f00",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 200,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull"
-		},
-		{
-			"uuid": "b660f72a-7640-4446-b8bb-2df3cad61bbb",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/ASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/Bomb_Sensor_1.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBombSensor.lua", "classname": "ExplosiveBombSensor"},
-			"qualityLevel": 20,
-			"color": "3c5200",
-			"hull": {
-				"x": 1, "y": 1, "z": 4, "margin": 0.35
-				,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 4},
-					{"x": 0, "y": 0, "z": -4}
-				]
-			},
-			"density": 120,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		},
-		{
-			"uuid": "db03da50-e7d6-4a42-8f07-4a296c64f2cd",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/ASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/bomb 100.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"color": "556b2f",
-			"hull": {
-				"x": 1, "y": 1, "z": 2, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 2},
-					{"x": 0, "y": 0, "z": -2}
-				]
-			},
-			"density": 50,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		},
-		{
-			"uuid": "2433e932-88bb-4c14-b9bb-76502e03a9c9",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/ASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/bomb 250.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"color": "556b2f",
-			"hull": {
-				"x": 1, "y": 1, "z": 3, "margin": 0.45,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 3},
-					{"x": 0, "y": 0, "z": -3}
-				]
-			},
-			"density": 120,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		},
-		{
-			"uuid": "fe2d4f4e-a2ba-42ba-a7a5-6b97b2c0fa48",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/ASG.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/bomb 500.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"color": "556b2f",
-			"hull": {
-				"x": 1, "y": 1, "z": 5, "margin": 0.45,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 5},
-					{"x": 0, "y": 0, "z": -5}
-				]
-			},
-			"density": 200,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		},
-		{
-			"uuid": "46584f5b-b846-43c3-9f17-3fd494c5b8f0",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/M1_A.obj"
-					}
-				]
-			},
-			"rotationSet": "PropYZ",
-			"color": "cadc79",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.015,
-				"pointList": [
-					{"x": -1, "y": -1, "z": -1},
-					{"x": -1, "y": -1, "z": 1},
-					{"x": 1, "y": -1, "z": -1},
-					{"x": 1, "y": -1, "z": 1}
-				]
-			},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sensor": {},
-			"qualityLevel": 1,
-			"showInInventory": false
-		},
-		{
-			"uuid": "1a74c9b1-dea5-42ab-86ad-08f1d24507d3",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/Sminegunfo.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/S Mine F.obj"
-					}
-				]
-			},
-			"rotationSet": "PropYZ",
-			"color": "F8E08C",
-			"hull": {
-				"x": 1, "y": 1, "z": 1, "margin": 0.015,
-				"pointList": [
-					{"x": -1, "y": -1, "z": -1},
-					{"x": -1, "y": 1, "z": -1},
-					{"x": 1, "y": -1, "z": -1},
-					{"x": 1, "y": 1, "z": -1}
-				]
-			},
-			"density": 300,
-			"physicsMaterial": "Metal",
-			"sensor": {},
-			"qualityLevel": 1
-		},
-		{
-			"uuid": "0352de84-5cc7-487a-ae15-f3d9d6a84f37",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/M1.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"color": "556b2f",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 1500,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X",
-			"showInInventory": false
-		},
-		{
-			"uuid": "820f8c24-37a5-42c4-9443-f60f0724c6b1",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/earth.png",
-									"$MOD_DATA/Objects/Textures/reflections3_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/ziemia.obj"
-					}
-				]
-			},
-			"color": "F8E08C",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 10000,
-			"physicsMaterial": "Metal",
-			"sticky": "+X-X+Z-Z+Y-Y",
-			"rotationSet": "PropFull",
-			"showInInventory": false
-		},
-		{
-			"uuid": "77a65230-9c33-490f-b24d-e80cd63f6802",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/SMG2.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/S Mine p1.obj"
-					}
-				]
-			},
-			"scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveBomb.lua", "classname": "ExplosiveBomb"},
-			"qualityLevel": 20,
-			"color": "54616a",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		},
-		{
-			"uuid": "561b2e83-4e9b-462f-ae97-645dc596b2c4",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {"u": 0.16666667, "v": 0.1645}
-								}
-							}
-						],
-						"mesh": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
-						"pose0": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx"
-					}
-				]
-			},
-			"rotationSet": "PropYZ",
-			"color": "000000",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 250,
-			"physicsMaterial": "Metal",
-			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3,
-			"showInInventory": false
-		},
-		{
-			"uuid": "b40dbc55-65f3-40ae-be5e-4d8976c7d970",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {"u": 0.16666667, "v": 0.1645}
-								}
-							}
-						],
-						"mesh": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
-						"pose0": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx"
-					}
-				]
-			},
-			"rotationSet": "PropYZ",
-			"color": "000000",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 250,
-			"physicsMaterial": "Metal",
-			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3,
-			"showInInventory": false
-		},
-		{
-			"uuid": "27839ef0-bc1e-4fed-a715-7adb9c9701b1",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "PoseAnimDifAsgNor"
-							},
-							{
-								"textureList": [
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
-									"$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
-								],
-								"material": "UVAnimDifAsgNor",
-								"custom": {
-									"uv0": {"u": 0.16666667, "v": 0.1645}
-								}
-							}
-						],
-						"mesh": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
-						"pose0": "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx"
-					}
-				]
-			},
-			"rotationSet": "PropYZ",
-			"color": "000000",
-			"box": {"x": 1, "y": 1, "z": 1},
-			"density": 250,
-			"physicsMaterial": "Metal",
-			"scripted": {"filename": "$MOD_DATA/Scripts/AlarmBlock.lua", "classname": "AlarmBlock"},
-			"qualityLevel": 3,
-			"showInInventory": false
-		},
-		{
-			"uuid": "cb8d96c9-2b7b-4bfc-ae07-e308455dee6b",
-			"renderable": {
-				"lodList": [
-					{
-						"subMeshList": [
-							{
-								"textureList": [
-									"$MOD_DATA/Objects/Textures/texture_dif.tga",
-									"$MOD_DATA/Objects/Textures/reflections2_asg.tga",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$MOD_DATA/Objects/Mesh/Tks.obj"
-					}
-				]
-			},
-			"color": "375219",
-			"hull": {
-				"x": 1, "y": 1, "z": 2, "margin": 0.25,
-				"pointList": [
-					{"x": 0, "y": 0, "z": 2},
-					{"x": 0, "y": 0, "z": -2}
-				]
-			},
-			"density": 1000,
-			"physicsMaterial": "Metal",
-			"rotationSet": "PropYZ",
-			"sticky": "+Y-Y+Z-Z+X-X"
-		}
-	]
+   "partList" : [
+      {
+         "color" : "375219",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 1
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "animationList" : [
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx",
+                        "name" : "Shots"
+                     },
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/Mac-31_R_Model.fbx",
+                        "name" : "Reload"
+                     }
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Mac-31_R_Model.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "690ce3fd-6f14-4d6d-9a47-8576fec4350d"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 3
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -3
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 3
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/MaximPose1.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/MaximPose2.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "e33ed886-b55b-489a-b11d-7f590cea0be7"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.150,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 3
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -3
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 3
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/mg 15_1.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/mg 15_2.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "7ee6c514-3362-4fd1-b581-d8047b18801f"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 1
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Maxim1x1.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "8edb6045-f410-441c-b9a9-a55ab15a90c7"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 200,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/DSzK Sight.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "4b62da08-1214-4827-8bc0-b4dface80e0d"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "375219",
+         "density" : 200,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/MaximShield.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "36d496d5-0718-4c53-81cf-eda4836847b1"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/dp.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "7f25238c-0e9a-4910-b3ff-f63016fc9052"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 1
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/dp2.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "0ccd6479-f1d8-46e6-acb1-02f9dc20f577"
+      },
+      {
+         "color" : "375219",
+         "density" : 500,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 3
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -3
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 3
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/AKM.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/AKM2.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "dee496d2-a9a9-4708-9a2f-50910f59f8fa"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.150,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "animationList" : [
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx",
+                        "name" : "Shots"
+                     },
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/MosinAnim.fbx",
+                        "name" : "Reload"
+                     }
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/MosinAnim.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "6d98a168-f0c5-4774-a6ac-e0972fd9f1a4"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/1x8.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "b23027d0-0a69-4e82-a917-d43acce49057"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 2
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -2
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 2
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/M1919_nomag.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "32e96b7d-a08a-483c-88c6-8a1616ea3123"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 2
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -2
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 2
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/M1919_nomag.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "45c849b8-9417-446d-b703-75c582bd9b60"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 1000,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/mg 34.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "1e731dbe-d89e-4722-b955-d347f92eec62"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 3
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -3
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 3
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Lewis.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/LewisPose2.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "c4b65002-2928-4829-8661-84a08a31a253"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "animationList" : [
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx",
+                        "name" : "Shots"
+                     },
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx",
+                        "name" : "BarrelExchange"
+                     },
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx",
+                        "name" : "Reload"
+                     }
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/mg42_anim.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.010,
+                              "v" : 0.010
+                           }
+                        },
+                        "material" : "SkelUVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "b0384020-b6ac-45ae-9df3-045e51cc7e8a"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 100,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 1
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "animationList" : [
+                     {
+                        "file" : "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Objects/Mesh/mg42_anim.fbx",
+                        "name" : "Shots"
+                     }
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/mg42_1x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "SkelAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.010,
+                              "v" : 0.010
+                           }
+                        },
+                        "material" : "SkelUVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "2779083c-1ee2-4b52-9eb3-586a383c5d4e"
+      },
+      {
+         "color" : "002E1A",
+         "density" : 400,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/dzialko.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "VGun",
+            "filename" : "$MOD_DATA/Scripts/VanillaProjectileGun.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "68337ca8-e957-4b3f-a6dd-c11ac61da064"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 1000,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/uchwyt 4.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "04075bce-2b41-47a2-8753-343b1e0b20f7"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 1000,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/podporka.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "ad260178-696b-4f96-b4ac-1f915afb1ce4"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "5099511b-554b-4cba-a425-e07527b9a8f0"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_OneAndHalf.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "e9cd2aab-9f63-49c5-8b65-96e8471bfb7f"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_wedge_1x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "4c3133fa-02cc-466d-85ed-fd40e7b7a297"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_wedge_1x2.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "1260c944-c2d6-41be-b6a1-e9d1dfb020c5"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_SQ.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "930e02b4-0c2b-49d6-a34a-8045b81b41d9"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_SQ_OneAndHalf.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "f0bd91ea-5fcd-4679-9cd8-0208473fba96"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_wedge_SQ_1x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "5093704c-63d7-4e7c-bd5b-e9306df6e479"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankSight_wedge_SQ_1x2.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sphere" : {
+            "diameter" : 1
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "83d839c5-ff98-44b2-bcaf-629439b85d9b"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "hull" : {
+            "margin" : 0.450,
+            "pointList" : [
+               {
+                  "x" : 2,
+                  "y" : 0,
+                  "z" : 0
+               },
+               {
+                  "x" : -2,
+                  "y" : 0,
+                  "z" : 0
+               }
+            ],
+            "x" : 2,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankDriverVisor2x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "2fe5a537-657f-43f3-bced-aa1785ba74d9"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "hull" : {
+            "margin" : 0.450,
+            "pointList" : [
+               {
+                  "x" : 2,
+                  "y" : 0,
+                  "z" : 0
+               },
+               {
+                  "x" : -2,
+                  "y" : 0,
+                  "z" : 0
+               }
+            ],
+            "x" : 2,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankDriverVisor45d2x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "1fad8451-7485-42f0-a607-26728b389858"
+      },
+      {
+         "color" : "df7f00",
+         "density" : 100,
+         "hull" : {
+            "margin" : 0.450,
+            "pointList" : [
+               {
+                  "x" : 3,
+                  "y" : 0,
+                  "z" : 0
+               },
+               {
+                  "x" : -3,
+                  "y" : 0,
+                  "z" : 0
+               }
+            ],
+            "x" : 3,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankDriverVisor3x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "e7b4c12b-f074-4ca5-98f5-15a98c4615ef"
+      },
+      {
+         "box" : {
+            "x" : 3,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankDriverVisor3x1x1.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "27ddbae7-247a-4955-99b7-190708d46ef4"
+      },
+      {
+         "box" : {
+            "x" : 3,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/TankCommanderVisor3x0.5.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "67c2f314-5b3a-442e-ab08-6e6c24699d97"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/PlaneSight.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     },
+                     {
+                        "material" : "Glass",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "9d06161a-da39-451f-9ca3-08e1e7a20d4a"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/2Shells.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "2d132e4e-5084-4178-839c-c75e06e19153"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 100,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/AmmoRack37.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "0232a807-7615-4049-b600-12583a3ba392"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "39FF14",
+         "density" : 100,
+         "logic" : {},
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "includes" : [
+                     "POSITION",
+                     "UV0",
+                     "UV1",
+                     "NORMAL",
+                     "TANGENTS",
+                     "BLEND_INDICES",
+                     "BLEND_WEIGHTS"
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Ger_Crossight_on.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/Ger_Crossight_on.obj",
+                  "subMeshList" : [
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/SightDIF.png",
+                           "$MOD_DATA/Objects/Textures/SightASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropZ",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "029e27bd-f589-4a15-b8fc-19a553f34fd0"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "39FF14",
+         "density" : 100,
+         "logic" : {},
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "includes" : [
+                     "POSITION",
+                     "UV0",
+                     "UV1",
+                     "NORMAL",
+                     "TANGENTS",
+                     "BLEND_INDICES",
+                     "BLEND_WEIGHTS"
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/US_Crossight_on.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/US_Crossight_on.obj",
+                  "subMeshList" : [
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/SightDIF.png",
+                           "$MOD_DATA/Objects/Textures/SightASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropZ",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "4ef479e3-e403-4a3b-a7b5-2c0464549de7"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "39FF14",
+         "density" : 100,
+         "logic" : {},
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "includes" : [
+                     "POSITION",
+                     "UV0",
+                     "UV1",
+                     "NORMAL",
+                     "TANGENTS",
+                     "BLEND_INDICES",
+                     "BLEND_WEIGHTS"
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/CAM_Crossight_on.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/CAM_Crossight_on.obj",
+                  "subMeshList" : [
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/SightDIF.png",
+                           "$MOD_DATA/Objects/Textures/SightASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropZ",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "01f520e7-488c-4456-a4e7-6d4fee7bddb4"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "39FF14",
+         "density" : 100,
+         "logic" : {},
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "includes" : [
+                     "POSITION",
+                     "UV0",
+                     "UV1",
+                     "NORMAL",
+                     "TANGENTS",
+                     "BLEND_INDICES",
+                     "BLEND_WEIGHTS"
+                  ],
+                  "mesh" : "$MOD_DATA/Objects/Mesh/OR_Crossight_on.obj",
+                  "pose0" : "$MOD_DATA/Objects/Mesh/OR_Crossight_on.obj",
+                  "subMeshList" : [
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/SightDIF.png",
+                           "$MOD_DATA/Objects/Textures/SightASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropZ",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "3423b398-0083-45e8-a5d3-ba7d6dddd668"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "F8E08C",
+         "density" : 1000,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/oslona.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "28cc8c06-44e3-48e9-a76e-d0fa178997f0"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 200,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/pancerz.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "f6a9f44d-4544-4d4f-b623-559f3e0a0b31"
+      },
+      {
+         "color" : "3c5200",
+         "density" : 120,
+         "hull" : {
+            "margin" : 0.350,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 4
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -4
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 4
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Bomb_Sensor_1.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/ASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBombSensor",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBombSensor.lua"
+         },
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "b660f72a-7640-4446-b8bb-2df3cad61bbb"
+      },
+      {
+         "color" : "556b2f",
+         "density" : 50,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 2
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -2
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 2
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/bomb 100.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/ASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "db03da50-e7d6-4a42-8f07-4a296c64f2cd"
+      },
+      {
+         "color" : "556b2f",
+         "density" : 120,
+         "hull" : {
+            "margin" : 0.450,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 3
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -3
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 3
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/bomb 250.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/ASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "2433e932-88bb-4c14-b9bb-76502e03a9c9"
+      },
+      {
+         "color" : "556b2f",
+         "density" : 200,
+         "hull" : {
+            "margin" : 0.450,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 5
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -5
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 5
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/bomb 500.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/ASG.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "fe2d4f4e-a2ba-42ba-a7a5-6b97b2c0fa48"
+      },
+      {
+         "color" : "cadc79",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.0150,
+            "pointList" : [
+               {
+                  "x" : -1,
+                  "y" : -1,
+                  "z" : -1
+               },
+               {
+                  "x" : -1,
+                  "y" : -1,
+                  "z" : 1
+               },
+               {
+                  "x" : 1,
+                  "y" : -1,
+                  "z" : -1
+               },
+               {
+                  "x" : 1,
+                  "y" : -1,
+                  "z" : 1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 1,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/M1_A.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "sensor" : {},
+         "showInInventory" : false,
+         "uuid" : "46584f5b-b846-43c3-9f17-3fd494c5b8f0"
+      },
+      {
+         "color" : "F8E08C",
+         "density" : 300,
+         "hull" : {
+            "margin" : 0.0150,
+            "pointList" : [
+               {
+                  "x" : -1,
+                  "y" : -1,
+                  "z" : -1
+               },
+               {
+                  "x" : -1,
+                  "y" : 1,
+                  "z" : -1
+               },
+               {
+                  "x" : 1,
+                  "y" : -1,
+                  "z" : -1
+               },
+               {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : -1
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 1,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/S Mine F.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/Sminegunfo.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "sensor" : {},
+         "uuid" : "1a74c9b1-dea5-42ab-86ad-08f1d24507d3"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "556b2f",
+         "density" : 1500,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/M1.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "showInInventory" : false,
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "0352de84-5cc7-487a-ae15-f3d9d6a84f37"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "F8E08C",
+         "density" : 10000,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/ziemia.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/earth.png",
+                           "$MOD_DATA/Objects/Textures/reflections3_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "showInInventory" : false,
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "820f8c24-37a5-42c4-9443-f60f0724c6b1"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "54616a",
+         "density" : 1000,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 20,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/S Mine p1.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/SMG2.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "ExplosiveBomb",
+            "filename" : "$MOD_DATA/Scripts/ExplosiveBomb.lua"
+         },
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "77a65230-9c33-490f-b24d-e80cd63f6802"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "000000",
+         "density" : 250,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 3,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
+                  "pose0" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     },
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "AlarmBlock",
+            "filename" : "$MOD_DATA/Scripts/AlarmBlock.lua"
+         },
+         "showInInventory" : false,
+         "uuid" : "561b2e83-4e9b-462f-ae97-645dc596b2c4"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "000000",
+         "density" : 250,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 3,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
+                  "pose0" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     },
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "AlarmBlock",
+            "filename" : "$MOD_DATA/Scripts/AlarmBlock.lua"
+         },
+         "showInInventory" : false,
+         "uuid" : "b40dbc55-65f3-40ae-be5e-4d8976c7d970"
+      },
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "000000",
+         "density" : 250,
+         "physicsMaterial" : "Metal",
+         "qualityLevel" : 3,
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_off.fbx",
+                  "pose0" : "$GAME_DATA/Objects/Mesh/interactive/obj_interactive_logicgate_on.fbx",
+                  "subMeshList" : [
+                     {
+                        "material" : "PoseAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     },
+                     {
+                        "custom" : {
+                           "uv0" : {
+                              "u" : 0.166666670,
+                              "v" : 0.16450
+                           }
+                        },
+                        "material" : "UVAnimDifAsgNor",
+                        "textureList" : [
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_dif.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_asg.tga",
+                           "$GAME_DATA/Objects/Textures/interactive/obj_interactive_logicgate_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "scripted" : {
+            "classname" : "AlarmBlock",
+            "filename" : "$MOD_DATA/Scripts/AlarmBlock.lua"
+         },
+         "showInInventory" : false,
+         "uuid" : "27839ef0-bc1e-4fed-a715-7adb9c9701b1"
+      },
+      {
+         "color" : "375219",
+         "density" : 1000,
+         "hull" : {
+            "margin" : 0.250,
+            "pointList" : [
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 2
+               },
+               {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : -2
+               }
+            ],
+            "x" : 1,
+            "y" : 1,
+            "z" : 2
+         },
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/Tks.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/texture_dif.tga",
+                           "$MOD_DATA/Objects/Textures/reflections2_asg.tga",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropYZ",
+         "sticky" : "+Y-Y+Z-Z+X-X",
+         "uuid" : "cb8d96c9-2b7b-4bfc-ae07-e308455dee6b"
+      },
+      {
+         "box" : {
+            "x" : 2,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "FFFFFF",
+         "name" : "obj_consumable_medicalbag",
+         "physicsMaterial" : "Fabric",
+         "ratings" : {
+            "density" : 3,
+            "durability" : 2
+         },
+         "renderable" : "$CONTENT_DATA/Objects/Renderables/obj_consumable_medicalbag.rend",
+         "rotationSet" : "PropY",
+         "uuid" : "4664a470-275f-4799-a54f-6a4a2111f436"
+      }
+   ]
 }
