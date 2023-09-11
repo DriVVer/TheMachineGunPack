@@ -3518,7 +3518,15 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.0
+						time = 0.25
+					},
+					{
+						type = mgp_tool_anim_enum.event,
+						callback = "cl_n_displayMagInfo"
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.75
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3542,7 +3550,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.15
@@ -3594,6 +3601,15 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.3
+					},
+					{
+						type = mgp_tool_anim_enum.event,
+						callback = "sv_n_trySpendAmmo",
+						server = true
 					}
 				}
 			},
@@ -3660,6 +3676,15 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.event,
+						callback = "sv_n_trySpendAmmo",
+						server = true
 					}
 				}
 			},

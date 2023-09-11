@@ -259,9 +259,24 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 	track.func(self, track, dt)
 end
 
+---@class EventHandlerData
+---@field callback string
+---@field args? any
+---@field server? boolean
+
+---@class EventHandlerTrack
+---@field step_data EventHandlerData
+---@field func function
+
+---@param self ToolClass
+---@param track EventHandlerTrack
 AnimationUpdateFunctions.event_handler = function(self, track, dt)
 	local func_data = track.step_data
-	self[func_data.callback](self, func_data.args)
+	if not func_data.server then
+		self[func_data.callback](self, func_data.args)
+	elseif self.tool:isLocal() then
+		self.network:sendToServer(func_data.callback, func_data.args)
+	end
 
 	track.func = AnimationUpdateFunctions.anim_selector
 	track.func(self, track, dt)
