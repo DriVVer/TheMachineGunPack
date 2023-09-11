@@ -260,7 +260,8 @@ end
 local actual_reload_anims =
 {
 	["reload"] = true,
-	["reload_empty"] = true
+	["reload_empty"] = true,
+	["reload_type"] = true
 }
 
 local aim_animations =
@@ -322,39 +323,16 @@ end
 function DB:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
-	if self.cl_show_ammo_timer then
-		self.cl_show_ammo_timer = self.cl_show_ammo_timer - dt
-
-		if self.cl_show_ammo_timer <= 0.0 then
-			self.cl_show_ammo_timer = nil
-			if self.tool:isEquipped() then
-				sm.gui.displayAlertText(("DB: %s #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammoTypes[self.ammoType].name, self.ammo_in_mag, self.mag_capacity), 2)
-			end
-		end
-	end
-
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
 	if self.tool:isLocal() then
 		if self.equipped then
-			local fp_anim = self.fpAnimations
-			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
-
-				if time_predict >= info_duration then
-					self.network:sendToServer("sv_n_trySpendAmmo")
-				end
-			end
-
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+			local cur_anim_cache = self.fpAnimations.currentAnimation
+			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+			elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
@@ -448,7 +426,7 @@ function DB:client_onUpdate(dt)
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
+				elseif actual_reload_anims[name] == true then
 					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, "idle", 3 )
@@ -780,11 +758,13 @@ function DB:cl_startCheckMagAnim()
 	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
+function DB:cl_n_displayMagInfo()
+	sm.gui.displayAlertText(("DB: %s #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammoTypes[self.ammoType].name, self.ammo_in_mag, self.mag_capacity), 2)
+end
+
 function DB:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			self.cl_show_ammo_timer = 0.3
-
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
