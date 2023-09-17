@@ -1,0 +1,17 @@
+{
+   "lodList" : [
+      {
+         "mesh" : "$CONTENT_DATA/Objects/Mesh/consumable/char_tool_medicalbag_props_test.fbx",
+         "subMeshList" : [
+            {
+               "material" : "DifAsgNor",
+               "textureList" : [
+                  "$CONTENT_DATA/Objects/Textures/consumable/obj_consumable_medicalbag_props_dif.tga",
+                  "$CONTENT_DATA/Objects/Textures/consumable/obj_consumable_medicalbag_props_asg.tga",
+                  "$CONTENT_DATA/Objects/Textures/consumable/obj_consumable_medicalbag_props_nor.tga"
+               ]
+            }
+         ]
+      }
+   ]
+}
