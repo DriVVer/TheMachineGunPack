@@ -103,7 +103,7 @@
 		{
 			"uuid": "7a3887dd-0fd2-489c-ac04-7306a672ae35",
 			"name": "mgp_grenade_sharpnel",
-			"mass": 100.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.5,
 			"spin": 7.0,
