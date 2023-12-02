@@ -26,6 +26,7 @@ dofile("../ExplosionUtil.lua")
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
+	self.cl_isLocal = self.tool:isLocal()
 	self.grenade_active = false
 end
 
@@ -42,7 +43,7 @@ function HandheldGrenadeBase.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(self.tool, self.mgp_fp_animation_list)
 	end
 
@@ -144,7 +145,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 		end
 	end
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped and not self.grenade_used then
 			local fp_anims = self.fpAnimations
 			local cur_anim = fp_anims.currentAnimation
@@ -201,7 +202,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -366,7 +367,7 @@ function HandheldGrenadeBase.client_onUnequip( self, animate )
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
 		end
 		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
+		if self.cl_isLocal then
 			self.tool:setMovementSlowDown( false )
 			self.tool:setBlockSprint( false )
 			self.tool:setCrossHairAlpha( 1.0 )
@@ -383,7 +384,7 @@ function HandheldGrenadeBase.sv_n_onAim( self, aiming )
 end
 
 function HandheldGrenadeBase.cl_n_onAim( self, aiming )
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
@@ -400,7 +401,7 @@ function HandheldGrenadeBase:onActivateGrenade()
 end
 
 function HandheldGrenadeBase:cl_n_activateGrenade()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onActivateGrenade()
 	end
 end
@@ -414,7 +415,7 @@ function HandheldGrenadeBase:onThrowGrenade()
 end
 
 function HandheldGrenadeBase:cl_n_throwGrenade()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onThrowGrenade()
 	end
 end
@@ -676,7 +677,7 @@ local blocking_animations =
 }
 
 function HandheldGrenadeBase:cl_shouldBlockSprint()
-	if self.tool:isLocal() and self.equipped then
+	if self.cl_isLocal and self.equipped then
 		return (blocking_animations[self.fpAnimations.currentAnimation] == true)
 	end
 

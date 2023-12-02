@@ -64,11 +64,11 @@ local function IsLiquid(trigger)
 end
 
 ---@param self PTRD
-function PTRDProjectile_clientSpawnProjectile(self, dir, is_local)
+function PTRDProjectile_clientSpawnProjectile(self, dir)
 	local s_tool = self.tool
 
 	local v_proj_pos = nil
-	if is_local and s_tool:isLocal() and s_tool:isInFirstPersonView() then
+	if self.cl_isLocals and s_tool:isInFirstPersonView() then
 		v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
 
 		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()

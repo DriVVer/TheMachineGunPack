@@ -194,7 +194,7 @@ function Bazooka.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -366,7 +366,7 @@ function Bazooka:client_onUpdate(dt)
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
 			if hit and not mgp_tool_isAnimPlaying(self, g_close_anim_block) then
@@ -454,7 +454,7 @@ function Bazooka:client_onUpdate(dt)
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -599,8 +599,7 @@ function Bazooka:client_onEquip(animate, is_custom)
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -619,7 +618,7 @@ function Bazooka:client_onEquip(animate, is_custom)
 	end
 
 	if (is_custom and self.cl_barrel_attached) or not self.cl_is_loaded then
-		if is_tool_local then
+		if self.cl_isLocal then
 			self.tool:updateFpAnimation("BZ_Anim", 3.5, 1.0)
 			swapFpAnimation(self.fpAnimations, "unequip", "equip_short", 0.2)
 		end
@@ -628,7 +627,7 @@ function Bazooka:client_onEquip(animate, is_custom)
 
 		--Set tp and fp animations
 		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
-		if is_tool_local then
+		if self.cl_isLocal then
 			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 		end
 	end
@@ -679,7 +678,7 @@ function Bazooka:sv_n_onAim(aiming)
 end
 
 function Bazooka:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
@@ -704,7 +703,7 @@ function Bazooka:sv_n_onShoot(v_proj_hit)
 end
 
 function Bazooka:cl_n_onShoot(v_proj_hit)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(v_proj_hit)
 	end
 end
@@ -714,7 +713,7 @@ function Bazooka:onShoot(v_proj_hit)
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 120 }, self.tool:isLocal())
+	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 120 })
 
 	self.cl_barrel_exhaust:start()
 end
@@ -783,7 +782,7 @@ function Bazooka:sv_n_onReload()
 end
 
 function Bazooka:cl_n_onReload()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim()
 	end
 end

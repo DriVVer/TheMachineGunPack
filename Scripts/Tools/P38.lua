@@ -24,6 +24,10 @@ local Damage = 26
 ---@field spineWeight number
 P38 = class()
 P38.mag_capacity = 8
+P38.maxRecoil = 15
+P38.recoilAmount = 10
+P38.aimRecoilAmount = 7.5
+P38.recoilRecoverySpeed = 1
 
 local renderables =
 {
@@ -146,7 +150,7 @@ function P38.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -291,7 +295,7 @@ function P38.client_onUpdate( self, dt )
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
@@ -343,7 +347,7 @@ function P38.client_onUpdate( self, dt )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -387,7 +391,7 @@ function P38.client_onUpdate( self, dt )
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
-	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
+	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -493,8 +497,7 @@ function P38:client_onEquip(animate, is_custom)
 	
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -507,7 +510,7 @@ function P38:client_onEquip(animate, is_custom)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
+	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
@@ -556,7 +559,7 @@ function P38:sv_n_onAim(aiming)
 end
 
 function P38:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
@@ -578,7 +581,7 @@ function P38:sv_n_onShoot(is_last_shot)
 end
 
 function P38:cl_n_onShoot(is_last_shot)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(is_last_shot)
 	end
 end
@@ -790,7 +793,7 @@ function P38:sv_n_onReload(anim_id)
 end
 
 function P38:cl_n_onReload(anim_id)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
@@ -902,6 +905,8 @@ function P38.cl_onSecondaryUse( self, state )
 end
 
 function P38.client_onEquippedUpdate( self, primaryState, secondaryState )
+	mgp_toolAnimator_checkForRecoil(self, primaryState)
+
 	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then

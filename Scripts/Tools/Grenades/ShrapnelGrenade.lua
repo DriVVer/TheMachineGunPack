@@ -65,7 +65,7 @@ function ShrapnelGrenadeBase.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -143,7 +143,7 @@ function ShrapnelGrenadeBase.client_onUpdate( self, dt )
 	local isSprinting =  self.tool:isSprinting()
 	local isCrouching =  self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
@@ -185,7 +185,7 @@ function ShrapnelGrenadeBase.client_onUpdate( self, dt )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -374,7 +374,7 @@ function ShrapnelGrenadeBase.client_onUnequip( self, animate )
 			sm.audio.play( "PotatoRifle - Unequip", self.tool:getPosition() )
 		end
 		setTpAnimation( self.tpAnimations, "putdown" )
-		if self.tool:isLocal() then
+		if self.cl_isLocal then
 			self.tool:setMovementSlowDown( false )
 			self.tool:setBlockSprint( false )
 			self.tool:setCrossHairAlpha( 1.0 )
@@ -391,7 +391,7 @@ function ShrapnelGrenadeBase.sv_n_onAim( self, aiming )
 end
 
 function ShrapnelGrenadeBase.cl_n_onAim( self, aiming )
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
@@ -412,7 +412,7 @@ function ShrapnelGrenadeBase:onShoot()
 end
 
 function ShrapnelGrenadeBase:cl_n_throwGrenade()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot()
 	end
 end

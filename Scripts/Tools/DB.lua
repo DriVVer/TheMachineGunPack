@@ -38,6 +38,10 @@ DB.ammoTypes = {
 		name = "Sabot"
 	}
 }
+DB.maxRecoil = 30
+DB.recoilAmount = 20
+DB.aimRecoilAmount = 10
+DB.recoilRecoverySpeed = 0.5
 
 local renderables =
 {
@@ -117,7 +121,7 @@ function DB:client_onCreate()
 	self.network:sendToServer("server_requestAmmo")
 
 	self.ammoType = 1
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
 		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
 		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
@@ -184,7 +188,7 @@ function DB.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -327,7 +331,7 @@ function DB:client_onUpdate(dt)
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			local cur_anim_cache = self.fpAnimations.currentAnimation
 			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
@@ -366,7 +370,7 @@ function DB:client_onUpdate(dt)
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -409,7 +413,7 @@ function DB:client_onUpdate(dt)
 	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() or self.aiming)
 
 	local playerDir = self.tool:getSmoothDirection()
-	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
+	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -515,8 +519,7 @@ function DB:client_onEquip(animate, is_custom)
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -527,7 +530,7 @@ function DB:client_onEquip(animate, is_custom)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
+	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 end
@@ -574,7 +577,7 @@ function DB:sv_n_onAim(aiming)
 end
 
 function DB:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
@@ -597,7 +600,7 @@ function DB:sv_n_onShoot()
 end
 
 function DB:cl_n_onShoot()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot()
 	end
 end
@@ -679,7 +682,7 @@ function DB:sv_n_onReload(anim_id)
 end
 
 function DB:cl_n_onReload(anim_id)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
 	end
 end
@@ -795,6 +798,8 @@ function DB.cl_onSecondaryUse( self, state )
 end
 
 function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
+	mgp_toolAnimator_checkForRecoil(self, primaryState)
+
 	if primaryState == sm.tool.interactState.start then
 		self:cl_onPrimaryUse()
 	end
@@ -847,7 +852,7 @@ end
 
 function DB:cl_playSwitch(ammoType)
 	self.ammoType = ammoType
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self:client_receiveAmmo(self.mag_capacity)
 	end
 
@@ -858,7 +863,7 @@ end
 function DB:cl_changeColour()
 	local col = self.ammoTypes[self.ammoType].colour
 	self.tool:setTpColor(col)
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.tool:setFpColor(col)
 	end
 end

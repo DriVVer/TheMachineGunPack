@@ -274,7 +274,7 @@ AnimationUpdateFunctions.event_handler = function(self, track, dt)
 	local func_data = track.step_data
 	if not func_data.server then
 		self[func_data.callback](self, func_data.args)
-	elseif self.tool:isLocal() then
+	elseif self.cl_isLocal then
 		self.network:sendToServer(func_data.callback, func_data.args)
 	end
 
@@ -282,6 +282,19 @@ AnimationUpdateFunctions.event_handler = function(self, track, dt)
 	track.func(self, track, dt)
 end
 
+
+local cam = sm.camera
+local camera_getPullBack = cam.getCameraPullback
+local camera_setState = cam.setCameraState
+local camera_setPos = cam.setPosition
+local camera_setRot = cam.setRotation
+local camera_setFov = cam.setFov
+local camera_getDefaultPos = cam.getDefaultPosition
+local camera_getDefaultRotation = cam.getDefaultRotation
+local camera_getDefaultFov = cam.getDefaultFov
+local quat_angleAxis = sm.quat.angleAxis
+local right = sm.vec3.new(1,0,0)
+local util_lerp = sm.util.lerp
 function mgp_toolAnimator_update(self, dt)
 	if self.cl_animator_current_track_count > 0 then
 		for id, track in pairs(self.cl_animator_tracks) do
@@ -296,6 +309,25 @@ function mgp_toolAnimator_update(self, dt)
 
 		if self.cl_animator_current_track_count == 0 then
 			self.cl_animator_current_name = nil
+		end
+	end
+
+	self.cl_desiredRecoilAngle = math.max(self.cl_desiredRecoilAngle - dt * (self.recoilRecoverySpeed or 1), 0)
+	self.cl_recoilAngle = util_lerp(self.cl_recoilAngle, self.cl_desiredRecoilAngle, dt * 10)
+	if self.cl_isLocal and self.equipped then
+		local pullback = camera_getPullBack()
+		if pullback == 0 then
+			camera_setState(2)
+			camera_setPos(camera_getDefaultPos())
+			camera_setRot(camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right))
+			camera_setFov(util_lerp(camera_getDefaultFov(), 30, self.aimWeight))
+		else
+			camera_setState(0)
+			--[[setState(3)
+			local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
+			local rot = sm.quat.angleAxis(self.cl_recoilAngle, sm.vec3.new(1,0,0))
+			sm.camera.setPosition(sm.localPlayer.getPlayer().character.worldPosition + rot * offset)
+			sm.camera.setDirection(rot * sm.localPlayer.getPlayer().character.direction)]]
 		end
 	end
 end
@@ -331,6 +363,16 @@ function mgp_toolAnimator_getAnimation(self)
 	return self.cl_animator_current_name
 end
 
+local isAimShootAnim = {
+	aimShoot = true,
+	shoot_aim = true,
+	shoot_bipod = true,
+}
+local isShootAnim = {
+	shoot = true,
+	last_shot = true
+}
+
 function mgp_toolAnimator_setAnimation(self, anim_name)
 	if self.cl_animator_reset_data then
 		local reset_data = self.cl_animator_reset_data[anim_name]
@@ -359,6 +401,25 @@ function mgp_toolAnimator_setAnimation(self, anim_name)
 			func = AnimationUpdateFunctions.anim_selector
 		}
 	end
+
+	local isAimShoot = isAimShootAnim[anim_name] == true
+	if isAimShoot or isShootAnim[anim_name] == true then
+		local recoilAmount = isAimShoot and self.aimRecoilAmount or self.recoilAmount
+		self.cl_desiredRecoilAngle = math.min(self.cl_desiredRecoilAngle + math.rad(recoilAmount or 0), math.rad(self.maxRecoil or 0))
+	end
+end
+
+local function cl_recoil_unlock(self)
+	sm.localPlayer.setLockedControls(false)
+end
+
+local function sv_recoil_resetRecoil(self)
+	self.network:sendToClients("cl_recoil_resetRecoil")
+end
+
+local function cl_recoil_resetRecoil(self)
+	self.cl_recoilAngle = 0
+	self.cl_desiredRecoilAngle = 0
 end
 
 function mgp_toolAnimator_initialize(self, tool_name)
@@ -398,10 +459,24 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	self.cl_animator_on_unequip = anim_data.on_unequip_action
 	self.cl_animator_current_track_count = 0
 	self.cl_animator_tracks = {}
+
+	self.cl_recoilAngle = 0
+	self.cl_desiredRecoilAngle = 0
+	self.cl_isFiring = false
+
+	self.cl_isLocal = self.tool:isLocal()
+
+	self.cl_recoil_unlock = cl_recoil_unlock
+	self.sv_recoil_resetRecoil = sv_recoil_resetRecoil
+	self.cl_recoil_resetRecoil = cl_recoil_resetRecoil
 end
 
 function mgp_toolAnimator_reset(self)
 	self.cl_animator_tracks = {}
+
+	if self.cl_isLocal then
+		sm.camera.setCameraState(0)
+	end
 
 	local cl_on_unequip = self.cl_animator_on_unequip
 	if cl_on_unequip == nil then return end
@@ -421,7 +496,26 @@ function mgp_toolAnimator_reset(self)
 	end
 end
 
+function mgp_toolAnimator_checkForRecoil(self, state)
+	--[[local isFiring = (state == 1 or state == 2) and self.ammo_in_mag > 0
+	if isFiring ~= self.cl_isFiring then
+		if not isFiring then
+			sm.localPlayer.setLockedControls(true)
+			sm.localPlayer.setDirection(sm.camera.getDefaultRotation() * sm.quat.angleAxis(self.cl_recoilAngle, sm.vec3.new(1,0,0)) * sm.vec3.new(0,1,0))
+			self:cl_recoil_resetRecoil()
+			self.network:sendToServer("sv_recoil_resetRecoil")
+			sm.event.sendToTool(self.tool, "cl_recoil_unlock")
+		end
+
+		self.cl_isFiring = isFiring
+	end]]
+end
+
 function mgp_toolAnimator_destroy(self)
+	if self.cl_isLocal then
+		sm.camera.setCameraState(0)
+	end
+
 	for k, cur_effect in pairs(self.cl_animator_effects) do
 		if cur_effect:isPlaying() then
 			cur_effect:stopImmediate()

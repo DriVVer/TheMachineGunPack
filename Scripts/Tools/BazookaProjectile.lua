@@ -24,11 +24,11 @@ local function calculateRightVector(vector)
 end
 
 ---@param self Bazooka
-function BazookaProjectile_clientSpawnProjectile(self, data, is_local)
+function BazookaProjectile_clientSpawnProjectile(self, data)
 	local s_tool = self.tool
 
 	local v_proj_pos = nil
-	if is_local and s_tool:isLocal() and s_tool:isInFirstPersonView() then
+	if self.cl_isLocal and s_tool:isInFirstPersonView() then
 		v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
 
 		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()

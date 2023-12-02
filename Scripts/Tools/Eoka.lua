@@ -46,6 +46,7 @@ function Eoka:client_initAimVals()
 end
 
 function Eoka:client_onCreate()
+	self.cl_isLocal = self.tool:isLocal()
 	self.aimBlendSpeed = 8.0
 	self:client_initAimVals()
 
@@ -106,7 +107,7 @@ function Eoka:loadAnimations()
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -228,7 +229,7 @@ function Eoka:client_onUpdate(dt)
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped and not self.cl_restore_timer then
 			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
@@ -252,7 +253,7 @@ function Eoka:client_onUpdate(dt)
 		return
 	end
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dir = sm.localPlayer.getDirection()
 		local fire_pos = self.tool:getFpBonePos("pejnt_barrel")
 
@@ -270,7 +271,7 @@ function Eoka:client_onUpdate(dt)
 	tp_eff:setVelocity(self.tool:getMovementVelocity())
 	tp_eff:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), shoot_dir))
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.normalFireMode
 
@@ -412,8 +413,7 @@ function Eoka:client_onEquip(animate, is_custom)
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables(currentRenderablesTp)
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -422,7 +422,7 @@ function Eoka:client_onEquip(animate, is_custom)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
+	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 end
@@ -470,7 +470,7 @@ function Eoka:sv_n_onShoot(gun_slot)
 end
 
 function Eoka:cl_n_onShoot()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot()
 	end
 end

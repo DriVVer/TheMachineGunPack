@@ -26,6 +26,10 @@ local Damage = 65
 ---@field scope_hud GuiInterface
 Garand = class()
 Garand.mag_capacity = 8
+Garand.maxRecoil = 30
+Garand.recoilAmount = 20
+Garand.aimRecoilAmount = 15
+Garand.recoilRecoverySpeed = 1
 
 local renderables =
 {
@@ -199,7 +203,7 @@ function Garand:loadAnimations()
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -373,7 +377,7 @@ function Garand:client_onUpdate(dt)
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
 			if hit and not self:client_isGunReloading(garand_obstacle_block_anims) then
@@ -444,7 +448,7 @@ function Garand:client_onUpdate(dt)
 		end
 	end
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -487,7 +491,7 @@ function Garand:client_onUpdate(dt)
 	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(garand_sprint_block_anims))
 
 	local playerDir = self.tool:getSmoothDirection()
-	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
+	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -594,8 +598,7 @@ function Garand:client_onEquip(animate, is_custom)
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -604,7 +607,7 @@ function Garand:client_onEquip(animate, is_custom)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
+	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
@@ -656,7 +659,7 @@ function Garand:sv_n_onAim(aiming)
 end
 
 function Garand:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
@@ -678,7 +681,7 @@ function Garand:sv_n_onShoot(ammo_in_mag)
 end
 
 function Garand:cl_n_onShoot(ammo_in_mag)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(ammo_in_mag)
 	end
 end
@@ -769,7 +772,7 @@ function Garand:sv_n_onReload(is_garand_thumb)
 end
 
 function Garand:cl_n_onReload(is_garand_thumb)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim(is_garand_thumb)
 	end
 end
@@ -885,6 +888,8 @@ function Garand:cl_onSecondaryUse(state)
 end
 
 function Garand:client_onEquippedUpdate(primaryState, secondaryState)
+	mgp_toolAnimator_checkForRecoil(self, primaryState)
+
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState

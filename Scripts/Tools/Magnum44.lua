@@ -24,6 +24,10 @@ local Damage = 45
 ---@field aim_timer integer
 Magnum44 = class()
 Magnum44.mag_capacity = 6
+Magnum44.maxRecoil = 30
+Magnum44.recoilAmount = 25
+Magnum44.aimRecoilAmount = 15
+Magnum44.recoilRecoverySpeed = 0.75
 
 local renderables =
 {
@@ -147,7 +151,7 @@ function Magnum44.loadAnimations( self )
 
 	setTpAnimation( self.tpAnimations, "idle", 5.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
@@ -317,7 +321,7 @@ function Magnum44:client_onUpdate(dt)
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		if self.equipped then
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
@@ -365,7 +369,7 @@ function Magnum44:client_onUpdate(dt)
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
 
-	if self.tool:isLocal() then
+	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
@@ -408,7 +412,7 @@ function Magnum44:client_onUpdate(dt)
 	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading())
 
 	local playerDir = self.tool:getSmoothDirection()
-	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 )
+	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
 	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
 
 	down = clamp( -angle, 0.0, 1.0 )
@@ -521,8 +525,7 @@ function Magnum44:client_onEquip(animate, is_custom)
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
-	local is_tool_local = self.tool:isLocal()
-	if is_tool_local then
+	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
@@ -535,7 +538,7 @@ function Magnum44:client_onEquip(animate, is_custom)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
-	if is_tool_local then
+	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 end
@@ -582,7 +585,7 @@ function Magnum44:sv_n_onAim(aiming)
 end
 
 function Magnum44:cl_n_onAim(aiming)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
@@ -604,7 +607,7 @@ function Magnum44:sv_n_onShoot(dir)
 end
 
 function Magnum44:cl_n_onShoot(dir)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot( dir )
 	end
 end
@@ -718,7 +721,7 @@ function Magnum44:sv_n_cockHammer()
 end
 
 function Magnum44:cl_n_cockHammer()
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
 	end
 end
@@ -842,7 +845,7 @@ function Magnum44:sv_n_onReload(anim_id)
 end
 
 function Magnum44:cl_n_onReload(anim_id)
-	if not self.tool:isLocal() and self.tool:isEquipped() then
+	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim(anim_id)
 	end
 end
@@ -949,6 +952,8 @@ function Magnum44:cl_onSecondaryUse(state)
 end
 
 function Magnum44:client_onEquippedUpdate(primaryState, secondaryState)
+	mgp_toolAnimator_checkForRecoil(self, primaryState)
+
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState
