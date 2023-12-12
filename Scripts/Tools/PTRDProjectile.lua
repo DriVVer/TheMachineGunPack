@@ -68,7 +68,7 @@ function PTRDProjectile_clientSpawnProjectile(self, dir)
 	local s_tool = self.tool
 
 	local v_proj_pos = nil
-	if self.cl_isLocals and s_tool:isInFirstPersonView() then
+	if self.cl_isLocal and s_tool:isInFirstPersonView() then
 		v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
 
 		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()
@@ -102,8 +102,10 @@ end
 local function PTRDProjectile_serverOnHit(proj_data)
 	local hit = proj_data[7]
 	local target = hit.target
-	local hitPos = hit.pos
 
+	if not sm.exists(target) then return end
+
+	local hitPos = hit.pos
 	local _type = type(target)
 	if _type == "Shape" then
 		local data = sm.item.getFeatureData(target.uuid)
@@ -177,15 +179,19 @@ function PTRDProjectile_clientOnFixedUpdate(self, dt)
 						sm.effect.playEffect( "Projectile - HitWater", hitPos )
 					else
 						local target = result:getShape() or result:getCharacter()
-						if sm.isHost and target and sm.exists(target) then
-							proj[7] = {
-								normal = result.normalWorld,
-								localPos = result.pointLocal,
-								pos = hitPos,
-								target = target
-							}
+						if target and sm.exists(target) then
+							if sm.isHost then
+								proj[7] = {
+									normal = result.normalWorld,
+									localPos = result.pointLocal,
+									pos = hitPos,
+									target = target
+								}
 
-							self.network:sendToServer("sv_checkProjectile", k)
+								self.network:sendToServer("sv_checkProjectile", k)
+							end
+
+							proj[8] = true
 						elseif g_killTypes[_type] == true then
 							proj[6] = 0
 							local v_cur_proj = proj[3]
@@ -194,8 +200,12 @@ function PTRDProjectile_clientOnFixedUpdate(self, dt)
 						end
 					end
 				else
-					proj[1] = v_pos + v_dir * dt
-					PTRDProjectile_UpdateProjectileRotation(proj)
+					if proj[8] == true then
+						proj[8] = nil
+					else
+						proj[1] = v_pos + v_dir * dt
+						PTRDProjectile_UpdateProjectileRotation(proj)
+					end
 				end
 			end
 		end
