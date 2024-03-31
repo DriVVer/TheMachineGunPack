@@ -285,10 +285,6 @@ end
 
 local cam = sm.camera
 local camera_getPullBack = cam.getCameraPullback
-local camera_setState = cam.setCameraState
-local camera_setPos = cam.setPosition
-local camera_setRot = cam.setRotation
-local camera_setFov = cam.setFov
 local camera_getDefaultPos = cam.getDefaultPosition
 local camera_getDefaultRotation = cam.getDefaultRotation
 local camera_getDefaultFov = cam.getDefaultFov
@@ -312,22 +308,28 @@ function mgp_toolAnimator_update(self, dt)
 		end
 	end
 
+	if true or not self.maxRecoil then return end
+
 	self.cl_desiredRecoilAngle = math.max(self.cl_desiredRecoilAngle - dt * (self.recoilRecoverySpeed or 1), 0)
 	self.cl_recoilAngle = util_lerp(self.cl_recoilAngle, self.cl_desiredRecoilAngle, dt * 10)
 	if self.cl_isLocal and self.equipped then
 		local pullback = camera_getPullBack()
 		if pullback == 0 then
-			camera_setState(2)
-			camera_setPos(camera_getDefaultPos())
-			camera_setRot(camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right))
-			camera_setFov(util_lerp(camera_getDefaultFov(), 30, self.aimWeight))
+			sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
+				cameraState = 2,
+				cameraPosition = camera_getDefaultPos(),
+				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
+				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+			}
 		else
-			camera_setState(0)
-			--[[setState(3)
-			local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
-			local rot = sm.quat.angleAxis(self.cl_recoilAngle, sm.vec3.new(1,0,0))
-			sm.camera.setPosition(sm.localPlayer.getPlayer().character.worldPosition + rot * offset)
-			sm.camera.setDirection(rot * sm.localPlayer.getPlayer().character.direction)]]
+			sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
+			--[[local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
+			sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
+				cameraState = 3,
+				cameraPosition = sm.localPlayer.getPlayer().character.worldPosition + sm.quat.angleAxis(self.cl_recoilAngle, sm.localPlayer.getRight()) * offset,
+				cameraRotation = camera_getDefaultRotation() * sm.quat.angleAxis(self.cl_recoilAngle, right),
+				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+			}]]
 		end
 	end
 end
@@ -475,7 +477,7 @@ function mgp_toolAnimator_reset(self)
 	self.cl_animator_tracks = {}
 
 	if self.cl_isLocal then
-		sm.camera.setCameraState(0)
+		sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
 	end
 
 	local cl_on_unequip = self.cl_animator_on_unequip
@@ -513,7 +515,7 @@ end
 
 function mgp_toolAnimator_destroy(self)
 	if self.cl_isLocal then
-		sm.camera.setCameraState(0)
+		sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
 	end
 
 	for k, cur_effect in pairs(self.cl_animator_effects) do
