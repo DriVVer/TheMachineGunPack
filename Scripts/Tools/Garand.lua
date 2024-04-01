@@ -7,7 +7,7 @@ dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 
-local Damage = 65
+local Damage = 165
 
 ---@class Garand : ToolClass
 ---@field fpAnimations table
