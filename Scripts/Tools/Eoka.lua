@@ -5,7 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolSwimUtil.lua")
 
-local Damage = 50
+local Damage = 9
 
 ---@class Eoka : ToolClass
 ---@field fpAnimations table

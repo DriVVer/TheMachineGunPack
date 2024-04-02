@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 1000
+local Damage = 100
 
 ---@class Mosin : ToolClass
 ---@field fpAnimations table
