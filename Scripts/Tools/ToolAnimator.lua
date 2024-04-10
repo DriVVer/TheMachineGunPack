@@ -308,21 +308,57 @@ function mgp_toolAnimator_update(self, dt)
 		end
 	end
 
-	if true or not self.maxRecoil then return end
+	if not self.maxRecoil then return end
 
 	self.cl_desiredRecoilAngle = math.max(self.cl_desiredRecoilAngle - dt * (self.recoilRecoverySpeed or 1), 0)
 	self.cl_recoilAngle = util_lerp(self.cl_recoilAngle, self.cl_desiredRecoilAngle, dt * 10)
+	--print(self.cl_desiredRecoilAngle, self.cl_recoilAngle, self.cl_isLocal, self.equipped)
 	if self.cl_isLocal and self.equipped then
+		local v_loc_pl = sm.localPlayer.getPlayer()
 		local pullback = camera_getPullBack()
 		if pullback == 0 then
-			sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
+			v_loc_pl.clientPublicData.customCameraData = {
 				cameraState = 2,
 				cameraPosition = camera_getDefaultPos(),
 				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
 				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
 			}
 		else
-			sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
+			local v_loc_char = v_loc_pl.character
+			if not v_loc_char then return end
+
+			local v_cam_dir = (sm.camera.getDefaultRotation() * sm.vec3.new(0, 1, 0)):normalize()
+			local v_cam_pitch = math.asin(v_cam_dir.z)
+			local v_cam_yaw = math.atan2(v_cam_dir.y, v_cam_dir.x) - math.pi / 2
+			local v_cam_dist = 1.3659 + 0.325 * pullback
+			local v_new_pos = sm.vec3.new(0, 1, 0)
+				:rotateX(v_cam_pitch + self.cl_recoilAngle)
+				:rotateZ(v_cam_yaw) * v_cam_dist
+
+			-- Using jnt_root because it's smoother than char.worldPosition
+			local v_char_real_pos = v_loc_char:getTpBonePos("jnt_root")
+				+ sm.vec3.new(0, 0, v_loc_char:getHeight() * 0.5) + v_loc_char.velocity * dt
+			local v_up_offset_coeff = math.abs(math.asin(v_cam_dir.z)) / math.pi * 2
+			local v_final_up_offset = 0.575 * (1 - v_up_offset_coeff)
+			local v_cam_final_offset = v_char_real_pos
+				+ sm.localPlayer.getRight() * 0.375
+				+ sm.localPlayer.getUp() * v_final_up_offset
+
+			local v_cam_final_pos = v_cam_final_offset - v_new_pos
+			local v_filter = sm.physics.filter
+			local v_hit, v_result = sm.physics.raycast(v_cam_final_offset, v_cam_final_pos - v_new_pos * 0.2, nil,
+				v_filter.staticBody + v_filter.terrainSurface + v_filter.terrainAsset)
+			if v_hit then
+				v_cam_final_pos = v_result.pointWorld + v_result.normalWorld * 0.2
+			end
+
+			v_loc_pl.clientPublicData.customCameraData = {
+				cameraState = 3,
+				cameraPosition = v_cam_final_pos,
+				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
+				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+			}
+			-- old solution
 			--[[local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
 			sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
 				cameraState = 3,
