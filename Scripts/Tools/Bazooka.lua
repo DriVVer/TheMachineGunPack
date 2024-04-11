@@ -155,7 +155,6 @@ function Bazooka.loadAnimations( self )
 		self.tool,
 		{
 			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
-			shoot_2 = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
 
 			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
