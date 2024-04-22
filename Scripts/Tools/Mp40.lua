@@ -23,10 +23,10 @@ local Damage = 21
 ---@field fireCooldownTimer integer
 Mp40 = class()
 Mp40.mag_capacity = 32
-Mp40.maxRecoil = 45
-Mp40.recoilAmount = 10
-Mp40.aimRecoilAmount = 7.5
-Mp40.recoilRecoverySpeed = 1
+Mp40.maxRecoil = 25
+Mp40.recoilAmount = 8
+Mp40.aimRecoilAmount = 6
+Mp40.recoilRecoverySpeed = 0.9
 
 local renderables =
 {
@@ -175,7 +175,7 @@ function Mp40.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.10,
+		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 4.7,

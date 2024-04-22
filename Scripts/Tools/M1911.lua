@@ -24,10 +24,10 @@ local Damage = 30
 ---@field spineWeight number
 M1911 = class()
 M1911.mag_capacity = 7
-M1911.maxRecoil = 15
-M1911.recoilAmount = 10
-M1911.aimRecoilAmount = 7.5
-M1911.recoilRecoverySpeed = 1
+M1911.maxRecoil = 40
+M1911.recoilAmount = 12
+M1911.aimRecoilAmount = 6
+M1911.recoilRecoverySpeed = 2
 
 local renderables =
 {

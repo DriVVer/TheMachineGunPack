@@ -24,10 +24,10 @@ local Damage = 26
 ---@field spineWeight number
 P38 = class()
 P38.mag_capacity = 8
-P38.maxRecoil = 15
+P38.maxRecoil = 20
 P38.recoilAmount = 10
-P38.aimRecoilAmount = 7.5
-P38.recoilRecoverySpeed = 1
+P38.aimRecoilAmount = 5
+P38.recoilRecoverySpeed = 2
 
 local renderables =
 {

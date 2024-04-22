@@ -40,8 +40,8 @@ DB.ammoTypes = {
 }
 DB.maxRecoil = 30
 DB.recoilAmount = 20
-DB.aimRecoilAmount = 10
-DB.recoilRecoverySpeed = 0.5
+DB.aimRecoilAmount = 12
+DB.recoilRecoverySpeed = 0.85
 
 local renderables =
 {

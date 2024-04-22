@@ -27,8 +27,8 @@ local Damage = 65
 Garand = class()
 Garand.mag_capacity = 8
 Garand.maxRecoil = 30
-Garand.recoilAmount = 20
-Garand.aimRecoilAmount = 15
+Garand.recoilAmount = 10
+Garand.aimRecoilAmount = 8
 Garand.recoilRecoverySpeed = 1
 
 local renderables =

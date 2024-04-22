@@ -28,8 +28,8 @@ Mosin = class()
 Mosin.mag_capacity = 5
 Mosin.maxRecoil = 30
 Mosin.recoilAmount = 20
-Mosin.aimRecoilAmount = 10
-Mosin.recoilRecoverySpeed = 1
+Mosin.aimRecoilAmount = 8
+Mosin.recoilRecoverySpeed = 0.75
 
 local renderables =
 {

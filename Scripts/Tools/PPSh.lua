@@ -24,8 +24,8 @@ local Damage = 19
 PPSh = class()
 PPSh.mag_capacity = 35
 PPSh.maxRecoil = 20
-PPSh.recoilAmount = 6
-PPSh.aimRecoilAmount = 3.5
+PPSh.recoilAmount = 8
+PPSh.aimRecoilAmount = 4
 PPSh.recoilRecoverySpeed = 1
 
 local renderables =

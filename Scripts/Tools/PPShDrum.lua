@@ -24,7 +24,7 @@ local Damage = 19
 PPShDrum = class()
 PPShDrum.mag_capacity = 71
 PPShDrum.maxRecoil = 25
-PPShDrum.recoilAmount = 6.5
+PPShDrum.recoilAmount = 6
 PPShDrum.aimRecoilAmount = 4
 PPShDrum.recoilRecoverySpeed = 1
 

@@ -24,10 +24,10 @@ local Damage = 24
 ---@field spineWeight number
 TommyGun = class()
 TommyGun.mag_capacity = 30
-TommyGun.maxRecoil = 15
-TommyGun.recoilAmount = 7.5
-TommyGun.aimRecoilAmount = 5
-TommyGun.recoilRecoverySpeed = 1
+TommyGun.maxRecoil = 20
+TommyGun.recoilAmount = 7
+TommyGun.aimRecoilAmount = 4
+TommyGun.recoilRecoverySpeed = 1.0
 
 local renderables =
 {
@@ -179,7 +179,7 @@ function TommyGun.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.11,
+		fireCooldown = 0.095,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 3.25,
