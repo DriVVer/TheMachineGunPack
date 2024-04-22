@@ -27,6 +27,8 @@ Mp40.maxRecoil = 25
 Mp40.recoilAmount = 8
 Mp40.aimRecoilAmount = 6
 Mp40.recoilRecoverySpeed = 0.9
+Mp40.aimFovTp = 30
+Mp40.aimFovFp = 30
 
 local renderables =
 {

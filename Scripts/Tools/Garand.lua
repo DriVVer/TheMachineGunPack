@@ -30,6 +30,8 @@ Garand.maxRecoil = 30
 Garand.recoilAmount = 10
 Garand.aimRecoilAmount = 8
 Garand.recoilRecoverySpeed = 1
+Garand.aimFovTp = 15
+Garand.aimFovFp = 20
 
 local renderables =
 {
@@ -439,14 +441,6 @@ function Garand:client_onUpdate(dt)
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
-
-	if self.scope_timer then
-		self.scope_timer = self.scope_timer - dt
-
-		if self.scope_timer <= 0.0 then
-			self.scope_timer = nil
-		end
-	end
 
 	if self.cl_isLocal then
 		local dispersion = 0.0
@@ -866,20 +860,13 @@ end
 
 local _intstate = sm.tool.interactState
 function Garand:cl_onSecondaryUse(state)
-	if self.scope_timer or not self.equipped then return end
+	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading(garand_aim_block_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
-
-		if self.aiming then
-			self.scope_timer = 0.3
-		else
-			self.fireCooldownTimer = 0.4
-			self.scope_timer = 0.5
-		end
 
 		self.tool:setMovementSlowDown(self.aiming)
 		self:onAim(self.aiming)

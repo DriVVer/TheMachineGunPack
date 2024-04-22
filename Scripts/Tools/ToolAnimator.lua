@@ -308,7 +308,10 @@ function mgp_toolAnimator_update(self, dt)
 		end
 	end
 
-	if not self.maxRecoil then return end
+	if not g_TMGP_SETTINGS.recoil or not self.maxRecoil then
+		self.cl_desiredRecoilAngle, self.cl_recoilAngle = 0, 0
+		return
+	end
 
 	self.cl_desiredRecoilAngle = math.max(self.cl_desiredRecoilAngle - dt * (self.recoilRecoverySpeed or 1), 0)
 	self.cl_recoilAngle = util_lerp(self.cl_recoilAngle, self.cl_desiredRecoilAngle, dt * 10)
@@ -321,7 +324,7 @@ function mgp_toolAnimator_update(self, dt)
 				cameraState = 2,
 				cameraPosition = camera_getDefaultPos(),
 				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
-				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovFp, self.aimWeight)
 			}
 		else
 			local v_loc_char = v_loc_pl.character
@@ -356,7 +359,7 @@ function mgp_toolAnimator_update(self, dt)
 				cameraState = 3,
 				cameraPosition = v_cam_final_pos,
 				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
-				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovTp, self.aimWeight)
 			}
 			-- old solution
 			--[[local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
@@ -512,10 +515,6 @@ end
 function mgp_toolAnimator_reset(self)
 	self.cl_animator_tracks = {}
 
-	if self.cl_isLocal then
-		sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
-	end
-
 	local cl_on_unequip = self.cl_animator_on_unequip
 	if cl_on_unequip == nil then return end
 
@@ -550,10 +549,6 @@ function mgp_toolAnimator_checkForRecoil(self, state)
 end
 
 function mgp_toolAnimator_destroy(self)
-	if self.cl_isLocal then
-		sm.localPlayer.getPlayer().clientPublicData.customCameraData = nil
-	end
-
 	for k, cur_effect in pairs(self.cl_animator_effects) do
 		if cur_effect:isPlaying() then
 			cur_effect:stopImmediate()

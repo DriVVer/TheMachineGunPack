@@ -28,6 +28,8 @@ TommyGun.maxRecoil = 20
 TommyGun.recoilAmount = 7
 TommyGun.aimRecoilAmount = 4
 TommyGun.recoilRecoverySpeed = 1.0
+TommyGun.aimFovTp = 30
+TommyGun.aimFovFp = 30
 
 local renderables =
 {

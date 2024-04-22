@@ -42,6 +42,8 @@ DB.maxRecoil = 30
 DB.recoilAmount = 20
 DB.aimRecoilAmount = 12
 DB.recoilRecoverySpeed = 0.85
+DB.aimFovTp = 40
+DB.aimFovFp = 40
 
 local renderables =
 {

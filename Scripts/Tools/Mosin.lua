@@ -30,6 +30,8 @@ Mosin.maxRecoil = 30
 Mosin.recoilAmount = 20
 Mosin.aimRecoilAmount = 8
 Mosin.recoilRecoverySpeed = 0.75
+Mosin.aimFovTp = 15
+Mosin.aimFovFp = 10
 
 local renderables =
 {
