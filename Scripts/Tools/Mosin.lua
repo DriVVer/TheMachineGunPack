@@ -373,7 +373,7 @@ function Mosin:client_updateAimWeights(dt)
 	else
 		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
 	end
-
+a
 	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
 	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end

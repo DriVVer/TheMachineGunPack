@@ -23,7 +23,7 @@ local Damage = 21
 ---@field fireCooldownTimer integer
 Mp40 = class()
 Mp40.mag_capacity = 32
-Mp40.maxRecoil = 25
+Mp40.maxRecoil = 20
 Mp40.recoilAmount = 8
 Mp40.aimRecoilAmount = 6
 Mp40.recoilRecoverySpeed = 0.9

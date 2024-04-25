@@ -23,7 +23,7 @@ local Damage = 19
 ---@field fireCooldownTimer integer
 PPSh = class()
 PPSh.mag_capacity = 35
-PPSh.maxRecoil = 20
+PPSh.maxRecoil = 15
 PPSh.recoilAmount = 8
 PPSh.aimRecoilAmount = 4
 PPSh.recoilRecoverySpeed = 1

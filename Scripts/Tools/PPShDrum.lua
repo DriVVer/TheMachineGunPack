@@ -23,7 +23,7 @@ local Damage = 19
 ---@field fireCooldownTimer integer
 PPShDrum = class()
 PPShDrum.mag_capacity = 71
-PPShDrum.maxRecoil = 25
+PPShDrum.maxRecoil = 15
 PPShDrum.recoilAmount = 6
 PPShDrum.aimRecoilAmount = 4
 PPShDrum.recoilRecoverySpeed = 1

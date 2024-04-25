@@ -24,7 +24,7 @@ local Damage = 30
 ---@field spineWeight number
 M1911 = class()
 M1911.mag_capacity = 7
-M1911.maxRecoil = 40
+M1911.maxRecoil = 20
 M1911.recoilAmount = 12
 M1911.aimRecoilAmount = 6
 M1911.recoilRecoverySpeed = 2
