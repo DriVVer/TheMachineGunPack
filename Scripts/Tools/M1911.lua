@@ -28,6 +28,8 @@ M1911.maxRecoil = 20
 M1911.recoilAmount = 12
 M1911.aimRecoilAmount = 6
 M1911.recoilRecoverySpeed = 2
+M1911.aimFovTp = 30
+M1911.aimFovFp = 30
 
 local renderables =
 {

@@ -27,6 +27,8 @@ PPSh.maxRecoil = 15
 PPSh.recoilAmount = 8
 PPSh.aimRecoilAmount = 4
 PPSh.recoilRecoverySpeed = 1
+PPSh.aimFovTp = 30
+PPSh.aimFovFp = 30
 
 local renderables =
 {

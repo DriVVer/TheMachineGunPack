@@ -28,6 +28,8 @@ Magnum44.maxRecoil = 30
 Magnum44.recoilAmount = 25
 Magnum44.aimRecoilAmount = 15
 Magnum44.recoilRecoverySpeed = 0.75
+Magnum44.aimFovTp = 30
+Magnum44.aimFovFp = 30
 
 local renderables =
 {

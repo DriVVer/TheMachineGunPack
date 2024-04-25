@@ -28,6 +28,8 @@ P38.maxRecoil = 20
 P38.recoilAmount = 10
 P38.aimRecoilAmount = 5
 P38.recoilRecoverySpeed = 2
+P38.aimFovTp = 30
+P38.aimFovFp = 30
 
 local renderables =
 {

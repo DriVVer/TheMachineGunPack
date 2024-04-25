@@ -28,6 +28,8 @@ PTRD.maxRecoil = 40
 PTRD.recoilAmount = 30
 PTRD.aimRecoilAmount = 20
 PTRD.recoilRecoverySpeed = 0.6
+PTRD.aimFovTp = 30
+PTRD.aimFovFp = 30
 
 local renderables =
 {

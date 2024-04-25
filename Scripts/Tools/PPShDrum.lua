@@ -27,6 +27,8 @@ PPShDrum.maxRecoil = 15
 PPShDrum.recoilAmount = 6
 PPShDrum.aimRecoilAmount = 4
 PPShDrum.recoilRecoverySpeed = 1
+PPShDrum.aimFovTp = 30
+PPShDrum.aimFovFp = 30
 
 local renderables =
 {
