@@ -3934,6 +3934,14 @@ local mgp_tool_database =
 				}
 			}
 		}
+	},
+	Medkit =
+	{
+		dlm_required_effects = {},
+		required_effects = {},
+		on_unequip_action = {},
+		animation_reset = {},
+		animation = {}
 	}
 }
 
