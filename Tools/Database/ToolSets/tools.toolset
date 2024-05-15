@@ -167,6 +167,18 @@
 			}
 		},
 		{
+			"name": "Medkit",
+			"uuid": "09404c9e-aafb-40c0-8cfa-f7a4166f8b42",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Medkit.lua",
+				"class": "Medkit",
+				"data": {}
+			},
+			"autoTool": true
+		},
+		{
 			"name" : "GameHook",
 			"previewRenderable" : "$GAME_DATA/Character/Char_Tools/char_spudgun_preview.rend",
 			"previewRotation" : [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
