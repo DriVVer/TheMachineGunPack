@@ -813,7 +813,7 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 
 	if f ~= self.prevF then
 		self.prevF = f
-		if f and not self:client_isGunReloading() then
+		if f and not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			local consume = sm.game.getEnableAmmoConsumption()
 			local quantity = sm.container.totalQuantity
 			local inv = sm.localPlayer.getInventory()
