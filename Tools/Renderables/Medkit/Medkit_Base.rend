@@ -1,0 +1,19 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/PTRD/PTRD_Base.dae",
+			"includes": ["POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS"],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Medkit/blank.png",
+						"$CONTENT_DATA/Tools/Textures/Medkit/blank.png",
+						"$CONTENT_DATA/Tools/Textures/Medkit/blank.png"
+					]
+				}
+				
+			]
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Medkit/Medkit_Preview.fbx",
+			"subMeshList": [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_nor.tga"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}
