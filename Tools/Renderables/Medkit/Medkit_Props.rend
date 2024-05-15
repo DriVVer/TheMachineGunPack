@@ -3,8 +3,8 @@
 		{
 			"animationList" : [
 				{
-					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/PTRD/PTRD_bipod.dae",
-					"name" : "Bipod_Anim"
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Medkit/Medkit_Props.dae",
+					"name" : "Medkit_Props"
 				}
 			],
 			"includes" : [
@@ -15,7 +15,7 @@
 				"BLEND_INDICES",
 				"BLEND_WEIGHTS"
 			],
-			"mesh" : "$CONTENT_DATA/Tools/Mesh/PTRD/PTRD_Bipod.dae",
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/Medkit/Medkit_Props.dae",
 			"subMeshList" : [
 				{
 					"material": "DifAsgNor",

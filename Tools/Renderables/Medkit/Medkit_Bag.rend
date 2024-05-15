@@ -3,7 +3,7 @@
 		{
 			"animationList" : [
 				{
-					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/PTRD/PTRD_anims.dae",
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Medkit/Medkit_anims.dae",
 					"name" : "Gun_Anim"
 				}
 			],
@@ -15,7 +15,7 @@
 				"BLEND_INDICES",
 				"BLEND_WEIGHTS"
 			],
-			"mesh" : "$CONTENT_DATA/Tools/Mesh/PTRD/PTRD_Anim.dae",
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/Medkit/Medkit_Bag.dae",
 			"subMeshList" : [
 				{
 					"material": "DifAsgNor",
