@@ -96,6 +96,9 @@ function Medkit:cl_updateUse(state)
 		end
 
 		mgp_toolAnimator_setAnimation(self, "on_equip")
+		local track = self.cl_animator_tracks[1]
+		track.func(self, track, 0)
+		track.time = 0
 	end
 end
 
