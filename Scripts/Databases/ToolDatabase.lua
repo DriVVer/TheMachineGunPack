@@ -3943,7 +3943,43 @@ local mgp_tool_database =
 		animation_reset = {},
 		animation = {}
 
-		
+		animation = {
+			on_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Medkit_Anim", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Medkit_Anim", start_val = 0.0, end_val = 1.0 } },
+						time = 3.5
+					}
+				}
+			},
+			use =
+			{
+				[1] = {
+
+				}
+			},
+			run_into =
+			{
+				[1] = {
+					
+				}
+			},
+			run_idle =
+			{
+				[1] = {
+					
+				}
+			},
+			run_exit =
+			{
+				[1] = {
+					
+				}
+			}
+		}
 	}
 }
 
