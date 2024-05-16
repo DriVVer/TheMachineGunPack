@@ -8,9 +8,8 @@ dofile("ToolSwimUtil.lua")
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Bag.rend",
 	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Props.rend"
+	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Bag.rend"
 }
 
 local renderablesTp = {
@@ -255,31 +254,31 @@ function Medkit:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			idle = { "Idle" },
-			use = { "Use" },
-			pickup = { "Pickup", { nextAnimation = "idle" } },
-			putdown = { "Putdown" }
+			idle = { "Medkit_idle" },
+			use = { "Medkit_use" },
+			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
+			putdown = { "Medkit_putdown" }
 		}
 	)
 	local movementAnimations = {
-		idle = "Idle",
+		idle = "Medkit_idle",
 
-		runFwd = "Run_fwd",
-		runBwd = "Run_bwd",
+		runFwd = "Medkit_run_fwd",
+		runBwd = "Medkit_run_bwd",
 
-		sprint = "Sprint_fwd",
+		sprint = "Medkit_sprint_fwd",
 
-		jump = "Jump",
-		jumpUp = "Jump_up",
-		jumpDown = "Jump_down",
+		jump = "Medkit_jump",
+		jumpUp = "Medkit_jump_up",
+		jumpDown = "Medkit_jump_down",
 
-		land = "Jump_land",
-		landFwd = "Jump_land_fwd",
-		landBwd = "Jump_land_bwd",
+		land = "Medkit_jump_land",
+		landFwd = "Medkit_jump_land_fwd",
+		landBwd = "Medkit_jump_land_bwd",
 
-		crouchIdle = "Crouch_idle",
-		crouchFwd = "Crouch_fwd",
-		crouchBwd = "Crouch_bwd"
+		crouchIdle = "Medkit_jrouch_idle",
+		crouchFwd = "Medkit_crouch_fwd",
+		crouchBwd = "Medkit_crouch_bwd"
 	}
 
 	for name, animation in pairs(movementAnimations) do
@@ -290,19 +289,19 @@ function Medkit:loadAnimations()
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				idle = { "Idle", { looping = true } },
+				idle = { "Medkit_fp_idle", { looping = true } },
 
-				use = { "Use" },
+				use = { "Medkit_fp_use" },
 
-				sprintInto = { "Sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
-				sprintIdle = { "Sprint_idle", { looping = true } },
-				sprintExit = { "Sprint_exit", { nextAnimation = "idle", blendNext = 0 } },
+				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
+				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
+				sprintExit = { "Medkit_fp_sprint_exit", { nextAnimation = "idle", blendNext = 0 } },
 
-				jump = { "Jump", { nextAnimation = "idle" } },
-				land = { "Jump_land", { nextAnimation = "idle" } },
+				jump = { "Medkit_fp_jump", { nextAnimation = "idle" } },
+				land = { "Medkit_fp_jump_land", { nextAnimation = "idle" } },
 
-				equip = { "Pickup", { nextAnimation = "idle" } },
-				unequip = { "Putdown" }
+				equip = { "Medkit_fp_pickup", { nextAnimation = "idle" } },
+				unequip = { "Medkit_fp_putdown" }
 			}
 		)
 	end

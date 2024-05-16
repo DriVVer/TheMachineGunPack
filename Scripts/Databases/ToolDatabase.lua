@@ -3942,6 +3942,8 @@ local mgp_tool_database =
 		on_unequip_action = {},
 		animation_reset = {},
 		animation = {}
+
+		
 	}
 }
 
