@@ -212,6 +212,8 @@ function Medkit:client_onEquip(animate, is_custom)
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
+
+	mgp_toolAnimator_setAnimation(self, "on_equip")
 end
 
 function Medkit:client_onUnequip()
