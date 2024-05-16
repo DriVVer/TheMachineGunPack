@@ -198,8 +198,10 @@ function Medkit:client_onEquip(animate, is_custom)
 
 	for k, v in pairs(renderablesTp) do currentRenderablesTp[#currentRenderablesTp + 1] = v end
 	for k, v in pairs(renderablesFp) do currentRenderablesFp[#currentRenderablesFp + 1] = v end
-
-	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
+	for k, v in pairs(renderables) do
+		currentRenderablesTp[#currentRenderablesTp+1] = v
+		currentRenderablesFp[#currentRenderablesFp+1] = v
+	end
 
 	self.tool:setTpRenderables(currentRenderablesTp)
 	if self.cl_isLocal then
