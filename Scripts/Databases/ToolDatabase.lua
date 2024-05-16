@@ -3965,22 +3965,28 @@ local mgp_tool_database =
 
 				}
 			},
+			use2 =
+			{
+				[1] = {
+
+				}
+			},
 			run_into =
 			{
 				[1] = {
-					
+
 				}
 			},
 			run_idle =
 			{
 				[1] = {
-					
+
 				}
 			},
 			run_exit =
 			{
 				[1] = {
-					
+
 				}
 			}
 		}
