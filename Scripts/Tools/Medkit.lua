@@ -58,6 +58,8 @@ function Medkit:server_onFixedUpdate(dt)
 end
 
 function Medkit:sv_updateUse(state)
+	if state == self.sv_using then return end
+
 	self.sv_using = state
 	self.sv_useProgress = 0
 
@@ -76,6 +78,25 @@ end
 function Medkit:cl_updateUse(state)
 	self.cl_using = state
 	self.cl_useProgress = 0
+
+	if not self.tool:isEquipped() then return end
+
+	if state then
+		local anim = math.random() > 0.5 and "use" or "use2"
+		setTpAnimation(self.tpAnimations, anim, 0.0001)
+		if self.cl_isLocal then
+			setFpAnimation(self.fpAnimations, anim,  0.2)
+		end
+
+		mgp_toolAnimator_setAnimation(self, anim)
+	else
+		setTpAnimation(self.tpAnimations, "idle", 0.0001)
+		if self.cl_isLocal then
+			setFpAnimation(self.fpAnimations, "idle",  0.2)
+		end
+
+		mgp_toolAnimator_setAnimation(self, "on_equip")
+	end
 end
 
 function Medkit:client_onDestroy()
@@ -260,6 +281,7 @@ function Medkit:loadAnimations()
 		{
 			idle = { "Medkit_idle" },
 			use = { "Medkit_use" },
+			use2 = { "Medkit_use" },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
 			putdown = { "Medkit_putdown" }
 		}
@@ -296,6 +318,7 @@ function Medkit:loadAnimations()
 				idle = { "Medkit_fp_idle", { looping = true } },
 
 				use = { "Medkit_fp_use" },
+				use2 = { "Medkit_fp_use" },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
