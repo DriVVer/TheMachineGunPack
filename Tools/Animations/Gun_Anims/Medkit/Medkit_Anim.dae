@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-15T21:41:51Z</created><keywords></keywords><modified>2024-05-15T21:41:51Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-16T15:08:59Z</created><keywords></keywords><modified>2024-05-16T15:08:59Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Medkit_Bag-anim" name="Medkit_Bag"><animation><source id="Medkit_Bag-Matrix-animation-input"><float_array id="Medkit_Bag-Matrix-animation-input-array" count="45">
 
@@ -665,7 +665,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_arra
   </library_animations>
   <library_visual_scenes>
    <visual_scene id="Scene" name="Scene">
-        
+       
             <node name="jnt_medkit" id="jnt_medkit" sid="jnt_medkit" type="JOINT">
                 <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                 <extra>
@@ -754,7 +754,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_arra
                     </node>
                 </node>
             </node>
-        
+       
         <extra>
             <technique profile="MAX3D">
                 <frame_rate>30.000000</frame_rate>
