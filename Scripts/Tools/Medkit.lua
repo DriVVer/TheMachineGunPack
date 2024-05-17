@@ -5,6 +5,7 @@ dofile("$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua")
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("$CONTENT_DATA/Scripts/MedkitProgressbar.lua")
 
 local renderables =
 {
@@ -75,6 +76,10 @@ function Medkit:client_onCreate()
 
 	self.cl_using = false
 	self.cl_useProgress = 0
+
+	if self.cl_isLocal then
+		self.progressbar = MedkitProgressbar():init(100, 1/self.healTime)
+	end
 end
 
 function Medkit:cl_updateUse(state)
@@ -95,6 +100,7 @@ function Medkit:cl_updateUse(state)
 		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
 		if self.cl_isLocal then
 			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+			self.progressbar:update(0)
 		end
 
 		mgp_toolAnimator_setAnimation(self, "on_equip")
@@ -103,6 +109,10 @@ end
 
 function Medkit:client_onDestroy()
 	mgp_toolAnimator_destroy(self)
+
+	if self.cl_isLocal then
+		self.progressbar:destroy()
+	end
 end
 
 function Medkit:client_onUpdate(dt)
@@ -121,7 +131,7 @@ function Medkit:client_onUpdate(dt)
 
 			if self.cl_using then
 				self.cl_useProgress = math.min(self.cl_useProgress + dt, self.healTime)
-				sm.gui.setProgressFraction(self.cl_useProgress/self.healTime)
+				self.progressbar:update(self.cl_useProgress/self.healTime)
 			end
 		end
 		updateFpAnimations(self.fpAnimations, self.equipped, dt)
@@ -136,38 +146,9 @@ function Medkit:client_onUpdate(dt)
 		return
 	end
 
-	if self.cl_isLocal then
-		local fireMode = self.normalFireMode
-		local dispersion = 0.0
-		local recoilDispersion = 1.0 - (math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding) + fireMode.maxMovementDispersion)
-
-		if isCrouching then
-			dispersion = fireMode.minDispersionCrouching
-		else
-			dispersion = fireMode.minDispersionStanding
-		end
-
-		if self.tool:getRelativeMoveDirection():length() > 0 then
-			dispersion = dispersion + fireMode.maxMovementDispersion * self.tool:getMovementSpeedFraction()
-		end
-
-		if not self.tool:isOnGround() then
-			dispersion = dispersion * fireMode.jumpDispersionMultiplier
-		end
-
-		self.movementDispersion = dispersion
-
-		self.spreadCooldownTimer = clamp(self.spreadCooldownTimer, 0.0, fireMode.spreadCooldown)
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp(self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0) or 0.0
-
-		self.tool:setDispersionFraction(clamp(self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0))
-		self.tool:setCrossHairAlpha(1.0)
-		self.tool:setInteractionTextSuppressed(false)
-	end
-
 	self.tool:setBlockSprint(self.cl_using)
 
-	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
+	local crouchWeight = isCrouching and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
 
 	local totalWeight = 0.0
@@ -230,6 +211,9 @@ function Medkit:client_onEquip(animate)
 	setTpAnimation(self.tpAnimations, "pickup", 0.0001)
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+
+		self.tool:setCrossHairAlpha(0.0)
+		self.progressbar:open()
 	end
 
 	mgp_toolAnimator_setAnimation(self, "on_equip")
@@ -246,6 +230,8 @@ function Medkit:client_onUnequip()
 	setTpAnimation( self.tpAnimations, "putdown" )
 	if self.cl_isLocal then
 		self.network:sendToServer("sv_updateUse")
+
+		self.progressbar:close()
 
 		if self.fpAnimations.currentAnimation ~= "unequip" then
 			swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
@@ -331,17 +317,4 @@ function Medkit:loadAnimations()
 	end
 
 	self.blendTime = 0.2
-
-	self.normalFireMode = {
-		spreadCooldown = 0.05,
-
-		minDispersionStanding = 0.1,
-		minDispersionCrouching = 0.04,
-
-		maxMovementDispersion = 0.4,
-		jumpDispersionMultiplier = 2
-	}
-
-	self.spreadCooldownTimer = 0
-	self.movementDispersion = 0
 end
