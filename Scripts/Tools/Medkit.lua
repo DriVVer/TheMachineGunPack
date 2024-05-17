@@ -94,6 +94,7 @@ function Medkit:cl_updateUse(state)
 		setTpAnimation(self.tpAnimations, anim, 0.0001)
 		if self.cl_isLocal then
 			setFpAnimation(self.fpAnimations, anim,  0.2)
+			self.progressbar:open()
 		end
 
 		mgp_toolAnimator_setAnimation(self, anim)
@@ -102,6 +103,7 @@ function Medkit:cl_updateUse(state)
 		if self.cl_isLocal then
 			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 			self.progressbar:update(0)
+			self.progressbar:close()
 		end
 
 		mgp_toolAnimator_setAnimation(self, "on_equip")
@@ -214,7 +216,6 @@ function Medkit:client_onEquip(animate)
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 
 		self.tool:setCrossHairAlpha(0.0)
-		self.progressbar:open()
 	end
 
 	mgp_toolAnimator_setAnimation(self, "on_equip")
