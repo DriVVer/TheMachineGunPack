@@ -112,6 +112,17 @@
 			}
 		},
 		{
+			"name": "MosinNS",
+			"uuid": "dab13420-11c4-40ec-b871-7374f71f8797",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/MosinNS.lua",
+				"class": "MosinNS",
+				"data": {}
+			}
+		},
+		{
 			"name": "Garand",
 			"uuid": "0ca4320e-5ddb-4dc1-843d-6037d65b2e4a",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Garand/Garand_Preview.rend",

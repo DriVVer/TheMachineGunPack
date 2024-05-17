@@ -2764,6 +2764,41 @@ local mgp_tool_database =
 		}
 	},
 
+	MosinNS =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_BoltRifle_Shot_1",
+			BoltOpen = "DLM_Rifle_Bolt_Open",
+			BoltClose = "DLM_Rifle_Bolt_Close",
+			BulletPut = "DLM_Gun_Ammo"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			BoltOpen = "MosinBoltOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
+		},
+		on_unequip_action = {
+			stop_effects = { "BoltOpen", "BoltClose", "BulletPut" }
+		},
+		animation = {
+			cock_the_hammer_on_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Anim", start_val = 4.75, end_val = 4.75 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 4.75, end_val = 4.75 } },
+						time = 0.0
+					}
+				}
+			},
+		}
+	},
+
 	Garand =
 	{
 		dlm_required_effects = {

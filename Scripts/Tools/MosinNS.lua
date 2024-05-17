@@ -8,7 +8,7 @@ dofile("ToolSwimUtil.lua")
 
 local Damage = 100
 
----@class Mosin : ToolClass
+---@class MosinNS : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
@@ -24,31 +24,32 @@ local Damage = 100
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
 ---@field scope_hud GuiInterface
-Mosin = class()
-Mosin.mag_capacity = 5
-Mosin.maxRecoil = 30
-Mosin.recoilAmount = 20
-Mosin.aimRecoilAmount = 10
-Mosin.recoilRecoverySpeed = 1
-Mosin.aimFovTp = 15
-Mosin.aimFovFp = 10
+MosinNS = class()
+MosinNS.mag_capacity = 5
+MosinNS.maxRecoil = 30
+MosinNS.recoilAmount = 20
+MosinNS.aimRecoilAmount = 10
+MosinNS.recoilRecoverySpeed = 1
+MosinNS.aimFovTp = 15
+MosinNS.aimFovFp = 10
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/Mosin_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_Anim.rend",
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_Prop.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_tp_Mosin.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/char_tp_MosinNS.rend",
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_tp_offset.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_male_fp_Mosin.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mosin/char_Mosin_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/char_fp_MosinNS.rend",
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_fp_offset.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -167,7 +168,7 @@ function Mosin:client_onCreate()
 	self.cl_hammer_cocked = true
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "Mosin")
+	mgp_toolAnimator_initialize(self, "MosinNS")
 
 	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
 		isHud = true,
