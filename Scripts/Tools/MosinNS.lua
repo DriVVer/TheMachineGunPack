@@ -123,13 +123,13 @@ local mosin_obstacle_block_anims =
 	["aimExit"] = true
 }
 
-function Mosin:client_initAimVals()
+function MosinNS:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.aimWeightFp = self.aimWeight
 end
 
-function Mosin:server_onCreate()
+function MosinNS:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -144,22 +144,22 @@ function Mosin:server_onCreate()
 	end
 end
 
-function Mosin:server_requestAmmo(data, caller)
+function MosinNS:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Mosin:server_updateAmmoCounter(data, caller)
+function MosinNS:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function Mosin:client_receiveAmmo(ammo_count)
+function MosinNS:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function Mosin:client_onCreate()
+function MosinNS:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self:client_initAimVals()
@@ -180,7 +180,7 @@ function Mosin:client_onCreate()
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function Mosin:client_onDestroy()
+function MosinNS:client_onDestroy()
 	local v_scopeHud = self.scope_hud
 	if v_scopeHud and sm.exists(v_scopeHud) then
 		if v_scopeHud:isActive() then
@@ -193,11 +193,11 @@ function Mosin:client_onDestroy()
 	mgp_toolAnimator_destroy(self)
 end
 
-function Mosin:client_onRefresh()
+function MosinNS:client_onRefresh()
 	self:loadAnimations()
 end
 
-function Mosin:loadAnimations()
+function MosinNS:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -358,7 +358,7 @@ local aim_animation_blacklist =
 	["cock_hammer_aim"] = true
 }
 
-function Mosin:client_updateAimWeights(dt)
+function MosinNS:client_updateAimWeights(dt)
 	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
 
 	-- Camera update
@@ -382,7 +382,7 @@ function Mosin:client_updateAimWeights(dt)
 end
 
 local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
-function Mosin:server_spendAmmo(data, player)
+function MosinNS:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -405,7 +405,7 @@ function Mosin:server_spendAmmo(data, player)
 	self:server_updateAmmoCounter()
 end
 
-function Mosin:sv_n_trySpendAmmo(data, player)
+function MosinNS:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -413,7 +413,7 @@ function Mosin:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Mosin:client_onUpdate(dt)
+function MosinNS:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	if self.cl_show_ammo_timer then
@@ -422,7 +422,7 @@ function Mosin:client_onUpdate(dt)
 		if self.cl_show_ammo_timer <= 0.0 then
 			self.cl_show_ammo_timer = nil
 			if self.tool:isEquipped() then
-				sm.gui.displayAlertText(("Mosin: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+				sm.gui.displayAlertText(("MosinNS: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			end
 		end
 	end
@@ -685,7 +685,7 @@ function Mosin:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function Mosin:client_onEquip(animate, is_custom)
+function MosinNS:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -729,7 +729,7 @@ function Mosin:client_onEquip(animate, is_custom)
 	end
 end
 
-function Mosin:client_onUnequip(animate, is_custom)
+function MosinNS:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -775,24 +775,24 @@ function Mosin:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Mosin:sv_n_onAim(aiming)
+function MosinNS:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Mosin:cl_n_onAim(aiming)
+function MosinNS:cl_n_onAim(aiming)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim( aiming )
 	end
 end
 
-function Mosin:onAim(aiming)
+function MosinNS:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Mosin:sv_n_onShoot(dir)
+function MosinNS:sv_n_onShoot(dir)
 	self.network:sendToClients( "cl_n_onShoot", dir )
 
 	if dir ~= nil and self.sv_ammo_counter > 0 then
@@ -801,13 +801,13 @@ function Mosin:sv_n_onShoot(dir)
 	end
 end
 
-function Mosin:cl_n_onShoot(dir)
+function MosinNS:cl_n_onShoot(dir)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(dir)
 	end
 end
 
-function Mosin:onShoot(dir)
+function MosinNS:onShoot(dir)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -820,11 +820,11 @@ function Mosin:onShoot(dir)
 	end
 end
 
-function Mosin:sv_n_cockHammer(data)
+function MosinNS:sv_n_cockHammer(data)
 	self.network:sendToClients("cl_n_cockHammer", data)
 end
 
-function Mosin:cl_n_cockHammer(aim_data)
+function MosinNS:cl_n_cockHammer(aim_data)
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		mgp_toolAnimator_setAnimation(self, "cock_the_hammer")
@@ -867,7 +867,7 @@ local function SolveBallisticArc(start_pos, end_pos, velocity, direction)
 end
 
 local mgp_projectile_potato = sm.uuid.new("033cea84-d6ad-4eb9-82dd-f576b60c1e70")
-function Mosin:cl_onPrimaryUse(state)
+function MosinNS:cl_onPrimaryUse(state)
 	if state ~= sm.tool.interactState.start then return end
 	if self:client_isGunReloading(mosin_action_block_anims) or not self.equipped then return end
 
@@ -982,22 +982,22 @@ local ammo_count_to_anim_name =
 	[5] = "reload5"
 }
 
-function Mosin:sv_n_onReload(anim_id)
+function MosinNS:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function Mosin:cl_n_onReload(anim_id)
+function MosinNS:cl_n_onReload(anim_id)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
 	end
 end
 
-function Mosin:cl_startReloadAnim(anim_name)
+function MosinNS:cl_startReloadAnim(anim_name)
 	setTpAnimation(self.tpAnimations, anim_name, 1.0)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function Mosin:client_isGunReloading(reload_table)
+function MosinNS:client_isGunReloading(reload_table)
 	if self.waiting_for_ammo then
 		return true
 	end
@@ -1005,7 +1005,7 @@ function Mosin:client_isGunReloading(reload_table)
 	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
-function Mosin:cl_initReloadAnim(anim_id)
+function MosinNS:cl_initReloadAnim(anim_id)
 	local v_cur_anim_id = anim_id
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
@@ -1031,7 +1031,7 @@ function Mosin:cl_initReloadAnim(anim_id)
 	self.network:sendToServer("sv_n_onReload", v_cur_anim_id)
 end
 
-function Mosin:client_onReload()
+function MosinNS:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if self.cl_hammer_cocked then
@@ -1046,23 +1046,23 @@ function Mosin:client_onReload()
 	return true
 end
 
-function Mosin:sv_n_checkMag()
+function MosinNS:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function Mosin:cl_n_checkMag()
+function MosinNS:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function Mosin:cl_startCheckMagAnim()
+function MosinNS:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
-function Mosin:client_onToggle()
+function MosinNS:client_onToggle()
 	if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			self.cl_show_ammo_timer = 0.7
@@ -1072,7 +1072,7 @@ function Mosin:client_onToggle()
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
 		else
-			sm.gui.displayAlertText("Mosin: No Ammo. Reloading...", 3)
+			sm.gui.displayAlertText("MosinNS: No Ammo. Reloading...", 3)
 			self:cl_initReloadAnim(0)
 		end
 	end
@@ -1081,7 +1081,7 @@ function Mosin:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Mosin:cl_onSecondaryUse(state)
+function MosinNS:cl_onSecondaryUse(state)
 	if self.scope_timer or not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading(mosin_aim_block_anims) or (self.aim_timer ~= nil)
@@ -1103,7 +1103,7 @@ function Mosin:cl_onSecondaryUse(state)
 	end
 end
 
-function Mosin:client_onEquippedUpdate(primaryState, secondaryState)
+function MosinNS:client_onEquippedUpdate(primaryState, secondaryState)
 	mgp_toolAnimator_checkForRecoil(self, primaryState)
 
 	if primaryState ~= self.prevPrimaryState then
