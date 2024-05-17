@@ -125,8 +125,6 @@ function Medkit:client_onUpdate(dt)
 		updateFpAnimations(self.fpAnimations, self.equipped, dt)
 	end
 
-	TSU_OnUpdate(self)
-
 	if not self.equipped then
 		if self.wantEquipped then
 			self.wantEquipped = false
@@ -203,11 +201,7 @@ function Medkit:client_onUpdate(dt)
 	end
 end
 
-function Medkit:client_onEquip(animate, is_custom)
-	if not is_custom and TSU_IsOwnerSwimming(self) then
-		return
-	end
-
+function Medkit:client_onEquip(animate)
 	if animate then
 		sm.audio.play("Sledgehammer - Equip", self.tool:getPosition())
 	end
