@@ -5,10 +5,6 @@
 				{
 					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Medkit/Medkit_Anim.dae",
 					"name" : "Medkit_Anim"
-				},
-				{
-					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Medkit/Medkit_Use.dae",
-					"name" : "Medkit_Use"
 				}
 			],
 			"includes" : [
