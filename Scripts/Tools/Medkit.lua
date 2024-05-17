@@ -49,19 +49,21 @@ function Medkit:server_onFixedUpdate(dt)
 
 			local container = owner:getInventory()
 			sm.container.beginTransaction()
-			sm.container.spend(container, self.itemUuid, 1)
+			sm.container.spendFromSlot(container, self.sv_selectedSlot, self.itemUuid, 1)
 			sm.container.endTransaction()
 
-			self:sv_updateUse(false)
+			self:sv_updateUse()
 		end
 	end
 end
 
-function Medkit:sv_updateUse(state)
+function Medkit:sv_updateUse(slot)
+	local state = slot ~= nil
 	if state == self.sv_using then return end
 
 	self.sv_using = state
 	self.sv_useProgress = 0
+	self.sv_selectedSlot = slot
 
 	self.network:sendToClients("cl_updateUse", state)
 end
@@ -90,15 +92,12 @@ function Medkit:cl_updateUse(state)
 
 		mgp_toolAnimator_setAnimation(self, anim)
 	else
-		setTpAnimation(self.tpAnimations, "idle", 0.0001)
+		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
 		if self.cl_isLocal then
-			setFpAnimation(self.fpAnimations, "idle",  0.2)
+			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 		end
 
 		mgp_toolAnimator_setAnimation(self, "on_equip")
-		local track = self.cl_animator_tracks[1]
-		track.func(self, track, 0)
-		track.time = 0
 	end
 end
 
@@ -122,13 +121,11 @@ function Medkit:client_onUpdate(dt)
 
 			if self.cl_using then
 				self.cl_useProgress = math.min(self.cl_useProgress + dt, self.healTime)
-				sm.gui.setProgressFraction(self.cl_useProgress)
+				sm.gui.setProgressFraction(self.cl_useProgress/self.healTime)
 			end
 		end
 		updateFpAnimations(self.fpAnimations, self.equipped, dt)
 	end
-
-	TSU_OnUpdate(self)
 
 	if not self.equipped then
 		if self.wantEquipped then
@@ -206,11 +203,7 @@ function Medkit:client_onUpdate(dt)
 	end
 end
 
-function Medkit:client_onEquip(animate, is_custom)
-	if not is_custom and TSU_IsOwnerSwimming(self) then
-		return
-	end
-
+function Medkit:client_onEquip(animate)
 	if animate then
 		sm.audio.play("Sledgehammer - Equip", self.tool:getPosition())
 	end
@@ -252,7 +245,7 @@ function Medkit:client_onUnequip()
 
 	setTpAnimation( self.tpAnimations, "putdown" )
 	if self.cl_isLocal then
-		self.network:sendToServer("sv_updateUse", false)
+		self.network:sendToServer("sv_updateUse")
 
 		if self.fpAnimations.currentAnimation ~= "unequip" then
 			swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
@@ -261,17 +254,21 @@ function Medkit:client_onUnequip()
 end
 
 function Medkit:client_onEquippedUpdate(lmb, rmb, f)
+	if mgp_tool_isAnimPlaying(self, { equip = true }) then
+		return true, false
+	end
+
 	if f then
 		return false, false
-	else
-		if lmb == 1 then
-			self.network:sendToServer("sv_updateUse", true)
-		elseif lmb == 3 then
-			self.network:sendToServer("sv_updateUse", false)
-		end
-
-		sm.gui.setInteractionText( "", sm.gui.getKeyBinding( "Create", true ), "#{INTERACTION_USE}" )
 	end
+
+	if (lmb == 1 or lmb == 2) and not self.cl_using then
+		self.network:sendToServer("sv_updateUse", sm.localPlayer.getSelectedHotbarSlot())
+	elseif lmb == 3 then
+		self.network:sendToServer("sv_updateUse")
+	end
+
+	sm.gui.setInteractionText( "", sm.gui.getKeyBinding( "Create", true ), "#{INTERACTION_USE}" )
 
 	return true, false
 end
@@ -321,14 +318,11 @@ function Medkit:loadAnimations()
 				idle = { "Medkit_fp_idle", { looping = true } },
 
 				use = { "Medkit_fp_use_1" },
-				use2 = { "Medkit_fp_use_1" },
+				use2 = { "Medkit_fp_use_2" },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
 				sprintExit = { "Medkit_fp_sprint_exit", { nextAnimation = "idle", blendNext = 0 } },
-
-				jump = { "Medkit_fp_jump", { nextAnimation = "idle" } },
-				land = { "Medkit_fp_jump_land", { nextAnimation = "idle" } },
 
 				equip = { "Medkit_fp_pickup", { nextAnimation = "idle" } },
 				unequip = { "Medkit_fp_putdown" }
