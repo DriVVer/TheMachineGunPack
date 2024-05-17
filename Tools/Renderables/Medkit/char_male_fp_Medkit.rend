@@ -15,7 +15,7 @@
 
 				{ "name": "Medkit_fp_sprint_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_into.dae" },
 				{ "name": "Medkit_fp_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_exit.dae" },
-				{ "name": "Medkit_fp_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_idle.dae" },
+				{ "name": "Medkit_fp_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_idle.dae" }
 			]
 		}
 	]
