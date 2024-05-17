@@ -31,7 +31,7 @@ sm.tool.preloadRenderables(renderablesFp)
 ---@field tpAnimations table
 ---@field cl_isLocal boolean
 Medkit = class()
-Medkit.healTime = 1
+Medkit.healTime = 3.75
 Medkit.restoredStats = { hpGain = 100 }
 Medkit.itemUuid = sm.uuid.new("4664a470-275f-4799-a54f-6a4a2111f436")
 
@@ -320,8 +320,8 @@ function Medkit:loadAnimations()
 			{
 				idle = { "Medkit_fp_idle", { looping = true } },
 
-				use = { "Medkit_fp_use" },
-				use2 = { "Medkit_fp_use" },
+				use = { "Medkit_fp_use_1" },
+				use2 = { "Medkit_fp_use_1" },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
