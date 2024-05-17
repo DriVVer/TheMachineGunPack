@@ -122,7 +122,7 @@ function Medkit:client_onUpdate(dt)
 
 			if self.cl_using then
 				self.cl_useProgress = math.min(self.cl_useProgress + dt, self.healTime)
-				sm.gui.setProgressFraction(self.cl_useProgress)
+				sm.gui.setProgressFraction(self.cl_useProgress/self.healTime)
 			end
 		end
 		updateFpAnimations(self.fpAnimations, self.equipped, dt)
