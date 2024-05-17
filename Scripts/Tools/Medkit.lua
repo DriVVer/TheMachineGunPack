@@ -90,15 +90,12 @@ function Medkit:cl_updateUse(state)
 
 		mgp_toolAnimator_setAnimation(self, anim)
 	else
-		setTpAnimation(self.tpAnimations, "idle", 0.0001)
+		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
 		if self.cl_isLocal then
-			setFpAnimation(self.fpAnimations, "idle",  0.2)
+			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 		end
 
 		mgp_toolAnimator_setAnimation(self, "on_equip")
-		local track = self.cl_animator_tracks[1]
-		track.func(self, track, 0)
-		track.time = 0
 	end
 end
 
@@ -261,17 +258,21 @@ function Medkit:client_onUnequip()
 end
 
 function Medkit:client_onEquippedUpdate(lmb, rmb, f)
+	if mgp_tool_isAnimPlaying(self, { equip = true }) then
+		return true, false
+	end
+
 	if f then
 		return false, false
-	else
-		if lmb == 1 then
-			self.network:sendToServer("sv_updateUse", true)
-		elseif lmb == 3 then
-			self.network:sendToServer("sv_updateUse", false)
-		end
-
-		sm.gui.setInteractionText( "", sm.gui.getKeyBinding( "Create", true ), "#{INTERACTION_USE}" )
 	end
+
+	if (lmb == 1 or lmb == 2) and not self.cl_using then
+		self.network:sendToServer("sv_updateUse", true)
+	elseif lmb == 3 then
+		self.network:sendToServer("sv_updateUse", false)
+	end
+
+	sm.gui.setInteractionText( "", sm.gui.getKeyBinding( "Create", true ), "#{INTERACTION_USE}" )
 
 	return true, false
 end
@@ -321,7 +322,7 @@ function Medkit:loadAnimations()
 				idle = { "Medkit_fp_idle", { looping = true } },
 
 				use = { "Medkit_fp_use_1" },
-				use2 = { "Medkit_fp_use_1" },
+				use2 = { "Medkit_fp_use_2" },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
