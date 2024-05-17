@@ -322,9 +322,6 @@ function Medkit:loadAnimations()
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
 				sprintExit = { "Medkit_fp_sprint_exit", { nextAnimation = "idle", blendNext = 0 } },
 
-				jump = { "Medkit_fp_jump", { nextAnimation = "idle" } },
-				land = { "Medkit_fp_jump_land", { nextAnimation = "idle" } },
-
 				equip = { "Medkit_fp_pickup", { nextAnimation = "idle" } },
 				unequip = { "Medkit_fp_putdown" }
 			}
