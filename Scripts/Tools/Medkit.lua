@@ -49,19 +49,21 @@ function Medkit:server_onFixedUpdate(dt)
 
 			local container = owner:getInventory()
 			sm.container.beginTransaction()
-			sm.container.spend(container, self.itemUuid, 1)
+			sm.container.spendFromSlot(container, self.sv_selectedSlot, self.itemUuid, 1)
 			sm.container.endTransaction()
 
-			self:sv_updateUse(false)
+			self:sv_updateUse()
 		end
 	end
 end
 
-function Medkit:sv_updateUse(state)
+function Medkit:sv_updateUse(slot)
+	local state = slot ~= nil
 	if state == self.sv_using then return end
 
 	self.sv_using = state
 	self.sv_useProgress = 0
+	self.sv_selectedSlot = slot
 
 	self.network:sendToClients("cl_updateUse", state)
 end
@@ -243,7 +245,7 @@ function Medkit:client_onUnequip()
 
 	setTpAnimation( self.tpAnimations, "putdown" )
 	if self.cl_isLocal then
-		self.network:sendToServer("sv_updateUse", false)
+		self.network:sendToServer("sv_updateUse")
 
 		if self.fpAnimations.currentAnimation ~= "unequip" then
 			swapFpAnimation( self.fpAnimations, "equip", "unequip", 0.2 )
@@ -261,9 +263,9 @@ function Medkit:client_onEquippedUpdate(lmb, rmb, f)
 	end
 
 	if (lmb == 1 or lmb == 2) and not self.cl_using then
-		self.network:sendToServer("sv_updateUse", true)
+		self.network:sendToServer("sv_updateUse", sm.localPlayer.getSelectedHotbarSlot())
 	elseif lmb == 3 then
-		self.network:sendToServer("sv_updateUse", false)
+		self.network:sendToServer("sv_updateUse")
 	end
 
 	sm.gui.setInteractionText( "", sm.gui.getKeyBinding( "Create", true ), "#{INTERACTION_USE}" )
