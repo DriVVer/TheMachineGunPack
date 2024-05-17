@@ -10,7 +10,8 @@ dofile("$CONTENT_DATA/Scripts/MedkitProgressbar.lua")
 local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Bag.rend"
+	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Bag.rend",
+	"$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Syr.rend"
 }
 
 local renderablesTp = {

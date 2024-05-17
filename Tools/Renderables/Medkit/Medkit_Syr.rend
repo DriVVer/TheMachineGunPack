@@ -1,0 +1,32 @@
+{
+	"lodList" : [
+		{
+			"animationList" : [
+				{
+					"file" : "$CONTENT_DATA/Tools/Animations/Gun_Anims/Medkit/Medkit_Syr.dae",
+					"name" : "Medkit_Syr"
+				}
+			],
+			"includes" : [
+				"POSITION",
+				"UV0",
+				"NORMAL",
+				"TANGENTS",
+				"BLEND_INDICES",
+				"BLEND_WEIGHTS"
+			],
+			"mesh" : "$CONTENT_DATA/Tools/Mesh/Medkit/Medkit_Syr.dae",
+			"subMeshList" : [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Medkit/obj_consumable_medicalbag_props_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}
