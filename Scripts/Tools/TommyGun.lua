@@ -463,7 +463,6 @@ function TommyGun.client_onUpdate( self, dt )
 end
 
 function TommyGun:client_onEquip(animate, is_custom)
-	print(self.cl_isLocal)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end

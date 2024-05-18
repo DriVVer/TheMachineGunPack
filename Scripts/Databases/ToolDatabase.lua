@@ -2821,7 +2821,7 @@ local mgp_tool_database =
 			GarandThumb = "GarandThumb"
 		},
 		on_unequip_action = {
-			stop_effects = { "Ping", "GarandThumb", "BulletPut" }
+			stop_effects = { "ping", "GarandThumb", "BulletPut" }
 		},
 		animation = {
 			no_ammo =
