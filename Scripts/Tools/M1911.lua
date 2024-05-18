@@ -907,8 +907,6 @@ function M1911.cl_onSecondaryUse( self, state )
 end
 
 function M1911.client_onEquippedUpdate( self, primaryState, secondaryState )
-	mgp_toolAnimator_checkForRecoil(self, primaryState)
-
 	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then

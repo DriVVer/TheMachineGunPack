@@ -486,19 +486,6 @@ function mgp_toolAnimator_setAnimation(self, anim_name)
 	end
 end
 
-local function cl_recoil_unlock(self)
-	sm.localPlayer.setLockedControls(false)
-end
-
-local function sv_recoil_resetRecoil(self)
-	self.network:sendToClients("cl_recoil_resetRecoil")
-end
-
-local function cl_recoil_resetRecoil(self)
-	self.cl_recoilAngle = 0
-	self.cl_desiredRecoilAngle = 0
-end
-
 function mgp_toolAnimator_initialize(self, tool_name)
 	local anim_data = mgp_getToolData(tool_name)
 
@@ -539,13 +526,8 @@ function mgp_toolAnimator_initialize(self, tool_name)
 
 	self.cl_recoilAngle = 0
 	self.cl_desiredRecoilAngle = 0
-	self.cl_isFiring = false
 
 	self.cl_isLocal = self.tool:isLocal()
-
-	self.cl_recoil_unlock = cl_recoil_unlock
-	self.sv_recoil_resetRecoil = sv_recoil_resetRecoil
-	self.cl_recoil_resetRecoil = cl_recoil_resetRecoil
 end
 
 function mgp_toolAnimator_reset(self)
@@ -571,21 +553,6 @@ function mgp_toolAnimator_reset(self)
 			print("[MGP] Reset: effect", v, "is invalid!")
 		end
 	end
-end
-
-function mgp_toolAnimator_checkForRecoil(self, state)
-	--[[local isFiring = (state == 1 or state == 2) and self.ammo_in_mag > 0
-	if isFiring ~= self.cl_isFiring then
-		if not isFiring then
-			sm.localPlayer.setLockedControls(true)
-			sm.localPlayer.setDirection(sm.camera.getDefaultRotation() * sm.quat.angleAxis(self.cl_recoilAngle, sm.vec3.new(1,0,0)) * sm.vec3.new(0,1,0))
-			self:cl_recoil_resetRecoil()
-			self.network:sendToServer("sv_recoil_resetRecoil")
-			sm.event.sendToTool(self.tool, "cl_recoil_unlock")
-		end
-
-		self.cl_isFiring = isFiring
-	end]]
 end
 
 function mgp_toolAnimator_destroy(self)

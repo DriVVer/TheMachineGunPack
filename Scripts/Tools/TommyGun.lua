@@ -886,8 +886,6 @@ function TommyGun.cl_onSecondaryUse( self, state )
 end
 
 function TommyGun.client_onEquippedUpdate( self, primaryState, secondaryState )
-	mgp_toolAnimator_checkForRecoil(self, primaryState)
-
 	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then

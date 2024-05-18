@@ -1030,8 +1030,6 @@ function PTRD:cl_onSecondaryUse(state)
 end
 
 function PTRD:client_onEquippedUpdate(primaryState, secondaryState)
-	mgp_toolAnimator_checkForRecoil(self, primaryState)
-
 	if primaryState ~= self.prevPrimaryState then
 		self:cl_onPrimaryUse(primaryState)
 		self.prevPrimaryState = primaryState

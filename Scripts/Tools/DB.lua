@@ -800,8 +800,6 @@ function DB.cl_onSecondaryUse( self, state )
 end
 
 function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
-	mgp_toolAnimator_checkForRecoil(self, primaryState)
-
 	if primaryState == sm.tool.interactState.start then
 		self:cl_onPrimaryUse()
 	end
