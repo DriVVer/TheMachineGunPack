@@ -23,7 +23,6 @@ local Damage = 100
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
----@field scope_hud GuiInterface
 MosinNS = class()
 MosinNS.mag_capacity = 5
 MosinNS.maxRecoil = 30
@@ -171,26 +170,10 @@ function MosinNS:client_onCreate()
 
 	mgp_toolAnimator_initialize(self, "MosinNS")
 
-	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
-		isHud = true,
-		isInteractive = false,
-		needsCursor = false,
-		hidesHotbar = true
-	})
-
 	self.network:sendToServer("server_requestAmmo")
 end
 
 function MosinNS:client_onDestroy()
-	local v_scopeHud = self.scope_hud
-	if v_scopeHud and sm.exists(v_scopeHud) then
-		if v_scopeHud:isActive() then
-			v_scopeHud:close()
-		end
-
-		v_scopeHud:destroy()
-	end
-
 	mgp_toolAnimator_destroy(self)
 end
 
@@ -364,7 +347,7 @@ function MosinNS:client_updateAimWeights(dt)
 
 	-- Camera update
 	local bobbingFp = 1
-	if self.aiming and self.scope_enabled and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
+	if self.aiming and self.fpAnimations.currentAnimation ~= "cock_hammer_aim" then
 		self.aimWeightFp = sm.util.lerp( self.aimWeightFp, 1.0, weight_blend )
 		bobbingFp = 0.12
 	else
@@ -514,51 +497,6 @@ function MosinNS:client_onUpdate(dt)
 	self.fireCooldownTimer = math.max( self.fireCooldownTimer - dt, 0.0 )
 	self.spreadCooldownTimer = math.max( self.spreadCooldownTimer - dt, 0.0 )
 	self.sprintCooldownTimer = math.max( self.sprintCooldownTimer - dt, 0.0 )
-
-	if self.scope_timer then
-		self.scope_timer = self.scope_timer - dt
-
-		if self.scope_timer <= 0.0 then
-			self.scope_timer = nil
-
-			if self.aiming then
-				self.scope_enabled = true
-			end
-		end
-	end
-
-	if self.scope_enabled then
-		local v_isInFirstPerson = self.tool:isInFirstPersonView()
-		local v_aimState = self.aiming
-		local v_isAimReload = self.fpAnimations.currentAnimation == "cock_hammer_aim"
-		if v_isInFirstPerson and v_aimState and not v_isAimReload then
-			if not self.scope_hud:isActive() then
-				self.scope_hud:open()
-
-				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
-				self.fpAnimations.animations.aim_anim.time = 0.5
-
-				sm.gui.startFadeToBlack(1.0, 0.5)
-				sm.gui.endFadeToBlack(0.8)
-			end
-		else
-			if not v_isAimReload then
-				if not v_aimState then
-					self.scope_enabled = false
-				end
-
-				setFpAnimation(self.fpAnimations, "aimExit", 0.0)
-			end
-
-			if self.scope_hud:isActive() then
-				self.scope_hud:close()
-
-				sm.gui.startFadeToBlack(1.0, 0.5)
-				sm.gui.endFadeToBlack(0.8)
-			end
-		end
-	end
-
 
 	if self.cl_isLocal then
 		local dispersion = 0.0
@@ -736,19 +674,11 @@ function MosinNS:client_onUnequip(animate, is_custom)
 	end
 
 	self.waiting_for_ammo = nil
-	self.scope_enabled = false
 	self.wantEquipped = false
 	self.equipped = false
 	self.aiming = false
 
 	mgp_toolAnimator_reset(self)
-
-	if self.scope_hud:isActive() then
-		self.scope_hud:close()
-
-		sm.gui.startFadeToBlack(1.0, 0.5)
-		sm.gui.endFadeToBlack(0.8)
-	end
 
 	local s_tool = self.tool
 	if sm.exists(s_tool) then
@@ -815,7 +745,7 @@ function MosinNS:onShoot(dir)
 
 	if dir ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
-		mgp_toolAnimator_setAnimation(self, self.scope_hud:isActive() and "shoot_aim" or "shoot")
+		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
@@ -1083,20 +1013,13 @@ end
 
 local _intstate = sm.tool.interactState
 function MosinNS:cl_onSecondaryUse(state)
-	if self.scope_timer or not self.equipped then return end
+	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading(mosin_aim_block_anims) or (self.aim_timer ~= nil)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
 		self.tpAnimations.animations.idle.time = 0
-
-		if self.aiming then
-			self.scope_timer = 0.3
-		else
-			self.fireCooldownTimer = 0.4
-			self.scope_timer = 0.5
-		end
 
 		self.tool:setMovementSlowDown(self.aiming)
 		self:onAim(self.aiming)
