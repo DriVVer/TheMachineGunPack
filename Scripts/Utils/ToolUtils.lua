@@ -6,3 +6,11 @@ function mgp_tool_isAnimPlaying(self, anim_table)
 
     return false
 end
+
+function mgp_tool_getToolDir(self)
+    if g_TMGP_SETTINGS.recoilType == 0 then
+        return sm.localPlayer.getDirection()
+    end
+
+    return sm.localPlayer.getDirection():rotate(self.cl_recoilAngle, sm.localPlayer.getRight())
+end

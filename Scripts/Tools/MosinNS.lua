@@ -49,7 +49,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/MosinNS/char_fp_MosinNS.rend",
-	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -896,7 +897,7 @@ function MosinNS:cl_onPrimaryUse(state)
 
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
-			local dir = sm.camera.getDirection()
+			local dir = mgp_tool_getToolDir(self)
 			local firePos = nil
 			if self.tool:isInFirstPersonView() then
 				if self.aiming then

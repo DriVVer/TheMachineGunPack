@@ -46,7 +46,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_anims_fp.rend",
-	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_offset_fp.rend"
+	"$CONTENT_DATA/Tools/Renderables/M1911/char_M1911_offset_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -711,7 +712,7 @@ function M1911:cl_onPrimaryUse(is_shooting)
 		self.ammo_in_mag = self.ammo_in_mag - 1
 		local firstPerson = self.tool:isInFirstPersonView()
 
-		local dir = sm.localPlayer.getDirection()
+		local dir = mgp_tool_getToolDir(self)
 
 		local firePos = self:calculateFirePosition()
 		local fakePosition = self:calculateTpMuzzlePos()

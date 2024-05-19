@@ -48,7 +48,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/Garand/char_male_fp_Garand.rend",
-	"$CONTENT_DATA/Tools/Renderables/Garand/char_Garand_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Garand/char_Garand_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -695,7 +696,7 @@ function Garand:onShoot(ammo_in_mag)
 end
 
 function Garand:cl_getFirePosition()
-	local v_direction = sm.camera.getDirection()
+	local v_direction = mgp_tool_getToolDir(self)
 
 	if not self.tool:isInFirstPersonView() then
 		return self.tool:getTpBonePos("pejnt_barrel"), v_direction

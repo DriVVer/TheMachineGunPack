@@ -3611,13 +3611,13 @@ local mgp_tool_database =
 			Clip = "GarandClip",
 			Check = "GarandRecieverMove",
 			Reciever = "GarandReciever",
-			Ping = "GarandPing",
+			ping = "GarandPing",
 			ClipTake = "GarandClipTake",
 			BulletPut = "MosinBulletPut",
 			GarandThumb = "GarandThumb"
 		},
 		on_unequip_action = {
-			stop_effects = { "Ping", "GarandThumb", "BulletPut" }
+			stop_effects = { "ping", "GarandThumb", "BulletPut" }
 		},
 		animation = {
 			no_ammo =

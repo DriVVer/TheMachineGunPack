@@ -47,7 +47,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_male_fp_TommyGun.rend",
-	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_TommyGun_fp_animlist.rend"
+	"$CONTENT_DATA/Tools/Renderables/TommyGun/char_TommyGun_fp_animlist.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -463,7 +464,6 @@ function TommyGun.client_onUpdate( self, dt )
 end
 
 function TommyGun:client_onEquip(animate, is_custom)
-	print(self.cl_isLocal)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -694,7 +694,7 @@ function TommyGun:cl_onPrimaryUse(is_shooting)
 		self.ammo_in_mag = self.ammo_in_mag - 1
 		local firstPerson = self.tool:isInFirstPersonView()
 
-		local dir = sm.localPlayer.getDirection()
+		local dir = mgp_tool_getToolDir(self)
 
 		local firePos = self:calculateFirePosition()
 		local fakePosition = self:calculateTpMuzzlePos()

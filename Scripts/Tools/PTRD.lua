@@ -46,7 +46,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/PTRD/char_male_fp_PTRD.rend",
-	"$CONTENT_DATA/Tools/Renderables/PTRD/char_PTRD_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/PTRD/char_PTRD_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -865,7 +866,7 @@ function PTRD:onShoot(dir)
 end
 
 function PTRD:cl_getFirePosition()
-	local v_direction = sm.camera.getDirection()
+	local v_direction = mgp_tool_getToolDir(self)
 
 	if not self.tool:isInFirstPersonView() then
 		return self.tool:getTpBonePos("pejnt_barrel"), v_direction
