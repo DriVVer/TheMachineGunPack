@@ -764,8 +764,8 @@ function Magnum44.cl_onPrimaryUse(self, state)
 
 			-- Aim assist
 			if not firstPerson then
-				local raycastPos = sm.camera.getPosition() + sm.camera.getDirection() * sm.camera.getDirection():dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, sm.camera.getDirection() )
+				local raycastPos = sm.camera.getPosition() + dir * dir:dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
+				local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, dir )
 				if hit then
 					local norDir = sm.vec3.normalize( result.pointWorld - firePos )
 					local dirDot = norDir:dot( dir )
