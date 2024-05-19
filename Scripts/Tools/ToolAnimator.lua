@@ -312,15 +312,18 @@ local function DoGunRecoil(self, dt)
 
 	---@type Character
 	local char = self.tool:getOwner().character
-	self.crosshair:setPosition(camera_getDefaultPos() + char.velocity * dt + recoilDir * 0.15)
+	self.crosshair:setPosition(sm.camera.getPosition() + char.velocity * dt + recoilDir * 0.15)
 	self.crosshair:setRotation(sm.camera.getRotation())
 
-	local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+	--spread
+	--[[local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 	local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 	local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
 
 	local baseScale = one / (90/sm.camera.getFov()) * 0.01
-	self.crosshair:setScale(baseScale + one * clamp( self.movementDispersion + fireMode.spreadCooldown * recoilDispersion, 0.0, 1.0 ) * 0.075)
+	self.crosshair:setScale(baseScale + one * clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) * 0.075)]]
+
+	self.crosshair:setScale(one / (90/sm.camera.getFov()) * 0.01)
 end
 
 local function ResetGunRecoil(self)
@@ -492,7 +495,10 @@ end
 
 local isShootAnim = {
 	shoot = true,
-	last_shot = true
+	last_shot = true,
+	aimShoot = true,
+	shoot_aim = true,
+	shoot_bipod = true,
 }
 
 function mgp_toolAnimator_setAnimation(self, anim_name)
@@ -524,7 +530,7 @@ function mgp_toolAnimator_setAnimation(self, anim_name)
 		}
 	end
 
-	if self.aiming or isShootAnim[anim_name] == true then
+	if isShootAnim[anim_name] == true then
 		local recoilAmount = self.aiming and self.aimRecoilAmount or self.recoilAmount
 		self.cl_desiredRecoilAngle = math.min(self.cl_desiredRecoilAngle + math.rad(recoilAmount or 0), math.rad(self.maxRecoil or 0))
 	end

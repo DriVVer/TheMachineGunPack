@@ -9,8 +9,8 @@ end
 
 function mgp_tool_getToolDir(self)
     if g_TMGP_SETTINGS.recoilType == 0 then
-        return sm.localPlayer.getDirection()
+        return sm.camera.getDirection()
     end
 
-    return sm.localPlayer.getDirection():rotate(self.cl_recoilAngle, sm.localPlayer.getRight())
+    return sm.camera.getDirection():rotate(self.cl_recoilAngle, sm.camera.getRight())
 end

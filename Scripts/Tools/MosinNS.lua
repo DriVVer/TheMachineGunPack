@@ -831,7 +831,7 @@ function MosinNS:cl_onPrimaryUse(state)
 			local firePos = nil
 			if self.tool:isInFirstPersonView() then
 				if self.aiming then
-					firePos = sm.camera.getPosition() + sm.camera.getDirection() * 0.5
+					firePos = sm.camera.getPosition() + dir * 0.5
 
 					local hit, result = sm.localPlayer.getRaycast(300)
 					if hit then
