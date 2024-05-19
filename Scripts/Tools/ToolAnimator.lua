@@ -284,6 +284,54 @@ end
 
 
 
+local cam = sm.camera
+local camera_getPullBack = cam.getCameraPullback
+local camera_getDefaultPos = cam.getDefaultPosition
+local camera_getDefaultRotation = cam.getDefaultRotation
+local camera_getDefaultFov = cam.getDefaultFov
+local quat_angleAxis = sm.quat.angleAxis
+local right = sm.vec3.new(1,0,0)
+local one = sm.vec3.one()
+local util_lerp = sm.util.lerp
+
+local function DoGunRecoil(self, dt)
+	self.tool:updateFpAnimation("recoil_horizontal", 0.5, 1, false)
+
+	local playerDir = sm.localPlayer.getDirection()
+	local recoilDir = playerDir:rotate(self.cl_recoilAngle, sm.localPlayer.getRight())
+	local angle = math.acos(playerDir:dot(recoilDir))
+	if angle ~= angle then
+		angle = 0
+	end
+
+	self.tool:updateFpAnimation("recoil_vertical", 0.5 - angle * 0.5, 1, false)
+
+	if not self.crosshair:isPlaying() then
+		self.crosshair:start()
+	end
+
+	---@type Character
+	local char = self.tool:getOwner().character
+	self.crosshair:setPosition(camera_getDefaultPos() + char.velocity * dt + recoilDir * 0.15)
+	self.crosshair:setRotation(sm.camera.getRotation())
+
+	local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+	local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+	local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+
+	local baseScale = one / (90/sm.camera.getFov()) * 0.01
+	self.crosshair:setScale(baseScale + one * clamp( self.movementDispersion + fireMode.spreadCooldown * recoilDispersion, 0.0, 1.0 ) * 0.075)
+end
+
+local function ResetGunRecoil(self)
+	if self.crosshair and self.crosshair:isPlaying() then
+		self.crosshair:stop()
+	end
+
+	self.tool:updateFpAnimation("recoil_horizontal", 0.5, 1, false)
+	self.tool:updateFpAnimation("recoil_vertical", 0.5, 1, false)
+end
+
 local function SetPlayerCamOverride(player, data)
 	local pData = player.clientPublicData
     if pData then
@@ -313,14 +361,69 @@ local function SetPlayerCamOverride(player, data)
     end
 end
 
-local cam = sm.camera
-local camera_getPullBack = cam.getCameraPullback
-local camera_getDefaultPos = cam.getDefaultPosition
-local camera_getDefaultRotation = cam.getDefaultRotation
-local camera_getDefaultFov = cam.getDefaultFov
-local quat_angleAxis = sm.quat.angleAxis
-local right = sm.vec3.new(1,0,0)
-local util_lerp = sm.util.lerp
+local function DoCameraRecoil(self, dt)
+	local v_loc_pl = sm.localPlayer.getPlayer()
+	local pullback = camera_getPullBack()
+	if pullback == 0 then
+		SetPlayerCamOverride(
+			v_loc_pl,
+			{
+				cameraState = 2,
+				cameraPosition = camera_getDefaultPos(),
+				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
+				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovFp, self.aimWeight)
+			}
+		)
+	else
+		local v_loc_char = v_loc_pl.character
+		if not v_loc_char then return end
+
+		local v_cam_dir = (sm.camera.getDefaultRotation() * sm.vec3.new(0, 1, 0)):normalize()
+		local v_cam_pitch = math.asin(v_cam_dir.z)
+		local v_cam_yaw = math.atan2(v_cam_dir.y, v_cam_dir.x) - math.pi / 2
+		local v_cam_dist = 1.3659 + 0.325 * pullback
+		local v_new_pos = sm.vec3.new(0, 1, 0)
+			:rotateX(v_cam_pitch + self.cl_recoilAngle)
+			:rotateZ(v_cam_yaw) * v_cam_dist
+
+		-- Using jnt_root because it's smoother than char.worldPosition
+		local v_char_real_pos = v_loc_char:getTpBonePos("jnt_root")
+			+ sm.vec3.new(0, 0, v_loc_char:getHeight() * 0.5) + v_loc_char.velocity * dt
+		local v_up_offset_coeff = math.abs(math.asin(v_cam_dir.z)) / math.pi * 2
+		local v_final_up_offset = 0.575 * (1 - v_up_offset_coeff)
+		local v_cam_final_offset = v_char_real_pos
+			+ sm.localPlayer.getRight() * 0.375
+			+ sm.localPlayer.getUp() * v_final_up_offset
+
+		local v_cam_final_pos = v_cam_final_offset - v_new_pos
+		local v_filter = sm.physics.filter
+		local v_hit, v_result = sm.physics.raycast(v_cam_final_offset, v_cam_final_pos - v_new_pos * 0.2, nil,
+			v_filter.staticBody + v_filter.terrainSurface + v_filter.terrainAsset)
+		if v_hit then
+			v_cam_final_pos = v_result.pointWorld + v_result.normalWorld * 0.2
+		end
+
+		SetPlayerCamOverride(
+			v_loc_pl,
+			{
+				cameraState = 3,
+				cameraPosition = v_cam_final_pos,
+				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
+				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovTp, self.aimWeight)
+			}
+		)
+		-- old solution
+		--[[local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
+		sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
+			cameraState = 3,
+			cameraPosition = sm.localPlayer.getPlayer().character.worldPosition + sm.quat.angleAxis(self.cl_recoilAngle, sm.localPlayer.getRight()) * offset,
+			cameraRotation = camera_getDefaultRotation() * sm.quat.angleAxis(self.cl_recoilAngle, right),
+			cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
+		}]]
+	end
+end
+
+
 function mgp_toolAnimator_update(self, dt)
 	if self.cl_animator_current_track_count > 0 then
 		for id, track in pairs(self.cl_animator_tracks) do
@@ -340,71 +443,18 @@ function mgp_toolAnimator_update(self, dt)
 
 	if not g_TMGP_SETTINGS.recoil or not self.maxRecoil then
 		self.cl_desiredRecoilAngle, self.cl_recoilAngle = 0, 0
+		ResetGunRecoil(self)
 		return
 	end
 
 	self.cl_desiredRecoilAngle = math.max(self.cl_desiredRecoilAngle - dt * (self.recoilRecoverySpeed or 1), 0)
 	self.cl_recoilAngle = util_lerp(self.cl_recoilAngle, self.cl_desiredRecoilAngle, dt * 10)
-	--print(self.cl_desiredRecoilAngle, self.cl_recoilAngle, self.cl_isLocal, self.equipped)
 	if self.cl_isLocal and self.equipped then
-		local v_loc_pl = sm.localPlayer.getPlayer()
-		local pullback = camera_getPullBack()
-		if pullback == 0 then
-			SetPlayerCamOverride(
-				v_loc_pl,
-				{
-					cameraState = 2,
-					cameraPosition = camera_getDefaultPos(),
-					cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
-					cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovFp, self.aimWeight)
-				}
-			)
+		if g_TMGP_SETTINGS.recoilType == 0 then
+			ResetGunRecoil(self)
+			DoCameraRecoil(self, dt)
 		else
-			local v_loc_char = v_loc_pl.character
-			if not v_loc_char then return end
-
-			local v_cam_dir = (sm.camera.getDefaultRotation() * sm.vec3.new(0, 1, 0)):normalize()
-			local v_cam_pitch = math.asin(v_cam_dir.z)
-			local v_cam_yaw = math.atan2(v_cam_dir.y, v_cam_dir.x) - math.pi / 2
-			local v_cam_dist = 1.3659 + 0.325 * pullback
-			local v_new_pos = sm.vec3.new(0, 1, 0)
-				:rotateX(v_cam_pitch + self.cl_recoilAngle)
-				:rotateZ(v_cam_yaw) * v_cam_dist
-
-			-- Using jnt_root because it's smoother than char.worldPosition
-			local v_char_real_pos = v_loc_char:getTpBonePos("jnt_root")
-				+ sm.vec3.new(0, 0, v_loc_char:getHeight() * 0.5) + v_loc_char.velocity * dt
-			local v_up_offset_coeff = math.abs(math.asin(v_cam_dir.z)) / math.pi * 2
-			local v_final_up_offset = 0.575 * (1 - v_up_offset_coeff)
-			local v_cam_final_offset = v_char_real_pos
-				+ sm.localPlayer.getRight() * 0.375
-				+ sm.localPlayer.getUp() * v_final_up_offset
-
-			local v_cam_final_pos = v_cam_final_offset - v_new_pos
-			local v_filter = sm.physics.filter
-			local v_hit, v_result = sm.physics.raycast(v_cam_final_offset, v_cam_final_pos - v_new_pos * 0.2, nil,
-				v_filter.staticBody + v_filter.terrainSurface + v_filter.terrainAsset)
-			if v_hit then
-				v_cam_final_pos = v_result.pointWorld + v_result.normalWorld * 0.2
-			end
-
-			SetPlayerCamOverride(
-				v_loc_pl,
-				{
-					cameraState = 3,
-					cameraPosition = v_cam_final_pos,
-					cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
-					cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovTp, self.aimWeight)
-				}
-			)
-			-- old solution
-			--[[local offset = sm.localPlayer.getRight() * 0.375 + sm.localPlayer.getUp() * 0.575 - sm.localPlayer.getDirection() * 1.6925 * pullback
-			sm.localPlayer.getPlayer().clientPublicData.customCameraData = {
-				cameraState = 3,
-				cameraPosition = sm.localPlayer.getPlayer().character.worldPosition + sm.quat.angleAxis(self.cl_recoilAngle, sm.localPlayer.getRight()) * offset,
-				cameraRotation = camera_getDefaultRotation() * sm.quat.angleAxis(self.cl_recoilAngle, right),
-				cameraFov = util_lerp(camera_getDefaultFov(), 30, self.aimWeight)
-			}]]
+			DoGunRecoil(self, dt)
 		end
 	end
 end
@@ -440,11 +490,6 @@ function mgp_toolAnimator_getAnimation(self)
 	return self.cl_animator_current_name
 end
 
-local isAimShootAnim = {
-	aimShoot = true,
-	shoot_aim = true,
-	shoot_bipod = true,
-}
 local isShootAnim = {
 	shoot = true,
 	last_shot = true
@@ -479,9 +524,8 @@ function mgp_toolAnimator_setAnimation(self, anim_name)
 		}
 	end
 
-	local isAimShoot = isAimShootAnim[anim_name] == true
-	if isAimShoot or isShootAnim[anim_name] == true then
-		local recoilAmount = isAimShoot and self.aimRecoilAmount or self.recoilAmount
+	if self.aiming or isShootAnim[anim_name] == true then
+		local recoilAmount = self.aiming and self.aimRecoilAmount or self.recoilAmount
 		self.cl_desiredRecoilAngle = math.min(self.cl_desiredRecoilAngle + math.rad(recoilAmount or 0), math.rad(self.maxRecoil or 0))
 	end
 end
@@ -528,6 +572,12 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	self.cl_desiredRecoilAngle = 0
 
 	self.cl_isLocal = self.tool:isLocal()
+	if self.cl_isLocal then
+		self.crosshair = sm.effect.createEffect("ShapeRenderable")
+		self.crosshair:setParameter("uuid", sm.uuid.new("6a1af0f5-7697-4ad4-a772-62ea03438745"))
+		self.crosshair:setParameter("color", sm.color.new("ffffff"))
+		self.crosshair:setScale(sm.vec3.one() * 0.1)
+	end
 end
 
 function mgp_toolAnimator_reset(self)
@@ -535,6 +585,7 @@ function mgp_toolAnimator_reset(self)
 
 	if self.cl_isLocal then
 		SetPlayerCamOverride(sm.localPlayer.getPlayer())
+		self.crosshair:stop()
 	end
 
 	local cl_on_unequip = self.cl_animator_on_unequip
@@ -566,5 +617,6 @@ function mgp_toolAnimator_destroy(self)
 
 	if self.cl_isLocal then
 		SetPlayerCamOverride(sm.localPlayer.getPlayer())
+		self.crosshair:destroy()
 	end
 end

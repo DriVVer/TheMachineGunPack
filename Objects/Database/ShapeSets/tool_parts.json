@@ -179,6 +179,34 @@
 			"showInInventory": false,
 			"stackSize": 1,
 			"uuid": "d9c36e6d-0878-4a87-909d-d71b4dca51e7"
+		},
+		{
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"color": "ffffff",
+			"name": "obj_crosshair",
+			"physicsMaterial": "Plastic",
+			"ratings": {},
+			"renderable": {
+				"lodList" : [
+				   	{
+					  	"mesh" : "$CONTENT_DATA/Objects/Mesh/obj_crosshair.fbx",
+					  	"subMeshList" : [
+						 	{
+								"material" : "ConnectJoint",
+								"textureList" : [
+									"$GAME_DATA/Textures/transparent.tga",
+									"$GAME_DATA/Textures/Default/default_asg.tga",
+									"$GAME_DATA/Textures/Default/default_nor.tga"
+								]
+							}
+						]
+					}
+				]
+			},
+			"rotationSet": "PropY",
+			"showInInventory": false,
+			"stackSize": 1,
+			"uuid": "6a1af0f5-7697-4ad4-a772-62ea03438745"
 		}
 	]
 }

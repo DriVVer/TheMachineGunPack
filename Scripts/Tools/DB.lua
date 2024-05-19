@@ -60,7 +60,8 @@ local renderablesTp =
 local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/DB/char_fp_DB_anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_fp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/DB/DB_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
 sm.tool.preloadRenderables( renderables )
@@ -634,7 +635,7 @@ function DB:cl_onPrimaryUse()
 		if self.ammo_in_mag > 0 then
 			self.ammo_in_mag = self.ammo_in_mag - 1
 
-			local dir = sm.camera.getDirection()
+			local dir = mgp_tool_getToolDir(self)
 			local firePos = nil
 			if self.tool:isInFirstPersonView() then
 				firePos = self.tool:getFpBonePos("pejnt_barrel")
