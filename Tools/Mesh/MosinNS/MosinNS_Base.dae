@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-17T23:05:47Z</created><keywords></keywords><modified>2024-05-17T23:05:47Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-18T16:56:12Z</created><keywords></keywords><modified>2024-05-18T16:56:12Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_images>
     <image id="base_color_texture-image" name="base_color_texture"><init_from>file://C:\Users\Home\AppData\Roaming\Axolot Games\Scrap Mechanic\User\User_76561198280635682\Mods\TheMachineGunPack\Tools\Textures\rifle_wood_dif.png</init_from></image>
     <image id="base_color_texture_ncl1_2-image" name="base_color_texture_ncl1_2"><init_from>file://D:\Steam\steamapps\common\Scrap Mechanic\Survival\Objects\Textures\harvests\Loggs\obj_harvest_log_dif.tga</init_from></image>
@@ -16585,7 +16585,7 @@
 </bind_shape_matrix>
         <source id="WoodController-Joints">
           <Name_array id="WoodController-Joints-array" count="3">
- jnt_weapon pejnt_barrel jnt_bolt.001</Name_array>
+ jnt_weapon pejnt_barrel jnt_bolt</Name_array>
           <technique_common>
             <accessor source="#WoodController-Joints-array" count="3">
               <param type="name"/>
@@ -16674,6 +16674,68 @@
       </skin>
     </controller>
   </library_controllers>
+  <library_animations>
+    <animation id="base-anim" name="base"><animation><source id="base-Matrix-animation-input"><float_array id="base-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#base-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="base-Matrix-animation-output-transform"><float_array id="base-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#base-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="base-Interpolations"><Name_array id="base-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#base-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="base-Matrix-animation-transform"><input semantic="INPUT" source="#base-Matrix-animation-input"/><input semantic="OUTPUT" source="#base-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#base-Interpolations"/></sampler><channel source="#base-Matrix-animation-transform" target="base/matrix"/></animation></animation>
+    <animation id="jnt_weapon-anim" name="jnt_weapon"><animation><source id="jnt_weapon-Matrix-animation-input"><float_array id="jnt_weapon-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#jnt_weapon-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_weapon-Matrix-animation-output-transform"><float_array id="jnt_weapon-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_weapon-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_weapon-Interpolations"><Name_array id="jnt_weapon-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_weapon-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="jnt_weapon-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_weapon-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_weapon-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_weapon-Interpolations"/></sampler><channel source="#jnt_weapon-Matrix-animation-transform" target="jnt_weapon/matrix"/></animation></animation>
+    <animation id="pejnt_barrel-anim" name="pejnt_barrel"><animation><source id="pejnt_barrel-Matrix-animation-input"><float_array id="pejnt_barrel-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#pejnt_barrel-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="pejnt_barrel-Matrix-animation-output-transform"><float_array id="pejnt_barrel-Matrix-animation-output-transform-array" count="160">
+
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000001 0.000000 -0.000001 -0.000000 -1.000000 0.210000 -0.000000 1.000000 -0.000000 2.940000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#pejnt_barrel-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="pejnt_barrel-Interpolations"><Name_array id="pejnt_barrel-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#pejnt_barrel-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="pejnt_barrel-Matrix-animation-transform"><input semantic="INPUT" source="#pejnt_barrel-Matrix-animation-input"/><input semantic="OUTPUT" source="#pejnt_barrel-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#pejnt_barrel-Interpolations"/></sampler><channel source="#pejnt_barrel-Matrix-animation-transform" target="pejnt_barrel/matrix"/></animation></animation>
+    <animation id="jnt_bolt-anim" name="jnt_bolt"><animation><source id="jnt_bolt-Matrix-animation-input"><float_array id="jnt_bolt-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#jnt_bolt-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_bolt-Matrix-animation-output-transform"><float_array id="jnt_bolt-Matrix-animation-output-transform-array" count="160">
+
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_bolt-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_bolt-Interpolations"><Name_array id="jnt_bolt-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_bolt-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="jnt_bolt-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_bolt-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_bolt-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_bolt-Interpolations"/></sampler><channel source="#jnt_bolt-Matrix-animation-transform" target="jnt_bolt/matrix"/></animation></animation>
+  </library_animations>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       
@@ -16692,7 +16754,7 @@
               </technique>
             </extra>
           </node>
-          <node name="jnt_bolt.001" id="jnt_bolt.001" sid="jnt_bolt.001" type="JOINT">
+          <node name="jnt_bolt" id="jnt_bolt" sid="jnt_bolt" type="JOINT">
             <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
             <extra>
               <technique profile="FCOLLADA">
