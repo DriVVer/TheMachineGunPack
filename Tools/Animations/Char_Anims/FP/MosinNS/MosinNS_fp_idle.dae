@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-19T11:26:12Z</created><keywords></keywords><modified>2024-05-19T11:26:12Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-19T17:34:43Z</created><keywords></keywords><modified>2024-05-19T17:34:43Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Character-anim" name="Character"><animation><source id="Character-Matrix-animation-input"><float_array id="Character-Matrix-animation-input-array" count="90">
 
@@ -8886,7 +8886,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
   </library_animations>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-        
+       
             <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
                 <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                 <extra>
@@ -8894,14 +8894,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                         <visibility>1.000000</visibility>
                     </technique>
                 </extra>
-                <node name="HIK_root_jnt_end" id="HIK_root_jnt_end" sid="HIK_root_jnt_end" type="JOINT">
-                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.149970 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                    <extra>
-                        <technique profile="FCOLLADA">
-                            <visibility>1.000000</visibility>
-                        </technique>
-                    </extra>
-                </node>
             </node>
             <node name="root_jnt" id="root_jnt" sid="root_jnt" type="JOINT">
                 <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -8966,14 +8958,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                         <visibility>1.000000</visibility>
                                                     </technique>
                                                 </extra>
-                                                <node name="jnt_headappend_end" id="jnt_headappend_end" sid="jnt_headappend_end" type="JOINT">
-                                                    <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.046737 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                    <extra>
-                                                        <technique profile="FCOLLADA">
-                                                            <visibility>1.000000</visibility>
-                                                        </technique>
-                                                    </extra>
-                                                </node>
                                             </node>
                                         </node>
                                     </node>
@@ -9005,14 +8989,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                             <visibility>1.000000</visibility>
                                                         </technique>
                                                     </extra>
-                                                    <node name="jnt_left_armroll_end" id="jnt_left_armroll_end" sid="jnt_left_armroll_end" type="JOINT">
-                                                        <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.094929 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                    </node>
                                                 </node>
                                                 <node name="jnt_left_forearm" id="jnt_left_forearm" sid="jnt_left_forearm" type="JOINT">
                                                     <matrix sid="matrix">0.048155 0.416482 -0.907867 -0.843981 0.425785 0.813643 0.395842 0.000001 0.903542 -0.405618 -0.138151 0.000004 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9028,14 +9004,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                 <visibility>1.000000</visibility>
                                                             </technique>
                                                         </extra>
-                                                        <node name="jnt_left_forearmroll_end" id="jnt_left_forearmroll_end" sid="jnt_left_forearmroll_end" type="JOINT">
-                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 0.109648 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                        </node>
                                                     </node>
                                                     <node name="jnt_left_hand" id="jnt_left_hand" sid="jnt_left_hand" type="JOINT">
                                                         <matrix sid="matrix">0.895020 0.243615 -0.373619 -0.975262 0.207496 0.514079 0.832267 -0.000001 0.394823 -0.822418 0.409563 0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9072,14 +9040,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_left_handthumb4_end" id="jnt_left_handthumb4_end" sid="jnt_left_handthumb4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.018386 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9112,14 +9072,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_left_handindex4_end" id="jnt_left_handindex4_end" sid="jnt_left_handindex4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.016061 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9131,14 +9083,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                     <visibility>1.000000</visibility>
                                                                 </technique>
                                                             </extra>
-                                                            <node name="jnt_left_weapon_end" id="jnt_left_weapon_end" sid="jnt_left_weapon_end" type="JOINT">
-                                                                <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 -0.000000 0.067634 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                            </node>
                                                         </node>
                                                         <node name="jnt_left_handmiddle1" id="jnt_left_handmiddle1" sid="jnt_left_handmiddle1" type="JOINT">
                                                             <matrix sid="matrix">0.537676 0.840391 -0.068176 -0.489248 -0.036994 -0.057266 -0.997674 -0.062066 -0.842340 0.538947 0.000299 -0.036309 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9168,14 +9112,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_left_handmiddle4_end" id="jnt_left_handmiddle4_end" sid="jnt_left_handmiddle4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.017875 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9208,14 +9144,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_left_handring4_end" id="jnt_left_handring4_end" sid="jnt_left_handring4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.018033 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9248,14 +9176,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_left_handpinky4_end" id="jnt_left_handpinky4_end" sid="jnt_left_handpinky4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.015171 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9293,14 +9213,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                             <visibility>1.000000</visibility>
                                                         </technique>
                                                     </extra>
-                                                    <node name="jnt_right_armroll_end" id="jnt_right_armroll_end" sid="jnt_right_armroll_end" type="JOINT">
-                                                        <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 0.000000 1.000000 -0.000000 0.094929 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                        <extra>
-                                                            <technique profile="FCOLLADA">
-                                                                <visibility>1.000000</visibility>
-                                                            </technique>
-                                                        </extra>
-                                                    </node>
                                                 </node>
                                                 <node name="jnt_right_forearm" id="jnt_right_forearm" sid="jnt_right_forearm" type="JOINT">
                                                     <matrix sid="matrix">-0.668743 0.306447 0.677402 0.843981 -0.020952 0.902976 -0.429179 -0.000002 -0.743199 -0.301203 -0.597439 -0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9316,14 +9228,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                 <visibility>1.000000</visibility>
                                                             </technique>
                                                         </extra>
-                                                        <node name="jnt_right_forearmroll_end" id="jnt_right_forearmroll_end" sid="jnt_right_forearmroll_end" type="JOINT">
-                                                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.109647 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                            <extra>
-                                                                <technique profile="FCOLLADA">
-                                                                    <visibility>1.000000</visibility>
-                                                                </technique>
-                                                            </extra>
-                                                        </node>
                                                     </node>
                                                     <node name="jnt_right_hand" id="jnt_right_hand" sid="jnt_right_hand" type="JOINT">
                                                         <matrix sid="matrix">0.683849 -0.302589 -0.663921 0.975261 -0.196818 0.799713 -0.567204 -0.000000 0.702577 0.518553 0.487329 0.000003 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9360,14 +9264,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_right_handthumb4_end" id="jnt_right_handthumb4_end" sid="jnt_right_handthumb4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.018387 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9400,14 +9296,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_right_handindex4_end" id="jnt_right_handindex4_end" sid="jnt_right_handindex4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.016062 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9419,14 +9307,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                     <visibility>1.000000</visibility>
                                                                 </technique>
                                                             </extra>
-                                                            <node name="jnt_right_weapon_end" id="jnt_right_weapon_end" sid="jnt_right_weapon_end" type="JOINT">
-                                                                <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.067634 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                <extra>
-                                                                    <technique profile="FCOLLADA">
-                                                                        <visibility>1.000000</visibility>
-                                                                    </technique>
-                                                                </extra>
-                                                            </node>
                                                         </node>
                                                         <node name="jnt_right_handmiddle1" id="jnt_right_handmiddle1" sid="jnt_right_handmiddle1" type="JOINT">
                                                             <matrix sid="matrix">0.435779 0.897468 -0.068175 0.489245 -0.030048 -0.061197 -0.997673 0.062066 -0.899552 0.436813 0.000299 0.036303 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9456,14 +9336,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_right_handmiddle4_end" id="jnt_right_handmiddle4_end" sid="jnt_right_handmiddle4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.017875 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9496,14 +9368,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_right_handring4_end" id="jnt_right_handring4_end" sid="jnt_right_handring4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.018033 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9536,14 +9400,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                                                 <visibility>1.000000</visibility>
                                                                             </technique>
                                                                         </extra>
-                                                                        <node name="jnt_right_handpinky4_end" id="jnt_right_handpinky4_end" sid="jnt_right_handpinky4_end" type="JOINT">
-                                                                            <matrix sid="matrix">1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.015170 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                                                            <extra>
-                                                                                <technique profile="FCOLLADA">
-                                                                                    <visibility>1.000000</visibility>
-                                                                                </technique>
-                                                                            </extra>
-                                                                        </node>
                                                                     </node>
                                                                 </node>
                                                             </node>
@@ -9560,14 +9416,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_backpack_end" id="jnt_backpack_end" sid="jnt_backpack_end" type="JOINT">
-                                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.069961 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                        </node>
                                     </node>
                                 </node>
                             </node>
@@ -9579,14 +9427,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                     <visibility>1.000000</visibility>
                                 </technique>
                             </extra>
-                            <node name="jnt_camera_end" id="jnt_camera_end" sid="jnt_camera_end" type="JOINT">
-                                <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.105508 -0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                            </node>
                         </node>
                     </node>
                     <node name="jnt_right_upleg" id="jnt_right_upleg" sid="jnt_right_upleg" type="JOINT">
@@ -9603,14 +9443,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                     <visibility>1.000000</visibility>
                                 </technique>
                             </extra>
-                            <node name="jnt_right_uplegroll_end" id="jnt_right_uplegroll_end" sid="jnt_right_uplegroll_end" type="JOINT">
-                                <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000000 0.096755 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                            </node>
                         </node>
                         <node name="jnt_right_leg" id="jnt_right_leg" sid="jnt_right_leg" type="JOINT">
                             <matrix sid="matrix">0.999767 0.021400 0.002812 0.860324 -0.021479 0.973563 0.227407 0.000000 0.002129 -0.227415 0.973796 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9626,14 +9458,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                         <visibility>1.000000</visibility>
                                     </technique>
                                 </extra>
-                                <node name="jnt_right_legroll_end" id="jnt_right_legroll_end" sid="jnt_right_legroll_end" type="JOINT">
-                                    <matrix sid="matrix">1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 -0.000000 0.086393 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                    <extra>
-                                        <technique profile="FCOLLADA">
-                                            <visibility>1.000000</visibility>
-                                        </technique>
-                                    </extra>
-                                </node>
                             </node>
                             <node name="jnt_right_foot" id="jnt_right_foot" sid="jnt_right_foot" type="JOINT">
                                 <matrix sid="matrix">0.594241 -0.775496 0.213271 0.768144 0.780146 0.620250 0.081618 -0.000001 -0.195576 0.117881 0.973578 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9656,14 +9480,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_right_toeend_end" id="jnt_right_toeend_end" sid="jnt_right_toeend_end" type="JOINT">
-                                            <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.056898 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                        </node>
                                     </node>
                                 </node>
                             </node>
@@ -9683,14 +9499,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                     <visibility>1.000000</visibility>
                                 </technique>
                             </extra>
-                            <node name="jnt_left_uplegroll_end" id="jnt_left_uplegroll_end" sid="jnt_left_uplegroll_end" type="JOINT">
-                                <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.096755 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                <extra>
-                                    <technique profile="FCOLLADA">
-                                        <visibility>1.000000</visibility>
-                                    </technique>
-                                </extra>
-                            </node>
                         </node>
                         <node name="jnt_left_leg" id="jnt_left_leg" sid="jnt_left_leg" type="JOINT">
                             <matrix sid="matrix">0.999693 0.022983 -0.009262 0.860328 -0.024481 0.973907 -0.225621 -0.000000 0.003835 0.225778 0.974171 0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9706,14 +9514,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                         <visibility>1.000000</visibility>
                                     </technique>
                                 </extra>
-                                <node name="jnt_left_legroll_end" id="jnt_left_legroll_end" sid="jnt_left_legroll_end" type="JOINT">
-                                    <matrix sid="matrix">1.000000 0.000000 -0.000000 -0.000000 0.000000 1.000000 -0.000000 0.086393 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                    <extra>
-                                        <technique profile="FCOLLADA">
-                                            <visibility>1.000000</visibility>
-                                        </technique>
-                                    </extra>
-                                </node>
                             </node>
                             <node name="jnt_left_foot" id="jnt_left_foot" sid="jnt_left_foot" type="JOINT">
                                 <matrix sid="matrix">0.186436 -0.953017 -0.238746 0.768142 0.958389 0.229885 -0.169243 0.000000 0.216175 -0.197259 0.956221 -0.000001 0.000000 0.000000 0.000000 1.000000</matrix>
@@ -9736,14 +9536,6 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                                                 <visibility>1.000000</visibility>
                                             </technique>
                                         </extra>
-                                        <node name="jnt_left_toeend_end" id="jnt_left_toeend_end" sid="jnt_left_toeend_end" type="JOINT">
-                                            <matrix sid="matrix">1.000000 0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.056898 -0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-                                            <extra>
-                                                <technique profile="FCOLLADA">
-                                                    <visibility>1.000000</visibility>
-                                                </technique>
-                                            </extra>
-                                        </node>
                                     </node>
                                 </node>
                             </node>
@@ -9751,7 +9543,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><
                     </node>
                 </node>
             </node>
-       
+        
         <extra>
             <technique profile="MAX3D">
                 <frame_rate>10.000000</frame_rate>

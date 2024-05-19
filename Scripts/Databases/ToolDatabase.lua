@@ -2790,8 +2790,16 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 1.5, end_val = 1.75 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 1.5, end_val = 1.75 } },
+						fp_anim = { { name = "MosinNS_Anim", start_val = 1.5, end_val = 1.70 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 1.5, end_val = 1.70 } },
+						time = 0.01
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Prop", start_val = 0.70, end_val = 0.75 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 0.70, end_val = 0.75 } },
 						time = 0.01
 					}
 				}
@@ -2992,43 +3000,20 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
-						time = 0.4
-					},
-					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, 0.0, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.8, end_val = 1.2 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.8, end_val = 1.2 } },
-						time = 0.8
-					},
-					{ type = mgp_tool_anim_enum.delay, time = 0.05 },
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 1.2, end_val = 1.8 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 1.2, end_val = 1.8 } },
-						time = 0.5
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 4.0, end_val = 4.75 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 4.0, end_val = 4.75 } },
-						time = 1.0
+						fp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
+						time = 0.75
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.75 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.75 } },
+						time = 0.75
+					}
+				},
+				[3] = {
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.15
@@ -3075,40 +3060,20 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.0, end_val = 0.4 } },
-						time = 0.4
-					},
-					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, 0.0, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 0.8, end_val = 1.2 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 0.8, end_val = 1.2 } },
-						time = 0.8
-					},
-					{ type = mgp_tool_anim_enum.delay, time = 0.05 },
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 1.2, end_val = 2.4 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 1.2, end_val = 2.4 } },
-						time = 1.1
-					},
-					{ type = mgp_tool_anim_enum.delay, time = 0.1 },
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Mosin_Anim", start_val = 4.0, end_val = 4.75 } },
-						tp_anim = { { name = "Mosin_Anim", start_val = 4.0, end_val = 4.75 } },
-						time = 1.0
+						fp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
+						time = 0.75
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.75 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.75 } },
+						time = 0.75
+					}
+				},
+				[3] = {
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.15
