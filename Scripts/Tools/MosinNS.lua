@@ -62,11 +62,9 @@ local mosin_action_block_anims =
 	["ammo_check"     ] = true,
 	["cock_hammer"    ] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true,
+	["reload_into"] = true,
+	["reload_single"] = true,
+	["reload_exit"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
@@ -80,11 +78,9 @@ local mosin_aim_block_anims =
 	["ammo_check" ] = true,
 	["cock_hammer"] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true,
+	["reload_into"] = true,
+	["reload_single"] = true,
+	["reload_exit"] = true,
 
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
@@ -97,12 +93,9 @@ local mosin_sprint_block_anims =
 	["cock_hammer"] = true,
 	["cock_hammer_aim"] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true,
-
+	["reload_into"] = true,
+	["reload_single"] = true,
+	["reload_exit"] = true,
 	["sprintExit"] = true,
 	["aimExit"] = true
 }
@@ -113,11 +106,9 @@ local mosin_obstacle_block_anims =
 	["cock_hammer"] = true,
 	["cock_hammer_aim"] = true,
 
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true,
+	["reload_into"] = true,
+	["reload_single"] = true,
+	["reload_exit"] = true,
 
 	["equip"] = true,
 	["aimExit"] = true
@@ -192,15 +183,13 @@ function MosinNS:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
+			reload_into = { "Mosin_Reload1", { nextAnimation = "idle" } },
+			reload_single = { "Mosin_Reload1", { nextAnimation = "idle" } },
+			reload_exit = { "Mosin_Reload1", { nextAnimation = "idle" } },
+
 			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
 			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },
 			bolt_action_crouch = { "spudgun_crouch_aim_bolt_action", { nextAnimation = "idle" } },
-
-			reload0 = { "Mosin_Reload5", { nextAnimation = "idle" } },
-			reload1 = { "Mosin_Reload4", { nextAnimation = "idle" } },
-			reload2 = { "Mosin_Reload3", { nextAnimation = "idle" } },
-			reload3 = { "Mosin_Reload2", { nextAnimation = "idle" } },
-			reload4 = { "Mosin_Reload1", { nextAnimation = "idle" } },
 
 			ammo_check = { "Mosin_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
 		}
@@ -246,11 +235,9 @@ function MosinNS:loadAnimations()
 				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
-				reload0 = { "Reload0", { nextAnimation = "idle" } },
-				reload1 = { "Reload1", { nextAnimation = "idle" } },
-				reload2 = { "Reload2", { nextAnimation = "idle" } },
-				reload3 = { "Reload3", { nextAnimation = "idle" } },
-				reload4 = { "Reload4", { nextAnimation = "idle" } },
+				reload_into = { "Gun_reload_into" },
+				reload_single = { "Gun_reload_single" },
+				reload_exit = { "Gun_reload_exit", { nextAnimation = "idle" } },
 
 				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -311,15 +298,6 @@ function MosinNS:loadAnimations()
 
 	self:client_initAimVals()
 end
-
-local actual_reload_anims =
-{
-	["reload0"] = true,
-	["reload1"] = true,
-	["reload2"] = true,
-	["reload3"] = true,
-	["reload4"] = true
-}
 
 local aim_animation_list01 =
 {
@@ -435,20 +413,6 @@ function MosinNS:client_onUpdate(dt)
 					end
 				end
 			else
-				local fp_anim = self.fpAnimations
-				local cur_anim_cache = fp_anim.currentAnimation
-				local anim_data = fp_anim.animations[cur_anim_cache]
-				local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-				if anim_data and is_reload_anim then
-					local time_predict = anim_data.time + anim_data.playRate * dt
-					local info_duration = anim_data.info.duration
-
-					if time_predict >= info_duration then
-						self.network:sendToServer("sv_n_trySpendAmmo")
-						self.cl_hammer_cocked = true
-					end
-				end
-
 				if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
 				elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
@@ -903,29 +867,19 @@ function MosinNS:cl_onPrimaryUse(state)
 	self.cl_hammer_cocked = not self.cl_hammer_cocked
 end
 
-local ammo_count_to_anim_name =
-{
-	[0] = "reload0",
-	[1] = "reload1",
-	[2] = "reload2",
-	[3] = "reload3",
-	[4] = "reload4",
-	[5] = "reload5"
-}
-
 function MosinNS:sv_n_onReload(anim_id)
 	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function MosinNS:cl_n_onReload(anim_id)
+function MosinNS:cl_n_onReload()
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function MosinNS:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function MosinNS:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload_into")
 end
 
 function MosinNS:client_isGunReloading(reload_table)
@@ -936,30 +890,50 @@ function MosinNS:client_isGunReloading(reload_table)
 	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
-function MosinNS:cl_initReloadAnim(anim_id)
-	local v_cur_anim_id = anim_id
-	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
-		if v_available_ammo == 0 then
-			sm.gui.displayAlertText("No Ammo", 3)
-			return true
-		end
-
-		local v_raw_spend_count = math.max(self.mag_capacity - self.ammo_in_mag, 0)
-		local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
-
-		v_cur_anim_id = (#ammo_count_to_anim_name - v_spend_count)
+function MosinNS:cl_initReloadAnim()
+	if sm.game.getEnableAmmoConsumption() and sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo) == 0 then
+		sm.gui.displayAlertText("No Ammo", 3)
+		return true
 	end
 
 	self.waiting_for_ammo = true
 
-	local anim_name = ammo_count_to_anim_name[v_cur_anim_id]
-
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", v_cur_anim_id)
+	self.network:sendToServer("sv_n_onReload")
+end
+
+function MosinNS:sv_reloadSingle()
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_sniper_ammo)
+	if v_available_ammo == 0 then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, mgp_sniper_ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_ammo_counter = self.sv_ammo_counter + 1
+	self:server_updateAmmoCounter()
+end
+
+function MosinNS:sv_reloadExit()
+	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
+
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateAmmoCounter()
+end
+
+function MosinNS:cl_reloadExit()
+	self.ammo_in_mag = self.mag_capacity
+	self.cl_hammer_cocked = true
+	self.waiting_for_ammo = nil
 end
 
 function MosinNS:client_onReload()
@@ -970,7 +944,7 @@ function MosinNS:client_onReload()
 				return true
 			end
 
-			self:cl_initReloadAnim(self.ammo_in_mag)
+			self:cl_initReloadAnim()
 		end
 	end
 

@@ -987,7 +987,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Na
     </animation>
   </library_animations>
   <library_visual_scenes>
-    
+    <visual_scene id="Scene" name="Scene">
         <node name="jnt_left_weapon" id="jnt_left_weapon" sid="jnt_left_weapon" type="JOINT">
           <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
           <extra>

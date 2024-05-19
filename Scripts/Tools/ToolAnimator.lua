@@ -8,7 +8,8 @@ local type_to_func_name =
 	[4] = "debris_handler",
 	[5] = "particle_handler",
 	[6] = "renderable_handler",
-	[7] = "event_handler"
+	[7] = "event_handler",
+	[8] = "decide_next_anim"
 }
 
 local AnimationUpdateFunctions = {}
@@ -282,6 +283,22 @@ AnimationUpdateFunctions.event_handler = function(self, track, dt)
 	track.func(self, track, dt)
 end
 
+AnimationUpdateFunctions.decide_next_anim = function(self, track, dt)
+	local step_data = track.step_data
+	local nextAnim = step_data.animation
+	if type(nextAnim) == "function" then
+		nextAnim = nextAnim(self)
+	end
+
+	setTpAnimation(self.tpAnimations, nextAnim, step_data.blendTp or 0)
+	mgp_toolAnimator_setAnimation(self, nextAnim)
+	if self.cl_isLocal then
+		setFpAnimation(self.fpAnimations, nextAnim, step_data.blendFp or 0)
+	end
+
+	track.func = AnimationUpdateFunctions.anim_selector
+	track.func(self, track, dt)
+end
 
 
 local cam = sm.camera
