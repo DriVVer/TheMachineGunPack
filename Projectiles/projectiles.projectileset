@@ -3,7 +3,7 @@
 		{
 			"uuid": "6c87e1c0-79a6-40dc-a26a-ef28916aff69",
 			"name": "mgp_potato",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -27,7 +27,7 @@
 		{
 			"uuid": "35427377-f2ee-40d7-a251-884a57a0f40e",
 			"name": "mgp_AT",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -55,7 +55,7 @@
 		{
 			"uuid": "bef985da-1271-489f-9c5a-99c08642f982",
 			"name": "mgp_Magnum",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -79,7 +79,7 @@
 		{
 			"uuid": "033cea84-d6ad-4eb9-82dd-f576b60c1e70",
 			"name": "mgp_Sniper",
-			"mass": 2.0,
+			"mass": 0.0,
 			"radius": 0.1,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -128,7 +128,7 @@
 		{
 			"uuid": "228fb03c-9b81-4460-b841-5fdc2eea3596",
 			"name": "shotgun_birdshot",
-			"mass": 0.75,
+			"mass": 0.0,
 			"radius": 0.0625,
 			"friction": 0.2,
 			"spin": 0.0,
@@ -152,7 +152,7 @@
 		{
 			"uuid": "35588452-1e08-46e8-aaf1-e8abb0cf7692",
 			"name": "shotgun_buckshot",
-			"mass": 0.75,
+			"mass": 0.0,
 			"radius": 0.0625,
 			"friction": 0.2,
 			"spin": 0.0,
@@ -178,7 +178,7 @@
 		{
 			"uuid": "50ba2d89-db44-43d6-9c5c-44aad85d8a60",
 			"name": "eoka_pellets",
-			"mass": 0.75,
+			"mass": 0.0,
 			"radius": 0.0625,
 			"friction": 0.2,
 			"spin": 0.0,
@@ -204,7 +204,7 @@
 		{
 			"uuid": "18a2dffb-ea20-4ab1-9bb3-bb66a2571854",
 			"name": "mgp_7mm",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -228,7 +228,7 @@
 		{
 			"uuid": "2d17fddd-851a-46ee-8017-22255f58d74f",
 			"name": "mgp_12mm",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -252,7 +252,7 @@
 		{
 			"uuid": "36b158ad-212b-4c81-8666-0c29f751c21a",
 			"name": "mgp_20mm",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,
@@ -276,7 +276,7 @@
 		{
 			"uuid": "9a151748-e5fa-4029-9a72-1d3264874b73",
 			"name": "rocket_sharpnel",
-			"mass": 3.0,
+			"mass": 0.0,
 			"radius": 0.25,
 			"friction": 0.2,
 			"spin": 7.0,

@@ -183,8 +183,8 @@ function MosinNS:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_into = { "Mosin_Reload1", { nextAnimation = "idle" } },
-			reload_single = { "Mosin_Reload1", { nextAnimation = "idle" } },
+			reload_into = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
+			reload_single = { "Mosin_Reload1", { looping = true } },
 			reload_exit = { "Mosin_Reload1", { nextAnimation = "idle" } },
 
 			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
@@ -235,8 +235,8 @@ function MosinNS:loadAnimations()
 				cock_hammer = { "Gun_c_hammer", { nextAnimation = "idle" } },
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
-				reload_into = { "Gun_reload_into" },
-				reload_single = { "Gun_reload_single" },
+				reload_into = { "Gun_reload_into", { nextAnimation = "reload_single" } },
+				reload_single = { "Gun_reload_single", { looping = true } },
 				reload_exit = { "Gun_reload_exit", { nextAnimation = "idle" } },
 
 				ammo_check = { "Gun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
@@ -687,29 +687,31 @@ function MosinNS:onAim(aiming)
 	end
 end
 
-function MosinNS:sv_n_onShoot(dir)
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function MosinNS:sv_n_onShoot(ammo)
+	self.network:sendToClients( "cl_n_onShoot", ammo )
 
-	if dir ~= nil and self.sv_ammo_counter > 0 then
+	if ammo ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function MosinNS:cl_n_onShoot(dir)
+function MosinNS:cl_n_onShoot(ammo)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot(dir)
+		self:onShoot(ammo)
 	end
 end
 
-function MosinNS:onShoot(dir)
+function MosinNS:onShoot(ammo)
 	self.tpAnimations.animations.idle.time     = 0
 	self.tpAnimations.animations.shoot.time    = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
-	if dir ~= nil then
+	if ammo ~= nil then
 		setTpAnimation(self.tpAnimations, self.aiming and "aimShoot" or "shoot", 10.0)
 		mgp_toolAnimator_setAnimation(self, self.aiming and "shoot_aim" or "shoot")
+
+		self.ammo_in_mag = ammo
 	else
 		mgp_toolAnimator_setAnimation(self, self.aiming and "no_ammo_aim" or "no_ammo")
 	end
@@ -827,7 +829,7 @@ function MosinNS:cl_onPrimaryUse(state)
 			self.sprintCooldownTimer = self.sprintCooldown
 
 			-- Send TP shoot over network and directly to self
-			self:onShoot(1)
+			self:onShoot(self.ammo_in_mag)
 			self.network:sendToServer("sv_n_onShoot", 1)
 
 			sm.camera.setShake(0.07)
