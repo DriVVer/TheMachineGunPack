@@ -190,6 +190,17 @@
 			}
 		]
 	},
+	"DLM_BoltRifle_Shot_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "BoltRifle_TMGP_Shot_2",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_20Cannon_Shot":
 	{
 		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0},
@@ -434,6 +445,40 @@
 			}
 		]
 	},
+	"DLM_Rifle_Clip":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "BoltRifle_TMGP_Clip",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Rifle_Clip_Hit":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "BoltRifle_TMGP_Clip_Hit",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Rifle_Clip_Remove":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "BoltRifle_TMGP_Clip_Remove",
+				"delay": 0.0
+			}
+		]
+	},
+	
 	"DLM_Rifle_Bolt_Open":
 	{
 		"effectList":
@@ -445,6 +490,7 @@
 			}
 		]
 	},
+	
 	"DLM_Rifle_Bolt_Close":
 	{
 		"effectList":
@@ -452,6 +498,28 @@
 			{
 				"type": "audio",
 				"name": "Rifle_TMGP_BoltClose",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Rifle_Bolt2_Open":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_Bolt2Open",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Rifle_Bolt2_Close":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Rifle_TMGP_Bolt2Close",
 				"delay": 0.0
 			}
 		]

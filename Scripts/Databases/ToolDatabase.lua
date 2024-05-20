@@ -2794,12 +2794,15 @@ local mgp_tool_database =
 	MosinNS =
 	{
 		dlm_required_effects = {
-			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
-			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_BoltRifle_Shot_1",
-			BoltOpen = "DLM_Rifle_Bolt_Open",
-			BoltClose = "DLM_Rifle_Bolt_Close",
-			BulletPut = "DLM_Gun_Ammo"
+			shoot_tp = 		"DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = 		"DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = 		"DLM_BoltRifle_Shot_2",
+			BoltOpen = 		"DLM_Rifle_Bolt2_Open",
+			BoltClose = 	"DLM_Rifle_Bolt2_Close",
+			BulletPut = 	"DLM_Gun_Ammo",
+			Clip = 			"DLM_Rifle_Clip",
+			ClipRemove = 	"DLM_Rifle_Clip_Remove",
+			ClipHit = 		"DLM_Rifle_Clip_Hit"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -2844,7 +2847,7 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.10
+						time = 0.20
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2876,48 +2879,12 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 0.2, end_val = 0.3 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 0.2, end_val = 0.3 } },
-						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, 0.0, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 0.3, end_val = 0.6 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 0.3, end_val = 0.6 } },
-						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.00
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 0.6, end_val = 0.4 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 0.6, end_val = 0.3  } },
-						time = 0.3
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 0.4, end_val = 0.2 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 0.3, end_val = 0.2  } },
-						time = 0.3
 					}
 				},
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.15
+						time = 0.10
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2930,7 +2897,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.15
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -3153,17 +3120,43 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.10
+						time = 0.4
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "BulletPut",
-						name_fp = "BulletPut",
+						name_tp = "ClipHit",
+						name_fp = "ClipHit",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
-					}
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.65
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "Clip",
+						name_fp = "Clip",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "ClipRemove",
+						name_fp = "ClipRemove",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
 				},
 				[3] = {
 					{
@@ -3213,6 +3206,7 @@ local mgp_tool_database =
 			ping = "DLM_Rifle_Ping",
 			ammocheck = "DLM_Gun_AmmoCheck",
 			slidedrop = "DLM_Pistol_SlideDrop"
+			
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",

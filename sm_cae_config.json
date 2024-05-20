@@ -65,6 +65,26 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "BoltRifle_TMGP_Shot_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/BoltRifle_TMGP_Shot_2.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "BoltRifle_TMGP_Clip": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Clip.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "BoltRifle_TMGP_Clip_Hit": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_ClipHit.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "BoltRifle_TMGP_Clip_Remove": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_ClipRemove.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "AssaultRifle_TMGP_Shot_1": {
             "path":"$CONTENT_DATA/Effects/Audio/AssaultRifle_TMGP_DistanceShot.mp3",
             "is3D": true,
@@ -137,6 +157,16 @@
         },
         "Rifle_TMGP_BoltClose": {
             "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_BoltClose.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Rifle_TMGP_Bolt2Open": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Bolt2Open.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Rifle_TMGP_Bolt2Close": {
+            "path":"$CONTENT_DATA/Effects/Audio/Rifle_TMGP_Bolt2Close.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
