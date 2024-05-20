@@ -75,15 +75,16 @@ function bindHook(command, params, callback, help)
                 "cl_onChatCommand",
                 "Toggles recoil"
             )
-            oldBind(
-                "/setRecoilType",
-                {
-                    { "int", "recoil type", false },
-                },
-                "cl_onChatCommand",
-                "Recoil types: 0 - Camera | 1 - Gun"
-            )
         end
+
+        oldBind(
+            "/setRecoilType",
+            {
+                { "int", "recoil type", false },
+            },
+            "cl_onChatCommand",
+            "Recoil types: 0 - Camera | 1 - Gun"
+        )
 
         dofile("$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Scripts/vanilla_override.lua")
     end
