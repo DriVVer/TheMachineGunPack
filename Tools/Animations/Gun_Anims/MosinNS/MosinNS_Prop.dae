@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-20T14:51:45Z</created><keywords></keywords><modified>2024-05-20T14:51:45Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-20T15:10:27Z</created><keywords></keywords><modified>2024-05-20T15:10:27Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Armature-anim" name="Armature"><animation><source id="Armature-Matrix-animation-input"><float_array id="Armature-Matrix-animation-input-array" count="23">
 
@@ -125,41 +125,8 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
   </library_animations>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      
-        <node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT">
-          <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-          <extra>
-            <technique profile="FCOLLADA">
-              <visibility>1.000000</visibility>
-            </technique>
-          </extra>
-          <node name="jnt_reload" id="jnt_reload" sid="jnt_reload" type="JOINT">
-            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
-            <extra>
-              <technique profile="FCOLLADA">
-                <visibility>1.000000</visibility>
-              </technique>
-            </extra>
-            <node name="jnt_clip" id="jnt_clip" sid="jnt_clip" type="JOINT">
-              <matrix sid="matrix">0.000100 -0.000000 0.000000 0.000000 0.000000 0.000100 -0.000000 0.000000 0.000000 0.000000 0.000100 -0.100000 0.000000 0.000000 0.000000 1.000000</matrix>
-              <extra>
-                <technique profile="FCOLLADA">
-                  <visibility>1.000000</visibility>
-                </technique>
-              </extra>
-            </node>
-          </node>
-        </node>
-    
-      <extra>
-        <technique profile="MAX3D">
-          <frame_rate>60.000000</frame_rate>
-        </technique>
-        <technique profile="FCOLLADA">
-          <start_time>0.000000</start_time>
-          <end_time>1.000000</end_time>
-        </technique>
-      </extra>
+      <node name="Armature" id="Armature" sid="Armature"><matrix sid="matrix">0.117617 -0.273539 0.954643 -0.613521 0.599976 -0.746455 -0.287806 3.405943 0.791325 0.606613 0.076321 -0.665694 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_right_weapon" id="jnt_right_weapon" sid="jnt_right_weapon" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_reload" id="jnt_reload" sid="jnt_reload" type="JOINT"><matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra><node name="jnt_clip" id="jnt_clip" sid="jnt_clip" type="JOINT"><matrix sid="matrix">0.000100 -0.000000 0.000000 0.000000 0.000000 0.000100 -0.000000 0.000000 0.000000 0.000000 0.000100 -0.100000 0.000000 0.000000 0.000000 1.000000</matrix><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node></node></node></node>
+      <extra><technique profile="MAX3D"><frame_rate>60.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>1.000000</end_time></technique></extra>
     </visual_scene>
   </library_visual_scenes>
   <scene>

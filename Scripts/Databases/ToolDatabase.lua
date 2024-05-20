@@ -3021,6 +3021,42 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.45 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.45 } },
+						time = 0.70
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.05
+					},
+					{
+						type = mgp_tool_anim_enum.nextAnimation,
+						blendTp = 1,
+						blendFp = 1,
+						animation = "reload_single",
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.10
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BoltOpen",
+						name_fp = "BoltOpen",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			reload_into_empty =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
 						tp_anim = { { name = "MosinNS_Anim", start_val = 1.75, end_val = 2.5 } },
 						time = 0.75
@@ -3086,13 +3122,47 @@ local mgp_tool_database =
 					}
 				}
 			},
+			reload_clip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Prop", start_val = 2.5, end_val = 4.5 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 2.5, end_val = 4.5 } },
+						time = 2.0
+					},
+					{
+						type = mgp_tool_anim_enum.nextAnimation,
+						blendTp = 1,
+						blendFp = 0,
+						animation = function(self)
+							return ReloadLoop(self, "reload_single", "reload_exit", sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510"))
+						end,
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.10
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "BulletPut",
+						name_fp = "BulletPut",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					}
+				}
+			},
 			reload_exit =
 			{
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 3.25 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 3.25 } },
+						fp_anim = { { name = "MosinNS_Anim", start_val = 4.5, end_val = 5.25 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 4.5, end_val = 5.25 } },
 						time = 0.75
 					},
 					{
