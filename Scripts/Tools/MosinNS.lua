@@ -63,6 +63,8 @@ local mosin_action_block_anims =
 	["cock_hammer"    ] = true,
 
 	["reload_into"] = true,
+	["reload_into_empty"] = true,
+	["reload_clip"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
@@ -80,6 +82,7 @@ local mosin_aim_block_anims =
 
 	["reload_into"] = true,
 	["reload_into_empty"] = true,
+	["reload_clip"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
@@ -96,6 +99,7 @@ local mosin_sprint_block_anims =
 
 	["reload_into"] = true,
 	["reload_into_empty"] = true,
+	["reload_clip"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
@@ -111,6 +115,7 @@ local mosin_obstacle_block_anims =
 
 	["reload_into"] = true,
 	["reload_into_empty"] = true,
+	["reload_clip"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
