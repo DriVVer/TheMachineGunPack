@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-20T14:26:58Z</created><keywords></keywords><modified>2024-05-20T14:26:58Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-05-20T14:51:33Z</created><keywords></keywords><modified>2024-05-20T14:51:33Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
   <library_animations>
     <animation id="Character-anim" name="Character"><animation><source id="Character-Matrix-animation-input"><float_array id="Character-Matrix-animation-input-array" count="23">
 
@@ -1238,28 +1238,28 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 0.533333 0.566667 0.600000 0.633333 0.666667 0.700000 0.733333</float_array><technique_common><accessor source="#jnt_right_arm-Matrix-animation-input-array" count="23"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_right_arm-Matrix-animation-output-transform"><float_array id="jnt_right_arm-Matrix-animation-output-transform-array" count="368">
 
 0.935623 -0.208562 0.284802 0.525417 -0.331113 -0.238827 0.912867 0.032447 -0.122371 -0.948399 -0.292510 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.888510 -0.159577 0.430215 0.525417 -0.434073 0.011663 0.900803 0.032447 -0.148765 -0.987115 -0.058906 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.860331 -0.009273 0.509652 0.525417 -0.374949 0.665821 0.645055 0.032447 -0.345319 -0.746053 0.569349 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.888510 -0.159577 0.430216 0.525417 -0.434073 0.011662 0.900802 0.032447 -0.148765 -0.987115 -0.058906 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.860331 -0.009272 0.509652 0.525417 -0.374949 0.665821 0.645055 0.032447 -0.345319 -0.746053 0.569350 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.903723 -0.125381 0.409345 0.525417 0.085797 0.989797 0.113756 0.032447 -0.419432 -0.067683 0.905260 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.866263 -0.275762 0.416586 0.525417 0.404477 0.876563 -0.260834 0.032447 -0.293236 0.394450 0.870874 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.790530 -0.358162 0.496772 0.525417 0.568458 0.730928 -0.377623 0.032447 -0.227854 0.580916 0.781421 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.715829 -0.416414 0.560524 0.525417 0.675107 0.617780 -0.403209 0.032447 -0.178379 0.667042 0.723350 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.790530 -0.358162 0.496771 0.525417 0.568458 0.730928 -0.377623 0.032447 -0.227854 0.580915 0.781421 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.715830 -0.416414 0.560524 0.525417 0.675107 0.617780 -0.403209 0.032447 -0.178379 0.667042 0.723350 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.663355 -0.466466 0.585123 0.525417 0.744712 0.488060 -0.455194 0.032447 -0.073242 0.737703 0.671140 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.621297 -0.498893 0.604231 0.525417 0.782969 0.364937 -0.503766 0.032447 0.030819 0.786082 0.617352 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.621297 -0.498893 0.604231 0.525417 0.782969 0.364936 -0.503766 0.032447 0.030820 0.786082 0.617352 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.592835 -0.510078 0.623191 0.525417 0.801308 0.296424 -0.519653 0.032447 0.080335 0.807435 0.584460 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.577834 -0.510319 0.636932 0.525417 0.804548 0.225019 -0.549608 0.032447 0.137154 0.830023 0.540600 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.543701 -0.506783 0.668999 0.525417 0.812083 0.116390 -0.571817 0.032447 0.211922 0.854179 0.474832 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.502124 -0.511929 0.696993 0.525417 0.827908 0.051681 -0.558478 0.032447 0.249880 0.857470 0.449781 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.485096 -0.547097 0.682178 0.525417 0.832677 0.050727 -0.551432 0.032447 0.267082 0.835529 0.480163 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.453242 -0.600992 0.658315 0.525417 0.821155 -0.005829 -0.570677 0.032447 0.346810 0.799232 0.490866 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.405632 -0.647955 0.644683 0.525417 0.795107 -0.097763 -0.598538 0.032447 0.450853 0.755377 0.475538 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.378837 -0.667779 0.640744 0.525417 0.783340 -0.137300 -0.606240 0.032447 0.492809 0.731585 0.471085 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.489826 -0.631726 0.600826 0.525417 0.829841 0.126563 -0.543459 0.032447 0.267275 0.764789 0.586226 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.543701 -0.506783 0.668999 0.525417 0.812083 0.116391 -0.571818 0.032447 0.211922 0.854179 0.474832 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.502124 -0.511929 0.696993 0.525417 0.827908 0.051682 -0.558478 0.032447 0.249880 0.857470 0.449781 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.485096 -0.547097 0.682178 0.525417 0.832676 0.050727 -0.551432 0.032447 0.267082 0.835529 0.480163 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.453243 -0.600992 0.658315 0.525417 0.821154 -0.005829 -0.570677 0.032447 0.346811 0.799232 0.490866 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.405632 -0.647955 0.644683 0.525417 0.795107 -0.097763 -0.598538 0.032447 0.450852 0.755377 0.475539 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.378838 -0.667779 0.640743 0.525417 0.783340 -0.137299 -0.606240 0.032447 0.492809 0.731585 0.471085 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.489826 -0.631726 0.600826 0.525417 0.829841 0.126562 -0.543459 0.032447 0.267275 0.764789 0.586226 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.613717 -0.526809 0.588067 0.525417 0.787821 0.457550 -0.412295 0.032447 -0.051869 0.716323 0.695838 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.721403 -0.392802 0.570336 0.525417 0.634050 0.705838 -0.315868 0.032447 -0.278492 0.589490 0.758251 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.865961 -0.155381 0.475361 0.525417 0.197354 0.979542 -0.039335 0.032447 -0.459525 0.127877 0.878911 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.721403 -0.392802 0.570336 0.525417 0.634050 0.705838 -0.315868 0.032447 -0.278492 0.589489 0.758251 -0.009491 0.000000 0.000000 0.000000 1.000000
+0.865961 -0.155381 0.475361 0.525417 0.197354 0.979542 -0.039335 0.032447 -0.459524 0.127877 0.878911 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.870618 -0.026769 0.491231 0.525417 -0.379880 0.597884 0.705850 0.032447 -0.312594 -0.801134 0.510360 -0.009491 0.000000 0.000000 0.000000 1.000000
-0.930104 -0.181496 0.319320 0.525417 -0.346764 -0.147312 0.926312 0.032447 -0.121083 -0.972294 -0.199952 -0.009491 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_right_arm-Matrix-animation-output-transform-array" count="23" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_right_arm-Interpolations"><Name_array id="jnt_right_arm-Interpolations-array" count="23">
+0.930104 -0.181496 0.319320 0.525417 -0.346764 -0.147312 0.926312 0.032447 -0.121082 -0.972294 -0.199952 -0.009491 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_right_arm-Matrix-animation-output-transform-array" count="23" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_right_arm-Interpolations"><Name_array id="jnt_right_arm-Interpolations-array" count="23">
  LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_right_arm-Interpolations-array" count="23"><param type="name"/></accessor></technique_common></source><sampler id="jnt_right_arm-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_right_arm-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_right_arm-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_right_arm-Interpolations"/></sampler><channel source="#jnt_right_arm-Matrix-animation-transform" target="jnt_right_arm/matrix"/></animation></animation>
     <animation id="jnt_right_armroll-anim" name="jnt_right_armroll"><animation><source id="jnt_right_armroll-Matrix-animation-input"><float_array id="jnt_right_armroll-Matrix-animation-input-array" count="23">
@@ -2494,8 +2494,8 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
 LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_left_toeend-Interpolations-array" count="23"><param type="name"/></accessor></technique_common></source><sampler id="jnt_left_toeend-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_left_toeend-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_left_toeend-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_left_toeend-Interpolations"/></sampler><channel source="#jnt_left_toeend-Matrix-animation-transform" target="jnt_left_toeend/matrix"/></animation></animation>
   </library_animations>
   <library_visual_scenes>
-   <visual_scene id="Scene" name="Scene">
-       
+    <visual_scene id="Scene" name="Scene">
+        
             <node name="HIK_root_jnt" id="HIK_root_jnt" sid="HIK_root_jnt" type="JOINT">
                 <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
                 <extra>
@@ -3152,7 +3152,7 @@ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LIN
                     </node>
                 </node>
             </node>
-       
+        
         <extra>
             <technique profile="MAX3D">
                 <frame_rate>60.000000</frame_rate>
