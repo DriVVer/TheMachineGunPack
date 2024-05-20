@@ -3093,8 +3093,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Prop", start_val = 0.25, end_val = 0.5 } },
-						tp_anim = { { name = "MosinNS_Prop", start_val = 0.25, end_val = 0.5 } },
+						fp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.15 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 0.0, end_val = 0.15 } },
 						time = 0.75
 					},
 					{
@@ -3127,8 +3127,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Prop", start_val = 2.5, end_val = 4.5 } },
-						tp_anim = { { name = "MosinNS_Prop", start_val = 2.5, end_val = 4.5 } },
+						fp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 4.5 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 4.5 } },
 						time = 2.0
 					},
 					{
@@ -3154,6 +3154,14 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
 					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Prop", start_val = 0.65, end_val = 0.75 } },
+						tp_anim = { { name = "MosinNS_Prop", start_val = 0.65, end_val = 0.75 } },
+						time = 0.1
+					},
 				}
 			},
 			reload_exit =

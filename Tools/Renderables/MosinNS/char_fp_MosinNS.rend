@@ -16,7 +16,7 @@
 				{ "name": "Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_into.dae" },
 
 				{ "name": "Gun_reload_into", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_into.dae" },
-				{ "name": "Gun_reload_single", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_clip.dae" },
+				{ "name": "Gun_reload_single", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_single.dae" },
 				{ "name": "Gun_reload_clip", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_clip.dae" },
 				{ "name": "Gun_reload_exit", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_reload_exit.dae" },
 
