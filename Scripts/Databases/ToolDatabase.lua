@@ -22,7 +22,11 @@ local mgp_magnum_shoot_reset_table =
 	tp = { { "Magnum44_Shoot", 0.0 } }
 }
 
-local function ReloadLoop(self, loopAnim, exitAnim, ammoUUID)
+local function ReloadLoop(self, loopAnim, exitAnim, ammoUUID, forceExit)
+	if forceExit then
+		goto exit
+	end
+
 	if sm.container.totalQuantity(self.tool:getOwner():getInventory(), ammoUUID) == 0 then
 		return exitAnim
 	end
@@ -36,6 +40,7 @@ local function ReloadLoop(self, loopAnim, exitAnim, ammoUUID)
 		return loopAnim
 	end
 
+	::exit::
 	if self.cl_isLocal then
 		self.network:sendToServer("sv_reloadExit")
 	end
@@ -3032,7 +3037,7 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.nextAnimation,
 						blendTp = 1,
-						blendFp = 1,
+						blendFp = 0,
 						animation = "reload_single",
 					}
 				},
@@ -3068,8 +3073,8 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.nextAnimation,
 						blendTp = 1,
-						blendFp = 1,
-						animation = "reload_single",
+						blendFp = 0,
+						animation = "reload_clip"
 					}
 				},
 				[2] = {
@@ -3136,7 +3141,7 @@ local mgp_tool_database =
 						blendTp = 1,
 						blendFp = 0,
 						animation = function(self)
-							return ReloadLoop(self, "reload_single", "reload_exit", sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510"))
+							return ReloadLoop(self, nil, "reload_exit", nil, true)
 						end,
 					}
 				},
@@ -3161,7 +3166,7 @@ local mgp_tool_database =
 						fp_anim = { { name = "MosinNS_Prop", start_val = 0.65, end_val = 0.75 } },
 						tp_anim = { { name = "MosinNS_Prop", start_val = 0.65, end_val = 0.75 } },
 						time = 0.1
-					},
+					}
 				}
 			},
 			reload_exit =
@@ -3172,11 +3177,7 @@ local mgp_tool_database =
 						fp_anim = { { name = "MosinNS_Anim", start_val = 4.5, end_val = 5.25 } },
 						tp_anim = { { name = "MosinNS_Anim", start_val = 4.5, end_val = 5.25 } },
 						time = 0.75
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.5
-					},
+					}
 				},
 				[2] = {
 					{

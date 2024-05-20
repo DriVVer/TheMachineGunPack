@@ -79,6 +79,7 @@ local mosin_aim_block_anims =
 	["cock_hammer"] = true,
 
 	["reload_into"] = true,
+	["reload_into_empty"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
@@ -94,8 +95,10 @@ local mosin_sprint_block_anims =
 	["cock_hammer_aim"] = true,
 
 	["reload_into"] = true,
+	["reload_into_empty"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
+
 	["sprintExit"] = true,
 	["aimExit"] = true
 }
@@ -107,6 +110,7 @@ local mosin_obstacle_block_anims =
 	["cock_hammer_aim"] = true,
 
 	["reload_into"] = true,
+	["reload_into_empty"] = true,
 	["reload_single"] = true,
 	["reload_exit"] = true,
 
@@ -184,6 +188,8 @@ function MosinNS:loadAnimations()
 			putdown = { "spudgun_putdown" },
 
 			reload_into = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
+			reload_into_empty = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
+			reload_clip = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
 			reload_single = { "Mosin_Reload1", { looping = true } },
 			reload_exit = { "Mosin_Reload1", { nextAnimation = "idle" } },
 
@@ -236,6 +242,8 @@ function MosinNS:loadAnimations()
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				reload_into = { "Gun_reload_into", { nextAnimation = "reload_single" } },
+				reload_into_empty = { "Gun_reload_into_empty", { nextAnimation = "reload_single" } },
+				reload_clip = { "Gun_reload_clip", { nextAnimation = "reload_single" } },
 				reload_single = { "Gun_reload_single", { looping = true } },
 				reload_exit = { "Gun_reload_exit", { nextAnimation = "idle" } },
 
@@ -869,19 +877,19 @@ function MosinNS:cl_onPrimaryUse(state)
 	self.cl_hammer_cocked = not self.cl_hammer_cocked
 end
 
-function MosinNS:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function MosinNS:sv_n_onReload(anim)
+	self.network:sendToClients("cl_n_onReload", anim)
 end
 
-function MosinNS:cl_n_onReload()
+function MosinNS:cl_n_onReload(anim)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim()
+		self:cl_startReloadAnim(anim)
 	end
 end
 
-function MosinNS:cl_startReloadAnim()
-	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
-	mgp_toolAnimator_setAnimation(self, "reload_into")
+function MosinNS:cl_startReloadAnim(anim)
+	setTpAnimation(self.tpAnimations, anim, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim)
 end
 
 function MosinNS:client_isGunReloading(reload_table)
@@ -900,8 +908,9 @@ function MosinNS:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
-	self:cl_startReloadAnim()
+	local anim = self.ammo_in_mag == 0 and "reload_into_empty" or "reload_into"
+	setFpAnimation(self.fpAnimations, anim, 0.0)
+	self:cl_startReloadAnim(anim)
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload")
@@ -939,6 +948,21 @@ function MosinNS:cl_reloadExit()
 end
 
 function MosinNS:client_onReload()
+	--[[if true then
+		self.waiting_for_ammo = true
+
+		self.ammo_in_mag = 0
+		local anim = "reload_into_empty"
+		setFpAnimation(self.fpAnimations, anim, 0.0)
+		self:cl_startReloadAnim(anim)
+
+		--Send the animation data to all the other clients
+		self.network:sendToServer("sv_n_onReload")
+
+
+		return true
+	end]]
+
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if self.cl_hammer_cocked then
@@ -980,7 +1004,7 @@ function MosinNS:client_onToggle()
 			self.network:sendToServer("sv_n_checkMag")
 		else
 			sm.gui.displayAlertText("MosinNS: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim(0)
+			self:cl_initReloadAnim()
 		end
 	end
 
