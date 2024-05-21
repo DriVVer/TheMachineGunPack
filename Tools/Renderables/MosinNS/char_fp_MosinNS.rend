@@ -22,10 +22,10 @@
 				{ "name": "Gun_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
 				{ "name": "Gun_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_idle.dae" },
 
-				{ "name": "Gun_aim_into",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_into.dae" },
+				{ "name": "Gun_aim_into",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_aim_idle.dae" },
 				{ "name": "Gun_aim_exit",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_exit.dae" },
-				{ "name": "Gun_aim_shoot",    		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
-				{ "name": "Gun_aim_idle",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
+				{ "name": "Gun_aim_shoot",    		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_idle.dae" },
+				{ "name": "Gun_aim_idle",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/MosinNS/MosinNS_fp_idle.dae" },
 				{ "name": "Gun_aim_c_hammer", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_bolt.dae" },
 
 				{ "name": "Gun_ammo_check", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_ammo_check.dae" }
