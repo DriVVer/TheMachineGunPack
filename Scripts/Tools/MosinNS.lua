@@ -334,7 +334,7 @@ local aim_animation_blacklist =
 }
 
 function MosinNS:client_updateAimWeights(dt)
-	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
+	local weight_blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 35 )
 
 	-- Camera update
 	local bobbingFp = 1
