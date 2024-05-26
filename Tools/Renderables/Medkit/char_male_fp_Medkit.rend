@@ -7,15 +7,15 @@
 			"animationList": [
 				{ "name": "Medkit_fp_idle",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_idle.dae" },
 
-				{ "name": "Medkit_fp_use_1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_1.dae" },
-				{ "name": "Medkit_fp_use_2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_2.dae" },
+				{ "name": "Medkit_fp_use_1", "file": 	"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_1.dae" },
+				{ "name": "Medkit_fp_use_2", "file": 	"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_2.dae" },
 
 				{ "name": "Medkit_fp_pickup",  			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_pickup.dae" },
-				{ "name": "Medkit_fp_putdown", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_putdown.dae" },
+				{ "name": "Medkit_fp_putdown", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_putdown.dae" },
 
-				{ "name": "Medkit_fp_sprint_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_into.dae" },
-				{ "name": "Medkit_fp_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_exit.dae" },
-				{ "name": "Medkit_fp_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_idle.dae" }
+				{ "name": "Medkit_fp_sprint_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_idle.dae" },
+				{ "name": "Medkit_fp_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_idle.dae" },
+				{ "name": "Medkit_fp_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_idle.dae" }
 			]
 		}
 	]

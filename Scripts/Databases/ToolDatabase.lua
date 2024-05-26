@@ -4444,6 +4444,12 @@ local mgp_tool_database =
 				[1] = {
 
 				}
+			},
+			putdown =
+			{
+				[1] = {
+
+				}
 			}
 		}
 	}

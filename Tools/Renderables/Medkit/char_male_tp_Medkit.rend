@@ -21,8 +21,8 @@
 			{ "name" : "Medkit_jump_land_fwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_jump_land.dae" },
 			{ "name" : "Medkit_jump_land_bwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_jump_land.dae" },
 			
-			{ "name" : "Medkit_pickup", 				"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_pickup.dae" },
-			{ "name" : "Medkit_pickup_special",		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_pickup.dae" },
+			{ "name" : "Medkit_pickup", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Medkit/Medkit_tp_pickup.dae" },
+			{ "name" : "Medkit_pickup_special",			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_pickup.dae" },
 			{ "name" : "Medkit_putdown", 				"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_putdown.dae" },
 
 			{ "name" : "Medkit_use_exit", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Handbook/ani_char_male_handbook_use_exit.dae" },
