@@ -238,7 +238,6 @@ function MosinNS:loadAnimations()
 			{
 				equip = { "Gun_pickup", { nextAnimation = "idle" } },
 				unequip = { "Gun_putdown" },
-				aim_anim = { "Gun_putdown" },
 
 				idle = { "Gun_idle", { looping = true } },
 				shoot = { "Gun_shoot", { nextAnimation = "idle" } },
@@ -438,8 +437,8 @@ function MosinNS:client_onUpdate(dt)
 					local v_timePredict = v_animData.time + dt
 					if v_timePredict >= v_animData.info.duration then
 						if self.aiming then
-							setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
-							self.fpAnimations.animations.aim_anim.time = 0.5
+							setFpAnimation(self.fpAnimations, "aimIdle", 0.0)
+							self.fpAnimations.animations.aimIdle.time = 0.5
 						end
 					end
 				end
