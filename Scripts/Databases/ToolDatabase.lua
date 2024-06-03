@@ -4421,9 +4421,15 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 4.0 } },
-						tp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 4.0 } },
-						time = 4.0
+						fp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 3.9 } },
+						tp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 3.9 } },
+						time = 3.9
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 0.1 } },
+						tp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 0.1 } },
+						time = 0.1
 					}
 				}
 			},
