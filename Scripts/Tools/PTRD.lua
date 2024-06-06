@@ -378,7 +378,7 @@ function PTRD:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
-local mgp_sniper_ammo = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
+local mgp_antitank_ammo = sm.uuid.new("d80e4edd-8823-42f6-9f17-1dc130ba51ce")
 function PTRD:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
@@ -388,14 +388,14 @@ function PTRD:server_spendAmmo(data, player)
 	local v_inventory = v_owner:getInventory()
 	if v_inventory == nil then return end
 
-	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_sniper_ammo)
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_antitank_ammo)
 	if v_available_ammo == 0 then return end
 
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
 	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_sniper_ammo, v_spend_count)
+	sm.container.spend(v_inventory, mgp_antitank_ammo, v_spend_count)
 	sm.container.endTransaction()
 
 	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
@@ -959,7 +959,7 @@ end
 
 function PTRD:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo)
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_antitank_ammo)
 		if v_available_ammo == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
