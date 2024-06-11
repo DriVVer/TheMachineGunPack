@@ -18,7 +18,6 @@
 						"$CONTENT_DATA/Tools/Textures/tommy_gun_nor.png"
 					]
 				},
-				
 				{
 					"material": "DifAsgNor",
 					"textureList": [
@@ -39,7 +38,7 @@
 					"material": "DifAsgNor",
 					"textureList": [
 						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
 						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}

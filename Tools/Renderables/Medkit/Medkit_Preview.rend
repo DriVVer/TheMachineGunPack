@@ -3,7 +3,6 @@
 		{
 			"mesh": "$CONTENT_DATA/Tools/Mesh/Medkit/Medkit_Preview.fbx",
 			"subMeshList": [
-				
 				{
 					"material": "DifAsgNor",
 					"textureList": [

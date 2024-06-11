@@ -31,7 +31,7 @@
 					"material": "DifAsgNor",
 					"textureList": [ 
 						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$CONTENT_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
 						"$CONTENT_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}

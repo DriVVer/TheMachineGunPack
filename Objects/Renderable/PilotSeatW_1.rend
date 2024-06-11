@@ -1,37 +1,34 @@
-	{
+{
 	"lodList": [
 		{
-		"minViewSize": 45,
+			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae",
+			"minViewSize": 45,
 			"subMeshMap": {
 				"submesh0": {
 					"material": "SkelAnimDifAsgNor",
 					"textureList": [
 						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
 						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}
 			},
-			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae",
 			"animationList": [
-				{
-					"name": "steering",
-					"file": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae"
-				}
+				{ "name": "steering", "file": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.dae" }
 			]
 		},
 		{
+			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.fbx",
 			"subMeshMap": {
 				"submesh0": {
 					"material": "DifAsgNor",
 					"textureList": [
 						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-						"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
 						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
 					]
 				}
-			},
-			"mesh": "$MOD_DATA/Objects/Mesh/PilotSeatW_1.fbx"
+			}
 		}
 	]
 }

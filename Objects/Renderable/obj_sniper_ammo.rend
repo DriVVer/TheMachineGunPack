@@ -1,30 +1,28 @@
 {
-				"lodList": [
-					{
-						"minViewSize": 20,
-						"subMeshList": [
-							{
-								"idx": 0,
-								"textureList": [
-									
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							},
-							{
-								"idx": 1,
-								"textureList": [
-									
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
-									"$MOD_DATA/Objects/Textures/tekstura_horizontal_asg_2.png",
-									"$MOD_DATA/Objects/Textures/nonor_nor.tga"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/SniperRifle_Ammo.fbx"
-					}
-				]
-			} 
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/SniperRifle_Ammo.fbx",
+			"minViewSize": 20,
+			"subMeshList": [
+				{
+					"idx": 0,
+					"material": "DifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				},
+				{
+					"idx": 1,
+					"material": "DifAsgNor",
+					"textureList": [
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+						"$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
+						"$MOD_DATA/Objects/Textures/nonor_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}
