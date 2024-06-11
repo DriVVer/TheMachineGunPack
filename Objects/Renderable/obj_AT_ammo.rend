@@ -1,20 +1,19 @@
 {
-				"lodList": [
-					{
-						"minViewSize": 20,
-						"subMeshList": [
-							{
-								"idx": 0,
-								"textureList": [
-									
-									"$MOD_DATA/Tools/Textures/TommyGunDif.png",
-									"$MOD_DATA/Tools/Textures/TommyGunAsg.png",
-									"$MOD_DATA/Tools/Textures/TommyGunNor.png"
-								],
-								"material": "DifAsgNor"
-							}
-						],
-						"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/AT_Ammo.fbx"
-					}
-				]
-			} 
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Objects/Mesh/Ammo/AT_Ammo.fbx",
+			"minViewSize": 20,
+			"subMeshList": [
+				{
+					"idx": 0,
+					"textureList": [
+						"$MOD_DATA/Tools/Textures/tommy_gun_dif.png",
+						"$MOD_DATA/Tools/Textures/tommy_gun_asg.png",
+						"$MOD_DATA/Tools/Textures/tommy_gun_nor.png"
+					],
+					"material": "DifAsgNor"
+				}
+			]
+		}
+	]
+}
