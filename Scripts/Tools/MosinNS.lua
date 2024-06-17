@@ -192,11 +192,11 @@ function MosinNS:loadAnimations()
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_into = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
-			reload_into_empty = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
-			reload_clip = { "Mosin_Reload1", { nextAnimation = "reload_single" } },
-			reload_single = { "Mosin_Reload1", { looping = true } },
-			reload_exit = { "Mosin_Reload1", { nextAnimation = "idle" } },
+			reload_into = { "Mosin_reload_into", { nextAnimation = "reload_single" } },
+			reload_into_empty = { "Mosin_reload_into", { nextAnimation = "reload_single" } },
+			reload_clip = { "Mosin_reload_clip", { nextAnimation = "reload_single" } },
+			reload_single = { "Mosin_reload_single", { looping = true } },
+			reload_exit = { "Mosin_reload_exit", { nextAnimation = "idle" } },
 
 			bolt_action = { "Mosin_tp_bolt_action", { nextAnimation = "idle" } },
 			bolt_action_aim = { "Mosin_tp_aim_bolt_action", { nextAnimation = "idle" } },

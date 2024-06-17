@@ -19,11 +19,10 @@
 				{ "name": "Mosin_tp_bolt_action",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_bolt.dae" },
 				{ "name": "Mosin_tp_aim_bolt_action", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_bolt.dae" },
 
-				{ "name": "Mosin_Reload1", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_1.dae" },
-				{ "name": "Mosin_Reload2", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_2.dae" },
-				{ "name": "Mosin_Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_3.dae" },
-				{ "name": "Mosin_Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_4.dae" },
-				{ "name": "Mosin_Reload5", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_reload_5.dae" },
+				{ "name": "Mosin_reload_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_into.dae" },
+				{ "name": "Mosin_reload_single",	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_single.dae" },
+				{ "name": "Mosin_reload_clip", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_clip.dae" },
+				{ "name": "Mosin_Reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_exit.dae" },
 				
 				{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 				{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
