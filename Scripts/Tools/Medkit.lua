@@ -91,7 +91,7 @@ function Medkit:cl_updateUse(state)
 
 	if state then
 		local anim = math.random() > 0.5 and "use" or "use2"
-		setTpAnimation(self.tpAnimations, anim, 0.0001)
+		setTpAnimation(self.tpAnimations, anim, 0.1)
 		if self.cl_isLocal then
 			setFpAnimation(self.fpAnimations, anim,  0.2)
 			self.progressbar:open()
@@ -268,8 +268,8 @@ function Medkit:loadAnimations()
 		self.tool,
 		{
 			idle = { "Medkit_idle" },
-			use = { "Medkit_use" },
-			use2 = { "Medkit_use" },
+			use = { "Medkit_use_1" },
+			use2 = { "Medkit_use_2" },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
 			putdown = { "Medkit_putdown" }
 		}
@@ -290,7 +290,7 @@ function Medkit:loadAnimations()
 		landFwd = "Medkit_jump_land_fwd",
 		landBwd = "Medkit_jump_land_bwd",
 
-		crouchIdle = "Medkit_jrouch_idle",
+		crouchIdle = "Medkit_crouch_idle",
 		crouchFwd = "Medkit_crouch_fwd",
 		crouchBwd = "Medkit_crouch_bwd"
 	}
@@ -305,8 +305,8 @@ function Medkit:loadAnimations()
 			{
 				idle = { "Medkit_fp_idle", { looping = true } },
 
-				use = { "Medkit_fp_use_1" },
-				use2 = { "Medkit_fp_use_2" },
+				use = { "Medkit_fp_use_1", { nextAnimation = "equip", blendNext = 0 } },
+				use2 = { "Medkit_fp_use_2", { nextAnimation = "equip", blendNext = 0 } },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
