@@ -2945,6 +2945,12 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Anim", start_val = 0.0, end_val = 0.2 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 0.0, end_val = 0.2 } },
+						time = 0.2
 					}
 				},
 				[2] = {

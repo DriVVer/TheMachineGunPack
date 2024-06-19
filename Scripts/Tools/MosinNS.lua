@@ -9,6 +9,8 @@ dofile("ToolSwimUtil.lua")
 local Damage = 100
 
 ---@class MosinNS : ToolClass
+---@field cl_isLocal boolean
+---@field cl_recoilAngle integer
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean
