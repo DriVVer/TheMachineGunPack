@@ -21,8 +21,8 @@
 
 				{ "name": "Mosin_reload_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_into.dae" },
 				{ "name": "Mosin_reload_single",	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_single.dae" },
-				{ "name": "Mosin_reload_clip", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_clip.dae" },
-				{ "name": "Mosin_Reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_exit.dae" },
+				{ "name": "Mosin_reload_clip", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_single.dae" },
+				{ "name": "Mosin_reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_reload_exit.dae" },
 				
 				{ "name": "spudgun_crouch_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
 				{ "name": "spudgun_crouch_fwd", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_idle.dae", "looping": true },
