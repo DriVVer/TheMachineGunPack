@@ -10,6 +10,7 @@ dofile("../ExplosionUtil.lua")
 ---@field tpAnimations table
 ---@field aiming boolean
 ---@field aimFireMode table
+---@field prevPrimaryState boolean
 ---@field normalFireMode table
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
@@ -23,6 +24,7 @@ dofile("../ExplosionUtil.lua")
 ---@field mgp_fp_animation_list table
 ---@field grenade_used boolean
 ---@field sv_activation_timer integer
+---@field sprintCooldown integer
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
