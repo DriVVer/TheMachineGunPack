@@ -25,7 +25,7 @@
 			{ "name" : "Medkit_putdown", 				"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Medkit/Medkit_tp_idle.dae" },
 
 			{ "name" : "Medkit_use_1", 					"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Medkit/Medkit_tp_use_1.dae" },
-			{ "name" : "Medkit_use_2", 					"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Medkit/Medkit_tp_use_1.dae" }
+			{ "name" : "Medkit_use_2", 					"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Medkit/Medkit_tp_use_2.dae" }
 			]
 		}
 	]
