@@ -91,7 +91,7 @@ function Medkit:cl_updateUse(state)
 
 	if state then
 		local anim = math.random() > 0.5 and "use" or "use2"
-		setTpAnimation(self.tpAnimations, anim, 0.1)
+		setTpAnimation(self.tpAnimations, anim, 10)
 		if self.cl_isLocal then
 			setFpAnimation(self.fpAnimations, anim,  0.2)
 			self.progressbar:open()
@@ -99,7 +99,7 @@ function Medkit:cl_updateUse(state)
 
 		mgp_toolAnimator_setAnimation(self, anim)
 	else
-		setTpAnimation(self.tpAnimations, "pickup", 0.0001)
+		setTpAnimation(self.tpAnimations, "pickup", 10)
 		if self.cl_isLocal then
 			swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 			self.progressbar:update(0)
@@ -268,8 +268,8 @@ function Medkit:loadAnimations()
 		self.tool,
 		{
 			idle = { "Medkit_idle" },
-			use = { "Medkit_use_1" },
-			use2 = { "Medkit_use_2" },
+			use = { "Medkit_use_1", { nextAnimation = "pickup" } },
+			use2 = { "Medkit_use_2", { nextAnimation = "pickup" } },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
 			putdown = { "Medkit_putdown" }
 		}

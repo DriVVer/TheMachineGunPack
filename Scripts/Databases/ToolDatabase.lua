@@ -4391,7 +4391,7 @@ local mgp_tool_database =
 						fp_anim = { { name = "Medkit_Anim", start_val = 0.0, end_val = 2.0 } },
 						tp_anim = { { name = "Medkit_Anim", start_val = 0.0, end_val = 2.0 } },
 						time = 2.0
-					}				
+					}
 				},
 				[2] = {
 					{
