@@ -303,17 +303,17 @@ function Medkit:loadAnimations()
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				idle = { "Medkit_fp_idle", { looping = true } },
+				idle = 	{ "Medkit_fp_idle", { looping = true } },
 
-				use = { "Medkit_fp_use_1", { nextAnimation = "equip", blendNext = 0 } },
-				use2 = { "Medkit_fp_use_2", { nextAnimation = "equip", blendNext = 0 } },
+				use = 	{ "Medkit_fp_use_1", { nextAnimation = "equip", blendNext = 0 } },
+				use2 = 	{ "Medkit_fp_use_2", { nextAnimation = "equip", blendNext = 0 } },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
 				sprintExit = { "Medkit_fp_sprint_exit", { nextAnimation = "idle", blendNext = 0 } },
 
-				equip = { "Medkit_fp_pickup", { nextAnimation = "idle" } },
-				unequip = { "Medkit_fp_putdown" }
+				equip = 	{ "Medkit_fp_pickup", { nextAnimation = "idle" } },
+				unequip = 	{ "Medkit_fp_putdown" }
 			}
 		)
 	end
