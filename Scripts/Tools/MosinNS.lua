@@ -195,7 +195,7 @@ function MosinNS:loadAnimations()
 			putdown = { "spudgun_putdown" },
 
 			reload_into = { "Mosin_reload_into", { nextAnimation = "reload_single" } },
-			reload_into_empty = { "Mosin_reload_into", { nextAnimation = "reload_single" } },
+			--reload_into_empty = { "Mosin_reload_into", { nextAnimation = "reload_single" } },
 			reload_clip = { "Mosin_reload_clip", { nextAnimation = "reload_single" } },
 			reload_single = { "Mosin_reload_single", { looping = true } },
 			reload_exit = { "Mosin_reload_exit", { nextAnimation = "idle" } },
@@ -248,7 +248,7 @@ function MosinNS:loadAnimations()
 				cock_hammer_aim = { "Gun_aim_c_hammer", { nextAnimation = "aimIdle" } },
 
 				reload_into = { "Gun_reload_into", { nextAnimation = "reload_single" } },
-				reload_into_empty = { "Gun_reload_into_empty", { nextAnimation = "reload_single" } },
+				--reload_into_empty = { "Gun_reload_into_empty", { nextAnimation = "reload_single" } },
 				reload_clip = { "Gun_reload_clip", { nextAnimation = "reload_single" } },
 				reload_single = { "Gun_reload_single", { looping = true } },
 				reload_exit = { "Gun_reload_exit", { nextAnimation = "idle" } },
@@ -894,7 +894,7 @@ function MosinNS:cl_n_onReload(anim)
 end
 
 function MosinNS:cl_startReloadAnim(anim)
-	setTpAnimation(self.tpAnimations, anim, 1.0)
+	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
 	mgp_toolAnimator_setAnimation(self, anim)
 end
 
