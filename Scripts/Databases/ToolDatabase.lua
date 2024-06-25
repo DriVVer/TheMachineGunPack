@@ -3013,7 +3013,6 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.nextAnimation,
 						blendTp = 1,
 						blendFp = 0,
-						blendFp = 0,
 						animation = "reload_single",
 					}
 				},

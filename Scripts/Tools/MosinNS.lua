@@ -850,10 +850,8 @@ function MosinNS:cl_onPrimaryUse(state)
 
 			sm.camera.setShake(0.07)
 
-			if not self.aiming then
-				-- Play FP shoot animation
-				setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
-			end
+			-- Play FP shoot animation
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 		else
 			self:onShoot()
 			self.network:sendToServer("sv_n_onShoot")
@@ -921,7 +919,7 @@ function MosinNS:cl_initReloadAnim()
 	self:cl_startReloadAnim(anim)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload")
+	self.network:sendToServer("sv_n_onReload", anim)
 end
 
 function MosinNS:sv_reloadSingle()
