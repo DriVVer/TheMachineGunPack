@@ -3111,9 +3111,15 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 4.5 } },
-						tp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 4.5 } },
-						time = 2.0
+						fp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 2.7 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 2.5, end_val = 2.5 } },
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "MosinNS_Anim", start_val = 2.7, end_val = 4.5 } },
+						tp_anim = { { name = "MosinNS_Anim", start_val = 2.7, end_val = 4.5 } },
+						time = 1.8
 					},
 					{
 						type = mgp_tool_anim_enum.nextAnimation,

@@ -34,7 +34,7 @@ sm.tool.preloadRenderables(renderablesFp)
 ---@field cl_isLocal boolean
 Medkit = class()
 Medkit.healTime = 3.75
-Medkit.restoredStats = { hpGain = 100 }
+Medkit.restoredStats = { hpGain = 75 }
 Medkit.itemUuid = sm.uuid.new("4664a470-275f-4799-a54f-6a4a2111f436")
 
 function Medkit:server_onCreate()

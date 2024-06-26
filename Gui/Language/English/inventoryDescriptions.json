@@ -72,6 +72,10 @@
 		"title": "Revolver",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
+	"4664a470-275f-4799-a54f-6a4a2111f436": {
+		"title": "First Aid Medkit",
+		"description": "The Machine Gun Pack\n\nFirst Aid, heals up to 75hp when used.\n\nPress LMB to use"
+	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
 		"title": "Mosin-Nagant M44 rifle (Sniper class)",
 		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
