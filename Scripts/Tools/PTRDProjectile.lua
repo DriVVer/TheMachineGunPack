@@ -1,11 +1,11 @@
 local g_ptrdProjectiles = {}
 local g_ptrdActiveInstances = 0
 local g_ptrdClientTick = 0
-local g_projectile_noconsume = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
+local g_projectile_noconsume = sm.uuid.new("36b158ad-212b-4c81-8666-0c29f751c21a")
 
 local g_projectileDamage = 480
 local g_projectileVelocity = 120
-local g_maxPenetrationCount = 4
+local g_maxPenetrationCount = 6
 local g_killTypes = {
 	terrainSurface = true,
 	terrainAsset = true,
