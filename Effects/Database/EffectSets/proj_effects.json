@@ -23,7 +23,7 @@
 		"effectList": [
 			{
 				"type": "renderable",
-				"name": "$CONTENT_DATA/Projectiles/Renderables/Rocket.rend"
+				"name": "$CONTENT_DATA/Projectiles/Renderables/Bullet_yel.rend"
 			}
 		]
 	}

@@ -4,7 +4,7 @@ local g_ptrdClientTick = 0
 local g_projectile_noconsume = sm.uuid.new("36b158ad-212b-4c81-8666-0c29f751c21a")
 
 local g_projectileDamage = 480
-local g_projectileVelocity = 120
+local g_projectileVelocity = 240
 local g_maxPenetrationCount = 6
 local g_killTypes = {
 	terrainSurface = true,
