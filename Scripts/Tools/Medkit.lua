@@ -280,7 +280,7 @@ function Medkit:loadAnimations()
 		runFwd = "Medkit_run_fwd",
 		runBwd = "Medkit_run_bwd",
 
-		sprint = "Medkit_sprint_fwd",
+		sprint = "Medkit_sprint",
 
 		jump = "Medkit_jump",
 		jumpUp = "Medkit_jump_up",

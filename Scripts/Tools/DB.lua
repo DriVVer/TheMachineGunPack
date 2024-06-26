@@ -22,6 +22,24 @@ dofile("ToolSwimUtil.lua")
 ---@field ammoType number
 DB = class()
 DB.mag_capacity = 2
+--[[DB.modificationData = {
+	layout = "path_to_file",
+	mods = {
+		{
+			slot = "ammo",
+			options = {
+				{
+					uuid = sm.uuid.new("uuid_of_item"),
+					renderable = "",
+				},
+				{
+					uuid = sm.uuid.new("uuid_of_item"),
+					renderable = "",
+				}
+			}
+		}
+	}
+}]]
 DB.ammoTypes = {
 	[1] = {
 		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
