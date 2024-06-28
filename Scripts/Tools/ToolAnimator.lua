@@ -229,31 +229,7 @@ AnimationUpdateFunctions.renderable_handler = function(self, track, dt)
 
 	local s_tool = self.tool
 	if s_tool:isEquipped() then
-		local rend_data = self.cl_animator_renderables[t_data.name]
-		if t_data.enabled then
-			if not rend_data.enabled then
-				rend_data.enabled = true
-
-				rend_data.fp_id = #self.cl_animator_fp_renderables + 1
-				rend_data.tp_id = #self.cl_animator_tp_renderables + 1
-
-				_table_insert(self.cl_animator_fp_renderables, rend_data.path)
-				_table_insert(self.cl_animator_tp_renderables, rend_data.path)
-			end
-		else
-			if rend_data.enabled then
-				rend_data.enabled = false
-
-				_table_remove(self.cl_animator_tp_renderables, rend_data.tp_id)
-				_table_remove(self.cl_animator_fp_renderables, rend_data.fp_id)
-
-				rend_data.tp_id = nil
-				rend_data.fp_id = nil
-			end
-		end
-
-		s_tool:setFpRenderables(self.cl_animator_fp_renderables)
-		s_tool:setTpRenderables(self.cl_animator_tp_renderables)
+		mgp_updateRenderables(self, t_data, true)
 	end
 
 	track.func = AnimationUpdateFunctions.anim_selector
@@ -479,11 +455,27 @@ function mgp_toolAnimator_update(self, dt)
 	end
 end
 
+function mgp_toolAnimator_onModdedToolEquip(self, fp_renderables, tp_renderables, fallback_renderables)
+	mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderables, fallback_renderables)
+
+	for slot, mods in pairs(self.modificationData.mods) do
+		for uuid, mod in pairs(mods) do
+			if self.selectedMods[slot] == uuid and mod.renderable then
+				mgp_updateRenderables(self, { name = mod.renderable, enabled = true }, false)
+			end
+		end
+	end
+end
+
 function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderables, fallback_renderables)
 	if self.cl_animator_renderables then
 		for k, v in pairs(self.cl_animator_renderables) do
-			v.enabled = v.enabled_by_default
-			if v.enabled then
+			local enabled = v.enabled_by_default
+			if v.isAttachment then
+				enabled = enabled or v.enabled
+			end
+
+			if enabled then
 				local fp_id = #fp_renderables + 1
 				local tp_id = #tp_renderables + 1
 
@@ -494,6 +486,8 @@ function mgp_toolAnimator_registerRenderables(self, fp_renderables, tp_renderabl
 				v.fp_id = fp_id
 				v.tp_id = tp_id
 			end
+
+			v.enabled = enabled
 		end
 
 		self.cl_animator_tp_renderables = tp_renderables
@@ -577,7 +571,7 @@ function mgp_toolAnimator_initialize(self, tool_name)
 	if anim_data_renderables ~= nil then
 		self.cl_animator_renderables = {}
 		for rend_name, data in pairs(anim_data_renderables) do
-			self.cl_animator_renderables[rend_name] = data
+			self.cl_animator_renderables[rend_name] = shallowcopy(data)
 		end
 	end
 
@@ -641,5 +635,35 @@ function mgp_toolAnimator_destroy(self)
 	if self.cl_isLocal then
 		SetPlayerCamOverride(sm.localPlayer.getPlayer())
 		self.crosshair:destroy()
+	end
+end
+
+function mgp_updateRenderables(self, t_data, setRend)
+	local rend_data = self.cl_animator_renderables[t_data.name]
+	if t_data.enabled then
+		if not rend_data.enabled then
+			rend_data.enabled = true
+
+			rend_data.fp_id = #self.cl_animator_fp_renderables + 1
+			rend_data.tp_id = #self.cl_animator_tp_renderables + 1
+
+			_table_insert(self.cl_animator_fp_renderables, rend_data.path)
+			_table_insert(self.cl_animator_tp_renderables, rend_data.path)
+		end
+	else
+		if rend_data.enabled then
+			rend_data.enabled = false
+
+			_table_remove(self.cl_animator_tp_renderables, rend_data.tp_id)
+			_table_remove(self.cl_animator_fp_renderables, rend_data.fp_id)
+
+			rend_data.tp_id = nil
+			rend_data.fp_id = nil
+		end
+	end
+
+	if setRend then
+		self.tool:setFpRenderables(self.cl_animator_fp_renderables)
+		self.tool:setTpRenderables(self.cl_animator_tp_renderables)
 	end
 end

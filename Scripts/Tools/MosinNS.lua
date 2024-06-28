@@ -954,21 +954,6 @@ function MosinNS:cl_reloadExit()
 end
 
 function MosinNS:client_onReload()
-	--[[if true then
-		self.waiting_for_ammo = true
-
-		self.ammo_in_mag = 0
-		local anim = "reload_into_empty"
-		setFpAnimation(self.fpAnimations, anim, 0.0)
-		self:cl_startReloadAnim(anim)
-
-		--Send the animation data to all the other clients
-		self.network:sendToServer("sv_n_onReload")
-
-
-		return true
-	end]]
-
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if self.cl_hammer_cocked then
