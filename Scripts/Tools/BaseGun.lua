@@ -1,8 +1,13 @@
+dofile("$SURVIVAL_DATA/Scripts/game/survival_loot.lua")
+
 ---@class GunModOption
----@field minSpendAmount number
+---@field minSpendAmount? number
+---@field getReturnAmount function
 ---@field renderable string ID of renderable in ToolDB
----@field OnUnEquip? function
----@field OnEquip? function
+---@field Sv_OnUnEquip? function
+---@field Sv_OnEquip? function
+---@field Cl_OnUnEquip? function
+---@field Cl_OnEquip? function
 
 ---@alias GunMod { [string]: GunModOption } Options for the mod
 
@@ -60,7 +65,42 @@ function BaseGun:server_updateStorage(data, caller)
 end
 
 function BaseGun:sv_chooseSlotOption(data, caller)
-    self.sv_selectedMods[data.slot] = data.uuid
+    local slot, uuid = data.slot, data.uuid
+    local modData = self.modificationData.mods[slot]
+    local prevEquipped = self.sv_selectedMods[slot]
+    local container = self.tool:getOwner():getInventory()
+    if prevEquipped then
+        local prevModSelf = modData[prevEquipped]
+        if prevModSelf.Sv_OnUnEquip then
+            prevModSelf:Sv_OnUnEquip(self)
+        end
+
+        local prevUuid = sm.uuid.new(prevEquipped)
+        local amount = 1
+        if prevModSelf.getReturnAmount then
+            amount = prevModSelf:getReturnAmount(self)
+        end
+
+        if container:canCollect(prevUuid, amount) then
+            sm.container.beginTransaction()
+            sm.container.collect(container, prevUuid, amount)
+            sm.container.endTransaction()
+        else
+            SpawnLoot(self.tool:getOwner(), { { uuid = prevUuid, quantity = amount } })
+        end
+    end
+
+    self.sv_selectedMods[slot] = uuid
+
+    local nextMod = modData[uuid]
+    if nextMod.Sv_OnEquip then
+        nextMod:Sv_OnEquip(self)
+    end
+
+    sm.container.beginTransaction()
+    sm.container.spend(container, sm.uuid.new(uuid), nextMod.minSpendAmount)
+    sm.container.endTransaction()
+
 	self:server_updateStorage()
     self.network:sendToClients("cl_OnChooseSlotOption", data)
 end
@@ -155,6 +195,8 @@ function BaseGun:cl_openSlotOptions(button)
 end
 
 function BaseGun:cl_chooseSlotOption(button, id, data, grid)
+    if not data then return end
+
     local slot, uuid = data.slot, data.itemId
     if self.sv_selectedMods[slot] == uuid then return end
 
@@ -178,8 +220,8 @@ function BaseGun:cl_OnChooseSlotOption(data)
     local modData = self.modificationData.mods[slot]
     if prevEquipped then
         local prevModSelf = modData[prevEquipped]
-        if prevModSelf.OnUnEquip then
-            prevModSelf:OnUnEquip(self)
+        if prevModSelf.Cl_OnUnEquip then
+            prevModSelf:Cl_OnUnEquip(self)
         end
 
         if prevModSelf.renderable then
@@ -189,8 +231,8 @@ function BaseGun:cl_OnChooseSlotOption(data)
 
 
     local nextModSelf = modData[uuid]
-    if nextModSelf.OnEquip then
-        nextModSelf:OnEquip(self)
+    if nextModSelf.Cl_OnEquip then
+        nextModSelf:Cl_OnEquip(self)
     end
 
     if nextModSelf.renderable then

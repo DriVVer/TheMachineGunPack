@@ -29,7 +29,14 @@ DB.modificationData = {
 		ammo = {
 			["a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"] = {
 				minSpendAmount = 2,
-				OnEquip = function(self, toolSelf)
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = toolSelf.mag_capacity --math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
 					toolSelf:cl_updateColour()
 				end,
 				projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
@@ -40,7 +47,14 @@ DB.modificationData = {
 			},
 			["a2a1b12e-8045-4ab0-9577-8b63c06a55c2"] = {
 				minSpendAmount = 2,
-				OnEquip = function(self, toolSelf)
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = toolSelf.mag_capacity
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
 					toolSelf:cl_updateColour()
 				end,
 				projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
