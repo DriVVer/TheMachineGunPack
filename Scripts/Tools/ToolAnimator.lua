@@ -324,8 +324,8 @@ local function ResetGunRecoil(self)
 		self.crosshair:stop()
 	end
 
-	self.tool:updateFpAnimation("recoil_horizontal", 0.5, 1, false)
-	self.tool:updateFpAnimation("recoil_vertical", 0.5, 1, false)
+	self.tool:updateFpAnimation("recoil_horizontal", 0, 0, false)
+	self.tool:updateFpAnimation("recoil_vertical", 0, 0, false)
 end
 
 local function SetPlayerCamOverride(player, data)

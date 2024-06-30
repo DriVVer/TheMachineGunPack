@@ -2,8 +2,8 @@ dofile("$SURVIVAL_DATA/Scripts/game/survival_loot.lua")
 
 ---@class GunModOption
 ---@field minSpendAmount? number
----@field getReturnAmount function
----@field renderable string ID of renderable in ToolDB
+---@field getReturnAmount? function
+---@field renderable? string ID of renderable in ToolDB
 ---@field Sv_OnUnEquip? function
 ---@field Sv_OnEquip? function
 ---@field Cl_OnUnEquip? function
@@ -35,7 +35,7 @@ dofile("$SURVIVAL_DATA/Scripts/game/survival_loot.lua")
 ---@field selectedMods { [string]: string } slot -> uuid
 BaseGun = class()
 
-local emptyModSlot = "gui_icon_popup_alert.png"
+local emptyModSlot = sm.uuid.new("068a89ca-504e-4782-9ede-48f710aeea73")
 
 function BaseGun:sv_init()
     local v_saved_data = self.storage:load()
@@ -90,16 +90,21 @@ function BaseGun:sv_chooseSlotOption(data, caller)
         end
     end
 
-    self.sv_selectedMods[slot] = uuid
+    local nextUuid = sm.uuid.new(uuid)
+    if nextUuid == emptyModSlot then
+        self.sv_selectedMods[slot] = nil
+    else
+        self.sv_selectedMods[slot] = uuid
 
-    local nextMod = modData[uuid]
-    if nextMod.Sv_OnEquip then
-        nextMod:Sv_OnEquip(self)
+        local nextMod = modData[uuid]
+        if nextMod.Sv_OnEquip then
+            nextMod:Sv_OnEquip(self)
+        end
+
+        sm.container.beginTransaction()
+        sm.container.spend(container, nextUuid, nextMod.minSpendAmount or 1)
+        sm.container.endTransaction()
     end
-
-    sm.container.beginTransaction()
-    sm.container.spend(container, sm.uuid.new(uuid), nextMod.minSpendAmount)
-    sm.container.endTransaction()
 
 	self:server_updateStorage()
     self.network:sendToClients("cl_OnChooseSlotOption", data)
@@ -141,7 +146,7 @@ function BaseGun:cl_updateGuiSlots()
         if selected then
             self.modGui:setIconImage("slot_"..k.."_icon", sm.uuid.new(selected))
         else
-            self.modGui:setImage("slot_"..k.."_icon", emptyModSlot)
+            self.modGui:setIconImage("slot_"..k.."_icon", emptyModSlot)
         end
     end
 end
@@ -158,6 +163,10 @@ end
 function BaseGun:cl_openSlotOptions(button)
     local slot = button:sub(6, #button)
     local options = self.modificationData.mods[slot]
+    if options.CanBeUnEquipped then
+        options[tostring(emptyModSlot)] = {}
+    end
+
     self.modGuiContainer = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/GunModOptions.layout", true)
     self.modGuiContainer:createGridFromJson("UpperGrid", {
 		type = "materialGrid",
@@ -172,9 +181,13 @@ function BaseGun:cl_openSlotOptions(button)
     local container = sm.localPlayer.getInventory()
     local count = 0
     for k, v in pairs(options) do
-        local uuid = sm.uuid.new(k)
+        local success, uuid = pcall(sm.uuid.new, k)
+        if not success then
+            goto continue
+        end
+
         local amount = v.minSpendAmount or 1
-        if container:canSpend(uuid, amount) then
+        if uuid == emptyModSlot or container:canSpend(uuid, amount) then
             self.modGuiContainer:setGridItem("UpperGrid", count, {
                 itemId = k,
                 quantity = amount,
@@ -183,6 +196,8 @@ function BaseGun:cl_openSlotOptions(button)
 
             count = count + 1
         end
+
+        ::continue::
     end
 
     self.modGuiContainer:setContainer("UpperGrid", container)
@@ -225,21 +240,25 @@ function BaseGun:cl_OnChooseSlotOption(data)
         end
 
         if prevModSelf.renderable then
-            mgp_updateRenderables(self, { name = prevModSelf.renderable, enbled = false }, false)
+            mgp_updateRenderables(self, { name = prevModSelf.renderable, enbled = false }, uuid == tostring(emptyModSlot))
         end
     end
 
+    if uuid == tostring(emptyModSlot) then
+        self.selectedMods[slot] = nil
+    else
+        self.selectedMods[slot] = uuid
 
-    local nextModSelf = modData[uuid]
-    if nextModSelf.Cl_OnEquip then
-        nextModSelf:Cl_OnEquip(self)
+        local nextModSelf = modData[uuid]
+        if nextModSelf.Cl_OnEquip then
+            nextModSelf:Cl_OnEquip(self)
+        end
+
+        if nextModSelf.renderable then
+            mgp_updateRenderables(self, { name = nextModSelf.renderable, enabled = true }, true)
+        end
     end
 
-    if nextModSelf.renderable then
-        mgp_updateRenderables(self, { name = nextModSelf.renderable, enabled = true }, true)
-    end
-
-    self.selectedMods[slot] = uuid
     self.modGuiContainer:close()
 end
 
@@ -267,15 +286,10 @@ function BaseGun:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( self.aimFovFp, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function BaseGun:client_isGunReloading()
+function BaseGun:client_isGunReloading(reload_anims)
 	if self.waiting_for_ammo then
 		return true
 	end
 
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (self.reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
+	return mgp_tool_isAnimPlaying(self, reload_anims or self.reload_anims)
 end

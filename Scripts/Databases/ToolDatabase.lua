@@ -2811,6 +2811,9 @@ local mgp_tool_database =
 			BoltClose = "MosinBoltClose",
 			BulletPut = "MosinBulletPut"
 		},
+		renderables = {
+			scope = { path = "$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_scope_attachment.rend", enabled_by_default = false, isAttachment = true }
+		},
 		on_unequip_action = {
 			stop_effects = { "BoltOpen", "BoltClose", "BulletPut" }
 		},

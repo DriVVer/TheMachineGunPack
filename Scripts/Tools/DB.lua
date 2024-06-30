@@ -27,6 +27,7 @@ DB.modificationData = {
 	layout = "$CONTENT_DATA/Gui/Layouts/DB_mods.layout",
 	mods = {
 		ammo = {
+			CanBeUnEquipped = false,
 			["a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"] = {
 				minSpendAmount = 2,
 				getReturnAmount = function(self, toolSelf)
@@ -502,7 +503,7 @@ function DB:client_onEquip(animate, is_custom)
 		currentRenderablesFp[#currentRenderablesFp+1] = v
 	end
 
-	mgp_toolAnimator_onModdedToolEquip(self, currentRenderablesFp, currentRenderablesTp, renderables)
+	mgp_toolAnimator_onModdedToolEquip(self, currentRenderablesFp, currentRenderablesTp, {})
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
