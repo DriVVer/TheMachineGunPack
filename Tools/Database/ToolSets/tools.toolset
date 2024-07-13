@@ -178,6 +178,18 @@
 			}
 		},
 		{
+			"name": "Shotgun",
+			"uuid": "daa59c62-2671-4071-b8dc-47654f620cd2",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Shotgun.lua",
+				"class": "Shotgun",
+				"data": {}
+			}
+		},
+		
+		{
 			"name": "Medkit",
 			"uuid": "09404c9e-aafb-40c0-8cfa-f7a4166f8b42",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Medkit/Medkit_Preview.rend",

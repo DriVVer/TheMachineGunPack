@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+ <asset>
+  <contributor>
+   <author></author>
+   <authoring_tool>FBX COLLADA exporter</authoring_tool>
+   <comments></comments>
+  </contributor>
+  <created>2024-07-02T18:20:39Z</created>
+  <keywords></keywords>
+  <modified>2024-07-02T18:20:39Z</modified>
+  <revision></revision>
+  <subject></subject>
+  <title></title>
+  <unit meter="0.010000" name="centimeter"></unit>
+  <up_axis>Y_UP</up_axis>
+ </asset>
+ <library_animations>
+  <animation id="ShotgunAnim-anim" name="ShotgunAnim">
+   <animation>
+    <source id="ShotgunAnim-Matrix-animation-input">
+     <float_array id="ShotgunAnim-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array>
+     <technique_common>
+      <accessor source="#ShotgunAnim-Matrix-animation-input-array" count="10">
+       <param name="TIME" type="float"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="ShotgunAnim-Matrix-animation-output-transform">
+     <float_array id="ShotgunAnim-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
+     <technique_common>
+      <accessor source="#ShotgunAnim-Matrix-animation-output-transform-array" count="10" stride="16">
+       <param type="float4x4"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="ShotgunAnim-Interpolations">
+     <Name_array id="ShotgunAnim-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array>
+     <technique_common>
+      <accessor source="#ShotgunAnim-Interpolations-array" count="10">
+       <param type="name"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <sampler id="ShotgunAnim-Matrix-animation-transform">
+     <input semantic="INPUT" source="#ShotgunAnim-Matrix-animation-input"></input>
+     <input semantic="OUTPUT" source="#ShotgunAnim-Matrix-animation-output-transform"></input>
+     <input semantic="INTERPOLATION" source="#ShotgunAnim-Interpolations"></input>
+    </sampler>
+    <channel source="#ShotgunAnim-Matrix-animation-transform" target="ShotgunAnim/matrix"></channel>
+   </animation>
+  </animation>
+  <animation id="jnt_anim-anim" name="jnt_anim">
+   <animation>
+    <source id="jnt_anim-Matrix-animation-input">
+     <float_array id="jnt_anim-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array>
+     <technique_common>
+      <accessor source="#jnt_anim-Matrix-animation-input-array" count="10">
+       <param name="TIME" type="float"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="jnt_anim-Matrix-animation-output-transform">
+     <float_array id="jnt_anim-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
+     <technique_common>
+      <accessor source="#jnt_anim-Matrix-animation-output-transform-array" count="10" stride="16">
+       <param type="float4x4"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="jnt_anim-Interpolations">
+     <Name_array id="jnt_anim-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array>
+     <technique_common>
+      <accessor source="#jnt_anim-Interpolations-array" count="10">
+       <param type="name"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <sampler id="jnt_anim-Matrix-animation-transform">
+     <input semantic="INPUT" source="#jnt_anim-Matrix-animation-input"></input>
+     <input semantic="OUTPUT" source="#jnt_anim-Matrix-animation-output-transform"></input>
+     <input semantic="INTERPOLATION" source="#jnt_anim-Interpolations"></input>
+    </sampler>
+    <channel source="#jnt_anim-Matrix-animation-transform" target="jnt_anim/matrix"></channel>
+   </animation>
+  </animation>
+  <animation id="jnt_pump-anim" name="jnt_pump">
+   <animation>
+    <source id="jnt_pump-Matrix-animation-input">
+     <float_array id="jnt_pump-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array>
+     <technique_common>
+      <accessor source="#jnt_pump-Matrix-animation-input-array" count="10">
+       <param name="TIME" type="float"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="jnt_pump-Matrix-animation-output-transform">
+     <float_array id="jnt_pump-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000</float_array>
+     <technique_common>
+      <accessor source="#jnt_pump-Matrix-animation-output-transform-array" count="10" stride="16">
+       <param type="float4x4"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <source id="jnt_pump-Interpolations">
+     <Name_array id="jnt_pump-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array>
+     <technique_common>
+      <accessor source="#jnt_pump-Interpolations-array" count="10">
+       <param type="name"></param>
+      </accessor>
+     </technique_common>
+    </source>
+    <sampler id="jnt_pump-Matrix-animation-transform">
+     <input semantic="INPUT" source="#jnt_pump-Matrix-animation-input"></input>
+     <input semantic="OUTPUT" source="#jnt_pump-Matrix-animation-output-transform"></input>
+     <input semantic="INTERPOLATION" source="#jnt_pump-Interpolations"></input>
+    </sampler>
+    <channel source="#jnt_pump-Matrix-animation-transform" target="jnt_pump/matrix"></channel>
+   </animation>
+  </animation>
+ </library_animations>
+ <library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+   <node name="jnt_anim" id="jnt_anim" sid="jnt_anim" type="JOINT">
+    <matrix sid="matrix">1.000000 0.000000 -0.000001 0.000000 -0.000001 0.000001 -1.000000 0.000000 0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+    <extra>
+     <technique profile="FCOLLADA">
+      <visibility>1.000000</visibility>
+     </technique>
+    </extra>
+    <node name="jnt_pump" id="jnt_pump" sid="jnt_pump" type="JOINT">
+     <matrix sid="matrix">1.000000 0.000000 0.000000 0.000001 -0.000000 1.000000 0.000000 0.199999 -0.000000 -0.000000 1.000000 2.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+     <extra>
+      <technique profile="FCOLLADA">
+       <visibility>1.000000</visibility>
+      </technique>
+     </extra>
+    </node>
+   </node>
+   <extra>
+    <technique profile="MAX3D">
+     <frame_rate>30.000000</frame_rate>
+    </technique>
+    <technique profile="FCOLLADA">
+     <start_time>0.000000</start_time>
+     <end_time>1.000000</end_time>
+    </technique>
+   </extra>
+  </visual_scene>
+ </library_visual_scenes>
+ <scene>
+  <instance_visual_scene url="#Scene"></instance_visual_scene>
+ </scene>
+</COLLADA>
