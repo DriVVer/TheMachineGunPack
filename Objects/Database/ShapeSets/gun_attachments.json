@@ -1,0 +1,29 @@
+{
+    "partList": [
+        {
+			"uuid": "3fd34aa2-9bbd-4a10-bc86-1258aca23d30",
+			"name": "gun_powder",
+			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_gun_powder.rend",
+			"color": "f71905",
+			"box": {
+				"x": 2,
+				"y": 2,
+				"z": 2
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Wood",
+			"ratings": {
+				"density": 1,
+				"durability": 5,
+				"friction": 4,
+				"buoyancy": 6
+			},
+			"qualityLevel": 20,
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 200
+		}
+    ]
+}

@@ -24,7 +24,11 @@
 				{ "name": "DB_reload_type",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_type.dae" },
 				{ "name": "DB_reload_1",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_1.dae" },	
 				{ "name": "DB_reload_0", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_reload_0.dae"},
-				{ "name": "DB_ammo_check",   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_ammo_check.dae" }
+				{ "name": "DB_ammo_check",   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_ammo_check.dae" },
+
+				{ "name": "DB_modSelect_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_sprint_into.dae" },
+				{ "name": "DB_modSelect_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_sprint_exit.dae" },
+				{ "name": "DB_modSelect_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_sprint_idle.dae" }
 			]
 		}
 	]

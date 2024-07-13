@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MyGUI type="Layout" version="3.2.0">
+    <Widget type="Button" skin="BeaconIconBorder" position="897 424 150 150" name="slot_scope">
+        <Widget type="ImageBox" skin="ImageBox" position="25 15 100 100" name="slot_scope_icon">
+            <Property key="InheritsAlpha" value="false"/>
+            <Property key="NeedMouse" value="false"/>
+            <Property key="NeedKey" value="false"/>
+            <Property key="InheritsPick" value="false"/>
+        </Widget>
+        <Widget type="TextBox" skin="TextBox" position="25 115 100 20" name="slot_scope_title">
+            <Property key="NeedMouse" value="false"/>
+            <Property key="NeedKey" value="false"/>
+            <Property key="InheritsPick" value="false"/>
+            <Property key="InheritsAlpha" value="false"/>
+            <Property key="TextAlign" value="Center"/>
+        </Widget>
+    </Widget>
+    <CodeGeneratorSettings/>
+</MyGUI>

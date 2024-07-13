@@ -5,10 +5,9 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("BaseGun.lua")
 
----@class DoubleBarrel : ToolClass
----@field fpAnimations table
----@field tpAnimations table
+---@class DoubleBarrel : BaseGun
 ---@field aiming boolean
 ---@field mag_capacity integer
 ---@field aimFireMode table
@@ -19,42 +18,61 @@ dofile("ToolSwimUtil.lua")
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field ammoType number
-DB = class()
+DB = class(BaseGun)
 DB.mag_capacity = 2
---[[DB.modificationData = {
-	layout = "path_to_file",
+DB.defaultSelectedMods = {
+	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
+}
+DB.modificationData = {
+	layout = "$CONTENT_DATA/Gui/Layouts/DB_mods.layout",
 	mods = {
-		{
-			slot = "ammo",
-			options = {
-				{
-					uuid = sm.uuid.new("uuid_of_item"),
-					renderable = "",
-				},
-				{
-					uuid = sm.uuid.new("uuid_of_item"),
-					renderable = "",
-				}
+		ammo = {
+			CanBeUnEquipped = false,
+			["a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"] = {
+				minSpendAmount = 2,
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = toolSelf.mag_capacity --math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
+					toolSelf:cl_updateColour()
+				end,
+				projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
+				shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
+				damage = 14,
+				colour = sm.color.new("#7b3030ff"),
+				name = "Birdshot"
+			},
+			["a2a1b12e-8045-4ab0-9577-8b63c06a55c2"] = {
+				minSpendAmount = 2,
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = toolSelf.mag_capacity
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
+					toolSelf:cl_updateColour()
+				end,
+				projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
+				shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
+				damage = 80,
+				colour = sm.color.new("#307326ff"),
+				name = "Sabot"
 			}
 		}
 	}
-}]]
-DB.ammoTypes = {
-	[1] = {
-		projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
-		shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
-		damage = 14,
-		colour = sm.color.new("#7b3030ff"),
-		name = "Birdshot"
-	},
-	[2] = {
-		projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
-		shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
-		damage = 80,
-		colour = sm.color.new("#307326ff"),
-		name = "Sabot"
-	}
+}
+DB.reload_anims =
+{
+	["ammo_check"   ] = true,
+	["reload"		] = true,
+	["reload_empty"	] = true,
+	["reload_type"	] = true
 }
 DB.maxRecoil = 30
 DB.recoilAmount = 20
@@ -92,37 +110,9 @@ function DB:client_initAimVals()
 end
 
 function DB:server_onCreate()
-	self.sv_ammo_counter = 0
-
-	local saved_data = self.storage:load() or {}
-	local v_saved_ammo = saved_data.ammo
-	if v_saved_ammo ~= nil then
-		self.sv_ammo_counter = v_saved_ammo
-	else
-		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
-			self.sv_ammo_counter = self.mag_capacity
-		end
-
-		self:server_updateStorage()
-	end
-
-	local ammoType = saved_data.type
-	if ammoType then
-		self.network:sendToClients("cl_loadSavedType", ammoType)
-	end
-
-	self.sv_ammoType = ammoType or 1
+	self:sv_init()
 end
 
-function DB:server_requestAmmo(data, caller)
-	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
-end
-
-function DB:server_updateStorage(data, caller)
-	if data ~= nil or caller ~= nil then return end
-
-	self.storage:save({ ammo = self.sv_ammo_counter, type = self.sv_ammoType })
-end
 
 function DB:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
@@ -139,21 +129,7 @@ function DB:client_onCreate()
 
 	mgp_toolAnimator_initialize(self, "DB")
 
-	self.network:sendToServer("server_requestAmmo")
-
-	self.ammoType = 1
-	if self.cl_isLocal then
-		self.gui = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/DBAmmo.layout")
-		self.gui:setButtonCallback("ammo1", "cl_ammoSelect")
-		self.gui:setButtonCallback("ammo2", "cl_ammoSelect")
-		self.gui:setVisible("ammo3", false)
-
-		for k, v in pairs(self.ammoTypes) do
-			local widget = "ammo"..k
-			self.gui:setIconImage(widget.."_img", v.shells)
-			self.gui:setText(widget.."_title", v.name)
-		end
-	end
+	self:cl_init()
 end
 
 function DB.client_onDestroy(self)
@@ -232,6 +208,10 @@ function DB.loadAnimations( self )
 				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
 				sprintIdle = { "DB_sprint_idle", { looping = true } },
+
+				modInto = { "DB_modSelect_into", { nextAnimation = "modIdle" } },
+				modExit = { "DB_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
+				modIdle = { "DB_modSelect_idle", { looping = true } },
 			}
 		)
 	end
@@ -296,23 +276,6 @@ local aim_animations =
 	["aimShoot"]        = true
 }
 
-function DB:client_updateAimWeights(dt)
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 20 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 40.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 40.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
-end
-
 function DB:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
@@ -322,7 +285,7 @@ function DB:server_spendAmmo(data, player)
 	local v_inventory = v_owner:getInventory()
 	if v_inventory == nil then return end
 
-	local mgp_shotgun_ammo = self.ammoTypes[self.sv_ammoType].shells
+	local mgp_shotgun_ammo = mgp_tool_GetSelectedMod(self, "ammo").shells
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_shotgun_ammo)
 	if v_available_ammo == 0 then return end
 
@@ -535,8 +498,12 @@ function DB:client_onEquip(animate, is_custom)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
+	for k,v in pairs( renderables ) do
+		currentRenderablesTp[#currentRenderablesTp+1] = v
+		currentRenderablesFp[#currentRenderablesFp+1] = v
+	end
 
-	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
+	mgp_toolAnimator_onModdedToolEquip(self, currentRenderablesFp, currentRenderablesTp, {})
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
@@ -544,7 +511,7 @@ function DB:client_onEquip(animate, is_custom)
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
-	self:cl_changeColour()
+	self:cl_updateColour()
 
 	--Load animations before setting them
 	self:loadAnimations()
@@ -553,6 +520,14 @@ function DB:client_onEquip(animate, is_custom)
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
+	end
+end
+
+function DB:cl_updateColour()
+	local colour = mgp_tool_GetSelectedMod(self, "ammo").colour
+	self.tool:setTpColor(colour)
+	if self.cl_isLocal then
+		self.tool:setFpColor(colour)
 	end
 end
 
@@ -662,7 +637,7 @@ function DB:cl_onPrimaryUse()
 			end
 
 			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-			local typeData = self.ammoTypes[self.ammoType]
+			local typeData = mgp_tool_GetSelectedMod(self, "ammo")
 			sm.projectile.projectileAttack(typeData.projectile, typeData.damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
 
 			-- Timers
@@ -683,14 +658,6 @@ function DB:cl_onPrimaryUse()
 		end
 	end
 end
-
-local reload_anims =
-{
-	["ammo_check"   ] = true,
-	["reload"		] = true,
-	["reload_empty"	] = true,
-	["reload_type"	] = true
-}
 
 local ammo_count_to_anim_name =
 {
@@ -713,33 +680,9 @@ function DB:cl_startReloadAnim(anim_name)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function DB:client_isGunReloading()
-	if self.waiting_for_ammo then
-		return true
-	end
-
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
 function DB:cl_initReloadAnim(anim_id)
 	if sm.game.getEnableAmmoConsumption() then
-		local inv = sm.localPlayer.getInventory()
-		local quantity = sm.container.totalQuantity
-		local v_available_ammo = quantity(inv, self.ammoTypes[self.ammoType].shells)
-		if v_available_ammo < self.mag_capacity then
-			for k, v in pairs(self.ammoTypes) do
-				if quantity(inv, v.shells) >= self.mag_capacity then
-					setFpAnimation(self.fpAnimations, "reload_type", 0.001)
-					self.network:sendToServer("sv_playSwitch", k)
-					return true
-				end
-			end
-
+		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells) < self.mag_capacity then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
@@ -760,42 +703,6 @@ function DB:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			self:cl_initReloadAnim(self.ammo_in_mag)
-		end
-	end
-
-	return true
-end
-
-function DB:sv_n_checkMag()
-	self.network:sendToClients("cl_n_checkMag")
-end
-
-function DB:cl_n_checkMag()
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		self:cl_startCheckMagAnim()
-	end
-end
-
-function DB:cl_startCheckMagAnim()
-	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-	mgp_toolAnimator_setAnimation(self, "ammo_check")
-end
-
-function DB:cl_n_displayMagInfo()
-	sm.gui.displayAlertText(("DB: %s #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammoTypes[self.ammoType].name, self.ammo_in_mag, self.mag_capacity), 2)
-end
-
-function DB:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
-		if self.ammo_in_mag > 0 then
-			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
-
-			self:cl_startCheckMagAnim()
-			self.network:sendToServer("sv_n_checkMag")
-		else
-			sm.gui.displayAlertText("DB: No Ammo. Reloading...", 3)
-			self:cl_initReloadAnim(0)
 		end
 	end
 
@@ -828,74 +735,5 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self.prevSecondaryState = secondaryState
 	end
 
-	if f ~= self.prevF then
-		self.prevF = f
-		if f and not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			local consume = sm.game.getEnableAmmoConsumption()
-			local quantity = sm.container.totalQuantity
-			local inv = sm.localPlayer.getInventory()
-			local ammoTypes = self.ammo_in_mag > 0 and 1 or 0
-			for i = 1, #self.ammoTypes do
-				local widget = "ammo"..i
-				local display = not consume or quantity(inv, self.ammoTypes[i].shells) >= self.mag_capacity
-
-				if display then ammoTypes = ammoTypes + 1 end
-				self.gui:setVisible(widget, display)
-				self.gui:setButtonState(widget, self.ammoType == i)
-			end
-
-			if ammoTypes < 2 then
-				sm.gui.displayAlertText("You dont have other ammo types!", 2)
-				return true, true
-			end
-
-			self.gui:open()
-		end
-	end
-
 	return true, true
-end
-
-function DB:sv_playSwitch(ammoType, player)
-	sm.container.beginTransaction()
-	local inv = player:getInventory()
-	sm.container.collect(inv, self.ammoTypes[self.sv_ammoType].shells, self.sv_ammo_counter)
-	sm.container.spend(inv, self.ammoTypes[ammoType].shells, self.mag_capacity)
-	sm.container.endTransaction()
-
-	self.sv_ammoType = ammoType
-	self.sv_ammo_counter = self.mag_capacity
-	self:server_updateStorage()
-	self.network:sendToClients("cl_playSwitch", ammoType)
-end
-
-function DB:cl_playSwitch(ammoType)
-	self.ammoType = ammoType
-	if self.cl_isLocal then
-		self:client_receiveAmmo(self.mag_capacity)
-	end
-
-	setTpAnimation(self.tpAnimations, "reload_type", 10)
-	mgp_toolAnimator_setAnimation(self, "reload_type")
-end
-
-function DB:cl_changeColour()
-	local col = self.ammoTypes[self.ammoType].colour
-	self.tool:setTpColor(col)
-	if self.cl_isLocal then
-		self.tool:setFpColor(col)
-	end
-end
-
-function DB:cl_loadSavedType(ammoType)
-	self.ammoType = ammoType
-end
-
-function DB:cl_ammoSelect(widget)
-	local ammoType = tonumber(widget:sub(5, 5))
-	if ammoType == self.ammoType then return end
-
-	self.gui:close()
-	setFpAnimation(self.fpAnimations, "reload_type", 0.001)
-	self.network:sendToServer("sv_playSwitch", ammoType)
 end

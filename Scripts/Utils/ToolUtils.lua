@@ -14,3 +14,11 @@ function mgp_tool_getToolDir(self)
 
     return sm.camera.getDirection():rotate(self.cl_recoilAngle, sm.camera.getRight())
 end
+
+function mgp_tool_GetSelectedMod(self, slot)
+    return self.modificationData.mods[slot][(self.sv_selectedMods or self.selectedMods)[slot]]
+end
+
+function mgp_tool_GetMods(self, slot)
+    return self.modificationData.mods[slot]
+end
