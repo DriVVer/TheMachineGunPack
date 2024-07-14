@@ -788,6 +788,17 @@
 			}
 		]
 	},
+	"DLM_Shotgun_Pump":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Pump",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Shotgun_AmmoIn":
 	{
 		"effectList":

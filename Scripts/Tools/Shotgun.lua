@@ -182,7 +182,7 @@ function Shotgun.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.15,
+		fireCooldown = 1.0,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 4.25,

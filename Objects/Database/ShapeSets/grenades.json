@@ -35,6 +35,24 @@
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
 			"showInInventory": false
+		},
+		{
+			"uuid": "32e38ac2-e34b-4617-805f-358a8699af65",
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Grenade/SingleGrenade_Base.rend",
+			"color": "939291",
+			"box": { "x": 1, "y": 1, "z": 2 },
+			"scripted": { "filename": "$CONTENT_DATA/Scripts/Grenade.lua", "classname": "Grenade" },
+			"density": 1000,
+			"ratings": {
+				"density": 4,
+				"durability": 20,
+				"friction": 5,
+				"buoyancy": 1
+			},
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		}
 	]
 }

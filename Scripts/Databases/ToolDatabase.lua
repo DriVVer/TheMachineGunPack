@@ -1370,7 +1370,8 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_Pistol_Shot_1",
+			gunshot = "DLM_Shotgun_Shot_2",
+			pump = "DLM_Shotgun_Pump",
 			slidedrop = "DLM_Pistol_SlideDrop",
 			magin = "DLM_Pistol_MagIn",
 			magout = "DLM_Pistol_MagOut",
@@ -1396,20 +1397,32 @@ local mgp_tool_database =
 						apply_velocity = false
 					},
 					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.07, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 1.0 } },
+						tp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 1.0 } },
+						time = 1.0
 					}
 				},
 				[2] = {
+					
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
 						name_tp = "gunshot",
 						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.65
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "pump",
+						name_fp = "pump",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
@@ -1425,8 +1438,12 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.25, 0),
+						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.0
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
@@ -1454,16 +1471,10 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 0.5 } },
-						tp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 0.5 } },
-						time = 0.75
+						fp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 0.3 } },
+						tp_anim = { { name = "Shotgun_anims", start_val = 0.0, end_val = 0.3 } },
+						time = 0.1
 					}
-				}
-			},
-			last_shot_equip =
-			{
-				[1] = {
-					
 				}
 			},
 			last_shot =
