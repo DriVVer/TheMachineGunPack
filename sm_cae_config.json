@@ -290,6 +290,16 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Shotgun_TMGP_PumpIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_PumpIn.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Shotgun_TMGP_PumpOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_PumpOut.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Shotgun_TMGP_Ammo_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Ammo_1.mp3",
             "is3D": true,

@@ -23,7 +23,7 @@
 
 				{ "name": "Shotgun_reload_into",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_into.dae" },
 				{ "name": "Shotgun_reload_single",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_single.dae" },
-				{ "name": "Shotgun_reload_extra",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_extra.dae" },
+				{ "name": "Shotgun_reload_single_pump",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_pump.dae" },
 				{ "name": "Shotgun_reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_exit.dae"}
 				
 			]
