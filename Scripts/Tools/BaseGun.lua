@@ -119,6 +119,8 @@ end
 function BaseGun:client_onToggle()
     if self:client_isGunReloading() then return true end
 
+    self.dontReOpen = false
+
     local modData = self.modificationData
     if not modData then return true end
 
@@ -225,6 +227,8 @@ function BaseGun:cl_closeModGui()
 end
 
 function BaseGun:cl_closeSlotOptions()
+    if self.dontReOpen then return end
+
     self:cl_updateGuiSlots()
     self.modGui:open()
 end
@@ -251,7 +255,9 @@ function BaseGun:cl_OnChooseSlotOption(data)
 
         local nextModSelf = modData[uuid]
         if nextModSelf.Cl_OnEquip then
-            nextModSelf:Cl_OnEquip(self)
+            if nextModSelf:Cl_OnEquip(self) then
+                self.dontReOpen = true
+            end
         end
 
         if nextModSelf.renderable then

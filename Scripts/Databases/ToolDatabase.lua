@@ -4489,7 +4489,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.event,
-						callback = "cl_changeColour"
+						callback = "cl_updateColour"
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
