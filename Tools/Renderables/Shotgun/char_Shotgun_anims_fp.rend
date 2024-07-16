@@ -24,7 +24,14 @@
 				{ "name": "Shotgun_reload_into",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_into.dae" },
 				{ "name": "Shotgun_reload_single",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_single.dae" },
 				{ "name": "Shotgun_reload_single_pump",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_pump.dae" },
-				{ "name": "Shotgun_reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_exit.dae"}
+				{ "name": "Shotgun_reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_exit.dae"},
+
+				{ "name": "Shotgun_mod_reload_single",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_single.dae" },
+				{ "name": "Shotgun_mod_reload_single_pump",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_pump.dae" },
+
+				{ "name": "Shotgun_modSelect_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_into.dae" },
+				{ "name": "Shotgun_modSelect_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_exit.dae" },
+				{ "name": "Shotgun_modSelect_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_idle.dae" }
 				
 			]
 		}

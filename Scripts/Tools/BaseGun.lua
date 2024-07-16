@@ -117,6 +117,8 @@ function BaseGun:cl_init()
 end
 
 function BaseGun:client_onToggle()
+    if not self:cl_canMod() then return true end
+
     if self:client_isGunReloading() then return true end
 
     self.dontReOpen = false
@@ -298,4 +300,8 @@ function BaseGun:client_isGunReloading(reload_anims)
 	end
 
 	return mgp_tool_isAnimPlaying(self, reload_anims or self.reload_anims)
+end
+
+function BaseGun:cl_canMod()
+    return true
 end

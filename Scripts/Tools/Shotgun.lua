@@ -5,31 +5,98 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("BaseGun.lua")
 
-local Damage = 30
-
----@class Shotgun : ToolClass
----@field fpAnimations table
----@field tpAnimations table
----@field mag_capacity integer
+---@class Shotgun : BaseGun
 ---@field aiming boolean
+---@field mag_capacity integer
 ---@field aimFireMode table
 ---@field normalFireMode table
+---@field movementDispersion integer
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
----@field movementDispersion integer
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field spineWeight number
-Shotgun = class()
-Shotgun.mag_capacity = 7
-Shotgun.maxRecoil = 20
-Shotgun.recoilAmount = 12
-Shotgun.aimRecoilAmount = 6
-Shotgun.recoilRecoverySpeed = 2
-Shotgun.aimFovTp = 30
-Shotgun.aimFovFp = 30
+Shotgun = class(BaseGun)
+Shotgun.mag_capacity = 6
+Shotgun.defaultSelectedMods = {
+	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
+}
+Shotgun.modificationData = {
+	layout = "$CONTENT_DATA/Gui/Layouts/DB_mods.layout",
+	mods = {
+		ammo = {
+			CanBeUnEquipped = false,
+			["a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"] = {
+				minSpendAmount = 1,
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
+					toolSelf:cl_updateColour()
+					setTpAnimation(toolSelf.tpAnimations, "reload_into", 10)
+					mgp_toolAnimator_setAnimation(toolSelf, "reload_mod_into")
+
+					if toolSelf.cl_isLocal then
+						setFpAnimation(toolSelf.fpAnimations, "reload_into", 0.001)
+					end
+
+					return true
+				end,
+				projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
+				shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
+				damage = 14,
+				colour = sm.color.new("#7b3030ff"),
+				name = "Birdshot"
+			},
+			["a2a1b12e-8045-4ab0-9577-8b63c06a55c2"] = {
+				minSpendAmount = 1,
+				getReturnAmount = function(self, toolSelf)
+					return toolSelf.sv_ammo_counter
+				end,
+				Sv_OnEquip = function(self, toolSelf)
+					toolSelf.sv_ammo_counter = math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
+					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
+				end,
+				Cl_OnEquip = function(self, toolSelf)
+					toolSelf:cl_updateColour()
+					setTpAnimation(toolSelf.tpAnimations, "reload_into", 10)
+					mgp_toolAnimator_setAnimation(toolSelf, "reload_mod_into")
+
+					if toolSelf.cl_isLocal then
+						setFpAnimation(toolSelf.fpAnimations, "reload_into", 0.001)
+					end
+
+					return true
+				end,
+				projectile = sm.uuid.new("35588452-1e08-46e8-aaf1-e8abb0cf7692"),
+				shells = sm.uuid.new("a2a1b12e-8045-4ab0-9577-8b63c06a55c2"),
+				damage = 80,
+				colour = sm.color.new("#307326ff"),
+				name = "Sabot"
+			}
+		}
+	}
+}
+Shotgun.reload_anims =
+{
+	["ammo_check"   	 ] = true,
+	["reload_into"		 ] = true,
+	["reload_single_pump"] = true,
+	["reload_single"	 ] = true,
+	["reload_exit"		 ] = true,
+}
+Shotgun.maxRecoil = 30
+Shotgun.recoilAmount = 20
+Shotgun.aimRecoilAmount = 12
+Shotgun.recoilRecoverySpeed = 0.85
+Shotgun.aimFovTp = 40
+Shotgun.aimFovFp = 40
 
 local renderables =
 {
@@ -60,29 +127,9 @@ function Shotgun:client_initAimVals()
 end
 
 function Shotgun:server_onCreate()
-	self.sv_ammo_counter = 0
-
-	local v_saved_ammo = self.storage:load()
-	if v_saved_ammo ~= nil then
-		self.sv_ammo_counter = v_saved_ammo
-	else
-		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
-			self.sv_ammo_counter = self.mag_capacity
-		end
-
-		self:server_updateAmmoCounter()
-	end
+	self:sv_init()
 end
 
-function Shotgun:server_requestAmmo(data, caller)
-	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
-end
-
-function Shotgun:server_updateAmmoCounter(data, caller)
-	if data ~= nil or caller ~= nil then return end
-
-	self.storage:save(self.sv_ammo_counter)
-end
 
 function Shotgun:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
@@ -92,14 +139,46 @@ end
 function Shotgun:client_onCreate()
 	self.ammo_in_mag = 0
 
-	self.aimBlendSpeed = 10.0
-	self:client_initAimVals()
-
 	self.waiting_for_ammo = true
+
+	self.aimBlendSpeed = 3.0
+	self:client_initAimVals()
 
 	mgp_toolAnimator_initialize(self, "Shotgun")
 
-	self.network:sendToServer("server_requestAmmo")
+	self:cl_init()
+end
+
+function Shotgun:sv_reloadSingle()
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	local ammo = mgp_tool_GetSelectedMod(self, "ammo").shells
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, ammo)
+	if v_available_ammo == 0 then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_ammo_counter = self.sv_ammo_counter + 1
+	self:server_updateStorage()
+end
+
+function Shotgun:sv_reloadExit()
+	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
+
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateStorage()
+end
+
+function Shotgun:cl_reloadExit()
+	self.ammo_in_mag = self.mag_capacity
+	self.cl_hammer_cocked = true
+	self.waiting_for_ammo = nil
 end
 
 function Shotgun.client_onDestroy(self)
@@ -121,9 +200,10 @@ function Shotgun.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "Shotgun_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "Shotgun_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "Shotgun_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
+			reload_single = { "Shotgun_reload_single", { looping = true } },
+			reload_single_pump = { "Shotgun_reload_single_pump" },
+			reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
 		}
 	)
 	local movementAnimations = {
@@ -163,10 +243,13 @@ function Shotgun.loadAnimations( self )
 				idle = { "Shotgun_idle", { looping = true } },
 				shoot = { "Shotgun_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Shotgun_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "Shotgun_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
+				reload_single = { "Shotgun_reload_single", { looping = true } },
+				reload_single_pump = { "Shotgun_reload_single_pump" },
+				reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
 
-				ammo_check = { "Shotgun_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				reload_mod_single = { "Shotgun_mod_reload_single", { looping = true } },
+				reload_mod_single_pump = { "Shotgun_mod_reload_single_pump" },
 
 				aimInto = { "Shotgun_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "Shotgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
@@ -176,7 +259,11 @@ function Shotgun.loadAnimations( self )
 				sprintInto = { "Shotgun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Shotgun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
 				sprintIdle = { "Shotgun_sprint_idle", { looping = true } },
-				sprintShoot = { "Shotgun_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } }
+				sprintShoot = { "Shotgun_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+
+				modInto = { "Shotgun_modSelect_into", { nextAnimation = "modIdle" } },
+				modExit = { "Shotgun_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
+				modIdle = { "Shotgun_modSelect_idle", { looping = true } },
 			}
 		)
 	end
@@ -230,7 +317,8 @@ end
 local actual_reload_anims =
 {
 	["reload"] = true,
-	["reload_empty"] = true
+	["reload_empty"] = true,
+	["reload_type"] = true
 }
 
 local aim_animations =
@@ -240,24 +328,6 @@ local aim_animations =
 	["aimShoot"]        = true
 }
 
-function Shotgun:client_updateAimWeights(dt)
-	-- Camera update
-	local bobbing = 1
-	if self.aiming then
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 1.0, blend )
-		bobbing = 0.12
-	else
-		local blend = 1 - math.pow( 1 - 1 / self.aimBlendSpeed, dt * 60 )
-		self.aimWeight = sm.util.lerp( self.aimWeight, 0.0, blend )
-		bobbing = 1
-	end
-
-	self.tool:updateCamera( 2.8, 30.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
-end
-
-local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
 function Shotgun:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
@@ -267,20 +337,19 @@ function Shotgun:server_spendAmmo(data, player)
 	local v_inventory = v_owner:getInventory()
 	if v_inventory == nil then return end
 
-	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+	local mgp_shotgun_ammo = mgp_tool_GetSelectedMod(self, "ammo").shells
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_shotgun_ammo)
 	if v_available_ammo == 0 then return end
-
-	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
 
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
 	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
+	sm.container.spend(v_inventory, mgp_shotgun_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
-	self:server_updateAmmoCounter()
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+	self:server_updateStorage()
 end
 
 function Shotgun:sv_n_trySpendAmmo(data, player)
@@ -291,7 +360,7 @@ function Shotgun:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Shotgun.client_onUpdate( self, dt )
+function Shotgun:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -300,25 +369,11 @@ function Shotgun.client_onUpdate( self, dt )
 
 	if self.cl_isLocal then
 		if self.equipped then
-			local fp_anim = self.fpAnimations
-			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
-
-				if time_predict >= info_duration then
-					self.network:sendToServer("sv_n_trySpendAmmo")
-				end
-			end
-
-			if cur_anim_cache ~= "sprintShoot" then
-				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
-					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
-					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
-				end
+			local cur_anim_cache = self.fpAnimations.currentAnimation
+			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+			elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
 			local isAimAnim = aim_animations[cur_anim_cache] == true
@@ -329,6 +384,7 @@ function Shotgun.client_onUpdate( self, dt )
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -390,8 +446,7 @@ function Shotgun.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self:client_isGunReloading()
-	self.tool:setBlockSprint( blockSprint )
+	self.tool:setBlockSprint(self.sprintCooldownTimer > 0.0 or self:client_isGunReloading() or self.aiming)
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
@@ -408,13 +463,13 @@ function Shotgun.client_onUpdate( self, dt )
 
 			if animation.time >= animation.info.duration - self.blendTime then
 				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
+					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
+				elseif actual_reload_anims[name] == true then
+					setTpAnimation( self.tpAnimations, "idle", 2 )
 				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
+					setTpAnimation( self.tpAnimations, "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
@@ -441,7 +496,7 @@ function Shotgun.client_onUpdate( self, dt )
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -495,29 +550,37 @@ function Shotgun:client_onEquip(animate, is_custom)
 
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
-	for k,v in pairs( renderables ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-	
+	for k,v in pairs( renderables ) do
+		currentRenderablesTp[#currentRenderablesTp+1] = v
+		currentRenderablesFp[#currentRenderablesFp+1] = v
+	end
+
+	mgp_toolAnimator_onModdedToolEquip(self, currentRenderablesFp, currentRenderablesTp, {})
+
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
 	if self.cl_isLocal then
 		self.tool:setFpRenderables(currentRenderablesFp)
 	end
 
+	self:cl_updateColour()
+
 	--Load animations before setting them
 	self:loadAnimations()
-
-	local v_gun_color = sm.color.new("4d2714")
-	self.tool:setTpColor(v_gun_color)
-	self.tool:setFpColor(v_gun_color)
 
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
+end
 
-	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
+function Shotgun:cl_updateColour()
+	local colour = mgp_tool_GetSelectedMod(self, "ammo").colour
+	self.tool:setTpColor(colour)
+	if self.cl_isLocal then
+		self.tool:setFpColor(colour)
+	end
 end
 
 function Shotgun:client_onUnequip(animate, is_custom)
@@ -574,128 +637,33 @@ function Shotgun:onAim(aiming)
 	end
 end
 
-function Shotgun:sv_n_onShoot(is_last_shot)
-	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
-	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
+function Shotgun:sv_n_onShoot()
+	self.network:sendToClients("cl_n_onShoot")
+
+	if self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
-		self:server_updateAmmoCounter()
+		self:server_updateStorage()
 	end
 end
 
-function Shotgun:cl_n_onShoot(is_last_shot)
+function Shotgun:cl_n_onShoot()
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot(is_last_shot)
+		self:onShoot()
 	end
 end
 
-function Shotgun:onShoot(is_last_shot)
-	self.tpAnimations.animations.idle.time = 0
-	self.tpAnimations.animations.shoot.time = 0
-	self.tpAnimations.animations.aimShoot.time = 0
-
-	local anim = self.aiming and "aimShoot" or "shoot"
-	setTpAnimation( self.tpAnimations, anim, 10.0 )
-	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
+function Shotgun:onShoot()
+	local v_anim_name = self.aiming and "aimShoot" or "shoot"
+	mgp_toolAnimator_setAnimation(self, v_anim_name)
+	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
-function Shotgun:calculateFirePosition()
-	local crouching = self.tool:isCrouching()
-	local firstPerson = self.tool:isInFirstPersonView()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-
-	local fireOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if crouching then
-		fireOffset.z = 0.15
-	else
-		fireOffset.z = 0.45
-	end
-
-	if firstPerson then
-		if not self.aiming then
-			fireOffset = fireOffset + right * 0.05
-		end
-	else
-		fireOffset = fireOffset + right * 0.25
-		fireOffset = fireOffset:rotate( math.rad( pitch ), right )
-	end
-	local firePosition = GetOwnerPosition( self.tool ) + fireOffset
-	return firePosition
-end
-
-function Shotgun:calculateTpMuzzlePos()
-	local crouching = self.tool:isCrouching()
-	local dir = sm.localPlayer.getDirection()
-	local pitch = math.asin( dir.z )
-	local right = sm.localPlayer.getRight()
-	local up = right:cross(dir)
-
-	local fakeOffset = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	--General offset
-	fakeOffset = fakeOffset + right * 0.25
-	fakeOffset = fakeOffset + dir * 0.5
-	fakeOffset = fakeOffset + up * 0.25
-
-	--Action offset
-	local pitchFraction = pitch / ( math.pi * 0.5 )
-	if crouching then
-		fakeOffset = fakeOffset + dir * 0.2
-		fakeOffset = fakeOffset + up * 0.1 --[[@as Vec3]]
-		fakeOffset = fakeOffset - right * 0.05
-
-		if pitchFraction > 0.0 then
-			fakeOffset = fakeOffset - up * 0.2 * pitchFraction
-		else
-			fakeOffset = fakeOffset + up * 0.1 * math.abs( pitchFraction )
-		end
-	else
-		fakeOffset = fakeOffset + up * 0.1 *  math.abs( pitchFraction )
-	end
-
-	local fakePosition = fakeOffset + GetOwnerPosition( self.tool )
-	return fakePosition
-end
-
-function Shotgun:calculateFpMuzzlePos()
-	local fovScale = ( sm.camera.getFov() - 45 ) / 45
-
-	local up = sm.localPlayer.getUp()
-	local dir = sm.localPlayer.getDirection()
-	local right = sm.localPlayer.getRight()
-
-	local muzzlePos45 = sm.vec3.new( 0.0, 0.0, 0.0 )
-	local muzzlePos90 = sm.vec3.new( 0.0, 0.0, 0.0 )
-
-	if self.aiming then
-		muzzlePos45 = muzzlePos45 - up * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 0.5 --[[@as Vec3]]
-
-		muzzlePos90 = muzzlePos90 - up * 0.5
-		muzzlePos90 = muzzlePos90 - dir * 0.6 --[[@as Vec3]]
-	else
-		muzzlePos45 = muzzlePos45 - up * 0.15
-		muzzlePos45 = muzzlePos45 + right * 0.2
-		muzzlePos45 = muzzlePos45 + dir * 1.25
-
-		muzzlePos90 = muzzlePos90 - up * 0.15
-		muzzlePos90 = muzzlePos90 + right * 0.2
-		muzzlePos90 = muzzlePos90 + dir * 0.25
-	end
-
-	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
-end
-
-local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function Shotgun:cl_onPrimaryUse(is_shooting)
-	if not is_shooting or not self.equipped then return end
+function Shotgun:cl_onPrimaryUse()
 	if self:client_isGunReloading() then return end
 
 	local v_toolOwner = self.tool:getOwner()
-	if not (v_toolOwner and sm.exists(v_toolOwner)) then
+	if not v_toolOwner then
 		return
 	end
 
@@ -704,125 +672,63 @@ function Shotgun:cl_onPrimaryUse(is_shooting)
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 then
-		return
-	end
-
-	if self.ammo_in_mag > 0 then
-		self.ammo_in_mag = self.ammo_in_mag - 1
-		local firstPerson = self.tool:isInFirstPersonView()
-
-		local dir = mgp_tool_getToolDir(self)
-
-		local firePos = self:calculateFirePosition()
-		local fakePosition = self:calculateTpMuzzlePos()
-		local fakePositionSelf = fakePosition
-		if firstPerson then
-			fakePositionSelf = self:calculateFpMuzzlePos()
+	if self.fireCooldownTimer <= 0.0 then
+		if self.tool:isSprinting() then
+			return
 		end
 
-		-- Aim assist
-		if not firstPerson then
-			local raycastPos = sm.camera.getPosition() + dir * dir:dot( GetOwnerPosition( self.tool ) - sm.camera.getPosition() )
-			local hit, result = sm.localPlayer.getRaycast( 250, raycastPos, dir )
-			if hit then
-				local norDir = sm.vec3.normalize( result.pointWorld - firePos )
-				local dirDot = norDir:dot( dir )
+		if self.ammo_in_mag > 0 then
+			self.ammo_in_mag = self.ammo_in_mag - 1
 
-				if dirDot > 0.96592583 then -- max 15 degrees off
-					dir = norDir
-				else
-					local radsOff = math.asin( dirDot )
-					dir = sm.vec3.lerp( dir, norDir, math.tan( radsOff ) / 3.7320508 ) -- if more than 15, make it 15
-				end
+			local dir = mgp_tool_getToolDir(self)
+			local firePos = nil
+			if self.tool:isInFirstPersonView() then
+				firePos = self.tool:getFpBonePos("pejnt_barrel")
+			else
+				firePos = self.tool:getTpBonePos("pejnt_barrel")
 			end
+
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+			local typeData = mgp_tool_GetSelectedMod(self, "ammo")
+			sm.projectile.projectileAttack(typeData.projectile, typeData.damage, firePos, dir * fireMode.fireVelocity, v_toolOwner)
+
+			-- Timers
+			self.fireCooldownTimer = fireMode.fireCooldown
+			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+			self.sprintCooldownTimer = self.sprintCooldown
+
+			-- Send TP shoot over network and dircly to self
+			self:onShoot()
+			self.network:sendToServer("sv_n_onShoot")
+
+			-- Play FP shoot animation
+			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
+		else
+			local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+			self.fireCooldownTimer = fireMode.fireCooldown
+			sm.audio.play( "PotatoRifle - NoAmmo" )
 		end
-
-		dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-		-- Spread
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
-
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-		dir = sm.noise.gunSpread( dir, spreadDeg )
-
-		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
-
-		-- Timers
-		self.fireCooldownTimer = fireMode.fireCooldown
-		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
-		self.sprintCooldownTimer = self.sprintCooldown
-
-		local is_last_shot = self.ammo_in_mag == 0
-
-		-- Send TP shoot over network and dircly to self
-		self:onShoot(is_last_shot)
-		self.network:sendToServer("sv_n_onShoot", is_last_shot)
-
-		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, self.tool:isSprinting() and "sprintShoot" or (self.aiming and "aimShoot" or "shoot"), 0.0 )
-	else
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		self.fireCooldownTimer = fireMode.fireCooldown
-		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
 
-local reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true,
-	["ammo_check"] = true
-}
-
-local anim_name_to_id =
-{
-	["reload"] = 1,
-	["reload_empty"] = 2
-}
-
-local id_to_anim_name =
-{
-	[1] = "reload",
-	[2] = "reload_empty"
-}
-
-function Shotgun:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Shotgun:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
-function Shotgun:cl_n_onReload(anim_id)
+function Shotgun:cl_n_onReload()
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim(id_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function Shotgun:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function Shotgun:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload_into")
 end
 
-function Shotgun:client_isGunReloading()
-	if self.waiting_for_ammo then
-		return true
-	end
-
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
-function Shotgun:cl_initReloadAnim(anim_name)
+function Shotgun:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
-		if v_available_ammo == 0 then
+		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells) < self.mag_capacity then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
@@ -830,61 +736,17 @@ function Shotgun:cl_initReloadAnim(anim_name)
 
 	self.waiting_for_ammo = true
 
-	--Start fp and tp animations locally
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
+	self.network:sendToServer("sv_n_onReload")
 end
 
 function Shotgun:client_onReload()
-	if self.equipped then
-		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
-		if not is_mag_full then
-			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-				local cur_anim_name = "reload"
-				if self.ammo_in_mag == 0 then
-					cur_anim_name = "reload_empty"
-				end
-
-				self:cl_initReloadAnim(cur_anim_name)
-			end
-		end
-	end
-
-	return true
-end
-
-function Shotgun:sv_n_checkMag()
-	self.network:sendToClients("cl_n_checkMag")
-end
-
-function Shotgun:cl_n_checkMag()
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		self:cl_startCheckMagAnim()
-	end
-end
-
-function Shotgun:cl_startCheckMagAnim()
-	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-end
-
-function Shotgun:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
-		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("Shotgun: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
-			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
-
-			self:cl_startCheckMagAnim()
-			self.network:sendToServer("sv_n_checkMag")
-
-			mgp_toolAnimator_setAnimation(self, "ammo_check")
-		else
-			sm.gui.displayAlertText("Shotgun: No Ammo. Reloading...", 3)
-
-			self:cl_initReloadAnim("reload_empty")
+	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			self:cl_initReloadAnim()
 		end
 	end
 
@@ -907,8 +769,10 @@ function Shotgun.cl_onSecondaryUse( self, state )
 	end
 end
 
-function Shotgun.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start)
+function Shotgun:client_onEquippedUpdate(primaryState, secondaryState, f)
+	if primaryState == sm.tool.interactState.start then
+		self:cl_onPrimaryUse()
+	end
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )
@@ -916,4 +780,13 @@ function Shotgun.client_onEquippedUpdate( self, primaryState, secondaryState )
 	end
 
 	return true, true
+end
+
+function Shotgun:cl_canMod()
+    local empty = self.ammo_in_mag == 0
+	if not empty then
+		sm.gui.displayAlertText("Empty your magazine to switch mods!")
+	end
+
+	return empty
 end
