@@ -1,0 +1,39 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "Shotgun_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_idle.dae" },
+				{ "name": "Shotgun_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_shoot.dae" },
+
+				{ "name": "Shotgun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_pickup.dae" },
+				{ "name": "Shotgun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_putdown.dae" },
+
+				{ "name": "Shotgun_sprint_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_into.dae" },
+				{ "name": "Shotgun_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_exit.dae" },
+				{ "name": "Shotgun_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_idle.dae" },
+				{ "name": "Shotgun_sprint_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_shoot.dae" },
+
+				{ "name": "Shotgun_aim_into",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_into.dae" },
+				{ "name": "Shotgun_aim_exit",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_exit.dae" },
+				{ "name": "Shotgun_aim_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_shoot.dae" },
+				{ "name": "Shotgun_aim_idle",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_idle.dae" },
+
+				{ "name": "Shotgun_reload_into",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_into.dae" },
+				{ "name": "Shotgun_reload_single",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_single.dae" },
+				{ "name": "Shotgun_reload_single_pump",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_pump.dae" },
+				{ "name": "Shotgun_reload_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_exit.dae"},
+
+				{ "name": "Shotgun_mod_reload_single",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_single.dae" },
+				{ "name": "Shotgun_mod_reload_single_pump",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_reload_pump.dae" },
+
+				{ "name": "Shotgun_modSelect_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_into.dae" },
+				{ "name": "Shotgun_modSelect_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_exit.dae" },
+				{ "name": "Shotgun_modSelect_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_idle.dae" }
+				
+			]
+		}
+	]
+} 

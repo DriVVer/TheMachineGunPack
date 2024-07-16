@@ -7,7 +7,7 @@ dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 dofile("BaseGun.lua")
 
----@class DoubleBarrel : BaseGun
+---@class Shotgun : BaseGun
 ---@field aiming boolean
 ---@field mag_capacity integer
 ---@field aimFireMode table
@@ -18,31 +18,32 @@ dofile("BaseGun.lua")
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
-DB = class(BaseGun)
-DB.mag_capacity = 2
-DB.defaultSelectedMods = {
+Shotgun = class(BaseGun)
+Shotgun.mag_capacity = 6
+Shotgun.defaultSelectedMods = {
 	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
 }
-DB.modificationData = {
+Shotgun.modificationData = {
 	layout = "$CONTENT_DATA/Gui/Layouts/DB_mods.layout",
 	mods = {
 		ammo = {
 			CanBeUnEquipped = false,
 			["a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"] = {
-				minSpendAmount = 2,
+				minSpendAmount = 1,
 				getReturnAmount = function(self, toolSelf)
 					return toolSelf.sv_ammo_counter
 				end,
 				Sv_OnEquip = function(self, toolSelf)
-					toolSelf.sv_ammo_counter = toolSelf.mag_capacity --math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
+					toolSelf.sv_ammo_counter = math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
 					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
 				end,
 				Cl_OnEquip = function(self, toolSelf)
-					setTpAnimation(toolSelf.tpAnimations, "reload_type", 10)
-					mgp_toolAnimator_setAnimation(toolSelf, "reload_type")
+					toolSelf:cl_updateColour()
+					setTpAnimation(toolSelf.tpAnimations, "reload_into", 10)
+					mgp_toolAnimator_setAnimation(toolSelf, "reload_mod_into")
 
 					if toolSelf.cl_isLocal then
-						setFpAnimation(toolSelf.fpAnimations, "reload_type", 0.001)
+						setFpAnimation(toolSelf.fpAnimations, "reload_into", 0.001)
 					end
 
 					return true
@@ -54,20 +55,21 @@ DB.modificationData = {
 				name = "Birdshot"
 			},
 			["a2a1b12e-8045-4ab0-9577-8b63c06a55c2"] = {
-				minSpendAmount = 2,
+				minSpendAmount = 1,
 				getReturnAmount = function(self, toolSelf)
 					return toolSelf.sv_ammo_counter
 				end,
 				Sv_OnEquip = function(self, toolSelf)
-					toolSelf.sv_ammo_counter = toolSelf.mag_capacity
+					toolSelf.sv_ammo_counter = math.min(sm.container.totalQuantity(toolSelf.tool:getOwner():getInventory(), self.shells), toolSelf.mag_capacity)
 					toolSelf.network:setClientData({ ammo = toolSelf.sv_ammo_counter, mods = toolSelf.sv_selectedMods })
 				end,
 				Cl_OnEquip = function(self, toolSelf)
-					setTpAnimation(toolSelf.tpAnimations, "reload_type", 10)
-					mgp_toolAnimator_setAnimation(toolSelf, "reload_type")
+					toolSelf:cl_updateColour()
+					setTpAnimation(toolSelf.tpAnimations, "reload_into", 10)
+					mgp_toolAnimator_setAnimation(toolSelf, "reload_mod_into")
 
 					if toolSelf.cl_isLocal then
-						setFpAnimation(toolSelf.fpAnimations, "reload_type", 0.001)
+						setFpAnimation(toolSelf.fpAnimations, "reload_into", 0.001)
 					end
 
 					return true
@@ -81,36 +83,37 @@ DB.modificationData = {
 		}
 	}
 }
-DB.reload_anims =
+Shotgun.reload_anims =
 {
-	["ammo_check"   ] = true,
-	["reload"		] = true,
-	["reload_empty"	] = true,
-	["reload_type"	] = true
+	["ammo_check"   	 ] = true,
+	["reload_into"		 ] = true,
+	["reload_single_pump"] = true,
+	["reload_single"	 ] = true,
+	["reload_exit"		 ] = true,
 }
-DB.maxRecoil = 30
-DB.recoilAmount = 20
-DB.aimRecoilAmount = 12
-DB.recoilRecoverySpeed = 0.85
-DB.aimFovTp = 40
-DB.aimFovFp = 40
+Shotgun.maxRecoil = 30
+Shotgun.recoilAmount = 20
+Shotgun.aimRecoilAmount = 12
+Shotgun.recoilRecoverySpeed = 0.85
+Shotgun.aimFovTp = 40
+Shotgun.aimFovFp = 40
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_tp_DB_anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/char_Shotgun_anims_tp.rend",
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_offset_tp.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/DB/char_fp_DB_anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/DB/DB_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/char_Shotgun_anims_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_offset_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
@@ -118,22 +121,22 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function DB:client_initAimVals()
+function Shotgun:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function DB:server_onCreate()
+function Shotgun:server_onCreate()
 	self:sv_init()
 end
 
 
-function DB:client_receiveAmmo(ammo_count)
+function Shotgun:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function DB:client_onCreate()
+function Shotgun:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.waiting_for_ammo = true
@@ -141,35 +144,66 @@ function DB:client_onCreate()
 	self.aimBlendSpeed = 3.0
 	self:client_initAimVals()
 
-	mgp_toolAnimator_initialize(self, "DB")
+	mgp_toolAnimator_initialize(self, "Shotgun")
 
 	self:cl_init()
 end
 
-function DB.client_onDestroy(self)
+function Shotgun:sv_reloadSingle()
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	local ammo = mgp_tool_GetSelectedMod(self, "ammo").shells
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, ammo)
+	if v_available_ammo == 0 then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_ammo_counter = self.sv_ammo_counter + 1
+	self:server_updateStorage()
+end
+
+function Shotgun:sv_reloadExit()
+	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
+
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateStorage()
+end
+
+function Shotgun:cl_reloadExit()
+	self.ammo_in_mag = self.mag_capacity
+	self.cl_hammer_cocked = true
+	self.waiting_for_ammo = nil
+end
+
+function Shotgun.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function DB.client_onRefresh( self )
+function Shotgun.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function DB.loadAnimations( self )
+function Shotgun.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			shoot = { "spudgun_shoot", { nextAnimation = "idle" } },
+			shoot = { "spudgun_shoot", { crouch = "spudgun_crouch_shoot" } },
 			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
 			aimShoot = { "spudgun_aim_shoot", { crouch = "spudgun_crouch_aim_shoot" } },
-
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "DB_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload_type = { "DB_tp_type", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "DB_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "DB_tp_ammo_check", { nextAnimation = "idle", duration = 1.0 } }
+			reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
+			reload_single = { "Shotgun_reload_single", { looping = true } },
+			reload_single_pump = { "Shotgun_reload_single_pump" },
+			reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
 		}
 	)
 	local movementAnimations = {
@@ -203,40 +237,44 @@ function DB.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "DB_pickup", { nextAnimation = "idle" } },
-				unequip = { "DB_putdown" },
+				equip = { "Shotgun_pickup", { nextAnimation = "idle" } },
+				unequip = { "Shotgun_putdown" },
 
-				idle = { "DB_idle_1", { nextAnimation = "idle" } },
+				idle = { "Shotgun_idle", { looping = true } },
+				shoot = { "Shotgun_shoot", { nextAnimation = "idle" } },
 
-				shoot = { "DB_shoot_1", { nextAnimation = "idle" } },
-				reload = { "DB_reload_1", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "DB_reload_0", { nextAnimation = "idle", duration = 1.0 } },
-				reload_type = { "DB_reload_type", { nextAnimation = "idle", duration = 1.0 } },
-				ammo_check = { "DB_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
+				reload_single = { "Shotgun_reload_single", { looping = true } },
+				reload_single_pump = { "Shotgun_reload_single_pump" },
+				reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
 
-				aimInto = { "DB_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "DB_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "DB_aim_idle", { looping = true } },
-				aimShoot = { "DB_aim_shoot", { nextAnimation = "aimIdle"} },
+				reload_mod_single = { "Shotgun_mod_reload_single", { looping = true } },
+				reload_mod_single_pump = { "Shotgun_mod_reload_single_pump" },
 
-				sprintInto = { "DB_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "DB_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "DB_sprint_idle", { looping = true } },
+				aimInto = { "Shotgun_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "Shotgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "Shotgun_aim_idle", { looping = true } },
+				aimShoot = { "Shotgun_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				modInto = { "DB_modSelect_into", { nextAnimation = "modIdle" } },
-				modExit = { "DB_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
-				modIdle = { "DB_modSelect_idle", { looping = true } },
+				sprintInto = { "Shotgun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Shotgun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Shotgun_sprint_idle", { looping = true } },
+				sprintShoot = { "Shotgun_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+
+				modInto = { "Shotgun_modSelect_into", { nextAnimation = "modIdle" } },
+				modExit = { "Shotgun_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
+				modIdle = { "Shotgun_modSelect_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.25,
-		spreadCooldown = 0.2,
-		spreadIncrement = 3,
-		spreadMinAngle = 1,
-		spreadMaxAngle = 2,
-		fireVelocity = 150.0,
+		fireCooldown = 1.0,
+		spreadCooldown = 0.18,
+		spreadIncrement = 2.6,
+		spreadMinAngle = 4.25,
+		spreadMaxAngle = 16,
+		fireVelocity = 350.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -246,12 +284,12 @@ function DB.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.25,
-		spreadCooldown = 0.3,
-		spreadIncrement = 3,
+		fireCooldown = 0.15,
+		spreadCooldown = 0.18,
+		spreadIncrement = 1.5,
 		spreadMinAngle = 1,
-		spreadMaxAngle = 2,
-		fireVelocity = 150.0,
+		spreadMaxAngle = 3,
+		fireVelocity =  350.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -260,7 +298,7 @@ function DB.loadAnimations( self )
 		jumpDispersionMultiplier = 2
 	}
 
-	self.fireCooldownTimer = 1.0
+	self.fireCooldownTimer = 0.8
 	self.spreadCooldownTimer = 0.0
 
 	self.movementDispersion = 0.0
@@ -290,7 +328,7 @@ local aim_animations =
 	["aimShoot"]        = true
 }
 
-function DB:server_spendAmmo(data, player)
+function Shotgun:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -314,7 +352,7 @@ function DB:server_spendAmmo(data, player)
 	self:server_updateStorage()
 end
 
-function DB:sv_n_trySpendAmmo(data, player)
+function Shotgun:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -322,7 +360,7 @@ function DB:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function DB:client_onUpdate(dt)
+function Shotgun:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -492,7 +530,7 @@ function DB:client_onUpdate(dt)
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function DB:client_onEquip(animate, is_custom)
+function Shotgun:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -537,7 +575,7 @@ function DB:client_onEquip(animate, is_custom)
 	end
 end
 
-function DB:cl_updateColour()
+function Shotgun:cl_updateColour()
 	local colour = mgp_tool_GetSelectedMod(self, "ammo").colour
 	self.tool:setTpColor(colour)
 	if self.cl_isLocal then
@@ -545,7 +583,7 @@ function DB:cl_updateColour()
 	end
 end
 
-function DB:client_onUnequip(animate, is_custom)
+function Shotgun:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -582,17 +620,17 @@ function DB:client_onUnequip(animate, is_custom)
 	end
 end
 
-function DB:sv_n_onAim(aiming)
+function Shotgun:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function DB:cl_n_onAim(aiming)
+function Shotgun:cl_n_onAim(aiming)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function DB:onAim(aiming)
+function Shotgun:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
@@ -600,7 +638,7 @@ function DB:onAim(aiming)
 end
 
 
-function DB:sv_n_onShoot()
+function Shotgun:sv_n_onShoot()
 	self.network:sendToClients("cl_n_onShoot")
 
 	if self.sv_ammo_counter > 0 then
@@ -609,19 +647,19 @@ function DB:sv_n_onShoot()
 	end
 end
 
-function DB:cl_n_onShoot()
+function Shotgun:cl_n_onShoot()
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot()
 	end
 end
 
-function DB:onShoot()
+function Shotgun:onShoot()
 	local v_anim_name = self.aiming and "aimShoot" or "shoot"
 	mgp_toolAnimator_setAnimation(self, v_anim_name)
 	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
-function DB:cl_onPrimaryUse()
+function Shotgun:cl_onPrimaryUse()
 	if self:client_isGunReloading() then return end
 
 	local v_toolOwner = self.tool:getOwner()
@@ -673,28 +711,22 @@ function DB:cl_onPrimaryUse()
 	end
 end
 
-local ammo_count_to_anim_name =
-{
-	[0] = "reload_empty",
-	[1] = "reload"
-}
-
-function DB:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Shotgun:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
-function DB:cl_n_onReload(anim_id)
+function Shotgun:cl_n_onReload()
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim(ammo_count_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function DB:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function Shotgun:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload_into")
 end
 
-function DB:cl_initReloadAnim(anim_id)
+function Shotgun:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
 		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells) < self.mag_capacity then
 			sm.gui.displayAlertText("No Ammo", 3)
@@ -704,19 +736,17 @@ function DB:cl_initReloadAnim(anim_id)
 
 	self.waiting_for_ammo = true
 
-	local anim_name = ammo_count_to_anim_name[anim_id]
-
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_id)
+	self.network:sendToServer("sv_n_onReload")
 end
 
-function DB:client_onReload()
+function Shotgun:client_onReload()
 	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
 		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			self:cl_initReloadAnim(self.ammo_in_mag)
+			self:cl_initReloadAnim()
 		end
 	end
 
@@ -724,7 +754,7 @@ function DB:client_onReload()
 end
 
 local _intstate = sm.tool.interactState
-function DB.cl_onSecondaryUse( self, state )
+function Shotgun.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -739,7 +769,7 @@ function DB.cl_onSecondaryUse( self, state )
 	end
 end
 
-function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
+function Shotgun:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if primaryState == sm.tool.interactState.start then
 		self:cl_onPrimaryUse()
 	end
@@ -750,4 +780,13 @@ function DB:client_onEquippedUpdate(primaryState, secondaryState, f)
 	end
 
 	return true, true
+end
+
+function Shotgun:cl_canMod()
+    local empty = self.ammo_in_mag == 0
+	if not empty then
+		sm.gui.displayAlertText("Empty your magazine to switch mods!")
+	end
+
+	return empty
 end

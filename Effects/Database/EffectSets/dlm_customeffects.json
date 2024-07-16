@@ -788,6 +788,39 @@
 			}
 		]
 	},
+	"DLM_Shotgun_Pump":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_Pump",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_PumpIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_PumpIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Shotgun_PumpOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Shotgun_TMGP_PumpOut",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Shotgun_AmmoIn":
 	{
 		"effectList":

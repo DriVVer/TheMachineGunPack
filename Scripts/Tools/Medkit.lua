@@ -126,15 +126,15 @@ function Medkit:client_onUpdate(dt)
 
 	if self.cl_isLocal then
 		if self.equipped then
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation(self.fpAnimations, "sprintExit", "sprintInto", 0.0)
-			elseif not isSprinting and (self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto") then
-				swapFpAnimation(self.fpAnimations, "sprintInto", "sprintExit", 0.0)
-			end
-
 			if self.cl_using then
 				self.cl_useProgress = math.min(self.cl_useProgress + dt, self.healTime)
 				self.progressbar:update(self.cl_useProgress/self.healTime)
+			else
+				if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+					swapFpAnimation(self.fpAnimations, "sprintExit", "sprintInto", 0.0)
+				elseif not isSprinting and (self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto") then
+					swapFpAnimation(self.fpAnimations, "sprintInto", "sprintExit", 0.0)
+				end
 			end
 		end
 		updateFpAnimations(self.fpAnimations, self.equipped, dt)
@@ -280,7 +280,7 @@ function Medkit:loadAnimations()
 		runFwd = "Medkit_run_fwd",
 		runBwd = "Medkit_run_bwd",
 
-		sprint = "Medkit_sprint_fwd",
+		sprint = "Medkit_sprint",
 
 		jump = "Medkit_jump",
 		jumpUp = "Medkit_jump_up",

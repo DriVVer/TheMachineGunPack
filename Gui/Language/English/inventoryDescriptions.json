@@ -38,39 +38,39 @@
 	},
 	"e4ed32d5-d891-40e3-b82e-db975884dbb3": {
 		"title": "Colt M1911 Pistol",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"1e5f445b-934a-4366-b5c2-0bc11fd3580f": {
 		"title": "P38 Walther Pistol",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Walter' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Walter' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"8f97ff41-6498-46f7-84aa-fd0c11918512": {
 		"title": "PTRD AT rifle (model 1941)",
-		"description": "The Machine Gun Pack\n\nAPPROACH A WALL (4 blocks high) to DEPLOY A BIPOD\nBipod makes the rifle much more accurate\n\nWeapon based on well known 'PTRD' made of scrap.\n\nSingle Shot\nPress R to reload"
+		"description": "The Machine Gun Pack\n\nAPPROACH A WALL (4 blocks high) to DEPLOY A BIPOD\nBipod makes the rifle much more accurate\n\nWeapon based on 'PTRD' made of scrap.\n\nSingle Shot\nPress R to reload"
 	},
 	"872b6328-37d4-4922-847d-0aef8803ac94": {
 		"title": "Bazooka M20",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
 	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"d64d4f6c-1a21-47f5-adf9-63397aa6a3a0": {
 		"title": "Maschinenpistole 40",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'MP40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'MP40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"d8ba1dfe-172c-41ea-83e1-2c977e21d9e9": {
 		"title": "PPSh 41 SMG (Box mag)",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'PPSh' made of scrap.\n\n35-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'PPSh' made of scrap.\n\n35-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"1e1960d3-1a4e-4127-8937-d4171cd5d324": {
 		"title": "PPSh 41 SMG (Drum mag)",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
 		"title": "Revolver",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"4664a470-275f-4799-a54f-6a4a2111f436": {
 		"title": "First Aid Medkit",
@@ -78,27 +78,35 @@
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
 		"title": "Mosin-Nagant M44 rifle (Sniper class)",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"dab13420-11c4-40ec-b871-7374f71f8797": {
 		"title": "Mosin-Nagant M44 rifle (Troop class)",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\n"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\n"
 	},
 	"0ca4320e-5ddb-4dc1-843d-6037d65b2e4a": {
 		"title": "M1 Garand rifle",
-		"description": "The Machine Gun Pack\n\nWeapon based on well known 'M1 Garand rifle' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nLOOK OT FOR YOUR FINGERS!!!"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'M1 Garand rifle' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nLOOK OT FOR YOUR FINGERS!!!"
 	},
 	"c3e4dc43-a841-4c0f-82a6-7225d1bf210e": {
+		"title": "Stielhandgranate 24 Anti-Tank Bundle",
+		"description": "The Machine Gun Pack\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade"
+	},
+	"dca95fd7-9423-4898-b2a9-ce046a8d7f57": {
 		"title": "Stielhandgranate 24",
-		"description": "The Machine Gun Pack\n\nGrenade based on well known German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer\nPress LMB once again to throw the granade"
+		"description": "The Machine Gun Pack\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade"
 	},
 	"0c27e043-0cff-492b-9bcf-091520a99764": {
 		"title": "RG-42 Grenade",
-		"description": "The Machine Gun Pack\n\nGrenade based on well known Soviet 'RG-42' made of scrap.\n\nHold LMB to activate timer\nRelease LMB to throw the granade"
+		"description": "The Machine Gun Pack\n\nGrenade based on Soviet 'RG-42' made of scrap.\n\nHold LMB to activate timer\nRelease LMB to throw the granade"
 	},
 	"b0c08b35-4b40-40fe-b933-ca123f99eef8": {
 		"title": "Double Barrel Shotgun",
 		"description": "The Machine Gun Pack\n\n'Double Barrel Shotgun' made of scrap.\n\n\n2-round magazine\nPress F to switch between ammo types\nPress R to reload\nPress Q to check how much ammo left"
+	},
+	"daa59c62-2671-4071-b8dc-47654f620cd2": {
+		"title": "Pump Shotgun",
+		"description": "The Machine Gun Pack\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress F to switch between ammo types\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"bdd9e357-35f7-4140-8b19-477abef20e0f": {
 		"title": "Browning .50 HMG",

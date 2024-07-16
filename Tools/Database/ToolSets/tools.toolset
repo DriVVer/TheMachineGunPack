@@ -145,6 +145,17 @@
 			}
 		},
 		{
+			"name": "HandheldGrenadeSingle",
+			"uuid": "dca95fd7-9423-4898-b2a9-ce046a8d7f57",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Grenade/SingleGrenade_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Grenades/HandheldGrenadeSingle.lua",
+				"class": "HandheldGrenadeSingle",
+				"data": {}
+			}
+		},
+		{
 			"name": "FragGrenade",
 			"uuid": "0c27e043-0cff-492b-9bcf-091520a99764",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Frag/Frag_Prewiev.rend",
@@ -177,6 +188,18 @@
 				"data": {}
 			}
 		},
+		{
+			"name": "Shotgun",
+			"uuid": "daa59c62-2671-4071-b8dc-47654f620cd2",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Shotgun.lua",
+				"class": "Shotgun",
+				"data": {}
+			}
+		},
+		
 		{
 			"name": "Medkit",
 			"uuid": "09404c9e-aafb-40c0-8cfa-f7a4166f8b42",

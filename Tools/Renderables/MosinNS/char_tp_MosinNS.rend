@@ -15,7 +15,7 @@
 				{ "name": "spudgun_aim",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_idle.dae", "looping": true },
 				{ "name": "spudgun_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_aim_shoot.dae" },
 
-				{ "name": "Mosin_tp_ammo_check",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/Mosin_tp_ammo_check.dae" },
+				{ "name": "Mosin_tp_ammo_check",      "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_idle.dae" },
 				{ "name": "Mosin_tp_bolt_action",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_bolt.dae" },
 				{ "name": "Mosin_tp_aim_bolt_action", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/MosinNS/MosinNS_tp_aim_bolt.dae" },
 
