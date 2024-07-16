@@ -1,0 +1,16 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Projectiles/Mesh/PFRocket.obj",
+			"subMeshList": [
+				{
+					"material": "DifAsg",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_dif.png",
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png"
+					]
+				}
+			]
+		}
+	]
+}

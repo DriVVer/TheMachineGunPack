@@ -1,0 +1,25 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Panzerfaust/Panzerfaust_Preview.fbx",
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_dif.png",
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png",
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/rifle_wood_dif.png",
+						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
+						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}

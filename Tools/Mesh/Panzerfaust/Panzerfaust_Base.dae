@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2024-07-16T14:44:37Z</created><keywords></keywords><modified>2024-07-16T14:44:37Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_materials>
+    <material id="Material.002" name="Material.002">
+      <instance_effect url="#Material.002-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Material.002-fx" name="Material.002">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.800000  0.800000 0.800000 1.000000</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.200000  0.200000 0.200000 1.000000</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">25.000000</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.800000  0.800000 0.800000 1.000000</color>
+            </reflective>
+            <reflectivity>
+              <float sid="reflectivity">0.000000</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">0.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="base-lib" name="baseMesh">
+      <mesh>
+        <source id="base-POSITION">
+          <float_array id="base-POSITION-array" count="48">
+0.000000 3.906585 -26.039406
+0.000000 3.906583 5.715709
+0.792408 3.578359 -26.039406
+0.792408 3.578356 5.715709
+1.120635 2.785950 -26.039406
+1.120635 2.785948 5.715709
+0.792408 1.993541 -26.039404
+0.792408 1.993539 5.715710
+0.000000 1.665315 -26.039404
+0.000000 1.665313 5.715710
+-0.792408 1.993541 -26.039404
+-0.792408 1.993539 5.715710
+-1.120635 2.785950 -26.039406
+-1.120635 2.785948 5.715709
+-0.792408 3.578359 -26.039406
+-0.792408 3.578356 5.715709
+</float_array>
+          <technique_common>
+            <accessor source="#base-POSITION-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="base-Normal0">
+          <float_array id="base-Normal0-array" count="30">
+0.382683 -0.923880 -0.000000
+-0.382683 -0.923880 -0.000000
+-0.000001 -0.000001 -1.000000
+0.000000 0.000001 1.000000
+0.382683 0.923880 0.000000
+-0.382683 0.923880 0.000000
+0.923880 0.382683 0.000000
+0.923880 -0.382683 -0.000000
+-0.923880 -0.382683 -0.000000
+-0.923880 0.382683 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#base-Normal0-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="base-UV0">
+          <float_array id="base-UV0-array" count="68">
+0.250000 0.010000
+0.750000 0.010000
+0.080294 0.080294
+0.419706 0.080294
+0.580294 0.080294
+0.919706 0.080294
+0.010000 0.250000
+0.490000 0.250000
+0.510000 0.250000
+0.990000 0.250000
+0.080294 0.419706
+0.419706 0.419706
+0.580294 0.419706
+0.919706 0.419706
+0.250000 0.490000
+0.750000 0.490000
+0.000000 0.500000
+0.125000 0.500000
+0.250000 0.500000
+0.375000 0.500000
+0.500000 0.500000
+0.625000 0.500000
+0.750000 0.500000
+0.875000 0.500000
+1.000000 0.500000
+0.000000 1.000000
+0.125000 1.000000
+0.250000 1.000000
+0.375000 1.000000
+0.500000 1.000000
+0.625000 1.000000
+0.750000 1.000000
+0.875000 1.000000
+1.000000 1.000000
+</float_array>
+          <technique_common>
+            <accessor source="#base-UV0-array" count="34" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="base-VERTEX">
+          <input semantic="POSITION" source="#base-POSITION"/>
+        </vertices>
+        <triangles count="28" material="Material.002"><input semantic="VERTEX" offset="0" source="#base-VERTEX"/><input semantic="NORMAL" offset="1" source="#base-Normal0"/><input semantic="TEXCOORD" offset="2" set="0" source="#base-UV0"/><p> 3 4 32 0 4 24 1 4 33 0 4 24 3 4 32 2 4 23 3 6 32 4 6 22 2 6 23 4 6 22 3 6 32 5 6 31 5 7 31 6 7 21 4 7 22 6 7 21 5 7 31 7 7 30 7 0 30 8 0 20 6 0 21 8 0 20 7 0 30 9 0 29 9 1 29 10 1 19 8 1 20 10 1 19 9 1 29 11 1 28 13 8 27 10 8 19 11 8 28 10 8 19 13 8 27 12 8 18 15 3 10 11 3 2 9 3 0 1 3 14 7 3 3 3 3 11 15 3 10 9 3 0 1 3 14 11 3 2 15 3 10 13 3 6 7 3 3 1 3 14 9 3 0 3 3 11 7 3 3 5 3 7 15 9 26 12 9 18 13 9 27 12 9 18 15 9 26 14 9 17 1 5 25 14 5 17 15 5 26 14 5 17 1 5 25 0 5 16 4 2 9 12 2 8 0 2 15 4 2 9 0 2 15 2 2 13 12 2 8 4 2 9 8 2 1 8 2 1 4 2 9 6 2 5 12 2 8 8 2 1 10 2 4 0 2 15 12 2 8 14 2 12</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+    <controller id="baseController">
+      <skin source="#base-lib">
+        <bind_shape_matrix>0.100000 0.000000 0.000000 0.000000 -0.000000 0.100000 0.000000 0.000000 -0.000000 -0.000000 0.100000 0.000000 0.000000 0.000000 0.000000 1.000000
+</bind_shape_matrix>
+        <source id="baseController-Joints">
+          <Name_array id="baseController-Joints-array" count="3">
+ jnt_bazooka pejnt_barrel jnt_anim</Name_array>
+          <technique_common>
+            <accessor source="#baseController-Joints-array" count="3">
+              <param type="name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="baseController-Matrices">
+          <float_array id="baseController-Matrices-array" count="48">
+
+1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 -0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 0.000000 -0.000025 0.000000 0.000000 1.000000 -0.568950 -0.000000 -1.000000 0.000000 0.281315 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 0.000001 -0.000000 0.000000 1.000000 0.000000 -0.000000 -0.000001 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
+          <technique_common>
+            <accessor source="#baseController-Matrices-array" count="3" stride="16">
+              <param type="float4x4"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="baseController-Weights">
+          <float_array id="baseController-Weights-array" count="17">
+
+1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000
+1.000000</float_array>
+          <technique_common>
+            <accessor source="#baseController-Weights-array" count="17">
+              <param type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <joints>
+          <input semantic="JOINT" source="#baseController-Joints"/>
+          <input semantic="INV_BIND_MATRIX" source="#baseController-Matrices"/>
+        </joints>
+        <vertex_weights count="16">
+          <input semantic="JOINT" offset="0" source="#baseController-Joints"/>
+          <input semantic="WEIGHT" offset="1" source="#baseController-Weights"/>
+          <vcount>1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</vcount>
+          <v>2 1 2 2 2 3 2 4 2 5 2 6 2 7 2 8 2 9 2 10 2 11 2 12 2 13 2 14 2 15 2 16</v>
+        </vertex_weights>
+      </skin>
+    </controller>
+  </library_controllers>
+  <library_animations>
+    <animation id="PFBase-anim" name="PFBase"><animation><source id="PFBase-Matrix-animation-input"><float_array id="PFBase-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#PFBase-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="PFBase-Matrix-animation-output-transform"><float_array id="PFBase-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#PFBase-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="PFBase-Interpolations"><Name_array id="PFBase-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#PFBase-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="PFBase-Matrix-animation-transform"><input semantic="INPUT" source="#PFBase-Matrix-animation-input"/><input semantic="OUTPUT" source="#PFBase-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#PFBase-Interpolations"/></sampler><channel source="#PFBase-Matrix-animation-transform" target="PFBase/matrix"/></animation></animation>
+    <animation id="jnt_bazooka-anim" name="jnt_bazooka"><animation><source id="jnt_bazooka-Matrix-animation-input"><float_array id="jnt_bazooka-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#jnt_bazooka-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_bazooka-Matrix-animation-output-transform"><float_array id="jnt_bazooka-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 -1.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_bazooka-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_bazooka-Interpolations"><Name_array id="jnt_bazooka-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_bazooka-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="jnt_bazooka-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_bazooka-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_bazooka-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_bazooka-Interpolations"/></sampler><channel source="#jnt_bazooka-Matrix-animation-transform" target="jnt_bazooka/matrix"/></animation></animation>
+    <animation id="pejnt_barrel-anim" name="pejnt_barrel"><animation><source id="pejnt_barrel-Matrix-animation-input"><float_array id="pejnt_barrel-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#pejnt_barrel-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="pejnt_barrel-Matrix-animation-output-transform"><float_array id="pejnt_barrel-Matrix-animation-output-transform-array" count="160">
+
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000
+1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#pejnt_barrel-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="pejnt_barrel-Interpolations"><Name_array id="pejnt_barrel-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#pejnt_barrel-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="pejnt_barrel-Matrix-animation-transform"><input semantic="INPUT" source="#pejnt_barrel-Matrix-animation-input"/><input semantic="OUTPUT" source="#pejnt_barrel-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#pejnt_barrel-Interpolations"/></sampler><channel source="#pejnt_barrel-Matrix-animation-transform" target="pejnt_barrel/matrix"/></animation></animation>
+    <animation id="jnt_anim-anim" name="jnt_anim"><animation><source id="jnt_anim-Matrix-animation-input"><float_array id="jnt_anim-Matrix-animation-input-array" count="10">
+
+0.000000 0.033333 0.066667 0.100000 0.133333 0.166667 0.200000 0.233333 0.266667 0.300000</float_array><technique_common><accessor source="#jnt_anim-Matrix-animation-input-array" count="10"><param name="TIME" type="float"/></accessor></technique_common></source><source id="jnt_anim-Matrix-animation-output-transform"><float_array id="jnt_anim-Matrix-animation-output-transform-array" count="160">
+
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array><technique_common><accessor source="#jnt_anim-Matrix-animation-output-transform-array" count="10" stride="16"><param type="float4x4"/></accessor></technique_common></source><source id="jnt_anim-Interpolations"><Name_array id="jnt_anim-Interpolations-array" count="10">
+ LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array><technique_common><accessor source="#jnt_anim-Interpolations-array" count="10"><param type="name"/></accessor></technique_common></source><sampler id="jnt_anim-Matrix-animation-transform"><input semantic="INPUT" source="#jnt_anim-Matrix-animation-input"/><input semantic="OUTPUT" source="#jnt_anim-Matrix-animation-output-transform"/><input semantic="INTERPOLATION" source="#jnt_anim-Interpolations"/></sampler><channel source="#jnt_anim-Matrix-animation-transform" target="jnt_anim/matrix"/></animation></animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node name="PFBase" id="PFBase" sid="PFBase">
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 -0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+        
+          <node name="pejnt_barrel" id="pejnt_barrel" sid="pejnt_barrel" type="JOINT">
+            <matrix sid="matrix">1.000000 -0.000000 -0.000000 0.000026 -0.000000 -0.000000 -1.000000 0.281315 0.000000 1.000000 -0.000000 0.568950 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+          </node>
+          <node name="jnt_anim" id="jnt_anim" sid="jnt_anim" type="JOINT">
+            <matrix sid="matrix">1.000000 0.000000 -0.000001 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000001 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+            <extra>
+              <technique profile="FCOLLADA">
+                <visibility>1.000000</visibility>
+              </technique>
+            </extra>
+          </node>
+        
+      </node>
+      <node name="base" id="base" sid="base">
+        <instance_controller url="#baseController">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material.002" target="#Material.002"/>
+            </technique_common>
+          </bind_material>
+        </instance_controller>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.000000</start_time>
+          <end_time>1.000000</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"></instance_visual_scene>
+  </scene>
+</COLLADA>

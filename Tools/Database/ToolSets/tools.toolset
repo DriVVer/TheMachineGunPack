@@ -178,6 +178,17 @@
 			}
 		},
 		{
+			"name": "Panzerfaust",
+			"uuid": "56b4204e-6a3b-4d6d-8858-924dc65fe6d9",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Panzerfaust/Panzerfaust_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Panzerfaust.lua",
+				"class": "Panzerfaust",
+				"data": {}
+			}
+		},
+		{
 			"name": "DoubleBarrel",
 			"uuid": "b0c08b35-4b40-40fe-b933-ca123f99eef8",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DB/DB_Preview.rend",

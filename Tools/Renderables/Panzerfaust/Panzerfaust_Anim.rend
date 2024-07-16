@@ -1,0 +1,21 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Panzerfaust/Panzerfaust_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "Panzerfaust_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/Panzerfaust/Panzerfaust_anims.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_dif.png",
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png",
+						"$CONTENT_DATA/Tools/Textures/tommy_gun_nor.png"
+					]
+				}
+			]
+		}
+	]
+}

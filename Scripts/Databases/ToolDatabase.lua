@@ -4692,6 +4692,110 @@ local mgp_tool_database =
 			}
 		}
 	},
+
+	Panzerfaust =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_AT_Shot_2",
+			load = "DLM_Bazooka_Ammo"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			MagOpen = "DBOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
+		},
+		on_unequip_action = {
+			stop_effects = { "BulletPut", "MagOpen", "BoltClose" }
+		},
+		animation_reset = {
+			on_equip = { fp = { { "Panzerfaust_anims", 0.0 } }, tp = { { "Panzerfaust_anims", 0.0 } } }
+		},
+		animation = {
+			on_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.49 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.49 } },
+						time = 0.5
+					}
+				}
+			},
+			shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.1, 0),
+						apply_velocity = false
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+				}
+			},
+			aimShoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						apply_velocity = false
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
+						time = 0.1
+					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+				}
+
+			}
+		}
+	},
+
 	Medkit =
 	{
 		dlm_required_effects = {},
