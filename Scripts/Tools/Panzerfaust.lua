@@ -20,7 +20,7 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field sprintCooldown integer
 ---@field fireCooldownTimer integer
 ---@field equipped boolean
-Panzerfaust = class() 
+Panzerfaust = class()
 
 local renderables =
 {
@@ -146,11 +146,11 @@ function Panzerfaust:client_onDestroy()
 	mgp_toolAnimator_destroy(self)
 end
 
-function Bazooka.client_onRefresh( self )
+function Panzerfaust.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function Bazooka.loadAnimations( self )
+function Panzerfaust.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -713,7 +713,7 @@ function Panzerfaust:onShoot(v_proj_hit)
 	self.cl_barrel_exhaust:start()
 end
 
-function Bazooka.cl_onPrimaryUse(self)
+function Panzerfaust.cl_onPrimaryUse(self)
 	if mgp_tool_isAnimPlaying(self, g_action_block_anims) or self.cl_waiting_for_data then
 		return
 	end
