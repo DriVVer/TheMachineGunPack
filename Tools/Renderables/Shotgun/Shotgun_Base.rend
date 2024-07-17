@@ -8,9 +8,9 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_dif.tga",
-						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_asg.tga",
-						"$GAME_DATA/Terrain/Textures/Forest/env_forest_giantpine_nor.tga"
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_nor.tga"
 					]
 				}
 			]
