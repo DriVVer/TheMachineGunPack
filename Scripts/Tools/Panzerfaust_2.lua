@@ -20,7 +20,7 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field sprintCooldown integer
 ---@field fireCooldownTimer integer
 ---@field equipped boolean
-Panzerfaust = class()
+Panzerfaust = class() 
 
 local renderables =
 {
@@ -79,36 +79,36 @@ function Panzerfaust:client_initAimVals()
 end
 
 function Panzerfaust:sv_updateAmmoCounter()
-	self.storage:save(self.sv_Panzerfaust_loaded)
+	self.storage:save(self.sv_Bazooka_loaded)
 end
 
 function Panzerfaust:server_onCreate()
 	local v_bz_loaded = self.storage:load()
 	if v_bz_loaded ~= nil then
-		self.sv_Panzerfaust_loaded = v_bz_loaded
+		self.sv_Bazooka_loaded = v_bz_loaded
 	else
 		if not sm.game.getEnableAggro() or not sm.game.getLimitedInventory() then
-			self.sv_Panzerfaust_loaded = true
+			self.sv_Bazooka_loaded = true
 		end
 
 		self:sv_updateAmmoCounter()
 	end
 end
 
-function Panzerfaust:cl_receivePanzerfaustState(state)
+function Panzerfaust:cl_receiveBazookaState(state)
 	self.cl_waiting_for_data = nil
 	self.cl_is_loaded = state
 end
 
-function Panzerfaust:sv_requestPanzerfaustState(data, player)
-	self.network:sendToClient(player, "cl_receivePanzerfaustState", self.sv_Panzerfaust_loaded)
+function Panzerfaust:sv_requestBazookaState(data, player)
+	self.network:sendToClient(player, "cl_receiveBazookaState", self.sv_Bazooka_loaded)
 end
 
 function Panzerfaust:client_onCreate()
 	self.cl_is_loaded = true
 
 	self.cl_waiting_for_data = true
-	self.network:sendToServer("sv_requestPanzerfaustState")
+	self.network:sendToServer("sv_requestBazookaState")
 
 	self:client_initAimVals()
 	self.aimBlendSpeed = 10.0
@@ -146,11 +146,11 @@ function Panzerfaust:client_onDestroy()
 	mgp_toolAnimator_destroy(self)
 end
 
-function Panzerfaust.client_onRefresh( self )
+function Bazooka.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function Panzerfaust.loadAnimations( self )
+function Bazooka.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -161,9 +161,7 @@ function Panzerfaust.loadAnimations( self )
 
 			idle = { "spudgun_idle" },
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
-			putdown = { "spudgun_putdown" },
-
-			reload_empty = { "Panzerfaust_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
+			putdown = { "spudgun_putdown" }
 		}
 	)
 	local movementAnimations = {
@@ -204,8 +202,6 @@ function Panzerfaust.loadAnimations( self )
 				idle = { "Panzerfaust_idle", { nextAnimation = "idle" } },
 
 				shoot = { "Panzerfaust_shoot", { nextAnimation = "idle" } },
-
-				reload_empty = { "Panzerfaust_reload", { nextAnimation = "idle", duration = 1.0 } },
 
 				aimInto = { "Panzerfaust_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "Panzerfaust_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
@@ -319,7 +315,7 @@ end
 
 local mgp_Bazooka_ammo = sm.uuid.new("903b737a-42b9-459d-a169-c4171016cfab")
 function Panzerfaust:server_spendAmmo(data, player)
-	if self.sv_Panzerfaust_loaded then return end
+	if self.sv_Bazooka_loaded then return end
 
 	if data ~= nil or player ~= nil then return end
 
@@ -332,10 +328,10 @@ function Panzerfaust:server_spendAmmo(data, player)
 	if not v_inventory:canSpend(mgp_Bazooka_ammo, 1) then return end
 
 	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_Bazookat_ammo, 1)
+	sm.container.spend(v_inventory, mgp_Bazooka_ammo, 1)
 	sm.container.endTransaction()
 
-	self.sv_Panzerfaust_loaded = true
+	self.sv_Bazooka_loaded = true
 	self:sv_updateAmmoCounter()
 end
 
@@ -344,7 +340,7 @@ function Panzerfaust:sv_n_trySpendAmmo(data, player)
 	if v_owner == nil or v_owner ~= player then return end
 
 	self:server_spendAmmo()
-	self.network:sendToClient(v_owner, "cl_receivePanzerfaustState", self.sv_Panzerfaust_loaded)
+	self.network:sendToClient(v_owner, "cl_receiveBazookaState", self.sv_Bazooka_loaded)
 end
 
 local function predict_animation_end(anim_data, dt)
@@ -610,7 +606,7 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 	end
 
 	if not self.cl_is_loaded then
-		self.tool:updateAnimation("Panzerfaust_anims", 4.3, 1.0)
+		self.tool:updateAnimation("BZ_Anim", 4.3, 1.0)
 		self.fireCooldownTimer = 1.0
 	else
 		self.fireCooldownTimer = 3.5
@@ -618,7 +614,7 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 
 	if (is_custom and self.cl_barrel_attached) or not self.cl_is_loaded then
 		if self.cl_isLocal then
-			self.tool:updateFpAnimation("Panzerfaust_anims", 3.5, 1.0)
+			self.tool:updateFpAnimation("BZ_Anim", 3.5, 1.0)
 			swapFpAnimation(self.fpAnimations, "unequip", "equip_short", 0.2)
 		end
 	else
@@ -664,7 +660,7 @@ function Panzerfaust:client_onUnequip(animate, is_custom)
 			s_tool:setDispersionFraction(0.0)
 
 			if self.fpAnimations.currentAnimation == "equip" then
-				s_tool:updateFpAnimation("Panzerfaust_anims", 0.0, 1.0)
+				s_tool:updateFpAnimation("BZ_Anim", 0.0, 1.0)
 			end
 
 			setFpAnimation(self.fpAnimations, "unequip", 0.2)
@@ -690,14 +686,14 @@ function Panzerfaust:onAim(aiming)
 end
 
 function Panzerfaust:sv_n_onShoot(v_proj_hit)
-	if self.sv_shoot_timer ~= nil or not self.sv_Panzerfaust_loaded then
+	if self.sv_shoot_timer ~= nil or not self.sv_Bazooka_loaded then
 		return
 	end
 
 	self.sv_shoot_timer = 5.5
 	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
 
-	self.sv_Panzerfaust_loaded = false
+	self.sv_Bazooka_loaded = false
 	self:sv_updateAmmoCounter()
 end
 
@@ -717,7 +713,7 @@ function Panzerfaust:onShoot(v_proj_hit)
 	self.cl_barrel_exhaust:start()
 end
 
-function Panzerfaust.cl_onPrimaryUse(self)
+function Bazooka.cl_onPrimaryUse(self)
 	if mgp_tool_isAnimPlaying(self, g_action_block_anims) or self.cl_waiting_for_data then
 		return
 	end
@@ -804,7 +800,7 @@ function Panzerfaust:client_onReload()
 	if not self.cl_is_loaded then
 		if not mgp_tool_isAnimPlaying(self, g_action_block_anims) and not self.cl_waiting_for_data and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 			if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
-				if not sm.localPlayer.getInventory():canSpend(mgp_Panzerfaust_ammo, 1) then
+				if not sm.localPlayer.getInventory():canSpend(mgp_Bazooka_ammo, 1) then
 					sm.gui.displayAlertText("Panzerfaust: No Ammo")
 					sm.audio.play("PotatoRifle - NoAmmo")
 					return true

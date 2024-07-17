@@ -19,9 +19,7 @@
 
 				{ "name": "Panzerfaust_sprint_into",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_sprint_into.dae" },
 				{ "name": "Panzerfaust_sprint_exit",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_sprint_exit.dae" },
-				{ "name": "Panzerfaust_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_sprint_idle.dae" },
-
-				{ "name": "Panzerfaust_inspect",    	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DB/DB_fp_ammo_check.dae" }
+				{ "name": "Panzerfaust_sprint_idle",  	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_sprint_idle.dae" }
 			]
 		}
 	]

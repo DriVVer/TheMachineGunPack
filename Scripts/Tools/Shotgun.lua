@@ -52,7 +52,7 @@ Shotgun.modificationData = {
 				shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
 				damage = 14,
 				colour = sm.color.new("#7b3030ff"),
-				name = "Birdshot"
+				name = "Buckshot"
 			},
 			["a2a1b12e-8045-4ab0-9577-8b63c06a55c2"] = {
 				minSpendAmount = 1,
