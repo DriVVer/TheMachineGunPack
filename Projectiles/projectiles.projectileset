@@ -126,8 +126,8 @@
 			"enableImpactEffect": true
 		},
 		{
-			"uuid": "35588452-1e08-46e8-aaf1-e8abb0cf7692",
-			"name": "shotgun_birdshot",
+			"uuid": "228fb03c-9b81-4460-b841-5fdc2eea3596",
+			"name": "shotgun_buckshot",
 			"mass": 0.0,
 			"radius": 0.0625,
 			"friction": 0.2,
@@ -150,8 +150,8 @@
 			"enableImpactEffect": false
 		},
 		{
-			"uuid": "228fb03c-9b81-4460-b841-5fdc2eea3596",
-			"name": "shotgun_buckshot",
+			"uuid": "35588452-1e08-46e8-aaf1-e8abb0cf7692",
+			"name": "shotgun_sabot",
 			"mass": 0.0,
 			"radius": 0.0625,
 			"friction": 0.2,
@@ -166,9 +166,9 @@
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "chance": 1.0  },
-					{ "qualityLevel": 2, "chance": 0.8  },
-					{ "qualityLevel": 3, "chance": 0.3  },
-					{ "qualityLevel": 4, "chance": 0.0  },
+					{ "qualityLevel": 2, "chance": 1.0  },
+					{ "qualityLevel": 3, "chance": 0.9  },
+					{ "qualityLevel": 4, "chance": 0.5  },
 					{ "qualityLevel": 5, "chance": 0.0  },
 					{ "qualityLevel": 6, "chance": 0.0  }
 				]

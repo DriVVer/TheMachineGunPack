@@ -202,7 +202,7 @@
 		{
 			"name": "Shotgun",
 			"uuid": "daa59c62-2671-4071-b8dc-47654f620cd2",
-			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun.rend",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
 				"file": "$CONTENT_DATA/Scripts/Tools/Shotgun.lua",

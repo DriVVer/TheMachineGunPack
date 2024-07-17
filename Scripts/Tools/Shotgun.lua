@@ -50,7 +50,7 @@ Shotgun.modificationData = {
 				end,
 				projectile = sm.uuid.new("228fb03c-9b81-4460-b841-5fdc2eea3596"),
 				shells = sm.uuid.new("a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"),
-				damage = 14,
+				damage = 12,
 				colour = sm.color.new("#7b3030ff"),
 				name = "Buckshot"
 			},
