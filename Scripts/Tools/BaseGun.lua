@@ -166,6 +166,8 @@ end
 
 function BaseGun:cl_openSlotOptions(button)
     local slot = button:sub(6, #button)
+    if not self:cl_canChangeModSlot(slot) then return end
+
     local options = self.modificationData.mods[slot]
     if options.CanBeUnEquipped then
         options[tostring(emptyModSlot)] = {}
@@ -303,5 +305,9 @@ function BaseGun:client_isGunReloading(reload_anims)
 end
 
 function BaseGun:cl_canMod()
+    return true
+end
+
+function BaseGun:cl_canChangeModSlot(slot)
     return true
 end

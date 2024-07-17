@@ -782,11 +782,15 @@ function Shotgun:client_onEquippedUpdate(primaryState, secondaryState, f)
 	return true, true
 end
 
-function Shotgun:cl_canMod()
-    local empty = self.ammo_in_mag == 0
-	if not empty then
-		sm.gui.displayAlertText("Empty your magazine to switch mods!")
+function Shotgun:cl_canChangeModSlot(slot)
+	if slot == "ammo" then
+		local empty = self.ammo_in_mag == 0
+		if not empty then
+			sm.gui.displayAlertText("Empty your magazine to switch ammo!")
+		end
+
+		return empty
 	end
 
-	return empty
+	return true
 end
