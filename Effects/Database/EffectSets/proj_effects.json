@@ -11,6 +11,18 @@
 			}
 		]
 	},
+	"Panzerfaust - Projectile": {
+		"effectList": [
+			{
+				"type": "renderable",
+				"name": "$CONTENT_DATA/Projectiles/Renderables/PFRocket.rend"
+			},
+			{
+				"type": "particle",
+				"name": "Bazooka_Rocket_Exhaust"
+			}
+		]
+	},
 	"Bazooka - BarrelExhaust": {
 		"effectList": [
 			{

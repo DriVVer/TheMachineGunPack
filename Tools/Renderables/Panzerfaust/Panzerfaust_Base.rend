@@ -8,7 +8,7 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/tommy_gun_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Beige.png",
 						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png",
 						"$CONTENT_DATA/Tools/Textures/tommy_gun_nor.png"
 					]
