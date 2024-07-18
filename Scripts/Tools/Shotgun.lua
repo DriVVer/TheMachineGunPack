@@ -101,7 +101,8 @@ Shotgun.aimFovFp = 40
 local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Anim.rend",
+	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Bagnet.rend"
 }
 
 local renderablesTp =

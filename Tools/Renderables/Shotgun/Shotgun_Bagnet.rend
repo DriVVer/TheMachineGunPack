@@ -1,0 +1,19 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/Shotgun/Shotgun_Bagnet.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"subMeshList": [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}
