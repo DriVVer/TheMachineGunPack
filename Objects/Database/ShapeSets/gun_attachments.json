@@ -2,8 +2,33 @@
     "partList": [
         {
 			"uuid": "3fd34aa2-9bbd-4a10-bc86-1258aca23d30",
-			"name": "gun_powder",
-			"renderable": "$CONTENT_DATA/Objects/Renderable/obj_gun_powder.rend",
+			"name": "obj_mosinns_scope",
+			"renderable": "$CONTENT_DATA/Tools/Renderables/MosinNS/MosinNS_scope_attachment.rend",
+			"color": "f71905",
+			"box": {
+				"x": 2,
+				"y": 2,
+				"z": 2
+			},
+			"itemStack": {},
+			"rotationSet": "PropY",
+			"sticky": "+Y-Y",
+			"physicsMaterial": "Wood",
+			"ratings": {
+				"density": 1,
+				"durability": 5,
+				"friction": 4,
+				"buoyancy": 6
+			},
+			"qualityLevel": 20,
+			"flammable": true,
+			"consumable": true,
+			"stackSize": 200
+		},
+		{
+			"uuid": "ddaac958-c047-47e4-8733-5295d9979c1d",
+			"name": "obj_shotgun_bayonet",
+			"renderable": "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Bagnet.rend",
 			"color": "f71905",
 			"box": {
 				"x": 2,

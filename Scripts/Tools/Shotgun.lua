@@ -24,7 +24,7 @@ Shotgun.defaultSelectedMods = {
 	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
 }
 Shotgun.modificationData = {
-	layout = "$CONTENT_DATA/Gui/Layouts/DB_mods.layout",
+	layout = "$CONTENT_DATA/Gui/Layouts/Shotgun_mods.layout",
 	mods = {
 		ammo = {
 			CanBeUnEquipped = false,
@@ -80,6 +80,13 @@ Shotgun.modificationData = {
 				colour = sm.color.new("#307326ff"),
 				name = "Sabot"
 			}
+		},
+		bayonet = {
+			CanBeUnEquipped = true,
+			["ddaac958-c047-47e4-8733-5295d9979c1d"] = {
+				minSpendAmount = 1,
+				renderable = "bayonet"
+			}
 		}
 	}
 }
@@ -102,7 +109,6 @@ local renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Base.rend",
 	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Bagnet.rend"
 }
 
 local renderablesTp =
@@ -121,6 +127,11 @@ local renderablesFp =
 sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
+
+
+BayonetStabAttack = sm.uuid.new( "e7fa1286-152e-463b-a126-100478f50aa8" )
+BayonetStabDamage = 50
+BayonetStabRange  = 2
 
 function Shotgun:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
@@ -205,6 +216,8 @@ function Shotgun.loadAnimations( self )
 			reload_single = { "Shotgun_reload_single", { looping = true } },
 			reload_single_pump = { "Shotgun_reload_single_pump" },
 			reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
+
+			stab = { "Shotgun_stab", { nextAnimation = "idle" } },
 		}
 	)
 	local movementAnimations = {
@@ -246,11 +259,11 @@ function Shotgun.loadAnimations( self )
 
 				reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
 				reload_single = { "Shotgun_reload_single", { looping = true } },
-				reload_single_pump = { "Shotgun_reload_single_pump" },
+				reload_single_pump = { "Shotgun_reload_single_pump", { nextAnimation = "reload_single" } },
 				reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
 
 				reload_mod_single = { "Shotgun_mod_reload_single", { looping = true } },
-				reload_mod_single_pump = { "Shotgun_mod_reload_single_pump" },
+				reload_mod_single_pump = { "Shotgun_mod_reload_single_pump", { nextAnimation = "reload_mod_single" } },
 
 				aimInto = { "Shotgun_aim_into", { nextAnimation = "aimIdle" } },
 				aimExit = { "Shotgun_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
@@ -265,6 +278,8 @@ function Shotgun.loadAnimations( self )
 				modInto = { "Shotgun_modSelect_into", { nextAnimation = "modIdle" } },
 				modExit = { "Shotgun_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
 				modIdle = { "Shotgun_modSelect_idle", { looping = true } },
+
+				stab = { "Shotgun_stab", { nextAnimation = "idle" } },
 			}
 		)
 	end
@@ -639,24 +654,24 @@ function Shotgun:onAim(aiming)
 end
 
 
-function Shotgun:sv_n_onShoot()
-	self.network:sendToClients("cl_n_onShoot")
+function Shotgun:sv_n_onShoot(is_last_shot)
+	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
-	if self.sv_ammo_counter > 0 then
+	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateStorage()
 	end
 end
 
-function Shotgun:cl_n_onShoot()
+function Shotgun:cl_n_onShoot(is_last_shot)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot()
+		self:onShoot(is_last_shot)
 	end
 end
 
-function Shotgun:onShoot()
+function Shotgun:onShoot(is_last_shot)
 	local v_anim_name = self.aiming and "aimShoot" or "shoot"
-	mgp_toolAnimator_setAnimation(self, v_anim_name)
+	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or v_anim_name)
 	setTpAnimation(self.tpAnimations, v_anim_name, 1.0)
 end
 
@@ -698,8 +713,10 @@ function Shotgun:cl_onPrimaryUse()
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
+			local is_last_shot = self.ammo_in_mag == 0
+
 			-- Send TP shoot over network and dircly to self
-			self:onShoot()
+			self:onShoot(is_last_shot)
 			self.network:sendToServer("sv_n_onShoot")
 
 			-- Play FP shoot animation
@@ -780,7 +797,30 @@ function Shotgun:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self.prevSecondaryState = secondaryState
 	end
 
+	if f and mgp_tool_GetSelectedMod(self, "bayonet") ~= nil and self.fpAnimations.animations.stab.time >= 1 then
+		self.network:sendToServer("sv_n_onStab")
+		self:onStab()
+
+		setFpAnimation(self.fpAnimations, "stab", 0)
+
+		sm.melee.meleeAttack( BayonetStabAttack, BayonetStabDamage, sm.localPlayer.getRaycastStart(), sm.localPlayer.getDirection() * BayonetStabRange, self.tool:getOwner() )
+	end
+
 	return true, true
+end
+
+function Shotgun:sv_n_onStab()
+	self.network:sendToClients("cl_n_onStab")
+end
+
+function Shotgun:cl_n_onStab()
+	if not self.cl_isLocal and self.tool:isEquipped() then
+		self:onStab()
+	end
+end
+
+function Shotgun:onStab()
+	setTpAnimation(self.tpAnimations, "stab", 1)
 end
 
 function Shotgun:cl_canChangeModSlot(slot)

@@ -1383,6 +1383,9 @@ local mgp_tool_database =
 			reload = "PistolReload",
 			reload_empty = "PistolEReload"
 		},
+		renderables = {
+			bayonet = { path = "$CONTENT_DATA/Tools/Renderables/Shotgun/Shotgun_Bagnet.rend", enabled_by_default = false, isAttachment = true }
+		},
 		animation = {
 			shoot =
 			{
@@ -1404,7 +1407,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -1462,7 +1464,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -1531,7 +1532,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -1609,7 +1609,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
@@ -1648,7 +1647,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
@@ -1741,7 +1739,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
@@ -1785,7 +1782,6 @@ local mgp_tool_database =
 					}
 				},
 				[2] = {
-					
 					{
 						type = mgp_tool_anim_enum.delay,
 						time = 0.42
