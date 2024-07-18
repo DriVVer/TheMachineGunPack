@@ -7,6 +7,7 @@
 			"animationList": [
 				{ "name": "Shotgun_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_idle.dae" },
 				{ "name": "Shotgun_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_shoot.dae" },
+				{ "name": "Shotgun_stab", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_stab.dae" },
 
 				{ "name": "Shotgun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_pickup.dae" },
 				{ "name": "Shotgun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_putdown.dae" },
