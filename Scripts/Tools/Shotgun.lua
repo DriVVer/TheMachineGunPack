@@ -129,9 +129,20 @@ sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
 
-BayonetStabAttack = sm.uuid.new( "e7fa1286-152e-463b-a126-100478f50aa8" )
-BayonetStabDamage = 50
-BayonetStabRange  = 2
+local BayonetStabAttack = sm.uuid.new( "e7fa1286-152e-463b-a126-100478f50aa8" )
+local BayonetStabDamage = 50
+local BayonetStabRange  = 2
+
+local bayonet_block_anims = {
+	["ammo_check"   	 ] = true,
+	["reload_into"		 ] = true,
+	["reload_single_pump"] = true,
+	["reload_single"	 ] = true,
+	["reload_exit"		 ] = true,
+	["shoot"			 ] = true,
+	["aimShoot"			 ] = true,
+	["stab"				 ] = true,
+}
 
 function Shotgun:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
@@ -797,13 +808,17 @@ function Shotgun:client_onEquippedUpdate(primaryState, secondaryState, f)
 		self.prevSecondaryState = secondaryState
 	end
 
-	if f and mgp_tool_GetSelectedMod(self, "bayonet") ~= nil and self.fpAnimations.animations.stab.time >= 1 then
-		self.network:sendToServer("sv_n_onStab")
-		self:onStab()
+	if f ~= self.prevF then
+		if f and mgp_tool_GetSelectedMod(self, "bayonet") ~= nil and not self:client_isGunReloading(bayonet_block_anims) then
+			self.network:sendToServer("sv_n_onStab")
+			self:onStab()
 
-		setFpAnimation(self.fpAnimations, "stab", 0)
+			setFpAnimation(self.fpAnimations, "stab", 0)
 
-		sm.melee.meleeAttack( BayonetStabAttack, BayonetStabDamage, sm.localPlayer.getRaycastStart(), sm.localPlayer.getDirection() * BayonetStabRange, self.tool:getOwner() )
+			sm.melee.meleeAttack( BayonetStabAttack, BayonetStabDamage, sm.localPlayer.getRaycastStart(), sm.localPlayer.getDirection() * BayonetStabRange, self.tool:getOwner() )
+		end
+
+		self.prevF = f
 	end
 
 	return true, true
