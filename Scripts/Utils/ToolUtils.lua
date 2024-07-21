@@ -15,10 +15,22 @@ function mgp_tool_getToolDir(self)
     return sm.camera.getDirection():rotate(self.cl_recoilAngle, sm.camera.getRight())
 end
 
+---@param self any
+---@param slot string
+---@return GunModOption
 function mgp_tool_GetSelectedMod(self, slot)
     return self.modificationData.mods[slot][(self.sv_selectedMods or self.selectedMods)[slot]]
 end
 
 function mgp_tool_GetMods(self, slot)
     return self.modificationData.mods[slot]
+end
+
+---@param mod GunModOption
+function mgp_tool_GetModReturnAmount(self, mod)
+    if mod.getReturnAmount then
+        return mod:getReturnAmount(self)
+    end
+
+    return 1
 end

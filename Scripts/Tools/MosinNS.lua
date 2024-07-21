@@ -26,6 +26,8 @@ local Damage = 100
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
 MosinNS = class(BaseGun)
+MosinNS.reimburseAmmo = true
+MosinNS.ammoUuid = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
 MosinNS.mag_capacity = 5
 MosinNS.modificationData = {
 	layout = "$CONTENT_DATA/Gui/Layouts/MosinNS_mods.layout",
@@ -870,7 +872,8 @@ function MosinNS:cl_startReloadAnim(anim)
 end
 
 function MosinNS:cl_initReloadAnim()
-	if sm.game.getEnableAmmoConsumption() and sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo) == 0 then
+	local minAmount = self.ammo_in_mag > 0 and 1 or self.mag_capacity
+	if sm.game.getEnableAmmoConsumption() and sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_sniper_ammo) < minAmount then
 		sm.gui.displayAlertText("No Ammo", 3)
 		return true
 	end
@@ -903,7 +906,13 @@ function MosinNS:sv_reloadSingle()
 	self:server_updateStorage()
 end
 
-function MosinNS:sv_reloadExit()
+function MosinNS:sv_reloadExit(forceExit)
+	if forceExit then
+		sm.container.beginTransaction()
+		sm.container.spend(self.tool:getOwner():getInventory(), mgp_sniper_ammo, self.mag_capacity)
+		sm.container.endTransaction()
+	end
+
 	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
 
 	self.sv_ammo_counter = self.mag_capacity

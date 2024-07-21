@@ -27,22 +27,22 @@ local function ReloadLoop(self, loopAnim, exitAnim, ammoUUID, forceExit)
 		goto exit
 	end
 
-	if sm.container.totalQuantity(self.tool:getOwner():getInventory(), ammoUUID) == 0 then
+	self.ammo_in_mag = self.ammo_in_mag + 1
+	if self.cl_isLocal then
+		self.network:sendToServer("sv_reloadSingle")
+	end
+
+	if sm.container.totalQuantity(self.tool:getOwner():getInventory(), ammoUUID) - 1 == 0 then
 		return exitAnim
 	end
 
-	self.ammo_in_mag = self.ammo_in_mag + 1
 	if self.ammo_in_mag < self.mag_capacity then
-		if self.cl_isLocal then
-			self.network:sendToServer("sv_reloadSingle")
-		end
-
 		return loopAnim
 	end
 
 	::exit::
 	if self.cl_isLocal then
-		self.network:sendToServer("sv_reloadExit")
+		self.network:sendToServer("sv_reloadExit", forceExit)
 	end
 
 	return exitAnim

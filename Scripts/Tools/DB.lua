@@ -19,6 +19,7 @@ dofile("BaseGun.lua")
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 DB = class(BaseGun)
+DB.reimburseAmmo = false
 DB.mag_capacity = 2
 DB.defaultSelectedMods = {
 	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
