@@ -3,6 +3,8 @@
 This mod adds new spudguns. They look like famous guns from WW1 and WW2.
 Some of them are animated so check them out if you like that kind of details!
 
+![Steam Downloads](https://img.shields.io/steam/downloads/1903792337)
+
 - Many thanks to [Questionable Mark](https://steamcommunity.com/profiles/76561198361178618) for making scripts that support all new animations
 
 {value} - delay after shoot in ticks</br>
