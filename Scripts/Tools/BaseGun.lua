@@ -33,9 +33,38 @@ dofile("$SURVIVAL_DATA/Scripts/game/survival_loot.lua")
 ---@field defaultSelectedMods table?
 ---@field modificationData GunModData
 ---@field selectedMods { [string]: string } slot -> uuid
+---@field reimburseAmmo? boolean
+---@field ammoUuid? Uuid
 BaseGun = class()
 
 local emptyModSlot = sm.uuid.new("068a89ca-504e-4782-9ede-48f710aeea73")
+
+function BaseGun:server_onDestroy()
+    local inv = self.sv_owner:getInventory()
+
+    if self.reimburseAmmo then
+        local uuid = self.ammoUuid
+        if inv:canCollect(uuid, 1) then
+            sm.container.beginTransaction()
+            sm.container.collect(inv, uuid, self.sv_ammo_counter)
+            sm.container.endTransaction()
+        else
+			SpawnLoot(self.sv_owner, { { uuid = uuid, quantity = self.sv_ammo_counter } })
+        end
+    end
+
+    for slot, uuid in pairs(self.sv_selectedMods) do
+        local Uuid = sm.uuid.new(uuid)
+        local amount = mgp_tool_GetModReturnAmount(self, mgp_tool_GetSelectedMod(self, slot))
+        if inv:canCollect(Uuid, amount) then
+            sm.container.beginTransaction()
+            sm.container.collect(inv, Uuid, amount)
+            sm.container.endTransaction()
+        else
+			SpawnLoot(self.sv_owner, { { uuid = Uuid, quantity = amount } })
+        end
+    end
+end
 
 function BaseGun:sv_init()
     local v_saved_data = self.storage:load()
@@ -48,12 +77,16 @@ function BaseGun:sv_init()
 	else
 		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
 			self.sv_ammo_counter = self.mag_capacity
+        else
+			self.sv_ammo_counter = 0
 		end
 
         self.sv_selectedMods = shallowcopy(self.defaultSelectedMods or {})
 
 		self:server_updateStorage()
 	end
+
+    self.sv_owner = self.tool:getOwner()
 
     self.network:setClientData({ ammo = self.sv_ammo_counter, mods = self.sv_selectedMods })
 end
@@ -76,11 +109,7 @@ function BaseGun:sv_chooseSlotOption(data, caller)
         end
 
         local prevUuid = sm.uuid.new(prevEquipped)
-        local amount = 1
-        if prevModSelf.getReturnAmount then
-            amount = prevModSelf:getReturnAmount(self)
-        end
-
+        local amount = mgp_tool_GetModReturnAmount(self, prevModSelf)
         if container:canCollect(prevUuid, amount) then
             sm.container.beginTransaction()
             sm.container.collect(container, prevUuid, amount)

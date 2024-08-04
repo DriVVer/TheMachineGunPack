@@ -19,6 +19,7 @@ dofile("BaseGun.lua")
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 Shotgun = class(BaseGun)
+Shotgun.reimburseAmmo = false
 Shotgun.mag_capacity = 6
 Shotgun.defaultSelectedMods = {
 	ammo = "a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2"
@@ -191,7 +192,13 @@ function Shotgun:sv_reloadSingle()
 	self:server_updateStorage()
 end
 
-function Shotgun:sv_reloadExit()
+function Shotgun:sv_reloadExit(forceExit)
+	if forceExit then
+		sm.container.beginTransaction()
+		sm.container.spend(self.tool:getOwner():getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells, self.mag_capacity)
+		sm.container.endTransaction()
+	end
+
 	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
 
 	self.sv_ammo_counter = self.mag_capacity
@@ -728,7 +735,7 @@ function Shotgun:cl_onPrimaryUse()
 
 			-- Send TP shoot over network and dircly to self
 			self:onShoot(is_last_shot)
-			self.network:sendToServer("sv_n_onShoot")
+			self.network:sendToServer("sv_n_onShoot", is_last_shot)
 
 			-- Play FP shoot animation
 			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
@@ -757,7 +764,7 @@ end
 
 function Shotgun:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
-		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells) < self.mag_capacity then
+		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells) == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
