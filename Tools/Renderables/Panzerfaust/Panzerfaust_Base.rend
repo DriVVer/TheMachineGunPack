@@ -9,8 +9,8 @@
 					"material": "DifAsgNor",
 					"textureList": [
 						"$CONTENT_DATA/Tools/Textures/Beige.png",
-						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png",
-						"$CONTENT_DATA/Tools/Textures/tommy_gun_nor.png"
+						"$CONTENT_DATA/Objects/Textures/empty.png",
+						"$CONTENT_DATA/Tools/Textures/nonor_nor.tga"
 					]
 				}
 			]

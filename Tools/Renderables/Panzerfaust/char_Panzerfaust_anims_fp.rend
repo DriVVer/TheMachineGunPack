@@ -5,7 +5,7 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"maxViewDistance": 1000.0,
 			"animationList": [
-				{ "name": "Panzerfaust_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_idle.dae" },
+				{ "name": "Panzerfaust_idle", 	     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_idle.dae" },
 				{ "name": "Panzerfaust_shoot", 	 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_shoot.dae" },
 
 				{ "name": "Panzerfaust_pickup", 	   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Bazooka/Bazooka_fp_pickup.dae" },
