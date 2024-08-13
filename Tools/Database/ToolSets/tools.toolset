@@ -2,6 +2,17 @@
 	"toolList":
 	[
 		{
+			"name": "Knife",
+			"uuid": "a6a6ebb4-09b1-4fed-9593-68e4e98c9215",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Melee/Knife/Knife_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Melee/Knife.lua",
+				"class": "Knife",
+				"data": {}
+			}
+		},
+		{
 			"name": "TommyGun",
 			"uuid": "336a7328-4d50-432c-8698-2ed511187cc7",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/TommyGun/TommyGun_InventoryPreview.rend",

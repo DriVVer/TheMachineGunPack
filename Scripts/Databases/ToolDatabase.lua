@@ -1458,9 +1458,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Shotgun_anims", start_val = 1.5, end_val = 2.5 } },
-						tp_anim = { { name = "Shotgun_anims", start_val = 1.5, end_val = 2.5 } },
-						time = 1.0
+						fp_anim = { { name = "Shotgun_anims", start_val = 1.83, end_val = 2.5 } },
+						tp_anim = { { name = "Shotgun_anims", start_val = 1.83, end_val = 2.5 } },
+						time = 0.66
 					}
 				},
 				[2] = {
@@ -1475,7 +1475,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.65
+						time = 0.32
 					},
 					{
 						type = mgp_tool_anim_enum.effect,

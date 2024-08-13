@@ -10,9 +10,17 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_dif.tga",
-						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_asg.tga",
-						"$CONTENT_DATA/Tools/Textures/weapon_trimsheet_generic_nor.tga"
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_nor.tga"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
 					]
 				}
 			]

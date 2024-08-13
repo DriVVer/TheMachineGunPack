@@ -84,7 +84,7 @@ Shotgun.modificationData = {
 		},
 		bayonet = {
 			CanBeUnEquipped = true,
-			["ddaac958-c047-47e4-8733-5295d9979c1d"] = {
+			["a6a6ebb4-09b1-4fed-9593-68e4e98c9215"] = {
 				minSpendAmount = 1,
 				renderable = "bayonet"
 			}
@@ -230,12 +230,12 @@ function Shotgun.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_into = { "Shotgun_reload_into", { nextAnimation = "reload_single" } },
-			reload_single = { "Shotgun_reload_single", { looping = true } },
-			reload_single_pump = { "Shotgun_reload_single_pump" },
-			reload_exit = { "Shotgun_reload_exit", { nextAnimation = "idle" } },
+			reload_into = { "Shotgun_tp_reload_into", { nextAnimation = "reload_single" } },
+			reload_single = { "Shotgun_tp_reload_single", { looping = true } },
+			reload_single_pump = { "Shotgun_tp_reload_single_pump" },
+			reload_exit = { "Shotgun_tp_reload_exit", { nextAnimation = "idle" } },
 
-			stab = { "Shotgun_stab", { nextAnimation = "idle" } },
+			stab = { "spudgun_idle", { nextAnimation = "idle" } },
 		}
 	)
 	local movementAnimations = {
@@ -318,7 +318,7 @@ function Shotgun.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.15,
+		fireCooldown = 0.66,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.5,
 		spreadMinAngle = 1,
@@ -731,11 +731,9 @@ function Shotgun:cl_onPrimaryUse()
 			self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 			self.sprintCooldownTimer = self.sprintCooldown
 
-			local is_last_shot = self.ammo_in_mag == 0
-
 			-- Send TP shoot over network and dircly to self
-			self:onShoot(is_last_shot)
-			self.network:sendToServer("sv_n_onShoot", is_last_shot)
+			self:onShoot()
+			self.network:sendToServer("sv_n_onShoot")
 
 			-- Play FP shoot animation
 			setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
