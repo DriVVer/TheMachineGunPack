@@ -2374,44 +2374,49 @@ local mgp_tool_database =
 					}
 				}
 			},
-			ammo_check =
+			reload_into =
 			{
-				[1] = { --first animation track
+				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
-						tp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
-						time = 1.75
+						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
+						time = 2.0
 					}
 				},
-				[2] = {
+			},
+			reload_single =
+			{
+				[1] = {
 					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.20
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
-						name_tp = "magout",
-						name_fp = "magout",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.0, 0),
-						apply_velocity = false
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.80
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
-						name_tp = "magin",
-						name_fp = "magin",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.0, 0),
-						apply_velocity = false
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
+						tp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
+						time = 2.0
 					}
-				}
+				},
+			},
+			reload_SL =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
+						tp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
+						time = 2.0
+					}
+				},
+			},
+			reload_exit =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 2.8, end_val = 3.8 } },
+						tp_anim = { { name = "SW38_anims", start_val = 2.8, end_val = 3.8 } },
+						time = 2.0
+					}
+				},
 			}
 		}
 	},
