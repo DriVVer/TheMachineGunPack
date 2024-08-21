@@ -2120,7 +2120,7 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.2
+						time = 0.1
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2135,15 +2135,15 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
-						time = 0.2
+						fp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						time = 0.1
 					}
 				},
 				[3] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.2
+						time = 0.1
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2160,6 +2160,10 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
@@ -2167,15 +2171,21 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, 0.25, 0),
 						apply_velocity = false
-					},
+					}
+				},
+				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
 						tp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
-						time = 0.15
+						time = 0.1
 					}
 				},
-				[2] = {
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -2192,8 +2202,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 0.2 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 0.2 } },
+						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 0.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 0.0 } },
 						time = 0.0
 					}
 				}
@@ -2203,8 +2213,8 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 2.1, end_val = 2.11 } },
-						tp_anim = { { name = "SW38_anims", start_val = 2.1, end_val = 2.11 } },
+						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 0.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 0.0 } },
 						time = 0.1
 					}
 				}
@@ -2213,6 +2223,10 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
@@ -2220,23 +2234,21 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
-					},
-					{
-						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.07, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
-						name_tp = "TommyShell",
-						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
-						tp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
-						time = 0.1
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.1, end_val = 0.2 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.1, end_val = 0.2 } },
+						time = 0.1
+					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",

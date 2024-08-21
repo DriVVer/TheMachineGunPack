@@ -102,6 +102,44 @@ function SW38:client_onCreate()
 	self.network:sendToServer("server_requestAmmo")
 end
 
+function SW38:sv_reloadSingle()
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	local ammo = mgp_tool_GetSelectedMod(self, "ammo").shells
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, ammo)
+	if v_available_ammo == 0 then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_ammo_counter = self.sv_ammo_counter + 1
+	self:server_updateStorage()
+end
+
+function SW38:sv_reloadExit(forceExit)
+	if forceExit then
+		sm.container.beginTransaction()
+		sm.container.spend(self.tool:getOwner():getInventory(), mgp_tool_GetSelectedMod(self, "ammo").shells, self.mag_capacity)
+		sm.container.endTransaction()
+	end
+
+	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
+
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateStorage()
+end
+
+function SW38:cl_reloadExit()
+	self.ammo_in_mag = self.mag_capacity
+	self.cl_hammer_cocked = true
+	self.waiting_for_ammo = nil
+end
+
 function SW38.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
@@ -182,7 +220,7 @@ function SW38.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.45,
+		fireCooldown = 0.40,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 4.25,
@@ -197,7 +235,7 @@ function SW38.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.45,
+		fireCooldown = 0.30,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.5,
 		spreadMinAngle = 1,
