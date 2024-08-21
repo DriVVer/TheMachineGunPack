@@ -3,9 +3,6 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$CONTENT_DATA/Scripts/Tools/Melee/survival_meleeattacks.lua" )
 
 local Damage = 35
-local maxCritDamage = 20
-local minCritDamage = 5
-local critChance = 35 -- %
 
 ---@class Knife : ToolClass
 ---@field isLocal boolean
@@ -128,7 +125,7 @@ function Knife.loadAnimations( self )
 			self.tool,
 			{
 				equip = { "melee_pickup", { nextAnimation = "idle", blendNext = 0.2 } },
-				unequip = { "melee_putdown" },	
+				unequip = { "melee_putdown" },
 				idle = { "melee_idle",  { looping = true } },
 
 				sprintInto = { "melee_sprint_into", { nextAnimation = "sprintIdle" } },
@@ -165,7 +162,6 @@ function Knife.client_onUpdate( self, dt )
 
 	--update
 	if self.isLocal then
-
 		if self.fpAnimations.currentAnimation == self.swings[self.currentSwing] then
 			self:updateFreezeFrame(self.swings[self.currentSwing], dt)
 		end
@@ -204,7 +200,7 @@ function Knife.client_onUpdate( self, dt )
 			self.tool:setBlockSprint(keepBlockSprint)
 		end
 
-		local isSprinting =  self.tool:isSprinting() 
+		local isSprinting =  self.tool:isSprinting()
 		if isSprinting and self.fpAnimations.currentAnimation == "idle" and self.attackCooldownTimer <= 0 and not isAnyOf( self.fpAnimations.currentAnimation, { "sprintInto", "sprintIdle" } ) then
 			local params = { name = "sprintInto" }
 			self:client_startLocalEvent( params )

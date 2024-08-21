@@ -10,7 +10,6 @@
 				{ "name" : "melee_attack1", 		"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_attack1.dae" },
 				{ "name" : "melee_exit1", 			"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_exit1.dae" },
 
-
 				{ "name" : "melee_attack2", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Firstperson/Sledgehammer/ani_char_male_fp_sledgehammer_attack2.dae" },
 				{ "name" : "melee_exit2", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Firstperson/Sledgehammer/ani_char_male_fp_sledgehammer_attack2_exit.dae" },
 
