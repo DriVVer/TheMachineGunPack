@@ -1,0 +1,37 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/SW38/SW38_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "SW38_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/SW38/SW38_anims.dae" }
+			],
+			"subMeshList": [
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_dif.png",
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_nor.tga"
+					]
+				}
+			]
+		}
+	]
+}

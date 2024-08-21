@@ -1,0 +1,34 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/SW38/SW38_Preview.fbx",
+			"subMeshList": [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_dif.png",
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/SW38/SW38_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/tool_shotgun_win_nor.tga"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
+					]
+				}
+			]
+		}
+	]
+}

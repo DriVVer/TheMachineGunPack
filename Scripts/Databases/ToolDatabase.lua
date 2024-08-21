@@ -2091,7 +2091,7 @@ local mgp_tool_database =
 			}
 		}
 	},
-	Magnum44 =
+	SW38 =
 	{
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
@@ -2115,70 +2115,36 @@ local mgp_tool_database =
 			shoot_aim = mgp_magnum_shoot_reset_table
 		},
 		animation = {
-			cock_the_hammer =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.0, end_val = 0.5 } },
-						tp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.0, end_val = 0.5 } },
-						time = 0.5
-					}
-				}
-			},
-			cock_the_hammer_aim =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.0, end_val = 0.5 } },
-						tp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.0, end_val = 0.5 } },
-						time = 0.5
-					}
-				}
-			},
-			no_ammo =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
-					}
-				}
-			},
-			no_ammo_aim =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
-					}
-				}
-			},
 			shoot =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_Shoot", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
 					}
 				},
 				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
+						time = 0.2
+					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -2187,10 +2153,10 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
-					},
+					}
 				}
 			},
-			shoot_aim =
+			aimShoot =
 			{
 				[1] = {
 					{
@@ -2199,14 +2165,14 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, 0.25, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_aim_Shoot", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
+						fp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.2 } },
+						time = 0.15
 					}
 				},
 				[2] = {
@@ -2218,7 +2184,7 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
-					},
+					}
 				}
 			},
 			equip =
@@ -2226,125 +2192,73 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_Pickup", start_val = 0.0, end_val = 1.0 } },
-						tp_anim = { { name = "Magnum44_Pickup", start_val = 0.9, end_val = 1.0 } },
-						time = 1.0
-					}
-				}
-				--[2] = {
-
-					--{
-						--type = mgp_tool_anim_enum.bone_animation,
-						--fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.97, end_val = 2.97 } },
-						--tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.97, end_val = 2.97 } },
-						--time = 0.1
-					--}
-					--{
-						--type = mgp_tool_anim_enum.bone_animation,
-						--fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
-						--tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 2.8 } },
-						--time = 0.1
-					--},
-			},
-			reload5 =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_5-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_5-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
-					}
-				}--,
-				--[2] = { --second animation track
-					--{
-						--type = mgp_tool_anim_enum.delay,
-						--time = 2.85
-					--},
-					--{
-						--type = mgp_tool_anim_enum.bone_animation,
-						--fp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
-						--tp_anim = { { name = "Magnum44_SL_Reload", start_val = 2.8, end_val = 4.1 } },
-						--time = 1.2
-					--},
-				--}
-			},
-			reload4 =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_4-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_4-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 0.2 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 0.2 } },
+						time = 0.0
 					}
 				}
 			},
-			reload3 =
+			last_shot_equip =
 			{
 				[1] = {
 					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_3-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_3-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "SW38_anims", start_val = 2.1, end_val = 2.11 } },
+						tp_anim = { { name = "SW38_anims", start_val = 2.1, end_val = 2.11 } },
+						time = 0.1
 					}
 				}
 			},
-			reload2 =
+			last_shot =
 			{
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, -0.07, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "jnt_slide"
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_2-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_2-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						fp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
+						tp_anim = { { name = "M1911_anims", start_val = 2.0, end_val = 2.10 } },
+						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
 					}
 				}
 			},
-			reload1 =
+			reload =
 			{
 				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
+						time = 2.0
+					}
+				},
+				[2] = {
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
@@ -2353,45 +2267,137 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_1-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						tp_anim = { { name = "Magnum44_1-6_Reload", start_val = 0.0, end_val = 5.0 } },
-						time = 5.0
+						type = mgp_tool_anim_enum.delay,
+						time = 0.42
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.60
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
 					}
 				}
 			},
-			reload0 =
+			reload_empty =
 			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
+				[1] = { --first animation track
 
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.10
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 3.0 } },
-						tp_anim = { { name = "Magnum44_E_Reload", start_val = 0.0, end_val = 3.0 } },
-						time = 3.0
+						fp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
+						tp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
+						time = 1.65
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "reload_empty",
+						name_fp = "reload_empty",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "slidedrop",
+						name_fp = "slidedrop",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
 					}
 				}
 			},
 			ammo_check =
 			{
-				[1] = {
+				[1] = { --first animation track
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
-						tp_anim = { { name = "Magnum44_normal_ammo_check", start_val = 0.0, end_val = 2.0 } },
-						time = 2.0
+						fp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
+						tp_anim = { { name = "M1911_anims", start_val = 3.75, end_val = 5.5 } },
+						time = 1.75
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.20
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.80
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_slide",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
 					}
 				}
 			}
