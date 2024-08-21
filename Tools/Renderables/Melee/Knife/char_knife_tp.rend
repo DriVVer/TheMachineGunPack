@@ -3,34 +3,32 @@
 		{
 			"maxViewDistance": 1000.0,
 			"animationList": [	
-			{ "name" : "melee_idle", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_idle.dae", "looping" : true },
-			{ "name" : "melee_idle_select", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_use_idle.dae", "looping" : true },
-			{ "name" : "melee_idle_relaxed", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_idle.dae", "looping" : true },
-			{ "name" : "melee_reload", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_reload.dae" },
-			
-			{ "name" : "melee_pickup", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_pickup.dae" },
-			{ "name" : "melee_putdown",		 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_putdown.dae" },
-			
-			{ "name" : "melee_sprint", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_sprint.dae", "looping" : true },
-			{ "name" : "melee_run_fwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_run.dae", "looping" : true },
-			{ "name" : "melee_run_bwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_run_bwd.dae", "looping" : true },
-			
-			{ "name" : "melee_crouch_idle", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_crouch_idle.dae", "looping" : true },
-			{ "name" : "melee_crouch_fwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_crouch_fwd.dae", "looping" : true },
-			{ "name" : "melee_crouch_bwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_crouch_bwd.dae", "looping" : true },
-			
-			{ "name" : "melee_jump", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump.dae" },
-			{ "name" : "melee_jump_up", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump_up.dae", "looping" : true  },
-			{ "name" : "melee_jump_down", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump_down.dae", "looping" : true  },
-			{ "name" : "melee_jump_land", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump_land.dae" },
-			{ "name" : "melee_jump_land_fwd", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump_land.dae" },
-			{ "name" : "melee_jump_land_bwd", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_jump_land.dae" },
+				{ "name" : "melee_idle", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_idle.dae", "looping" : true },
+				{ "name" : "melee_idle_relaxed", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_idle.dae", "looping" : true },
+				
+				{ "name" : "melee_pickup", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_pickup.dae" },
+				{ "name" : "melee_putdown",		 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_putdown.dae" },
+				
+				{ "name" : "melee_sprint", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_sprint.dae", "looping" : true },
+				{ "name" : "melee_run_fwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_run.dae", "looping" : true },
+				{ "name" : "melee_run_bwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_run_bwd.dae", "looping" : true },
+				
+				{ "name" : "melee_crouch_idle", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_crouch_idle.dae", "looping" : true },
+				{ "name" : "melee_crouch_fwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_crouch_fwd.dae", "looping" : true },
+				{ "name" : "melee_crouch_bwd", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_crouch_bwd.dae", "looping" : true },
+				
+				{ "name" : "melee_jump", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump.dae" },
+				{ "name" : "melee_jump_up", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump_up.dae", "looping" : true  },
+				{ "name" : "melee_jump_down", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump_down.dae", "looping" : true  },
+				{ "name" : "melee_jump_land", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump_land.dae" },
+				{ "name" : "melee_jump_land_fwd", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump_land.dae" },
+				{ "name" : "melee_jump_land_bwd", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_painttool_jump_land.dae" },
 
-			{ "name" : "melee_paint", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_use_paint.dae" },
-			{ "name" : "melee_erase", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_use_erase.dae" },
-			{ "name" : "melee_colorpick",		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_colorpick.dae" },
-			{ "name" : "melee_colorpick_exit",	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_colorpick_exit.dae" },
-			{ "name" : "melee_colorpick_idle",	"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Painttool/ani_char_male_melee_colorpick_idle.dae" }
+				{ "name" : "melee_attack1", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Sledgehammer/ani_char_male_sledgehammer_attack1.dae" },
+				{ "name" : "melee_exit1", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Sledgehammer/ani_char_male_sledgehammer_attack1_exit.dae" },
+		
+				{ "name" : "melee_attack2", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Sledgehammer/ani_char_male_sledgehammer_attack2.dae" },
+				{ "name" : "melee_exit2", 			"file" : "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Sledgehammer/ani_char_male_sledgehammer_attack2_exit.dae" }
 			]
 		}
 	]

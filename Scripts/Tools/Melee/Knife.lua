@@ -81,28 +81,18 @@ end
 
 function Knife.loadAnimations( self )
 
-	self.tpAnimations = createTpAnimations(
+	self.tpAnimations = mgp_tool_createTpAnimations(
 		self.tool,
 		{
 			equip = { "melee_pickup", { nextAnimation = "idle", blendNext = 0.2 } },
 			unequip = { "melee_putdown" },
 			idle = {"melee_idle", { looping = true } },
 			idleRelaxed = {"melee_idle_relaxed", { looping = true } },
-			
+
 			melee_attack1 = { "melee_attack1", { nextAnimation = "melee_exit1", blendNext = 0.2 } },
 			melee_attack2 = { "melee_attack2", { nextAnimation = "melee_exit2", blendNext = 0.2 } },
 			melee_exit1 = { "melee_exit1", { nextAnimation = "idle", blendNext = 0.2 } },
 			melee_exit2 = { "melee_exit2", { nextAnimation = "idle", blendNext = 0.2 } },
-			
-			guardInto = { "melee_guard_into", { nextAnimation = "guardIdle" } },
-			guardIdle = { "melee_guard_idle", { looping = true } },
-			guardExit = { "melee_guard_exit", { nextAnimation = "idle" } },
-			
-			guardBreak = { "melee_guard_break", { nextAnimation = "idle" } }--,
-			--guardHit = { "melee_guard_hit", { nextAnimation = "guardIdle" } }
-			--guardHit is missing for tp
-			
-		
 		}
 	)
 	local movementAnimations = {
@@ -125,7 +115,6 @@ function Knife.loadAnimations( self )
 		crouchIdle = "melee_crouch_idle",
 		crouchFwd = "melee_crouch_fwd",
 		crouchBwd = "melee_crouch_bwd"
-		
 	}
 
 	for name, animation in pairs( movementAnimations ) do
@@ -139,25 +128,17 @@ function Knife.loadAnimations( self )
 			self.tool,
 			{
 				equip = { "melee_pickup", { nextAnimation = "idle", blendNext = 0.2 } },
-				unequip = { "melee_putdown" },			
+				unequip = { "melee_putdown" },	
 				idle = { "melee_idle",  { looping = true } },
-				
+
 				sprintInto = { "melee_sprint_into", { nextAnimation = "sprintIdle" } },
 				sprintIdle = { "melee_sprint_idle", { looping = true } },
 				sprintExit = { "melee_sprint_exit", { nextAnimation = "idle" } },
-				
+
 				melee_attack1 = { "melee_attack1", { nextAnimation = "melee_exit1", blendNext = 0.2 } },
 				melee_attack2 = { "melee_attack2", { nextAnimation = "melee_exit2", blendNext = 0.2 } },
 				melee_exit1 = { "melee_exit1", { nextAnimation = "idle", blendNext = 0.2 } },
 				melee_exit2 = { "melee_exit2", { nextAnimation = "idle", blendNext = 0.2 } },
-				
-				guardInto = { "melee_guard_into", { nextAnimation = "guardIdle" } },
-				guardIdle = { "melee_guard_idle", { looping = true } },
-				guardExit = { "melee_guard_exit", { nextAnimation = "idle" } },
-				
-				guardBreak = { "melee_guard_break", { nextAnimation = "idle" } },
-				guardHit = { "melee_guard_hit", { nextAnimation = "guardIdle" } }
-			
 			}
 		)
 		setFpAnimation( self.fpAnimations, "idle", 0.0 )
@@ -172,37 +153,36 @@ function Knife.loadAnimations( self )
 end
 
 function Knife.client_onUpdate( self, dt )
-	
 	if not self.animationsLoaded then
 		return
 	end
-	
+
 	--synchronized update
 	self.attackCooldownTimer = math.max( self.attackCooldownTimer - dt, 0.0 )
 
 	--standard third person updateAnimation
 	updateTpAnimations( self.tpAnimations, self.equipped, dt )
-	
+
 	--update
 	if self.isLocal then
-		
+
 		if self.fpAnimations.currentAnimation == self.swings[self.currentSwing] then
 			self:updateFreezeFrame(self.swings[self.currentSwing], dt)
 		end
-		
+
 		local preAnimation = self.fpAnimations.currentAnimation
 
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
-		
+
 		if preAnimation ~= self.fpAnimations.currentAnimation then
-			
+
 			-- Ended animation - re-evaluate what next state is
-			
+
 			local keepBlockSprint = false
 			local endedSwing = preAnimation == self.swings[self.currentSwing] and self.fpAnimations.currentAnimation == self.swingExits[self.currentSwing]
 			if self.nextAttackFlag == true and endedSwing == true then
 				-- Ended swing with next attack flag
-				
+
 				-- Next swing
 				self.currentSwing = self.currentSwing + 1
 				if self.currentSwing > self.swingCount then
@@ -215,27 +195,26 @@ function Knife.client_onUpdate( self, dt )
 				self.nextAttackFlag = false
 				self.attackCooldownTimer = self.swingCooldowns[self.currentSwing]
 				keepBlockSprint = true
-				
+
 			elseif isAnyOf( self.fpAnimations.currentAnimation, { "guardInto", "guardIdle", "guardExit", "guardBreak", "guardHit" } )  then
 				keepBlockSprint = true
 			end
-			
+
 			--Stop sprint blocking
 			self.tool:setBlockSprint(keepBlockSprint)
 		end
-		
+
 		local isSprinting =  self.tool:isSprinting() 
 		if isSprinting and self.fpAnimations.currentAnimation == "idle" and self.attackCooldownTimer <= 0 and not isAnyOf( self.fpAnimations.currentAnimation, { "sprintInto", "sprintIdle" } ) then
 			local params = { name = "sprintInto" }
 			self:client_startLocalEvent( params )
 		end
-		
+
 		if ( not isSprinting and isAnyOf( self.fpAnimations.currentAnimation, { "sprintInto", "sprintIdle" } ) ) and self.fpAnimations.currentAnimation ~= "sprintExit" then
 			local params = { name = "sprintExit" }
 			self:client_startLocalEvent( params )
 		end
 	end
-	
 end
 
 function Knife.updateFreezeFrame( self, state, dt )
@@ -258,7 +237,7 @@ function Knife.client_startLocalEvent( self, params )
 end
 
 function Knife.client_handleEvent( self, params )
-	
+
 	-- Setup animation data on equip
 	if params.name == "equip" then
 		self.equipped = true
@@ -270,10 +249,10 @@ function Knife.client_handleEvent( self, params )
 	if not self.animationsLoaded then
 		return
 	end
-	
+
 	--Maybe not needed
 -------------------------------------------------------------------
-	
+
 	-- Third person animations
 	local tpAnimation = self.tpAnimations.animations[params.name]
 	if tpAnimation then
@@ -284,15 +263,15 @@ function Knife.client_handleEvent( self, params )
 				isSwing = true
 			end
 		end
-		
+
 		local blend = not isSwing
 		setTpAnimation( self.tpAnimations, params.name, blend and 0.2 or 0.0 )
 	end
-	
+
 	-- First person animations
 	if self.isLocal then
 		local isSwing = false
-		
+
 		for i = 1, self.swingCount do
 			if self.swings[i] == params.name then
 				self.fpAnimations.animations[self.swings[i]].playRate = 1
@@ -305,7 +284,7 @@ function Knife.client_handleEvent( self, params )
 		else
 			self.tool:setBlockSprint( false )
 		end
-		
+
 		if params.name == "guardInto" then
 			swapFpAnimation( self.fpAnimations, "guardExit", "guardInto", 0.2 )
 		elseif params.name == "guardExit" then
@@ -318,22 +297,11 @@ function Knife.client_handleEvent( self, params )
 			local blend = not ( isSwing or isAnyOf( params.name, { "equip", "unequip" } ) )
 			setFpAnimation( self.fpAnimations, params.name, blend and 0.2 or 0.0 )
 		end
-		
+
 	end
-		
 end
 
---function Knife.sv_n_toggleTumble( self )
---	local character = self.tool:getOwner().character
---	character:setTumbling( not character:isTumbling() )
---end
-
 function Knife.client_onEquippedUpdate( self, primaryState, secondaryState )
-	--HACK Enter/exit tumble state when hammering
-	--if primaryState == sm.tool.interactState.start then
-	--	self.network:sendToServer( "sv_n_toggleTumble" )
-	--end
-
 	if self.pendingRaycastFlag then
 		local time = 0.0
 		local frameTime = 0.0
@@ -345,29 +313,18 @@ function Knife.client_onEquippedUpdate( self, primaryState, secondaryState )
 			self.pendingRaycastFlag = false
 			local raycastStart = sm.localPlayer.getRaycastStart()
 			local direction = sm.localPlayer.getDirection()
-			local critDamage = (math.random() * 100) <= critChance and math.random(minCritDamage, maxCritDamage) or 0
-			sm.melee.meleeAttack( melee_Knife, Damage + critDamage, raycastStart, direction * Range, self.tool:getOwner() )
+			sm.melee.meleeAttack( melee_sledgehammer, Damage, raycastStart, direction * Range, self.tool:getOwner() )
 
 			local success, result = sm.localPlayer.getRaycast( Range, raycastStart, direction )
 			if success then
 				self.freezeTimer = self.freezeDuration
-				if critDamage > 0 then
-					self.network:sendToServer("sv_n_playCritEffect", {
-						effectName = "Barrier - SledgeHammerHit",
-						effect2Name = "EpicLootProjectile - Hit",
-						effect3Name = "Soundcube - Activate",
-						rotation = sm.vec3.getRotation(sm.vec3.new(0, 1, 0), result.normalWorld),
-						position = result.pointWorld
-					})
-				end
 			end
 		end
 	end
-	
+
 	--Start attack?
 	self.startedSwinging = ( self.startedSwinging or primaryState == sm.tool.interactState.start ) and primaryState ~= sm.tool.interactState.stop and primaryState ~= sm.tool.interactState.null
 	if primaryState == sm.tool.interactState.start or ( primaryState == sm.tool.interactState.hold and self.startedSwinging ) then
-		
 		--Check if we are currently playing a swing
 		if self.fpAnimations.currentAnimation == self.swings[self.currentSwing] then
 			if self.attackCooldownTimer < 0.125 then
@@ -394,16 +351,6 @@ function Knife.client_onEquippedUpdate( self, primaryState, secondaryState )
 	return true, false
 end
 
-function Knife:sv_n_playCritEffect(data)
-	self.network:sendToClients("cl_n_playCritEffect", data)
-end
-
-function Knife:cl_n_playCritEffect(data)
-	sm.effect.playEffect(data.effectName, data.position , nil, data.rotation, nil)
-	sm.effect.playEffect(data.effect2Name, data.position)
-	sm.effect.playEffect(data.effect3Name, data.position)
-end
-
 function Knife.client_onEquip( self, animate )
 
 	if animate then
@@ -414,7 +361,7 @@ function Knife.client_onEquip( self, animate )
 
 	for k,v in pairs( renderables ) do renderablesTp[#renderablesTp+1] = v end
 	for k,v in pairs( renderables ) do renderablesFp[#renderablesFp+1] = v end
-	
+
 	self.tool:setTpRenderables(renderablesTp)
 	if self.isLocal then
 		self.tool:setFpRenderables(renderablesFp)

@@ -15,7 +15,6 @@
 				{ "name": "Shotgun_sprint_into", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_into.dae" },
 				{ "name": "Shotgun_sprint_exit", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_exit.dae" },
 				{ "name": "Shotgun_sprint_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_idle.dae" },
-				{ "name": "Shotgun_sprint_shoot", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_sprint_shoot.dae" },
 
 				{ "name": "Shotgun_aim_into",  				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_into.dae" },
 				{ "name": "Shotgun_aim_exit",  				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_aim_exit.dae" },
@@ -32,9 +31,7 @@
 
 				{ "name": "Shotgun_modSelect_into", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_inspect_into.dae" },
 				{ "name": "Shotgun_modSelect_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_inspect_idle.dae" },
-				{ "name": "Shotgun_modSelect_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_inspect_exit.dae" }
-				
-				
+				{ "name": "Shotgun_modSelect_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Shotgun/Shotgun_fp_inspect_exit.dae" }	
 			]
 		}
 	]

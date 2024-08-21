@@ -291,7 +291,6 @@ function Shotgun.loadAnimations( self )
 				sprintInto = { "Shotgun_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Shotgun_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
 				sprintIdle = { "Shotgun_sprint_idle", { looping = true } },
-				sprintShoot = { "Shotgun_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 
 				modInto = { "Shotgun_modSelect_into", { nextAnimation = "modIdle" } },
 				modExit = { "Shotgun_modSelect_exit", { nextAnimation = "idle", blendNext = 0 } },
