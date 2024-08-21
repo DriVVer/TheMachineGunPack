@@ -21,10 +21,10 @@
 				{ "name": "SW38_aim_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_aim_shoot.dae" },
 				{ "name": "SW38_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_aim_idle.dae" },
 				
-				{ "name": "SW38_reload_into",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_reload_into.dae" },
-				{ "name": "SW38_reload_single",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_reload_single.dae" },
-				{ "name": "SW38_reload_SL",       		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_reload_single.dae" },
-				{ "name": "SW38_reload_exit",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_reload_exit.dae" }
+				{ "name": "SW38_reload_into",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_into.dae" },
+				{ "name": "SW38_reload_single",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_single.dae" },
+				{ "name": "SW38_reload_SL",       		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_SL.dae" },
+				{ "name": "SW38_reload_exit",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_exit.dae" }
 			]
 		}
 	]
