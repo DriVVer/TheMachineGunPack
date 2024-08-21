@@ -2378,10 +2378,14 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
-						time = 2.0
+						fp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 2.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 2.0 } },
+						time = 1.8
 					},
 					{
 						type = mgp_tool_anim_enum.nextAnimation,
@@ -2404,7 +2408,7 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
 						tp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
-						time = 2.0
+						time = 0.8
 					},
 					{
 						type = mgp_tool_anim_enum.nextAnimation,
@@ -2423,7 +2427,7 @@ local mgp_tool_database =
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
 						tp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
-						time = 2.0
+						time = 0.8
 					},
 					{
 						type = mgp_tool_anim_enum.nextAnimation,
