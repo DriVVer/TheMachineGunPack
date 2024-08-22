@@ -1611,7 +1611,7 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.42
+						time = 0.35
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
