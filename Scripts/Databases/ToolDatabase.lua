@@ -2025,7 +2025,7 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_SMG_Shot_5",
+			gunshot = "DLM_STG_Shot_1",
 			rack = "DLM_SMG_Rack_1",
 			magin = "DLM_AR_MagIn",
 			magout = "DLM_AR_MagOut"
@@ -2072,9 +2072,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "STG44_anims", start_val = 0.0, end_val = 0.13 } },
-						tp_anim = { { name = "STG44_anims", start_val = 0.0, end_val = 0.13 } },
-						time = 0.13
+						fp_anim = { { name = "STG44_anims", start_val = 0.0, end_val = 0.2 } },
+						tp_anim = { { name = "STG44_anims", start_val = 0.0, end_val = 0.2 } },
+						time = 0.2
 					}
 				},
 				[2] = {

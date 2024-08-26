@@ -157,6 +157,17 @@
 			}
 		]
 	},
+	"DLM_STG_Shot_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_Shot_1",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_HighCal_Shot_1":
 	{
 		"effectList":
