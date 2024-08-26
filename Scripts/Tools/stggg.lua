@@ -5,12 +5,10 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
-dofile("BaseGun.lua")
 
-local Damage = 41
-local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+local Damage = 32
 
----@class SW38 : BaseGun
+---@class STG44 : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field mag_capacity integer
@@ -23,39 +21,31 @@ local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
----@field spineWeight number
-SW38 = class(BaseGun)
-SW38.mag_capacity = 7
-SW38.maxRecoil = 20
-SW38.recoilAmount = 12
-SW38.aimRecoilAmount = 6
-SW38.recoilRecoverySpeed = 2
-SW38.aimFovTp = 30
-SW38.aimFovFp = 30
-SW38.reload_anims = {
-	["reload_into"] = true,
-	["reload_single"] = true,
-	["reload_exit"] = true,
-	["reload_SL"] = true
-}
+STG44 = class()
+STG44.mag_capacity = 30
+STG44.maxRecoil = 20
+STG44.recoilAmount = 8
+STG44.aimRecoilAmount = 6
+STG44.recoilRecoverySpeed = 0.9
+STG44.aimFovTp = 30
+STG44.aimFovFp = 30
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/SW38_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/SW38_Anim.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/SW38_Ammo.rend"
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_anims_tp.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_offset_tp.rend"
+	"$CONTENT_DATA/Tools/Renderables/STG44/char_STG44_anims_tp.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_offset_tp.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_anims_fp.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_offset_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/char_STG44_anims_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_offset_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
@@ -63,27 +53,42 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function SW38:client_initAimVals()
+function STG44:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function SW38:server_onCreate()
-	self:sv_init()
+function STG44:server_onCreate()
+	self.sv_ammo_counter = 0
+
+	local v_saved_ammo = self.storage:load()
+	if v_saved_ammo ~= nil then
+		self.sv_ammo_counter = v_saved_ammo
+	else
+		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
+			self.sv_ammo_counter = self.mag_capacity
+		end
+
+		self:server_updateAmmoCounter()
+	end
 end
 
-function SW38:server_updateAmmoCounter(data, caller)
+function STG44:server_requestAmmo(data, caller)
+	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
+end
+
+function STG44:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function SW38:client_receiveAmmo(ammo_count)
+function STG44:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function SW38:client_onCreate()
+function STG44:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
@@ -91,57 +96,20 @@ function SW38:client_onCreate()
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "SW38")
+	mgp_toolAnimator_initialize(self, "STG44")
 
-	self:cl_init()
+	self.network:sendToServer("server_requestAmmo")
 end
 
-function SW38:sv_reloadSingle()
-	local v_owner = self.tool:getOwner()
-	if v_owner == nil then return end
-
-	local v_inventory = v_owner:getInventory()
-	if v_inventory == nil then return end
-
-	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
-	if v_available_ammo == 0 then return end
-
-	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_pistol_ammo, 1)
-	sm.container.endTransaction()
-
-	self.sv_ammo_counter = self.sv_ammo_counter + 1
-	self:server_updateStorage()
-end
-
-function SW38:sv_reloadExit(forceExit)
-	if forceExit then
-		sm.container.beginTransaction()
-		sm.container.spend(self.tool:getOwner():getInventory(), mgp_pistol_ammo, self.mag_capacity)
-		sm.container.endTransaction()
-	end
-
-	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
-
-	self.sv_ammo_counter = self.mag_capacity
-	self:server_updateStorage()
-end
-
-function SW38:cl_reloadExit()
-	self.ammo_in_mag = self.mag_capacity
-	self.cl_hammer_cocked = true
-	self.waiting_for_ammo = nil
-end
-
-function SW38.client_onDestroy(self)
+function STG44.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function SW38.client_onRefresh( self )
+function STG44.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function SW38.loadAnimations( self )
+function STG44.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -152,10 +120,8 @@ function SW38.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_into = { "SW38_reload_into", { nextAnimation = "reload_single" } },
-			reload_single = { "SW38_reload_single", { looping = true } },
-			reload_SL = { "SW38_reload_SL", { nextAnimation = "reload_single" } },
-			reload_exit = { "SW38_reload_exit", { nextAnimation = "idle" } }
+			reload = { "STG44_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "STG44_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -189,37 +155,35 @@ function SW38.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "SW38_pickup", { nextAnimation = "idle" } },
-				unequip = { "SW38_putdown" },
+				equip = { "STG44_pickup", { nextAnimation = "idle" } },
+				unequip = { "STG44_putdown" },
 
-				idle = { "SW38_idle", { looping = true } },
-				shoot = { "SW38_shoot", { nextAnimation = "idle" } },
+				idle = { "STG44_idle", { looping = true } },
+				shoot = { "STG44_shoot", { nextAnimation = "idle" } },
 
-				aimInto = { "SW38_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "SW38_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "SW38_aim_idle", { looping = true } },
-				aimShoot = { "SW38_aim_shoot", { nextAnimation = "aimIdle"} },
+				reload = { "STG44_reload", { nextAnimation = "idle", duration = 1.0 } },
 
-				reload_into = { "SW38_reload_into", { nextAnimation = "reload_single" } },
-				reload_single = { "SW38_reload_single", { looping = true } },
-				reload_SL = { "SW38_reload_SL", { nextAnimation = "reload_single" } },
-				reload_exit = { "SW38_reload_exit", { nextAnimation = "idle" } },
+				ammo_check = { "STG44_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				sprintInto = { "SW38_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "SW38_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "SW38_sprint_idle", { looping = true } },
-				sprintShoot = { "SW38_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } }
+				aimInto = { "STG44_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "STG44_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "STG44_aim_idle", { looping = true } },
+				aimShoot = { "STG44_aim_shoot", { nextAnimation = "aimIdle"} },
+
+				sprintInto = { "STG44_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "STG44_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "STG44_sprint_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.40,
+		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = 4.25,
+		spreadMinAngle = 4.7,
 		spreadMaxAngle = 16,
-		fireVelocity = 350.0,
+		fireVelocity = 400.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -229,12 +193,12 @@ function SW38.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.30,
+		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
-		spreadIncrement = 1.5,
-		spreadMinAngle = 1,
-		spreadMaxAngle = 3,
-		fireVelocity =  350.0,
+		spreadIncrement = 1.3,
+		spreadMinAngle = 2,
+		spreadMaxAngle = 6,
+		fireVelocity =  400.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -259,14 +223,7 @@ function SW38.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-local aim_animations =
-{
-	["aimInto"]         = true,
-	["aimIdle"]         = true,
-	["aimShoot"]        = true
-}
-
-function SW38:client_updateAimWeights(dt)
+function STG44:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
@@ -283,7 +240,8 @@ function SW38:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-function SW38:server_spendAmmo(data, player)
+local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+function STG44:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -308,7 +266,7 @@ function SW38:server_spendAmmo(data, player)
 	self:server_updateAmmoCounter()
 end
 
-function SW38:sv_n_trySpendAmmo(data, player)
+function STG44:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -316,7 +274,7 @@ function SW38:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function SW38.client_onUpdate( self, dt )
+function STG44.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -327,19 +285,27 @@ function SW38.client_onUpdate( self, dt )
 		if self.equipped then
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
-			if cur_anim_cache ~= "sprintShoot" then
-				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
-					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-				elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
-					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			local anim_data = fp_anim.animations[cur_anim_cache]
+			local is_reload_anim = cur_anim_cache == "reload"
+			if anim_data and is_reload_anim then
+				local time_predict = anim_data.time + anim_data.playRate * dt
+				local info_duration = anim_data.info.duration
+
+				if time_predict >= info_duration then
+					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 			end
 
-			local isAimAnim = aim_animations[cur_anim_cache] == true
-			if self.aiming and not isAimAnim then
+			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+			elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+			end
+
+			if self.aiming and not isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAimAnim then
+			if not self.aiming and isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -404,7 +370,7 @@ function SW38.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self:client_isGunReloading()
+	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -425,7 +391,7 @@ function SW38.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload" or name == "reload_empty" ) then
+				elseif name == "reload" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -455,7 +421,7 @@ function SW38.client_onUpdate( self, dt )
 
 	-- Third Person joint lock
 	local relativeMoveDirection = self.tool:getRelativeMoveDirection()
-	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) ) then
+	if ( ( ( isAnyOf( self.tpAnimations.currentAnimation, { "aimInto", "aim", "shoot" } ) and ( relativeMoveDirection:length() > 0 or isCrouching) ) or ( self.aiming and ( relativeMoveDirection:length() > 0 or isCrouching) ) ) and not isSprinting ) then
 		self.jointWeight = math.min( self.jointWeight + ( 10.0 * dt ), 1.0 )
 	else
 		self.jointWeight = math.max( self.jointWeight - ( 6.0 * dt ), 0.0 )
@@ -489,7 +455,7 @@ function SW38.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function SW38:client_onEquip(animate, is_custom)
+function STG44:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -521,20 +487,16 @@ function SW38:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	local v_gun_color = sm.color.new("4d2714")
-	self.tool:setTpColor(v_gun_color)
-	self.tool:setFpColor(v_gun_color)
-
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
-	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
+	mgp_toolAnimator_setAnimation(self, "equip")
 end
 
-function SW38:client_onUnequip(animate, is_custom)
+function STG44:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -571,49 +533,49 @@ function SW38:client_onUnequip(animate, is_custom)
 	end
 end
 
-function SW38:sv_n_onAim(aiming)
+function STG44:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function SW38:cl_n_onAim(aiming)
+function STG44:cl_n_onAim(aiming)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function SW38:onAim(aiming)
+function STG44:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function SW38:sv_n_onShoot(is_last_shot)
-	self.network:sendToClients("cl_n_onShoot", is_last_shot)
+function STG44:sv_n_onShoot(dir)
+	self.network:sendToClients( "cl_n_onShoot", dir )
 
-	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
+	if dir ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function SW38:cl_n_onShoot(is_last_shot)
+function STG44:cl_n_onShoot(dir)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot(is_last_shot)
+		self:onShoot(dir)
 	end
 end
 
-function SW38:onShoot(is_last_shot)
+function STG44:onShoot(dir)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation( self.tpAnimations, anim, 10.0 )
-	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
+	mgp_toolAnimator_setAnimation(self, anim)
 end
 
-function SW38:calculateFirePosition()
+function STG44:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -640,7 +602,7 @@ function SW38:calculateFirePosition()
 	return firePosition
 end
 
-function SW38:calculateTpMuzzlePos()
+function STG44:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -674,7 +636,7 @@ function SW38:calculateTpMuzzlePos()
 	return fakePosition
 end
 
-function SW38:calculateFpMuzzlePos()
+function STG44:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -704,7 +666,7 @@ function SW38:calculateFpMuzzlePos()
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function SW38:cl_onPrimaryUse(is_shooting)
+function STG44:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
@@ -752,7 +714,7 @@ function SW38:cl_onPrimaryUse(is_shooting)
 			end
 		end
 
-		dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
+		dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 		-- Spread
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
@@ -771,14 +733,12 @@ function SW38:cl_onPrimaryUse(is_shooting)
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
-		local is_last_shot = self.ammo_in_mag == 0
-
 		-- Send TP shoot over network and dircly to self
-		self:onShoot(is_last_shot)
-		self.network:sendToServer("sv_n_onShoot", is_last_shot)
+		self:onShoot( dir )
+		self.network:sendToServer( "sv_n_onShoot", dir )
 
 		-- Play FP shoot animation
-		setFpAnimation( self.fpAnimations, self.tool:isSprinting() and "sprintShoot" or (self.aiming and "aimShoot" or "shoot"), 0.0 )
+		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		self.fireCooldownTimer = fireMode.fireCooldown
@@ -786,24 +746,44 @@ function SW38:cl_onPrimaryUse(is_shooting)
 	end
 end
 
-function SW38:sv_n_onReload()
+local reload_anims =
+{
+	["reload"] = true,
+	["ammo_check"] = true
+}
+
+function STG44:sv_n_onReload()
 	self.network:sendToClients("cl_n_onReload")
 end
 
-function SW38:cl_n_onReload()
+function STG44:cl_n_onReload()
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:cl_startReloadAnim()
 	end
 end
 
-function SW38:cl_startReloadAnim()
-	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
-	mgp_toolAnimator_setAnimation(self, "reload_into")
+function STG44:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload")
 end
 
-function SW38:cl_initReloadAnim()
+function STG44:client_isGunReloading()
+	if self.waiting_for_ammo then
+		return true
+	end
+
+	local fp_anims = self.fpAnimations
+	if fp_anims ~= nil then
+		return (reload_anims[fp_anims.currentAnimation] == true)
+	end
+
+	return false
+end
+
+function STG44:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
-		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo) == 0 then
+		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
+		if v_available_ammo == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
@@ -811,16 +791,53 @@ function SW38:cl_initReloadAnim()
 
 	self.waiting_for_ammo = true
 
-	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
+	--Start fp and tp animations locally
+	setFpAnimation(self.fpAnimations, "reload", 0.0)
 	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
 	self.network:sendToServer("sv_n_onReload")
 end
 
-function SW38:client_onReload()
-	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
-		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+function STG44:client_onReload()
+	if self.equipped then
+		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		if not is_mag_full then
+			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+				self:cl_initReloadAnim()
+			end
+		end
+	end
+
+	return true
+end
+
+function STG44:sv_n_checkMag()
+	self.network:sendToClients("cl_n_checkMag")
+end
+
+function STG44:cl_n_checkMag()
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
+		self:cl_startCheckMagAnim()
+	end
+end
+
+function STG44:cl_startCheckMagAnim()
+	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
+end
+
+function STG44:client_onToggle()
+	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+		if self.ammo_in_mag > 0 then
+			sm.gui.displayAlertText(("STG44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
+
+			self:cl_startCheckMagAnim()
+			self.network:sendToServer("sv_n_checkMag")
+		else
+			sm.gui.displayAlertText("STG44: No Ammo. Reloading...", 3)
+
 			self:cl_initReloadAnim()
 		end
 	end
@@ -829,7 +846,7 @@ function SW38:client_onReload()
 end
 
 local _intstate = sm.tool.interactState
-function SW38.cl_onSecondaryUse( self, state )
+function STG44.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -844,8 +861,8 @@ function SW38.cl_onSecondaryUse( self, state )
 	end
 end
 
-function SW38.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start)
+function STG44.client_onEquippedUpdate( self, primaryState, secondaryState )
+	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then
 		self:cl_onSecondaryUse( secondaryState )

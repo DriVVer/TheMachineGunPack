@@ -6,9 +6,9 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 21
+local Damage = 34
 
----@class Mp40 : ToolClass
+---@class STG44 : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field mag_capacity integer
@@ -21,31 +21,31 @@ local Damage = 21
 ---@field sprintCooldown integer
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
-Mp40 = class()
-Mp40.mag_capacity = 32
-Mp40.maxRecoil = 20
-Mp40.recoilAmount = 8
-Mp40.aimRecoilAmount = 6
-Mp40.recoilRecoverySpeed = 0.9
-Mp40.aimFovTp = 30
-Mp40.aimFovFp = 30
+STG44 = class()
+STG44.mag_capacity = 35
+STG44.maxRecoil = 15
+STG44.recoilAmount = 8
+STG44.aimRecoilAmount = 4
+STG44.recoilRecoverySpeed = 1
+STG44.aimFovTp = 30
+STG44.aimFovFp = 30
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mp40/Mp40_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_Anim.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mp40/char_male_tp_Mp40.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mp40/char_Mp40_tp_offset.rend"
+	"$CONTENT_DATA/Tools/Renderables/STG44/char_STG44_anims_tp.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_offset_tp.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/Mp40/char_male_fp_Mp40.rend",
-	"$CONTENT_DATA/Tools/Renderables/Mp40/char_Mp40_fp_offset.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/char_STG44_anims_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/STG44/STG44_offset_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
@@ -53,12 +53,12 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function Mp40:client_initAimVals()
+function STG44:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function Mp40:server_onCreate()
+function STG44:server_onCreate()
 	self.sv_ammo_counter = 0
 
 	local v_saved_ammo = self.storage:load()
@@ -73,22 +73,22 @@ function Mp40:server_onCreate()
 	end
 end
 
-function Mp40:server_requestAmmo(data, caller)
+function STG44:server_requestAmmo(data, caller)
 	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Mp40:server_updateAmmoCounter(data, caller)
+function STG44:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function Mp40:client_receiveAmmo(ammo_count)
+function STG44:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function Mp40:client_onCreate()
+function STG44:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
@@ -96,20 +96,20 @@ function Mp40:client_onCreate()
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "Mp40")
+	mgp_toolAnimator_initialize(self, "STG44")
 
 	self.network:sendToServer("server_requestAmmo")
 end
 
-function Mp40.client_onDestroy(self)
+function STG44.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function Mp40.client_onRefresh( self )
+function STG44.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function Mp40.loadAnimations( self )
+function STG44.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -120,8 +120,9 @@ function Mp40.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload = { "Mp40_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "Mp40_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			reload_empty = { "STG44_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
+			reload = { "STG44_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
+			ammo_check = { "STG44_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
 		}
 	)
 	local movementAnimations = {
@@ -155,35 +156,36 @@ function Mp40.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "Mp40_pickup", { nextAnimation = "idle" } },
-				unequip = { "Mp40_putdown" },
+				equip = { "STG44_pickup", { nextAnimation = "idle" } },
+				unequip = { "STG44_putdown" },
 
-				idle = { "Mp40_idle", { looping = true } },
-				shoot = { "Mp40_shoot", { nextAnimation = "idle" } },
+				idle = { "STG44_idle", { looping = true } },
+				shoot = { "STG44_shoot", { nextAnimation = "idle" } },
 
-				reload = { "Mp40_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload = { "STG44_reload", { nextAnimation = "idle", duration = 1.0 } },
+				reload_empty = { "STG44_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
 
-				ammo_check = { "Mp40_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				ammo_check = { "STG44_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "Mp40_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "Mp40_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Mp40_aim_idle", { looping = true } },
-				aimShoot = { "Mp40_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimInto = { "STG44_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "STG44_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "STG44_aim_idle", { looping = true } },
+				aimShoot = { "STG44_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				sprintInto = { "Mp40_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "Mp40_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "Mp40_sprint_idle", { looping = true } },
+				sprintInto = { "STG44_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "STG44_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "STG44_sprint_idle", { looping = true } },
 			}
 		)
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.08,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
-		spreadMinAngle = 4.7,
-		spreadMaxAngle = 16,
-		fireVelocity = 400.0,
+		spreadMinAngle = 4.25,
+		spreadMaxAngle = 15,
+		fireVelocity = 350.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -193,12 +195,12 @@ function Mp40.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.08,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 2,
 		spreadMaxAngle = 6,
-		fireVelocity =  400.0,
+		fireVelocity =  350.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
@@ -223,7 +225,13 @@ function Mp40.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-function Mp40:client_updateAimWeights(dt)
+local actual_reload_anims =
+{
+	["reload"] = true,
+	["reload_empty"] = true
+}
+
+function STG44:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
@@ -241,7 +249,7 @@ function Mp40:client_updateAimWeights(dt)
 end
 
 local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function Mp40:server_spendAmmo(data, player)
+function STG44:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -266,7 +274,7 @@ function Mp40:server_spendAmmo(data, player)
 	self:server_updateAmmoCounter()
 end
 
-function Mp40:sv_n_trySpendAmmo(data, player)
+function STG44:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -274,7 +282,7 @@ function Mp40:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function Mp40.client_onUpdate( self, dt )
+function STG44.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -286,7 +294,7 @@ function Mp40.client_onUpdate( self, dt )
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
 			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = cur_anim_cache == "reload"
+			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
 			if anim_data and is_reload_anim then
 				local time_predict = anim_data.time + anim_data.playRate * dt
 				local info_duration = anim_data.info.duration
@@ -296,16 +304,16 @@ function Mp40.client_onUpdate( self, dt )
 				end
 			end
 
-			if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
+			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
 				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( cur_anim_cache == "sprintIdle" or cur_anim_cache == "sprintInto" ) then
+			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
 				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
 			end
 
-			if self.aiming and not isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
 			end
-			if not self.aiming and isAnyOf( cur_anim_cache, { "aimInto", "aimIdle", "aimShoot" } ) then
+			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
 				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 			end
 		end
@@ -375,6 +383,11 @@ function Mp40.client_onUpdate( self, dt )
 
 	local playerDir = self.tool:getSmoothDirection()
 	local angle = math.asin( playerDir:dot( sm.vec3.new( 0, 0, 1 ) ) ) / ( math.pi / 2 ) + self.cl_recoilAngle
+	local linareAngle = playerDir:dot( sm.vec3.new( 0, 0, 1 ) )
+
+	down = clamp( -angle, 0.0, 1.0 )
+	fwd = ( 1.0 - math.abs( angle ) )
+	up = clamp( angle, 0.0, 1.0 )
 
 	local crouchWeight = self.tool:isCrouching() and 1.0 or 0.0
 	local normalWeight = 1.0 - crouchWeight
@@ -391,7 +404,7 @@ function Mp40.client_onUpdate( self, dt )
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
 				elseif name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif name == "reload" then
+				elseif ( name == "reload" or name == "reload_empty" ) then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
 				elseif  name == "ammo_check" then
 					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
@@ -455,7 +468,7 @@ function Mp40.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function Mp40:client_onEquip(animate, is_custom)
+function STG44:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -496,7 +509,7 @@ function Mp40:client_onEquip(animate, is_custom)
 	mgp_toolAnimator_setAnimation(self, "equip")
 end
 
-function Mp40:client_onUnequip(animate, is_custom)
+function STG44:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -533,24 +546,24 @@ function Mp40:client_onUnequip(animate, is_custom)
 	end
 end
 
-function Mp40:sv_n_onAim(aiming)
+function STG44:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function Mp40:cl_n_onAim(aiming)
+function STG44:cl_n_onAim(aiming)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function Mp40:onAim(aiming)
+function STG44:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function Mp40:sv_n_onShoot(dir)
+function STG44:sv_n_onShoot(dir)
 	self.network:sendToClients( "cl_n_onShoot", dir )
 
 	if dir ~= nil and self.sv_ammo_counter > 0 then
@@ -559,13 +572,13 @@ function Mp40:sv_n_onShoot(dir)
 	end
 end
 
-function Mp40:cl_n_onShoot(dir)
+function STG44:cl_n_onShoot(dir)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(dir)
 	end
 end
 
-function Mp40:onShoot(dir)
+function STG44:onShoot(dir)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -575,7 +588,7 @@ function Mp40:onShoot(dir)
 	mgp_toolAnimator_setAnimation(self, anim)
 end
 
-function Mp40:calculateFirePosition()
+function STG44:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -602,7 +615,7 @@ function Mp40:calculateFirePosition()
 	return firePosition
 end
 
-function Mp40:calculateTpMuzzlePos()
+function STG44:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -636,7 +649,7 @@ function Mp40:calculateTpMuzzlePos()
 	return fakePosition
 end
 
-function Mp40:calculateFpMuzzlePos()
+function STG44:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -666,7 +679,7 @@ function Mp40:calculateFpMuzzlePos()
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function Mp40:cl_onPrimaryUse(is_shooting)
+function STG44:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
@@ -714,7 +727,7 @@ function Mp40:cl_onPrimaryUse(is_shooting)
 			end
 		end
 
-		dir = dir:rotate( math.rad( 0.6 ), sm.camera.getRight() ) -- 25 m sight calibration
+		dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
 
 		-- Spread
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
@@ -749,25 +762,38 @@ end
 local reload_anims =
 {
 	["reload"] = true,
+	["reload_empty"] = true,
 	["ammo_check"] = true
 }
 
-function Mp40:sv_n_onReload()
-	self.network:sendToClients("cl_n_onReload")
+local anim_name_to_id =
+{
+	["reload"] = 1,
+	["reload_empty"] = 2
+}
+
+local id_to_anim_name =
+{
+	[1] = "reload",
+	[2] = "reload_empty"
+}
+
+function STG44:sv_n_onReload(anim_id)
+	self.network:sendToClients("cl_n_onReload", anim_id)
 end
 
-function Mp40:cl_n_onReload()
+function STG44:cl_n_onReload(anim_id)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim()
+		self:cl_startReloadAnim(id_to_anim_name[anim_id])
 	end
 end
 
-function Mp40:cl_startReloadAnim()
-	setTpAnimation(self.tpAnimations, "reload", 1.0)
-	mgp_toolAnimator_setAnimation(self, "reload")
+function STG44:cl_startReloadAnim(anim_name)
+	setTpAnimation(self.tpAnimations, anim_name, 1.0)
+	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function Mp40:client_isGunReloading()
+function STG44:client_isGunReloading()
 	if self.waiting_for_ammo then
 		return true
 	end
@@ -780,7 +806,7 @@ function Mp40:client_isGunReloading()
 	return false
 end
 
-function Mp40:cl_initReloadAnim()
+function STG44:cl_initReloadAnim(anim_name)
 	if sm.game.getEnableAmmoConsumption() then
 		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
 		if v_available_ammo == 0 then
@@ -792,19 +818,24 @@ function Mp40:cl_initReloadAnim()
 	self.waiting_for_ammo = true
 
 	--Start fp and tp animations locally
-	setFpAnimation(self.fpAnimations, "reload", 0.0)
-	self:cl_startReloadAnim()
+	setFpAnimation(self.fpAnimations, anim_name, 0.0)
+	self:cl_startReloadAnim(anim_name)
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload")
+	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
 end
 
-function Mp40:client_onReload()
+function STG44:client_onReload()
 	if self.equipped then
 		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
 		if not is_mag_full then
 			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-				self:cl_initReloadAnim()
+				local cur_anim_name = "reload"
+				if self.ammo_in_mag == 0 then
+					cur_anim_name = "reload_empty"
+				end
+
+				self:cl_initReloadAnim(cur_anim_name)
 			end
 		end
 	end
@@ -812,33 +843,33 @@ function Mp40:client_onReload()
 	return true
 end
 
-function Mp40:sv_n_checkMag()
+function STG44:sv_n_checkMag()
 	self.network:sendToClients("cl_n_checkMag")
 end
 
-function Mp40:cl_n_checkMag()
+function STG44:cl_n_checkMag()
 	local s_tool = self.tool
 	if not s_tool:isLocal() and s_tool:isEquipped() then
 		self:cl_startCheckMagAnim()
 	end
 end
 
-function Mp40:cl_startCheckMagAnim()
+function STG44:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
 end
 
-function Mp40:client_onToggle()
+function STG44:client_onToggle()
 	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("Mp40: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			sm.gui.displayAlertText(("STG44: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
 		else
-			sm.gui.displayAlertText("Mp40: No Ammo. Reloading...", 3)
+			sm.gui.displayAlertText("STG44: No Ammo. Reloading...", 3)
 
-			self:cl_initReloadAnim()
+			self:cl_initReloadAnim("reload_empty")
 		end
 	end
 
@@ -846,7 +877,7 @@ function Mp40:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function Mp40.cl_onSecondaryUse( self, state )
+function STG44.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -861,7 +892,7 @@ function Mp40.cl_onSecondaryUse( self, state )
 	end
 end
 
-function Mp40.client_onEquippedUpdate( self, primaryState, secondaryState )
+function STG44.client_onEquippedUpdate( self, primaryState, secondaryState )
 	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
 
 	if secondaryState ~= self.prevSecondaryState then

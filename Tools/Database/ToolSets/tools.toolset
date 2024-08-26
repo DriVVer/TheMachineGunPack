@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"name": "STG44",
+			"uuid": "f3d472ac-fcfc-4118-8327-c69f465fe167",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/STG44/STG44_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/STG44.lua",
+				"class": "STG44",
+				"data": {}
+			}
+		},
+		{
 			"name": "PPSh",
 			"uuid": "d8ba1dfe-172c-41ea-83e1-2c977e21d9e9",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/PPSh/PPSh_Preview.rend",

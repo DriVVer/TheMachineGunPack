@@ -1,0 +1,26 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/STG44/STG44_Preview.fbx",
+			"subMeshList": [
+				
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_dif.png",
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
+					]
+				}
+			]
+		}
+	]
+}
