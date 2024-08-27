@@ -313,6 +313,62 @@
 
 	//reload_effects
 	
+	"DLM_STG_MagIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_MagIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_STG_MagOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_MagOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_STG_MagDrop":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_MagDrop",
+				"delay": 0.0
+			}
+		]
+	},
+
+	"DLM_STG_RackIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_RackIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_STG_RackOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "STG_TMGP_RackOut",
+				"delay": 0.0
+			}
+		]
+	},
 	
 	"DLM_Gun_AmmoCheck":
 	{
@@ -325,6 +381,7 @@
 			}
 		]
 	},
+
 	"DLM_Rocket_Flyin": {
 
 		"parameterList":{"DLM_Volume" : 10},
@@ -368,6 +425,52 @@
 			}
 		]
 	},
+
+	"DLM_PFRocket_Flyin": {
+
+		"parameterList":{"DLM_Volume" : 10},
+		"effectList": [
+			{
+				"type": "renderable",
+				"name": "$CONTENT_DATA/Projectiles/Renderables/PFRocket.rend"
+			},
+			{
+				"type": "particle",
+				"name": "Bazooka_Rocket_Exhaust"
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 2.3,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 4.6,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 6.9,
+				"parameters" : ["DLM_Volume"]
+			},
+			{
+				"type": "audio",
+				"name": "Rocket_TMGP_Flyin",
+				"delay": 9.2,
+				"parameters" : ["DLM_Volume"]
+			}
+		]
+	},
+
+
 	"DLM_Bazooka_Ammo":
 	{
 		"effectList":

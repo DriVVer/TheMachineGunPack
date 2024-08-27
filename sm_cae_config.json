@@ -1,5 +1,32 @@
 {
     "soundList": {
+
+        "STG_TMGP_MagIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_MagIn.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "STG_TMGP_MagOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_MagOut.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "STG_TMGP_MagDrop": {
+            "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_MagDrop.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "STG_TMGP_RackIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_RackIn.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "STG_TMGP_RackOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_RackOut.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+
         "NoAmmo_TMGP": {
             "path":"$CONTENT_DATA/Effects/Audio/NoAmmo_TMGP.mp3",
             "is3D": true,

@@ -2026,9 +2026,11 @@ local mgp_tool_database =
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_STG_Shot_1",
-			rack = "DLM_SMG_Rack_1",
-			magin = "DLM_AR_MagIn",
-			magout = "DLM_AR_MagOut"
+			rackin = "DLM_STG_RackIn",
+			rackout = "DLM_STG_RackOut",
+			magdrop = "DLM_STG_MagDrop",
+			magin = "DLM_STG_MagIn",
+			magout = "DLM_STG_MagOut"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -2132,24 +2134,57 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "reload",
-						name_fp = "reload",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.13
+						time = 0.25
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "STG44_anims", start_val = 0.13, end_val = 4.5 } },
-						tp_anim = { { name = "STG44_anims", start_val = 0.13, end_val = 4.5 } },
-						time = 4.37
+						fp_anim = { { name = "STG44_anims", start_val = 0.15, end_val = 2.0 } },
+						tp_anim = { { name = "STG44_anims", start_val = 0.15, end_val = 2.0 } },
+						time = 1.85
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.25
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.5
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					}
+				}
+			},
+			reload_empty =
+			{
+				[1] = { --first animation track
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "STG44_anims", start_val = 2.0, end_val = 4.0 } },
+						tp_anim = { { name = "STG44_anims", start_val = 2.0, end_val = 4.0 } },
+						time = 2.0
 					}
 				},
 				[2] = {
@@ -2160,30 +2195,28 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false,
-
-					},
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.85
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.2
+						time = 0.65
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magdrop",
+						name_fp = "magdrop",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.40
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2193,21 +2226,32 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.10
+						time = 0.58
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
+						name_tp = "rackin",
+						name_fp = "rackin",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
-
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.15
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "rackout",
+						name_fp = "rackout",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
 					}
 				}
 			}
