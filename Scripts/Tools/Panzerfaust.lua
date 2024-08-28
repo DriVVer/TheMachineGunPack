@@ -712,7 +712,7 @@ function Panzerfaust:onShoot(v_proj_hit)
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 120 })
+	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 10 })
 
 	self.cl_barrel_exhaust:start()
 end

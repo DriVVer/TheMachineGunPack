@@ -22,7 +22,7 @@ local Damage = 34
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 STG44 = class()
-STG44.mag_capacity = 35
+STG44.mag_capacity = 5
 STG44.maxRecoil = 15
 STG44.recoilAmount = 8
 STG44.aimRecoilAmount = 4
@@ -180,12 +180,12 @@ function STG44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.08,
+		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
-		spreadIncrement = 2.6,
-		spreadMinAngle = 4.25,
-		spreadMaxAngle = 15,
-		fireVelocity = 350.0,
+		spreadIncrement = 1.6,
+		spreadMinAngle = 0.25,
+		spreadMaxAngle = 7,
+		fireVelocity = 500.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -195,18 +195,18 @@ function STG44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.08,
+		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
-		spreadIncrement = 1.3,
-		spreadMinAngle = 2,
-		spreadMaxAngle = 6,
-		fireVelocity =  350.0,
+		spreadIncrement = 0.3,
+		spreadMinAngle = 0.25,
+		spreadMaxAngle = 7,
+		fireVelocity =  500.0,
 
 		minDispersionStanding = 0.01,
 		minDispersionCrouching = 0.01,
 
-		maxMovementDispersion = 0.4,
-		jumpDispersionMultiplier = 2
+		maxMovementDispersion = 0.7,
+		jumpDispersionMultiplier = 4
 	}
 
 	self.fireCooldownTimer = 0.8
@@ -248,7 +248,7 @@ function STG44:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
+local mgp_pistol_ammo = sm.uuid.new("3f4644d5-47cb-477d-b22d-901ab2ed2e0f")
 function STG44:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
