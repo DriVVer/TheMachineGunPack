@@ -22,7 +22,7 @@ local Damage = 34
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 STG44 = class()
-STG44.mag_capacity = 5
+STG44.mag_capacity = 30
 STG44.maxRecoil = 15
 STG44.recoilAmount = 8
 STG44.aimRecoilAmount = 4

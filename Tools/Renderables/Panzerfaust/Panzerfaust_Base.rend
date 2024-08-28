@@ -8,9 +8,9 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/Beige.png",
-						"$CONTENT_DATA/Objects/Textures/empty.png",
-						"$CONTENT_DATA/Tools/Textures/nonor_nor.tga"
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_dif.png",
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_nor.png"
 					]
 				}
 			]
