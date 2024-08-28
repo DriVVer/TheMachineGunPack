@@ -76,8 +76,12 @@
 		"title": "StG 44",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'SturmGewehr' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
-	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
+	"ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3": {
 		"title": "S&W Model 10 Revolver",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
+	},
+	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
+		"title": "S&W Model 29 Revolver",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"4664a470-275f-4799-a54f-6a4a2111f436": {

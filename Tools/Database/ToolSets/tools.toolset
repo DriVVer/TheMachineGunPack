@@ -101,8 +101,19 @@
 			}
 		},
 		{
-			"name": "SW38",
+			"name": "Magnum",
 			"uuid": "96f3b45c-8729-4573-bc14-bbe1cc7fd2bb",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Magnum4444.lua",
+				"class": "Magnum44",
+				"data": {}
+			}
+		},
+		{
+			"name": "SW38",
+			"uuid": "ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/SW38/SW38_Preview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
