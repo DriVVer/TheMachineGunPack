@@ -2160,7 +2160,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.5
+						time = 1.35
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
