@@ -20,6 +20,7 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field sprintCooldown integer
 ---@field fireCooldownTimer integer
 ---@field equipped boolean
+---@field cl_isLocal boolean
 Panzerfaust = class()
 
 local renderables =
@@ -712,7 +713,7 @@ function Panzerfaust:onShoot(v_proj_hit)
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, { v_proj_hit, 10 })
+	BazookaProjectile_clientSpawnProjectile(self, v_proj_hit, 10, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
 
 	self.cl_barrel_exhaust:start()
 end

@@ -23,8 +23,23 @@ local function calculateRightVector(vector)
 	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
 end
 
----@param self Bazooka
-function BazookaProjectile_clientSpawnProjectile(self, data)
+---@param effect? string
+---@param cae_effect? string
+---@return string
+local function BazookaProjectile_getEffectName(effect, cae_effect)
+	if sm.cae_injected then
+		return cae_effect or "DLM_Rocket_Flyin"
+	else
+		return effect or "Bazooka - Projectile"
+	end
+end
+
+---@param self Bazooka|Panzerfaust
+---@param hit_position Vec3
+---@param velocity number
+---@param effect? string
+---@param cae_effect? string
+function BazookaProjectile_clientSpawnProjectile(self, hit_position, velocity, effect, cae_effect)
 	local s_tool = self.tool
 
 	local v_proj_pos = nil
@@ -37,11 +52,11 @@ function BazookaProjectile_clientSpawnProjectile(self, data)
 		v_proj_pos = s_tool:getTpBonePos("pejnt_barrel")
 	end
 
-	local v_proj_direction = (data[1] - v_proj_pos):normalize()
+	local v_proj_direction = (hit_position - v_proj_pos):normalize()
 	v_proj_pos = v_proj_pos + v_proj_direction
-	local v_proj_velocity = v_proj_direction * data[2]
+	local v_proj_velocity = v_proj_direction * velocity
 
-	local v_proj_effect = sm.effect.createEffect (sm.cae_injected and "DLM_Rocket_Flyin" or "Bazooka - Projectile")
+	local v_proj_effect = sm.effect.createEffect(BazookaProjectile_getEffectName(effect, cae_effect))
 	v_proj_effect:setScale(sm.vec3.new(0.5, 0.5, 0.5))
 
 	local v_new_projectile =
