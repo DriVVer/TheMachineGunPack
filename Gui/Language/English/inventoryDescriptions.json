@@ -2,7 +2,7 @@
 	
 	"903b737a-42b9-459d-a169-c4171016cfab": {
 		"title": "Rocket Launcher Ammo",
-		"description": "Used for: \n- Bazooka M20"
+		"description": "Used for: \n- Bazooka M20\n- Panzerfaust 100"
 	},
 	"af84d5d9-00b1-4bab-9c5a-102c11e14a13": {
 		"title": "Pistol Ammo",
@@ -14,15 +14,15 @@
 	},
 	"3f4644d5-47cb-477d-b22d-901ab2ed2e0f": {
 		"title": "Short Rifle Ammo",
-		"description": "Used for: \n- COMMING SOON"
+		"description": "Used for: \n- StG 44"
 	},
 	"a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2": {
 		"title": "Shotgun Birdshot Ammo",
-		"description": "Used for: \n- Double Barrel Shotgun"
+		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun"
 	},
 	"a2a1b12e-8045-4ab0-9577-8b63c06a55c2": {
 		"title": "Shotgun Sabot Ammo",
-		"description": "Used for: \n- Double Barrel Shotgun"
+		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun"
 	},
 	"d80e4edd-8823-42f6-9f17-1dc130ba51ce": {
 		"title": "Anti-Armor Ammo",
@@ -52,13 +52,17 @@
 		"title": "Bazooka M20",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
 	},
+	"56b4204e-6a3b-4d6d-8858-924dc65fe6d9": {
+		"title": "Panzerfaust 100",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Panzerfaust' made of scrap.\n\nSingle Use"
+	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"d64d4f6c-1a21-47f5-adf9-63397aa6a3a0": {
-		"title": "Maschinenpistole 40",
-		"description": "The Machine Gun Pack\n\nWeapon based on 'MP40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"title": "Mp 40",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Maschinenpistole 40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"d8ba1dfe-172c-41ea-83e1-2c977e21d9e9": {
 		"title": "PPSh 41 SMG (Box mag)",
@@ -68,9 +72,13 @@
 		"title": "PPSh 41 SMG (Drum mag)",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
+	"f3d472ac-fcfc-4118-8327-c69f465fe167": {
+		"title": "StG 44",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'SturmGewehr' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+	},
 	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
-		"title": "Revolver",
-		"description": "The Machine Gun Pack\n\nWeapon based on 'Smith & Wesson Model 29' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
+		"title": "S&W Model 10 Revolver",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"4664a470-275f-4799-a54f-6a4a2111f436": {
 		"title": "First Aid Medkit",
