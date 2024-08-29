@@ -614,7 +614,7 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 		self.tool:updateAnimation("Panzerfaust_anims", 4.3, 1.0)
 		self.fireCooldownTimer = 1.0
 	else
-		self.fireCooldownTimer = 3.5
+		self.fireCooldownTimer = 1.25
 	end
 
 	if (is_custom and self.cl_barrel_attached) or not self.cl_is_loaded then
@@ -713,7 +713,7 @@ function Panzerfaust:onShoot(v_proj_hit)
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, v_proj_hit, 90, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
+	BazookaProjectile_clientSpawnProjectile(self, v_proj_hit, 80, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
 
 	self.cl_barrel_exhaust:start()
 end

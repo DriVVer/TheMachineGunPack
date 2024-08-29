@@ -8,7 +8,7 @@ dofile("ToolSwimUtil.lua")
 
 local Damage = 45
 
----@class Magnum : ToolClass
+---@class Magnum44 : ToolClass
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field aiming boolean

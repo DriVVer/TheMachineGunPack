@@ -5172,9 +5172,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.49 } },
-						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.49 } },
-						time = 0.01
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.70 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.0, end_val = 0.70 } },
+						time = 0.70
 					}
 				}
 			},
@@ -5194,9 +5194,9 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
-						time = 0.1
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.75, end_val = 1.25 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.75, end_val = 1.25 } },
+						time = 0.5
 					}
 				},
 				[3] = {
@@ -5227,8 +5227,8 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
-						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.5, end_val = 1.0 } },
+						fp_anim = { { name = "Panzerfaust_anims", start_val = 0.75, end_val = 1.25 } },
+						tp_anim = { { name = "Panzerfaust_anims", start_val = 0.75, end_val = 1.25 } },
 						time = 0.1
 					}
 				},

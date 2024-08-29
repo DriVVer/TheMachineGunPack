@@ -6,8 +6,8 @@
 				{
 					"material": "DifAsg",
 					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/beige.png",
-						"$CONTENT_DATA/Tools/Textures/tommy_gun_asg.png"
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_dif.png",
+						"$CONTENT_DATA/Tools/Textures/STG44/STG44_asg.tga"
 					]
 				}
 			]

@@ -103,10 +103,10 @@
 		{
 			"name": "Magnum",
 			"uuid": "96f3b45c-8729-4573-bc14-bbe1cc7fd2bb",
-			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44Preview.rend",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Revolver/Magnum44_InventoryPreview.rend",
 			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
 			"script": {
-				"file": "$CONTENT_DATA/Scripts/Tools/Magnum4444.lua",
+				"file": "$CONTENT_DATA/Scripts/Tools/Magnum44.lua",
 				"class": "Magnum44",
 				"data": {}
 			}
