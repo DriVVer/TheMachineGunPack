@@ -1832,9 +1832,10 @@ local mgp_tool_database =
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_5",
-			rack = "DLM_SMG_Rack_1",
-			magin = "DLM_AR_MagIn",
-			magout = "DLM_AR_MagOut"
+			rackback = "DLM_SMG_Rack_1",
+			magin = "DLM_Mp40_Mag_In",
+			magout = "DLM_Mp40_Mag_Out",
+			rackforward = "DLM_SMG_Rack_4"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_tp",
@@ -1961,13 +1962,13 @@ local mgp_tool_database =
 				[2] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.15
+						time = 0.25
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
+						name_tp = "rackback",
+						name_fp = "rackback",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -1975,7 +1976,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.85
+						time = 1.15
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -1989,7 +1990,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.2
+						time = 1.25
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2003,13 +2004,13 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.10
+						time = 0.75
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "pejnt_barrel",
-						name_tp = "rack",
-						name_fp = "rack",
+						name_tp = "rackforward",
+						name_fp = "rackforward",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false,
@@ -2260,6 +2261,10 @@ local mgp_tool_database =
 
 	Frag =
 	{
+		dlm_required_effects = {
+			ClipTake = "DLM_Pinpull",
+			Clip = "DLM_Spoon_Eject"
+		},
 		required_effects = {
 			Clip = "GarandClip",
 			ClipTake = "GarandClipTake",
@@ -3975,8 +3980,8 @@ local mgp_tool_database =
 			gunshot = "DLM_SemiRifle_Shot_1",
 			ping = "DLM_Rifle_Ping",
 			ammocheck = "DLM_Gun_AmmoCheck",
-			slidedrop = "DLM_Pistol_SlideDrop"
-			
+			slidedrop = "DLM_Garand_Bolt_Forward",
+			Clip = "DLM_Clip_In"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",

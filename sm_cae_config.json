@@ -283,6 +283,11 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "SMG_TMGP_Rack_4": {
+            "path":"$CONTENT_DATA/Effects/Audio/SMG_TMGP_Rack_4.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Pistol_TMGP_Holster": {
             "path":"$CONTENT_DATA/Effects/Audio/Gun_TMGP_Pickup.mp3",
             "is3D": true,
@@ -335,6 +340,36 @@
         },
         "Shotgun_TMGP_Ammo_1": {
             "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Ammo_1.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Garand_Bolt_Forward": {
+            "path":"$CONTENT_DATA/Effects/Audio/Garand_TMGP_Bolt_Forward.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Clip_In": {
+            "path":"$CONTENT_DATA/Effects/Audio/Clip_In_TMGP.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Mp40_Mag_In": {
+            "path":"$CONTENT_DATA/Effects/Audio/Mp40_TMGP_Mag_In.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Mp40_Mag_Out": {
+            "path":"$CONTENT_DATA/Effects/Audio/Mp40_TMGP_Mag_Out.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Spoon_Eject": {
+            "path":"$CONTENT_DATA/Effects/Audio/Spoon_TMGP_Eject.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Pinpull": {
+            "path":"$CONTENT_DATA/Effects/Audio/Pinpull_TMGP.mp3",
             "is3D": true,
             "reverb": "MOUNTAINS"
         },

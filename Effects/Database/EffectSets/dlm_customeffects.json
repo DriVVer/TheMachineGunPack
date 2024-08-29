@@ -693,6 +693,17 @@
 			}
 		]
 	},
+	"DLM_SMG_Rack_4":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SMG_TMGP_Rack_4",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_AR_Rack":
 	{
 		"effectList":
@@ -942,6 +953,72 @@
 			{
 				"type": "audio",
 				"name": "Shotgun_TMGP_Ammo_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Clip_In":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Clip_In",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Mp40_Mag_In":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Mp40_Mag_In",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Mp40_Mag_Out":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Mp40_Mag_Out",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Garand_Bolt_Forward":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Garand_Bolt_Forward",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Spoon_Eject":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Spoon_Eject",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Pinpull":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Pinpull",
 				"delay": 0.0
 			}
 		]
