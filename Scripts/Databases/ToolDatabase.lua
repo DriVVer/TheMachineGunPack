@@ -2262,12 +2262,14 @@ local mgp_tool_database =
 	Frag =
 	{
 		dlm_required_effects = {
-			ClipTake = "DLM_Pinpull",
-			Clip = "DLM_Spoon_Eject"
+			Pin = "DLM_Pinpull",
+			Spoon = "DLM_Spoon_Eject",
+			Throw = "DLM_Throw",
+			Arm_Move = "DLM_Arm_Move"
 		},
 		required_effects = {
-			Clip = "GarandClip",
-			ClipTake = "GarandClipTake",
+			Pin = "GarandClip",
+			Spoon = "GarandClipTake",
 		},
 		animation = {
 			activate =
@@ -2284,13 +2286,26 @@ local mgp_tool_database =
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.01
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "jnt_lever",
-						name_tp = "ClipTake",
-						name_fp = "ClipTake",
+						name_tp = "Arm_Move",
+						name_fp = "Arm_Move",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.45
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_lever",
+						name_tp = "Pin",
+						name_fp = "Pin",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false
@@ -2324,8 +2339,21 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.effect,
 						bone = "jnt_lever",
-						name_tp = "Clip",
-						name_fp = "Clip",
+						name_tp = "Spoon",
+						name_fp = "Spoon",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "jnt_lever",
+						name_tp = "Throw",
+						name_fp = "Throw",
 						tp_offset = sm.vec3.new(0, 0, 0),
 						fp_offset = sm.vec3.new(0, 0, 0),
 						apply_velocity = false

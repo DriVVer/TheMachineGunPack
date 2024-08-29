@@ -373,6 +373,16 @@
             "is3D": true,
             "reverb": "MOUNTAINS"
         },
+        "Throw": {
+            "path":"$CONTENT_DATA/Effects/Audio/Throw_TMGP.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "Arm_Move": {
+            "path":"$CONTENT_DATA/Effects/Audio/Arm_TMGP.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
         "Shotgun_TMGP_Ammo_2": {
             "path":"$CONTENT_DATA/Effects/Audio/Shotgun_TMGP_Ammo_2.mp3",
             "is3D": true,

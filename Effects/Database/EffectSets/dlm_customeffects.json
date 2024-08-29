@@ -1023,6 +1023,28 @@
 			}
 		]
 	},
+	"DLM_Throw":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Throw",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_Arm_Move":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "Arm_Move",
+				"delay": 0.0
+			}
+		]
+	},
 	"DLM_Shotgun_AmmoOut":
 	{
 		"effectList":
