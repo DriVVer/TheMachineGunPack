@@ -282,7 +282,7 @@ local mgp_tool_database =
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
 			gunshot = "DLM_SMG_Shot_1",
 			rack = "DLM_SMG_Rack_3",
-			magin = "DLM_AR_MagIn",
+			magin = "DLM_AK_MagIn",
 			magout = "DLM_AK_MagOut"
 		},
 		required_effects = {
@@ -409,7 +409,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.13
+						time = 0.15
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -422,7 +422,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.15
+						time = 1.50
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -461,7 +461,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.03
+						time = 0.15
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -474,7 +474,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.15
+						time = 1.50
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -487,7 +487,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 1.35
+						time = 0.85
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
