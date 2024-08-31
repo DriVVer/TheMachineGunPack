@@ -201,17 +201,6 @@
 			}
 		]
 	},
-	"DLM_BoltRifle_Shot_2":
-	{
-		"effectList":
-		[
-			{
-				"type": "audio",
-				"name": "BoltRifle_TMGP_Shot_2",
-				"delay": 0.0
-			}
-		]
-	},
 	"DLM_20Cannon_Shot":
 	{
 		"parameterList":{"color":"f2eea0","radius":3.0,"intensity":0.0},
