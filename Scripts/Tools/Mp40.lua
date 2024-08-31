@@ -178,7 +178,7 @@ function Mp40.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.10,
+		fireCooldown = 0.13,
 		spreadCooldown = 0.18,
 		spreadIncrement = 2.6,
 		spreadMinAngle = 4.7,
