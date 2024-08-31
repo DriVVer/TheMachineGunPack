@@ -967,7 +967,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.35
+						time = 0.2
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -993,7 +993,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.42
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -1284,7 +1284,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.35
+						time = 0.2
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -1310,7 +1310,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.42
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
