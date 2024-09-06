@@ -193,7 +193,7 @@ function Mp40.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.10,
+		fireCooldown = 0.13,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.3,
 		spreadMinAngle = 2,

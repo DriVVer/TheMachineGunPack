@@ -254,7 +254,7 @@ function Panzerfaust.loadAnimations( self )
 
 	self.movementDispersion = 0.0
 
-	self.sprintCooldownTimer = 3.5
+	self.sprintCooldownTimer = 1.3
 	self.sprintCooldown = 0.3
 
 	self.blendTime = 0.2
