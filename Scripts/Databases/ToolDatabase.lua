@@ -2674,7 +2674,8 @@ local mgp_tool_database =
 		dlm_required_effects = {
 			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
-			gunshot = "DLM_HighCal_Shot_1"
+			gunshot = "DLM_HighCal_Shot_1",
+			dry_fire = "DLM_Dry_Fire"
 		},
 		required_effects = {
 			shoot_tp = "Muzzle_Flash_SmallCal_fp",
@@ -2734,6 +2735,32 @@ local mgp_tool_database =
 					}
 				}
 			},
+			no_ammo =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "dry_fire",
+						name_fp = "dry_fire",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					}
+				}
+			},
 			aimShoot =
 			{
 				[1] = {
@@ -2769,6 +2796,32 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "gunshot",
 						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					}
+				}
+			},
+			no_ammo_aim =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						time = 0.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.1
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "dry_fire",
+						name_fp = "dry_fire",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
@@ -2838,14 +2891,18 @@ local mgp_tool_database =
 					}
 				}
 			},
-			reload1 =
+			reload =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.20
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.0, end_val = 2.0 } },
-						time = 2.0
+						fp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 4.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 4.0 } },
+						time = 3.80
 					}
 				},
 				[2] = {
@@ -2892,13 +2949,13 @@ local mgp_tool_database =
 
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.10
+						time = 0.20
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
-						tp_anim = { { name = "M1911_anims", start_val = 2.10, end_val = 3.75 } },
-						time = 1.65
+						fp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 4.0 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 4.0 } },
+						time = 3.80
 					}
 				},
 				[2] = {
@@ -2913,7 +2970,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.35
+						time = 0.2
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2939,7 +2996,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.42
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
@@ -2951,82 +3008,6 @@ local mgp_tool_database =
 						apply_velocity = false
 					}
 				}
-			},
-			reload_into =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.2
-					},
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 2.0 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.2, end_val = 2.0 } },
-						time = 1.8
-					},
-					{
-						type = mgp_tool_anim_enum.nextAnimation,
-						blendTp = 1,
-						blendFp = 0,
-						animation = function(self)
-							if self.ammo_in_mag == 0 then
-								return "reload_SL"
-							end
-
-							return "reload_single"
-						end,
-					}
-				},
-			},
-			reload_single =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
-						tp_anim = { { name = "SW38_anims", start_val = 2.0, end_val = 2.8 } },
-						time = 0.8
-					},
-					{
-						type = mgp_tool_anim_enum.nextAnimation,
-						blendTp = 1,
-						blendFp = 0,
-						animation = function(self)
-							return ReloadLoop(self, "reload_single", "reload_exit", sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13"))
-						end,
-					}
-				},
-			},
-			reload_SL =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
-						tp_anim = { { name = "SW38_anims", start_val = 4.0, end_val = 4.8 } },
-						time = 0.8
-					},
-					{
-						type = mgp_tool_anim_enum.nextAnimation,
-						blendTp = 1,
-						blendFp = 0,
-						animation = function(self)
-							return ReloadLoop(self, "reload_single", "reload_exit", sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13"), true)
-						end,
-					}
-				},
-			},
-			reload_exit =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 2.8, end_val = 3.8 } },
-						tp_anim = { { name = "SW38_anims", start_val = 2.8, end_val = 3.8 } },
-						time = 1.0
-					}
-				},
 			}
 		}
 	},

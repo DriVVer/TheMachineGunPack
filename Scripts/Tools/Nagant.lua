@@ -5,10 +5,12 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("BaseGun.lua")
 
-local Damage = 39
+local Damage = 41
+local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
 
----@class SW38 : ToolClass
+---@class Nagant : BaseGun
 ---@field fpAnimations table
 ---@field tpAnimations table
 ---@field mag_capacity integer
@@ -22,31 +24,38 @@ local Damage = 39
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 ---@field spineWeight number
-SW38 = class()
-SW38.mag_capacity = 6
-SW38.maxRecoil = 20
-SW38.recoilAmount = 10
-SW38.aimRecoilAmount = 5
-SW38.recoilRecoverySpeed = 2
-SW38.aimFovTp = 30
-SW38.aimFovFp = 30
+Nagant = class(BaseGun)
+Nagant.mag_capacity = 7
+Nagant.maxRecoil = 20
+Nagant.recoilAmount = 12
+Nagant.aimRecoilAmount = 6
+Nagant.recoilRecoverySpeed = 2
+Nagant.aimFovTp = 30
+Nagant.aimFovFp = 30
+Nagant.reload_anims = {
+	["reload_into"] = true,
+	["reload_single"] = true,
+	["reload_exit"] = true,
+	["reload_SL"] = true
+}
 
 local renderables =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/SW38_Base.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/SW38_Anim.rend"
+	"$CONTENT_DATA/Tools/Renderables/Nagant/Nagant_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Nagant/Nagant_Anim.rend",
+	"$CONTENT_DATA/Tools/Renderables/Nagant/Nagant_Ammo.rend"
 }
 
 local renderablesTp =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_anims_tp.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_offset_tp.rend"
+	"$CONTENT_DATA/Tools/Renderables/Nagant/char_Nagant_anims_tp.rend",
+	"$CONTENT_DATA/Tools/Renderables/Nagant/char_Nagant_offset_tp.rend"
 }
 
 local renderablesFp =
 {
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_anims_fp.rend",
-	"$CONTENT_DATA/Tools/Renderables/SW38/char_SW38_offset_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/Nagant/char_Nagant_anims_fp.rend",
+	"$CONTENT_DATA/Tools/Renderables/Nagant/char_Nagant_offset_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/char_male_fp_recoil.rend"
 }
 
@@ -54,42 +63,27 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-function SW38:client_initAimVals()
+function Nagant:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 end
 
-function SW38:server_onCreate()
-	self.sv_ammo_counter = 0
-
-	local v_saved_ammo = self.storage:load()
-	if v_saved_ammo ~= nil then
-		self.sv_ammo_counter = v_saved_ammo
-	else
-		if not sm.game.getEnableAmmoConsumption() or not sm.game.getLimitedInventory() then
-			self.sv_ammo_counter = self.mag_capacity
-		end
-
-		self:server_updateAmmoCounter()
-	end
+function Nagant:server_onCreate()
+	self:sv_init()
 end
 
-function SW38:server_requestAmmo(data, caller)
-	self.network:sendToClient(caller, "client_receiveAmmo", self.sv_ammo_counter)
-end
-
-function SW38:server_updateAmmoCounter(data, caller)
+function Nagant:server_updateAmmoCounter(data, caller)
 	if data ~= nil or caller ~= nil then return end
 
 	self.storage:save(self.sv_ammo_counter)
 end
 
-function SW38:client_receiveAmmo(ammo_count)
+function Nagant:client_receiveAmmo(ammo_count)
 	self.ammo_in_mag = ammo_count
 	self.waiting_for_ammo = nil
 end
 
-function SW38:client_onCreate()
+function Nagant:client_onCreate()
 	self.ammo_in_mag = 0
 
 	self.aimBlendSpeed = 10.0
@@ -97,20 +91,57 @@ function SW38:client_onCreate()
 
 	self.waiting_for_ammo = true
 
-	mgp_toolAnimator_initialize(self, "SW38")
+	mgp_toolAnimator_initialize(self, "Nagant")
 
-	self.network:sendToServer("server_requestAmmo")
+	self:cl_init()
 end
 
-function SW38.client_onDestroy(self)
+function Nagant:sv_reloadSingle()
+	local v_owner = self.tool:getOwner()
+	if v_owner == nil then return end
+
+	local v_inventory = v_owner:getInventory()
+	if v_inventory == nil then return end
+
+	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
+	if v_available_ammo == 0 then return end
+
+	sm.container.beginTransaction()
+	sm.container.spend(v_inventory, mgp_pistol_ammo, 1)
+	sm.container.endTransaction()
+
+	self.sv_ammo_counter = self.sv_ammo_counter + 1
+	self:server_updateStorage()
+end
+
+function Nagant:sv_reloadExit(forceExit)
+	if forceExit then
+		sm.container.beginTransaction()
+		sm.container.spend(self.tool:getOwner():getInventory(), mgp_pistol_ammo, self.mag_capacity)
+		sm.container.endTransaction()
+	end
+
+	self.network:sendToClient(self.tool:getOwner(), "cl_reloadExit")
+
+	self.sv_ammo_counter = self.mag_capacity
+	self:server_updateStorage()
+end
+
+function Nagant:cl_reloadExit()
+	self.ammo_in_mag = self.mag_capacity
+	self.cl_hammer_cocked = true
+	self.waiting_for_ammo = nil
+end
+
+function Nagant.client_onDestroy(self)
 	mgp_toolAnimator_destroy(self)
 end
 
-function SW38.client_onRefresh( self )
+function Nagant.client_onRefresh( self )
 	self:loadAnimations()
 end
 
-function SW38.loadAnimations( self )
+function Nagant.loadAnimations( self )
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
@@ -121,9 +152,10 @@ function SW38.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "SW38_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
-			reload = { "SW38_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
-			ammo_check = { "SW38_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
+			reload_into = { "Nagant_reload_into", { nextAnimation = "reload_single" } },
+			reload_single = { "Nagant_reload_single", { looping = true } },
+			reload_SL = { "Nagant_reload_SL", { nextAnimation = "reload_single" } },
+			reload_exit = { "Nagant_reload_exit", { nextAnimation = "idle" } }
 		}
 	)
 	local movementAnimations = {
@@ -157,26 +189,26 @@ function SW38.loadAnimations( self )
 		self.fpAnimations = createFpAnimations(
 			self.tool,
 			{
-				equip = { "SW38_pickup", { nextAnimation = "idle" } },
-				unequip = { "SW38_putdown" },
+				equip = { "Nagant_pickup", { nextAnimation = "idle" } },
+				unequip = { "Nagant_putdown" },
 
-				idle = { "SW38_idle", { looping = true } },
-				shoot = { "SW38_shoot", { nextAnimation = "idle" } },
+				idle = { "Nagant_idle", { looping = true } },
+				shoot = { "Nagant_shoot", { nextAnimation = "idle" } },
 
-				reload = { "SW38_reload", { nextAnimation = "idle", duration = 1.0 } },
-				reload_empty = { "SW38_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				aimInto = { "Nagant_aim_into", { nextAnimation = "aimIdle" } },
+				aimExit = { "Nagant_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
+				aimIdle = { "Nagant_aim_idle", { looping = true } },
+				aimShoot = { "Nagant_aim_shoot", { nextAnimation = "aimIdle"} },
 
-				ammo_check = { "SW38_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
+				reload_into = { "Nagant_reload_into", { nextAnimation = "reload_single" } },
+				reload_single = { "Nagant_reload_single", { looping = true } },
+				reload_SL = { "Nagant_reload_SL", { nextAnimation = "reload_single" } },
+				reload_exit = { "Nagant_reload_exit", { nextAnimation = "idle" } },
 
-				aimInto = { "SW38_aim_into", { nextAnimation = "aimIdle" } },
-				aimExit = { "SW38_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "SW38_aim_idle", { looping = true } },
-				aimShoot = { "SW38_aim_shoot", { nextAnimation = "aimIdle"} },
-
-				sprintInto = { "SW38_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
-				sprintExit = { "SW38_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
-				sprintIdle = { "SW38_sprint_idle", { looping = true } },
-				sprintShoot = { "SW38_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } }
+				sprintInto = { "Nagant_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
+				sprintExit = { "Nagant_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
+				sprintIdle = { "Nagant_sprint_idle", { looping = true } },
+				sprintShoot = { "Nagant_sprint_shoot", { nextAnimation = "sprintIdle",  blendNext = 0.2 } }
 			}
 		)
 	end
@@ -227,12 +259,6 @@ function SW38.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-local actual_reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true
-}
-
 local aim_animations =
 {
 	["aimInto"]         = true,
@@ -240,7 +266,7 @@ local aim_animations =
 	["aimShoot"]        = true
 }
 
-function SW38:client_updateAimWeights(dt)
+function Nagant:client_updateAimWeights(dt)
 	-- Camera update
 	local bobbing = 1
 	if self.aiming then
@@ -257,8 +283,7 @@ function SW38:client_updateAimWeights(dt)
 	self.tool:updateFpCamera( 30.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeight, bobbing )
 end
 
-local mgp_pistol_ammo = sm.uuid.new("af84d5d9-00b1-4bab-9c5a-102c11e14a13")
-function SW38:server_spendAmmo(data, player)
+function Nagant:server_spendAmmo(data, player)
 	if data ~= nil or player ~= nil then return end
 
 	local v_owner = self.tool:getOwner()
@@ -270,6 +295,8 @@ function SW38:server_spendAmmo(data, player)
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
+	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
+
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
@@ -277,11 +304,11 @@ function SW38:server_spendAmmo(data, player)
 	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
 	self:server_updateAmmoCounter()
 end
 
-function SW38:sv_n_trySpendAmmo(data, player)
+function Nagant:sv_n_trySpendAmmo(data, player)
 	local v_owner = self.tool:getOwner()
 	if v_owner == nil or v_owner ~= player then return end
 
@@ -289,7 +316,7 @@ function SW38:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
-function SW38.client_onUpdate( self, dt )
+function Nagant.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
 	-- First person animation
@@ -300,17 +327,6 @@ function SW38.client_onUpdate( self, dt )
 		if self.equipped then
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
-
-				if time_predict >= info_duration then
-					self.network:sendToServer("sv_n_trySpendAmmo")
-				end
-			end
-
 			if cur_anim_cache ~= "sprintShoot" then
 				if isSprinting and cur_anim_cache ~= "sprintInto" and cur_anim_cache ~= "sprintIdle" then
 					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
@@ -473,7 +489,7 @@ function SW38.client_onUpdate( self, dt )
 	self.tool:updateJoint( "jnt_head", sm.vec3.new( totalOffsetX, totalOffsetY, totalOffsetZ ), 0.3 * finalJointWeight )
 end
 
-function SW38:client_onEquip(animate, is_custom)
+function Nagant:client_onEquip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -505,7 +521,7 @@ function SW38:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
-	local v_gun_color = sm.color.new("c4b68d")
+	local v_gun_color = sm.color.new("4d2714")
 	self.tool:setTpColor(v_gun_color)
 	self.tool:setFpColor(v_gun_color)
 
@@ -518,7 +534,7 @@ function SW38:client_onEquip(animate, is_custom)
 	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
 end
 
-function SW38:client_onUnequip(animate, is_custom)
+function Nagant:client_onUnequip(animate, is_custom)
 	if not is_custom and TSU_IsOwnerSwimming(self) then
 		return
 	end
@@ -555,24 +571,24 @@ function SW38:client_onUnequip(animate, is_custom)
 	end
 end
 
-function SW38:sv_n_onAim(aiming)
+function Nagant:sv_n_onAim(aiming)
 	self.network:sendToClients( "cl_n_onAim", aiming )
 end
 
-function SW38:cl_n_onAim(aiming)
+function Nagant:cl_n_onAim(aiming)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onAim(aiming)
 	end
 end
 
-function SW38:onAim(aiming)
+function Nagant:onAim(aiming)
 	self.aiming = aiming
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
 
-function SW38:sv_n_onShoot(is_last_shot)
+function Nagant:sv_n_onShoot(is_last_shot)
 	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
 	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
@@ -581,13 +597,13 @@ function SW38:sv_n_onShoot(is_last_shot)
 	end
 end
 
-function SW38:cl_n_onShoot(is_last_shot)
+function Nagant:cl_n_onShoot(is_last_shot)
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(is_last_shot)
 	end
 end
 
-function SW38:onShoot(is_last_shot)
+function Nagant:onShoot(is_last_shot)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
@@ -595,10 +611,9 @@ function SW38:onShoot(is_last_shot)
 	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation( self.tpAnimations, anim, 10.0 )
 	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
-	
 end
 
-function SW38:calculateFirePosition()
+function Nagant:calculateFirePosition()
 	local crouching = self.tool:isCrouching()
 	local firstPerson = self.tool:isInFirstPersonView()
 	local dir = sm.localPlayer.getDirection()
@@ -625,7 +640,7 @@ function SW38:calculateFirePosition()
 	return firePosition
 end
 
-function SW38:calculateTpMuzzlePos()
+function Nagant:calculateTpMuzzlePos()
 	local crouching = self.tool:isCrouching()
 	local dir = sm.localPlayer.getDirection()
 	local pitch = math.asin( dir.z )
@@ -659,7 +674,7 @@ function SW38:calculateTpMuzzlePos()
 	return fakePosition
 end
 
-function SW38:calculateFpMuzzlePos()
+function Nagant:calculateFpMuzzlePos()
 	local fovScale = ( sm.camera.getFov() - 45 ) / 45
 
 	local up = sm.localPlayer.getUp()
@@ -689,7 +704,7 @@ function SW38:calculateFpMuzzlePos()
 end
 
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
-function SW38:cl_onPrimaryUse(is_shooting)
+function Nagant:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading() then return end
 
@@ -771,57 +786,24 @@ function SW38:cl_onPrimaryUse(is_shooting)
 	end
 end
 
-local reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true,
-	["ammo_check"] = true
-}
-
-local anim_name_to_id =
-{
-	["reload"] = 1,
-	["reload_empty"] = 2
-}
-
-local id_to_anim_name =
-{
-	[1] = "reload",
-	[2] = "reload_empty"
-}
-
-function SW38:sv_n_onReload(anim_id)
-	self.network:sendToClients("cl_n_onReload", anim_id)
+function Nagant:sv_n_onReload()
+	self.network:sendToClients("cl_n_onReload")
 end
 
-function SW38:cl_n_onReload(anim_id)
+function Nagant:cl_n_onReload()
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim(id_to_anim_name[anim_id])
+		self:cl_startReloadAnim()
 	end
 end
 
-function SW38:cl_startReloadAnim(anim_name)
-	setTpAnimation(self.tpAnimations, anim_name, 1.0)
-	mgp_toolAnimator_setAnimation(self, anim_name)
+function Nagant:cl_startReloadAnim()
+	setTpAnimation(self.tpAnimations, "reload_into", 1.0)
+	mgp_toolAnimator_setAnimation(self, "reload_into")
 end
 
-function SW38:client_isGunReloading()
-	if self.waiting_for_ammo then
-		return true
-	end
-
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
-end
-
-function SW38:cl_initReloadAnim(anim_name)
+function Nagant:cl_initReloadAnim()
 	if sm.game.getEnableAmmoConsumption() then
-		local v_available_ammo = sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo)
-		if v_available_ammo == 0 then
+		if sm.container.totalQuantity(sm.localPlayer.getInventory(), mgp_pistol_ammo) == 0 then
 			sm.gui.displayAlertText("No Ammo", 3)
 			return true
 		end
@@ -829,61 +811,17 @@ function SW38:cl_initReloadAnim(anim_name)
 
 	self.waiting_for_ammo = true
 
-	--Start fp and tp animations locally
-	setFpAnimation(self.fpAnimations, anim_name, 0.0)
-	self:cl_startReloadAnim(anim_name)
+	setFpAnimation(self.fpAnimations, "reload_into", 0.0)
+	self:cl_startReloadAnim()
 
 	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload", anim_name_to_id[anim_name])
+	self.network:sendToServer("sv_n_onReload")
 end
 
-function SW38:client_onReload()
-	if self.equipped then
-		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
-		if not is_mag_full then
-			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-				local cur_anim_name = "reload"
-				if self.ammo_in_mag == 0 then
-					cur_anim_name = "reload_empty"
-				end
-
-				self:cl_initReloadAnim(cur_anim_name)
-			end
-		end
-	end
-
-	return true
-end
-
-function SW38:sv_n_checkMag()
-	self.network:sendToClients("cl_n_checkMag")
-end
-
-function SW38:cl_n_checkMag()
-	local s_tool = self.tool
-	if not s_tool:isLocal() and s_tool:isEquipped() then
-		self:cl_startCheckMagAnim()
-	end
-end
-
-function SW38:cl_startCheckMagAnim()
-	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
-end
-
-function SW38:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
-		if self.ammo_in_mag > 0 then
-			sm.gui.displayAlertText(("SW38: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
-			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
-
-			self:cl_startCheckMagAnim()
-			self.network:sendToServer("sv_n_checkMag")
-
-			mgp_toolAnimator_setAnimation(self, "ammo_check")
-		else
-			sm.gui.displayAlertText("SW38: No Ammo. Reloading...", 3)
-
-			self:cl_initReloadAnim("reload_empty")
+function Nagant:client_onReload()
+	if self.equipped and self.ammo_in_mag ~= self.mag_capacity then
+		if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			self:cl_initReloadAnim()
 		end
 	end
 
@@ -891,7 +829,7 @@ function SW38:client_onToggle()
 end
 
 local _intstate = sm.tool.interactState
-function SW38.cl_onSecondaryUse( self, state )
+function Nagant.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
 	local is_reloading = self:client_isGunReloading()
@@ -906,7 +844,7 @@ function SW38.cl_onSecondaryUse( self, state )
 	end
 end
 
-function SW38.client_onEquippedUpdate( self, primaryState, secondaryState )
+function Nagant.client_onEquippedUpdate( self, primaryState, secondaryState )
 	self:cl_onPrimaryUse(primaryState == _intstate.start)
 
 	if secondaryState ~= self.prevSecondaryState then
