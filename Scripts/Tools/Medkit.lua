@@ -44,15 +44,30 @@ end
 
 function Medkit:server_onFixedUpdate(dt)
 	if self.sv_using then
+		if self.sv_targetChar then
+			local char = self.tool:getOwner().character
+			local start = char.worldPosition + (char:isCrouching() and sm.vec3.new(0,0,0.3) or sm.vec3.new(0,0,0.575))
+			local hit, result = sm.physics.raycast(start, start + char.direction * 7.5)
+			local targetChar = result:getCharacter()
+			if self.sv_targetChar ~= targetChar then
+				self:sv_updateUse()
+				return
+			end
+		end
+
 		self.sv_useProgress = self.sv_useProgress + dt
 		if self.sv_useProgress >= self.healTime then
 			local owner = self.tool:getOwner()
-			sm.event.sendToPlayer(owner, "sv_e_eat", self.restoredStats)
-
 			local container = owner:getInventory()
-			sm.container.beginTransaction()
-			sm.container.spendFromSlot(container, self.sv_selectedSlot, self.itemUuid, 1)
-			sm.container.endTransaction()
+			if self.sv_targetChar then
+				sm.event.sendToPlayer(self.sv_targetChar:getPlayer(), "sv_e_feed", { foodUuid = self.itemUuid, playerInventory = container })
+			else
+				sm.event.sendToPlayer(owner, "sv_e_eat", self.restoredStats)
+
+				sm.container.beginTransaction()
+				sm.container.spendFromSlot(container, self.sv_selectedSlot, self.itemUuid, 1)
+				sm.container.endTransaction()
+			end
 
 			self:sv_updateUse()
 		end
@@ -60,10 +75,16 @@ function Medkit:server_onFixedUpdate(dt)
 end
 
 function Medkit:sv_updateUse(slot)
+	local player
+	if type(slot) == "table" then
+		slot, player = slot[1], slot[2]
+	end
+
 	local state = slot ~= nil
 	if state == self.sv_using then return end
 
 	self.sv_using = state
+	self.sv_targetChar = player
 	self.sv_useProgress = 0
 	self.sv_selectedSlot = slot
 
@@ -251,7 +272,13 @@ function Medkit:client_onEquippedUpdate(lmb, rmb, f)
 	end
 
 	if (lmb == 1 or lmb == 2) and not self.cl_using then
-		self.network:sendToServer("sv_updateUse", sm.localPlayer.getSelectedHotbarSlot())
+		local hit, result = sm.localPlayer.getRaycast(7.5)
+		local char = result:getCharacter()
+		if char and char:isPlayer() then
+			self.network:sendToServer("sv_updateUse", { sm.localPlayer.getSelectedHotbarSlot(), char })
+		else
+			self.network:sendToServer("sv_updateUse", sm.localPlayer.getSelectedHotbarSlot())
+		end
 	elseif lmb == 3 then
 		self.network:sendToServer("sv_updateUse")
 	end
