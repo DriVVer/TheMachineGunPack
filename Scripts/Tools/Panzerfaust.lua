@@ -21,6 +21,10 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field fireCooldownTimer integer
 ---@field equipped boolean
 ---@field cl_isLocal boolean
+---@field cl_used boolean
+---@field cl_usedTimer number
+---@field sv_usedTimer number
+---@field aimMode integer
 Panzerfaust = class()
 
 local renderables =
@@ -59,7 +63,8 @@ local g_sprint_block_anims =
 	["reload"      ] = true,
 	["sprintExit"  ] = true,
 	["aimExit"     ] = true,
-	["equip"       ] = true
+	["equip"       ] = true,
+	["throwAway"   ] = true
 }
 
 local g_action_block_anims =
@@ -71,7 +76,8 @@ local g_action_block_anims =
 	["sprintInto"  ] = true,
 	["aimExit"     ] = true,
 	["equip_short" ] = true,
-	["equip"       ] = true
+	["equip"       ] = true,
+	["throwAway"   ] = true
 }
 
 function Panzerfaust:client_initAimVals()
@@ -103,6 +109,45 @@ end
 
 function Panzerfaust:sv_requestPanzerfaustState(data, player)
 	self.network:sendToClient(player, "cl_receivePanzerfaustState", self.sv_Panzerfaust_loaded)
+end
+
+local g_aim_mode_to_anim_name =
+{
+	[0] = "aim_idle30",
+	[1] = "aim_idle60",
+	[2] = "aim_idle90"
+}
+
+local g_aim_anim_table =
+{
+	["aim_idle30"] = true,
+	["aim_idle60"] = true,
+	["aim_idle90"] = true
+}
+
+local g_aim_mode_to_notification_text =
+{
+	[0] = "30m",
+	[1] = "60m",
+	[2] = "90m"
+}
+
+function Panzerfaust:client_setAimMode(mode, showNotif)
+	self.aimMode = mode
+
+	local fpAnims = self.fpAnimations
+	local animToPlay = g_aim_mode_to_anim_name[mode]
+
+	local aimInto = fpAnims.animations.aimInto
+	aimInto.nextAnimation = animToPlay
+
+	if showNotif then
+		sm.gui.displayAlertText(("Sight calibrated for #ffff00%s#ffffff"):format(g_aim_mode_to_notification_text[mode]), 3)
+	end
+
+	if g_aim_anim_table[fpAnims.currentAnimation] == true then
+		setFpAnimation(self.fpAnimations, animToPlay, 0.0)
+	end
 end
 
 function Panzerfaust:client_onCreate()
@@ -208,16 +253,23 @@ function Panzerfaust.loadAnimations( self )
 
 				reload_empty = { "Panzerfaust_reload", { nextAnimation = "idle", duration = 1.0 } },
 
-				aimInto = { "Panzerfaust_aim_into", { nextAnimation = "aimIdle" } },
+				aim_idle30 = { "Panzerfaust_aim_idle_30", { looping = true, duration = 1.0 } },
+				aim_idle60 = { "Panzerfaust_aim_idle_60", { looping = true, duration = 1.0 } },
+				aim_idle90 = { "Panzerfaust_aim_idle_90", { looping = true, duration = 1.0 } },
+				throwAway = { "Panzerfaust_throwaway" },
+
+				aimInto = { "Panzerfaust_aim_into", { nextAnimation = "aim_idle90" } },
 				aimExit = { "Panzerfaust_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "Panzerfaust_aim_idle", { looping = true } },
-				aimShoot = { "Panzerfaust_aim_shoot", { nextAnimation = "aimIdle"} },
+				aimShoot = { "Panzerfaust_aim_shoot", { nextAnimation = "aimIdle" } },
 
 				sprintInto = { "Panzerfaust_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Panzerfaust_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
 				sprintIdle = { "Panzerfaust_sprint_idle", { looping = true } },
 			}
 		)
+
+		self:client_setAimMode(0)
 	end
 
 	self.normalFireMode = {
@@ -254,7 +306,7 @@ function Panzerfaust.loadAnimations( self )
 
 	self.movementDispersion = 0.0
 
-	self.sprintCooldownTimer = 1.3
+	self.sprintCooldownTimer = 1.5
 	self.sprintCooldown = 0.3
 
 	self.blendTime = 0.2
@@ -275,15 +327,21 @@ local aim_animation_list01 =
 {
 	["aimInto"]         = true,
 	["aimIdle"]         = true,
+	["aim_idle30"]      = true,
+	["aim_idle60"]      = true,
+	["aim_idle90"]      = true,
 	["aimShoot"]        = true,
 	["cock_hammer_aim"] = true
 }
 
 local aim_animation_list02 =
 {
-	["aimInto"]  = true,
-	["aimIdle"]  = true,
-	["aimShoot"] = true
+	["aimInto"]    = true,
+	["aimIdle"]    = true,
+	["aim_idle30"] = true,
+	["aim_idle60"] = true,
+	["aim_idle90"] = true,
+	["aimShoot"]   = true
 }
 
 function Panzerfaust:client_onFixedUpdate(dt)
@@ -297,6 +355,44 @@ function Panzerfaust:server_onFixedUpdate(dt)
 		self.sv_shoot_timer = self.sv_shoot_timer - dt
 		if self.sv_shoot_timer <= 0.0 then
 			self.sv_shoot_timer = nil
+		end
+	end
+
+	if self.sv_eraseTimer then
+		self.sv_eraseTimer = self.sv_eraseTimer - dt
+
+		if self.sv_eraseTimer <= 0.0 then
+			self.sv_eraseTimer = nil
+
+			local v_tool_owner = self.tool:getOwner()
+			if not (v_tool_owner and sm.exists(v_tool_owner)) then
+				return
+			end
+
+			local v_pl_inventory = nil
+			if sm.game.getLimitedInventory() then
+				v_pl_inventory = v_tool_owner:getInventory()
+			else
+				v_pl_inventory = v_tool_owner:getHotbar()
+			end
+
+			if not (v_pl_inventory and sm.exists(v_pl_inventory)) then
+				return
+			end
+
+			local v_panzerfaust_uuid = "56b4204e-6a3b-4d6d-8858-924dc65fe6d9"
+			for i = 0, v_pl_inventory:getSize() - 1 do
+				local v_cur_item = v_pl_inventory:getItem(i)
+				if tostring(v_cur_item.uuid) == v_panzerfaust_uuid then
+					if v_cur_item.instance == self.tool.id then
+						sm.container.beginTransaction()
+						sm.container.spendFromSlot(v_pl_inventory, i, v_cur_item.uuid, 1, true)
+						sm.container.endTransaction()
+
+						break
+					end
+				end
+			end
 		end
 	end
 end
@@ -359,15 +455,39 @@ local function predict_animation_end(anim_data, dt)
 	return time_predict >= info_duration
 end
 
+
+
 function Panzerfaust:client_onUpdate(dt)
+	if not sm.exists(self.tool) then
+		return
+	end
+
 	mgp_toolAnimator_update(self, dt)
+
+	if self.cl_usedTimer then
+		self.cl_usedTimer = self.cl_usedTimer - dt
+
+		if self.cl_usedTimer <= 0.0 then
+			self.cl_usedTimer = nil
+
+			if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+				self.tool:setFpRenderables({})
+			else
+				self.cl_used = nil
+				self.cl_is_loaded = true
+				if self.tool:isEquipped() then
+					self:client_onEquip(true)
+				end
+			end
+		end
+	end
 
 	-- First person animation
 	local isSprinting = self.tool:isSprinting()
 	local isCrouching = self.tool:isCrouching()
 
 	if self.cl_isLocal then
-		if self.equipped then
+		if self.equipped and not self.cl_usedTimer then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
 			if hit and not mgp_tool_isAnimPlaying(self, g_close_anim_block) then
 				local v_cur_anim = self.fpAnimations.currentAnimation
@@ -494,6 +614,7 @@ function Panzerfaust:client_onUpdate(dt)
 	end
 
 	-- Sprint block
+	print(self.sprintCooldownTimer, mgp_tool_isAnimPlaying(self, g_sprint_block_anims))
 	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or mgp_tool_isAnimPlaying(self, g_sprint_block_anims) )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -583,6 +704,15 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 		return
 	end
 
+	if animate and not is_custom then
+		sm.audio.play("PotatoRifle - Equip", self.tool:getPosition())
+	end
+
+	if self.cl_used then
+		self.tool:setFpRenderables({})
+		return
+	end
+
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
 	self.wantEquipped = true
@@ -605,10 +735,6 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 
 	--Load animations before setting them
 	self:loadAnimations()
-
-	if animate and not is_custom then
-		sm.audio.play("PotatoRifle - Equip", self.tool:getPosition())
-	end
 
 	if not self.cl_is_loaded then
 		self.tool:updateAnimation("Panzerfaust_anims", 4.3, 1.0)
@@ -643,6 +769,7 @@ function Panzerfaust:client_onUnequip(animate, is_custom)
 	self.aiming = false
 	self.cl_sight_timer = nil
 	self.cl_waiting_for_data = nil
+	self.sprintCooldownTimer = 0.0
 	mgp_toolAnimator_reset(self)
 
 	local s_tool = self.tool
@@ -763,7 +890,7 @@ function Panzerfaust.cl_onPrimaryUse(self)
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
-		-- Send TP shoot over network and dircly to self
+		-- Send TP shoot over network and directly to self
 		self:onShoot(v_proj_hit)
 		self.network:sendToServer("sv_n_onShoot", v_proj_hit)
 
@@ -772,8 +899,16 @@ function Panzerfaust.cl_onPrimaryUse(self)
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
-		self.fireCooldownTimer = 0.3
-		sm.audio.play( "PotatoRifle - NoAmmo" )
+		self.cl_usedTimer = 1.5
+		self.cl_used = true
+		self.network:sendToServer("sv_n_throwAway")
+		setFpAnimation( self.fpAnimations, "throwAway", 0.0 )
+	end
+end
+
+function Panzerfaust:sv_n_throwAway()
+	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
+		self.sv_eraseTimer = 2.0
 	end
 end
 
@@ -802,18 +937,8 @@ function Panzerfaust:cl_initReloadAnim(anim_id)
 end
 
 function Panzerfaust:client_onReload()
-	if not self.cl_is_loaded then
-		if not mgp_tool_isAnimPlaying(self, g_action_block_anims) and not self.cl_waiting_for_data and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
-			if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
-				if not sm.localPlayer.getInventory():canSpend(mgp_Panzerfaust_ammo, 1) then
-					sm.gui.displayAlertText("Panzerfaust: No Ammo")
-					sm.audio.play("PotatoRifle - NoAmmo")
-					return true
-				end
-			end
-
-			self:cl_initReloadAnim()
-		end
+	if self.aiming and not mgp_tool_isAnimPlaying(self, g_action_block_anims) then
+		self:client_setAimMode((self.aimMode + 1) % 3, true)
 	end
 
 	return true
