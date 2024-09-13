@@ -614,7 +614,6 @@ function Panzerfaust:client_onUpdate(dt)
 	end
 
 	-- Sprint block
-	print(self.sprintCooldownTimer, mgp_tool_isAnimPlaying(self, g_sprint_block_anims))
 	self.tool:setBlockSprint(self.aiming or self.sprintCooldownTimer > 0.0 or mgp_tool_isAnimPlaying(self, g_sprint_block_anims) )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -845,6 +844,48 @@ function Panzerfaust:onShoot(v_proj_hit)
 	self.cl_barrel_exhaust:start()
 end
 
+---@param vector Vec3
+---@return Vec3
+local function calculateRightVector(vector)
+	local yaw = math.atan2(vector.y, vector.x) - math.pi / 2
+	return sm.vec3.new(math.cos(yaw), math.sin(yaw), 0)
+end
+
+---@param origin Vec3
+---@param direction Vec3
+---@param angle number
+---@param ray_length number
+---@return Vec3
+local function calculateProjectileHit(origin, direction, angle, ray_length)
+	local v_dir_norm = direction:normalize()
+
+	if math.abs(v_dir_norm:dot(sm.vec3.new(0, 0, 1))) >= 0.97 then
+		return origin + v_dir_norm * ray_length
+	end
+
+	local v_dir_right = calculateRightVector(v_dir_norm)
+	local v_final_dir = v_dir_norm:rotate(math.rad(angle), v_dir_right)
+
+	return origin + v_final_dir * ray_length
+end
+
+-- Measured in degrees
+local g_angle_adjustment_table =
+{
+	[0] = 0.0, -- 30m adjustment
+	[1] = 2.5, -- 60m adjustment
+	[2] = 4.0  -- 90m adjustment
+}
+
+---@return number
+function Panzerfaust:getAdjustmentAngle()
+	if self.aiming then
+		return g_angle_adjustment_table[self.aimMode]
+	end
+
+	return 0.0
+end
+
 function Panzerfaust.cl_onPrimaryUse(self)
 	if mgp_tool_isAnimPlaying(self, g_action_block_anims) or self.cl_waiting_for_data then
 		return
@@ -875,18 +916,20 @@ function Panzerfaust.cl_onPrimaryUse(self)
 			firePos = self.tool:getTpBonePos("pejnt_barrel")
 		end
 
-		local fireMode = self.normalFireMode
-
 		local v_proj_hit = nil
-		local hit, result = sm.localPlayer.getRaycast(1000)
+		local v_ray_length = 1000
+		local v_adjustment_angle = self:getAdjustmentAngle()
+
+		local hit, result = sm.localPlayer.getRaycast(v_ray_length)
 		if hit then
-			v_proj_hit = result.pointWorld
+			v_proj_hit = calculateProjectileHit(result.originWorld, result.directionWorld, v_adjustment_angle, v_ray_length)
 		else
-			v_proj_hit = firePos + dir * 1000
+			v_proj_hit = calculateProjectileHit(firePos, dir, v_adjustment_angle, v_ray_length)
 		end
 
 		-- Timers
-		self.fireCooldownTimer = 0.5
+		self.fireCooldownTimer = 1.3
+		local fireMode = self.normalFireMode
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 

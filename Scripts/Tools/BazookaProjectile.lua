@@ -35,6 +35,20 @@ local function BazookaProjectile_getEffectName(effect, cae_effect)
 end
 
 ---@param self Bazooka|Panzerfaust
+function BazookaProjectile_clientCalculateProjectilePos(self)
+	local s_tool = self.tool
+
+	if self.cl_isLocal and s_tool:isInFirstPersonView() then
+		local v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
+		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()
+
+		return v_proj_pos + calculateRightVector(v_char_dir) * 0.1
+	end
+
+	return s_tool:getTpBonePos("pejnt_barrel")
+end
+
+---@param self Bazooka|Panzerfaust
 ---@param hit_position Vec3
 ---@param velocity number
 ---@param effect? string
@@ -42,16 +56,7 @@ end
 function BazookaProjectile_clientSpawnProjectile(self, hit_position, velocity, effect, cae_effect)
 	local s_tool = self.tool
 
-	local v_proj_pos = nil
-	if self.cl_isLocal and s_tool:isInFirstPersonView() then
-		v_proj_pos = s_tool:getFpBonePos("pejnt_barrel")
-
-		local v_char_dir = s_tool:getOwner():getCharacter():getDirection()
-		v_proj_pos = v_proj_pos + calculateRightVector(v_char_dir) * 0.1
-	else
-		v_proj_pos = s_tool:getTpBonePos("pejnt_barrel")
-	end
-
+	local v_proj_pos = BazookaProjectile_clientCalculateProjectilePos(self)
 	local v_proj_direction = (hit_position - v_proj_pos):normalize()
 	v_proj_pos = v_proj_pos + v_proj_direction
 	local v_proj_velocity = v_proj_direction * velocity
