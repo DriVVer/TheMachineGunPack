@@ -22,7 +22,7 @@
 				{ "name" : "melee_guard_hit", 		"file" : "$GAME_DATA/Character/Char_Male/Animations/Firstperson/Sledgehammer/ani_char_male_fp_sledgehammer_guard_hit.dae" },
 				{ "name" : "melee_guard_break", 	"file" : "$GAME_DATA/Character/Char_Male/Animations/Firstperson/Sledgehammer/ani_char_male_fp_sledgehammer_guard_break.dae" },
 
-				{ "name" : "melee_sprint_into", 	"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_putdwon.dae" },
+				{ "name" : "melee_sprint_into", 	"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_putdown.dae" },
 				{ "name" : "melee_sprint_exit", 	"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_pickup.dae" },
 				{ "name" : "melee_sprint_idle", 	"file" : "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/melee_fp_down.dae" }
 			]
