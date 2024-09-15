@@ -301,6 +301,84 @@
 
 
 	//reload_effects
+
+	"DLM_SW_Cloth_1":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_Cloth_1",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_Cloth_2":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_Cloth_2",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_Cloth_3":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_Cloth_3",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_ClipIn":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_ClipIn",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_RoundsOut":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_RoundsOut",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_Open":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_Open",
+				"delay": 0.0
+			}
+		]
+	},
+	"DLM_SW_Close":
+	{
+		"effectList":
+		[
+			{
+				"type": "audio",
+				"name": "SW_TMGP_Close",
+				"delay": 0.0
+			}
+		]
+	},
 	
 	"DLM_STG_MagIn":
 	{

@@ -1,6 +1,44 @@
 {
     "soundList": {
 
+        
+        "SW_TMGP_Cloth_1": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_cloth_01.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_Cloth_2": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_cloth_02.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_Cloth_3": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_cloth_03.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_ClipIn": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_clip_insert_01.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_RoundsOut": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_dump_rounds_01.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_Open": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_open_chamber.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+        "SW_TMGP_Close": {
+            "path":"$CONTENT_DATA/Effects/Audio/SW_TMGP_close_chamber.mp3",
+            "is3D": true,
+            "reverb": "MOUNTAINS"
+        },
+
+
         "STG_TMGP_MagIn": {
             "path":"$CONTENT_DATA/Effects/Audio/STG_TMGP_MagIn.mp3",
             "is3D": true,

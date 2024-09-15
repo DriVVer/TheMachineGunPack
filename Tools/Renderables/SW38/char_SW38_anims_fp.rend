@@ -22,7 +22,8 @@
 				{ "name": "SW38_aim_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_aim_idle.dae" },
 				
 				{ "name": "SW38_reload",       			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_empty.dae" },
-				{ "name": "SW38_reload_empty",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_empty.dae" }
+				{ "name": "SW38_reload_empty",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/SW38/SW38_fp_reload_empty.dae" },
+				{ "name": "SW38_ammo_check",       	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/M1911/M1911_idle.dae" }
 			]
 		}
 	]

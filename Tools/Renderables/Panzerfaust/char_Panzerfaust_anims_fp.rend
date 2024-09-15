@@ -9,8 +9,8 @@
 				{ "name": "Panzerfaust_shoot", 	 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_shoot.dae" },
 
 				{ "name": "Panzerfaust_pickup", 	   	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_pickup.dae" },
-				{ "name": "Panzerfaust_pickup_short", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_pickup.dae" },
-				{ "name": "Panzerfaust_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_sprint_into.dae" },
+				{ "name": "Panzerfaust_pickup_short", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_pickup_short.dae" },
+				{ "name": "Panzerfaust_putdown", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_putdown.dae" },
 				{ "name": "Panzerfaust_throwaway", 	 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_throw_away.dae" },
 
 				{ "name": "Panzerfaust_aim_into",  			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Panzerfaust/Panzerfaust_fp_aim_into.dae" },

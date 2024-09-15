@@ -159,7 +159,7 @@ function Panzerfaust:client_onCreate()
 	self:client_initAimVals()
 	self.aimBlendSpeed = 10.0
 
-	self.cl_sight_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/BazookaSight.layout", false, {
+	self.cl_sight_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/PanzerfaustSight.layout", false, {
 		isHud = true,
 		isInteractive = false,
 		needsCursor = false,
