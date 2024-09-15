@@ -2924,7 +2924,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
+						bone = "pejnt_barrel",
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
@@ -2937,7 +2937,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
+						bone = "pejnt_barrel",
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
@@ -2977,7 +2977,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
+						bone = "pejnt_barrel",
 						name_tp = "magout",
 						name_fp = "magout",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
@@ -2990,7 +2990,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
+						bone = "pejnt_barrel",
 						name_tp = "magin",
 						name_fp = "magin",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
@@ -3003,7 +3003,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_slide",
+						bone = "pejnt_barrel",
 						name_tp = "slidedrop",
 						name_fp = "slidedrop",
 						tp_offset = sm.vec3.new(0, 0.5, 0),

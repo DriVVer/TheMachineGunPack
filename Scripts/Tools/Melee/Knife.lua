@@ -24,7 +24,7 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
-local Range = 3.5
+local Range = 2.0
 local SwingStaminaSpend = 1.5
 
 Knife.swingCount = 2

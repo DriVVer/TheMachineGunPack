@@ -20,8 +20,8 @@
 				{ "name": "PTRD_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_exit.dae" },
 				{ "name": "PTRD_sprint_idle", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_sprint_idle.dae" },
 
-				{ "name": "PTRD_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_into.dae" },
-				{ "name": "PTRD_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_exit.dae" },
+				{ "name": "PTRD_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_into_bipod.dae" },
+				{ "name": "PTRD_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_exit_bipod.dae" },
 				{ "name": "PTRD_aim_shoot",    "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_shoot.dae" },
 				{ "name": "PTRD_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/PTRD/PTRD_fp_aim_idle.dae" },
 

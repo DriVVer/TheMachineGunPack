@@ -261,7 +261,7 @@ function Panzerfaust.loadAnimations( self )
 				aimInto = { "Panzerfaust_aim_into", { nextAnimation = "aim_idle90" } },
 				aimExit = { "Panzerfaust_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
 				aimIdle = { "Panzerfaust_aim_idle", { looping = true } },
-				aimShoot = { "Panzerfaust_aim_shoot", { nextAnimation = "aimIdle" } },
+				aimShoot = { "Panzerfaust_aim_shoot", { nextAnimation = "aim_idle30" } },
 
 				sprintInto = { "Panzerfaust_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
 				sprintExit = { "Panzerfaust_sprint_exit", { nextAnimation = "idle",  blendNext = 0 } },
@@ -872,9 +872,9 @@ end
 -- Measured in degrees
 local g_angle_adjustment_table =
 {
-	[0] = 0.0, -- 30m adjustment
-	[1] = 2.5, -- 60m adjustment
-	[2] = 4.0  -- 90m adjustment
+	[0] = 1.5, -- 30m adjustment
+	[1] = 3.0, -- 60m adjustment
+	[2] = 4.5  -- 90m adjustment
 }
 
 ---@return number
