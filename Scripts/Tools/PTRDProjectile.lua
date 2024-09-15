@@ -38,7 +38,7 @@ local function PTRDProjectile_UpdateProjectileRotation(proj)
 	proj[3]:setPosition(proj[1])
 
 	if proj[2]:length() > 0.001 then
-		proj[3]:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, -1), proj[2]))
+		proj[3]:setRotation(sm.vec3.getRotation(sm.vec3.new(0, -1, 0), proj[2]))
 	end
 end
 
@@ -80,8 +80,10 @@ function PTRDProjectile_clientSpawnProjectile(self, dir)
 	v_proj_pos = v_proj_pos + dir
 	local v_proj_velocity = dir * g_projectileVelocity
 
-	local v_proj_effect = sm.effect.createEffect("PRTD - Projectile")
-	v_proj_effect:setScale(sm.vec3.one() * 0.25)
+	local v_proj_effect = sm.effect.createEffect("ShapeRenderable")
+	v_proj_effect:setParameter("uuid", sm.uuid.new("bc3c9b6b-41f1-4096-8c7d-185e2b368964"))
+	v_proj_effect:setScale(sm.vec3.new(1, 4, 1))
+	v_proj_effect:setPosition(v_proj_pos)
 
 	local v_new_projectile =
 	{

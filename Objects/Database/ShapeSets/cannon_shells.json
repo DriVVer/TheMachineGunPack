@@ -10,6 +10,17 @@
 			"sticky": "+X-X+Z-Z+Y-Y",
 			"rotationSet": "PropFull",
 			"showInInventory": false
+		},
+		{
+			"uuid": "bc3c9b6b-41f1-4096-8c7d-185e2b368964",
+			"renderable": "$CONTENT_DATA/Projectiles/Renderables/Bullet_yel.rend",
+			"color": "939291",
+			"box": { "x": 1, "y": 1, "z": 1 },
+			"density": 100,
+			"physicsMaterial": "Metal",
+			"sticky": "+X-X+Z-Z+Y-Y",
+			"rotationSet": "PropFull",
+			"showInInventory": false
 		}
 	]
 }
