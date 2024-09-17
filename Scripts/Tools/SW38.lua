@@ -595,7 +595,6 @@ function SW38:onShoot(is_last_shot)
 	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation( self.tpAnimations, anim, 10.0 )
 	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
-	
 end
 
 function SW38:calculateFirePosition()
@@ -765,6 +764,8 @@ function SW38:cl_onPrimaryUse(is_shooting)
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.tool:isSprinting() and "sprintShoot" or (self.aiming and "aimShoot" or "shoot"), 0.0 )
 	else
+		mgp_toolAnimator_setAnimation(self, "no_ammo_shot")
+
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 		self.fireCooldownTimer = fireMode.fireCooldown
 		sm.audio.play( "PotatoRifle - NoAmmo" )
