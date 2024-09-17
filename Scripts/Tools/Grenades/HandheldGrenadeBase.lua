@@ -25,11 +25,14 @@ dofile("../ExplosionUtil.lua")
 ---@field grenade_used boolean
 ---@field sv_activation_timer integer
 ---@field sprintCooldown integer
+---@field mgp_tool_animator_type string
 HandheldGrenadeBase = class()
 
 function HandheldGrenadeBase:client_onCreate()
 	self.cl_isLocal = self.tool:isLocal()
 	self.grenade_active = false
+
+	mgp_toolAnimator_initialize(self, self.mgp_tool_animator_type)
 end
 
 function HandheldGrenadeBase:client_onRefresh()
@@ -113,6 +116,7 @@ function HandheldGrenadeBase:client_onUpdate(dt)
 		return
 	end
 
+	mgp_toolAnimator_update(self, dt)
 	self:client_onGrenadeUpdate(dt)
 
 	-- First person animation
@@ -361,6 +365,7 @@ function HandheldGrenadeBase.client_onUnequip( self, animate )
 	self.equipped = false
 	self.aiming = false
 	self.grenade_active = false
+	mgp_toolAnimator_reset(self)
 
 	if sm.exists( self.tool ) then
 		self.network:sendToServer("sv_n_unequipGrenade")

@@ -2669,6 +2669,21 @@ local mgp_tool_database =
 			}
 		}
 	},
+
+	HandheldGrenade = {
+		required_effects = {},
+		animation = {
+
+		}
+	},
+
+	HandheldGrenadeSingle = {
+		required_effects = {},
+		animation = {
+
+		}
+	},
+
 	SW38 =
 	{
 		dlm_required_effects = {

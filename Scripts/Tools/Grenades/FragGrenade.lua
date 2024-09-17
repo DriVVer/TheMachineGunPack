@@ -8,6 +8,7 @@ dofile("HandheldGrenadeBase.lua")
 ---@class FragGrenade : HandheldGrenadeBase
 FragGrenade = class(HandheldGrenadeBase)
 
+FragGrenade.mgp_tool_animator_type = "Frag"
 FragGrenade.mgp_renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Frag/Frag_Base.rend",
@@ -104,11 +105,6 @@ sm.tool.preloadRenderables(FragGrenade.mgp_renderables)
 sm.tool.preloadRenderables(FragGrenade.mgp_renderables_tp)
 sm.tool.preloadRenderables(FragGrenade.mgp_renderables_fp)
 
-function FragGrenade:client_onCreate()
-	HandheldGrenadeBase.client_onCreate(self)
-	mgp_toolAnimator_initialize(self, "Frag")
-end
-
 function FragGrenade:client_onEquip(animate)
 	HandheldGrenadeBase.client_onEquip(self, animate)
 	self.ready_to_throw = false
@@ -127,8 +123,6 @@ function FragGrenade:sv_getGrenadeTimer()
 end
 
 function FragGrenade:client_onGrenadeUpdate(dt)
-	mgp_toolAnimator_update(self, dt)
-
 	if self.ready_to_throw and self.grenade_active and not self.is_holding_grenade then
 		self.ready_to_throw = false
 		self.grenade_active = false

@@ -8,6 +8,7 @@ dofile("HandheldGrenadeBase.lua")
 ---@class HandheldGrenadeSingle : HandheldGrenadeBase
 HandheldGrenadeSingle = class(HandheldGrenadeBase)
 
+HandheldGrenadeSingle.mgp_tool_animator_type = "HandheldGrenadeSingle"
 HandheldGrenadeSingle.mgp_renderables =
 {
 	"$CONTENT_DATA/Tools/Renderables/Grenade/SingleGrenade_Base.rend"
