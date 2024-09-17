@@ -383,7 +383,6 @@ function Bazooka:client_onUpdate(dt)
 				local cur_anim_cache = fp_anim.currentAnimation
 				local anim_data = fp_anim.animations[cur_anim_cache]
 				if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
-					--self.cl_is_loaded = true
 					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 

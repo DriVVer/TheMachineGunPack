@@ -317,12 +317,6 @@ function Panzerfaust.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-local actual_reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true
-}
-
 local aim_animation_list01 =
 {
 	["aimInto"]         = true,
@@ -429,7 +423,7 @@ function Panzerfaust:server_spendAmmo(data, player)
 	if not v_inventory:canSpend(mgp_Bazooka_ammo, 1) then return end
 
 	sm.container.beginTransaction()
-	sm.container.spend(v_inventory, mgp_Bazookat_ammo, 1)
+	sm.container.spend(v_inventory, mgp_Bazooka_ammo, 1)
 	sm.container.endTransaction()
 
 	self.sv_Panzerfaust_loaded = true
@@ -487,7 +481,7 @@ function Panzerfaust:client_onUpdate(dt)
 	local isCrouching = self.tool:isCrouching()
 
 	if self.cl_isLocal then
-		if self.equipped and not self.cl_usedTimer then
+		if self.equipped then
 			local hit, result = sm.localPlayer.getRaycast(1.5)
 			if hit and not mgp_tool_isAnimPlaying(self, g_close_anim_block) then
 				local v_cur_anim = self.fpAnimations.currentAnimation
@@ -502,8 +496,7 @@ function Panzerfaust:client_onUpdate(dt)
 				local fp_anim = self.fpAnimations
 				local cur_anim_cache = fp_anim.currentAnimation
 				local anim_data = fp_anim.animations[cur_anim_cache]
-				if actual_reload_anims[cur_anim_cache] and predict_animation_end(anim_data, dt) then
-					--self.cl_is_loaded = true
+				if cur_anim_cache == "throwAway" and predict_animation_end(anim_data, dt) then
 					self.network:sendToServer("sv_n_trySpendAmmo")
 				end
 
@@ -828,18 +821,18 @@ function Panzerfaust:sv_n_onShoot(v_proj_hit)
 	self:sv_updateAmmoCounter()
 end
 
-function Panzerfaust:cl_n_onShoot(v_proj_hit)
+function Panzerfaust:cl_n_onShoot(proj_hit)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot(v_proj_hit)
+		self:onShoot(proj_hit)
 	end
 end
 
-function Panzerfaust:onShoot(v_proj_hit)
+function Panzerfaust:onShoot(proj_hit)
 	local v_shoot_anim = (self.aiming and "aimShoot" or "shoot")
 
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
-	BazookaProjectile_clientSpawnProjectile(self, v_proj_hit, 80, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
+	BazookaProjectile_clientSpawnProjectile(self, proj_hit, 80, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
 
 	self.cl_barrel_exhaust:start()
 end
