@@ -14,7 +14,6 @@
 				{ "name": "STG44_sprint_into",			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_into.dae" },
 				{ "name": "STG44_sprint_exit", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_exit.dae" },
 				{ "name": "STG44_sprint_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_idle.dae" },
-				{ "name": "STG44_sprint_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_shoot.dae" },
 
 				{ "name": "STG44_aim_into",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_into.dae" },
 				{ "name": "STG44_aim_exit",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_exit.dae" },
