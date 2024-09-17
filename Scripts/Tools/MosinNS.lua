@@ -29,17 +29,6 @@ MosinNS = class(BaseGun)
 MosinNS.reimburseAmmo = true
 MosinNS.ammoUuid = sm.uuid.new("295481d0-910a-48d4-a04a-e1bf1290e510")
 MosinNS.mag_capacity = 5
-MosinNS.modificationData = {
-	layout = "$CONTENT_DATA/Gui/Layouts/MosinNS_mods.layout",
-	mods = {
-		scope = {
-			CanBeUnEquipped = true,
-			["3fd34aa2-9bbd-4a10-bc86-1258aca23d30"] = {
-				renderable = "scope"
-			}
-		}
-	}
-}
 MosinNS.reload_anims = {
 	["reload_into"] = true,
 	["reload_into_empty"] = true,
@@ -372,6 +361,17 @@ end
 function MosinNS:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
 
+	if self.cl_show_ammo_timer then
+		self.cl_show_ammo_timer = self.cl_show_ammo_timer - dt
+
+		if self.cl_show_ammo_timer <= 0.0 then
+			self.cl_show_ammo_timer = nil
+			if self.tool:isEquipped() then
+				sm.gui.displayAlertText(("Mosin: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
+			end
+		end
+	end
+
 	if self.aim_timer then
 		self.aim_timer = self.aim_timer - dt
 		if self.aim_timer <= 0.0 then
@@ -598,8 +598,6 @@ function MosinNS:client_onEquip(animate, is_custom)
 		currentRenderablesTp[#currentRenderablesTp+1] = v
 		currentRenderablesFp[#currentRenderablesFp+1] = v
 	end
-
-	mgp_toolAnimator_onModdedToolEquip(self, currentRenderablesFp, currentRenderablesTp, {})
 
 	--Set the tp and fp renderables before actually loading animations
 	self.tool:setTpRenderables( currentRenderablesTp )
@@ -933,6 +931,40 @@ function MosinNS:client_onReload()
 				return true
 			end
 
+			self:cl_initReloadAnim()
+		end
+	end
+
+	return true
+end
+
+function MosinNS:cl_startCheckMagAnim()
+	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
+	mgp_toolAnimator_setAnimation(self, "ammo_check")
+end
+
+function MosinNS:sv_n_checkMag()
+	self.network:sendToClients("cl_n_checkMag")
+end
+
+function MosinNS:cl_n_checkMag()
+	local s_tool = self.tool
+	if not s_tool:isLocal() and s_tool:isEquipped() then
+		self:cl_startCheckMagAnim()
+	end
+end
+
+function MosinNS:client_onToggle()
+	if not self:client_isGunReloading(mosin_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+		if self.ammo_in_mag > 0 then
+			self.cl_show_ammo_timer = 0.7
+
+			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
+
+			self:cl_startCheckMagAnim()
+			self.network:sendToServer("sv_n_checkMag")
+		else
+			sm.gui.displayAlertText("Mosin: No Ammo. Reloading...", 3)
 			self:cl_initReloadAnim()
 		end
 	end
