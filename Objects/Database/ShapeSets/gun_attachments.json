@@ -12,6 +12,7 @@
 			},
 			"itemStack": {},
 			"rotationSet": "PropY",
+			"showInInventory": false,
 			"sticky": "+Y-Y",
 			"physicsMaterial": "Wood",
 			"ratings": {
