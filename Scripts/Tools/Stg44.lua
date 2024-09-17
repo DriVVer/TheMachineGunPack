@@ -866,6 +866,8 @@ function STG44:client_onToggle()
 
 			self:cl_startCheckMagAnim()
 			self.network:sendToServer("sv_n_checkMag")
+
+			mgp_toolAnimator_setAnimation(self, "ammo_check")
 		else
 			sm.gui.displayAlertText("STG44: No Ammo. Reloading...", 3)
 
