@@ -827,7 +827,7 @@ end
 
 function STG44:client_onReload()
 	if self.equipped then
-		local is_mag_full = (self.ammo_in_mag == self.mag_capacity)
+		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
 		if not is_mag_full then
 			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 				local cur_anim_name = "reload"
