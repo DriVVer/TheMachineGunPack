@@ -54,11 +54,11 @@
 	},
 	"872b6328-37d4-4922-847d-0aef8803ac94": {
 		"title": "Bazooka M20",
-		"description": "The Machine Gun Pack\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress R to reload"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress F to measure the distance.\nPress R to reload"
 	},
 	"56b4204e-6a3b-4d6d-8858-924dc65fe6d9": {
 		"title": "Panzerfaust 100",
-		"description": "The Machine Gun Pack\n\nWeapon based on 'Panzerfaust' made of scrap.\n\nSingle Use"
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Panzerfaust' made of scrap.\nPress R when aiming to adjust the sight.\nPress F to measure the distance.\n\nSingle Use"
 	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",
@@ -122,7 +122,7 @@
 	},
 	"daa59c62-2671-4071-b8dc-47654f620cd2": {
 		"title": "Pump Shotgun",
-		"description": "The Machine Gun Pack\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress F to switch between ammo types\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress Q to switch between ammo types\nPress R to reload\nPress F to stab"
 	},
 	"bdd9e357-35f7-4140-8b19-477abef20e0f": {
 		"title": "Browning .50 HMG",
