@@ -22,7 +22,7 @@
 				
 				{ "name": "STG44_reload",       		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_reload.dae" },
 				{ "name": "STG44_reload_empty",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_reload_empty.dae" },
-				{ "name": "STG44_ammo_check",  				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_idle.dae" }
+				{ "name": "STG44_ammo_check",  				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_ammo_check.dae" }
 			]
 		}
 	]

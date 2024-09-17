@@ -21,7 +21,7 @@ local _Database = {
 					min = 400.0,
 					max = 400.0
 				},
-				recoil = sm.vec3.new(0, 0, -400),
+				recoil = sm.vec3.new(0, 0, -40),
 				reload_time = 10,
 				auto_reload = true
 			},
@@ -69,7 +69,7 @@ local _Database = {
 					min = 120.0,
 					max = 120.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 280,
 				auto_reload = true
 			},
@@ -109,7 +109,7 @@ local _Database = {
 					min = 400.0,
 					max = 400.0
 				},
-				recoil = sm.vec3.new(0, 0, -200),
+				recoil = sm.vec3.new(0, 0, -20),
 				reload_time = 120,
 				auto_reload = true
 			},
@@ -151,7 +151,7 @@ local _Database = {
 					min = 400.0,
 					max = 400.0
 				},
-				recoil = sm.vec3.new(0, 0, -200),
+				recoil = sm.vec3.new(0, 0, -20),
 				reload_time = 120,
 				auto_reload = true
 			},
@@ -193,7 +193,7 @@ local _Database = {
 					min = 400.0,
 					max = 400.0
 				},
-				recoil = sm.vec3.new(0, 0, -200),
+				recoil = sm.vec3.new(0, 0, -20),
 				reload_time = 160,
 				auto_reload = true
 			},
@@ -235,7 +235,7 @@ local _Database = {
 					min = 400.0,
 					max = 400.0
 				},
-				recoil = sm.vec3.new(0, 0, -400),
+				recoil = sm.vec3.new(0, 0, -40),
 				reload_time = 7,
 				auto_reload = true
 			},
@@ -283,7 +283,7 @@ local _Database = {
 					min = 200.0,
 					max = 225.0
 				},
-				recoil = sm.vec3.new(0, 0, -400),
+				recoil = sm.vec3.new(0, 0, -40),
 				reload_time = 120,
 				auto_reload = false
 			},
@@ -323,7 +323,7 @@ local _Database = {
 					min = 400.0,
 					max = 450.0
 				},
-				recoil = sm.vec3.new(0, 0, -400),
+				recoil = sm.vec3.new(0, 0, -40),
 				reload_time = 5,
 				auto_reload = true
 			},
@@ -371,7 +371,7 @@ local _Database = {
 					min = 1000.0,
 					max = 1000.0
 				},
-				recoil = sm.vec3.new(0, 0, -1000),
+				recoil = sm.vec3.new(0, 0, -50),
 				reload_time = 2,
 				auto_reload = true
 			},
@@ -421,7 +421,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true
 			},
@@ -471,7 +471,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.5),
@@ -520,7 +520,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.8),
@@ -572,7 +572,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7)
@@ -629,7 +629,7 @@ local _Database = {
 					min = 500.0,
 					max = 500.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,                                                        
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.6),
@@ -669,7 +669,7 @@ local _Database = {
 					min = 500.0,
 					max = 500.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.6),
@@ -707,7 +707,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.3),
@@ -759,7 +759,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
@@ -797,7 +797,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 1),
@@ -829,7 +829,7 @@ local _Database = {
 					min = 1200.0,
 					max = 1200.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 100,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
@@ -871,7 +871,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -400),
+				recoil = sm.vec3.new(0, 0, -40),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.65),
@@ -911,7 +911,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
@@ -949,7 +949,7 @@ local _Database = {
 					min = 700.0,
 					max = 700.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.9),
@@ -979,7 +979,7 @@ local _Database = {
 					min = 600.0,
 					max = 600.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.5),
@@ -1009,7 +1009,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.4),
@@ -1047,7 +1047,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 3,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.4),
@@ -1085,7 +1085,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 2,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.5),
@@ -1125,7 +1125,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 2,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.7),
@@ -1185,7 +1185,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.6),
@@ -1223,7 +1223,7 @@ local _Database = {
 					min = 800.0,
 					max = 800.0
 				},
-				recoil = sm.vec3.new(0, 0, -100),
+				recoil = sm.vec3.new(0, 0, -10),
 				reload_time = 4,
 				auto_reload = true,
 				projectile_offset = sm.vec3.new(0, 0, 0.45),

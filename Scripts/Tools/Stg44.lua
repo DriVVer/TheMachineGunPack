@@ -856,6 +856,7 @@ end
 
 function STG44:cl_startCheckMagAnim()
 	setTpAnimation(self.tpAnimations, "ammo_check", 1.0)
+	mgp_toolAnimator_setAnimation(self, "ammo_check")
 end
 
 function STG44:client_onToggle()

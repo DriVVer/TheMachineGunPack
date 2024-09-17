@@ -2255,6 +2255,45 @@ local mgp_tool_database =
 						apply_velocity = false,
 					}
 				}
+			},
+			ammo_check =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "STG44_anims", start_val = 4.0, end_val = 6.1 } },
+						tp_anim = { { name = "STG44_anims", start_val = 4.0, end_val = 6.1 } },
+						time = 2.1
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.25
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magout",
+						name_fp = "magout",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 1.35
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "magin",
+						name_fp = "magin",
+						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, 0, 0),
+						apply_velocity = false,
+					}
+				}
 			}
 		}
 	},
@@ -2757,13 +2796,13 @@ local mgp_tool_database =
 					}
 				}
 			},
-			no_ammo =
+			no_ammo_shot =
 			{
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
-						tp_anim = { { name = "SW38_anims", start_val = 0.06, end_val = 0.17 } },
+						fp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.17 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.00, end_val = 0.17 } },
 						time = 0.1
 					}
 				},
@@ -3171,7 +3210,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.5
+						time = 0.55
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -3209,7 +3248,7 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.6
+						time = 0.75
 					},
 					{
 						type = mgp_tool_anim_enum.effect,
