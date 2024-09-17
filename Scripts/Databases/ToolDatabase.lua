@@ -3140,7 +3140,86 @@ local mgp_tool_database =
 						apply_velocity = false
 					}
 				}
-			}
+			},
+			ammo_check =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.20
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 0.75 } },
+						tp_anim = { { name = "SW38_anims", start_val = 0.20, end_val = 0.75 } },
+						time = 0.55
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.5
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "SW38_anims", start_val = 3.5, end_val = 3.8 } },
+						tp_anim = { { name = "SW38_anims", start_val = 3.5, end_val = 3.8 } },
+						time = 0.3
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "cloth1",
+						name_fp = "cloth1",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.3
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "open",
+						name_fp = "open",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.6
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "close",
+						name_fp = "close",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.2
+					},
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "cloth3",
+						name_fp = "cloth3",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					}		
+				}
+			},
 		}
 	},
 
