@@ -2262,7 +2262,7 @@ local mgp_tool_database =
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "STG44_anims", start_val = 4.0, end_val = 6.1 } },
-						tp_anim = { { name = "STG44_anims", start_val = 4.0, end_val = 6.1 } },
+						tp_anim = { { name = "STG44_anims", start_val = 4.0, end_val = 4.0 } },
 						time = 2.1
 					}
 				},

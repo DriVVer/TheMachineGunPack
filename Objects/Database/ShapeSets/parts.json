@@ -936,6 +936,38 @@
          "sticky" : "+X-X+Z-Z+Y-Y",
          "uuid" : "04075bce-2b41-47a2-8753-343b1e0b20f7"
       },
+
+      {
+         "box" : {
+            "x" : 1,
+            "y" : 1,
+            "z" : 1
+         },
+         "color" : "df7f00",
+         "density" : 1000,
+         "physicsMaterial" : "Metal",
+         "renderable" : {
+            "lodList" : [
+               {
+                  "mesh" : "$MOD_DATA/Objects/Mesh/smoke_dropper.obj",
+                  "subMeshList" : [
+                     {
+                        "material" : "DifAsgNor",
+                        "textureList" : [
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal_dif.png",
+                           "$MOD_DATA/Objects/Textures/tekstura_horizontal2_asg.png",
+                           "$MOD_DATA/Objects/Textures/nonor_nor.tga"
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+         "rotationSet" : "PropFull",
+         "sticky" : "+X-X+Z-Z+Y-Y",
+         "uuid" : "7b646a58-4020-426f-82b3-89305e27d2c1"
+      },
+
       {
          "box" : {
             "x" : 1,

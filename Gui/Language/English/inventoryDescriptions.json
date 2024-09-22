@@ -90,7 +90,7 @@
 	},
 	"4664a470-275f-4799-a54f-6a4a2111f436": {
 		"title": "First Aid Medkit",
-		"description": "The Machine Gun Pack\n\nFirst Aid, heals up to 75hp when used.\n\nPress LMB to use"
+		"description": "The Machine Gun Pack\nmodelled by Illumina\n\nFirst Aid, heals up to 75hp when used.\n\nPress LMB to use"
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
 		"title": "Mosin-Nagant M44 rifle (Sniper class)",
@@ -122,7 +122,7 @@
 	},
 	"daa59c62-2671-4071-b8dc-47654f620cd2": {
 		"title": "Pump Shotgun",
-		"description": "The Machine Gun Pack\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress Q to switch between ammo types\nPress R to reload\nPress F to stab"
+		"description": "The Machine Gun Pack\nmodelled by Illumina\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress Q to switch between ammo types\nPress R to reload\nPress F to stab"
 	},
 	"bdd9e357-35f7-4140-8b19-477abef20e0f": {
 		"title": "Browning .50 HMG",
@@ -134,6 +134,10 @@
 	},
 	"04075bce-2b41-47a2-8753-343b1e0b20f7": {
 		"title": "Mounting panel",
+		"description": "The Machine Gun Pack\n\n"
+	},
+	"7b646a58-4020-426f-82b3-89305e27d2c1": {
+		"title": "smoke_launcher decor",
 		"description": "The Machine Gun Pack\n\n"
 	},
 	"32e96b7d-a08a-483c-88c6-8a1616ea3123": {
