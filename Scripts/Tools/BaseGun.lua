@@ -248,7 +248,7 @@ function BaseGun:cl_chooseSlotOption(button, id, data, grid)
     if not data then return end
 
     local slot, uuid = data.slot, data.itemId
-    if self.sv_selectedMods[slot] == uuid then return end
+    if self.selectedMods[slot] == uuid then return end
 
     self.network:sendToServer("sv_chooseSlotOption", { slot = slot, uuid = uuid })
 end
