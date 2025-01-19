@@ -5,6 +5,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
+dofile("BaseGun.lua")
 
 local Damage = 100
 
