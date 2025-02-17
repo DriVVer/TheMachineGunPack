@@ -8,7 +8,7 @@
 				{ "name": "Medkit_fp_idle",     		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_idle.dae" },
 
 				{ "name": "Medkit_fp_use_1", "file": 		"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_1.dae" },
-				{ "name": "Medkit_fp_use_2", "file": 		"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_1.dae" },
+				{ "name": "Medkit_fp_use_2", "file": 		"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_2.dae" },
 				{ "name": "Medkit_fp_use_revive", "file": 	"$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Medkit/Medkit_fp_use_2.dae" },
 
 
