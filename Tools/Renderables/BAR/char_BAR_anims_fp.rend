@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$GAME_DATA/Character/Char_Male/Animations/Animationrefs/aniref_char_male_tpose.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"maxViewDistance": 1000.0,
+			"animationList": [
+				{ "name": "BAR_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_idle.dae" },
+				{ "name": "BAR_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_shoot.dae" },
+
+				{ "name": "BAR_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_pickup.dae" },
+				{ "name": "BAR_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_putdown.dae" },
+
+				{ "name": "BAR_sprint_into",			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_into.dae" },
+				{ "name": "BAR_sprint_exit", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_exit.dae" },
+				{ "name": "BAR_sprint_idle", 			"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_sprint_idle.dae" },
+
+				{ "name": "BAR_aim_into",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_into.dae" },
+				{ "name": "BAR_aim_exit",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_exit.dae" },
+				{ "name": "BAR_aim_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_shoot.dae" },
+				{ "name": "BAR_aim_idle", 		 "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_aim_idle.dae" },
+				
+				{ "name": "BAR_reload",       		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_reload.dae" },
+				{ "name": "BAR_reload_empty",     	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_reload_empty.dae" },
+				{ "name": "BAR_ammo_check",  				"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/STG44/STG44_fp_ammo_check.dae" }
+			]
+		}
+	]
+} 

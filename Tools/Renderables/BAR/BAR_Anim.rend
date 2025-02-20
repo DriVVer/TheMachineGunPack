@@ -1,0 +1,29 @@
+{
+	"lodList": [
+		{
+			"mesh": "$CONTENT_DATA/Tools/Mesh/BAR/BAR_Anim.dae",
+			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
+			"animationList": [
+				{ "name": "BAR_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/BAR/BAR_anims.dae" }
+			],
+			"subMeshList": [			
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/BAR_DP_Bi/BAR_DP_Bi_dif.tga",
+						"$CONTENT_DATA/Tools/Textures/BAR_DP_Bi/BAR_DP_Bi_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/BAR_DP_Bi/BAR_DP_Bi_nor.png"
+					]
+				},
+				{
+					"material": "DifAsgNor",
+					"textureList": [
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
+						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
+					]
+				}
+			]
+		}
+	]
+}
