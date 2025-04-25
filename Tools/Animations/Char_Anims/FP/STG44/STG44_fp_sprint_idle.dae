@@ -19,11 +19,11 @@
   <animation id="Character-anim" name="Character">
    <animation>
     <source id="Character-Matrix-animation-input">
-     <float_array id="Character-Matrix-animation-input-array" count="3">
+     <float_array id="Character-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#Character-Matrix-animation-input-array" count="3">
+      <accessor source="#Character-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -35,16 +35,16 @@
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#Character-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#Character-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="Character-Interpolations">
-     <Name_array id="Character-Interpolations-array" count="3">
+     <Name_array id="Character-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#Character-Interpolations-array" count="3">
+      <accessor source="#Character-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -60,11 +60,11 @@
   <animation id="HIK_root_jnt-anim" name="HIK_root_jnt">
    <animation>
     <source id="HIK_root_jnt-Matrix-animation-input">
-     <float_array id="HIK_root_jnt-Matrix-animation-input-array" count="3">
+     <float_array id="HIK_root_jnt-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#HIK_root_jnt-Matrix-animation-input-array" count="3">
+      <accessor source="#HIK_root_jnt-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -76,16 +76,16 @@
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#HIK_root_jnt-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#HIK_root_jnt-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="HIK_root_jnt-Interpolations">
-     <Name_array id="HIK_root_jnt-Interpolations-array" count="3">
+     <Name_array id="HIK_root_jnt-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#HIK_root_jnt-Interpolations-array" count="3">
+      <accessor source="#HIK_root_jnt-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -101,11 +101,11 @@
   <animation id="root_jnt-anim" name="root_jnt">
    <animation>
     <source id="root_jnt-Matrix-animation-input">
-     <float_array id="root_jnt-Matrix-animation-input-array" count="3">
+     <float_array id="root_jnt-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#root_jnt-Matrix-animation-input-array" count="3">
+      <accessor source="#root_jnt-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -117,16 +117,16 @@
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#root_jnt-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#root_jnt-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="root_jnt-Interpolations">
-     <Name_array id="root_jnt-Interpolations-array" count="3">
+     <Name_array id="root_jnt-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#root_jnt-Interpolations-array" count="3">
+      <accessor source="#root_jnt-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -142,11 +142,11 @@
   <animation id="jnt_hips-anim" name="jnt_hips">
    <animation>
     <source id="jnt_hips-Matrix-animation-input">
-     <float_array id="jnt_hips-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_hips-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_hips-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_hips-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -158,16 +158,16 @@
 1.000000 0.000000 0.000000 0.000000 -0.000000 0.999997 -0.002456 2.061423 -0.000000 0.002456 0.999997 -0.094053 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.000000 -0.000000 0.999997 -0.002456 2.061423 -0.000000 0.002456 0.999997 -0.094053 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_hips-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_hips-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_hips-Interpolations">
-     <Name_array id="jnt_hips-Interpolations-array" count="3">
+     <Name_array id="jnt_hips-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_hips-Interpolations-array" count="3">
+      <accessor source="#jnt_hips-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -183,11 +183,11 @@
   <animation id="jnt_height-anim" name="jnt_height">
    <animation>
     <source id="jnt_height-Matrix-animation-input">
-     <float_array id="jnt_height-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_height-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_height-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_height-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -199,16 +199,16 @@
 1.000000 0.000000 0.000000 -0.000000 -0.000000 0.999997 -0.002456 -0.000000 -0.000000 0.002456 0.999997 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 -0.000000 -0.000000 0.999997 -0.002456 -0.000000 -0.000000 0.002456 0.999997 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_height-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_height-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_height-Interpolations">
-     <Name_array id="jnt_height-Interpolations-array" count="3">
+     <Name_array id="jnt_height-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_height-Interpolations-array" count="3">
+      <accessor source="#jnt_height-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -224,11 +224,11 @@
   <animation id="jnt_spine1-anim" name="jnt_spine1">
    <animation>
     <source id="jnt_spine1-Matrix-animation-input">
-     <float_array id="jnt_spine1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_spine1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_spine1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_spine1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -240,16 +240,16 @@
 0.000000 0.000000 1.000000 0.000000 0.999914 -0.013155 -0.000000 0.212132 0.013155 0.999914 -0.000000 0.023482 0.000000 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000 0.000000 0.999914 -0.013155 -0.000000 0.212132 0.013155 0.999914 -0.000000 0.023482 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_spine1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_spine1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_spine1-Interpolations">
-     <Name_array id="jnt_spine1-Interpolations-array" count="3">
+     <Name_array id="jnt_spine1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_spine1-Interpolations-array" count="3">
+      <accessor source="#jnt_spine1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -265,11 +265,11 @@
   <animation id="jnt_spine2-anim" name="jnt_spine2">
    <animation>
     <source id="jnt_spine2-Matrix-animation-input">
-     <float_array id="jnt_spine2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_spine2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_spine2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_spine2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -281,16 +281,16 @@
 0.998580 0.053271 -0.000000 0.426848 -0.053271 0.998580 -0.000000 0.000003 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.998580 0.053271 -0.000000 0.426848 -0.053271 0.998580 -0.000000 0.000003 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_spine2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_spine2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_spine2-Interpolations">
-     <Name_array id="jnt_spine2-Interpolations-array" count="3">
+     <Name_array id="jnt_spine2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_spine2-Interpolations-array" count="3">
+      <accessor source="#jnt_spine2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -306,11 +306,11 @@
   <animation id="jnt_spine3-anim" name="jnt_spine3">
    <animation>
     <source id="jnt_spine3-Matrix-animation-input">
-     <float_array id="jnt_spine3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_spine3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_spine3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_spine3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -322,16 +322,16 @@
 0.997528 0.070262 -0.000000 0.555067 -0.070262 0.997528 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.997528 0.070262 -0.000000 0.555067 -0.070262 0.997528 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_spine3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_spine3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_spine3-Interpolations">
-     <Name_array id="jnt_spine3-Interpolations-array" count="3">
+     <Name_array id="jnt_spine3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_spine3-Interpolations-array" count="3">
+      <accessor source="#jnt_spine3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -347,11 +347,11 @@
   <animation id="jnt_neck-anim" name="jnt_neck">
    <animation>
     <source id="jnt_neck-Matrix-animation-input">
-     <float_array id="jnt_neck-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_neck-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_neck-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_neck-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -363,16 +363,16 @@
 0.999409 -0.034365 -0.000000 0.867450 0.034365 0.999409 -0.000000 0.171573 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.999409 -0.034365 -0.000000 0.867450 0.034365 0.999409 -0.000000 0.171573 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_neck-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_neck-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_neck-Interpolations">
-     <Name_array id="jnt_neck-Interpolations-array" count="3">
+     <Name_array id="jnt_neck-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_neck-Interpolations-array" count="3">
+      <accessor source="#jnt_neck-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -388,11 +388,11 @@
   <animation id="jnt_head-anim" name="jnt_head">
    <animation>
     <source id="jnt_head-Matrix-animation-input">
-     <float_array id="jnt_head-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_head-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_head-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_head-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -404,16 +404,16 @@
 0.999537 -0.030417 -0.000001 0.273591 0.030417 0.999537 0.000000 0.000002 0.000001 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.999537 -0.030417 -0.000001 0.273591 0.030417 0.999537 0.000000 0.000002 0.000001 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_head-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_head-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_head-Interpolations">
-     <Name_array id="jnt_head-Interpolations-array" count="3">
+     <Name_array id="jnt_head-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_head-Interpolations-array" count="3">
+      <accessor source="#jnt_head-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -429,11 +429,11 @@
   <animation id="jnt_headappend-anim" name="jnt_headappend">
    <animation>
     <source id="jnt_headappend-Matrix-animation-input">
-     <float_array id="jnt_headappend-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_headappend-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_headappend-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_headappend-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -445,16 +445,16 @@
 1.000000 0.000000 -0.000000 0.000001 -0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.000001 -0.000000 1.000000 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_headappend-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_headappend-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_headappend-Interpolations">
-     <Name_array id="jnt_headappend-Interpolations-array" count="3">
+     <Name_array id="jnt_headappend-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_headappend-Interpolations-array" count="3">
+      <accessor source="#jnt_headappend-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -470,11 +470,11 @@
   <animation id="jnt_left_armroot-anim" name="jnt_left_armroot">
    <animation>
     <source id="jnt_left_armroot-Matrix-animation-input">
-     <float_array id="jnt_left_armroot-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_armroot-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_armroot-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_armroot-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -486,16 +486,16 @@
 0.999937 -0.010412 -0.004204 -1.061290 0.010594 0.998888 0.045934 0.393092 0.003721 -0.045975 0.998936 -0.646019 0.000000 0.000000 0.000000 1.000000
 0.999937 -0.010412 -0.004204 -1.061290 0.010594 0.998888 0.045934 0.393092 0.003721 -0.045975 0.998936 -0.646019 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_armroot-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_armroot-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_armroot-Interpolations">
-     <Name_array id="jnt_left_armroot-Interpolations-array" count="3">
+     <Name_array id="jnt_left_armroot-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_armroot-Interpolations-array" count="3">
+      <accessor source="#jnt_left_armroot-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -511,11 +511,11 @@
   <animation id="jnt_left_shoulder-anim" name="jnt_left_shoulder">
    <animation>
     <source id="jnt_left_shoulder-Matrix-animation-input">
-     <float_array id="jnt_left_shoulder-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_shoulder-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_shoulder-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_shoulder-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -527,16 +527,16 @@
 -0.019289 0.092831 -0.995495 0.635987 0.352002 -0.931301 -0.093665 0.114390 -0.935800 -0.352223 -0.014713 0.266187 0.000000 0.000000 0.000000 1.000000
 -0.019289 0.092831 -0.995495 0.635987 0.352002 -0.931301 -0.093665 0.114390 -0.935800 -0.352223 -0.014713 0.266187 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_shoulder-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_shoulder-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_shoulder-Interpolations">
-     <Name_array id="jnt_left_shoulder-Interpolations-array" count="3">
+     <Name_array id="jnt_left_shoulder-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_shoulder-Interpolations-array" count="3">
+      <accessor source="#jnt_left_shoulder-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -552,11 +552,11 @@
   <animation id="jnt_left_arm-anim" name="jnt_left_arm">
    <animation>
     <source id="jnt_left_arm-Matrix-animation-input">
-     <float_array id="jnt_left_arm-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_arm-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_arm-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_arm-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -568,16 +568,16 @@
 -0.198299 -0.511549 0.836059 -0.525417 0.826906 0.370643 0.422908 -0.032447 -0.526219 0.775204 0.349504 0.009492 0.000000 0.000000 0.000000 1.000000
 -0.202511 -0.508522 0.836895 -0.525417 0.831279 0.362481 0.421405 -0.032447 -0.517654 0.781033 0.349317 0.009492 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_arm-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_arm-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_arm-Interpolations">
-     <Name_array id="jnt_left_arm-Interpolations-array" count="3">
+     <Name_array id="jnt_left_arm-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_arm-Interpolations-array" count="3">
+      <accessor source="#jnt_left_arm-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -593,11 +593,11 @@
   <animation id="jnt_left_armroll-anim" name="jnt_left_armroll">
    <animation>
     <source id="jnt_left_armroll-Matrix-animation-input">
-     <float_array id="jnt_left_armroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_armroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_armroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_armroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -609,16 +609,16 @@
 1.000000 -0.000000 0.000000 -0.421995 0.000000 1.000000 0.000000 0.000002 -0.000000 -0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 -0.421995 0.000000 1.000000 0.000000 0.000002 -0.000000 -0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_armroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_armroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_armroll-Interpolations">
-     <Name_array id="jnt_left_armroll-Interpolations-array" count="3">
+     <Name_array id="jnt_left_armroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_armroll-Interpolations-array" count="3">
+      <accessor source="#jnt_left_armroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -634,11 +634,11 @@
   <animation id="jnt_left_forearm-anim" name="jnt_left_forearm">
    <animation>
     <source id="jnt_left_forearm-Matrix-animation-input">
-     <float_array id="jnt_left_forearm-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_forearm-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_forearm-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_forearm-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -650,16 +650,16 @@
 0.127395 -0.258489 0.957577 -0.843981 0.949714 0.310207 -0.042611 0.000001 -0.286032 0.914852 0.285009 0.000003 0.000000 0.000000 0.000000 1.000000
 0.132554 -0.259151 0.956697 -0.843981 0.949667 0.309608 -0.047712 0.000001 -0.283837 0.914868 0.287147 0.000003 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_forearm-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_forearm-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_forearm-Interpolations">
-     <Name_array id="jnt_left_forearm-Interpolations-array" count="3">
+     <Name_array id="jnt_left_forearm-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_forearm-Interpolations-array" count="3">
+      <accessor source="#jnt_left_forearm-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -675,11 +675,11 @@
   <animation id="jnt_left_forearmroll-anim" name="jnt_left_forearmroll">
    <animation>
     <source id="jnt_left_forearmroll-Matrix-animation-input">
-     <float_array id="jnt_left_forearmroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_forearmroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_forearmroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_forearmroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -691,16 +691,16 @@
 1.000000 0.000001 -0.000000 -0.487001 -0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000001 -0.000000 -0.487001 -0.000001 1.000000 -0.000000 -0.000001 0.000000 0.000000 1.000000 -0.000004 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_forearmroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_forearmroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_forearmroll-Interpolations">
-     <Name_array id="jnt_left_forearmroll-Interpolations-array" count="3">
+     <Name_array id="jnt_left_forearmroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_forearmroll-Interpolations-array" count="3">
+      <accessor source="#jnt_left_forearmroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -716,11 +716,11 @@
   <animation id="jnt_left_hand-anim" name="jnt_left_hand">
    <animation>
     <source id="jnt_left_hand-Matrix-animation-input">
-     <float_array id="jnt_left_hand-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_hand-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_hand-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_hand-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -732,16 +732,16 @@
 0.988710 -0.117044 0.093554 -0.975262 0.135346 0.429734 -0.892754 -0.000001 0.064288 0.895337 0.440724 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.989153 -0.115104 0.091257 -0.975262 0.132382 0.429333 -0.893391 -0.000001 0.063653 0.895781 0.439913 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_hand-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_hand-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_hand-Interpolations">
-     <Name_array id="jnt_left_hand-Interpolations-array" count="3">
+     <Name_array id="jnt_left_hand-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_hand-Interpolations-array" count="3">
+      <accessor source="#jnt_left_hand-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -757,11 +757,11 @@
   <animation id="jnt_left_handthumb1-anim" name="jnt_left_handthumb1">
    <animation>
     <source id="jnt_left_handthumb1-Matrix-animation-input">
-     <float_array id="jnt_left_handthumb1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handthumb1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handthumb1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -773,16 +773,16 @@
 0.847245 -0.522545 -0.095504 -0.060229 0.457005 0.625381 0.632491 -0.203939 -0.270779 -0.579521 0.768657 0.155678 0.000000 0.000000 0.000000 1.000000
 0.847246 -0.522546 -0.095504 -0.060229 0.457005 0.625381 0.632491 -0.203939 -0.270779 -0.579521 0.768657 0.155678 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handthumb1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handthumb1-Interpolations">
-     <Name_array id="jnt_left_handthumb1-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handthumb1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb1-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handthumb1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -798,11 +798,11 @@
   <animation id="jnt_left_handthumb2-anim" name="jnt_left_handthumb2">
    <animation>
     <source id="jnt_left_handthumb2-Matrix-animation-input">
-     <float_array id="jnt_left_handthumb2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handthumb2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handthumb2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -814,16 +814,16 @@
 0.936673 0.350206 -0.000001 -0.213226 -0.350206 0.936673 -0.000003 -0.000002 -0.000001 0.000003 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000
 0.936673 0.350206 -0.000000 -0.213227 -0.350206 0.936673 -0.000003 -0.000002 -0.000001 0.000003 1.000000 0.000003 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handthumb2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handthumb2-Interpolations">
-     <Name_array id="jnt_left_handthumb2-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handthumb2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb2-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handthumb2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -839,11 +839,11 @@
   <animation id="jnt_left_handthumb3-anim" name="jnt_left_handthumb3">
    <animation>
     <source id="jnt_left_handthumb3-Matrix-animation-input">
-     <float_array id="jnt_left_handthumb3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handthumb3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handthumb3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -855,16 +855,16 @@
 0.957316 0.289044 -0.000001 -0.141879 -0.289044 0.957316 -0.000003 0.000003 0.000000 0.000003 1.000000 -0.000027 0.000000 0.000000 0.000000 1.000000
 0.957316 0.289044 -0.000001 -0.141880 -0.289044 0.957316 -0.000003 0.000004 0.000000 0.000003 1.000000 -0.000027 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handthumb3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handthumb3-Interpolations">
-     <Name_array id="jnt_left_handthumb3-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handthumb3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb3-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handthumb3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -880,11 +880,11 @@
   <animation id="jnt_left_handthumb4-anim" name="jnt_left_handthumb4">
    <animation>
     <source id="jnt_left_handthumb4-Matrix-animation-input">
-     <float_array id="jnt_left_handthumb4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handthumb4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handthumb4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -896,16 +896,16 @@
 1.000000 -0.000000 0.000000 -0.122601 0.000000 1.000000 0.000000 -0.000006 -0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 -0.122600 0.000000 1.000000 0.000000 -0.000006 -0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handthumb4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handthumb4-Interpolations">
-     <Name_array id="jnt_left_handthumb4-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handthumb4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handthumb4-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handthumb4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -921,11 +921,11 @@
   <animation id="jnt_left_handindex1-anim" name="jnt_left_handindex1">
    <animation>
     <source id="jnt_left_handindex1-Matrix-animation-input">
-     <float_array id="jnt_left_handindex1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handindex1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handindex1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -937,16 +937,16 @@
 0.803118 0.595024 -0.030790 -0.494375 -0.069847 0.042702 -0.996643 -0.203977 -0.591712 0.802573 0.075855 -0.029847 0.000000 0.000000 0.000000 1.000000
 0.803118 0.595024 -0.030790 -0.494374 -0.069847 0.042702 -0.996643 -0.203977 -0.591712 0.802573 0.075855 -0.029848 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handindex1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handindex1-Interpolations">
-     <Name_array id="jnt_left_handindex1-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handindex1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex1-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handindex1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -962,11 +962,11 @@
   <animation id="jnt_left_handindex2-anim" name="jnt_left_handindex2">
    <animation>
     <source id="jnt_left_handindex2-Matrix-animation-input">
-     <float_array id="jnt_left_handindex2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handindex2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handindex2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -978,16 +978,16 @@
 0.977194 0.212348 -0.000000 -0.145432 -0.212348 0.977194 -0.000001 0.001124 0.000000 0.000001 1.000000 0.000040 0.000000 0.000000 0.000000 1.000000
 0.977194 0.212348 -0.000000 -0.145433 -0.212348 0.977194 -0.000000 0.001125 0.000000 0.000001 1.000000 0.000040 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handindex2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handindex2-Interpolations">
-     <Name_array id="jnt_left_handindex2-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handindex2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex2-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handindex2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1003,11 +1003,11 @@
   <animation id="jnt_left_handindex3-anim" name="jnt_left_handindex3">
    <animation>
     <source id="jnt_left_handindex3-Matrix-animation-input">
-     <float_array id="jnt_left_handindex3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handindex3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handindex3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1019,16 +1019,16 @@
 0.999087 0.042728 -0.000000 -0.093753 -0.042728 0.999087 0.000001 0.000003 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 0.999087 0.042728 -0.000000 -0.093753 -0.042728 0.999087 0.000001 0.000003 0.000000 -0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handindex3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handindex3-Interpolations">
-     <Name_array id="jnt_left_handindex3-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handindex3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex3-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handindex3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1044,11 +1044,11 @@
   <animation id="jnt_left_handindex4-anim" name="jnt_left_handindex4">
    <animation>
     <source id="jnt_left_handindex4-Matrix-animation-input">
-     <float_array id="jnt_left_handindex4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handindex4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handindex4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1060,16 +1060,16 @@
 1.000000 -0.000000 0.000000 -0.107084 0.000000 1.000000 0.000000 0.000048 -0.000000 -0.000000 1.000000 -0.001504 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 -0.000000 -0.107084 0.000000 1.000000 0.000000 0.000048 0.000000 -0.000000 1.000000 -0.001504 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handindex4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handindex4-Interpolations">
-     <Name_array id="jnt_left_handindex4-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handindex4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handindex4-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handindex4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1085,11 +1085,11 @@
   <animation id="jnt_left_weapon-anim" name="jnt_left_weapon">
    <animation>
     <source id="jnt_left_weapon-Matrix-animation-input">
-     <float_array id="jnt_left_weapon-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_weapon-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_weapon-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_weapon-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1101,16 +1101,16 @@
 -0.068652 -0.108939 -0.991679 -0.369354 0.108715 -0.988918 0.101111 -0.054074 -0.991705 -0.100868 0.079734 0.296616 0.000000 0.000000 0.000000 1.000000
 -0.068652 -0.108939 -0.991679 -0.369354 0.108715 -0.988918 0.101111 -0.054074 -0.991705 -0.100868 0.079734 0.296616 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_weapon-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_weapon-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_weapon-Interpolations">
-     <Name_array id="jnt_left_weapon-Interpolations-array" count="3">
+     <Name_array id="jnt_left_weapon-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_weapon-Interpolations-array" count="3">
+      <accessor source="#jnt_left_weapon-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1126,11 +1126,11 @@
   <animation id="jnt_left_handmiddle1-anim" name="jnt_left_handmiddle1">
    <animation>
     <source id="jnt_left_handmiddle1-Matrix-animation-input">
-     <float_array id="jnt_left_handmiddle1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handmiddle1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handmiddle1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1142,16 +1142,16 @@
 0.640058 0.767591 -0.033615 -0.489248 0.010231 -0.052262 -0.998581 -0.062066 -0.768259 0.638806 -0.041303 -0.036308 0.000000 0.000000 0.000000 1.000000
 0.640058 0.767591 -0.033615 -0.489249 0.010231 -0.052262 -0.998581 -0.062066 -0.768259 0.638806 -0.041303 -0.036308 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handmiddle1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handmiddle1-Interpolations">
-     <Name_array id="jnt_left_handmiddle1-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handmiddle1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle1-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handmiddle1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1167,11 +1167,11 @@
   <animation id="jnt_left_handmiddle2-anim" name="jnt_left_handmiddle2">
    <animation>
     <source id="jnt_left_handmiddle2-Matrix-animation-input">
-     <float_array id="jnt_left_handmiddle2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handmiddle2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handmiddle2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1183,16 +1183,16 @@
 0.910363 0.413810 -0.000000 -0.176688 -0.413810 0.910363 0.000000 0.000004 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.910363 0.413810 -0.000000 -0.176689 -0.413810 0.910363 0.000000 0.000004 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handmiddle2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handmiddle2-Interpolations">
-     <Name_array id="jnt_left_handmiddle2-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handmiddle2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle2-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handmiddle2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1208,11 +1208,11 @@
   <animation id="jnt_left_handmiddle3-anim" name="jnt_left_handmiddle3">
    <animation>
     <source id="jnt_left_handmiddle3-Matrix-animation-input">
-     <float_array id="jnt_left_handmiddle3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handmiddle3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handmiddle3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1224,16 +1224,16 @@
 0.978981 0.203949 0.000000 -0.108367 -0.203949 0.978981 0.000000 0.000001 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.978982 0.203949 0.000000 -0.108367 -0.203949 0.978981 0.000000 0.000002 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handmiddle3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handmiddle3-Interpolations">
-     <Name_array id="jnt_left_handmiddle3-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handmiddle3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle3-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handmiddle3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1249,11 +1249,11 @@
   <animation id="jnt_left_handmiddle4-anim" name="jnt_left_handmiddle4">
    <animation>
     <source id="jnt_left_handmiddle4-Matrix-animation-input">
-     <float_array id="jnt_left_handmiddle4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handmiddle4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handmiddle4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1265,16 +1265,16 @@
 1.000000 -0.000000 0.000000 -0.119193 0.000000 1.000000 0.000000 -0.000106 -0.000000 -0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 -0.119192 0.000000 1.000000 -0.000000 -0.000107 -0.000000 0.000000 1.000000 0.000005 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handmiddle4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handmiddle4-Interpolations">
-     <Name_array id="jnt_left_handmiddle4-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handmiddle4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handmiddle4-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handmiddle4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1290,11 +1290,11 @@
   <animation id="jnt_left_handring1-anim" name="jnt_left_handring1">
    <animation>
     <source id="jnt_left_handring1-Matrix-animation-input">
-     <float_array id="jnt_left_handring1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handring1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handring1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1306,16 +1306,16 @@
 0.605660 0.778632 -0.164038 -0.469963 0.017593 -0.219202 -0.975521 0.076797 -0.795529 0.587948 -0.146460 -0.036647 0.000000 0.000000 0.000000 1.000000
 0.605660 0.778632 -0.164038 -0.469963 0.017593 -0.219202 -0.975521 0.076797 -0.795529 0.587948 -0.146460 -0.036646 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handring1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handring1-Interpolations">
-     <Name_array id="jnt_left_handring1-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handring1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handring1-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handring1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1331,11 +1331,11 @@
   <animation id="jnt_left_handring2-anim" name="jnt_left_handring2">
    <animation>
     <source id="jnt_left_handring2-Matrix-animation-input">
-     <float_array id="jnt_left_handring2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handring2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handring2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1347,16 +1347,16 @@
 0.881478 0.472226 0.000000 -0.184234 -0.472226 0.881477 -0.000001 -0.000002 -0.000001 0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000
 0.881477 0.472226 0.000000 -0.184233 -0.472226 0.881478 -0.000001 -0.000002 -0.000001 0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handring2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handring2-Interpolations">
-     <Name_array id="jnt_left_handring2-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handring2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handring2-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handring2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1372,11 +1372,11 @@
   <animation id="jnt_left_handring3-anim" name="jnt_left_handring3">
    <animation>
     <source id="jnt_left_handring3-Matrix-animation-input">
-     <float_array id="jnt_left_handring3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handring3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handring3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1388,16 +1388,16 @@
 0.967951 0.251140 0.000000 -0.103958 -0.251140 0.967951 0.000001 0.000003 0.000000 -0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.967951 0.251140 0.000000 -0.103957 -0.251140 0.967951 0.000001 0.000002 0.000000 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handring3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handring3-Interpolations">
-     <Name_array id="jnt_left_handring3-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handring3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handring3-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handring3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1413,11 +1413,11 @@
   <animation id="jnt_left_handring4-anim" name="jnt_left_handring4">
    <animation>
     <source id="jnt_left_handring4-Matrix-animation-input">
-     <float_array id="jnt_left_handring4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handring4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handring4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1429,16 +1429,16 @@
 1.000000 0.000000 0.000000 -0.120246 -0.000000 1.000000 0.000000 -0.000105 -0.000000 -0.000000 1.000000 0.000017 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 -0.120246 -0.000000 1.000000 -0.000000 -0.000105 0.000000 0.000000 1.000000 0.000017 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handring4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handring4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handring4-Interpolations">
-     <Name_array id="jnt_left_handring4-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handring4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handring4-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handring4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1454,11 +1454,11 @@
   <animation id="jnt_left_handpinky1-anim" name="jnt_left_handpinky1">
    <animation>
     <source id="jnt_left_handpinky1-Matrix-animation-input">
-     <float_array id="jnt_left_handpinky1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handpinky1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handpinky1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1470,16 +1470,16 @@
 0.536721 0.840265 -0.076715 -0.407613 0.103818 -0.155996 -0.982287 0.208156 -0.837348 0.519250 -0.170961 0.012223 0.000000 0.000000 0.000000 1.000000
 0.536721 0.840265 -0.076715 -0.407612 0.103818 -0.155996 -0.982287 0.208155 -0.837349 0.519249 -0.170961 0.012223 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handpinky1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handpinky1-Interpolations">
-     <Name_array id="jnt_left_handpinky1-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handpinky1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky1-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handpinky1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1495,11 +1495,11 @@
   <animation id="jnt_left_handpinky2-anim" name="jnt_left_handpinky2">
    <animation>
     <source id="jnt_left_handpinky2-Matrix-animation-input">
-     <float_array id="jnt_left_handpinky2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handpinky2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handpinky2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1511,16 +1511,16 @@
 0.822138 0.569288 0.000001 -0.148503 -0.569288 0.822138 -0.000000 0.000001 -0.000001 -0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000
 0.822138 0.569288 0.000001 -0.148504 -0.569288 0.822138 -0.000000 0.000001 -0.000001 -0.000000 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handpinky2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handpinky2-Interpolations">
-     <Name_array id="jnt_left_handpinky2-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handpinky2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky2-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handpinky2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1536,11 +1536,11 @@
   <animation id="jnt_left_handpinky3-anim" name="jnt_left_handpinky3">
    <animation>
     <source id="jnt_left_handpinky3-Matrix-animation-input">
-     <float_array id="jnt_left_handpinky3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handpinky3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handpinky3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1552,16 +1552,16 @@
 0.936795 0.349878 -0.000000 -0.075474 -0.349878 0.936795 -0.000001 0.000001 0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.936795 0.349878 -0.000000 -0.075474 -0.349878 0.936795 -0.000001 0.000003 0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handpinky3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handpinky3-Interpolations">
-     <Name_array id="jnt_left_handpinky3-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handpinky3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky3-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handpinky3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1577,11 +1577,11 @@
   <animation id="jnt_left_handpinky4-anim" name="jnt_left_handpinky4">
    <animation>
     <source id="jnt_left_handpinky4-Matrix-animation-input">
-     <float_array id="jnt_left_handpinky4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_handpinky4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_handpinky4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1593,16 +1593,16 @@
 1.000000 0.000000 -0.000000 -0.101158 -0.000000 1.000000 0.000000 -0.000003 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 -0.101158 -0.000000 1.000000 0.000000 -0.000003 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_handpinky4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_handpinky4-Interpolations">
-     <Name_array id="jnt_left_handpinky4-Interpolations-array" count="3">
+     <Name_array id="jnt_left_handpinky4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_handpinky4-Interpolations-array" count="3">
+      <accessor source="#jnt_left_handpinky4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1618,11 +1618,11 @@
   <animation id="jnt_right_armroot-anim" name="jnt_right_armroot">
    <animation>
     <source id="jnt_right_armroot-Matrix-animation-input">
-     <float_array id="jnt_right_armroot-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_armroot-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_armroot-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_armroot-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1634,16 +1634,16 @@
 1.000000 -0.000004 -0.000000 -0.000000 0.000004 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000004 -0.000000 -0.000000 0.000004 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_armroot-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_armroot-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_armroot-Interpolations">
-     <Name_array id="jnt_right_armroot-Interpolations-array" count="3">
+     <Name_array id="jnt_right_armroot-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_armroot-Interpolations-array" count="3">
+      <accessor source="#jnt_right_armroot-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1659,11 +1659,11 @@
   <animation id="jnt_right_shoulder-anim" name="jnt_right_shoulder">
    <animation>
     <source id="jnt_right_shoulder-Matrix-animation-input">
-     <float_array id="jnt_right_shoulder-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_shoulder-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_shoulder-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_shoulder-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1675,16 +1675,16 @@
 0.019288 -0.092831 0.995495 0.635987 -0.352003 0.931300 0.093665 0.114390 -0.935800 -0.352224 -0.014713 -0.266187 0.000000 0.000000 0.000000 1.000000
 0.019288 -0.092831 0.995495 0.635987 -0.352003 0.931300 0.093665 0.114390 -0.935800 -0.352224 -0.014713 -0.266187 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_shoulder-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_shoulder-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_shoulder-Interpolations">
-     <Name_array id="jnt_right_shoulder-Interpolations-array" count="3">
+     <Name_array id="jnt_right_shoulder-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_shoulder-Interpolations-array" count="3">
+      <accessor source="#jnt_right_shoulder-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1700,11 +1700,11 @@
   <animation id="jnt_right_arm-anim" name="jnt_right_arm">
    <animation>
     <source id="jnt_right_arm-Matrix-animation-input">
-     <float_array id="jnt_right_arm-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_arm-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_arm-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_arm-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1716,16 +1716,16 @@
 0.437538 -0.579135 0.687868 0.525417 -0.890081 -0.387612 0.239819 0.032447 0.127738 -0.717188 -0.685071 -0.009491 0.000000 0.000000 0.000000 1.000000
 0.438666 -0.577270 0.688717 0.525417 -0.889232 -0.389505 0.239902 0.032447 0.129770 -0.717665 -0.684189 -0.009491 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_arm-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_arm-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_arm-Interpolations">
-     <Name_array id="jnt_right_arm-Interpolations-array" count="3">
+     <Name_array id="jnt_right_arm-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_arm-Interpolations-array" count="3">
+      <accessor source="#jnt_right_arm-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1741,11 +1741,11 @@
   <animation id="jnt_right_armroll-anim" name="jnt_right_armroll">
    <animation>
     <source id="jnt_right_armroll-Matrix-animation-input">
-     <float_array id="jnt_right_armroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_armroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_armroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_armroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1757,16 +1757,16 @@
 1.000000 0.000000 -0.000000 0.421995 -0.000000 1.000000 -0.000000 -0.000002 0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.421995 -0.000000 1.000000 -0.000000 -0.000002 0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_armroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_armroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_armroll-Interpolations">
-     <Name_array id="jnt_right_armroll-Interpolations-array" count="3">
+     <Name_array id="jnt_right_armroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_armroll-Interpolations-array" count="3">
+      <accessor source="#jnt_right_armroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1782,11 +1782,11 @@
   <animation id="jnt_right_forearm-anim" name="jnt_right_forearm">
    <animation>
     <source id="jnt_right_forearm-Matrix-animation-input">
-     <float_array id="jnt_right_forearm-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_forearm-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_forearm-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_forearm-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1798,16 +1798,16 @@
 -0.887949 -0.392849 -0.239199 0.843981 0.374129 -0.314413 -0.872451 -0.000002 0.267535 -0.864183 0.426159 -0.000003 0.000000 0.000000 0.000000 1.000000
 -0.888537 -0.392015 -0.238382 0.843981 0.373315 -0.315685 -0.872341 -0.000002 0.266717 -0.864099 0.426843 -0.000003 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_forearm-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_forearm-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_forearm-Interpolations">
-     <Name_array id="jnt_right_forearm-Interpolations-array" count="3">
+     <Name_array id="jnt_right_forearm-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_forearm-Interpolations-array" count="3">
+      <accessor source="#jnt_right_forearm-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1823,11 +1823,11 @@
   <animation id="jnt_right_forearmroll-anim" name="jnt_right_forearmroll">
    <animation>
     <source id="jnt_right_forearmroll-Matrix-animation-input">
-     <float_array id="jnt_right_forearmroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_forearmroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_forearmroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_forearmroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1839,16 +1839,16 @@
 1.000000 0.000001 0.000000 0.487001 -0.000001 1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000001 0.000000 0.487001 -0.000001 1.000000 -0.000000 -0.000000 -0.000000 0.000000 1.000000 0.000004 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_forearmroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_forearmroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_forearmroll-Interpolations">
-     <Name_array id="jnt_right_forearmroll-Interpolations-array" count="3">
+     <Name_array id="jnt_right_forearmroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_forearmroll-Interpolations-array" count="3">
+      <accessor source="#jnt_right_forearmroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1864,11 +1864,11 @@
   <animation id="jnt_right_hand-anim" name="jnt_right_hand">
    <animation>
     <source id="jnt_right_hand-Matrix-animation-input">
-     <float_array id="jnt_right_hand-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_hand-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_hand-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_hand-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1880,16 +1880,16 @@
 0.817008 -0.281553 -0.503216 0.975261 0.260126 0.958806 -0.114125 -0.000000 0.514619 -0.037658 0.856591 0.000003 0.000000 0.000000 0.000000 1.000000
 0.813800 -0.287024 -0.505318 0.975261 0.264995 0.957138 -0.116895 -0.000000 0.517211 -0.038777 0.854979 0.000003 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_hand-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_hand-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_hand-Interpolations">
-     <Name_array id="jnt_right_hand-Interpolations-array" count="3">
+     <Name_array id="jnt_right_hand-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_hand-Interpolations-array" count="3">
+      <accessor source="#jnt_right_hand-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1905,11 +1905,11 @@
   <animation id="jnt_right_handthumb1-anim" name="jnt_right_handthumb1">
    <animation>
     <source id="jnt_right_handthumb1-Matrix-animation-input">
-     <float_array id="jnt_right_handthumb1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handthumb1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handthumb1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1921,16 +1921,16 @@
 0.840651 -0.501489 0.204487 0.060226 0.200669 0.639129 0.742459 0.203939 -0.503029 -0.583115 0.637918 -0.155682 0.000000 0.000000 0.000000 1.000000
 0.840651 -0.501489 0.204487 0.060227 0.200669 0.639129 0.742460 0.203939 -0.503029 -0.583115 0.637917 -0.155682 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handthumb1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handthumb1-Interpolations">
-     <Name_array id="jnt_right_handthumb1-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handthumb1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb1-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handthumb1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1946,11 +1946,11 @@
   <animation id="jnt_right_handthumb2-anim" name="jnt_right_handthumb2">
    <animation>
     <source id="jnt_right_handthumb2-Matrix-animation-input">
-     <float_array id="jnt_right_handthumb2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handthumb2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handthumb2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -1962,16 +1962,16 @@
 0.925479 0.378799 -0.000001 0.213224 -0.378799 0.925479 -0.000003 -0.000000 -0.000001 0.000003 1.000000 0.000001 0.000000 0.000000 0.000000 1.000000
 0.925479 0.378800 -0.000001 0.213224 -0.378800 0.925479 -0.000003 -0.000000 -0.000001 0.000003 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handthumb2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handthumb2-Interpolations">
-     <Name_array id="jnt_right_handthumb2-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handthumb2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb2-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handthumb2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -1987,11 +1987,11 @@
   <animation id="jnt_right_handthumb3-anim" name="jnt_right_handthumb3">
    <animation>
     <source id="jnt_right_handthumb3-Matrix-animation-input">
-     <float_array id="jnt_right_handthumb3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handthumb3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handthumb3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2003,16 +2003,16 @@
 0.947989 0.318304 0.000001 0.141882 -0.318304 0.947989 0.000006 -0.000001 0.000001 -0.000006 1.000000 0.000024 0.000000 0.000000 0.000000 1.000000
 0.947989 0.318304 0.000001 0.141882 -0.318304 0.947989 0.000006 -0.000001 0.000001 -0.000006 1.000000 0.000023 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handthumb3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handthumb3-Interpolations">
-     <Name_array id="jnt_right_handthumb3-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handthumb3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb3-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handthumb3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2028,11 +2028,11 @@
   <animation id="jnt_right_handthumb4-anim" name="jnt_right_handthumb4">
    <animation>
     <source id="jnt_right_handthumb4-Matrix-animation-input">
-     <float_array id="jnt_right_handthumb4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handthumb4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handthumb4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2044,16 +2044,16 @@
 1.000000 -0.000002 -0.000000 0.122606 0.000002 1.000000 -0.000000 0.000001 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000002 -0.000000 0.122606 0.000002 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handthumb4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handthumb4-Interpolations">
-     <Name_array id="jnt_right_handthumb4-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handthumb4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handthumb4-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handthumb4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2069,11 +2069,11 @@
   <animation id="jnt_right_handindex1-anim" name="jnt_right_handindex1">
    <animation>
     <source id="jnt_right_handindex1-Matrix-animation-input">
-     <float_array id="jnt_right_handindex1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handindex1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handindex1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2085,16 +2085,16 @@
 0.837454 0.526174 0.147688 0.494372 0.148092 0.041639 -0.988097 0.203978 -0.526061 0.849357 -0.043052 0.029844 0.000000 0.000000 0.000000 1.000000
 0.837454 0.526174 0.147688 0.494373 0.148092 0.041639 -0.988097 0.203977 -0.526060 0.849357 -0.043052 0.029845 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handindex1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handindex1-Interpolations">
-     <Name_array id="jnt_right_handindex1-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handindex1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex1-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handindex1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2110,11 +2110,11 @@
   <animation id="jnt_right_handindex2-anim" name="jnt_right_handindex2">
    <animation>
     <source id="jnt_right_handindex2-Matrix-animation-input">
-     <float_array id="jnt_right_handindex2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handindex2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handindex2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2126,16 +2126,16 @@
 0.991475 0.130297 -0.000000 0.145440 -0.130297 0.991475 -0.000000 -0.001121 0.000000 0.000000 1.000000 -0.000040 0.000000 0.000000 0.000000 1.000000
 0.991475 0.130297 -0.000000 0.145440 -0.130297 0.991475 -0.000000 -0.001120 0.000000 0.000000 1.000000 -0.000040 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handindex2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handindex2-Interpolations">
-     <Name_array id="jnt_right_handindex2-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handindex2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex2-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handindex2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2151,11 +2151,11 @@
   <animation id="jnt_right_handindex3-anim" name="jnt_right_handindex3">
    <animation>
     <source id="jnt_right_handindex3-Matrix-animation-input">
-     <float_array id="jnt_right_handindex3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handindex3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handindex3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2167,16 +2167,16 @@
 0.999179 -0.040517 -0.000000 0.093746 0.040517 0.999179 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.999179 -0.040517 -0.000000 0.093746 0.040517 0.999179 0.000000 0.000000 0.000000 -0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handindex3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handindex3-Interpolations">
-     <Name_array id="jnt_right_handindex3-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handindex3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex3-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handindex3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2192,11 +2192,11 @@
   <animation id="jnt_right_handindex4-anim" name="jnt_right_handindex4">
    <animation>
     <source id="jnt_right_handindex4-Matrix-animation-input">
-     <float_array id="jnt_right_handindex4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handindex4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handindex4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2208,16 +2208,16 @@
 1.000000 -0.000000 0.000000 0.107088 0.000000 1.000000 -0.000000 -0.000052 -0.000000 0.000000 1.000000 0.001503 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.107088 -0.000000 1.000000 -0.000000 -0.000052 -0.000000 0.000000 1.000000 0.001503 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handindex4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handindex4-Interpolations">
-     <Name_array id="jnt_right_handindex4-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handindex4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handindex4-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handindex4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2233,11 +2233,11 @@
   <animation id="jnt_right_weapon-anim" name="jnt_right_weapon">
    <animation>
     <source id="jnt_right_weapon-Matrix-animation-input">
-     <float_array id="jnt_right_weapon-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_weapon-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_weapon-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_weapon-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2249,16 +2249,16 @@
 -0.254526 0.012455 0.966986 0.365356 0.094872 0.995415 0.012151 -0.011735 -0.962401 0.094833 -0.254541 -0.164379 0.000000 0.000000 0.000000 1.000000
 -0.254526 0.012455 0.966986 0.365356 0.094872 0.995415 0.012151 -0.011735 -0.962401 0.094833 -0.254541 -0.164379 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_weapon-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_weapon-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_weapon-Interpolations">
-     <Name_array id="jnt_right_weapon-Interpolations-array" count="3">
+     <Name_array id="jnt_right_weapon-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_weapon-Interpolations-array" count="3">
+      <accessor source="#jnt_right_weapon-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2274,11 +2274,11 @@
   <animation id="jnt_right_handmiddle1-anim" name="jnt_right_handmiddle1">
    <animation>
     <source id="jnt_right_handmiddle1-Matrix-animation-input">
-     <float_array id="jnt_right_handmiddle1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handmiddle1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handmiddle1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2290,16 +2290,16 @@
 0.368560 0.925868 -0.083257 0.489245 -0.066291 -0.063157 -0.995799 0.062067 -0.927237 0.372531 0.038099 0.036303 0.000000 0.000000 0.000000 1.000000
 0.368561 0.925868 -0.083256 0.489245 -0.066291 -0.063157 -0.995800 0.062066 -0.927237 0.372532 0.038099 0.036303 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handmiddle1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handmiddle1-Interpolations">
-     <Name_array id="jnt_right_handmiddle1-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handmiddle1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle1-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handmiddle1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2315,11 +2315,11 @@
   <animation id="jnt_right_handmiddle2-anim" name="jnt_right_handmiddle2">
    <animation>
     <source id="jnt_right_handmiddle2-Matrix-animation-input">
-     <float_array id="jnt_right_handmiddle2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handmiddle2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handmiddle2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2331,16 +2331,16 @@
 0.739923 0.672692 -0.000000 0.176685 -0.672692 0.739923 -0.000000 0.000001 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.739923 0.672692 -0.000000 0.176685 -0.672692 0.739923 -0.000000 0.000001 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handmiddle2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handmiddle2-Interpolations">
-     <Name_array id="jnt_right_handmiddle2-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handmiddle2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle2-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handmiddle2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2356,11 +2356,11 @@
   <animation id="jnt_right_handmiddle3-anim" name="jnt_right_handmiddle3">
    <animation>
     <source id="jnt_right_handmiddle3-Matrix-animation-input">
-     <float_array id="jnt_right_handmiddle3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handmiddle3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handmiddle3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2372,16 +2372,16 @@
 0.869501 0.493932 -0.000000 0.108374 -0.493932 0.869501 0.000000 0.000000 0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.869501 0.493932 0.000000 0.108375 -0.493932 0.869501 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handmiddle3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handmiddle3-Interpolations">
-     <Name_array id="jnt_right_handmiddle3-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handmiddle3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle3-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handmiddle3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2397,11 +2397,11 @@
   <animation id="jnt_right_handmiddle4-anim" name="jnt_right_handmiddle4">
    <animation>
     <source id="jnt_right_handmiddle4-Matrix-animation-input">
-     <float_array id="jnt_right_handmiddle4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handmiddle4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handmiddle4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2413,16 +2413,16 @@
 1.000000 0.000000 -0.000000 0.119191 -0.000000 1.000000 0.000000 0.000105 0.000000 -0.000000 1.000000 -0.000005 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.119191 -0.000000 1.000000 -0.000000 0.000105 0.000000 0.000000 1.000000 -0.000005 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handmiddle4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handmiddle4-Interpolations">
-     <Name_array id="jnt_right_handmiddle4-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handmiddle4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handmiddle4-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handmiddle4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2438,11 +2438,11 @@
   <animation id="jnt_right_handring1-anim" name="jnt_right_handring1">
    <animation>
     <source id="jnt_right_handring1-Matrix-animation-input">
-     <float_array id="jnt_right_handring1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handring1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handring1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2454,16 +2454,16 @@
 0.355831 0.903712 -0.238097 0.469962 -0.059672 -0.232282 -0.970817 -0.076798 -0.932643 0.359654 -0.028727 0.036646 0.000000 0.000000 0.000000 1.000000
 0.355831 0.903712 -0.238097 0.469963 -0.059672 -0.232281 -0.970816 -0.076798 -0.932643 0.359654 -0.028727 0.036646 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handring1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handring1-Interpolations">
-     <Name_array id="jnt_right_handring1-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handring1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handring1-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handring1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2479,11 +2479,11 @@
   <animation id="jnt_right_handring2-anim" name="jnt_right_handring2">
    <animation>
     <source id="jnt_right_handring2-Matrix-animation-input">
-     <float_array id="jnt_right_handring2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handring2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handring2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2495,16 +2495,16 @@
 0.729500 0.683981 -0.000001 0.184241 -0.683981 0.729500 -0.000001 -0.000000 -0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.729500 0.683981 -0.000001 0.184241 -0.683981 0.729500 -0.000001 0.000000 -0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handring2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handring2-Interpolations">
-     <Name_array id="jnt_right_handring2-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handring2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handring2-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handring2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2520,11 +2520,11 @@
   <animation id="jnt_right_handring3-anim" name="jnt_right_handring3">
    <animation>
     <source id="jnt_right_handring3-Matrix-animation-input">
-     <float_array id="jnt_right_handring3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handring3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handring3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2536,16 +2536,16 @@
 0.870175 0.492743 0.000000 0.103951 -0.492743 0.870175 0.000001 0.000001 0.000000 -0.000001 1.000000 -0.000001 0.000000 0.000000 0.000000 1.000000
 0.870175 0.492743 0.000000 0.103951 -0.492743 0.870175 0.000001 0.000001 0.000000 -0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handring3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handring3-Interpolations">
-     <Name_array id="jnt_right_handring3-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handring3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handring3-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handring3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2561,11 +2561,11 @@
   <animation id="jnt_right_handring4-anim" name="jnt_right_handring4">
    <animation>
     <source id="jnt_right_handring4-Matrix-animation-input">
-     <float_array id="jnt_right_handring4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handring4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handring4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2577,16 +2577,16 @@
 1.000000 -0.000000 0.000000 0.120247 0.000000 1.000000 0.000000 0.000103 -0.000000 -0.000000 1.000000 -0.000016 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 0.120247 0.000000 1.000000 0.000000 0.000103 -0.000000 -0.000000 1.000000 -0.000016 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handring4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handring4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handring4-Interpolations">
-     <Name_array id="jnt_right_handring4-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handring4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handring4-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handring4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2602,11 +2602,11 @@
   <animation id="jnt_right_handpinky1-anim" name="jnt_right_handpinky1">
    <animation>
     <source id="jnt_right_handpinky1-Matrix-animation-input">
-     <float_array id="jnt_right_handpinky1-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handpinky1-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky1-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handpinky1-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2618,16 +2618,16 @@
 0.385619 0.904000 -0.184610 0.407608 -0.085969 -0.164011 -0.982705 -0.208156 -0.918644 0.394821 0.014471 -0.012229 0.000000 0.000000 0.000000 1.000000
 0.385619 0.904000 -0.184610 0.407608 -0.085970 -0.164011 -0.982705 -0.208155 -0.918644 0.394821 0.014471 -0.012230 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky1-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handpinky1-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handpinky1-Interpolations">
-     <Name_array id="jnt_right_handpinky1-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handpinky1-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky1-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handpinky1-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2643,11 +2643,11 @@
   <animation id="jnt_right_handpinky2-anim" name="jnt_right_handpinky2">
    <animation>
     <source id="jnt_right_handpinky2-Matrix-animation-input">
-     <float_array id="jnt_right_handpinky2-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handpinky2-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky2-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handpinky2-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2659,16 +2659,16 @@
 0.734578 0.678524 -0.000000 0.148507 -0.678524 0.734578 -0.000001 0.000001 -0.000000 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.734578 0.678524 -0.000001 0.148507 -0.678524 0.734578 -0.000001 0.000001 -0.000000 0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky2-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handpinky2-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handpinky2-Interpolations">
-     <Name_array id="jnt_right_handpinky2-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handpinky2-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky2-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handpinky2-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2684,11 +2684,11 @@
   <animation id="jnt_right_handpinky3-anim" name="jnt_right_handpinky3">
    <animation>
     <source id="jnt_right_handpinky3-Matrix-animation-input">
-     <float_array id="jnt_right_handpinky3-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handpinky3-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky3-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handpinky3-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2700,16 +2700,16 @@
 0.878731 0.477317 -0.000000 0.075471 -0.477317 0.878731 0.000002 -0.000001 0.000001 -0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.878731 0.477317 -0.000000 0.075471 -0.477317 0.878731 0.000002 -0.000001 0.000001 -0.000001 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky3-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handpinky3-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handpinky3-Interpolations">
-     <Name_array id="jnt_right_handpinky3-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handpinky3-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky3-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handpinky3-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2725,11 +2725,11 @@
   <animation id="jnt_right_handpinky4-anim" name="jnt_right_handpinky4">
    <animation>
     <source id="jnt_right_handpinky4-Matrix-animation-input">
-     <float_array id="jnt_right_handpinky4-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_handpinky4-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky4-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_handpinky4-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2741,16 +2741,16 @@
 1.000000 0.000000 0.000000 0.101152 -0.000000 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 -0.000000 0.101152 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky4-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_handpinky4-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_handpinky4-Interpolations">
-     <Name_array id="jnt_right_handpinky4-Interpolations-array" count="3">
+     <Name_array id="jnt_right_handpinky4-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_handpinky4-Interpolations-array" count="3">
+      <accessor source="#jnt_right_handpinky4-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2766,11 +2766,11 @@
   <animation id="jnt_backpack-anim" name="jnt_backpack">
    <animation>
     <source id="jnt_backpack-Matrix-animation-input">
-     <float_array id="jnt_backpack-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_backpack-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_backpack-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_backpack-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2782,16 +2782,16 @@
 0.000000 0.995068 -0.099191 0.682545 -0.000000 0.099191 0.995068 -0.705658 1.000000 -0.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.000000 0.995068 -0.099191 0.682545 -0.000000 0.099191 0.995068 -0.705658 1.000000 -0.000000 0.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_backpack-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_backpack-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_backpack-Interpolations">
-     <Name_array id="jnt_backpack-Interpolations-array" count="3">
+     <Name_array id="jnt_backpack-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_backpack-Interpolations-array" count="3">
+      <accessor source="#jnt_backpack-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2807,11 +2807,11 @@
   <animation id="jnt_camera-anim" name="jnt_camera">
    <animation>
     <source id="jnt_camera-Matrix-animation-input">
-     <float_array id="jnt_camera-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_camera-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_camera-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_camera-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2823,16 +2823,16 @@
 1.000000 -0.000000 -0.000000 0.000000 0.000000 0.999988 0.004912 1.193611 0.000000 -0.004912 0.999988 0.007402 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 -0.000000 0.000000 0.000000 0.999988 0.004912 1.193611 0.000000 -0.004912 0.999988 0.007402 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_camera-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_camera-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_camera-Interpolations">
-     <Name_array id="jnt_camera-Interpolations-array" count="3">
+     <Name_array id="jnt_camera-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_camera-Interpolations-array" count="3">
+      <accessor source="#jnt_camera-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2848,11 +2848,11 @@
   <animation id="jnt_right_upleg-anim" name="jnt_right_upleg">
    <animation>
     <source id="jnt_right_upleg-Matrix-animation-input">
-     <float_array id="jnt_right_upleg-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_upleg-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_upleg-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_upleg-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2864,16 +2864,16 @@
 -0.112562 -0.332887 -0.936224 -0.446779 -0.993503 0.053585 0.100396 -0.111214 0.016747 0.941443 -0.336756 0.043020 0.000000 0.000000 0.000000 1.000000
 -0.112562 -0.332887 -0.936224 -0.446779 -0.993503 0.053585 0.100396 -0.111214 0.016747 0.941443 -0.336756 0.043020 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_upleg-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_upleg-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_upleg-Interpolations">
-     <Name_array id="jnt_right_upleg-Interpolations-array" count="3">
+     <Name_array id="jnt_right_upleg-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_upleg-Interpolations-array" count="3">
+      <accessor source="#jnt_right_upleg-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2889,11 +2889,11 @@
   <animation id="jnt_right_uplegroll-anim" name="jnt_right_uplegroll">
    <animation>
     <source id="jnt_right_uplegroll-Matrix-animation-input">
-     <float_array id="jnt_right_uplegroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_uplegroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_uplegroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_uplegroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2905,16 +2905,16 @@
 1.000000 -0.000000 0.000000 0.430000 0.000000 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 0.000000 0.430000 0.000000 1.000000 0.000000 0.000000 -0.000000 -0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_uplegroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_uplegroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_uplegroll-Interpolations">
-     <Name_array id="jnt_right_uplegroll-Interpolations-array" count="3">
+     <Name_array id="jnt_right_uplegroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_uplegroll-Interpolations-array" count="3">
+      <accessor source="#jnt_right_uplegroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2930,11 +2930,11 @@
   <animation id="jnt_right_leg-anim" name="jnt_right_leg">
    <animation>
     <source id="jnt_right_leg-Matrix-animation-input">
-     <float_array id="jnt_right_leg-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_leg-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_leg-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_leg-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2946,16 +2946,16 @@
 0.968055 0.250270 -0.015278 0.860324 -0.240256 0.943300 0.229042 0.000000 0.071735 -0.218055 0.973296 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.968055 0.250270 -0.015278 0.860324 -0.240256 0.943300 0.229042 0.000000 0.071735 -0.218055 0.973296 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_leg-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_leg-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_leg-Interpolations">
-     <Name_array id="jnt_right_leg-Interpolations-array" count="3">
+     <Name_array id="jnt_right_leg-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_leg-Interpolations-array" count="3">
+      <accessor source="#jnt_right_leg-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -2971,11 +2971,11 @@
   <animation id="jnt_right_legroll-anim" name="jnt_right_legroll">
    <animation>
     <source id="jnt_right_legroll-Matrix-animation-input">
-     <float_array id="jnt_right_legroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_legroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_legroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_legroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -2987,16 +2987,16 @@
 1.000000 0.000000 0.000000 0.384000 -0.000000 1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 0.000000 0.000000 0.384000 -0.000000 1.000000 0.000000 -0.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_legroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_legroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_legroll-Interpolations">
-     <Name_array id="jnt_right_legroll-Interpolations-array" count="3">
+     <Name_array id="jnt_right_legroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_legroll-Interpolations-array" count="3">
+      <accessor source="#jnt_right_legroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3012,11 +3012,11 @@
   <animation id="jnt_right_foot-anim" name="jnt_right_foot">
    <animation>
     <source id="jnt_right_foot-Matrix-animation-input">
-     <float_array id="jnt_right_foot-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_foot-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_foot-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_foot-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3028,16 +3028,16 @@
 0.278762 -0.954826 0.102953 0.768144 0.945566 0.291630 0.144415 -0.000001 -0.167916 0.057091 0.984147 0.000000 0.000000 0.000000 0.000000 1.000000
 0.278762 -0.954826 0.102953 0.768144 0.945566 0.291630 0.144415 -0.000001 -0.167916 0.057091 0.984147 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_foot-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_foot-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_foot-Interpolations">
-     <Name_array id="jnt_right_foot-Interpolations-array" count="3">
+     <Name_array id="jnt_right_foot-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_foot-Interpolations-array" count="3">
+      <accessor source="#jnt_right_foot-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3053,11 +3053,11 @@
   <animation id="jnt_right_toebase-anim" name="jnt_right_toebase">
    <animation>
     <source id="jnt_right_toebase-Matrix-animation-input">
-     <float_array id="jnt_right_toebase-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_toebase-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_toebase-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_toebase-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3069,16 +3069,16 @@
 0.918936 -0.394407 -0.000000 0.441847 0.394407 0.918936 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 0.918936 -0.394407 -0.000000 0.441847 0.394407 0.918936 0.000000 -0.000000 0.000000 -0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_toebase-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_toebase-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_toebase-Interpolations">
-     <Name_array id="jnt_right_toebase-Interpolations-array" count="3">
+     <Name_array id="jnt_right_toebase-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_toebase-Interpolations-array" count="3">
+      <accessor source="#jnt_right_toebase-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3094,11 +3094,11 @@
   <animation id="jnt_right_toeend-anim" name="jnt_right_toeend">
    <animation>
     <source id="jnt_right_toeend-Matrix-animation-input">
-     <float_array id="jnt_right_toeend-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_right_toeend-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_right_toeend-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_right_toeend-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3110,16 +3110,16 @@
 1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_right_toeend-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_right_toeend-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_right_toeend-Interpolations">
-     <Name_array id="jnt_right_toeend-Interpolations-array" count="3">
+     <Name_array id="jnt_right_toeend-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_right_toeend-Interpolations-array" count="3">
+      <accessor source="#jnt_right_toeend-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3135,11 +3135,11 @@
   <animation id="jnt_left_upleg-anim" name="jnt_left_upleg">
    <animation>
     <source id="jnt_left_upleg-Matrix-animation-input">
-     <float_array id="jnt_left_upleg-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_upleg-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_upleg-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_upleg-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3151,16 +3151,16 @@
 0.112561 0.332886 -0.936224 0.446779 -0.993504 0.053590 -0.100393 -0.111213 0.016753 0.941443 0.336756 0.043020 0.000000 0.000000 0.000000 1.000000
 0.112561 0.332886 -0.936224 0.446779 -0.993504 0.053590 -0.100393 -0.111213 0.016753 0.941443 0.336756 0.043020 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_upleg-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_upleg-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_upleg-Interpolations">
-     <Name_array id="jnt_left_upleg-Interpolations-array" count="3">
+     <Name_array id="jnt_left_upleg-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_upleg-Interpolations-array" count="3">
+      <accessor source="#jnt_left_upleg-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3176,11 +3176,11 @@
   <animation id="jnt_left_uplegroll-anim" name="jnt_left_uplegroll">
    <animation>
     <source id="jnt_left_uplegroll-Matrix-animation-input">
-     <float_array id="jnt_left_uplegroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_uplegroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_uplegroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_uplegroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3192,16 +3192,16 @@
 1.000000 -0.000000 -0.000000 0.430000 0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 -0.000000 0.430000 0.000000 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_uplegroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_uplegroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_uplegroll-Interpolations">
-     <Name_array id="jnt_left_uplegroll-Interpolations-array" count="3">
+     <Name_array id="jnt_left_uplegroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_uplegroll-Interpolations-array" count="3">
+      <accessor source="#jnt_left_uplegroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3217,11 +3217,11 @@
   <animation id="jnt_left_leg-anim" name="jnt_left_leg">
    <animation>
     <source id="jnt_left_leg-Matrix-animation-input">
-     <float_array id="jnt_left_leg-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_leg-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_leg-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_leg-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3233,16 +3233,16 @@
 0.968052 0.250284 0.015281 0.860328 -0.240268 0.943298 -0.229044 -0.000000 -0.071741 0.218054 0.973296 0.000001 0.000000 0.000000 0.000000 1.000000
 0.968052 0.250284 0.015281 0.860328 -0.240268 0.943298 -0.229044 -0.000000 -0.071741 0.218054 0.973296 0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_leg-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_leg-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_leg-Interpolations">
-     <Name_array id="jnt_left_leg-Interpolations-array" count="3">
+     <Name_array id="jnt_left_leg-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_leg-Interpolations-array" count="3">
+      <accessor source="#jnt_left_leg-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3258,11 +3258,11 @@
   <animation id="jnt_left_legroll-anim" name="jnt_left_legroll">
    <animation>
     <source id="jnt_left_legroll-Matrix-animation-input">
-     <float_array id="jnt_left_legroll-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_legroll-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_legroll-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_legroll-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3274,16 +3274,16 @@
 1.000000 -0.000000 -0.000000 0.384000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000000 -0.000000 0.384000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_legroll-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_legroll-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_legroll-Interpolations">
-     <Name_array id="jnt_left_legroll-Interpolations-array" count="3">
+     <Name_array id="jnt_left_legroll-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_legroll-Interpolations-array" count="3">
+      <accessor source="#jnt_left_legroll-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3299,11 +3299,11 @@
   <animation id="jnt_left_foot-anim" name="jnt_left_foot">
    <animation>
     <source id="jnt_left_foot-Matrix-animation-input">
-     <float_array id="jnt_left_foot-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_foot-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_foot-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_foot-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3315,16 +3315,16 @@
 0.278754 -0.954828 -0.102953 0.768142 0.945569 0.291623 -0.144416 0.000000 0.167916 -0.057093 0.984147 -0.000001 0.000000 0.000000 0.000000 1.000000
 0.278754 -0.954828 -0.102953 0.768142 0.945569 0.291623 -0.144416 0.000000 0.167916 -0.057093 0.984147 -0.000001 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_foot-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_foot-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_foot-Interpolations">
-     <Name_array id="jnt_left_foot-Interpolations-array" count="3">
+     <Name_array id="jnt_left_foot-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_foot-Interpolations-array" count="3">
+      <accessor source="#jnt_left_foot-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3340,11 +3340,11 @@
   <animation id="jnt_left_toebase-anim" name="jnt_left_toebase">
    <animation>
     <source id="jnt_left_toebase-Matrix-animation-input">
-     <float_array id="jnt_left_toebase-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_toebase-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_toebase-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_toebase-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3356,16 +3356,16 @@
 0.918936 -0.394408 0.000000 0.441847 0.394408 0.918936 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 0.918936 -0.394408 0.000000 0.441847 0.394408 0.918936 -0.000000 0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_toebase-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_toebase-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_toebase-Interpolations">
-     <Name_array id="jnt_left_toebase-Interpolations-array" count="3">
+     <Name_array id="jnt_left_toebase-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_toebase-Interpolations-array" count="3">
+      <accessor source="#jnt_left_toebase-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
@@ -3381,11 +3381,11 @@
   <animation id="jnt_left_toeend-anim" name="jnt_left_toeend">
    <animation>
     <source id="jnt_left_toeend-Matrix-animation-input">
-     <float_array id="jnt_left_toeend-Matrix-animation-input-array" count="3">
+     <float_array id="jnt_left_toeend-Matrix-animation-input-array" count="1">
 
 0.000000 0.033333 0.066667</float_array>
      <technique_common>
-      <accessor source="#jnt_left_toeend-Matrix-animation-input-array" count="3">
+      <accessor source="#jnt_left_toeend-Matrix-animation-input-array" count="1">
        <param name="TIME" type="float"></param>
       </accessor>
      </technique_common>
@@ -3397,16 +3397,16 @@
 1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000
 1.000000 -0.000001 -0.000000 0.379397 0.000001 1.000000 -0.000000 -0.000000 0.000000 0.000000 1.000000 -0.000000 0.000000 0.000000 0.000000 1.000000</float_array>
      <technique_common>
-      <accessor source="#jnt_left_toeend-Matrix-animation-output-transform-array" count="3" stride="16">
+      <accessor source="#jnt_left_toeend-Matrix-animation-output-transform-array" count="1" stride="16">
        <param type="float4x4"></param>
       </accessor>
      </technique_common>
     </source>
     <source id="jnt_left_toeend-Interpolations">
-     <Name_array id="jnt_left_toeend-Interpolations-array" count="3">
+     <Name_array id="jnt_left_toeend-Interpolations-array" count="1">
  LINEAR LINEAR LINEAR</Name_array>
      <technique_common>
-      <accessor source="#jnt_left_toeend-Interpolations-array" count="3">
+      <accessor source="#jnt_left_toeend-Interpolations-array" count="1">
        <param type="name"></param>
       </accessor>
      </technique_common>
