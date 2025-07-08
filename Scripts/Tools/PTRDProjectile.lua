@@ -65,8 +65,6 @@ end
 
 ---@param self PTRD
 function PTRDProjectile_clientSpawnProjectile(self, dir)
-
-
 	local s_tool = self.tool
 
 	local v_proj_pos = nil
@@ -105,9 +103,10 @@ end
 
 local function PTRDProjectile_serverOnHit(proj_data)
 	local hit = proj_data[7]
+	---@type Shape
 	local target = hit.target
 
-	if not sm.exists(target) then return end
+	if not sm.exists(target) then return false end
 
 	local hitPos = hit.pos
 	local _type = type(target)
@@ -125,21 +124,33 @@ local function PTRDProjectile_serverOnHit(proj_data)
 
 		if not success then
 			local uuid = target.uuid
-			if math.random() <= g_destructionLevels[sm.item.getQualityLevel(uuid)] then
-				local normal = hit.normal
-				local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), normal )
-				local effectData = { Material = target.materialId, Color = target.color }
+			if target.destructable and target.body.destructable then
+				if math.random() <= g_destructionLevels[sm.item.getQualityLevel(uuid)] then
+					local normal = hit.normal
+					local effectRot = sm.vec3.getRotation( sm.vec3.new(0,0,1), normal )
+					local effectData = { Material = target.materialId, Color = target.color }
 
-				sm.physics.applyImpulse(target.body, proj_data[2], true, hit.localPos )
+					sm.physics.applyImpulse(target.body, proj_data[2], true, hit.localPos )
 
-				if sm.item.isBlock(uuid) then
-					target:destroyBlock(target:getClosestBlockLocalPosition(hitPos))
-				else
-					target:destroyShape()
+					if sm.item.isBlock(uuid) then
+						target:destroyBlock(target:getClosestBlockLocalPosition(hitPos))
+					else
+						target:destroyShape()
+					end
+
+					sm.effect.playEffect( "Sledgehammer - Destroy", hitPos, sm.vec3.zero(), effectRot, sm.vec3.one(), effectData )
+				end
+			else
+				local int = target.interactable
+				if int and int.type == "scripted" then
+					sm.event.sendToInteractable(int, "sv_e_onHit", {
+						damage = g_projectileDamage,
+						source = proj_data[5],
+						position = hitPos,
+						normal = hit.normal
+					})
 				end
 
-				sm.effect.playEffect( "Sledgehammer - Destroy", hitPos, sm.vec3.zero(), effectRot, sm.vec3.one(), effectData )
-			else
 				return true
 			end
 		end
