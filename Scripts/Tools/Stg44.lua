@@ -180,7 +180,7 @@ function STG44.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.10,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.6,
 		spreadMinAngle = 0.25,
@@ -195,7 +195,7 @@ function STG44.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.10,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.3,
 		spreadMinAngle = 0.25,

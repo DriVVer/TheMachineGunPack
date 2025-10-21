@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 34
+local Damage = 40
 
 ---@class DP27 : ToolClass
 ---@field fpAnimations table
@@ -22,7 +22,7 @@ local Damage = 34
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 DP27 = class()
-DP27.mag_capacity = 30
+DP27.mag_capacity = 47
 DP27.maxRecoil = 15
 DP27.recoilAmount = 8
 DP27.aimRecoilAmount = 4
@@ -182,10 +182,10 @@ function DP27.loadAnimations( self )
 	self.normalFireMode = {
 		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
-		spreadIncrement = 1.6,
-		spreadMinAngle = 0.25,
-		spreadMaxAngle = 7,
-		fireVelocity = 500.0,
+		spreadIncrement = 0.6,
+		spreadMinAngle = 0.35,
+		spreadMaxAngle = 9,
+		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
@@ -500,13 +500,17 @@ function DP27:client_onEquip(animate, is_custom)
 	--Load animations before setting them
 	self:loadAnimations()
 
+	local v_gun_color = sm.color.new("4d2714")
+	self.tool:setTpColor(v_gun_color)
+	self.tool:setFpColor(v_gun_color)
+
 	--Set tp and fp animations
 	setTpAnimation( self.tpAnimations, "pickup", 0.0001 )
 	if self.cl_isLocal then
 		swapFpAnimation(self.fpAnimations, "unequip", "equip", 0.2)
 	end
 
-	mgp_toolAnimator_setAnimation(self, "equip")
+	mgp_toolAnimator_setAnimation(self, (self.ammo_in_mag <= 0) and "last_shot_equip" or "equip")
 end
 
 function DP27:client_onUnequip(animate, is_custom)
@@ -563,29 +567,29 @@ function DP27:onAim(aiming)
 	end
 end
 
-function DP27:sv_n_onShoot(dir)
-	self.network:sendToClients( "cl_n_onShoot", dir )
+function DP27:sv_n_onShoot(is_last_shot)
+	self.network:sendToClients("cl_n_onShoot", is_last_shot)
 
-	if dir ~= nil and self.sv_ammo_counter > 0 then
+	if is_last_shot ~= nil and self.sv_ammo_counter > 0 then
 		self.sv_ammo_counter = self.sv_ammo_counter - 1
 		self:server_updateAmmoCounter()
 	end
 end
 
-function DP27:cl_n_onShoot(dir)
+function DP27:cl_n_onShoot(is_last_shot)
 	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:onShoot(dir)
+		self:onShoot(is_last_shot)
 	end
 end
 
-function DP27:onShoot(dir)
+function DP27:onShoot(is_last_shot)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
 	self.tpAnimations.animations.aimShoot.time = 0
 
 	local anim = self.aiming and "aimShoot" or "shoot"
 	setTpAnimation( self.tpAnimations, anim, 10.0 )
-	mgp_toolAnimator_setAnimation(self, anim)
+	mgp_toolAnimator_setAnimation(self, is_last_shot and "last_shot" or anim)
 end
 
 function DP27:calculateFirePosition()
@@ -746,9 +750,11 @@ function DP27:cl_onPrimaryUse(is_shooting)
 		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
 		self.sprintCooldownTimer = self.sprintCooldown
 
+		local is_last_shot = self.ammo_in_mag == 0
+
 		-- Send TP shoot over network and dircly to self
-		self:onShoot( dir )
-		self.network:sendToServer( "sv_n_onShoot", dir )
+		self:onShoot(is_last_shot)
+		self.network:sendToServer( "sv_n_onShoot", is_last_shot)
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )

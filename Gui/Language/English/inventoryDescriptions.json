@@ -40,6 +40,10 @@
 		"title": "M1 Combat Knife",
 		"description": "The Machine Gun Pack\n\nCombat Knife"
 	},
+	"c450ecfc-54f7-44b1-bd66-0bd888c2b84f": {
+		"title": "Binoculars",
+		"description": "The Machine Gun Pack\n\nBinoculars to scout and measure"
+	},
 	"e4ed32d5-d891-40e3-b82e-db975884dbb3": {
 		"title": "Colt M1911 Pistol",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
@@ -77,8 +81,16 @@
 		"description": "The Machine Gun Pack\n\nWeapon based on 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"f3d472ac-fcfc-4118-8327-c69f465fe167": {
-		"title": "StG 44",
+		"title": "StG 44 Assault Rifle",
 		"description": "The Machine Gun Pack\n\nWeapon based on 'SturmGewehr' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+	},
+	"ac8d35f9-3f88-4a4f-a96b-b2a8e0f3a0ad": {
+		"title": "DP-27 LMG",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Degtyarov's Machinegun' made of scrap.\n\n47-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+	},
+	"b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba": {
+		"title": "BAR LMG",
+		"description": "The Machine Gun Pack\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3": {
 		"title": "S&W Model 10 Revolver",

@@ -12,7 +12,17 @@
 				"data": {}
 			}
 		},
-		
+		{
+			"name": "Bino",
+			"uuid": "c450ecfc-54f7-44b1-bd66-0bd888c2b84f",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/Melee/Bino.lua",
+				"class": "Bino",
+				"data": {}
+			}
+		},
 		{
 			"name": "TommyGun",
 			"uuid": "336a7328-4d50-432c-8698-2ed511187cc7",
@@ -35,8 +45,28 @@
 				"data": {}
 			}
 		},
-		
-		
+		{
+			"name": "BAR",
+			"uuid": "b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/BAR/BAR_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/BAR.lua",
+				"class": "BAR",
+				"data": {}
+			}
+		},
+		{
+			"name": "DP27",
+			"uuid": "ac8d35f9-3f88-4a4f-a96b-b2a8e0f3a0ad",
+			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/DP27/DP27_Preview.rend",
+			"previewRotation": [ 1, 0, 0, 0, 0, -1, 0, 1, 0 ],
+			"script": {
+				"file": "$CONTENT_DATA/Scripts/Tools/DP27.lua",
+				"class": "DP27",
+				"data": {}
+			}
+		},
 		{
 			"name": "PPSh",
 			"uuid": "d8ba1dfe-172c-41ea-83e1-2c977e21d9e9",
