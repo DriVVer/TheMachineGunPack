@@ -64,6 +64,9 @@ local dp27_action_block_anims =
 	["equip"] = true,
 	["aimExit"] = true,
 
+	["bipod_into"] = true,
+	["bipod_exit"] = true,
+
 	["sprintInto"] = true,
 	["sprintIdle"] = true,
 	["sprintExit"] = true
@@ -94,6 +97,24 @@ local dp27_sprint_block_anims =
 	["reload_gt"] = true,
 	["aimExit"] = true,
 	["sprintExit"] = true
+}
+
+local dp27_bipod_block_anims =
+{
+	["reload"] = true,
+	["equip"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true,
+
+	["aimInto"]  = true,
+	["aimIdle"]  = true,
+	["aimExit"]  = true,
+	["aimShoot"] = true,
+
+	["shoot"] = true,
+	["shoot_bipod"] = true
 }
 
 function DP27:client_initAimVals()
@@ -204,6 +225,9 @@ function DP27.loadAnimations( self )
 
 				idle = { "DP27_idle", { looping = true } },
 				shoot = { "DP27_shoot", { nextAnimation = "idle" } },
+
+				bipod_into = { "DP27_bipod_into", { nextAnimation = "idle" } },
+				bipod_exit = { "DP27_bipod_exit", { nextAnimation = "idle" } },
 
 				reload = { "DP27_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "DP27_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
@@ -325,6 +349,101 @@ function DP27:sv_n_trySpendAmmo(data, player)
 	self.network:sendToClient(v_owner, "client_receiveAmmo", self.sv_ammo_counter)
 end
 
+---@param self DP27
+local function dp27_can_deploy_bipod(self)
+	local v_owner = self.tool:getOwner()
+	if not (v_owner and sm.exists(v_owner)) then
+		return false
+	end
+
+	local v_owner_char = v_owner.character
+	if not (v_owner_char and sm.exists(v_owner_char)) then
+		return false
+	end
+
+	if v_owner_char:isCrouching() then
+		return false
+	end
+
+	local v_char_pos = v_owner_char.worldPosition
+	v_char_pos.z = v_char_pos.z + v_owner_char:getHeight() * 0.4
+
+	local v_forward_check = v_char_pos + v_owner_char.direction * 0.5
+	local hit, result = sm.physics.raycast(v_char_pos, v_forward_check, v_owner_char)
+	if hit then
+		return false
+	end
+
+	local v_cam_up = sm.camera.getUp()
+	local v_final_check = v_forward_check - v_cam_up * 0.5
+	local final_hit, final_result = sm.physics.raycast(v_forward_check, v_final_check, v_owner_char)
+	if not final_hit then
+		return false
+	end
+
+	local v_up_direction = sm.vec3.new(0, 0, 1)
+	if final_result.fraction < 0.4 or final_result.normalWorld:dot(v_up_direction) < 0.97 or v_cam_up:dot(v_up_direction) < 0.98 then
+		return false
+	end
+
+	return true
+end
+
+function DP27:server_updateBipodAnim(is_deploy)
+	self.network:sendToClients("client_receiveBipodAnim", is_deploy)
+end
+
+function DP27:client_receiveBipodAnim(is_deploy)
+	if not self.cl_isLocal and self.tool:isEquipped() then
+		mgp_toolAnimator_setAnimation(self, is_deploy and "deploy_bipod" or "hide_bipod")
+		self.bipod_deployed = is_deploy
+	end
+end
+
+function DP27:client_updateBipod(dt)
+	if self:client_isGunReloading(dp27_bipod_block_anims) then
+		self.bipod_unequip_timer = 0.0
+		self.bipod_equip_timer = 0.0
+		return
+	end
+
+	if dp27_can_deploy_bipod(self) then
+		self.bipod_unequip_timer = 0.0
+
+		if not self.bipod_deployed then
+			self.bipod_equip_timer = self.bipod_equip_timer + dt
+			if self.bipod_equip_timer >= 0.5 then
+				self.network:sendToServer("server_updateBipodAnim", true)
+
+				mgp_toolAnimator_setAnimation(self, "bipod_into")
+				if not self.aiming then
+					setFpAnimation(self.fpAnimations, "bipod_into", 0.0)
+				end
+
+				self.bipod_equip_timer = 0.0
+				self.bipod_deployed = true
+			end
+		end
+	else
+		self.bipod_equip_timer = 0.0
+
+		if self.bipod_deployed then
+			self.bipod_unequip_timer = self.bipod_unequip_timer + dt
+			if self.bipod_unequip_timer >= 0.5 then
+				self.network:sendToServer("server_updateBipodAnim", false)
+
+				mgp_toolAnimator_setAnimation(self, "bipod_exit")
+				if not self.aiming then
+					setFpAnimation(self.fpAnimations, "bipod_exit", 0.0)
+				end
+
+				self.bipod_unequip_timer = 0.0
+				self.bipod_deployed = false
+			end
+		end
+	end
+end
+
 function DP27.client_onUpdate( self, dt )
 	mgp_toolAnimator_update(self, dt)
 
@@ -370,6 +489,8 @@ function DP27.client_onUpdate( self, dt )
 				if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
 					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 				end
+
+				self:client_updateBipod(dt)
 			end
 		end
 
@@ -788,16 +909,19 @@ function DP27:cl_onPrimaryUse(is_shooting)
 		end
 
 		dir = dir:rotate( math.rad( 0.4 ), sm.camera.getRight() ) -- 25 m sight calibration
-
-		-- Spread
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
-		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
-
-		dir = sm.noise.gunSpread( dir, spreadDeg )
+		if not (self.bipod_deployed and dp27_can_deploy_bipod(self)) then
+			sm.gui.displayAlertText("NO BENEFIT FOR YOU", 1)
+			-- Spread
+			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
+	
+			local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+			spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
+			local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+	
+			dir = sm.noise.gunSpread( dir, spreadDeg )	
+		end
 
 		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
