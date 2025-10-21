@@ -5,7 +5,8 @@
 			"includes": [ "POSITION", "UV0", "NORMAL", "TANGENTS", "BLEND_INDICES", "BLEND_WEIGHTS" ],
 			"animationList": [
 				{ "name": "DP27_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DP27/DP27_anims.dae" },
-				{ "name": "DP27_bolt", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DP27/DP27_bolt.dae" }
+				{ "name": "DP27_bolt", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DP27/DP27_bolt.dae" },
+				{ "name": "DP27_bipod_anims", "file": "$CONTENT_DATA/Tools/Animations/Gun_Anims/DP27/DP27_bipod_anims.dae" }
 			],
 			"subMeshList": [			
 				{
