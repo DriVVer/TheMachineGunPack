@@ -711,7 +711,7 @@ function Garand:cl_onPrimaryUse(state)
 	if self:client_isGunReloading(garand_action_block_anims) or not self.equipped then return end
 
 	local v_toolOwner = self.tool:getOwner()
-	if not v_toolOwner then
+	if not (v_toolOwner and sm.exists(v_toolOwner)) then
 		return
 	end
 
@@ -782,6 +782,7 @@ function Garand:cl_startReloadAnim(is_garand_thumb)
 	mgp_toolAnimator_setAnimation(self, v_cur_anim)
 end
 
+---@param reload_table string[]
 function Garand:client_isGunReloading(reload_table)
 	if self.waiting_for_ammo then
 		return true
