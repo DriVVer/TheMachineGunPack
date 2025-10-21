@@ -53,6 +53,49 @@ sm.tool.preloadRenderables( renderables )
 sm.tool.preloadRenderables( renderablesTp )
 sm.tool.preloadRenderables( renderablesFp )
 
+local dp27_action_block_anims =
+{
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
+
+	["reload"] = true,
+	["reload_gt"] = true,
+
+	["equip"] = true,
+	["aimExit"] = true,
+
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true
+}
+
+local dp27_aim_block_anims =
+{
+	["sprintInto"] = true,
+	["sprintIdle"] = true,
+	["sprintExit"] = true
+}
+
+local dp27_obstacle_block_anims =
+{
+	["ammo_check"] = true,
+	["reload"    ] = true,
+	["reload_gt" ] = true,
+	["equip"     ] = true,
+	["aimExit"   ] = true
+}
+
+local dp27_sprint_block_anims =
+{
+	["ammo_check" ] = true,
+	["cock_hammer"] = true,
+
+	["reload"] = true,
+	["reload_gt"] = true,
+	["aimExit"] = true,
+	["sprintExit"] = true
+}
+
 function DP27:client_initAimVals()
 	local cameraWeight, cameraFPWeight = self.tool:getCameraWeights()
 	self.aimWeight = math.max( cameraWeight, cameraFPWeight )
@@ -291,32 +334,45 @@ function DP27.client_onUpdate( self, dt )
 
 	if self.cl_isLocal then
 		if self.equipped then
-			local fp_anim = self.fpAnimations
-			local cur_anim_cache = fp_anim.currentAnimation
-			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
-			if anim_data and is_reload_anim then
-				local time_predict = anim_data.time + anim_data.playRate * dt
-				local info_duration = anim_data.info.duration
+			local hit, result = sm.localPlayer.getRaycast(1.5)
+			if hit and not self:client_isGunReloading(dp27_obstacle_block_anims) then
+				local v_cur_anim = self.fpAnimations.currentAnimation
+				if v_cur_anim ~= "sprintInto" and v_cur_anim ~= "sprintExit" then
+					if v_cur_anim == "sprintIdle" then
+						self.fpAnimations.animations.sprintIdle.time = 0
+					else
+						swapFpAnimation(self.fpAnimations, "sprintExit", "sprintInto", 0.0)
+					end
+				end
+			else
+				local fp_anim = self.fpAnimations
+				local cur_anim_cache = fp_anim.currentAnimation
+				local anim_data = fp_anim.animations[cur_anim_cache]
+				local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+				if anim_data and is_reload_anim then
+					local time_predict = anim_data.time + anim_data.playRate * dt
+					local info_duration = anim_data.info.duration
 
-				if time_predict >= info_duration then
-					self.network:sendToServer("sv_n_trySpendAmmo")
+					if time_predict >= info_duration then
+						self.network:sendToServer("sv_n_trySpendAmmo")
+					end
+				end
+
+				if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
+					swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
+				elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
+					swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
+				end
+
+				if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+					swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
+				end
+				if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
+					swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
 				end
 			end
-
-			if isSprinting and self.fpAnimations.currentAnimation ~= "sprintInto" and self.fpAnimations.currentAnimation ~= "sprintIdle" then
-				swapFpAnimation( self.fpAnimations, "sprintExit", "sprintInto", 0.0 )
-			elseif not isSprinting and ( self.fpAnimations.currentAnimation == "sprintIdle" or self.fpAnimations.currentAnimation == "sprintInto" ) then
-				swapFpAnimation( self.fpAnimations, "sprintInto", "sprintExit", 0.0 )
-			end
-
-			if self.aiming and not isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimExit", "aimInto", 0.0 )
-			end
-			if not self.aiming and isAnyOf( self.fpAnimations.currentAnimation, { "aimInto", "aimIdle", "aimShoot" } ) then
-				swapFpAnimation( self.fpAnimations, "aimInto", "aimExit", 0.0 )
-			end
 		end
+
 		updateFpAnimations( self.fpAnimations, self.equipped, dt )
 	end
 
@@ -378,7 +434,7 @@ function DP27.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
+	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(dp27_sprint_block_anims)
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -685,7 +741,7 @@ end
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
 function DP27:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
-	if self:client_isGunReloading() then return end
+	if self:client_isGunReloading(dp27_action_block_anims) then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not (v_toolOwner and sm.exists(v_toolOwner)) then
@@ -697,7 +753,7 @@ function DP27:cl_onPrimaryUse(is_shooting)
 		return
 	end
 
-	if self.fireCooldownTimer > 0.0 then
+	if self.fireCooldownTimer > 0.0 or self.tool:isSprinting() then
 		return
 	end
 
@@ -799,17 +855,13 @@ function DP27:cl_startReloadAnim(anim_name)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function DP27:client_isGunReloading()
+---@param reload_table string[]
+function DP27:client_isGunReloading(reload_table)
 	if self.waiting_for_ammo then
 		return true
 	end
 
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
+	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
 function DP27:cl_initReloadAnim(anim_name)
@@ -835,7 +887,7 @@ function DP27:client_onReload()
 	if self.equipped then
 		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
 		if not is_mag_full then
-			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			if not self:client_isGunReloading(dp27_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 				local cur_anim_name = "reload"
 				if self.ammo_in_mag == 0 then
 					cur_anim_name = "reload_empty"
@@ -866,7 +918,7 @@ function DP27:cl_startCheckMagAnim()
 end
 
 function DP27:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+	if not self:client_isGunReloading(dp27_action_block_anims) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("DP27: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
@@ -889,7 +941,7 @@ local _intstate = sm.tool.interactState
 function DP27.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading()
+	local is_reloading = self:client_isGunReloading(dp27_aim_block_anims)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
@@ -903,11 +955,6 @@ end
 
 function DP27.client_onEquippedUpdate( self, primaryState, secondaryState )
 	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
-
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
-	end
-
+	self:cl_onSecondaryUse(secondaryState)
 	return true, true
 end
