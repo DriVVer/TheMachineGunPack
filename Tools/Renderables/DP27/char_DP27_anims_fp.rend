@@ -15,6 +15,10 @@
 				{ "name": "DP27_sprint_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_sprint_exit.dae" },
 				{ "name": "DP27_sprint_idle", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_sprint_idle.dae" },
 
+				{ "name": "DP27_bipod_into",		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_bipod_into.dae" },
+				{ "name": "DP27_bipod_exit", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_bipod_exit.dae" },
+				{ "name": "DP27_bipod_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_bipod_shoot.dae" },
+
 				{ "name": "DP27_aim_into",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_aim_into.dae" },
 				{ "name": "DP27_aim_exit",  		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_aim_exit.dae" },
 				{ "name": "DP27_aim_shoot", 		"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/DP27/DP27_fp_aim_shoot.dae" },
