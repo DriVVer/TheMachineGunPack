@@ -912,7 +912,6 @@ function DP27:cl_onPrimaryUse(is_shooting)
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
 
 		if not (self.bipod_deployed and dp27_can_deploy_bipod(self)) then
-			sm.gui.displayAlertText("NO BENEFIT FOR YOU", 1)
 			-- Spread
 			local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 	
