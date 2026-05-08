@@ -343,6 +343,53 @@ local mgp_tool_database =
 					}
 				}
 			},
+			bipod_shoot =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "shoot_tp",
+						name_fp = "shoot_fp",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.05, 0.0),
+						apply_velocity = false
+					},
+					{
+						type = mgp_tool_anim_enum.particle,
+						fp_offset = sm.vec3.new(0, -0.07, 0),
+						tp_offset = sm.vec3.new(0, 0, 0),
+						name_tp = "TommyShell",
+						name_fp = "TommyShellFP",
+						bone_name = "jnt_ammo"
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "DP27_bolt", start_val = 0.5, end_val = 0.8 } },
+						tp_anim = { { name = "DP27_bolt", start_val = 0.5, end_val = 0.8 } },
+						time = 0.3
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "DP27_anims", start_val = 0.0, end_val = 0.5 } },
+						tp_anim = { { name = "DP27_anims", start_val = 0.0, end_val = 0.5 } },
+						time = 0.5
+					}
+				},
+				[3] = {
+					{
+						type = mgp_tool_anim_enum.effect,
+						bone = "pejnt_barrel",
+						name_tp = "gunshot",
+						name_fp = "gunshot",
+						tp_offset = sm.vec3.new(0, 0.5, 0),
+						fp_offset = sm.vec3.new(0.0, -0.0, 0),
+						apply_velocity = false
+					},
+				}
+			},
 			shoot =
 			{
 				[1] = {
@@ -6568,13 +6615,38 @@ local mgp_tool_database =
 					}
 				}
 			},
-			use2 =
+			revive =
 			{
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "Medkit_Anim", start_val = 6.0, end_val = 10.0 } },
 						tp_anim = { { name = "Medkit_Anim", start_val = 6.0, end_val = 10.0 } },
+						time = 4.0
+					}
+				},
+				[2] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 3.9 } },
+						tp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 3.9 } },
+						time = 3.9
+					},
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 0.1 } },
+						tp_anim = { { name = "Medkit_Syr", start_val = 0.0, end_val = 0.1 } },
+						time = 0.1
+					}
+				}
+			},
+			use2 =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Medkit_Anim", start_val = 10.0, end_val = 14.0 } },
+						tp_anim = { { name = "Medkit_Anim", start_val = 10.0, end_val = 14.0 } },
 						time = 4.0
 					}
 				},

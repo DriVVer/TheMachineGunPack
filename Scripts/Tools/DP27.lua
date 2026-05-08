@@ -759,6 +759,14 @@ function DP27:cl_n_onShoot(is_last_shot)
 	end
 end
 
+function DP27:cl_chooseShootAnim()
+	if self.bipod_deployed then
+		return self.aiming and "bipodAimShoot" or "shoot_bipod"
+	end
+
+	return self.aiming and "aimShoot" or "shoot"
+end
+
 function DP27:onShoot(is_last_shot)
 	self.tpAnimations.animations.idle.time = 0
 	self.tpAnimations.animations.shoot.time = 0
