@@ -665,7 +665,7 @@ end
 
 function Shotgun:onAim(aiming)
 	self.aiming = aiming
-	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
+	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "relax" and self.aiming then
 		setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 5.0 )
 	end
 end
