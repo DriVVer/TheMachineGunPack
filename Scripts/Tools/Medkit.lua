@@ -47,7 +47,7 @@ function Medkit:server_onFixedUpdate(dt)
 		if self.sv_targetChar then
 			local char = self.tool:getOwner().character
 			local start = char.worldPosition + (char:isCrouching() and sm.vec3.new(0,0,0.3) or sm.vec3.new(0,0,0.575))
-			local hit, result = sm.physics.raycast(start, start + char.direction * 7.5)
+			local hit, result = sm.physics.raycast(start, start + char.direction * 1.5)
 			local targetChar = result:getCharacter()
 			if self.sv_targetChar ~= targetChar then
 				self:sv_updateUse()
@@ -105,7 +105,12 @@ function Medkit:client_onCreate()
 end
 
 function Medkit:cl_updateUse(data)
-	local state, isRevive = data[1], data[2]
+	local state, isRevive
+	if type(data) == "table" then
+		state, isRevive = data[1], data[2]
+	else
+		state, isRevive = data, false
+	end
 	self.cl_using = state
 	self.cl_useProgress = 0
 
@@ -300,7 +305,7 @@ function Medkit:loadAnimations()
 			use2 = { "Medkit_use_2", { nextAnimation = "pickup" } },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
 			putdown = { "Medkit_putdown" },
-			--revive = { "Medkit_revive" }
+	
 		}
 	)
 	local movementAnimations = {
