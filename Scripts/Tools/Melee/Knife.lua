@@ -309,7 +309,7 @@ function Knife.client_onEquippedUpdate( self, primaryState, secondaryState )
 			self.pendingRaycastFlag = false
 			local raycastStart = sm.localPlayer.getRaycastStart()
 			local direction = sm.localPlayer.getDirection()
-			sm.melee.meleeAttack( melee_farmbotswipe, Damage, raycastStart, direction * Range, self.tool:getOwner() )
+			sm.melee.meleeAttack( melee_sledgehammer, Damage, raycastStart, direction * Range, self.tool:getOwner() )
 
 			local success, result = sm.localPlayer.getRaycast( Range, raycastStart, direction )
 			if success then
