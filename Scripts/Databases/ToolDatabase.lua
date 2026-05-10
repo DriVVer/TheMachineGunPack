@@ -6615,7 +6615,7 @@ local mgp_tool_database =
 					}
 				}
 			},
-			revive =
+			use2 =
 			{
 				[1] = {
 					{
@@ -6640,7 +6640,7 @@ local mgp_tool_database =
 					}
 				}
 			},
-			use2 =
+			revive =
 			{
 				[1] = {
 					{

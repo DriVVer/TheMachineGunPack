@@ -88,7 +88,7 @@ function Medkit:sv_updateUse(slot)
 	self.sv_useProgress = 0
 	self.sv_selectedSlot = slot
 
-	self.network:sendToClients("cl_updateUse", state)
+	self.network:sendToClients("cl_updateUse", { state, player ~= nil })
 end
 
 
@@ -104,14 +104,15 @@ function Medkit:client_onCreate()
 	end
 end
 
-function Medkit:cl_updateUse(state)
+function Medkit:cl_updateUse(data)
+	local state, isRevive = data[1], data[2]
 	self.cl_using = state
 	self.cl_useProgress = 0
 
 	if not self.tool:isEquipped() then return end
 
 	if state then
-		local anim = math.random() > 0.5 and "use" or "use2"
+		local anim = isRevive and "revive" or (math.random() > 0.5 and "use" or "use2")
 		setTpAnimation(self.tpAnimations, anim, 10)
 		if self.cl_isLocal then
 			setFpAnimation(self.fpAnimations, anim,  0.2)
@@ -298,7 +299,8 @@ function Medkit:loadAnimations()
 			use = { "Medkit_use_1", { nextAnimation = "pickup" } },
 			use2 = { "Medkit_use_2", { nextAnimation = "pickup" } },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
-			putdown = { "Medkit_putdown" }
+			putdown = { "Medkit_putdown" },
+			--revive = { "Medkit_revive" }
 		}
 	)
 	local movementAnimations = {
@@ -334,6 +336,7 @@ function Medkit:loadAnimations()
 
 				use = 	{ "Medkit_fp_use_1", { nextAnimation = "equip", blendNext = 0 } },
 				use2 = 	{ "Medkit_fp_use_2", { nextAnimation = "equip", blendNext = 0 } },
+				revive = { "Medkit_fp_use_revive", { nextAnimation = "equip", blendNext = 0 } },
 
 				sprintInto = { "Medkit_fp_sprint_into", { nextAnimation = "sprintIdle", blendNext = 0.2 } },
 				sprintIdle = { "Medkit_fp_sprint_idle", { looping = true } },
