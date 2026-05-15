@@ -817,10 +817,10 @@
 				"duration":0.3
 			},
 			{
-				"type": "audio",
-				"name": "event:/char/npc/bots/enemies/tapebot/tapebot_takedamage",
-				"delay": 0.0,
-				"duration": 0.24
+				"delay" : 0.0,
+            	"duration" : 0.250,
+            	"name" : "event:/char/npc/bots/enemies/farmbot/farmbot_shoot",
+            	"type" : "audio"
 			},	
 			{
 				"type": "particle",
@@ -853,10 +853,10 @@
 				"duration":0.3
 			},
 			{
-				"type": "audio",
-				"name": "event:/char/npc/bots/enemies/tapebot/tapebot_takedamage",
-				"delay": 0.0,
-				"duration": 0.24
+				"delay" : 0.0,
+            	"duration" : 0.250,
+            	"name" : "event:/char/npc/bots/enemies/farmbot/farmbot_shoot",
+            	"type" : "audio"
 			},	
 			{
 				"type": "particle",
