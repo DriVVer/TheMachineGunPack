@@ -821,13 +821,19 @@
             	"duration" : 0.250,
             	"name" : "event:/char/npc/bots/enemies/farmbot/farmbot_shoot",
             	"type" : "audio"
-			},	
+			},
 			{
 				"type": "particle",
 				"name": "Muzzle_flash_1_tp",
 				"attached": true,
 				"delay": 0.0
 			},
+			{
+            	"delay" : 0.0,
+            	"duration" : 0.30,
+            	"name" : "event:/char/npc/bots/enemies/farmbot/farmbot_takedamage",
+            	"type" : "audio"
+         	},
 			{
 				"type": "particle",
 				"name": "Smoke_new_tp",
@@ -864,6 +870,12 @@
 				"attached": true,
 				"delay": 0.0
 			},
+			{
+            	"delay" : 0.0,
+            	"duration" : 0.30,
+           	 	"name" : "event:/char/npc/bots/enemies/farmbot/farmbot_takedamage",
+            	"type" : "audio"
+         	},
 			{
 				"type": "particle",
 				"name": "Smoke_new_fp",
