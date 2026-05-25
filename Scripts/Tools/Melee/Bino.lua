@@ -19,7 +19,7 @@ local Damage = 100
 ---@field blendTime integer
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
----@field ammo_in_mag integer
+---@field ammo_in_mag integer	
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
