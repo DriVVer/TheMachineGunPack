@@ -15,7 +15,7 @@
 				{ "name": "Reload3", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_3_reload.dae" },
 				{ "name": "Reload4", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_4_reload.dae" },
 
-				{ "name": "Gun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_pickup.dae" },
+				{ "name": "Gun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_pickup.dae" },
 				{ "name": "Gun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
 
 				{ "name": "Gun_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_into.dae" },
