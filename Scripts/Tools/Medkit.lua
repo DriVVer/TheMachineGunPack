@@ -303,6 +303,7 @@ function Medkit:loadAnimations()
 			idle = { "Medkit_idle" },
 			use = { "Medkit_use_1", { nextAnimation = "pickup" } },
 			use2 = { "Medkit_use_2", { nextAnimation = "pickup" } },
+			revive = { "Medkit_revive", { nextAnimation = "pickup" } },
 			pickup = { "Medkit_pickup", { nextAnimation = "idle" } },
 			putdown = { "Medkit_putdown" },
 	

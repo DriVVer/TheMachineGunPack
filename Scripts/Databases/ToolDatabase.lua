@@ -336,6 +336,10 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.45
+					},
+					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "DP27_bipod_anims", start_val = 0.75, end_val = 1.0 } },
 						tp_anim = { { name = "DP27_bipod_anims", start_val = 0.75, end_val = 1.0 } },
@@ -3426,30 +3430,6 @@ local mgp_tool_database =
 		}
 	},
 
-	Bino = {
-		required_effects = {},
-		animation = {
-			cock_the_hammer_on_equip =
-			{
-				[1] = {
-					{
-						type = mgp_tool_anim_enum.delay,
-						time = 0.10
-					},
-					{
-						type = mgp_tool_anim_enum.effect,
-						bone = "pejnt_barrel",
-						name_tp = "BoltOpen",
-						name_fp = "BoltOpen",
-						tp_offset = sm.vec3.new(0, 0, 0),
-						fp_offset = sm.vec3.new(0, 0, 0),
-						apply_velocity = false
-					}
-				}
-			}
-		}
-	},
-
 	HandheldGrenade = {
 		required_effects = {},
 		animation = {
@@ -4013,6 +3993,41 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					}		
+				}
+			},
+		}
+	},
+
+	Bino =
+	{
+		dlm_required_effects = {
+			shoot_tp = "DLM_Muzzle_Flash_SmallCal_tp",
+			shoot_fp = "DLM_Muzzle_Flash_SmallCal_fp",
+			gunshot = "DLM_BoltRifle_Shot_1",
+			BoltOpen = "DLM_Rifle_Bolt_Open",
+			BoltClose = "DLM_Rifle_Bolt_Close",
+			BulletPut = "DLM_Gun_Ammo"
+		},
+		required_effects = {
+			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_fp = "Muzzle_Flash_SmallCal_fp",
+			BoltOpen = "MosinBoltOpen",
+			BoltClose = "MosinBoltClose",
+			BulletPut = "MosinBulletPut"
+		},
+		on_unequip_action = {
+			stop_effects = { "BoltOpen", "BoltClose", "BulletPut" }
+		},
+		animation = {
+			cock_the_hammer_on_equip =
+			{
+				[1] = {
+					{
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "Bino_Anims", start_val = 0.0, end_val = 0.01 } },
+						tp_anim = { { name = "Bino_Anims", start_val = 0.0, end_val = 0.01 } },
+						time = 0.01
+					}
 				}
 			},
 		}

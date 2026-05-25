@@ -250,8 +250,8 @@ function DP27.loadAnimations( self )
 		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.6,
-		spreadMinAngle = 0.35,
-		spreadMaxAngle = 9,
+		spreadMinAngle = 4.35,
+		spreadMaxAngle = 20,
 		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.1,
@@ -265,8 +265,8 @@ function DP27.loadAnimations( self )
 		fireCooldown = 0.12,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.3,
-		spreadMinAngle = 0.25,
-		spreadMaxAngle = 7,
+		spreadMinAngle = 3.5,
+		spreadMaxAngle = 8,
 		fireVelocity =  500.0,
 
 		minDispersionStanding = 0.01,

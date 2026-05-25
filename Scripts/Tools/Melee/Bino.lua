@@ -34,7 +34,8 @@ Bino.aimFovTp = 15
 Bino.aimFovFp = 10
 
 local renderables = {
-	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_Base.rend"
+	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_Base.rend",
+	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_Anim.rend"
 }
 
 local renderablesTp = 
@@ -168,7 +169,7 @@ function Bino:client_onCreate()
 
 	mgp_toolAnimator_initialize(self, "Bino")
 
-	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
+	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/Bino.layout", false, {
 		isHud = true,
 		isInteractive = false,
 		needsCursor = false,
