@@ -53,3 +53,31 @@ if FantGetToolProxyItem then
 	end
 	FantGetToolProxyItem = getToolProxyItemHook3
 end
+
+oldBindChatCommand = sm.game.bindChatCommand
+function sm.game.bindChatCommand(command, params, callback, help)
+	-- Restore the old bind chat command immediately
+	sm.game.bindChatCommand = oldBindChatCommand
+
+	if sm.isHost then
+		oldBindChatCommand(
+			"/toggleRecoil",
+			{
+				{ "bool", "enable", true },
+			},
+			"cl_onChatCommand",
+			"Toggles recoil"
+		)
+	end
+
+	oldBindChatCommand(
+		"/setRecoilType",
+		{
+			{ "int", "recoil type", false },
+		},
+		"cl_onChatCommand",
+		"Recoil types: 0 - Camera | 1 - Gun"
+	)
+
+	return oldBindChatCommand(command, params, callback, help)
+end

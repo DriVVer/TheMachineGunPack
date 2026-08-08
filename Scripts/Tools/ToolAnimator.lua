@@ -336,7 +336,7 @@ local function SetPlayerCamOverride(player, data)
     end
 
     if not data then
-        sm.camera.setCameraState( 0 )
+        sm.camera.setCameraState( sm.camera.state.default )
         return
     end
 
@@ -364,7 +364,7 @@ local function DoCameraRecoil(self, dt)
 		SetPlayerCamOverride(
 			v_loc_pl,
 			{
-				cameraState = 2,
+				cameraState = sm.camera.state.gyroSeatFP,
 				cameraPosition = camera_getDefaultPos(),
 				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
 				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovFp, self.aimWeight)
@@ -402,7 +402,7 @@ local function DoCameraRecoil(self, dt)
 		SetPlayerCamOverride(
 			v_loc_pl,
 			{
-				cameraState = 3,
+				cameraState = sm.camera.state.scriptedTP,
 				cameraPosition = v_cam_final_pos,
 				cameraRotation = camera_getDefaultRotation() * quat_angleAxis(self.cl_recoilAngle, right),
 				cameraFov = util_lerp(camera_getDefaultFov(), self.aimFovTp, self.aimWeight)

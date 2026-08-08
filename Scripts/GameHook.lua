@@ -59,41 +59,12 @@ function GameHook:cl_chatMsg(msg)
     sm.gui.chatMessage(msg)
 end
 
-
-
-oldBind = oldBind or sm.game.bindChatCommand
-function bindHook(command, params, callback, help)
-    if not gameHooked then
-        gameHooked = true
-
-        if sm.isHost then
-            oldBind(
-                "/toggleRecoil",
-                {
-                    { "bool", "enable", true },
-                },
-                "cl_onChatCommand",
-                "Toggles recoil"
-            )
-        end
-
-        oldBind(
-            "/setRecoilType",
-            {
-                { "int", "recoil type", false },
-            },
-            "cl_onChatCommand",
-            "Recoil types: 0 - Camera | 1 - Gun"
-        )
-
-        dofile("$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Scripts/vanilla_override.lua")
-    end
-
-	return oldBind(command, params, callback, help)
+uuidOldBind = sm.uuid.new
+function sm.uuid.new(...)
+    sm.uuid.new = uuidOldBind
+    dofile("$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Scripts/vanilla_override.lua")
+    return uuidOldBind(...)
 end
-sm.game.bindChatCommand = bindHook
-
-
 
 local recoilToName = {
     [0] = "CAMERA",
