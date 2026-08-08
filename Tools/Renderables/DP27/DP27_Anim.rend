@@ -24,7 +24,7 @@
 						"$SURVIVAL_DATA/Objects/Textures/interactive/obj_interactive_driversaddle_01_asg.tga",
 						"$SURVIVAL_DATA/Objects/Textures/interactive/obj_interactive_driversaddle_01_nor.tga"
 					]
-				},
+				}/*,
 				{
 					"material": "DifAsgNor",
 					"textureList": [
@@ -32,7 +32,7 @@
 						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
 						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
 					]
-				}
+				}*/
 			]
 		}
 	]
