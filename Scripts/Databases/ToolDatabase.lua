@@ -359,14 +359,14 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0.0, -0.05, 0.0),
 						apply_velocity = false
 					},
-					{
+					--[[{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_ammo"
-					},
+					},]]
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "DP27_bolt", start_val = 0.5, end_val = 0.8 } },
@@ -406,14 +406,14 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0.0, -0.05, 0.0),
 						apply_velocity = false
 					},
-					{
+					--[[{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_ammo"
-					},
+					},]]
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "DP27_bolt", start_val = 0.5, end_val = 0.8 } },
@@ -453,14 +453,14 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0.0, -0.05, 0.0),
 						apply_velocity = false
 					},
-					{
+					--[[{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_ammo"
-					},
+					},]]
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "DP27_bolt", start_val = 0.1, end_val = 0.0 } },
@@ -500,14 +500,14 @@ local mgp_tool_database =
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
-					{
+					--[[{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, 0.2, 0.015),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_ammo"
-					},
+					},]]
 					{
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "DP27_bolt", start_val = 0.5, end_val = 0.8 } },
