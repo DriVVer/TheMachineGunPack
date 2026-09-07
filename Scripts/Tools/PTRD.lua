@@ -24,7 +24,7 @@ dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
 ---@field aim_timer integer
 ---@field cl_isLocal boolean
 PTRD = class()
-PTRD.mag_capacity = 100
+PTRD.mag_capacity = 1
 PTRD.maxRecoil = 40
 PTRD.recoilAmount = 30
 PTRD.aimRecoilAmount = 20
