@@ -14,8 +14,8 @@
 				{ "name": "Gun_sprint_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_idle.dae" },
 
 				{ "name": "Gun_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_aim_into.dae" },
-				{ "name": "Gun_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_aim_exit.dae" },
-				{ "name": "Gun_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" },
+				{ "name": "Gun_aim_exit",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_aim_exit.dae" },
+				{ "name": "Gun_aim_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_idle.dae" }
 			]
 		}
 	]
