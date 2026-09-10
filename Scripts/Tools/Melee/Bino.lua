@@ -82,31 +82,31 @@ function Bino:loadAnimations()
 	self.tpAnimations = createTpAnimations(
 		self.tool,
 		{
-			aim = { "spudgun_aim", { crouch = "spudgun_crouch_aim" } },
-			idle = { "spudgun_idle" },
-			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
-			putdown = { "spudgun_putdown" }
+			aim = { "melee_aim", { crouch = "melee_crouch_aim" } },
+			idle = { "melee_idle" },
+			pickup = { "melee_pickup", { nextAnimation = "idle" } },
+			putdown = { "melee_putdown" }
 		}
 	)
 	local movementAnimations = {
-		idle = "spudgun_idle",
-		idleRelaxed = "spudgun_relax",
+		idle = "melee_idle",
+		idleRelaxed = "melee_relax",
 
-		sprint = "spudgun_sprint",
-		runFwd = "spudgun_run_fwd",
-		runBwd = "spudgun_run_bwd",
+		sprint = "melee_sprint",
+		runFwd = "melee_run_fwd",
+		runBwd = "melee_run_bwd",
 
-		jump = "spudgun_jump",
-		jumpUp = "spudgun_jump_up",
-		jumpDown = "spudgun_jump_down",
+		jump = "melee_jump",
+		jumpUp = "melee_jump_up",
+		jumpDown = "melee_jump_down",
 
-		land = "spudgun_jump_land",
-		landFwd = "spudgun_jump_land_fwd",
-		landBwd = "spudgun_jump_land_bwd",
+		land = "melee_jump_land",
+		landFwd = "melee_jump_land_fwd",
+		landBwd = "melee_jump_land_bwd",
 
-		crouchIdle = "spudgun_crouch_idle",
-		crouchFwd = "spudgun_crouch_fwd",
-		crouchBwd = "spudgun_crouch_bwd"
+		crouchIdle = "melee_crouch_idle",
+		crouchFwd = "melee_crouch_fwd",
+		crouchBwd = "melee_crouch_bwd"
 	}
 
 	for name, animation in pairs( movementAnimations ) do
@@ -362,7 +362,7 @@ function Bino:client_onUpdate(dt)
 	end
 
 	local finalAngle = ( 0.5 + angle * 0.5 )
-	self.tool:updateAnimation( "spudgun_spine_bend", finalAngle, self.spineWeight )
+	self.tool:updateAnimation( "melee_spine_bend", finalAngle, self.spineWeight )
 
 	local totalOffsetZ = lerp( -22.0, -26.0, crouchWeight )
 	local totalOffsetY = lerp( 6.0, 12.0, crouchWeight )

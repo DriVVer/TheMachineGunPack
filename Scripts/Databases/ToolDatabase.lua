@@ -78,13 +78,13 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.0, 0),
 						fp_offset = sm.vec3.new(0.0, -0.3, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.07, 0),
+						fp_offset = sm.vec3.new(-0.03, -0.38, 0.05),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
@@ -117,13 +117,13 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.5, -0.14),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, 0.2, 0),
+						fp_offset = sm.vec3.new(0, -0.3, 0.05),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
