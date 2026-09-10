@@ -268,9 +268,8 @@ function Bino:client_onUpdate(dt)
 		else
 			if not v_aimState then
 				self.scope_enabled = false
+				setFpAnimation(self.fpAnimations, "aimExit", 0.0)
 			end
-
-			setFpAnimation(self.fpAnimations, "aimExit", 0.0)
 
 			if self.scope_hud:isActive() then
 				self.scope_hud:close()
@@ -313,16 +312,8 @@ function Bino:client_onUpdate(dt)
 			animation.weight = math.min( animation.weight + ( self.tpAnimations.blendSpeed * dt ), 1.0 )
 
 			if animation.time >= animation.info.duration - self.blendTime then
-				if ( name == "shoot" or name == "aimShoot" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 10.0 )
-				elseif name == "pickup" then
+				if name == "pickup" then
 					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 0.001 )
-				elseif ( name == "reload0" or name == "reload1" or name == "reload2" or name == "reload3" or name == "reload4" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 2 )
-				elseif ( name == "bolt_action" or name == "bolt_action_aim" ) then
-					setTpAnimation( self.tpAnimations, self.aiming and "aim" or "idle", 2 )
-				elseif  name == "ammo_check" then
-					setTpAnimation( self.tpAnimations, self.aiming and "idle" or "idle", 3 )
 				elseif animation.nextAnimation ~= "" then
 					setTpAnimation( self.tpAnimations, animation.nextAnimation, 0.001 )
 				end
