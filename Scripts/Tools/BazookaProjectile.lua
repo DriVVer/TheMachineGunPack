@@ -92,9 +92,9 @@ local function BazookaProjectile_serverCreateExplosion(proj_data)
 
 				mgp_better_explosion(proj_data[1], 7, 0.3, 5, 10, "PropaneTank - ExplosionSmall")
 
-				for i = 1, math.random(30, 40) do
+				for i = 1, math.random(30, 60) do
 					local v_dir = sm.noise.gunSpread(v_spawn_dir, 80)
-					local v_proj_delay = math.random(0, 8)
+					local v_proj_delay = math.random(0, 10)
 
 					sm.projectile.projectileAttack(g_bazooka_sharpnel, 50, v_spawn_pos, v_dir, v_proj_owner, nil, nil, v_proj_delay)
 				end

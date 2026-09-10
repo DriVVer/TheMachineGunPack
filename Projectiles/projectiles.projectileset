@@ -15,11 +15,11 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.9 },
-					{ "qualityLevel": 3, "chance": 0.5 },
-					{ "qualityLevel": 4, "chance": 0.0 },
-					{ "qualityLevel": 5, "chance": 0.0 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 80.0 },
+					{ "qualityLevel": 3, "damage": 50.0 },
+					{ "qualityLevel": 4, "damage": 30.0 },
+					{ "qualityLevel": 5, "damage": 2.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -67,11 +67,12 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 1.0 },
-					{ "qualityLevel": 3, "chance": 0.8 },
-					{ "qualityLevel": 4, "chance": 0.6 },
-					{ "qualityLevel": 5, "chance": 0.2 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 90.0    },
+					{ "qualityLevel": 4, "damage": 70.0    },
+					{ "qualityLevel": 5, "damage": 50.0    },
+					{ "qualityLevel": 6, "damage": 20.0    }
 				]
 			},
 			"enableImpactEffect": true
@@ -91,11 +92,13 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 1.0 },
-					{ "qualityLevel": 3, "chance": 1.0 },
-					{ "qualityLevel": 4, "chance": 0.8 },
-					{ "qualityLevel": 5, "chance": 0.3 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 10000.0 },
+					{ "qualityLevel": 4, "damage": 10000.0 },
+					{ "qualityLevel": 5, "damage": 90.0 },
+					{ "qualityLevel": 6, "damage": 50.0 },
+					{ "qualityLevel": 7, "damage": 20.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -115,12 +118,13 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.8 },
-					{ "qualityLevel": 3, "chance": 0.6 },
-					{ "qualityLevel": 4, "chance": 0.4 },
-					{ "qualityLevel": 5, "chance": 0.2 },
-					{ "qualityLevel": 6, "chance": 0.1 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 90.0 },
+					{ "qualityLevel": 4, "damage": 75.0 },
+					{ "qualityLevel": 5, "damage": 50.0 },
+					{ "qualityLevel": 6, "damage": 25.0 },
+					{ "qualityLevel": 7, "damage": 10.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -141,10 +145,11 @@
 			"amount": 12,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0  },
-					{ "qualityLevel": 2, "chance": 0.5  },
-					{ "qualityLevel": 3, "chance": 0.2  },
-					{ "qualityLevel": 4, "chance": 0.0 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 50.0    },
+					{ "qualityLevel": 3, "damage": 25.0    },
+					{ "qualityLevel": 4, "damage": 10.0    },
+					{ "qualityLevel": 5, "damage": 5.0     }
 				]
 			},
 			"enableImpactEffect": false
@@ -165,12 +170,12 @@
 			"amount": 1,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0  },
-					{ "qualityLevel": 2, "chance": 1.0  },
-					{ "qualityLevel": 3, "chance": 0.9  },
-					{ "qualityLevel": 4, "chance": 0.5  },
-					{ "qualityLevel": 5, "chance": 0.0  },
-					{ "qualityLevel": 6, "chance": 0.0  }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 90.0    },
+					{ "qualityLevel": 4, "damage": 75.0    },
+					{ "qualityLevel": 5, "damage": 35.0    },
+					{ "qualityLevel": 6, "damage": 10.0    }
 				]
 			},
 			"enableImpactEffect": false
@@ -191,12 +196,12 @@
 			"amount": 16,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0  },
-					{ "qualityLevel": 2, "chance": 1.0  },
-					{ "qualityLevel": 3, "chance": 0.9  },
-					{ "qualityLevel": 4, "chance": 0.3  },
-					{ "qualityLevel": 5, "chance": 0.0  },
-					{ "qualityLevel": 6, "chance": 0.0  }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 90.0 },
+					{ "qualityLevel": 4, "damage": 35.0 },
+					{ "qualityLevel": 5, "damage": 15.0 },
+					{ "qualityLevel": 6, "damage": 5.0  }
 				]
 			},
 			"enableImpactEffect": false
@@ -216,11 +221,11 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.5 },
-					{ "qualityLevel": 3, "chance": 0.0 },
-					{ "qualityLevel": 4, "chance": 0.0 },
-					{ "qualityLevel": 5, "chance": 0.0 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 35.0 },
+					{ "qualityLevel": 3, "damage": 20.0 },
+					{ "qualityLevel": 4, "damage": 15.0 },
+					{ "qualityLevel": 5, "damage": 10.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -240,11 +245,11 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.9 },
-					{ "qualityLevel": 3, "chance": 0.5 },
-					{ "qualityLevel": 4, "chance": 0.05 },
-					{ "qualityLevel": 5, "chance": 0.0 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 45.0 },
+					{ "qualityLevel": 3, "damage": 30.0 },
+					{ "qualityLevel": 4, "damage": 15.0 },
+					{ "qualityLevel": 5, "damage": 5.0  }
 				]
 			},
 			"enableImpactEffect": true
@@ -264,11 +269,13 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 0.9 },
-					{ "qualityLevel": 3, "chance": 0.5 },
-					{ "qualityLevel": 4, "chance": 0.05 },
-					{ "qualityLevel": 5, "chance": 0.0 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 50.0 },
+					{ "qualityLevel": 3, "damage": 35.0 },
+					{ "qualityLevel": 4, "damage": 20.0 },
+					{ "qualityLevel": 5, "damage": 10.0 },
+					{ "qualityLevel": 6, "damage": 7.0 },
+					{ "qualityLevel": 7, "damage": 4.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -288,12 +295,16 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 1.0 },
-					{ "qualityLevel": 3, "chance": 1.0 },
-					{ "qualityLevel": 4, "chance": 1.0 },
-					{ "qualityLevel": 5, "chance": 0.9 },
-					{ "qualityLevel": 6, "chance": 0.8 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 10000.0 },
+					{ "qualityLevel": 4, "damage": 10000.0 },
+					{ "qualityLevel": 5, "damage": 90.0 },
+					{ "qualityLevel": 6, "damage": 60.0 },
+					{ "qualityLevel": 7, "damage": 35.0 },
+					{ "qualityLevel": 8, "damage": 20.0 },
+					{ "qualityLevel": 9, "damage": 10.0 },
+					{ "qualityLevel": 10, "damage": 5.0 }
 				]
 			},
 			"enableImpactEffect": false
