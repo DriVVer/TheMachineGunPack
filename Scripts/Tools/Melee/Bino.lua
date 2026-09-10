@@ -24,13 +24,13 @@ local renderables = {
 	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_Anim.rend"
 }
 
-local renderablesTp = 
+local renderablesTp =
 {
 	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/char_Bino_tp.rend",
 	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_offset_tp.rend"
 }
 
-local renderablesFp = 
+local renderablesFp =
 {
 	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/char_Bino_fp.rend",
 	"$CONTENT_DATA/Tools/Renderables/Melee/Bino/Bino_offset_fp.rend",
@@ -482,12 +482,33 @@ function Bino:onAim(aiming)
 	end
 end
 
-function Bino:client_onReload()
-	return true
+function Bino:cl_showRange()
+	if not self.scope_hud:isActive() then
+		return
+	end
+
+	local v_output_text = "#ffff00Range Estimation#ffffff: %s meters"
+
+	local hit, result = sm.localPlayer.getRaycast(300)
+	if hit then
+		local v_distance = (result.pointWorld - result.originWorld):length()
+		local v_range_text = ("#ff2d03%0.0f#ffffff"):format(v_distance)
+		v_output_text = v_output_text:format(v_range_text)
+	else
+		v_output_text = v_output_text:format("More than #ff2d03300#ffffff")
+	end
+
+	sm.gui.displayAlertText(v_output_text, 2)
 end
 
+local g_bino_aim_block_anims = {
+	["aimInto"] = true,
+	["aimExit"] = true,
+	["equip"] = true
+}
+
 local _intstate = sm.tool.interactState
-function Bino:client_onEquippedUpdate(primaryState, secondaryState)
+function Bino:client_onEquippedUpdate(primaryState, secondaryState, f)
 	if self.scope_timer == nil and self.equipped then
 		local newState = (
 			primaryState == _intstate.start or
@@ -496,7 +517,7 @@ function Bino:client_onEquippedUpdate(primaryState, secondaryState)
 			secondaryState == _intstate.hold
 		) and self.aim_timer == nil
 
-		if self.aiming ~= newState then
+		if self.aiming ~= newState and not mgp_tool_isAnimPlaying(self, g_bino_aim_block_anims) then
 			self.aiming = newState
 			self.tpAnimations.animations.idle.time = 0
 
@@ -509,6 +530,13 @@ function Bino:client_onEquippedUpdate(primaryState, secondaryState)
 			self.tool:setMovementSlowDown(self.aiming)
 			self:onAim(self.aiming)
 			self.network:sendToServer("sv_n_onAim", self.aiming)
+		end
+	end
+
+	if f ~= self.prevFState then
+		self.prevFState = f
+		if f then
+			self:cl_showRange()
 		end
 	end
 
