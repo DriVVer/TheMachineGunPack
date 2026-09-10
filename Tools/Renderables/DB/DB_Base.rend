@@ -23,9 +23,9 @@
 				{
 					"material": "DifAsgNor",
 					"textureList": [
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_dif.tga",
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_asg.tga",
-						"$SURVIVAL_DATA/Objects/Textures/harvests/Loggs/obj_harvest_log_nor.tga"
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Logs/obj_harvest_log_dif.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Logs/obj_harvest_log_asg.tga",
+						"$SURVIVAL_DATA/Objects/Textures/harvests/Logs/obj_harvest_log_nor.tga"
 					]
 				}
 				
