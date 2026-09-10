@@ -7,10 +7,10 @@
 			"animationList": [
 				{ "name": "Gun_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_idle.dae" },
 				{ "name": "Gun_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_pickup.dae" },
-				{ "name": "Gun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_putdown.dae" },
+				{ "name": "Gun_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_putdown.dae" },
 
-				{ "name": "Gun_sprint_into", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_into.dae" },
-				{ "name": "Gun_sprint_exit", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Mosin/Mosin_fp_sprint_exit.dae" },
+				{ "name": "Gun_sprint_into", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_idle.dae" },
+				{ "name": "Gun_sprint_exit", 	"file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_idle.dae" },
 				{ "name": "Gun_sprint_idle",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_idle.dae" },
 
 				{ "name": "Gun_aim_into",     "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/Melee/Bino/Bino_fp_aim_into.dae" },
