@@ -45,8 +45,8 @@
 				"data": {}
 			}
 		},
-		// WIP very broken
-		/*{
+		
+		{
 			"name": "BAR",
 			"uuid": "b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba",
 			"previewRenderable": "$CONTENT_DATA/Tools/Renderables/BAR/BAR_Preview.rend",
@@ -56,7 +56,7 @@
 				"class": "BAR",
 				"data": {}
 			}
-		},*/
+		},
 		{
 			"name": "DP27",
 			"uuid": "ac8d35f9-3f88-4a4f-a96b-b2a8e0f3a0ad",
