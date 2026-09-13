@@ -3,10 +3,9 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
+dofile("$CONTENT_DATA/Scripts/Utils/ScopeRenderer.lua")
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
-
-local Damage = 100
 
 ---@class Bino : ToolClass
 ---@field fpAnimations table
@@ -16,7 +15,7 @@ local Damage = 100
 ---@field aimBlendSpeed integer
 ---@field sprintCooldown integer
 ---@field aim_timer integer
----@field scope_hud GuiInterface
+---@field scope_hud JsonGui
 Bino = class()
 
 local renderables = {
@@ -53,7 +52,7 @@ function Bino:client_onCreate()
 
 	mgp_toolAnimator_initialize(self, "Bino")
 
-	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/Bino.layout", false, {
+	self.scope_hud = sm.jsonGui.createGui({
 		isHud = true,
 		isInteractive = false,
 		needsCursor = false,
@@ -67,8 +66,6 @@ function Bino:client_onDestroy()
 		if v_scopeHud:isActive() then
 			v_scopeHud:close()
 		end
-
-		v_scopeHud:destroy()
 	end
 
 	mgp_toolAnimator_destroy(self)
@@ -257,14 +254,14 @@ function Bino:client_onUpdate(dt)
 		local v_aimState = self.aiming
 		if v_isInFirstPerson and v_aimState then
 			if not self.scope_hud:isActive() then
-				self.scope_hud:open()
-
 				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
 				self.fpAnimations.animations.aim_anim.time = 0.5
 
 				sm.gui.startFadeToBlack(1.0, 0.5)
 				sm.gui.endFadeToBlack(0.8)
 			end
+
+			ScopeRenderer_RenderScopeImage(self.scope_hud, "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Gui/Bino.png", 7680, 4320)
 		else
 			if not v_aimState then
 				self.scope_enabled = false

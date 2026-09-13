@@ -3,6 +3,7 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
+dofile("$CONTENT_DATA/Scripts/Utils/ScopeRenderer.lua")
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
@@ -23,7 +24,7 @@ local Damage = 100
 ---@field fireCooldownTimer integer
 ---@field aim_timer integer
 ---@field cl_hammer_cocked boolean
----@field scope_hud GuiInterface
+---@field scope_hud JsonGui
 Mosin = class()
 Mosin.mag_capacity = 5
 Mosin.maxRecoil = 30
@@ -170,7 +171,7 @@ function Mosin:client_onCreate()
 
 	mgp_toolAnimator_initialize(self, "Mosin")
 
-	self.scope_hud = sm.gui.createGuiFromLayout("$CONTENT_DATA/Gui/Layouts/MosinScope.layout", false, {
+	self.scope_hud = sm.jsonGui.createGui({
 		isHud = true,
 		isInteractive = false,
 		needsCursor = false,
@@ -186,8 +187,6 @@ function Mosin:client_onDestroy()
 		if v_scopeHud:isActive() then
 			v_scopeHud:close()
 		end
-
-		v_scopeHud:destroy()
 	end
 
 	mgp_toolAnimator_destroy(self)
@@ -532,14 +531,14 @@ function Mosin:client_onUpdate(dt)
 		local v_isAimReload = self.fpAnimations.currentAnimation == "cock_hammer_aim"
 		if v_isInFirstPerson and v_aimState and not v_isAimReload then
 			if not self.scope_hud:isActive() then
-				self.scope_hud:open()
-
 				setFpAnimation(self.fpAnimations, "aim_anim", 0.0)
 				self.fpAnimations.animations.aim_anim.time = 0.5
 
 				sm.gui.startFadeToBlack(1.0, 0.5)
 				sm.gui.endFadeToBlack(0.8)
 			end
+
+			ScopeRenderer_RenderScopeImage(self.scope_hud, "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Gui/PU_Sight.png", 7680, 4320)
 		else
 			if not v_isAimReload then
 				if not v_aimState then
