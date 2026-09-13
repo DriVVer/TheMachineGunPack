@@ -49,6 +49,8 @@ end
 function Bino:client_onCreate()
 	self:client_initAimVals()
 	self.aimBlendSpeed = 3.0
+	self.targetFov = 10.0
+	self.currentFov = self.targetFov
 
 	mgp_toolAnimator_initialize(self, "Bino")
 
@@ -183,12 +185,13 @@ function Bino:client_updateAimWeights(dt)
 		self.aimWeight = sm.util.lerp(self.aimWeight, 0.0, weight_blend)
 	end
 
-	self.tool:updateCamera( 2.8, 15.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
-	self.tool:updateFpCamera( 10.0, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
+	self.tool:updateCamera( 2.8, self.currentFov + 5.0, sm.vec3.new( 0.65, 0.0, 0.05 ), self.aimWeight )
+	self.tool:updateFpCamera( self.currentFov, sm.vec3.new( 0.0, 0.0, 0.0 ), self.aimWeightFp, bobbingFp )
 end
 
 function Bino:client_onUpdate(dt)
 	mgp_toolAnimator_update(self, dt)
+	self.currentFov = sm.util.lerp(self.currentFov, self.targetFov, dt * 5.0)
 
 	if self.aim_timer then
 		self.aim_timer = self.aim_timer - dt
@@ -261,7 +264,29 @@ function Bino:client_onUpdate(dt)
 				sm.gui.endFadeToBlack(0.8)
 			end
 
-			ScopeRenderer_RenderScopeImage(self.scope_hud, "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Gui/Bino.png", 7680, 4320)
+			local instructions = nil
+			if not self.hide_instructions then
+				instructions = {
+					{
+						Anchor = "Top Left",
+						TextAlign = "Top Left",
+						Caption = ("#ffff00INSTRUCTIONS:#ffffff\n#ffff00%s#ffffff to zoom in\n#ffff00%s#ffffff to zoom out"):format(sm.gui.getKeyBinding("Reload"), sm.gui.getKeyBinding("NextCreateRotation")),
+						Childs = {},
+						FontName = "SM_Text",
+						Name = "HelpText",
+						Skin = "TextBox",
+						Type = "TextBox",
+						NeedKey = false,
+						NeedMouse = false,
+						height = 70,
+						width = 380,
+						x = 20,
+						y = 20
+					}
+				}
+			end
+
+			ScopeRenderer_RenderScopeImage(self.scope_hud, "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Gui/Bino.png", 7680, 4320, instructions)
 		else
 			if not v_aimState then
 				self.scope_enabled = false
@@ -269,6 +294,7 @@ function Bino:client_onUpdate(dt)
 			end
 
 			if self.scope_hud:isActive() then
+				self.hide_instructions = true
 				self.scope_hud:close()
 
 				sm.gui.startFadeToBlack(1.0, 0.5)
@@ -477,16 +503,30 @@ function Bino:cl_showRange()
 
 	local v_output_text = "#ffff00Range Estimation#ffffff: %s meters"
 
-	local hit, result = sm.localPlayer.getRaycast(300)
+	local hit, result = sm.localPlayer.getRaycast(600)
 	if hit then
 		local v_distance = (result.pointWorld - result.originWorld):length()
 		local v_range_text = ("#ff2d03%0.0f#ffffff"):format(v_distance)
 		v_output_text = v_output_text:format(v_range_text)
 	else
-		v_output_text = v_output_text:format("More than #ff2d03300#ffffff")
+		v_output_text = v_output_text:format("More than #ff2d03600#ffffff")
 	end
 
 	sm.gui.displayAlertText(v_output_text, 2)
+end
+
+function Bino:client_onReload()
+	if self.scope_enabled then
+		self.targetFov = math.max(self.targetFov - 10.0, 10.0)
+	end
+	return true
+end
+
+function Bino:client_onToggle()
+	if self.scope_enabled then
+		self.targetFov = math.min(self.targetFov + 10.0, 30.0)
+	end
+	return true
 end
 
 local g_bino_aim_block_anims = {

@@ -1,4 +1,4 @@
-function ScopeRenderer_RenderScopeImage(gui, imagePath, imageWidth, imageHeight)
+function ScopeRenderer_RenderScopeImage(gui, imagePath, imageWidth, imageHeight, children)
 	local viewWidth, viewHeight = sm.jsonGui.getViewSize()
 	local finalImageWidth = math.floor(viewHeight * (imageWidth / imageHeight))
 	local finalImageHeight = viewHeight
@@ -32,6 +32,12 @@ function ScopeRenderer_RenderScopeImage(gui, imagePath, imageWidth, imageHeight)
 		x = 0,
 		y = 0
 	}
+
+	if children ~= nil then
+		for _, child in pairs(children) do
+			table.insert(rootWidget.Childs, child)
+		end
+	end
 
 	if finalImageOffset > 0 then
 		table.insert(rootWidget.Childs, {
