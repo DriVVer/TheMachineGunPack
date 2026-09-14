@@ -209,7 +209,7 @@ function Panzerfaust.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "Panzerfaust_tp_throwaway", { nextAnimation = "idle", duration = 1.0 } }
+			throwAway = { "Panzerfaust_tp_throwaway" }
 		}
 	)
 	local movementAnimations = {
@@ -248,10 +248,7 @@ function Panzerfaust.loadAnimations( self )
 				unequip = { "Panzerfaust_putdown" },
 
 				idle = { "Panzerfaust_idle", { nextAnimation = "idle" } },
-
 				shoot = { "Panzerfaust_shoot", { nextAnimation = "idle" } },
-
-				reload_empty = { "Panzerfaust_reload", { nextAnimation = "idle", duration = 1.0 } },
 
 				aim_idle30 = { "Panzerfaust_aim_idle_30", { looping = true, duration = 1.0 } },
 				aim_idle60 = { "Panzerfaust_aim_idle_60", { looping = true, duration = 1.0 } },
@@ -260,7 +257,6 @@ function Panzerfaust.loadAnimations( self )
 
 				aimInto = { "Panzerfaust_aim_into", { nextAnimation = "aim_idle90" } },
 				aimExit = { "Panzerfaust_aim_exit", { nextAnimation = "idle", blendNext = 0 } },
-				aimIdle = { "Panzerfaust_aim_idle", { looping = true } },
 				aimShoot = { "Panzerfaust_aim_shoot", { nextAnimation = "aim_idle30" } },
 
 				sprintInto = { "Panzerfaust_sprint_into", { nextAnimation = "sprintIdle",  blendNext = 0.2 } },
@@ -936,7 +932,20 @@ function Panzerfaust.cl_onPrimaryUse(self)
 		self.cl_usedTimer = 1.5
 		self.cl_used = true
 		self.network:sendToServer("sv_n_throwAway")
+		self:throwAway()
 		setFpAnimation( self.fpAnimations, "throwAway", 0.0 )
+	end
+end
+
+function Panzerfaust:throwAway()
+	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and not self.aiming then
+		setTpAnimation(self.tpAnimations, "throwAway", 1.0)
+	end
+end
+
+function Panzerfaust:cl_n_throwAway()
+	if not self.cl_isLocal and self.tool:isEquipped() then
+		self:throwAway()
 	end
 end
 
@@ -944,30 +953,6 @@ function Panzerfaust:sv_n_throwAway()
 	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
 		self.sv_eraseTimer = 2.0
 	end
-end
-
-function Panzerfaust:sv_n_onReload()
-	self.network:sendToClients("cl_n_onReload")
-end
-
-function Panzerfaust:cl_n_onReload()
-	if not self.cl_isLocal and self.tool:isEquipped() then
-		self:cl_startReloadAnim()
-	end
-end
-
-function Panzerfaust:cl_startReloadAnim()
-	setTpAnimation(self.tpAnimations, "reload_empty", 1.0)
-	mgp_toolAnimator_setAnimation(self, "reload_empty")
-end
-
-function Panzerfaust:cl_initReloadAnim(anim_id)
-	setFpAnimation(self.fpAnimations, "reload_empty", 0.0)
-	self:cl_startReloadAnim()
-
-	--Send the animation data to all the other clients
-	self.network:sendToServer("sv_n_onReload")
-	self.cl_waiting_for_data = true
 end
 
 function Panzerfaust:client_onReload()
