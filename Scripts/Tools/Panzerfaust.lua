@@ -808,7 +808,6 @@ function Panzerfaust:onAim(aiming)
 end
 
 function Panzerfaust:sv_n_onShoot(v_proj_hit)
-	print("sv_n_onShoot", self.sv_shoot_timer, self.sv_Panzerfaust_loaded)
 	if self.sv_shoot_timer ~= nil or not self.sv_Panzerfaust_loaded then
 		return
 	end
@@ -821,7 +820,6 @@ function Panzerfaust:sv_n_onShoot(v_proj_hit)
 end
 
 function Panzerfaust:cl_n_onShoot(proj_hit)
-	print("cl_n_onShoot", self.cl_isLocal, self.tool:isEquipped())
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(proj_hit)
 	end
@@ -833,7 +831,6 @@ function Panzerfaust:onShoot(proj_hit)
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
 	BazookaProjectile_clientSpawnProjectile(self, proj_hit, 80, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
-	print("ON SHOOT")
 
 	self.cl_barrel_exhaust:start()
 end
