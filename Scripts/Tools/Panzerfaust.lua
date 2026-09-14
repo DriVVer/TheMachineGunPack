@@ -938,6 +938,9 @@ function Panzerfaust.cl_onPrimaryUse(self)
 end
 
 function Panzerfaust:throwAway()
+	self.cl_usedTimer = 1.5
+	self.cl_used = true
+
 	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and not self.aiming then
 		setTpAnimation(self.tpAnimations, "throwAway", 1.0)
 	end
