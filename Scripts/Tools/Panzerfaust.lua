@@ -711,12 +711,10 @@ function Panzerfaust:client_onEquip(animate, is_custom)
 	self.jointWeight = 0.0
 	self.aiming = false
 
-	currentRenderablesTp = {}
-	currentRenderablesFp = {}
-
+	local currentRenderablesTp = {}
+	local currentRenderablesFp = {}
 	for k,v in pairs( renderablesTp ) do currentRenderablesTp[#currentRenderablesTp+1] = v end
 	for k,v in pairs( renderablesFp ) do currentRenderablesFp[#currentRenderablesFp+1] = v end
-
 	mgp_toolAnimator_registerRenderables(self, currentRenderablesFp, currentRenderablesTp, renderables)
 
 	--Set the tp and fp renderables before actually loading animations
@@ -822,6 +820,7 @@ function Panzerfaust:sv_n_onShoot(v_proj_hit)
 end
 
 function Panzerfaust:cl_n_onShoot(proj_hit)
+	print(self.cl_isLocal, self.tool:isEquipped())
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(proj_hit)
 	end
@@ -833,6 +832,7 @@ function Panzerfaust:onShoot(proj_hit)
 	mgp_toolAnimator_setAnimation(self, v_shoot_anim)
 	setTpAnimation(self.tpAnimations, v_shoot_anim)
 	BazookaProjectile_clientSpawnProjectile(self, proj_hit, 80, "Panzerfaust - Projectile", "DLM_PFRocket_Flyin")
+	print("ON SHOOT")
 
 	self.cl_barrel_exhaust:start()
 end
