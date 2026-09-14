@@ -17,9 +17,34 @@
 				"destructionLevels": [
 					{ "qualityLevel": 1, "damage": 10000.0 },
 					{ "qualityLevel": 2, "damage": 80.0 },
-					{ "qualityLevel": 3, "damage": 50.0 },
-					{ "qualityLevel": 4, "damage": 30.0 },
+					{ "qualityLevel": 3, "damage": 30.0 },
+					{ "qualityLevel": 4, "damage": 10.0 },
 					{ "qualityLevel": 5, "damage": 2.0 }
+				]
+			},
+			"enableImpactEffect": true
+		},
+		{
+			"uuid": "d2dc400d-4cfd-472d-8fb7-31ec5133b567",
+			"name": "mgp_rifle_potato",
+			"mass": 0.0,
+			"radius": 0.25,
+			"friction": 0.2,
+			"spin": 7.0,
+			"mesh": "$CONTENT_DATA/Projectiles/Renderables/Bullet1.rend",
+			"effect": "PotatoProjectile - Hit",
+			"audiomass": 250.0,
+			"effectmaterial": "Potato",
+			"attachedEffect": "",
+			"enableGravity": true,
+			"destruction": {
+				"destructionLevels": [
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 1000.0 },
+					{ "qualityLevel": 3, "damage": 50.0 },
+					{ "qualityLevel": 4, "damage": 15.0 },
+					{ "qualityLevel": 5, "damage": 10.0 },
+					{ "qualityLevel": 6, "damage": 2.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -39,15 +64,13 @@
 			"enableGravity": true,
 			"destruction": {
 				"destructionLevels": [
-					{ "qualityLevel": 1, "chance": 1.0 },
-					{ "qualityLevel": 2, "chance": 1.0 },
-					{ "qualityLevel": 3, "chance": 1.0 },
-					{ "qualityLevel": 4, "chance": 1.0 },
-					{ "qualityLevel": 5, "chance": 1.0 },
-					{ "qualityLevel": 6, "chance": 0.9 },
-					{ "qualityLevel": 7, "chance": 0.8 },
-					{ "qualityLevel": 8, "chance": 0.3 },
-					{ "qualityLevel": 9, "chance": 0.1 }
+					{ "qualityLevel": 1, "damage": 10000.0 },
+					{ "qualityLevel": 2, "damage": 10000.0 },
+					{ "qualityLevel": 3, "damage": 10000.0 },
+					{ "qualityLevel": 4, "damage": 10000.0 },
+					{ "qualityLevel": 5, "damage": 90.0 },
+					{ "qualityLevel": 6, "damage": 50.0 },
+					{ "qualityLevel": 7, "damage": 20.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -222,10 +245,11 @@
 			"destruction": {
 				"destructionLevels": [
 					{ "qualityLevel": 1, "damage": 10000.0 },
-					{ "qualityLevel": 2, "damage": 35.0 },
-					{ "qualityLevel": 3, "damage": 20.0 },
+					{ "qualityLevel": 2, "damage": 1000.0 },
+					{ "qualityLevel": 3, "damage": 30.0 },
 					{ "qualityLevel": 4, "damage": 15.0 },
-					{ "qualityLevel": 5, "damage": 10.0 }
+					{ "qualityLevel": 5, "damage": 10.0 },
+					{ "qualityLevel": 6, "damage": 2.0 }
 				]
 			},
 			"enableImpactEffect": true
@@ -248,7 +272,7 @@
 					{ "qualityLevel": 1, "damage": 10000.0 },
 					{ "qualityLevel": 2, "damage": 45.0 },
 					{ "qualityLevel": 3, "damage": 30.0 },
-					{ "qualityLevel": 4, "damage": 15.0 },
+					{ "qualityLevel": 4, "damage": 20.0 },
 					{ "qualityLevel": 5, "damage": 5.0  }
 				]
 			},

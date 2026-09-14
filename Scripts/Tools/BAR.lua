@@ -728,7 +728,7 @@ function BAR:calculateFpMuzzlePos()
 	return self.tool:getFpBonePos( "pejnt_barrel" ) + sm.vec3.lerp( muzzlePos45, muzzlePos90, fovScale )
 end
 
-local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
+local mgp_projectile_potato = sm.uuid.new("d2dc400d-4cfd-472d-8fb7-31ec5133b567")
 function BAR:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
 	if self:client_isGunReloading(bar_anim_blockers.shoot) then return end
