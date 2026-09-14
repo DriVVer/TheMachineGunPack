@@ -11,14 +11,6 @@
 						"$CONTENT_DATA/Tools/Textures/BAR_DP_Bi/BAR_DP_Bi_asg.tga",
 						"$CONTENT_DATA/Tools/Textures/BAR_DP_Bi/BAR_DP_Bi_nor.png"
 					]
-				},
-				{
-					"material": "DifAsgNor",
-					"textureList": [
-						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_dif.png",
-						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_asg.tga",
-						"$CONTENT_DATA/Tools/Textures/Ammo/ammo_types_nor.png"
-					]
 				}
 			]
 		}
