@@ -90,6 +90,7 @@ end
 
 function BAR:client_onCreate()
 	self.ammo_in_mag = 0
+	self.fast_fire_mode = false
 
 	self.aimBlendSpeed = 10.0
 	self:client_initAimVals()
@@ -120,6 +121,7 @@ function BAR.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
+			switch_firemode = { "BAR_tp_firemode", { nextAnimation = "idle", duration = 1.0 } },
 			reload_empty = { "BAR_tp_empty_reload", { nextAnimation = "idle", duration = 1.0 } },
 			reload = { "BAR_tp_reload", { nextAnimation = "idle", duration = 1.0 } },
 			ammo_check = { "BAR_tp_ammo_check", {nextAnimation = "idle", duration = 1.0}}
@@ -164,6 +166,7 @@ function BAR.loadAnimations( self )
 
 				reload = { "BAR_reload", { nextAnimation = "idle", duration = 1.0 } },
 				reload_empty = { "BAR_reload_empty", { nextAnimation = "idle", duration = 1.0 } },
+				switch_firemode = { "BAR_firemode", { nextAnimation = "idle", duration = 1.0 } },
 
 				ammo_check = { "BAR_ammo_check", { nextAnimation = "idle", duration = 1.0 } },
 
@@ -225,7 +228,56 @@ function BAR.loadAnimations( self )
 	self:client_initAimVals()
 end
 
-local actual_reload_anims =
+local bar_anim_blockers =
+{
+	mode_switch = {
+		["shoot"] = true,
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["sprintInto"] = true,
+		["sprintExit"] = true,
+		["sprintIdle"] = true,
+		["aimExit"] = true,
+		["switch_firemode"] = true
+	},
+	reload = {
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["aimExit"] = true,
+		["sprintExit"] = true,
+		["switch_firemode"] = true
+	},
+	ammo_check = {
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["aimExit"] = true,
+		["sprintExit"] = true,
+		["switch_firemode"] = true
+	},
+	aim = {
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["switch_firemode"] = true
+	},
+	shoot = {
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["switch_firemode"] = true
+	},
+	sprint = {
+		["reload"] = true,
+		["reload_empty"] = true,
+		["ammo_check"] = true,
+		["switch_firemode"] = true
+	}
+}
+
+local bar_actual_reload_anims =
 {
 	["reload"] = true,
 	["reload_empty"] = true
@@ -261,8 +313,6 @@ function BAR:server_spendAmmo(data, player)
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
-	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
-
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
@@ -270,7 +320,7 @@ function BAR:server_spendAmmo(data, player)
 	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
 	self:server_updateAmmoCounter()
 end
 
@@ -294,7 +344,7 @@ function BAR.client_onUpdate( self, dt )
 			local fp_anim = self.fpAnimations
 			local cur_anim_cache = fp_anim.currentAnimation
 			local anim_data = fp_anim.animations[cur_anim_cache]
-			local is_reload_anim = (actual_reload_anims[cur_anim_cache] == true)
+			local is_reload_anim = (bar_actual_reload_anims[cur_anim_cache] == true)
 			if anim_data and is_reload_anim then
 				local time_predict = anim_data.time + anim_data.playRate * dt
 				local info_duration = anim_data.info.duration
@@ -378,7 +428,7 @@ function BAR.client_onUpdate( self, dt )
 	end
 
 	-- Sprint block
-	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading()
+	local blockSprint = self.aiming or self.sprintCooldownTimer > 0.0 or self:client_isGunReloading(bar_anim_blockers.sprint)
 	self.tool:setBlockSprint( blockSprint )
 
 	local playerDir = self.tool:getSmoothDirection()
@@ -681,7 +731,7 @@ end
 local mgp_projectile_potato = sm.uuid.new("6c87e1c0-79a6-40dc-a26a-ef28916aff69")
 function BAR:cl_onPrimaryUse(is_shooting)
 	if not is_shooting or not self.equipped then return end
-	if self:client_isGunReloading() then return end
+	if self:client_isGunReloading(bar_anim_blockers.shoot) then return end
 
 	local v_toolOwner = self.tool:getOwner()
 	if not (v_toolOwner and sm.exists(v_toolOwner)) then
@@ -731,6 +781,7 @@ function BAR:cl_onPrimaryUse(is_shooting)
 
 		-- Spread
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local fireCooldown = self.fast_fire_mode and 0.13 or 0.18
 		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
@@ -742,8 +793,8 @@ function BAR:cl_onPrimaryUse(is_shooting)
 		sm.projectile.projectileAttack( mgp_projectile_potato, Damage, firePos, dir * fireMode.fireVelocity, v_toolOwner, fakePosition, fakePositionSelf )
 
 		-- Timers
-		self.fireCooldownTimer = fireMode.fireCooldown
-		self.spreadCooldownTimer = math.min( self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown )
+		self.fireCooldownTimer = fireCooldown
+		self.spreadCooldownTimer = math.min(self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown)
 		self.sprintCooldownTimer = self.sprintCooldown
 
 		-- Send TP shoot over network and dircly to self
@@ -758,13 +809,6 @@ function BAR:cl_onPrimaryUse(is_shooting)
 		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
-
-local reload_anims =
-{
-	["reload"] = true,
-	["reload_empty"] = true,
-	["ammo_check"] = true
-}
 
 local anim_name_to_id =
 {
@@ -793,17 +837,12 @@ function BAR:cl_startReloadAnim(anim_name)
 	mgp_toolAnimator_setAnimation(self, anim_name)
 end
 
-function BAR:client_isGunReloading()
+function BAR:client_isGunReloading(reload_table)
 	if self.waiting_for_ammo then
 		return true
 	end
 
-	local fp_anims = self.fpAnimations
-	if fp_anims ~= nil then
-		return (reload_anims[fp_anims.currentAnimation] == true)
-	end
-
-	return false
+	return mgp_tool_isAnimPlaying(self, reload_table)
 end
 
 function BAR:cl_initReloadAnim(anim_name)
@@ -829,7 +868,7 @@ function BAR:client_onReload()
 	if self.equipped then
 		local is_mag_full = (self.ammo_in_mag >= self.mag_capacity)
 		if not is_mag_full then
-			if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+			if not self:client_isGunReloading(bar_anim_blockers.reload) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
 				local cur_anim_name = "reload"
 				if self.ammo_in_mag == 0 then
 					cur_anim_name = "reload_empty"
@@ -860,7 +899,7 @@ function BAR:cl_startCheckMagAnim()
 end
 
 function BAR:client_onToggle()
-	if not self:client_isGunReloading() and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
+	if not self:client_isGunReloading(bar_anim_blockers.ammo_check) and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 and self.equipped then
 		if self.ammo_in_mag > 0 then
 			sm.gui.displayAlertText(("BAR: Ammo #ffff00%s#ffffff/#ffff00%s#ffffff"):format(self.ammo_in_mag, self.mag_capacity), 2)
 			setFpAnimation(self.fpAnimations, "ammo_check", 0.0)
@@ -883,7 +922,7 @@ local _intstate = sm.tool.interactState
 function BAR.cl_onSecondaryUse( self, state )
 	if not self.equipped then return end
 
-	local is_reloading = self:client_isGunReloading()
+	local is_reloading = self:client_isGunReloading(bar_anim_blockers.aim)
 	local new_state = (state == _intstate.start or state == _intstate.hold) and not is_reloading
 	if self.aiming ~= new_state then
 		self.aiming = new_state
@@ -895,12 +934,39 @@ function BAR.cl_onSecondaryUse( self, state )
 	end
 end
 
-function BAR.client_onEquippedUpdate( self, primaryState, secondaryState )
-	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
+function BAR:sv_switchFiremode()
+	self.network:sendToClients("cl_switchFiremode")
+end
 
-	if secondaryState ~= self.prevSecondaryState then
-		self:cl_onSecondaryUse( secondaryState )
-		self.prevSecondaryState = secondaryState
+function BAR:cl_switchFiremode()
+	if not self.cl_isLocal and self.tool:isEquipped() then
+		self:switchFiremode()
+	end
+end
+
+function BAR:switchFiremode()
+	if self.tpAnimations.currentAnimation == "idle" or self.tpAnimations.currentAnimation == "aim" or self.tpAnimations.currentAnimation == "relax" and not self.aiming then
+		setTpAnimation( self.tpAnimations, "switch_firemode" )
+	end
+end
+
+function BAR:client_onEquippedUpdate( primaryState, secondaryState, modeSwitchState )
+	self:cl_onPrimaryUse(primaryState == _intstate.start or primaryState == _intstate.hold)
+	self:cl_onSecondaryUse( secondaryState )
+
+	if modeSwitchState ~= self.prevModeSwitchState and not self.aiming and not self.tool:isSprinting() and self.fireCooldownTimer == 0.0 then
+		self.prevModeSwitchState = modeSwitchState
+		if modeSwitchState and not self:client_isGunReloading(bar_anim_blockers.mode_switch) then
+			self.fast_fire_mode = not self.fast_fire_mode
+
+			local fireModeName = self.fast_fire_mode and "Fast Fire" or "Slow Fire"
+			sm.gui.displayAlertText(("Switched mode to: #ffff00%s#ffffff"):format(fireModeName))
+
+			setFpAnimation(self.fpAnimations, "switch_firemode", 0.0)
+			self:switchFiremode()
+			
+			self.network:sendToServer("sv_switchFiremode")
+		end
 	end
 
 	return true, true

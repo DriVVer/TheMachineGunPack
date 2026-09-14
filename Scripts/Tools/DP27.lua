@@ -328,8 +328,6 @@ function DP27:server_spendAmmo(data, player)
 	local v_available_ammo = sm.container.totalQuantity(v_inventory, mgp_pistol_ammo)
 	if v_available_ammo == 0 then return end
 
-	local v_capacity_adder = (self.sv_ammo_counter > 0) and 1 or 0
-
 	local v_raw_spend_count = math.max(self.mag_capacity - self.sv_ammo_counter, 0)
 	local v_spend_count = math.min(v_raw_spend_count, math.min(v_available_ammo, self.mag_capacity))
 
@@ -337,7 +335,7 @@ function DP27:server_spendAmmo(data, player)
 	sm.container.spend(v_inventory, mgp_pistol_ammo, v_spend_count)
 	sm.container.endTransaction()
 
-	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count + v_capacity_adder
+	self.sv_ammo_counter = self.sv_ammo_counter + v_spend_count
 	self:server_updateAmmoCounter()
 end
 
