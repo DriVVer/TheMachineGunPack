@@ -247,7 +247,7 @@ function DP27.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.11,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.6,
 		spreadMinAngle = 4.35,
@@ -262,7 +262,7 @@ function DP27.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.11,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.3,
 		spreadMinAngle = 3.5,

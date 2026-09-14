@@ -7,6 +7,7 @@
 			"animationList": [
 				{ "name": "BAR_idle",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/BAR/BAR_fp_idle.dae" },
 				{ "name": "BAR_shoot", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/BAR/BAR_fp_shoot.dae" },
+				{ "name": "BAR_firemode",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/BAR/BAR_fp_firemode.dae" },
 
 				{ "name": "BAR_pickup",  "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/BAR/BAR_fp_pickup.dae" },
 				{ "name": "BAR_putdown", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/FP/BAR/BAR_fp_putdown.dae" },

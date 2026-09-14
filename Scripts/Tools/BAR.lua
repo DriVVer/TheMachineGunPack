@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile("ToolAnimator.lua")
 dofile("ToolSwimUtil.lua")
 
-local Damage = 34
+local Damage = 20
 
 ---@class BAR : ToolClass
 ---@field fpAnimations table
@@ -22,7 +22,7 @@ local Damage = 34
 ---@field ammo_in_mag integer
 ---@field fireCooldownTimer integer
 BAR = class()
-BAR.mag_capacity = 30
+BAR.mag_capacity = 20
 BAR.maxRecoil = 15
 BAR.recoilAmount = 8
 BAR.aimRecoilAmount = 4
@@ -180,7 +180,7 @@ function BAR.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.13,
 		spreadCooldown = 0.18,
 		spreadIncrement = 1.6,
 		spreadMinAngle = 0.25,
@@ -195,7 +195,7 @@ function BAR.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.12,
+		fireCooldown = 0.18,
 		spreadCooldown = 0.18,
 		spreadIncrement = 0.3,
 		spreadMinAngle = 0.25,

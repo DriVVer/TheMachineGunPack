@@ -744,6 +744,7 @@ local mgp_tool_database =
 			{
 				[1] = {
 					{
+						--40fps!
 						type = mgp_tool_anim_enum.bone_animation,
 						fp_anim = { { name = "BAR_anims", start_val = 0.13, end_val = 0.13 } },
 						tp_anim = { { name = "BAR_anims", start_val = 0.13, end_val = 0.13 } },
@@ -760,7 +761,7 @@ local mgp_tool_database =
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, 0.2, 0.05),
+						fp_offset = sm.vec3.new(0.0, 0.2, 0.0),
 						apply_velocity = false
 					},
 					{
@@ -834,13 +835,24 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.25
+						time = 0.5
+					},
+					{
+						--40fps!
+						type = mgp_tool_anim_enum.bone_animation,
+						fp_anim = { { name = "BAR_anims", start_val = 0.5, end_val = 1.45 } },
+						tp_anim = { { name = "BAR_anims", start_val = 0.5, end_val = 1.45 } },
+						time = 0.95
+					},
+					{
+						type = mgp_tool_anim_enum.delay,
+						time = 0.02
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BAR_anims", start_val = 0.15, end_val = 2.0 } },
-						tp_anim = { { name = "BAR_anims", start_val = 0.15, end_val = 2.0 } },
-						time = 1.85
+						fp_anim = { { name = "BAR_anims", start_val = 3.0, end_val = 4.5 } },
+						tp_anim = { { name = "BAR_anims", start_val = 3.0, end_val = 4.5 } },
+						time = 1.5
 					}
 				},
 				[2] = {
@@ -877,13 +889,13 @@ local mgp_tool_database =
 				[1] = { --first animation track
 					{
 						type = mgp_tool_anim_enum.delay,
-						time = 0.1
+						time = 0.3
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BAR_anims", start_val = 2.0, end_val = 4.0 } },
-						tp_anim = { { name = "BAR_anims", start_val = 2.0, end_val = 4.0 } },
-						time = 2.0
+						fp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.0 } },
+						tp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.0 } },
+						time = 3.2
 					}
 				},
 				[2] = {
