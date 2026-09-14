@@ -760,7 +760,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.4, 0),
 						fp_offset = sm.vec3.new(0.0, 0.2, 0.0),
 						apply_velocity = false
 					},
@@ -799,7 +799,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.4, 0),
 						fp_offset = sm.vec3.new(0.0, 0.8, 0.01),
 						apply_velocity = false
 					},
