@@ -183,11 +183,18 @@ function BAR.loadAnimations( self )
 	end
 
 	self.normalFireMode = {
-		fireCooldown = 0.13,
-		spreadCooldown = 0.18,
-		spreadIncrement = 1.6,
-		spreadMinAngle = 0.25,
-		spreadMaxAngle = 7,
+		spreadFastFire = {
+			spreadCooldown = 0.3,
+			spreadIncrement = 3,
+			spreadMinAngle = 3,
+			spreadMaxAngle = 14
+		},
+		spreadNormalFire = {
+			spreadCooldown = 0.3,
+			spreadIncrement = 1.6,
+			spreadMinAngle = 0.25,
+			spreadMaxAngle = 7
+		},
 		fireVelocity = 500.0,
 
 		minDispersionStanding = 0.1,
@@ -198,11 +205,18 @@ function BAR.loadAnimations( self )
 	}
 
 	self.aimFireMode = {
-		fireCooldown = 0.18,
-		spreadCooldown = 0.18,
-		spreadIncrement = 0.3,
-		spreadMinAngle = 0.25,
-		spreadMaxAngle = 7,
+		spreadFastFire = {
+			spreadCooldown = 0.18,
+			spreadIncrement = 0.9,
+			spreadMinAngle = 1,
+			spreadMaxAngle = 10
+		},
+		spreadNormalFire = {
+			spreadCooldown = 0.18,
+			spreadIncrement = 0.3,
+			spreadMinAngle = 0.25,
+			spreadMaxAngle = 4
+		},
 		fireVelocity =  500.0,
 
 		minDispersionStanding = 0.01,
@@ -391,6 +405,7 @@ function BAR.client_onUpdate( self, dt )
 	if self.cl_isLocal then
 		local dispersion = 0.0
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
+		local spreadData = self.fast_fire_mode and fireMode.spreadFastFire or fireMode.spreadNormalFire
 		local recoilDispersion = 1.0 - ( math.max( fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
 		if isCrouching then
@@ -409,8 +424,8 @@ function BAR.client_onUpdate( self, dt )
 
 		self.movementDispersion = dispersion
 
-		self.spreadCooldownTimer = clamp( self.spreadCooldownTimer, 0.0, fireMode.spreadCooldown )
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+		self.spreadCooldownTimer = clamp( self.spreadCooldownTimer, 0.0, spreadData.spreadCooldown )
+		local spreadFactor = spreadData.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / spreadData.spreadCooldown, 0.0, 1.0 ) or 0.0
 
 		self.tool:setDispersionFraction( clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 ) )
 
@@ -747,6 +762,7 @@ function BAR:cl_onPrimaryUse(is_shooting)
 		return
 	end
 
+	local fireCooldown = self.fast_fire_mode and 0.13 or 0.18
 	if self.ammo_in_mag > 0 then
 		self.ammo_in_mag = self.ammo_in_mag - 1
 		local firstPerson = self.tool:isInFirstPersonView()
@@ -781,12 +797,12 @@ function BAR:cl_onPrimaryUse(is_shooting)
 
 		-- Spread
 		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		local fireCooldown = self.fast_fire_mode and 0.13 or 0.18
+		local spreadData = self.fast_fire_mode and fireMode.spreadFastFire or fireMode.spreadNormalFire
 		local recoilDispersion = 1.0 - ( math.max(fireMode.minDispersionCrouching, fireMode.minDispersionStanding ) + fireMode.maxMovementDispersion )
 
-		local spreadFactor = fireMode.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / fireMode.spreadCooldown, 0.0, 1.0 ) or 0.0
+		local spreadFactor = spreadData.spreadCooldown > 0.0 and clamp( self.spreadCooldownTimer / spreadData.spreadCooldown, 0.0, 1.0 ) or 0.0
 		spreadFactor = clamp( self.movementDispersion + spreadFactor * recoilDispersion, 0.0, 1.0 )
-		local spreadDeg =  fireMode.spreadMinAngle + ( fireMode.spreadMaxAngle - fireMode.spreadMinAngle ) * spreadFactor
+		local spreadDeg = spreadData.spreadMinAngle + ( spreadData.spreadMaxAngle - spreadData.spreadMinAngle ) * spreadFactor
 
 		dir = sm.noise.gunSpread( dir, spreadDeg )
 
@@ -794,7 +810,7 @@ function BAR:cl_onPrimaryUse(is_shooting)
 
 		-- Timers
 		self.fireCooldownTimer = fireCooldown
-		self.spreadCooldownTimer = math.min(self.spreadCooldownTimer + fireMode.spreadIncrement, fireMode.spreadCooldown)
+		self.spreadCooldownTimer = math.min(self.spreadCooldownTimer + spreadData.spreadIncrement, spreadData.spreadCooldown)
 		self.sprintCooldownTimer = self.sprintCooldown
 
 		-- Send TP shoot over network and dircly to self
@@ -804,8 +820,7 @@ function BAR:cl_onPrimaryUse(is_shooting)
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )
 	else
-		local fireMode = self.aiming and self.aimFireMode or self.normalFireMode
-		self.fireCooldownTimer = fireMode.fireCooldown
+		self.fireCooldownTimer = fireCooldown
 		sm.audio.play( "PotatoRifle - NoAmmo" )
 	end
 end
