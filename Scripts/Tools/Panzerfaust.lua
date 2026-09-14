@@ -808,6 +808,7 @@ function Panzerfaust:onAim(aiming)
 end
 
 function Panzerfaust:sv_n_onShoot(v_proj_hit)
+	print("sv_n_onShoot", self.sv_shoot_timer, self.sv_Panzerfaust_loaded)
 	if self.sv_shoot_timer ~= nil or not self.sv_Panzerfaust_loaded then
 		return
 	end
@@ -820,7 +821,7 @@ function Panzerfaust:sv_n_onShoot(v_proj_hit)
 end
 
 function Panzerfaust:cl_n_onShoot(proj_hit)
-	print(self.cl_isLocal, self.tool:isEquipped())
+	print("cl_n_onShoot", self.cl_isLocal, self.tool:isEquipped())
 	if not self.cl_isLocal and self.tool:isEquipped() then
 		self:onShoot(proj_hit)
 	end
