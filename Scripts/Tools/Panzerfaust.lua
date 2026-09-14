@@ -209,7 +209,7 @@ function Panzerfaust.loadAnimations( self )
 			pickup = { "spudgun_pickup", { nextAnimation = "idle" } },
 			putdown = { "spudgun_putdown" },
 
-			reload_empty = { "Panzerfaust_tp_reload", { nextAnimation = "idle", duration = 1.0 } }
+			reload_empty = { "Panzerfaust_tp_throwaway", { nextAnimation = "idle", duration = 1.0 } }
 		}
 	)
 	local movementAnimations = {
