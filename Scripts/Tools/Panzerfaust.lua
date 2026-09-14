@@ -813,7 +813,7 @@ function Panzerfaust:sv_n_onShoot(v_proj_hit)
 		return
 	end
 
-	self.sv_shoot_timer = 5.5
+	self.sv_shoot_timer = 4.0
 	self.network:sendToClients("cl_n_onShoot", v_proj_hit)
 
 	self.sv_Panzerfaust_loaded = false
