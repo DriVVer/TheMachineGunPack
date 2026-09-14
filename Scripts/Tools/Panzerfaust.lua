@@ -950,6 +950,7 @@ function Panzerfaust:cl_n_throwAway()
 end
 
 function Panzerfaust:sv_n_throwAway()
+	self.network:sendToClients("cl_n_throwAway")
 	if sm.game.getEnableAmmoConsumption() and sm.game.getLimitedInventory() then
 		self.sv_eraseTimer = 2.0
 	end
