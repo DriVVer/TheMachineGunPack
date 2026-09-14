@@ -270,7 +270,10 @@ function Bino:client_onUpdate(dt)
 					{
 						Anchor = "Top Left",
 						TextAlign = "Top Left",
-						Caption = ("#ffff00INSTRUCTIONS:#ffffff\n#ffff00%s#ffffff to zoom in\n#ffff00%s#ffffff to zoom out"):format(sm.gui.getKeyBinding("Reload"), sm.gui.getKeyBinding("NextCreateRotation")),
+						Caption = ("#ffff00INSTRUCTIONS:#ffffff\n#ffff00%s#ffffff to zoom in\n#ffff00%s#ffffff to zoom out\n#ffff00%s#ffffff to measure distance"):format(
+							sm.gui.getKeyBinding("Reload"),
+							sm.gui.getKeyBinding("NextCreateRotation"),
+							sm.gui.getKeyBinding("ForceBuild")),
 						Childs = {},
 						FontName = "SM_Text",
 						Name = "HelpText",
