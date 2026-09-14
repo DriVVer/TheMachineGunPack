@@ -746,9 +746,9 @@ local mgp_tool_database =
 					{
 						--40fps!
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BAR_anims", start_val = 0.13, end_val = 0.13 } },
-						tp_anim = { { name = "BAR_anims", start_val = 0.13, end_val = 0.13 } },
-						time = 0.0
+						fp_anim = { { name = "BAR_anims", start_val = 0.12, end_val = 0.13 } },
+						tp_anim = { { name = "BAR_anims", start_val = 0.12, end_val = 0.13 } },
+						time = 0.01
 					}
 				}
 			},
@@ -893,9 +893,9 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.0 } },
-						tp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.0 } },
-						time = 3.2
+						fp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.15 } },
+						tp_anim = { { name = "BAR_anims", start_val = 1.8, end_val = 5.15 } },
+						time = 3.35
 					}
 				},
 				[2] = {
@@ -971,9 +971,9 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.bone_animation,
-						fp_anim = { { name = "BAR_anims", start_val = 4.0, end_val = 6.1 } },
-						tp_anim = { { name = "BAR_anims", start_val = 4.0, end_val = 4.0 } },
-						time = 2.1
+						fp_anim = { { name = "BAR_anims", start_val = 0.3, end_val = 0.4 } },
+						tp_anim = { { name = "BAR_anims", start_val = 0.3, end_val = 0.4 } },
+						time = 0.01
 					}
 				},
 				[2] = {
