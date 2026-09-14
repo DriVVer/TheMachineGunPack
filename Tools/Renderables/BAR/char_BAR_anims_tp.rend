@@ -14,8 +14,8 @@
 				{ "name": "spudgun_aim",       "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_aim_idle.dae", "looping": true },
 				{ "name": "spudgun_aim_shoot", "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_aim_shoot.dae" },
 
-				{ "name": "BAR_tp_empty_reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/STG44/STG44_tp_reload_empty.dae" },
-				{ "name": "BAR_tp_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/STG44/STG44_tp_reload.dae" },
+				{ "name": "BAR_tp_empty_reload", "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/BAR/BAR_tp_reload_empty.dae" },
+				{ "name": "BAR_tp_reload",       "file": "$CONTENT_DATA/Tools/Animations/Char_Anims/TP/BAR/BAR_tp_reload.dae" },
 				{ "name": "BAR_tp_ammo_check",   "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_idle.dae" },
 				{ "name": "BAR_tp_firemode",      "file": "$GAME_DATA/Character/Char_Male/Animations/Thirdperson/Spudgun/ani_char_male_spudgun_idle.dae", "looping": true },
 

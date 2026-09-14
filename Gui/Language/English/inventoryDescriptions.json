@@ -42,7 +42,7 @@
 	},
 	"c450ecfc-54f7-44b1-bd66-0bd888c2b84f": {
 		"title": "Binoculars",
-		"description": "The Machine Gun Pack\nAnimated by: Maggz & DriVer\n\nPress F to measure the distance\nPress/Hold Q to zoom in\nPress/Hold Q to zoom out"
+		"description": "The Machine Gun Pack\nAnimated by: Maggz & DriVer\n\nPress F to measure the distance\nPress R to zoom in\nPress Q to zoom out"
 	},
 	"e4ed32d5-d891-40e3-b82e-db975884dbb3": {
 		"title": "Colt M1911 Pistol",
@@ -90,7 +90,7 @@
 	},
 	"b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba": {
 		"title": "BAR LMG",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress R to switch between fire modes\nFAST AUTO (500 RPM) or SLOW AUTO (300 RPM)"
 	},
 	"ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3": {
 		"title": "S&W Model 10 Revolver",
