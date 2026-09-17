@@ -71,9 +71,25 @@ AnimationUpdateFunctions.anim_handler = function(self, track, dt)
 	end
 end
 
+---@param tool Tool
+---@return Quat
+local function ToolAnimator_GetPlayerRotation(tool)
+	if tool:isLocal() then
+		return sm.camera.getRotation()
+	end
+
+	local localCharacter = sm.localPlayer.getPlayer():getCharacter()
+	if localCharacter ~= nil then
+		return sm.vec3.getRotation(sm.vec3.new(0, 1, 0), localCharacter.direction)
+	end
+
+	return sm.quat.identity()
+end
+
 AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 	local cur_data = track.step_data
 
+	---@type Tool
 	local s_tool = self.tool
 	if s_tool:isEquipped() then
 		local cur_effect
@@ -94,8 +110,7 @@ AnimationUpdateFunctions.effect_handler = function(self, track, dt)
 		end
 
 		if cur_effect then
-			effect_offset = sm.camera.getRotation() * effect_offset
-
+			effect_offset = ToolAnimator_GetPlayerRotation(s_tool) * effect_offset
 			cur_effect:setPosition(effect_pos + effect_offset)
 			cur_effect:setRotation(sm.vec3.getRotation(sm.vec3.new(0, 0, 1), effect_dir))
 			if cur_data.apply_velocity then
@@ -162,6 +177,7 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 	---@type ParticleHandlerTrack
 	local cur_data = track.step_data
 
+	---@type Tool
 	local s_tool = self.tool
 	if s_tool:isEquipped() then
 		local particle_pos = nil
@@ -179,18 +195,13 @@ AnimationUpdateFunctions.particle_handler = function(self, track, dt)
 			particle_name = cur_data.name_tp
 		end
 
-		--Calculate rotation quaternion
-		local camDir = sm.camera.getDirection()
-		local particle_rot = sm.vec3.getRotation(camDir, sm.camera.getUp())
-		local particle_rot_final = sm.quat.angleAxis(math.rad(90), sm.vec3.new(0, 0, 1)) * particle_rot
+		local camRot = ToolAnimator_GetPlayerRotation(s_tool)
+		local particle_pos_final = particle_pos + (camRot * particle_offset)
+		local particle_rot_final = camRot
 
 		if cur_data.offsetAngle then
-			particle_rot_final = sm.quat.angleAxis(math.rad(cur_data.offsetAngle), camDir) * particle_rot_final
+			particle_rot_final = particle_rot_final * sm.quat.angleAxis(math.rad(cur_data.offsetAngle), sm.vec3.new(0, 1, 0))
 		end
-
-		--Calculate final position
-		local offset_final = sm.camera.getRotation() * particle_offset
-		local particle_pos_final = particle_pos + offset_final
 
 		sm.particle.createParticle(particle_name, particle_pos_final, particle_rot_final, debri_color)
 	end

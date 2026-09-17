@@ -1055,7 +1055,7 @@ local mgp_tool_database =
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever",
-						offsetAngle = -90
+						offsetAngle = 0
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1090,12 +1090,12 @@ local mgp_tool_database =
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(-0.01, 0.2, -0.025),
+						fp_offset = sm.vec3.new(-0.06, 0.0, 0.02),
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever",
-						offsetAngle = -90
+						offsetAngle = 0
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1283,7 +1283,7 @@ local mgp_tool_database =
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever",
-						offsetAngle = -90
+						offsetAngle = 0
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1323,7 +1323,7 @@ local mgp_tool_database =
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
 						bone_name = "jnt_reciever",
-						offsetAngle = -90
+						offsetAngle = 0
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
