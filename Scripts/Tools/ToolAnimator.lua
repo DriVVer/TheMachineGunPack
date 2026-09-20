@@ -78,9 +78,12 @@ local function ToolAnimator_GetPlayerRotation(tool)
 		return sm.camera.getRotation()
 	end
 
-	local localCharacter = sm.localPlayer.getPlayer():getCharacter()
-	if localCharacter ~= nil then
-		return sm.vec3.getRotation(sm.vec3.new(0, 1, 0), localCharacter.direction)
+	local toolPlayer = tool:getOwner()
+	if toolPlayer ~= nil then
+		local toolCharacter = toolPlayer:getCharacter()
+		if toolCharacter ~= nil then
+			return sm.vec3.getRotation(sm.vec3.new(0, 1, 0), localCharacter.direction)
+		end
 	end
 
 	return sm.quat.identity()
