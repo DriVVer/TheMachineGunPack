@@ -82,7 +82,7 @@ local function ToolAnimator_GetPlayerRotation(tool)
 	if toolPlayer ~= nil then
 		local toolCharacter = toolPlayer:getCharacter()
 		if toolCharacter ~= nil then
-			return sm.vec3.getRotation(sm.vec3.new(0, 1, 0), localCharacter.direction)
+			return sm.vec3.getRotation(sm.vec3.new(0, 1, 0), toolCharacter.direction)
 		end
 	end
 
