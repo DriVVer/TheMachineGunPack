@@ -62,6 +62,7 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "durability" : 6,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -99,6 +100,7 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "durability" : 6,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -176,6 +178,7 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
+            "durability" : 6,
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"

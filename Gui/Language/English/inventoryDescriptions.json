@@ -90,7 +90,7 @@
 	},
 	"b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba": {
 		"title": "BAR LMG",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress R to switch between fire modes\nFAST AUTO (500 RPM) or SLOW AUTO (300 RPM)"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress F to switch between fire modes\nFAST AUTO (500 RPM) or SLOW AUTO (300 RPM)"
 	},
 	"ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3": {
 		"title": "S&W Model 10 Revolver",
@@ -106,11 +106,11 @@
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
 		"title": "Mosin-Nagant M44 rifle (Sniper class)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\nPress Q to check how much ammo left"
 	},
 	"dab13420-11c4-40ec-b871-7374f71f8797": {
 		"title": "Mosin-Nagant M44 rifle (Troop class)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-rounds magazine\nPress R to reload\n"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\n"
 	},
 	"0ca4320e-5ddb-4dc1-843d-6037d65b2e4a": {
 		"title": "M1 Garand rifle",
