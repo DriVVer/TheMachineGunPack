@@ -2,433 +2,537 @@
 	
 	"903b737a-42b9-459d-a169-c4171016cfab": {
 		"title": "Rocket Launcher Ammo",
-		"description": "Used for: \n- Bazooka M20\n- Panzerfaust 100"
+		"description": "Used for: \n- Bazooka M20\n- Panzerfaust 100",
+		"keywords": [ "tmgp" ]
 	},
 	"af84d5d9-00b1-4bab-9c5a-102c11e14a13": {
 		"title": "Pistol Ammo",
-		"description": "Used for: \n- Thompson SMG\n- Revolver\n- Mp 40 SMG\n- PPSh 41 SMG\n- M1911 Pistol\n- P38 Pistol"
+		"description": "Used for: \n- Thompson SMG\n- Revolver\n- Mp 40 SMG\n- PPSh 41 SMG\n- M1911 Pistol\n- P38 Pistol",
+		"keywords": [ "tmgp" ]
 	},
 	"295481d0-910a-48d4-a04a-e1bf1290e510": {
 		"title": "Long Rifle Ammo",
-		"description": "Used for: \n- Mosin-Nagant\n- M1 Garand"
+		"description": "Used for: \n- Mosin-Nagant\n- M1 Garand",
+		"keywords": [ "tmgp" ]
 	},
 	"3f4644d5-47cb-477d-b22d-901ab2ed2e0f": {
 		"title": "Short Rifle Ammo",
-		"description": "Used for: \n- StG 44"
+		"description": "Used for: \n- StG 44",
+		"keywords": [ "tmgp" ]
 	},
 	"a2fc1d9c-7c00-4d29-917b-6b9e26ea32a2": {
 		"title": "Shotgun Birdshot Ammo",
-		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun"
+		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun",
+		"keywords": [ "tmgp" ]
 	},
 	"a2a1b12e-8045-4ab0-9577-8b63c06a55c2": {
 		"title": "Shotgun Sabot Ammo",
-		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun"
+		"description": "Used for: \n- Double Barrel Shotgun\n- Pump Shotgun",
+		"keywords": [ "tmgp" ]
 	},
 	"d80e4edd-8823-42f6-9f17-1dc130ba51ce": {
 		"title": "Anti-Armor Ammo",
-		"description": "Used for: \n- PTRD AT Rifle"
+		"description": "Used for: \n- PTRD AT Rifle",
+		"keywords": [ "tmgp" ]
 	},
 	"9f9fda0d-9e65-4ffe-907c-5150218a03e1": {
 		"title": "Gun Powder",
-		"description": "Main ammo ingredient"
+		"description": "Main ammo ingredient",
+		"keywords": [ "tmgp" ]
 	},
 	"5a1ca305-513f-42db-ae71-52bd0a9247fc": {
 		"title": "Eoka Gun",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nEoka.\n\nSingle Use"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nEoka.\n\nSingle Use",
+		"keywords": [ "tmgp" ]
 	},
 	"a6a6ebb4-09b1-4fed-9593-68e4e98c9215": {
 		"title": "M1 Combat Knife",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nCombat Knife"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nCombat Knife",
+		"keywords": [ "tmgp" ]
 	},
 	"c450ecfc-54f7-44b1-bd66-0bd888c2b84f": {
 		"title": "Binoculars",
-		"description": "The Machine Gun Pack\nAnimated by: Maggz & DriVer\n\nPress F to measure the distance\nPress R to zoom in\nPress Q to zoom out"
+		"description": "The Machine Gun Pack\nAnimated by: Maggz & DriVer\n\nPress F to measure the distance\nPress R to zoom in\nPress Q to zoom out",
+		"keywords": [ "tmgp" ]
 	},
 	"e4ed32d5-d891-40e3-b82e-db975884dbb3": {
 		"title": "Colt M1911 Pistol",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Colt M1911' made of scrap.\n\n7-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"1e5f445b-934a-4366-b5c2-0bc11fd3580f": {
 		"title": "P38 Walther Pistol",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Walter' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Walter' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"8f97ff41-6498-46f7-84aa-fd0c11918512": {
 		"title": "PTRD AT rifle (model 1941)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nAPPROACH A WALL (4 blocks high) to DEPLOY A BIPOD\nBipod makes the rifle much more accurate\n\nWeapon based on 'PTRD' made of scrap.\n\nSingle Shot\nPress R to reload"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nAPPROACH A WALL (4 blocks high) to DEPLOY A BIPOD\nBipod makes the rifle much more accurate\n\nWeapon based on 'PTRD' made of scrap.\n\nSingle Shot\nPress R to reload",
+		"keywords": [ "tmgp" ]
 	},
 	"872b6328-37d4-4922-847d-0aef8803ac94": {
 		"title": "Bazooka M20",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress F to measure the distance.\nPress R to reload"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Bazooka M20' made of scrap.\n\nSingle Shot\nPress F to measure the distance.\nPress R to reload",
+		"keywords": [ "tmgp" ]
 	},
 	"56b4204e-6a3b-4d6d-8858-924dc65fe6d9": {
 		"title": "Panzerfaust 100",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Panzerfaust' made of scrap.\nPress R when aiming to adjust the sight.\nPress F to measure the distance.\n\nSingle Use"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Panzerfaust' made of scrap.\nPress R when aiming to adjust the sight.\nPress F to measure the distance.\n\nSingle Use",
+		"keywords": [ "tmgp" ]
 	},
 	"336a7328-4d50-432c-8698-2ed511187cc7": {
 		"title": "Thompson Submachine Gun",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Tommy Gun' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"d64d4f6c-1a21-47f5-adf9-63397aa6a3a0": {
 		"title": "Mp 40",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Maschinenpistole 40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Maschinenpistole 40' made of scrap.\n\n32-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"d8ba1dfe-172c-41ea-83e1-2c977e21d9e9": {
 		"title": "PPSh 41 SMG (Box mag)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'PPSh' made of scrap.\n\n35-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'PPSh' made of scrap.\n\n35-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"1e1960d3-1a4e-4127-8937-d4171cd5d324": {
 		"title": "PPSh 41 SMG (Drum mag)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'PPSh' made of scrap.\n\n71-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"f3d472ac-fcfc-4118-8327-c69f465fe167": {
 		"title": "StG 44 Assault Rifle",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'SturmGewehr' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'SturmGewehr' made of scrap.\n\n30-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"ac8d35f9-3f88-4a4f-a96b-b2a8e0f3a0ad": {
 		"title": "DP-27 LMG",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Degtyarov's Machinegun' made of scrap.\n\n47-rounds magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Degtyarov's Machinegun' made of scrap.\n\n47-rounds magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba": {
 		"title": "BAR LMG",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress F to switch between fire modes\nFAST AUTO (500 RPM) or SLOW AUTO (300 RPM)"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Browning Automatic Rifle' made of scrap.\n\n20-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nPress F to switch between fire modes\nFAST AUTO (500 RPM) or SLOW AUTO (300 RPM)",
+		"keywords": [ "tmgp" ]
 	},
 	"ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3": {
 		"title": "S&W Model 10 Revolver",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"96f3b45c-8729-4573-bc14-bbe1cc7fd2bb": {
 		"title": "S&W Model 29 Revolver",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Smith & Wesson' made of scrap.\n\n6-rounds cylinder\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"4664a470-275f-4799-a54f-6a4a2111f436": {
 		"title": "First Aid Medkit",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\nModelled by: Illumina\n\nFirst Aid, heals up to 75hp when used.\n\nPress LMB to use"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\nModelled by: Illumina\n\nFirst Aid, heals up to 75hp when used.\n\nPress LMB to use",
+		"keywords": [ "tmgp" ]
 	},
 	"c0cb7836-075a-478a-af3d-0b7360721527": {
 		"title": "Mosin-Nagant M44 rifle (Sniper class)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"dab13420-11c4-40ec-b871-7374f71f8797": {
 		"title": "Mosin-Nagant M44 rifle (Troop class)",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\n"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'Mosin Nagant Rifle' made of scrap.\n\n5-round magazine\nPress R to reload\n",
+		"keywords": [ "tmgp" ]
 	},
 	"0ca4320e-5ddb-4dc1-843d-6037d65b2e4a": {
 		"title": "M1 Garand rifle",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'M1 Garand rifle' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nLOOK OT FOR YOUR FINGERS!!!"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nWeapon based on 'M1 Garand rifle' made of scrap.\n\n8-rounds magazine\nPress R to reload\nPress Q to check how much ammo left\nLOOK OT FOR YOUR FINGERS!!!",
+		"keywords": [ "tmgp" ]
 	},
 	"c3e4dc43-a841-4c0f-82a6-7225d1bf210e": {
 		"title": "Stielhandgranate 24 Anti-Tank Bundle",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade",
+		"keywords": [ "tmgp" ]
 	},
 	"dca95fd7-9423-4898-b2a9-ce046a8d7f57": {
 		"title": "Stielhandgranate 24",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on German 'Stick Grenade' made of scrap.\n\nPress LMB to activate timer (4s)\nPress LMB once again to throw the granade",
+		"keywords": [ "tmgp" ]
 	},
 	"0c27e043-0cff-492b-9bcf-091520a99764": {
 		"title": "RG-42 Grenade",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on Soviet 'RG-42' made of scrap.\n\nHold LMB to activate timer\nRelease LMB to throw the granade"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\nGrenade based on Soviet 'RG-42' made of scrap.\n\nHold LMB to activate timer\nRelease LMB to throw the granade",
+		"keywords": [ "tmgp" ]
 	},
 	"b0c08b35-4b40-40fe-b933-ca123f99eef8": {
 		"title": "Double Barrel Shotgun",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\n'Double Barrel Shotgun' made of scrap.\n\n\n2-round magazine\nPress F to switch between ammo types\nPress R to reload\nPress Q to check how much ammo left"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\n\n'Double Barrel Shotgun' made of scrap.\n\n\n2-round magazine\nPress F to switch between ammo types\nPress R to reload\nPress Q to check how much ammo left",
+		"keywords": [ "tmgp" ]
 	},
 	"daa59c62-2671-4071-b8dc-47654f620cd2": {
 		"title": "Pump Shotgun",
-		"description": "The Machine Gun Pack\nAnimated by: DriVer\nmodelled by Illumina\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress Q to switch between ammo types\nPress R to reload\nPress F to stab"
+		"description": "The Machine Gun Pack\nAnimated by: DriVer\nmodelled by Illumina\n\nShotgun based on American 'Winchester 1897' made of scrap.\n\n\n6-round magazine\nPress Q to switch between ammo types\nPress R to reload\nPress F to stab",
+		"keywords": [ "tmgp" ]
 	},
 	"bdd9e357-35f7-4140-8b19-477abef20e0f": {
 		"title": "Browning .50 HMG",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"690ce3fd-6f14-4d6d-9a47-8576fec4350d": {
 		"title": "Mac-31 R",
-		"description": "The Machine Gun Pack\n\nLMG\n150 rounds drum magazine\nMag and trigger animatied\nReload animated\n\nProjectile speed = 800"
+		"description": "The Machine Gun Pack\n\nLMG\n150 rounds drum magazine\nMag and trigger animatied\nReload animated\n\nProjectile speed = 800",
+		"keywords": [ "tmgp" ]
 	},
 	"04075bce-2b41-47a2-8753-343b1e0b20f7": {
 		"title": "Mounting panel",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"7b646a58-4020-426f-82b3-89305e27d2c1": {
 		"title": "smoke_launcher decor",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"32e96b7d-a08a-483c-88c6-8a1616ea3123": {
 		"title": "Browning .30 LMG",
-		"description": "The Machine Gun Pack\n\nLMG\nAmmo unlimited\nProjectile speed = 800"
+		"description": "The Machine Gun Pack\n\nLMG\nAmmo unlimited\nProjectile speed = 800",
+		"keywords": [ "tmgp" ]
 	},
 	"1e731dbe-d89e-4722-b955-d347f92eec62": {
 		"title": "Maschinegewher Mg-34 LMG",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"28cc8c06-44e3-48e9-a76e-d0fa178997f0": {
 		"title": "Mg armored protection",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"6d98a168-f0c5-4774-a6ac-e0972fd9f1a4": {
 		"title": "Mosin-Nagant 1891 Rifle",
-		"description": "The Machine Gun Pack\n\nBolt-action Rifle\n5 rounds magazine\nBolt action animatied\nReload animated\nAnimations with audio\nProjectile speed = 1200"
+		"description": "The Machine Gun Pack\n\nBolt-action Rifle\n5 rounds magazine\nBolt action animatied\nReload animated\nAnimations with audio\nProjectile speed = 1200",
+		"keywords": [ "tmgp" ]
 	},
 	"ad260178-696b-4f96-b4ac-1f915afb1ce4": {
 		"title": "Rifle Bipod",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"5099511b-554b-4cba-a425-e07527b9a8f0": {
 		"title": "Rounded Tank visor (Shape 1)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"4c3133fa-02cc-466d-85ed-fd40e7b7a297": {
 		"title": "Rounded Tank visor (Shape 2)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"1260c944-c2d6-41be-b6a1-e9d1dfb020c5": {
 		"title": "Rounded Tank visor (Shape 3)" ,
-		"description": "The Machine Gun Pack\n\n" 
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"e9cd2aab-9f63-49c5-8b65-96e8471bfb7f": {
 		"title": "Rounded Tank visor (Shape 4)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"930e02b4-0c2b-49d6-a34a-8045b81b41d9": {
 		"title": "Square Tank visor (Shape 1)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"5093704c-63d7-4e7c-bd5b-e9306df6e479": {
 		"title": "Square Tank visor (Shape 2)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"83d839c5-ff98-44b2-bcaf-629439b85d9b": {
 		"title": "Square Tank visor (Shape 3)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"f0bd91ea-5fcd-4679-9cd8-0208473fba96": {
 		"title": "Square Tank visor (Shape 4)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"2fe5a537-657f-43f3-bced-aa1785ba74d9": {
 		"title": "Big Tank visor (Shape 1)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"1fad8451-7485-42f0-a607-26728b389858": {
 		"title": "Big Tank visor (Shape 2)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"e7b4c12b-f074-4ca5-98f5-15a98c4615ef": {
 		"title": "Big Tank visor (Shape 3)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"27ddbae7-247a-4955-99b7-190708d46ef4": {
 		"title": "Big Tank visor (Shape 4)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"67c2f314-5b3a-442e-ab08-6e6c24699d97": {
 		"title": "Big Tank visor (Shape 5)",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"2d132e4e-5084-4178-839c-c75e06e19153": {
 		"title": "37mm Shell x2",
-		"description": "The Machine Gun Pack\n\nPerfect for decorating tank interior. Designed to match the '37mm Ammo Rack' part."
+		"description": "The Machine Gun Pack\n\nPerfect for decorating tank interior. Designed to match the '37mm Ammo Rack' part.",
+		"keywords": [ "tmgp" ]
 	},
 	"0232a807-7615-4049-b600-12583a3ba392": {
 		"title": "37mm Ammo Rack",
-		"description": "The Machine Gun Pack\n\nPerfect for decorating tank interior. Designed to match the '37mm Shell x2' part."
+		"description": "The Machine Gun Pack\n\nPerfect for decorating tank interior. Designed to match the '37mm Shell x2' part.",
+		"keywords": [ "tmgp" ]
 	},
 	"9d06161a-da39-451f-9ca3-08e1e7a20d4a": {
 		"title": "Plane sight",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"073d0f36-9bee-47e4-b4b6-c42568648e3b": {
 		"title": "Mg 151/20",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"dee496d2-a9a9-4708-9a2f-50910f59f8fa": {
 		"title": "AK-47 Kalashnikov",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"7f25238c-0e9a-4910-b3ff-f63016fc9052": {
 		"title": "Degytariev Dp-29",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"77a65230-9c33-490f-b24d-e80cd63f6802": {
 		"title": "S-Mine p1 exp.",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"1a74c9b1-dea5-42ab-86ad-08f1d24507d3": {
 		"title": "S-Mine p2 sens.",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"0352de84-5cc7-487a-ae15-f3d9d6a84f37": {
 		"title": "M1 Mine p1 exp.",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"46584f5b-b846-43c3-9f17-3fd494c5b8f0": {
 		"title": "M1 Mine p2 sens.",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"820f8c24-37a5-42c4-9443-f60f0724c6b1": {
 		"title": "Mine Hider",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"db03da50-e7d6-4a42-8f07-4a296c64f2cd": {
 		"title": "Bomb 50kg",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"2433e932-88bb-4c14-b9bb-76502e03a9c9": {
 		"title": "Bomb 100kg",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"fe2d4f4e-a2ba-42ba-a7a5-6b97b2c0fa48": {
 		"title": "Bomb 250kg",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"68337ca8-e957-4b3f-a6dd-c11ac61da064": {
 		"title": "DGv03",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"b23027d0-0a69-4e82-a917-d43acce49057": {
 		"title": "1x8 7.7mm Gun Polygon",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"9664ed91-6917-43ce-8051-6dea8ac28e18": {
 		"title": "Bazooka M1A1",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"45c849b8-9417-446d-b703-75c582bd9b60": {
 		"title": "M1919 Browning (unlimited)",
-		"description": "The Machine Gun Pack\n\nLMG\nAmmo unlimited\nProjectile speed = 800"
+		"description": "The Machine Gun Pack\n\nLMG\nAmmo unlimited\nProjectile speed = 800",
+		"keywords": [ "tmgp" ]
 	},
 	"de609e41-58d1-409a-b981-447be0257609": {
 		"title": "Browning .50 1x1",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"f6a9f44d-4544-4d4f-b623-559f3e0a0b31": {
 		"title": "Browning Armor",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"cb8d96c9-2b7b-4bfc-ae07-e308455dee6b": {
 		"title": "TKS cannon Dome",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"f0f14c15-4d9c-4dc3-8518-4ae65af491da": {
 		"title": "Hispano 20mm Gun",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"9fec1f9f-9f39-4d95-95d3-c15c4389e095": {
 		"title": "WZ.38 20mm Gun",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"b0384020-b6ac-45ae-9df3-045e51cc7e8a": {
 		"title": "Maschinegewehr MG-42",
-		"description": "The Machine Gun Pack\n\nLMG\n50 rounds drum magazine\nBelt and trigger animatied\nReload animated\nAnimations with audio\nProjectile speed = 800"
+		"description": "The Machine Gun Pack\n\nLMG\n50 rounds drum magazine\nBelt and trigger animatied\nReload animated\nAnimations with audio\nProjectile speed = 800",
+		"keywords": [ "tmgp" ]
 	},
 	"2779083c-1ee2-4b52-9eb3-586a383c5d4e": {
 		"title": "Maschinegewehr MG-42 (unlimited)",
-		"description": "The Machine Gun Pack\n\nLMG\nUnlimited ammo\nTrigger animatied\nProjectile speed = 800"
+		"description": "The Machine Gun Pack\n\nLMG\nUnlimited ammo\nTrigger animatied\nProjectile speed = 800",
+		"keywords": [ "tmgp" ]
 	},
 	"0ccd6479-f1d8-46e6-acb1-02f9dc20f577": {
 		"title": "Degytariev Dp-29 1x1",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"05f70a50-3bb4-4a00-b7fb-f1c931d585ca": {
 		"title": "12mm DSzK Machine Gun",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"4b62da08-1214-4827-8bc0-b4dface80e0d": {
 		"title": "DSzK Sight",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"b40dbc55-65f3-40ae-be5e-4d8976c7d970": {
 		"title": "(Lost control, Press E to parachute) Alarm",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"561b2e83-4e9b-462f-ae97-645dc596b2c4": {
 		"title": "(Component destroyed) Alarm",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"27839ef0-bc1e-4fed-a715-7adb9c9701b1": {
 		"title": "(Target destroyed) Alarm",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"c4b65002-2928-4829-8661-84a08a31a253": {
 		"title": "Lewis M1914 Machine Gun",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"f9213740-d7ca-41ed-b1c8-23dd704c9063": {
 		"title": "Browning .50 Aircraft version",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"e33ed886-b55b-489a-b11d-7f590cea0be7": {
 		"title": "Maxim M1905",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"8edb6045-f410-441c-b9a9-a55ab15a90c7": {
 		"title": "Maxim M1905 1x1",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"28fbfaf6-3b42-4d72-94b1-5bf7b113b5dd": {
 		"title": "PTRD-41 AT rifle with bipod",
-		"description": "The Machine Gun Pack\n\n14.5mm AT Rifle\nSingle shot rifle\nBolt action animatied\nReload animated\nBipod animated\nprojectile speed = 400\nExplosive projectile"
+		"description": "The Machine Gun Pack\n\n14.5mm AT Rifle\nSingle shot rifle\nBolt action animatied\nReload animated\nBipod animated\nprojectile speed = 400\nExplosive projectile",
+		"keywords": [ "tmgp" ]
 	},
 	"36d496d5-0718-4c53-81cf-eda4836847b1": {
 		"title": "Maxim Shield",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"b6d96e7c-80ad-4838-b9fb-364c8205c23a": {
 		"title": "PTRD-41 AT rifle",
-		"description": "The Machine Gun Pack\n\n14.5mm AT Rifle\nSingle shot rifle\nBolt action animatied\nReload animated\nBipod animated\nprojectile speed = 400\nExplosive projectile"
+		"description": "The Machine Gun Pack\n\n14.5mm AT Rifle\nSingle shot rifle\nBolt action animatied\nReload animated\nBipod animated\nprojectile speed = 400\nExplosive projectile",
+		"keywords": [ "tmgp" ]
 	},
 	"4825e551-b9c4-484e-8216-efec182957f5": {
 		"title": "Classic Cannon",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"7ee6c514-3362-4fd1-b581-d8047b18801f": {
 		"title": "Maschinegewehr MG-15 ",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"ba6c5d49-3792-4a2c-b3a4-acef3ab8a787": {
 		"title": "Tank Cannon",
-		"description": "The Machine Gun Pack\n\n"
+		"description": "The Machine Gun Pack\n\n",
+		"keywords": [ "tmgp" ]
 	},
 	"3d410289-0079-4989-ba21-b211562147d5": {
 		"title": "Pak40 Cannon Breech (r=1)",
-		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40.",
+		"keywords": [ "tmgp" ]
 	},
 	"54b7c549-4b12-4be1-b73d-4d62db371394": {
 		"title": "Pak40 Cannon Breech - Small (r=1)",
-		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40."
+		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 6 sec (240 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on German Anti Tank cannon\n - Pak40.",
+		"keywords": [ "tmgp" ]
 	},
 	"379449f7-27ca-4aea-b723-f841406bbacc": {
 		"title": "M6 37mm Cannon Breech (r=0.5)",
-		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple."
+		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.5 sec (140 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Tank cannon\n - M6 37mm, used in M8 armored vehicles and Stuart tanks for exemple.",
+		"keywords": [ "tmgp" ]
 	},
 	"85de2428-d5ff-4a20-b2a0-408070b01b05": {
 		"title": "Abrams Cannon Breech (r=1)",
-		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.3 sec (132 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Abrams Tank cannon\n - Pak40."
-	
+		"description": "The Machine Gun Pack\n\nTank breech for decoration.\nThis part doesn't shoot any projectile. \nYou need to place cannon from Cannons Pack by Question Mark\nand connect the cannon with the breech.\nChoose cannon with reload time longer than 3.3 sec (132 ticks)\nIf you choose so, the breech will play the reload animation right after the shot.\nHave Fun !!!\n\nModel was based on US Abrams Tank cannon\n - Pak40.",
+		"keywords": [ "tmgp" ]
 	},
 	"cd1b3309-7046-4b81-ac01-f7ba8f7a00d7": {
 		"title": "M61 Vulcan 20mm",
-		"description": "The Machine Gun Pack\n\n20mm Minigun"
+		"description": "The Machine Gun Pack\n\n20mm Minigun",
+		"keywords": [ "tmgp" ]
 	},  
 	"b660f72a-7640-4446-b8bb-2df3cad61bbb": {
 		"title": "Bomb (proximity fuse)",
-		"description": "The Machine Gun Pack\n\nWhen activated, will explode when an obstacle within 3 blocks is reached. There is 1.5 sec delay after activation"
+		"description": "The Machine Gun Pack\n\nWhen activated, will explode when an obstacle within 3 blocks is reached. There is 1.5 sec delay after activation",
+		"keywords": [ "tmgp" ]
 	},  
 	"4ef479e3-e403-4a3b-a7b5-2c0464549de7": {
 		"title": "US Tank-CrosSight",
-		"description": "The Machine Gun Pack\n\nSight made for square and round optic,\nif you activate it, sight will change the color and look brighter"
+		"description": "The Machine Gun Pack\n\nSight made for square and round optic,\nif you activate it, sight will change the color and look brighter",
+		"keywords": [ "tmgp" ]
 	},  
 	"01f520e7-488c-4456-a4e7-6d4fee7bddb4": {
 		"title": "Camera HUD (Sight)",
-		"description": "The Machine Gun Pack\n\nHUD made for square optic,\nif you activate it, sight will change the color and look brighter"
+		"description": "The Machine Gun Pack\n\nHUD made for square optic,\nif you activate it, sight will change the color and look brighter",
+		"keywords": [ "tmgp" ]
 	},  
 	"029e27bd-f589-4a15-b8fc-19a553f34fd0": {
 		"title": "German Tank-CrosSight",
-		"description": "The Machine Gun Pack\n\nSight made for round optic,\nif you activate it, sight will change the color and look brighter"
+		"description": "The Machine Gun Pack\n\nSight made for round optic,\nif you activate it, sight will change the color and look brighter",
+		"keywords": [ "tmgp" ]
 	},  
 	"3423b398-0083-45e8-a5d3-ba7d6dddd668": {
 		"title": "Tank-CrosSight",
-		"description": "The Machine Gun Pack\n\nSight made for round optic,\nif you activate it, sight will change the color and look brighter"
-	}
-	
-	
+		"description": "The Machine Gun Pack\n\nSight made for round optic,\nif you activate it, sight will change the color and look brighter",
+		"keywords": [ "tmgp" ]
+	}	
 }
