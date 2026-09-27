@@ -1,4 +1,4 @@
-dofile("$SURVIVAL_DATA/Scripts/game/survival_loot.lua")
+dofile( "$SURVIVAL_DATA/Scripts/game/survival_loot.lua" )
 
 ---@class GunModOption
 ---@field minSpendAmount? number

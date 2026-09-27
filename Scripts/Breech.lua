@@ -2,8 +2,8 @@
 	Copyright (c) 2022 Questionable Mark
 ]]
 
-dofile("Databases/BreechDatabase.lua")
-dofile("Utils/BoneTracker.lua")
+dofile( "$CONTENT_DATA/Scripts/Databases/BreechDatabase.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/BoneTracker.lua" )
 
 ---@class Breech : ShapeClass
 ---@field anim_step_data table

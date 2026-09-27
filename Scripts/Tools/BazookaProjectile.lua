@@ -1,4 +1,4 @@
-dofile("ExplosionUtil.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ExplosionUtil.lua" )
 
 local g_bazookaProjectiles = {}
 local g_bazookaActiveInstances = 0

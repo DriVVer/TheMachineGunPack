@@ -1,7 +1,7 @@
 ---@class Grenade : ShapeClass
 Grenade = class()
 
-dofile("Tools/ExplosionUtil.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ExplosionUtil.lua" )
 
 function Grenade:server_onCreate()
 	self.sv_delta = 1 / 60

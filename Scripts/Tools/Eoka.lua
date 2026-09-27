@@ -3,7 +3,7 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("ToolSwimUtil.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolSwimUtil.lua" )
 
 local Damage = 9
 

@@ -3,10 +3,10 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("ToolAnimator.lua")
-dofile("ToolSwimUtil.lua")
-dofile("PTRDProjectile.lua")
-dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
+dofile( "$CONTENT_DATA/Scripts/Tools/PTRDProjectile.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolAnimator.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolSwimUtil.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolUtils.lua" )
 
 ---@class PTRD : ToolClass
 ---@field fpAnimations table

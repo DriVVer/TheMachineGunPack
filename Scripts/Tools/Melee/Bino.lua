@@ -3,9 +3,9 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("$CONTENT_DATA/Scripts/Utils/ScopeRenderer.lua")
-dofile("ToolAnimator.lua")
-dofile("ToolSwimUtil.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ScopeRenderer.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolAnimator.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolSwimUtil.lua" )
 
 ---@class Bino : ToolClass
 ---@field fpAnimations table

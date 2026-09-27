@@ -3,7 +3,7 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("../ExplosionUtil.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ExplosionUtil.lua" )
 
 ---@class HandheldGrenadeBase : ToolClass
 ---@field fpAnimations table

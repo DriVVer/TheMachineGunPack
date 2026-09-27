@@ -3,9 +3,9 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("ToolAnimator.lua")
-dofile("BazookaProjectile.lua")
-dofile("$CONTENT_DATA/Scripts/Utils/ToolUtils.lua")
+dofile( "$CONTENT_DATA/Scripts/Tools/BazookaProjectile.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolAnimator.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolUtils.lua" )
 
 ---@class Bazooka : ToolClass
 ---@field fpAnimations table

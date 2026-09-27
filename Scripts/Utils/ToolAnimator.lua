@@ -1,4 +1,4 @@
-dofile("$CONTENT_DATA/Scripts/Databases/ToolDatabase.lua")
+dofile( "$CONTENT_DATA/Scripts/Databases/ToolDatabase.lua" )
 
 local type_to_func_name =
 {

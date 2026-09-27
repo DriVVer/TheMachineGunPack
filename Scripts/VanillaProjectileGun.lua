@@ -4,9 +4,9 @@
 
 if VGun then return end
 
-dofile("Databases/GunDatabase.lua")
-dofile("Utils/AnimationUtil.lua")
-dofile("Utils/BoneTracker.lua")
+dofile( "$CONTENT_DATA/Scripts/Databases/GunDatabase.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/AnimationUtil.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/BoneTracker.lua" )
 
 ---@class VGun : ShapeClass
 ---@field sv_anim_wait boolean

@@ -62,7 +62,7 @@ end
 uuidOldBind = sm.uuid.new
 function sm.uuid.new(...)
     sm.uuid.new = uuidOldBind
-    dofile("$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Scripts/vanilla_override.lua")
+    dofile( "$CONTENT_3269e6ef-4d80-4f75-b8f6-dffb303e5243/Scripts/vanilla_override.lua" )
     return uuidOldBind(...)
 end
 

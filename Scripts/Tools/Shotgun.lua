@@ -3,9 +3,9 @@ dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_shapes.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 
-dofile("ToolAnimator.lua")
-dofile("ToolSwimUtil.lua")
-dofile("BaseGun.lua")
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolAnimator.lua" )
+dofile( "$CONTENT_DATA/Scripts/Utils/ToolSwimUtil.lua" )
+dofile( "$CONTENT_DATA/Scripts/Tools/BaseGun.lua" )
 
 ---@class Shotgun : BaseGun
 ---@field aiming boolean
