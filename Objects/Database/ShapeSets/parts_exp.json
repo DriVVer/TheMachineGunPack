@@ -29,6 +29,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+             "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 5,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -62,7 +69,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
-            "durability" : 6,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -100,7 +113,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
-            "durability" : 6,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -139,6 +158,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -178,7 +204,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
-            "durability" : 6,
+             "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -218,6 +250,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -257,6 +296,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/Breech.lua", "classname": "Breech"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 8,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -331,6 +377,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 5,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -365,6 +418,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -399,6 +459,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -433,6 +500,13 @@
             },
             "scripted": {"filename": "$MOD_DATA/Scripts/ExplosiveGun.lua", "classname": "ExplGun"},
             "density": 1000,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "+X-X+Z-Z+Y-Y",
             "rotationSet": "PropFull"
@@ -467,6 +541,13 @@
                 ]
             },
             "density": 500,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "-Z-Y+Y-X+X"
         },
@@ -500,6 +581,13 @@
                 ]
             },
             "density": 500,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "-Z-Y+Y-X+X"
         },
@@ -560,6 +648,13 @@
                 ]
             },
             "density": 1250,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 6,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "-Z-Y+Y-X+X"
         },
@@ -595,6 +690,13 @@
                 ]
             },
             "density": 2050,
+            "ratings" : 
+            {
+                "buoyancy" : 7,
+                "density" : 2,
+                "durability" : 7,
+                "friction" : 4
+            },
             "physicsMaterial": "Metal",
             "sticky": "-Z-Y+Y-X+X"
         }
