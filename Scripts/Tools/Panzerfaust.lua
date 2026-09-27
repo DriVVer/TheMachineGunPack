@@ -94,10 +94,7 @@ function Panzerfaust:server_onCreate()
 	if v_bz_loaded ~= nil then
 		self.sv_Panzerfaust_loaded = v_bz_loaded
 	else
-		if not sm.game.getEnableAggro() or not sm.game.getLimitedInventory() then
-			self.sv_Panzerfaust_loaded = true
-		end
-
+		self.sv_Panzerfaust_loaded = true
 		self:sv_updateAmmoCounter()
 	end
 end
