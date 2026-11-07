@@ -26,9 +26,9 @@ local Damage = 65
 ---@field scope_hud GuiInterface
 Garand = class()
 Garand.mag_capacity = 8
-Garand.maxRecoil = 30
-Garand.recoilAmount = 10
-Garand.aimRecoilAmount = 8
+Garand.maxRecoil = 18
+Garand.recoilAmount = 6
+Garand.aimRecoilAmount = 5
 Garand.recoilRecoverySpeed = 1
 Garand.aimFovTp = 15
 Garand.aimFovFp = 20
@@ -749,7 +749,7 @@ function Garand:cl_onPrimaryUse(state)
 		self:onShoot(self.ammo_in_mag)
 		self.network:sendToServer("sv_n_onShoot", 1)
 
-		sm.camera.setShake(0.025)
+		sm.camera.setShake(0.015)
 
 		-- Play FP shoot animation
 		setFpAnimation( self.fpAnimations, self.aiming and "aimShoot" or "shoot", 0.0 )

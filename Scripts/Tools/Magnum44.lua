@@ -6,7 +6,7 @@ dofile( "$SURVIVAL_DATA/Scripts/game/survival_projectiles.lua" )
 dofile( "$CONTENT_DATA/Scripts/Utils/ToolAnimator.lua" )
 dofile( "$CONTENT_DATA/Scripts/Utils/ToolSwimUtil.lua" )
 
-local Damage = 45
+local Damage = 65
 
 ---@class Magnum44 : ToolClass
 ---@field fpAnimations table
@@ -189,7 +189,7 @@ function Magnum44.loadAnimations( self )
 		spreadIncrement = 20,
 		spreadMinAngle = 5,
 		spreadMaxAngle = 15,
-		fireVelocity = 400.0,
+		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,

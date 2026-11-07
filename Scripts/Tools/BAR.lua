@@ -195,7 +195,7 @@ function BAR.loadAnimations( self )
 			spreadMinAngle = 0.25,
 			spreadMaxAngle = 7
 		},
-		fireVelocity = 500.0,
+		fireVelocity = 600.0,
 
 		minDispersionStanding = 0.1,
 		minDispersionCrouching = 0.04,
