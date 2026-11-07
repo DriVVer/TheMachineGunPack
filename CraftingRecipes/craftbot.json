@@ -172,6 +172,23 @@
 	},
 
 	//Guns 
+	
+
+	{
+		"itemId": "c450ecfc-54f7-44b1-bd66-0bd888c2b84f", //Bino
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 15,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+			{
+				"quantity": 15,
+				"itemId": "b5ee5539-75a2-4fef-873b-ef7c9398b3f5" //armor glass
+			}
+		]
+	},
 
 	{
 		"itemId": "09404c9e-aafb-40c0-8cfa-f7a4166f8b42", //Medkit
@@ -339,7 +356,78 @@
 			}
 		]
 	},
-	
+
+	{
+		"itemId": "f3d472ac-fcfc-4118-8327-c69f465fe167", //Stg44
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 40,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 70,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 6,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 2,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+
+	{
+		"itemId": "ac8d35f9-3f88-4a4f-a96b-b2a8e0f3a0ad", //Dp47
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 30,
+				"itemId": "1897ee42-0291-43e4-9645-8c5a5d310398" //wood 2
+			},
+			{
+				"quantity": 40,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 5,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 3,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+
+	{
+		"itemId": "b6f94d8f-bfd5-4b9d-b4d8-0080bdd391ba", //BAR
+		"quantity": 1,
+		"craftTime": 90,
+		"ingredientList": [
+			{
+				"quantity": 30,
+				"itemId": "1897ee42-0291-43e4-9645-8c5a5d310398" //wood 2
+			},
+			{
+				"quantity": 40,
+				"itemId": "c0dfdea5-a39d-433a-b94a-299345a5df46" //metal 3
+			},
+            {
+				"quantity": 5,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
+			},
+			{
+				"quantity": 3,
+				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
 
 	{
 		"itemId": "336a7328-4d50-432c-8698-2ed511187cc7", //Tommy
@@ -361,6 +449,26 @@
 			{
 				"quantity": 1,
 				"itemId": "a9658eaf-0dd8-46a6-8cac-be6978f19b79" //suspension
+			}
+		]
+	},
+
+	{
+		"itemId": "ca15afb3-a87b-4f5a-b55c-7dcf5e7360d3", //SW38
+		"quantity": 1,
+		"craftTime": 60,
+		"ingredientList": [
+			{
+				"quantity": 10,
+				"itemId": "df953d9c-234f-4ac2-af5e-f0490b223e71" //wood 1
+			},
+			{
+				"quantity": 30,
+				"itemId": "1016cafc-9f6b-40c9-8713-9019d399783f" //metal 2
+			},
+            {
+				"quantity": 1,
+				"itemId": "5530e6a0-4748-4926-b134-50ca9ecb9dcf" //component
 			}
 		]
 	},
