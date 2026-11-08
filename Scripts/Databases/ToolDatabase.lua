@@ -78,7 +78,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 1.0, 0),
+						tp_offset = sm.vec3.new(0, 0.3, 0),
 						fp_offset = sm.vec3.new(0.0, -0.3, 0),
 						apply_velocity = false
 					},
@@ -117,7 +117,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 1.5, -0.14),
+						tp_offset = sm.vec3.new(0, 0.3, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -402,7 +402,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.8, 0),
 						fp_offset = sm.vec3.new(0.0, 0.2, 0.05),
 						apply_velocity = false
 					},
@@ -449,7 +449,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.8, 0),
 						fp_offset = sm.vec3.new(0.0, 0.2, 0.05),
 						apply_velocity = false
 					},
@@ -496,7 +496,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.8, 0),
 						fp_offset = sm.vec3.new(0.0, 0.8, 0.05),
 						apply_velocity = false
 					},
@@ -760,7 +760,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.0, 0),
+						tp_offset = sm.vec3.new(0, 0.75, 0),
 						fp_offset = sm.vec3.new(0.0, 0.2, 0.0),
 						apply_velocity = false,
 						offsetAngle = 90
@@ -800,7 +800,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 2.0, 0),
+						tp_offset = sm.vec3.new(0, 0.7, 0),
 						fp_offset = sm.vec3.new(0.0, 0.8, 0.01),
 						apply_velocity = false
 					},
@@ -1045,7 +1045,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.2, 0),
 						apply_velocity = false
 					},
@@ -1085,7 +1085,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -1273,7 +1273,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.2, 0),
 						apply_velocity = false
 					},
@@ -1313,7 +1313,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -1491,17 +1491,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, -0.4, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						fp_offset = sm.vec3.new(0, -0.6, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						fp_offset = sm.vec3.new(0, -0.4, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1530,17 +1531,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.1, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, 0.1, 0.0125),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0.0, -0.2, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1591,17 +1593,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.4, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, -0.5, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.6, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1630,17 +1633,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, 0.1, 0.0125),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						fp_offset = sm.vec3.new(0, -0.2, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1847,17 +1851,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, -0.35, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1886,17 +1891,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, 0.25, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(-0.05, 0.15, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -1947,17 +1953,18 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.35, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, -0.5, 0),
 						apply_velocity = false
 					},
 					{
 						type = mgp_tool_anim_enum.particle,
 						fp_offset = sm.vec3.new(0, -0.07, 0),
-						tp_offset = sm.vec3.new(0, 0, 0),
+						tp_offset = sm.vec3.new(0, -0.15, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_slide"
+						bone_name = "jnt_slide",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -2168,7 +2175,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
@@ -2185,7 +2192,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "gunshot",
 						name_fp = "gunshot",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.4, 0),
 						fp_offset = sm.vec3.new(0.0, -0.0, 0),
 						apply_velocity = false
 					},
@@ -2225,7 +2232,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.4, 0),
 						fp_offset = sm.vec3.new(0.0, -0.05, 0),
 						apply_velocity = false
 					},
@@ -2638,7 +2645,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.1, 0),
 						fp_offset = sm.vec3.new(0.0, -0.35, 0.0),
 						apply_velocity = false
 					},
@@ -2678,7 +2685,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.25, 0),
 						apply_velocity = false
 					},
@@ -2688,7 +2695,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo"
+						bone_name = "jnt_ammo",
+						offsetAngle = 90
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -2835,7 +2843,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.4, 0),
 						fp_offset = sm.vec3.new(0.0, -0.26, 0.0),
 						apply_velocity = false
 					},
@@ -2874,7 +2882,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.48, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -3080,7 +3088,7 @@ local mgp_tool_database =
 			gunshot = "DLM_HighCal_Shot_1"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "TommyReload"
 		},
@@ -3148,7 +3156,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.04, 0),
 						fp_offset = sm.vec3.new(0.0, -0.44, 0),
 						apply_velocity = false
 					},
@@ -3179,7 +3187,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.04, 0),
 						fp_offset = sm.vec3.new(0.0, 0.1, 0.04),
 						apply_velocity = false
 					},
@@ -3513,7 +3521,7 @@ local mgp_tool_database =
 			cloth3 = "DLM_SW_Cloth_3"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			reload = "TommyReload"
 		},
@@ -3537,7 +3545,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, -0.35, 0),
 						apply_velocity = false
 					}
@@ -3604,7 +3612,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.15, 0),
 						fp_offset = sm.vec3.new(0.0, 0.25, 0),
 						apply_velocity = false
 					}
@@ -3693,7 +3701,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.15, 0),
 						fp_offset = sm.vec3.new(0.0, -0.35, 0),
 						apply_velocity = false
 					}
@@ -4058,7 +4066,7 @@ local mgp_tool_database =
 			BulletPut = "DLM_Gun_Ammo"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			BoltOpen = "MosinBoltOpen",
 			BoltClose = "MosinBoltClose",
@@ -4093,7 +4101,7 @@ local mgp_tool_database =
 			BulletPut = "DLM_Gun_Ammo"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			BoltOpen = "MosinBoltOpen",
 			BoltClose = "MosinBoltClose",
@@ -4133,7 +4141,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = -30
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4196,7 +4205,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = -30
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4280,7 +4290,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.7, 0),
 						apply_velocity = false
 					}
@@ -4305,7 +4315,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.35, 0),
 						apply_velocity = false
 					},
@@ -4343,7 +4353,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = 80
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4426,7 +4437,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = 80
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4519,7 +4531,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = 80
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4625,7 +4638,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = 80
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4744,7 +4758,8 @@ local mgp_tool_database =
 						tp_offset = sm.vec3.new(0, 0, 0),
 						name_tp = "TommyShell",
 						name_fp = "TommyShellFP",
-						bone_name = "jnt_ammo_1"
+						bone_name = "jnt_ammo_1",
+						offsetAngle = 80
 					},
 					{
 						type = mgp_tool_anim_enum.bone_animation,
@@ -4950,7 +4965,7 @@ local mgp_tool_database =
 			ClipHit = 		"DLM_Rifle_Clip_Hit"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			BoltOpen = "MosinBoltOpen",
 			BoltClose = "MosinBoltClose",
@@ -5090,7 +5105,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, 0.4, 0.03),
 						apply_velocity = false
 					},
@@ -5121,7 +5136,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.2, 0),
 						fp_offset = sm.vec3.new(0.0, -0.4, 0),
 						apply_velocity = false
 					},
@@ -5370,7 +5385,7 @@ local mgp_tool_database =
 			Clip = "DLM_Clip_In"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			Clip = "GarandClip",
 			Check = "GarandRecieverMove",
@@ -5414,7 +5429,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.0, 0),
 						fp_offset = sm.vec3.new(0.0, -0.5, 0),
 						apply_velocity = false
 					},
@@ -5459,7 +5474,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.05, 0),
 						fp_offset = sm.vec3.new(0.0, 0.8, 0.1),
 						apply_velocity = false
 					},
@@ -5515,7 +5530,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.0, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
 					},
@@ -5752,7 +5767,7 @@ local mgp_tool_database =
 			BipodHide = "DLM_Bipod_Hide"
 		},
 		required_effects = {
-			shoot_tp = "Muzzle_Flash_SmallCal_fp",
+			shoot_tp = "Muzzle_Flash_SmallCal_tp",
 			shoot_fp = "Muzzle_Flash_SmallCal_fp",
 			BoltOpen = "MosinBoltOpen",
 			BoltClose = "MosinBoltClose",
@@ -5820,7 +5835,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.02, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -5848,10 +5863,10 @@ local mgp_tool_database =
 				[1] = {
 					{
 						type = mgp_tool_anim_enum.effect,
-						bone = "jnt_muzzle",
+						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.0, 0),
 						fp_offset = sm.vec3.new(0.0, 0.5, 0),
 						apply_velocity = false
 					},
@@ -6048,7 +6063,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.3, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
 					},
@@ -6058,7 +6073,7 @@ local mgp_tool_database =
 						name_tp = "shoot_single",
 						name_fp = "shoot_single",
 						tp_offset = sm.vec3.new(0, 0.5, 0),
-						fp_offset = sm.vec3.new(0.0, -0.04, 0),
+						fp_offset = sm.vec3.new(0.0, -0.4, 0),
 						apply_velocity = false
 					}
 				}
@@ -6071,7 +6086,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 0.3, 0),
 						fp_offset = sm.vec3.new(0.0, 0.8, 0.05),
 						apply_velocity = false
 					},
@@ -6413,7 +6428,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.0, 0),
 						fp_offset = sm.vec3.new(0.0, 0.1, 0),
 						apply_velocity = false
 					}
@@ -6446,7 +6461,7 @@ local mgp_tool_database =
 						bone = "pejnt_barrel",
 						name_tp = "shoot_tp",
 						name_fp = "shoot_fp",
-						tp_offset = sm.vec3.new(0, 0.5, 0),
+						tp_offset = sm.vec3.new(0, 1.0, 0),
 						fp_offset = sm.vec3.new(0.0, -0.04, 0),
 						apply_velocity = false
 					}
